@@ -1,0 +1,53 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            // copy sfml resources
+            "label": "win32-copy-sfml-libs",
+            "command": "xcopy",
+            "args": [
+                ".\\lib\\SFML-2.5.1\\bin\\*",
+                ".\\bin",
+                "/d",
+                "/y"
+            ],
+            "type": "shell",
+            "group": "build"
+        },
+        {
+            // build for win32 gcc mingw: x86_64-7.3.0-posix-seh-rt_v5-rev0
+            "label": "win32-build",
+            "type": "shell",
+            "command": "gcc",
+            "args": [
+                // Options
+                "-Wall",
+                "-std=c++17",
+                // Source Files
+                "src/main.cpp",
+                "src/exampleclass/exampleclass.cpp",
+                // Include Files
+                "-Ilib/SFML-2.5.1/include",
+                // Libraries
+                "-Llib/SFML-2.5.1/lib",
+                "-lstdc++",
+                "-lsfml-graphics",
+                "-lsfml-window",
+                "-lsfml-system",
+                // Output 
+                "-o",
+                "bin/game.exe"
+            ],
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "dependsOn": [
+                "win32-copy-sfml-libs"
+            ],
+        }
+    ]
+}
