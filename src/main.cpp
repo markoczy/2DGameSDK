@@ -1,3 +1,4 @@
+#include "AssetManager.h"
 #include "exampleclass/exampleclass.h"
 #include <iostream>
 
@@ -16,18 +17,19 @@ int main() {
   sf::CircleShape shape(100.f);
   shape.setFillColor(sf::Color::Green);
 
+  auto assets = AssetManager();
+  auto tex = assets.GetTexture("res/textures/testtile/testtile_0.png");
+  shape.setTexture(&tex);
+
   while(window.isOpen()) {
     sf::Event event;
     while(window.pollEvent(event)) {
       if(event.type == sf::Event::Closed)
         window.close();
     }
-
     window.clear();
     window.draw(shape);
     window.display();
-
-    int* a = 0x0;
   }
 
   std::cout << "End." << std::endl;

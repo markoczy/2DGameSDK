@@ -2,17 +2,45 @@
     "version": "2.0.0",
     "tasks": [
         {
-            // copy sfml resources
+            // delete output
+            "label": "win32-clean",
+            "command": "rmdir",
+            "args": [
+                "/S",
+                "/Q",
+                "build"
+            ],
+            "type": "shell",
+            "problemMatcher": []
+        },
+        {
+            // copy resources
+            "label": "win32-copy-resources",
+            "command": "xcopy",
+            "args": [
+                ".\\res\\*",
+                ".\\build\\res\\",
+                "/d",
+                "/y",
+                "/S"
+            ],
+            "type": "shell",
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
+            // copy sfml libs
             "label": "win32-copy-sfml-libs",
             "command": "xcopy",
             "args": [
                 ".\\lib\\SFML-2.5.1\\bin\\*",
-                ".\\bin",
+                ".\\build\\",
                 "/d",
                 "/y"
             ],
             "type": "shell",
-            "group": "build"
+            "group": "build",
+            "problemMatcher": []
         },
         {
             // build for win32 gcc mingw: x86_64-7.3.0-posix-seh-rt_v5-rev0
@@ -26,6 +54,7 @@
                 // Source Files
                 "src/main.cpp",
                 "src/exampleclass/exampleclass.cpp",
+                "src/AssetManager.cpp",
                 // Include Files
                 "-Ilib/SFML-2.5.1/include",
                 // Libraries
@@ -36,7 +65,7 @@
                 "-lsfml-system",
                 // Output 
                 "-o",
-                "bin/game.exe"
+                "build/game.exe"
             ],
             "problemMatcher": [
                 "$gcc"
@@ -46,8 +75,20 @@
                 "isDefault": true
             },
             "dependsOn": [
+                "win32-copy-resources",
                 "win32-copy-sfml-libs"
             ],
-        }
+        },
+        {
+            // copy sfml libs
+            "label": "win32-rebuild",
+            "dependsOn": [
+                "win32-clean",
+                "win32-build"
+            ],
+            "type": "shell",
+            "group": "build",
+            "problemMatcher": []
+        },
     ]
 }
