@@ -13,7 +13,9 @@
             ],
             "windowsSdkVersion": "10.0.16299.0",
             "compilerPath": "C:\\Program Files\\mingw-w64\\x86_64-7.3.0-posix-seh-rt_v5-rev0\\mingw64\\bin\\gcc.exe",
-            "cStandard": "c11"
+            "intelliSenseMode": "gcc-x64",
+            "cStandard": "c11",
+            "cppStandard": "c++17"
         }
     ],
     "version": 4

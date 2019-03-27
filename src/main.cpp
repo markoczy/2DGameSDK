@@ -1,11 +1,15 @@
 #include "AssetManager.h"
+#include "core/GameObject.h"
 #include "exampleclass/exampleclass.h"
+#include "templates/ResourceCache.h"
 #include <iostream>
 
 #include <SFML/Graphics.hpp>
 
 int main() {
   std::cout << "Hello Compiler" << std::endl;
+
+  auto obj = game::GameObject("Test");
 
   auto c = ExampleClass();
 
@@ -15,11 +19,13 @@ int main() {
 
   sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
   sf::CircleShape shape(100.f);
-  shape.setFillColor(sf::Color::Green);
+  shape.setFillColor(sf::Color::Blue);
+
+  auto cache = TextureCache();
 
   auto assets = AssetManager();
-  auto tex = assets.GetTexture("res/textures/testtile/testtile_0.png");
-  shape.setTexture(&tex);
+  auto tex = cache.Get("res/textures/testtile/testtile_0.png");
+  shape.setTexture(tex);
 
   while(window.isOpen()) {
     sf::Event event;
@@ -32,7 +38,10 @@ int main() {
     window.display();
   }
 
+  // auto k = cache.Get("res/textures/testtile/testtile_0.png");
+  cache.Clear();
   std::cout << "End." << std::endl;
+  system("pause");
 
   return 0;
 }

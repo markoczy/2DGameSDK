@@ -54,6 +54,9 @@
                 // Source Files
                 "src/main.cpp",
                 "src/exampleclass/exampleclass.cpp",
+                "src/templates/ResourceCache.cpp",
+                "src/core/GameObject.cpp",
+                "src/core/Game.cpp",
                 "src/AssetManager.cpp",
                 // Include Files
                 "-Ilib/SFML-2.5.1/include",
