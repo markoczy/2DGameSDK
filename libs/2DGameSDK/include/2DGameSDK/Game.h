@@ -19,6 +19,9 @@ namespace game {
     Game(GameOptions options = DefaultOptions);
     void Run();
     void Stop();
+
+  private:
+    GameOptions mOptions;
   };
 } // namespace game
 

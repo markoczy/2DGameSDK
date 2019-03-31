@@ -19,6 +19,11 @@ namespace game {
     Game(GameOptions options = DefaultOptions);
     void Run();
     void Stop();
+
+  private:
+    GameOptions mOptions;
+    sf::RenderWindow mWindow;
+    sf::View mView;
   };
 } // namespace game
 
