@@ -1,19 +1,20 @@
 #ifndef __GAME_H__
 #define __GAME_H__
 
+#include "gamesdk_dll.h"
 #include <SFML/Graphics.hpp>
 
 namespace game {
 
-  struct GameOptions {
+  struct GAMESDK_DLL GameOptions {
     sf::Vector2i ScreenDim;
     int FramesPerSecond;
   };
 
-  GameOptions DefaultOptions = GameOptions{
+  GAMESDK_DLL GameOptions DefaultOptions = GameOptions{
       sf::Vector2i(800, 600), 50};
 
-  class Game {
+  class GAMESDK_DLL Game {
   public:
     Game(GameOptions options = DefaultOptions);
     void Run();

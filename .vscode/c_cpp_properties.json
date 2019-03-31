@@ -3,8 +3,9 @@
         {
             "name": "Win32",
             "includePath": [
-                "${workspaceFolder}/src/**",
-                "${workspaceFolder}/lib/SFML-2.5.1/include"
+                "${workspaceFolder}/Project_2DGameSDK/src/**",
+                "${workspaceFolder}/Project_Prototype/src/**",
+                "${workspaceFolder}/libs/**"
             ],
             "defines": [
                 "_DEBUG",

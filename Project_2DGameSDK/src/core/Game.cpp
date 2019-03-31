@@ -1,4 +1,4 @@
-#include "Game.h"
+#include "../shared/Game.h"
 
 namespace game {
 

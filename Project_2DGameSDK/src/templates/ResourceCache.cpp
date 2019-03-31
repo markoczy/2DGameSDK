@@ -1,4 +1,4 @@
-#include "ResourceCache.h"
+#include "../shared/ResourceCache.h"
 
 using namespace std;
 
@@ -34,3 +34,6 @@ sf::Texture* TextureCache::loadResource(const std::string& identifier) {
   mResources[identifier] = tex;
   return tex;
 }
+
+sf::Texture* TextureCache::Get(const std::string& identifier) { return ResourceCache::Get(identifier); };
+void TextureCache::Clear(){};

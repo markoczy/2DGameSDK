@@ -1,3 +1,7 @@
+#ifndef __GAME_OBJECT_H__
+#define __GAME_OBJECT_H__
+
+#include "gamesdk_dll.h"
 #include <string>
 
 namespace game {
@@ -18,3 +22,5 @@ namespace game {
   };
 
 } // namespace game
+
+#endif

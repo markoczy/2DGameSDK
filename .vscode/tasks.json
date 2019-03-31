@@ -2,96 +2,31 @@
     "version": "2.0.0",
     "tasks": [
         {
-            // delete output
-            "label": "win32-clean",
-            "command": "rmdir",
-            "args": [
-                "/S",
-                "/Q",
-                "build"
-            ],
+            "label": "cmake-mingw32-make",
             "type": "shell",
-            "problemMatcher": []
+            "command": "cmake",
+            "args": [
+                ".",
+                "-G",
+                "MinGW Makefiles",
+            ],
+            "group": "none"
         },
         {
-            // copy resources
-            "label": "win32-copy-resources",
-            "command": "xcopy",
-            "args": [
-                ".\\res\\*",
-                ".\\build\\res\\",
-                "/d",
-                "/y",
-                "/S"
-            ],
+            "label": "make-mingw32-make",
             "type": "shell",
-            "group": "build",
-            "problemMatcher": []
-        },
-        {
-            // copy sfml libs
-            "label": "win32-copy-sfml-libs",
-            "command": "xcopy",
-            "args": [
-                ".\\lib\\SFML-2.5.1\\bin\\*",
-                ".\\build\\",
-                "/d",
-                "/y"
-            ],
-            "type": "shell",
-            "group": "build",
-            "problemMatcher": []
-        },
-        {
-            // build for win32 gcc mingw: x86_64-7.3.0-posix-seh-rt_v5-rev0
-            "label": "win32-build",
-            "type": "shell",
-            "command": "gcc",
-            "args": [
-                // Options
-                "-Wall",
-                "-std=c++17",
-                // Source Files
-                "src/main.cpp",
-                "src/exampleclass/exampleclass.cpp",
-                "src/templates/ResourceCache.cpp",
-                "src/core/GameObject.cpp",
-                "src/core/Game.cpp",
-                "src/AssetManager.cpp",
-                // Include Files
-                "-Ilib/SFML-2.5.1/include",
-                // Libraries
-                "-Llib/SFML-2.5.1/lib",
-                "-lstdc++",
-                "-lsfml-graphics",
-                "-lsfml-window",
-                "-lsfml-system",
-                // Output 
-                "-o",
-                "build/game.exe"
-            ],
+            "command": "mingw32-make",
+            "args": [],
             "problemMatcher": [
                 "$gcc"
+            ],
+            "dependsOn": [
+                "cmake-mingw32-make",
             ],
             "group": {
                 "kind": "build",
                 "isDefault": true
-            },
-            "dependsOn": [
-                "win32-copy-resources",
-                "win32-copy-sfml-libs"
-            ],
-        },
-        {
-            // copy sfml libs
-            "label": "win32-rebuild",
-            "dependsOn": [
-                "win32-clean",
-                "win32-build"
-            ],
-            "type": "shell",
-            "group": "build",
-            "problemMatcher": []
+            }
         },
     ]
 }

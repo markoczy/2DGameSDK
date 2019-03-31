@@ -1,2 +1,5 @@
-.vscode/ipch/
-build/
+.vscode/ipch
+**/CMakeFiles/*
+**/CMakeCache.txt
+**/cmake_install.cmake
+Project_*/bin/*
