@@ -1,0 +1,878 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <help_text>// Uncomment the following line to change the fontsize and font:
+// fontsize=14
+fontfamily=FiraCode //possible: SansSerif,Serif,Monospaced
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+// Welcome to UMLet!
+//
+// Double-click on elements to add them to the diagram, or to copy them
+// Edit elements by modifying the text in this panel
+// Hold Ctrl to select multiple elements
+// Use Ctrl+mouse to select via lasso
+//
+// Use +/- or Ctrl+mouse wheel to zoom
+// Drag a whole relation at its central square icon
+//
+// Press Ctrl+C to copy the whole diagram to the system clipboard (then just paste it to, eg, Word)
+// Edit the files in the "palettes" directory to create your own element palettes
+//
+// Select "Custom Elements &gt; New..." to create new element types
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+
+// This text will be stored with each diagram;  use it for notes.</help_text>
+  <zoom_level>18</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>918</y>
+      <w>432</w>
+      <h>162</h>
+    </coordinates>
+    <panel_attributes>/game::GameObject/
+--
+#mType: int
+--
+/+Tick()/
+/+Render(target: sf::RenderTarget*)/</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>972</x>
+      <y>558</y>
+      <w>684</w>
+      <h>252</h>
+    </coordinates>
+    <panel_attributes>template=TData: Object
+/Observable/
+--
+#mObservers: std::vector&lt;Observable&lt;TData&gt;&gt;
+--
++Update()
++Subscribe(subscriber: Observer&lt;TData&gt;): int
+/#triggered(): bool/
+#emit(obj: TData)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1098</x>
+      <y>396</y>
+      <w>288</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>/ObservableBase/
+--
+--
+/+Update()/</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>990</x>
+      <y>1062</y>
+      <w>630</w>
+      <h>288</h>
+    </coordinates>
+    <panel_attributes>template=TData: Object
+Always
+--
+-mData: *TData
+--
++Always(TData* data)
++Update()
++Subscribe(subscriber: Observer&lt;TData&gt;): int
+#triggered(): bool
+#emit(obj: TData)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1746</x>
+      <y>774</y>
+      <w>180</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>Empty
+--
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1692</x>
+      <y>1098</y>
+      <w>666</w>
+      <h>216</h>
+    </coordinates>
+    <panel_attributes>template=TData: Object
+Never
+--
++Update()
++Subscribe(subscriber: Observer&lt;TData&gt;): int
+#triggered(): bool
+#emit(obj: TData)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1080</x>
+      <y>792</y>
+      <w>54</w>
+      <h>324</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;160.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1080</x>
+      <y>792</y>
+      <w>792</w>
+      <h>360</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;130.0;420.0;130.0;420.0;180.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2430</x>
+      <y>1116</y>
+      <w>540</w>
+      <h>252</h>
+    </coordinates>
+    <panel_attributes>OnKeyPress
+--
+-mKey: sf::Key
+--
++KeyPress(key: sf::Key)
++Update()
++Subscribe(subscriber: Observer&lt;TData&gt;): int
+#triggered(): bool
+#emit(obj: Empty)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1134</x>
+      <y>792</y>
+      <w>1512</w>
+      <h>360</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+&lt;&lt;bind&gt;&gt; (Empty)</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;100.0;820.0;100.0;820.0;180.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>1962</x>
+      <y>756</y>
+      <w>252</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>Data Class that
+contains no data
+bg=yellow</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>1062</x>
+      <y>1368</y>
+      <w>306</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>Triggers on every tick
+bg=yellow</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>1692</x>
+      <y>1350</y>
+      <w>252</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>Never triggers
+bg=yellow</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1368</x>
+      <y>1512</y>
+      <w>630</w>
+      <h>126</h>
+    </coordinates>
+    <panel_attributes>template=TData: Object
+/Observer/
+--
+/+Callback(TData* data)/</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1710</x>
+      <y>1800</y>
+      <w>1332</w>
+      <h>162</h>
+    </coordinates>
+    <panel_attributes>template=TData: Object, THandler: Object
+MethodObserver
+--
++MethodObserver(handler: *THandler, ObserverMethod&lt;TData, THandler&gt;)
++Callback(data: *TData)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>990</x>
+      <y>1800</y>
+      <w>684</w>
+      <h>162</h>
+    </coordinates>
+    <panel_attributes>template=TData: Object
+FunctionObserver
+--
++FunctionObserver(func: ObserverFunc&lt;TData&gt;)
++Callback(TData* data)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1512</x>
+      <y>1242</y>
+      <w>144</w>
+      <h>324</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;60.0;10.0;60.0;160.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1260</x>
+      <y>1620</y>
+      <w>396</w>
+      <h>234</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>200.0;10.0;200.0;60.0;10.0;60.0;10.0;110.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1602</x>
+      <y>1620</y>
+      <w>720</w>
+      <h>234</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0;380.0;60.0;380.0;110.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1782</x>
+      <y>1296</y>
+      <w>54</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;30.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1908</x>
+      <y>774</y>
+      <w>90</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;30.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1188</x>
+      <y>1332</y>
+      <w>54</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2088</x>
+      <y>450</y>
+      <w>540</w>
+      <h>198</h>
+    </coordinates>
+    <panel_attributes>game::EventController
+--
+mEvents: std::map&lt;int, ObservableBase*&gt;
+--
++AddEvent(key: int, event: ObservableBase*)
++GetEvent(key: int): ObservableBase*
++Tick()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1224</x>
+      <y>486</y>
+      <w>54</w>
+      <h>126</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>1746</x>
+      <y>486</y>
+      <w>306</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>Not recommended as
+this requires casting
+better store typed
+Observable as Variable
+bg=yellow</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1116</x>
+      <y>2070</y>
+      <w>864</w>
+      <h>252</h>
+    </coordinates>
+    <panel_attributes>template=TDrawable: sf::Drawable
+game::GenericGameObject
+--
+mDrawable: sf::Drawable
+--
++StaticGameObject(drawable: sf::Drawable, pos: sf::Vector3f)
++Tick()
++Render(target: sf::RenderTarget*)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>540</x>
+      <y>2106</y>
+      <w>504</w>
+      <h>216</h>
+    </coordinates>
+    <panel_attributes>/game::SpriteGameObject/
+--
+#mSprite: sf::Sprite*
+--
++SpriteGameObject(sprite: sf::Sprite*)
+/+Tick()/
++Render(target: sf::Window)
++GetSprite(): sf::Sprite*</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1620</x>
+      <y>0</y>
+      <w>360</w>
+      <h>162</h>
+    </coordinates>
+    <panel_attributes>game::AnimatedSprite
+--
++AnimatedSprite(textures:)
+--
+/+Tick()/
+/+Render(target: sf::Window)/</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>342</y>
+      <w>432</w>
+      <h>126</h>
+    </coordinates>
+    <panel_attributes>SceneGraph
+--
+mRoot: SceneGraphNode
+--
+GetRoot(): SceneGraphNode*
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>504</y>
+      <w>774</w>
+      <h>234</h>
+    </coordinates>
+    <panel_attributes>SceneGraphNode
+--
+-mObject: game::TransformableGameObject*
+-mParent: game::SceneGraphNode*
+--
++IsRoot(): bool
++AddChild(obj: TransformableGameObject*): SceneGraphNode*
++GetCurTransform(): sf::Transform
++GetRootTransform(): sf::Transform
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>3366</x>
+      <y>0</y>
+      <w>1404</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Singleton&gt;&gt;
+game::GameWorldFactory
+--
+--
++CreateGameWorld(tilemapFile: std::string&amp;, materialMapFile: std::string&amp;, texturesPrefix: std::string&amp;): game::GameWorld*
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>1170</y>
+      <w>576</w>
+      <h>216</h>
+    </coordinates>
+    <panel_attributes>/game::TransformableGameObject/
+--
+#mGraphNode: game::SceneGraphNode*
+--
++SetGraphNode(node game::SceneGraphNode*)
+/+Tick()/
+/+Render(target: sf::RenderTarget*)/
+/+GetTransform(): sf::Transformable*/
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>1440</y>
+      <w>630</w>
+      <h>270</h>
+    </coordinates>
+    <panel_attributes>/game::SpriteGameObject/
+--
+#mSprite: sf::Sprite*
+#mGraphNode: game::SceneGraphNode*
+--
++SpriteGameObject(sprite: sf::Sprite*)
++SetGraphNode(node game::SceneGraphNode*)
+/+Tick()/
++Render(target: sf::RenderTarget*)
++GetTransform(): sf::Transformable*</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>216</x>
+      <y>1062</y>
+      <w>54</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>216</x>
+      <y>1368</y>
+      <w>54</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>414</x>
+      <y>378</y>
+      <w>162</w>
+      <h>162</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;70.0;10.0;70.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>630</x>
+      <y>1332</y>
+      <w>180</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>Current only
+bg=yellow</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>558</x>
+      <y>1332</y>
+      <w>108</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;40.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>306</x>
+      <y>774</y>
+      <w>252</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>Root to this node
+bg=yellow</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>378</x>
+      <y>720</y>
+      <w>54</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;30.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>3294</x>
+      <y>1764</y>
+      <w>738</w>
+      <h>234</h>
+    </coordinates>
+    <panel_attributes>template=TResource: Object
+ResourceCache
+--
+#mResources: std::map&lt;std::string, TResource&gt;
+--
++GetResource(identifier: std::string&amp;): TResource
+/#createResource(identifier: std::string&amp;)/
+/#destroyResource(resource: TResource)/</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>3294</x>
+      <y>2124</y>
+      <w>612</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>game::TextureCache
+--
+#mResources: std::map&lt;std::string, sf::Texture*&gt;
+--
++GetResource(identifier: std::string&amp;): sf::Texture*
+#createResource(identifier: std::string&amp;)
+#destroyResource(resource: sf::Texture*)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>3600</x>
+      <y>1980</y>
+      <w>288</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+&lt;&lt;bind&gt;&gt; (sf::Texture*)</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2520</x>
+      <y>1476</y>
+      <w>594</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Singleton&gt;&gt;
+AssetManager
+--
+-mTextures: game::TextureCache
+- ...
+--
++GetTexture(identifier: std::string&amp;): sf::Texture*</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>3096</x>
+      <y>1548</y>
+      <w>360</w>
+      <h>612</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;80.0;10.0;80.0;280.0;180.0;280.0;180.0;320.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>3672</x>
+      <y>738</y>
+      <w>324</w>
+      <h>288</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;struct&gt;&gt;
+game::Tile
+--
++Index: int
++X: int
++Y: int
++Rot: int
++FlipX: int
++FlipY: int
++Texture: sf::Texture*
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>3762</x>
+      <y>1134</y>
+      <w>504</w>
+      <h>162</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;struct&gt;&gt;
+game::TileLayer
+--
++Name: string
++Tiles: game::Tile*[][]
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>4302</x>
+      <y>738</y>
+      <w>468</w>
+      <h>234</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;struct&gt;&gt;
+game::Tilemap
+--
++Layers: std::vector&lt;game::TileLayer&gt;
++TileWidth: int
++TileHeight: int
++TilesWide: int
++TilesHigh: int
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>4320</x>
+      <y>1224</y>
+      <w>324</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>[] simplified for std::array
+bg=yellow</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>4248</x>
+      <y>1242</y>
+      <w>108</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;40.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>3528</x>
+      <y>990</y>
+      <w>270</w>
+      <h>306</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>130.0;150.0;10.0;150.0;10.0;10.0;80.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>4122</x>
+      <y>810</y>
+      <w>216</w>
+      <h>360</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>100.0;10.0;10.0;10.0;10.0;180.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>3474</x>
+      <y>414</y>
+      <w>378</w>
+      <h>126</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;struct&gt;&gt;
+game::MaterialMap
+--
++Materials: game::Material*[]
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>3924</x>
+      <y>432</y>
+      <w>432</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;struct&gt;&gt;
+game::Material
+--
++Solid: bool
++Destructive: bool
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>3492</x>
+      <y>324</y>
+      <w>324</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>Maps tileID to a Material
+bg=yellow</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>3636</x>
+      <y>360</y>
+      <w>54</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;30.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>3960</x>
+      <y>180</y>
+      <w>864</w>
+      <h>216</h>
+    </coordinates>
+    <panel_attributes>game::GameWorld
+--
+-mTileMap: game::TileMap*
+-mMaterialMap: game::MaterialMap*
+--
++GameWorld(tilemap: game::Tilemap*, materialMap: game::MaterialMap*)
++Tick()
++Render()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>3978</x>
+      <y>684</y>
+      <w>126</w>
+      <h>360</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>50.0;10.0;50.0;180.0;10.0;180.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>3780</x>
+      <y>648</y>
+      <w>540</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>Mapped from Index on GameWorld creation
+bg=yellow</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>3834</x>
+      <y>486</y>
+      <w>126</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;&gt;&gt;&gt;</panel_attributes>
+    <additional_attributes>50.0;10.0;20.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+</diagram>

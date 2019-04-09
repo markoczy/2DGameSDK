@@ -47,10 +47,10 @@ RM = "C:\Program Files (x86)\CMake\bin\cmake.exe" -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = E:\Coding\Git\2DGameSDK
+CMAKE_SOURCE_DIR = C:\Workspace\Git\2DGameSDK
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = E:\Coding\Git\2DGameSDK
+CMAKE_BINARY_DIR = C:\Workspace\Git\2DGameSDK
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -79,14 +79,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /d E:\Coding\Git\2DGameSDK && $(CMAKE_COMMAND) -E cmake_progress_start E:\Coding\Git\2DGameSDK\CMakeFiles E:\Coding\Git\2DGameSDK\Project_2DGameSDK\CMakeFiles\progress.marks
-	cd /d E:\Coding\Git\2DGameSDK && $(MAKE) -f CMakeFiles\Makefile2 Project_2DGameSDK/all
-	$(CMAKE_COMMAND) -E cmake_progress_start E:\Coding\Git\2DGameSDK\CMakeFiles 0
+	cd /d C:\Workspace\Git\2DGameSDK && $(CMAKE_COMMAND) -E cmake_progress_start C:\Workspace\Git\2DGameSDK\CMakeFiles C:\Workspace\Git\2DGameSDK\Project_2DGameSDK\CMakeFiles\progress.marks
+	cd /d C:\Workspace\Git\2DGameSDK && $(MAKE) -f CMakeFiles\Makefile2 Project_2DGameSDK/all
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Workspace\Git\2DGameSDK\CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /d E:\Coding\Git\2DGameSDK && $(MAKE) -f CMakeFiles\Makefile2 Project_2DGameSDK/clean
+	cd /d C:\Workspace\Git\2DGameSDK && $(MAKE) -f CMakeFiles\Makefile2 Project_2DGameSDK/clean
 .PHONY : clean
 
 # The main clean target
@@ -96,22 +96,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /d E:\Coding\Git\2DGameSDK && $(MAKE) -f CMakeFiles\Makefile2 Project_2DGameSDK/preinstall
+	cd /d C:\Workspace\Git\2DGameSDK && $(MAKE) -f CMakeFiles\Makefile2 Project_2DGameSDK/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /d E:\Coding\Git\2DGameSDK && $(MAKE) -f CMakeFiles\Makefile2 Project_2DGameSDK/preinstall
+	cd /d C:\Workspace\Git\2DGameSDK && $(MAKE) -f CMakeFiles\Makefile2 Project_2DGameSDK/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /d E:\Coding\Git\2DGameSDK && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles\Makefile.cmake 1
+	cd /d C:\Workspace\Git\2DGameSDK && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles\Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 Project_2DGameSDK/CMakeFiles/2DGameSDK.dir/rule:
-	cd /d E:\Coding\Git\2DGameSDK && $(MAKE) -f CMakeFiles\Makefile2 Project_2DGameSDK/CMakeFiles/2DGameSDK.dir/rule
+	cd /d C:\Workspace\Git\2DGameSDK && $(MAKE) -f CMakeFiles\Makefile2 Project_2DGameSDK/CMakeFiles/2DGameSDK.dir/rule
 .PHONY : Project_2DGameSDK/CMakeFiles/2DGameSDK.dir/rule
 
 # Convenience name for target.
@@ -121,7 +121,7 @@ Project_2DGameSDK/CMakeFiles/2DGameSDK.dir/rule:
 
 # fast build rule for target.
 2DGameSDK/fast:
-	cd /d E:\Coding\Git\2DGameSDK && $(MAKE) -f Project_2DGameSDK\CMakeFiles\2DGameSDK.dir\build.make Project_2DGameSDK/CMakeFiles/2DGameSDK.dir/build
+	cd /d C:\Workspace\Git\2DGameSDK && $(MAKE) -f Project_2DGameSDK\CMakeFiles\2DGameSDK.dir\build.make Project_2DGameSDK/CMakeFiles/2DGameSDK.dir/build
 .PHONY : 2DGameSDK/fast
 
 src/core/Game.obj: src/core/Game.cpp.obj
@@ -130,7 +130,7 @@ src/core/Game.obj: src/core/Game.cpp.obj
 
 # target to build an object file
 src/core/Game.cpp.obj:
-	cd /d E:\Coding\Git\2DGameSDK && $(MAKE) -f Project_2DGameSDK\CMakeFiles\2DGameSDK.dir\build.make Project_2DGameSDK/CMakeFiles/2DGameSDK.dir/src/core/Game.cpp.obj
+	cd /d C:\Workspace\Git\2DGameSDK && $(MAKE) -f Project_2DGameSDK\CMakeFiles\2DGameSDK.dir\build.make Project_2DGameSDK/CMakeFiles/2DGameSDK.dir/src/core/Game.cpp.obj
 .PHONY : src/core/Game.cpp.obj
 
 src/core/Game.i: src/core/Game.cpp.i
@@ -139,7 +139,7 @@ src/core/Game.i: src/core/Game.cpp.i
 
 # target to preprocess a source file
 src/core/Game.cpp.i:
-	cd /d E:\Coding\Git\2DGameSDK && $(MAKE) -f Project_2DGameSDK\CMakeFiles\2DGameSDK.dir\build.make Project_2DGameSDK/CMakeFiles/2DGameSDK.dir/src/core/Game.cpp.i
+	cd /d C:\Workspace\Git\2DGameSDK && $(MAKE) -f Project_2DGameSDK\CMakeFiles\2DGameSDK.dir\build.make Project_2DGameSDK/CMakeFiles/2DGameSDK.dir/src/core/Game.cpp.i
 .PHONY : src/core/Game.cpp.i
 
 src/core/Game.s: src/core/Game.cpp.s
@@ -148,7 +148,7 @@ src/core/Game.s: src/core/Game.cpp.s
 
 # target to generate assembly for a file
 src/core/Game.cpp.s:
-	cd /d E:\Coding\Git\2DGameSDK && $(MAKE) -f Project_2DGameSDK\CMakeFiles\2DGameSDK.dir\build.make Project_2DGameSDK/CMakeFiles/2DGameSDK.dir/src/core/Game.cpp.s
+	cd /d C:\Workspace\Git\2DGameSDK && $(MAKE) -f Project_2DGameSDK\CMakeFiles\2DGameSDK.dir\build.make Project_2DGameSDK/CMakeFiles/2DGameSDK.dir/src/core/Game.cpp.s
 .PHONY : src/core/Game.cpp.s
 
 src/core/GameObject.obj: src/core/GameObject.cpp.obj
@@ -157,7 +157,7 @@ src/core/GameObject.obj: src/core/GameObject.cpp.obj
 
 # target to build an object file
 src/core/GameObject.cpp.obj:
-	cd /d E:\Coding\Git\2DGameSDK && $(MAKE) -f Project_2DGameSDK\CMakeFiles\2DGameSDK.dir\build.make Project_2DGameSDK/CMakeFiles/2DGameSDK.dir/src/core/GameObject.cpp.obj
+	cd /d C:\Workspace\Git\2DGameSDK && $(MAKE) -f Project_2DGameSDK\CMakeFiles\2DGameSDK.dir\build.make Project_2DGameSDK/CMakeFiles/2DGameSDK.dir/src/core/GameObject.cpp.obj
 .PHONY : src/core/GameObject.cpp.obj
 
 src/core/GameObject.i: src/core/GameObject.cpp.i
@@ -166,7 +166,7 @@ src/core/GameObject.i: src/core/GameObject.cpp.i
 
 # target to preprocess a source file
 src/core/GameObject.cpp.i:
-	cd /d E:\Coding\Git\2DGameSDK && $(MAKE) -f Project_2DGameSDK\CMakeFiles\2DGameSDK.dir\build.make Project_2DGameSDK/CMakeFiles/2DGameSDK.dir/src/core/GameObject.cpp.i
+	cd /d C:\Workspace\Git\2DGameSDK && $(MAKE) -f Project_2DGameSDK\CMakeFiles\2DGameSDK.dir\build.make Project_2DGameSDK/CMakeFiles/2DGameSDK.dir/src/core/GameObject.cpp.i
 .PHONY : src/core/GameObject.cpp.i
 
 src/core/GameObject.s: src/core/GameObject.cpp.s
@@ -175,7 +175,7 @@ src/core/GameObject.s: src/core/GameObject.cpp.s
 
 # target to generate assembly for a file
 src/core/GameObject.cpp.s:
-	cd /d E:\Coding\Git\2DGameSDK && $(MAKE) -f Project_2DGameSDK\CMakeFiles\2DGameSDK.dir\build.make Project_2DGameSDK/CMakeFiles/2DGameSDK.dir/src/core/GameObject.cpp.s
+	cd /d C:\Workspace\Git\2DGameSDK && $(MAKE) -f Project_2DGameSDK\CMakeFiles\2DGameSDK.dir\build.make Project_2DGameSDK/CMakeFiles/2DGameSDK.dir/src/core/GameObject.cpp.s
 .PHONY : src/core/GameObject.cpp.s
 
 src/templates/ResourceCache.obj: src/templates/ResourceCache.cpp.obj
@@ -184,7 +184,7 @@ src/templates/ResourceCache.obj: src/templates/ResourceCache.cpp.obj
 
 # target to build an object file
 src/templates/ResourceCache.cpp.obj:
-	cd /d E:\Coding\Git\2DGameSDK && $(MAKE) -f Project_2DGameSDK\CMakeFiles\2DGameSDK.dir\build.make Project_2DGameSDK/CMakeFiles/2DGameSDK.dir/src/templates/ResourceCache.cpp.obj
+	cd /d C:\Workspace\Git\2DGameSDK && $(MAKE) -f Project_2DGameSDK\CMakeFiles\2DGameSDK.dir\build.make Project_2DGameSDK/CMakeFiles/2DGameSDK.dir/src/templates/ResourceCache.cpp.obj
 .PHONY : src/templates/ResourceCache.cpp.obj
 
 src/templates/ResourceCache.i: src/templates/ResourceCache.cpp.i
@@ -193,7 +193,7 @@ src/templates/ResourceCache.i: src/templates/ResourceCache.cpp.i
 
 # target to preprocess a source file
 src/templates/ResourceCache.cpp.i:
-	cd /d E:\Coding\Git\2DGameSDK && $(MAKE) -f Project_2DGameSDK\CMakeFiles\2DGameSDK.dir\build.make Project_2DGameSDK/CMakeFiles/2DGameSDK.dir/src/templates/ResourceCache.cpp.i
+	cd /d C:\Workspace\Git\2DGameSDK && $(MAKE) -f Project_2DGameSDK\CMakeFiles\2DGameSDK.dir\build.make Project_2DGameSDK/CMakeFiles/2DGameSDK.dir/src/templates/ResourceCache.cpp.i
 .PHONY : src/templates/ResourceCache.cpp.i
 
 src/templates/ResourceCache.s: src/templates/ResourceCache.cpp.s
@@ -202,7 +202,7 @@ src/templates/ResourceCache.s: src/templates/ResourceCache.cpp.s
 
 # target to generate assembly for a file
 src/templates/ResourceCache.cpp.s:
-	cd /d E:\Coding\Git\2DGameSDK && $(MAKE) -f Project_2DGameSDK\CMakeFiles\2DGameSDK.dir\build.make Project_2DGameSDK/CMakeFiles/2DGameSDK.dir/src/templates/ResourceCache.cpp.s
+	cd /d C:\Workspace\Git\2DGameSDK && $(MAKE) -f Project_2DGameSDK\CMakeFiles\2DGameSDK.dir\build.make Project_2DGameSDK/CMakeFiles/2DGameSDK.dir/src/templates/ResourceCache.cpp.s
 .PHONY : src/templates/ResourceCache.cpp.s
 
 # Help Target
@@ -234,6 +234,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /d E:\Coding\Git\2DGameSDK && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles\Makefile.cmake 0
+	cd /d C:\Workspace\Git\2DGameSDK && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles\Makefile.cmake 0
 .PHONY : cmake_check_build_system
 
