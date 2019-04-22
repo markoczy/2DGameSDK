@@ -8,6 +8,6 @@ namespace game {
   void GameObject::Tick() {}
 
   /* does nothing, meant to be overridden */
-  void GameObject::Render() {}
+  void GameObject::Render(sf::RenderTarget& target) {}
 
 } // namespace game

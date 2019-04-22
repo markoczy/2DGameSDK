@@ -2,6 +2,7 @@
 #define __GAME_OBJECT_H__
 
 #include "gamesdk_dll.h"
+#include <SFML/Graphics.hpp>
 #include <string>
 
 namespace game {
@@ -15,7 +16,7 @@ namespace game {
   public:
     GameObject(const std::string& type);
     virtual void Tick() = 0;
-    virtual void Render() = 0;
+    virtual void Render(sf::RenderTarget& target) = 0;
 
   protected:
     std::string mType;

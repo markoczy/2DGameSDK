@@ -24,14 +24,14 @@ fontfamily=FiraCode //possible: SansSerif,Serif,Monospaced
 
 
 // This text will be stored with each diagram;  use it for notes.</help_text>
-  <zoom_level>18</zoom_level>
+  <zoom_level>19</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>0</x>
-      <y>918</y>
-      <w>432</w>
-      <h>162</h>
+      <y>969</y>
+      <w>456</w>
+      <h>171</h>
     </coordinates>
     <panel_attributes>/game::GameObject/
 --
@@ -44,10 +44,10 @@ fontfamily=FiraCode //possible: SansSerif,Serif,Monospaced
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>972</x>
-      <y>558</y>
-      <w>684</w>
-      <h>252</h>
+      <x>1026</x>
+      <y>589</y>
+      <w>722</w>
+      <h>266</h>
     </coordinates>
     <panel_attributes>template=TData: Object
 /Observable/
@@ -63,10 +63,10 @@ fontfamily=FiraCode //possible: SansSerif,Serif,Monospaced
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1098</x>
-      <y>396</y>
-      <w>288</w>
-      <h>108</h>
+      <x>1159</x>
+      <y>418</y>
+      <w>304</w>
+      <h>114</h>
     </coordinates>
     <panel_attributes>/ObservableBase/
 --
@@ -77,10 +77,10 @@ fontfamily=FiraCode //possible: SansSerif,Serif,Monospaced
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>990</x>
-      <y>1062</y>
-      <w>630</w>
-      <h>288</h>
+      <x>1045</x>
+      <y>1121</y>
+      <w>665</w>
+      <h>304</h>
     </coordinates>
     <panel_attributes>template=TData: Object
 Always
@@ -97,10 +97,10 @@ Always
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1746</x>
-      <y>774</y>
-      <w>180</w>
-      <h>54</h>
+      <x>1843</x>
+      <y>817</y>
+      <w>190</w>
+      <h>57</h>
     </coordinates>
     <panel_attributes>Empty
 --
@@ -110,10 +110,10 @@ Always
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1692</x>
-      <y>1098</y>
-      <w>666</w>
-      <h>216</h>
+      <x>1786</x>
+      <y>1159</y>
+      <w>703</w>
+      <h>228</h>
     </coordinates>
     <panel_attributes>template=TData: Object
 Never
@@ -127,10 +127,10 @@ Never
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1080</x>
-      <y>792</y>
-      <w>54</w>
-      <h>324</h>
+      <x>1140</x>
+      <y>836</y>
+      <w>57</w>
+      <h>342</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;160.0</additional_attributes>
@@ -138,10 +138,10 @@ Never
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1080</x>
-      <y>792</y>
-      <w>792</w>
-      <h>360</h>
+      <x>1140</x>
+      <y>836</y>
+      <w>836</w>
+      <h>380</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;130.0;420.0;130.0;420.0;180.0</additional_attributes>
@@ -149,10 +149,10 @@ Never
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>2430</x>
-      <y>1116</y>
-      <w>540</w>
-      <h>252</h>
+      <x>2565</x>
+      <y>1178</y>
+      <w>570</w>
+      <h>266</h>
     </coordinates>
     <panel_attributes>OnKeyPress
 --
@@ -168,10 +168,10 @@ Never
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1134</x>
-      <y>792</y>
-      <w>1512</w>
-      <h>360</h>
+      <x>1197</x>
+      <y>836</y>
+      <w>1596</w>
+      <h>380</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-
 &lt;&lt;bind&gt;&gt; (Empty)</panel_attributes>
@@ -180,10 +180,10 @@ Never
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>1962</x>
-      <y>756</y>
-      <w>252</w>
-      <h>72</h>
+      <x>2071</x>
+      <y>798</y>
+      <w>266</w>
+      <h>76</h>
     </coordinates>
     <panel_attributes>Data Class that
 contains no data
@@ -193,10 +193,10 @@ bg=yellow</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>1062</x>
-      <y>1368</y>
-      <w>306</w>
-      <h>54</h>
+      <x>1121</x>
+      <y>1444</y>
+      <w>323</w>
+      <h>57</h>
     </coordinates>
     <panel_attributes>Triggers on every tick
 bg=yellow</panel_attributes>
@@ -205,10 +205,10 @@ bg=yellow</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>1692</x>
-      <y>1350</y>
-      <w>252</w>
-      <h>54</h>
+      <x>1786</x>
+      <y>1425</y>
+      <w>266</w>
+      <h>57</h>
     </coordinates>
     <panel_attributes>Never triggers
 bg=yellow</panel_attributes>
@@ -217,10 +217,10 @@ bg=yellow</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1368</x>
-      <y>1512</y>
-      <w>630</w>
-      <h>126</h>
+      <x>1444</x>
+      <y>1596</y>
+      <w>665</w>
+      <h>133</h>
     </coordinates>
     <panel_attributes>template=TData: Object
 /Observer/
@@ -231,10 +231,10 @@ bg=yellow</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1710</x>
-      <y>1800</y>
-      <w>1332</w>
-      <h>162</h>
+      <x>1805</x>
+      <y>1900</y>
+      <w>1406</w>
+      <h>171</h>
     </coordinates>
     <panel_attributes>template=TData: Object, THandler: Object
 MethodObserver
@@ -246,10 +246,10 @@ MethodObserver
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>990</x>
-      <y>1800</y>
-      <w>684</w>
-      <h>162</h>
+      <x>1045</x>
+      <y>1900</y>
+      <w>722</w>
+      <h>171</h>
     </coordinates>
     <panel_attributes>template=TData: Object
 FunctionObserver
@@ -261,21 +261,21 @@ FunctionObserver
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1512</x>
-      <y>1242</y>
-      <w>144</w>
-      <h>324</h>
+      <x>1634</x>
+      <y>665</y>
+      <w>114</w>
+      <h>988</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;60.0;10.0;60.0;160.0</additional_attributes>
+    <additional_attributes>10.0;10.0;40.0;10.0;40.0;500.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1260</x>
-      <y>1620</y>
-      <w>396</w>
-      <h>234</h>
+      <x>1330</x>
+      <y>1710</y>
+      <w>418</w>
+      <h>247</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>200.0;10.0;200.0;60.0;10.0;60.0;10.0;110.0</additional_attributes>
@@ -283,10 +283,10 @@ FunctionObserver
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1602</x>
-      <y>1620</y>
-      <w>720</w>
-      <h>234</h>
+      <x>1691</x>
+      <y>1710</y>
+      <w>760</w>
+      <h>247</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;60.0;380.0;60.0;380.0;110.0</additional_attributes>
@@ -294,10 +294,10 @@ FunctionObserver
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1782</x>
-      <y>1296</y>
-      <w>54</w>
-      <h>90</h>
+      <x>1881</x>
+      <y>1368</y>
+      <w>57</w>
+      <h>95</h>
     </coordinates>
     <panel_attributes>lt=-</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;30.0</additional_attributes>
@@ -305,10 +305,10 @@ FunctionObserver
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1908</x>
-      <y>774</y>
-      <w>90</w>
-      <h>54</h>
+      <x>2014</x>
+      <y>817</y>
+      <w>95</w>
+      <h>57</h>
     </coordinates>
     <panel_attributes>lt=-</panel_attributes>
     <additional_attributes>10.0;10.0;30.0;10.0</additional_attributes>
@@ -316,10 +316,10 @@ FunctionObserver
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1188</x>
-      <y>1332</y>
-      <w>54</w>
-      <h>72</h>
+      <x>1254</x>
+      <y>1406</y>
+      <w>57</w>
+      <h>76</h>
     </coordinates>
     <panel_attributes>lt=-</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;20.0</additional_attributes>
@@ -327,10 +327,10 @@ FunctionObserver
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>2088</x>
-      <y>450</y>
-      <w>540</w>
-      <h>198</h>
+      <x>2204</x>
+      <y>475</y>
+      <w>570</w>
+      <h>209</h>
     </coordinates>
     <panel_attributes>game::EventController
 --
@@ -344,10 +344,10 @@ mEvents: std::map&lt;int, ObservableBase*&gt;
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1224</x>
-      <y>486</y>
-      <w>54</w>
-      <h>126</h>
+      <x>1292</x>
+      <y>513</y>
+      <w>57</w>
+      <h>133</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
@@ -355,10 +355,10 @@ mEvents: std::map&lt;int, ObservableBase*&gt;
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>1746</x>
-      <y>486</y>
-      <w>306</w>
-      <h>144</h>
+      <x>1843</x>
+      <y>513</y>
+      <w>323</w>
+      <h>152</h>
     </coordinates>
     <panel_attributes>Not recommended as
 this requires casting
@@ -370,62 +370,10 @@ bg=yellow</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1116</x>
-      <y>2070</y>
-      <w>864</w>
-      <h>252</h>
-    </coordinates>
-    <panel_attributes>template=TDrawable: sf::Drawable
-game::GenericGameObject
---
-mDrawable: sf::Drawable
---
-+StaticGameObject(drawable: sf::Drawable, pos: sf::Vector3f)
-+Tick()
-+Render(target: sf::RenderTarget*)</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>540</x>
-      <y>2106</y>
-      <w>504</w>
-      <h>216</h>
-    </coordinates>
-    <panel_attributes>/game::SpriteGameObject/
---
-#mSprite: sf::Sprite*
---
-+SpriteGameObject(sprite: sf::Sprite*)
-/+Tick()/
-+Render(target: sf::Window)
-+GetSprite(): sf::Sprite*</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>1620</x>
-      <y>0</y>
-      <w>360</w>
-      <h>162</h>
-    </coordinates>
-    <panel_attributes>game::AnimatedSprite
---
-+AnimatedSprite(textures:)
---
-/+Tick()/
-/+Render(target: sf::Window)/</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
       <x>0</x>
-      <y>342</y>
-      <w>432</w>
-      <h>126</h>
+      <y>361</y>
+      <w>456</w>
+      <h>133</h>
     </coordinates>
     <panel_attributes>SceneGraph
 --
@@ -439,9 +387,9 @@ GetRoot(): SceneGraphNode*
     <id>UMLClass</id>
     <coordinates>
       <x>0</x>
-      <y>504</y>
-      <w>774</w>
-      <h>234</h>
+      <y>532</y>
+      <w>817</w>
+      <h>247</h>
     </coordinates>
     <panel_attributes>SceneGraphNode
 --
@@ -460,10 +408,10 @@ GetRoot(): SceneGraphNode*
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>3366</x>
+      <x>3553</x>
       <y>0</y>
-      <w>1404</w>
-      <h>144</h>
+      <w>1482</w>
+      <h>152</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Singleton&gt;&gt;
 game::GameWorldFactory
@@ -477,9 +425,9 @@ game::GameWorldFactory
     <id>UMLClass</id>
     <coordinates>
       <x>0</x>
-      <y>1170</y>
-      <w>576</w>
-      <h>216</h>
+      <y>1235</y>
+      <w>608</w>
+      <h>228</h>
     </coordinates>
     <panel_attributes>/game::TransformableGameObject/
 --
@@ -496,9 +444,9 @@ game::GameWorldFactory
     <id>UMLClass</id>
     <coordinates>
       <x>0</x>
-      <y>1440</y>
-      <w>630</w>
-      <h>270</h>
+      <y>1520</y>
+      <w>665</w>
+      <h>285</h>
     </coordinates>
     <panel_attributes>/game::SpriteGameObject/
 --
@@ -515,10 +463,10 @@ game::GameWorldFactory
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>216</x>
-      <y>1062</y>
-      <w>54</w>
-      <h>144</h>
+      <x>228</x>
+      <y>1121</y>
+      <w>57</w>
+      <h>152</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
@@ -526,10 +474,10 @@ game::GameWorldFactory
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>216</x>
-      <y>1368</y>
-      <w>54</w>
-      <h>108</h>
+      <x>228</x>
+      <y>1444</y>
+      <w>57</w>
+      <h>114</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
@@ -537,10 +485,10 @@ game::GameWorldFactory
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>414</x>
-      <y>378</y>
-      <w>162</w>
-      <h>162</h>
+      <x>437</x>
+      <y>399</y>
+      <w>171</w>
+      <h>171</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;70.0;10.0;70.0;70.0</additional_attributes>
@@ -548,10 +496,10 @@ game::GameWorldFactory
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>630</x>
-      <y>1332</y>
-      <w>180</w>
-      <h>54</h>
+      <x>665</x>
+      <y>1406</y>
+      <w>190</w>
+      <h>57</h>
     </coordinates>
     <panel_attributes>Current only
 bg=yellow</panel_attributes>
@@ -560,10 +508,10 @@ bg=yellow</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>558</x>
-      <y>1332</y>
-      <w>108</w>
-      <h>54</h>
+      <x>589</x>
+      <y>1406</y>
+      <w>114</w>
+      <h>57</h>
     </coordinates>
     <panel_attributes>lt=-</panel_attributes>
     <additional_attributes>10.0;10.0;40.0;10.0</additional_attributes>
@@ -571,10 +519,10 @@ bg=yellow</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>306</x>
-      <y>774</y>
-      <w>252</w>
-      <h>54</h>
+      <x>323</x>
+      <y>817</y>
+      <w>266</w>
+      <h>57</h>
     </coordinates>
     <panel_attributes>Root to this node
 bg=yellow</panel_attributes>
@@ -583,10 +531,10 @@ bg=yellow</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>378</x>
-      <y>720</y>
-      <w>54</w>
-      <h>90</h>
+      <x>399</x>
+      <y>760</y>
+      <w>57</w>
+      <h>95</h>
     </coordinates>
     <panel_attributes>lt=-</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;30.0</additional_attributes>
@@ -594,10 +542,10 @@ bg=yellow</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>3294</x>
-      <y>1764</y>
-      <w>738</w>
-      <h>234</h>
+      <x>3477</x>
+      <y>1862</y>
+      <w>779</w>
+      <h>247</h>
     </coordinates>
     <panel_attributes>template=TResource: Object
 ResourceCache
@@ -612,10 +560,10 @@ ResourceCache
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>3294</x>
-      <y>2124</y>
-      <w>612</w>
-      <h>180</h>
+      <x>3477</x>
+      <y>2242</y>
+      <w>646</w>
+      <h>190</h>
     </coordinates>
     <panel_attributes>game::TextureCache
 --
@@ -629,10 +577,10 @@ ResourceCache
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>3600</x>
-      <y>1980</y>
-      <w>288</w>
-      <h>180</h>
+      <x>3800</x>
+      <y>2090</y>
+      <w>304</w>
+      <h>190</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-
 &lt;&lt;bind&gt;&gt; (sf::Texture*)</panel_attributes>
@@ -641,10 +589,10 @@ ResourceCache
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>2520</x>
-      <y>1476</y>
-      <w>594</w>
-      <h>180</h>
+      <x>2660</x>
+      <y>1558</y>
+      <w>627</w>
+      <h>190</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Singleton&gt;&gt;
 AssetManager
@@ -658,10 +606,10 @@ AssetManager
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>3096</x>
-      <y>1548</y>
-      <w>360</w>
-      <h>612</h>
+      <x>3268</x>
+      <y>1634</y>
+      <w>380</w>
+      <h>646</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;80.0;10.0;80.0;280.0;180.0;280.0;180.0;320.0</additional_attributes>
@@ -669,10 +617,10 @@ AssetManager
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>3672</x>
-      <y>738</y>
-      <w>324</w>
-      <h>288</h>
+      <x>3876</x>
+      <y>779</y>
+      <w>342</w>
+      <h>304</h>
     </coordinates>
     <panel_attributes>&lt;&lt;struct&gt;&gt;
 game::Tile
@@ -690,10 +638,10 @@ game::Tile
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>3762</x>
-      <y>1134</y>
-      <w>504</w>
-      <h>162</h>
+      <x>3971</x>
+      <y>1197</y>
+      <w>532</w>
+      <h>171</h>
     </coordinates>
     <panel_attributes>&lt;&lt;struct&gt;&gt;
 game::TileLayer
@@ -706,10 +654,10 @@ game::TileLayer
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>4302</x>
-      <y>738</y>
-      <w>468</w>
-      <h>234</h>
+      <x>4541</x>
+      <y>779</y>
+      <w>494</w>
+      <h>247</h>
     </coordinates>
     <panel_attributes>&lt;&lt;struct&gt;&gt;
 game::Tilemap
@@ -725,10 +673,10 @@ game::Tilemap
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>4320</x>
-      <y>1224</y>
-      <w>324</w>
-      <h>54</h>
+      <x>4560</x>
+      <y>1292</y>
+      <w>342</w>
+      <h>57</h>
     </coordinates>
     <panel_attributes>[] simplified for std::array
 bg=yellow</panel_attributes>
@@ -737,10 +685,10 @@ bg=yellow</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>4248</x>
-      <y>1242</y>
-      <w>108</w>
-      <h>54</h>
+      <x>4484</x>
+      <y>1311</y>
+      <w>114</w>
+      <h>57</h>
     </coordinates>
     <panel_attributes>lt=-</panel_attributes>
     <additional_attributes>10.0;10.0;40.0;10.0</additional_attributes>
@@ -748,10 +696,10 @@ bg=yellow</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>3528</x>
-      <y>990</y>
-      <w>270</w>
-      <h>306</h>
+      <x>3724</x>
+      <y>1045</y>
+      <w>285</w>
+      <h>323</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>130.0;150.0;10.0;150.0;10.0;10.0;80.0;10.0</additional_attributes>
@@ -759,10 +707,10 @@ bg=yellow</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>4122</x>
-      <y>810</y>
-      <w>216</w>
-      <h>360</h>
+      <x>4351</x>
+      <y>855</y>
+      <w>228</w>
+      <h>380</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>100.0;10.0;10.0;10.0;10.0;180.0</additional_attributes>
@@ -770,10 +718,10 @@ bg=yellow</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>3474</x>
-      <y>414</y>
-      <w>378</w>
-      <h>126</h>
+      <x>3667</x>
+      <y>437</y>
+      <w>399</w>
+      <h>133</h>
     </coordinates>
     <panel_attributes>&lt;&lt;struct&gt;&gt;
 game::MaterialMap
@@ -786,10 +734,10 @@ game::MaterialMap
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>3924</x>
-      <y>432</y>
-      <w>432</w>
-      <h>144</h>
+      <x>4142</x>
+      <y>456</y>
+      <w>456</w>
+      <h>152</h>
     </coordinates>
     <panel_attributes>&lt;&lt;struct&gt;&gt;
 game::Material
@@ -803,10 +751,10 @@ game::Material
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>3492</x>
-      <y>324</y>
-      <w>324</w>
-      <h>54</h>
+      <x>3686</x>
+      <y>342</y>
+      <w>342</w>
+      <h>57</h>
     </coordinates>
     <panel_attributes>Maps tileID to a Material
 bg=yellow</panel_attributes>
@@ -815,10 +763,10 @@ bg=yellow</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>3636</x>
-      <y>360</y>
-      <w>54</w>
-      <h>90</h>
+      <x>3838</x>
+      <y>380</y>
+      <w>57</w>
+      <h>95</h>
     </coordinates>
     <panel_attributes>lt=-</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;30.0</additional_attributes>
@@ -826,10 +774,10 @@ bg=yellow</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>3960</x>
-      <y>180</y>
-      <w>864</w>
-      <h>216</h>
+      <x>4180</x>
+      <y>190</y>
+      <w>912</w>
+      <h>228</h>
     </coordinates>
     <panel_attributes>game::GameWorld
 --
@@ -844,10 +792,10 @@ bg=yellow</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>3978</x>
-      <y>684</y>
-      <w>126</w>
-      <h>360</h>
+      <x>4199</x>
+      <y>722</y>
+      <w>133</w>
+      <h>380</h>
     </coordinates>
     <panel_attributes>lt=-</panel_attributes>
     <additional_attributes>50.0;10.0;50.0;180.0;10.0;180.0</additional_attributes>
@@ -855,10 +803,10 @@ bg=yellow</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>3780</x>
-      <y>648</y>
-      <w>540</w>
-      <h>54</h>
+      <x>3990</x>
+      <y>684</y>
+      <w>570</w>
+      <h>57</h>
     </coordinates>
     <panel_attributes>Mapped from Index on GameWorld creation
 bg=yellow</panel_attributes>
@@ -867,10 +815,10 @@ bg=yellow</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>3834</x>
-      <y>486</y>
-      <w>126</w>
-      <h>54</h>
+      <x>4047</x>
+      <y>513</y>
+      <w>133</w>
+      <h>57</h>
     </coordinates>
     <panel_attributes>lt=-&gt;&gt;&gt;&gt;&gt;</panel_attributes>
     <additional_attributes>50.0;10.0;20.0;10.0;10.0;10.0</additional_attributes>
