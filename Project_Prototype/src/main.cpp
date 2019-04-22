@@ -1,5 +1,6 @@
 #include <2DGameSDK/Core.h>
 #include <2DGameSDK/Event.h>
+#include <2DGameSDK/Scene.h>
 #include <iostream>
 
 #include <SFML/Graphics.hpp>
@@ -71,10 +72,30 @@ int testEvents() {
   return 0;
 }
 
+class MyEntity : public Entity {
+public:
+  MyEntity() : Entity(1) {}
+
+  void Tick() {
+    cout << "MyEntity ticks.." << endl;
+  }
+
+  void Render(sf::RenderTarget* target) {
+    cout << "MyEntity renders.." << endl;
+  }
+};
+
+int testEntity() {
+  auto ent = new MyEntity();
+  ent->Tick();
+  ent->Render(nullptr);
+}
+
 int main() {
   std::cout << "Hello Compiler" << std::endl;
 
   testEvents();
+  testEntity();
 
   // game::GameOptions options{
   //     "My Game", sf::Vector2i(800, 600), 50};

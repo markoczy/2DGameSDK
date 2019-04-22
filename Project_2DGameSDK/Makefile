@@ -205,6 +205,141 @@ src/event/EventController.cpp.s:
 	cd /d E:\Coding\Git\2DGameSDK && $(MAKE) -f Project_2DGameSDK\CMakeFiles\2DGameSDK.dir\build.make Project_2DGameSDK/CMakeFiles/2DGameSDK.dir/src/event/EventController.cpp.s
 .PHONY : src/event/EventController.cpp.s
 
+src/scene/SceneGraph.obj: src/scene/SceneGraph.cpp.obj
+
+.PHONY : src/scene/SceneGraph.obj
+
+# target to build an object file
+src/scene/SceneGraph.cpp.obj:
+	cd /d E:\Coding\Git\2DGameSDK && $(MAKE) -f Project_2DGameSDK\CMakeFiles\2DGameSDK.dir\build.make Project_2DGameSDK/CMakeFiles/2DGameSDK.dir/src/scene/SceneGraph.cpp.obj
+.PHONY : src/scene/SceneGraph.cpp.obj
+
+src/scene/SceneGraph.i: src/scene/SceneGraph.cpp.i
+
+.PHONY : src/scene/SceneGraph.i
+
+# target to preprocess a source file
+src/scene/SceneGraph.cpp.i:
+	cd /d E:\Coding\Git\2DGameSDK && $(MAKE) -f Project_2DGameSDK\CMakeFiles\2DGameSDK.dir\build.make Project_2DGameSDK/CMakeFiles/2DGameSDK.dir/src/scene/SceneGraph.cpp.i
+.PHONY : src/scene/SceneGraph.cpp.i
+
+src/scene/SceneGraph.s: src/scene/SceneGraph.cpp.s
+
+.PHONY : src/scene/SceneGraph.s
+
+# target to generate assembly for a file
+src/scene/SceneGraph.cpp.s:
+	cd /d E:\Coding\Git\2DGameSDK && $(MAKE) -f Project_2DGameSDK\CMakeFiles\2DGameSDK.dir\build.make Project_2DGameSDK/CMakeFiles/2DGameSDK.dir/src/scene/SceneGraph.cpp.s
+.PHONY : src/scene/SceneGraph.cpp.s
+
+src/scene/SceneGraphNode.obj: src/scene/SceneGraphNode.cpp.obj
+
+.PHONY : src/scene/SceneGraphNode.obj
+
+# target to build an object file
+src/scene/SceneGraphNode.cpp.obj:
+	cd /d E:\Coding\Git\2DGameSDK && $(MAKE) -f Project_2DGameSDK\CMakeFiles\2DGameSDK.dir\build.make Project_2DGameSDK/CMakeFiles/2DGameSDK.dir/src/scene/SceneGraphNode.cpp.obj
+.PHONY : src/scene/SceneGraphNode.cpp.obj
+
+src/scene/SceneGraphNode.i: src/scene/SceneGraphNode.cpp.i
+
+.PHONY : src/scene/SceneGraphNode.i
+
+# target to preprocess a source file
+src/scene/SceneGraphNode.cpp.i:
+	cd /d E:\Coding\Git\2DGameSDK && $(MAKE) -f Project_2DGameSDK\CMakeFiles\2DGameSDK.dir\build.make Project_2DGameSDK/CMakeFiles/2DGameSDK.dir/src/scene/SceneGraphNode.cpp.i
+.PHONY : src/scene/SceneGraphNode.cpp.i
+
+src/scene/SceneGraphNode.s: src/scene/SceneGraphNode.cpp.s
+
+.PHONY : src/scene/SceneGraphNode.s
+
+# target to generate assembly for a file
+src/scene/SceneGraphNode.cpp.s:
+	cd /d E:\Coding\Git\2DGameSDK && $(MAKE) -f Project_2DGameSDK\CMakeFiles\2DGameSDK.dir\build.make Project_2DGameSDK/CMakeFiles/2DGameSDK.dir/src/scene/SceneGraphNode.cpp.s
+.PHONY : src/scene/SceneGraphNode.cpp.s
+
+src/scene/entity/Entity.obj: src/scene/entity/Entity.cpp.obj
+
+.PHONY : src/scene/entity/Entity.obj
+
+# target to build an object file
+src/scene/entity/Entity.cpp.obj:
+	cd /d E:\Coding\Git\2DGameSDK && $(MAKE) -f Project_2DGameSDK\CMakeFiles\2DGameSDK.dir\build.make Project_2DGameSDK/CMakeFiles/2DGameSDK.dir/src/scene/entity/Entity.cpp.obj
+.PHONY : src/scene/entity/Entity.cpp.obj
+
+src/scene/entity/Entity.i: src/scene/entity/Entity.cpp.i
+
+.PHONY : src/scene/entity/Entity.i
+
+# target to preprocess a source file
+src/scene/entity/Entity.cpp.i:
+	cd /d E:\Coding\Git\2DGameSDK && $(MAKE) -f Project_2DGameSDK\CMakeFiles\2DGameSDK.dir\build.make Project_2DGameSDK/CMakeFiles/2DGameSDK.dir/src/scene/entity/Entity.cpp.i
+.PHONY : src/scene/entity/Entity.cpp.i
+
+src/scene/entity/Entity.s: src/scene/entity/Entity.cpp.s
+
+.PHONY : src/scene/entity/Entity.s
+
+# target to generate assembly for a file
+src/scene/entity/Entity.cpp.s:
+	cd /d E:\Coding\Git\2DGameSDK && $(MAKE) -f Project_2DGameSDK\CMakeFiles\2DGameSDK.dir\build.make Project_2DGameSDK/CMakeFiles/2DGameSDK.dir/src/scene/entity/Entity.cpp.s
+.PHONY : src/scene/entity/Entity.cpp.s
+
+src/scene/entity/SpriteTransformableEntity.obj: src/scene/entity/SpriteTransformableEntity.cpp.obj
+
+.PHONY : src/scene/entity/SpriteTransformableEntity.obj
+
+# target to build an object file
+src/scene/entity/SpriteTransformableEntity.cpp.obj:
+	cd /d E:\Coding\Git\2DGameSDK && $(MAKE) -f Project_2DGameSDK\CMakeFiles\2DGameSDK.dir\build.make Project_2DGameSDK/CMakeFiles/2DGameSDK.dir/src/scene/entity/SpriteTransformableEntity.cpp.obj
+.PHONY : src/scene/entity/SpriteTransformableEntity.cpp.obj
+
+src/scene/entity/SpriteTransformableEntity.i: src/scene/entity/SpriteTransformableEntity.cpp.i
+
+.PHONY : src/scene/entity/SpriteTransformableEntity.i
+
+# target to preprocess a source file
+src/scene/entity/SpriteTransformableEntity.cpp.i:
+	cd /d E:\Coding\Git\2DGameSDK && $(MAKE) -f Project_2DGameSDK\CMakeFiles\2DGameSDK.dir\build.make Project_2DGameSDK/CMakeFiles/2DGameSDK.dir/src/scene/entity/SpriteTransformableEntity.cpp.i
+.PHONY : src/scene/entity/SpriteTransformableEntity.cpp.i
+
+src/scene/entity/SpriteTransformableEntity.s: src/scene/entity/SpriteTransformableEntity.cpp.s
+
+.PHONY : src/scene/entity/SpriteTransformableEntity.s
+
+# target to generate assembly for a file
+src/scene/entity/SpriteTransformableEntity.cpp.s:
+	cd /d E:\Coding\Git\2DGameSDK && $(MAKE) -f Project_2DGameSDK\CMakeFiles\2DGameSDK.dir\build.make Project_2DGameSDK/CMakeFiles/2DGameSDK.dir/src/scene/entity/SpriteTransformableEntity.cpp.s
+.PHONY : src/scene/entity/SpriteTransformableEntity.cpp.s
+
+src/scene/entity/TransformableEntity.obj: src/scene/entity/TransformableEntity.cpp.obj
+
+.PHONY : src/scene/entity/TransformableEntity.obj
+
+# target to build an object file
+src/scene/entity/TransformableEntity.cpp.obj:
+	cd /d E:\Coding\Git\2DGameSDK && $(MAKE) -f Project_2DGameSDK\CMakeFiles\2DGameSDK.dir\build.make Project_2DGameSDK/CMakeFiles/2DGameSDK.dir/src/scene/entity/TransformableEntity.cpp.obj
+.PHONY : src/scene/entity/TransformableEntity.cpp.obj
+
+src/scene/entity/TransformableEntity.i: src/scene/entity/TransformableEntity.cpp.i
+
+.PHONY : src/scene/entity/TransformableEntity.i
+
+# target to preprocess a source file
+src/scene/entity/TransformableEntity.cpp.i:
+	cd /d E:\Coding\Git\2DGameSDK && $(MAKE) -f Project_2DGameSDK\CMakeFiles\2DGameSDK.dir\build.make Project_2DGameSDK/CMakeFiles/2DGameSDK.dir/src/scene/entity/TransformableEntity.cpp.i
+.PHONY : src/scene/entity/TransformableEntity.cpp.i
+
+src/scene/entity/TransformableEntity.s: src/scene/entity/TransformableEntity.cpp.s
+
+.PHONY : src/scene/entity/TransformableEntity.s
+
+# target to generate assembly for a file
+src/scene/entity/TransformableEntity.cpp.s:
+	cd /d E:\Coding\Git\2DGameSDK && $(MAKE) -f Project_2DGameSDK\CMakeFiles\2DGameSDK.dir\build.make Project_2DGameSDK/CMakeFiles/2DGameSDK.dir/src/scene/entity/TransformableEntity.cpp.s
+.PHONY : src/scene/entity/TransformableEntity.cpp.s
+
 src/templates/ResourceCache.obj: src/templates/ResourceCache.cpp.obj
 
 .PHONY : src/templates/ResourceCache.obj
@@ -250,6 +385,21 @@ help:
 	@echo ... src/event/EventController.obj
 	@echo ... src/event/EventController.i
 	@echo ... src/event/EventController.s
+	@echo ... src/scene/SceneGraph.obj
+	@echo ... src/scene/SceneGraph.i
+	@echo ... src/scene/SceneGraph.s
+	@echo ... src/scene/SceneGraphNode.obj
+	@echo ... src/scene/SceneGraphNode.i
+	@echo ... src/scene/SceneGraphNode.s
+	@echo ... src/scene/entity/Entity.obj
+	@echo ... src/scene/entity/Entity.i
+	@echo ... src/scene/entity/Entity.s
+	@echo ... src/scene/entity/SpriteTransformableEntity.obj
+	@echo ... src/scene/entity/SpriteTransformableEntity.i
+	@echo ... src/scene/entity/SpriteTransformableEntity.s
+	@echo ... src/scene/entity/TransformableEntity.obj
+	@echo ... src/scene/entity/TransformableEntity.i
+	@echo ... src/scene/entity/TransformableEntity.s
 	@echo ... src/templates/ResourceCache.obj
 	@echo ... src/templates/ResourceCache.i
 	@echo ... src/templates/ResourceCache.s
