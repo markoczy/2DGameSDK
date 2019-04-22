@@ -48,4 +48,7 @@
     // C++ Format Style for Project 2DGameSDK:
     // see .clang-format file in project root
     "C_Cpp.clang_format_style": "{ AlignEscapedNewlinesLeft: 'false', AlignTrailingComments: 'false', AllowAllParametersOfDeclarationOnNextLine: 'true', AllowShortBlocksOnASingleLine: 'false', AllowShortFunctionsOnASingleLine: All, AllowShortIfStatementsOnASingleLine: 'true', AllowShortLoopsOnASingleLine: 'true', AlwaysBreakBeforeMultilineStrings: 'false', AlwaysBreakTemplateDeclarations: 'true', BinPackParameters: 'false', BreakBeforeBinaryOperators: 'false', BreakBeforeBraces: Attach, BreakBeforeTernaryOperators: 'false', BreakConstructorInitializersBeforeComma: 'false', ColumnLimit: '0', ConstructorInitializerAllOnOneLineOrOnePerLine: 'false', Cpp11BracedListStyle: 'true', DerivePointerAlignment: 'false', DisableFormat: 'false', ExperimentalAutoDetectBinPacking: 'false', IndentCaseLabels: 'false', IndentWidth: '2', IndentWrappedFunctionNames: 'true', KeepEmptyLinesAtTheStartOfBlocks: 'false', Language: Cpp, NamespaceIndentation: All, PointerAlignment: Left, SpaceBeforeAssignmentOperators: 'true', SpaceBeforeParens: Never, SpaceInEmptyParentheses: 'false', SpacesInAngles: 'false', SpacesInCStyleCastParentheses: 'false', SpacesInParentheses: 'false', UseTab: Never }",
+    "search.exclude": {
+        "libs/**": true
+    },
 }

@@ -9,6 +9,7 @@ namespace game {
 
   struct TileLayer {
     std::string Name;
+    int Number;
     std::vector<std::vector<Tile>> Tiles;
   };
 

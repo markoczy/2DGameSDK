@@ -7,7 +7,7 @@
 namespace game {
 
   struct Tile {
-    int Id, X, Y, Rot;
+    int Id, Tile, X, Y, Rot;
     bool FlipX, FlipY;
     sf::Texture* Texture;
     Material* Material;

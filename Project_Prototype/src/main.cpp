@@ -143,13 +143,38 @@ int testTiles() {
   return 0;
 }
 
+int testWorldLoader() {
+  cout << "Start testWorldLoader 5" << endl;
+  sf::RenderWindow window(sf::VideoMode(600, 600), "SFML works!");
+  cout << "before create" << endl;
+  auto world = GameWorldFactory::CreateGameWorld("res/testmap/tilemap.json", "", "res/testmap/test-2_");
+  cout << "after create" << endl;
+
+  while(window.isOpen()) {
+    sf::Event event;
+    while(window.pollEvent(event)) {
+      if(event.type == sf::Event::Closed)
+        window.close();
+    }
+    window.clear();
+
+    world->Render(&window);
+    // ent->Render(&window);
+    // ent2->Render(&window);
+    std::this_thread::sleep_for(std::chrono::milliseconds(20));
+    // window.draw(shape);
+    window.display();
+  }
+}
+
 int main() {
   std::cout << "Hello Compiler" << std::endl;
 
   // testEvents();
   // testEntity();
-  testEntity2();
-  testTiles();
+  // testEntity2();
+  // testTiles();
+  testWorldLoader();
 
   // game::GameOptions options{
   //     "My Game", sf::Vector2i(800, 600), 50};

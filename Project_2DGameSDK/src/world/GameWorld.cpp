@@ -18,9 +18,11 @@ namespace game {
     for(auto layer : mTilemap->Layers) {
       for(auto row : layer.Tiles) {
         for(auto tile : row) {
-          Sprite sprite(*tile.Texture);
-          sprite.setPosition(tile.X * mTilemap->TileWidth, tile.Y * mTilemap->TileHeight);
-          target->draw(sprite);
+          if(tile.Texture != nullptr) {
+            Sprite sprite(*tile.Texture);
+            sprite.setPosition(tile.X * mTilemap->TileWidth, tile.Y * mTilemap->TileHeight);
+            target->draw(sprite);
+          }
         }
       }
     }
