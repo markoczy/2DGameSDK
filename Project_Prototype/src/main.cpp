@@ -1,6 +1,7 @@
 #include <2DGameSDK/Core.h>
 #include <2DGameSDK/Event.h>
 #include <2DGameSDK/Scene.h>
+#include <2DGameSDK/World.h>
 
 #include <chrono>
 #include <iostream>
@@ -134,12 +135,20 @@ int testEntity2() {
   return 0;
 }
 
+int testTiles() {
+  Tile t;
+  t.Id = 2;
+  cout << "Tile ID:" << t.Id << endl;
+  return 0;
+}
+
 int main() {
   std::cout << "Hello Compiler" << std::endl;
 
-  testEvents();
-  testEntity();
-  testEntity2();
+  // testEvents();
+  // testEntity();
+  // testEntity2();
+  testTiles();
 
   // game::GameOptions options{
   //     "My Game", sf::Vector2i(800, 600), 50};
