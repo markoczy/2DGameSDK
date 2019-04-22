@@ -10,11 +10,14 @@ namespace game {
   using ObserverFunc = void (*)(TData*);
 
   template <class TData>
-  class GAMESDK_DLL FunctionObserver : public Observer<TData> {
+  class FunctionObserver : public Observer<TData> {
   public:
-    FunctionObserver(ObserverFunc<TData> func);
+    FunctionObserver(ObserverFunc<TData> func) : mFunc(func) {
+    }
 
-    void Callback(TData* data);
+    void Callback(TData* data) {
+      mFunc(data);
+    }
 
   private:
     ObserverFunc<TData> mFunc;

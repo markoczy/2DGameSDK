@@ -21,7 +21,7 @@ namespace game {
 
     virtual void Update() {
       bool trigger = false;
-      auto data = triggered(&trigger);
+      TData* data = triggered(&trigger);
 
       if(trigger) {
         for(Observer<TData>* iObs : mObservers) {

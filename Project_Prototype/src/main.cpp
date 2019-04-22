@@ -1,9 +1,5 @@
 #include <2DGameSDK/Core.h>
 #include <2DGameSDK/Event.h>
-// #include <2DGameSDK/event/observable/Observable.h>
-// #include <2DGameSDK/event/observer/MethodObserver.h>
-// #include <2DGameSDK/event/observer/Observer.h>
-// #include <2DGameSDK/ResourceCache.h>
 #include <iostream>
 
 #include <SFML/Graphics.hpp>
@@ -40,6 +36,7 @@ public:
 
 protected:
   TData* triggered(bool* trigger) {
+    cout << "Called triggered of Emitter" << endl;
     // bool tr = mData != nullptr;
     *trigger = mData != nullptr;
     auto data = mData;
@@ -51,38 +48,38 @@ private:
   TData* mData = nullptr;
 };
 
-// template class Observer<MyClass>;
-// template class MethodObserver<MyClass, ClassWithMethod>;
-
-int testObserver2() {
+int testEvents() {
   auto data = new MyClass();
-  auto ctrl = ClassWithMethod();
-  auto observer = MethodObserver<MyClass, ClassWithMethod>(&ctrl, &ClassWithMethod::Method);
-  // observer.Callback(new MyClass());
+  auto handler = new ClassWithMethod();
+  auto observer = new MethodObserver<MyClass, ClassWithMethod>(handler, &ClassWithMethod::Method);
 
-  auto emitter = Emitter<MyClass>();
-  emitter.Subscribe(&observer);
+  auto emitter = new Emitter<MyClass>();
+  emitter->Subscribe(observer);
+
+  auto ctrl = EventController();
+  ctrl.AddEvent(emitter);
 
   cout << "*** Emitting data" << endl;
-  emitter.Emit(data);
+  emitter->Emit(data);
 
-  // auto observable = Observable<MyClass>();
-  // auto observable = Observable<MyClass>();
-  // observable.Subscribe(&observer);
+  cout << "*** Updating Controller" << endl;
+  ctrl.Tick();
 
-  // auto c = MyClass();
-  // observable.Emit(&c);
+  cout << "*** Updating Controller" << endl;
+  ctrl.Tick();
+
+  return 0;
 }
 
 int main() {
   std::cout << "Hello Compiler" << std::endl;
-  game::GameOptions options{
-      "My Game", sf::Vector2i(800, 600), 50};
 
-  testObserver2();
+  testEvents();
 
-  game::Game app(options);
-  app.Run();
+  // game::GameOptions options{
+  //     "My Game", sf::Vector2i(800, 600), 50};
+  // game::Game app(options);
+  // app.Run();
 
   // sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
   // sf::CircleShape shape(100.f);
