@@ -6,7 +6,9 @@ namespace game {
   const Transform _ZERO_TRANSFORM = Transform();
 
   SceneGraphNode::SceneGraphNode(SceneGraphNode* parent, TransformableEntity* entity) : mParent(parent), mEntity(entity) {
-    entity->SetGraphNode(this);
+    if(entity != nullptr) {
+      entity->SetGraphNode(this);
+    }
   }
 
   SceneGraphNode::~SceneGraphNode() {}

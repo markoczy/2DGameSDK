@@ -1,7 +1,10 @@
 #include <2DGameSDK/Core.h>
 #include <2DGameSDK/Event.h>
 #include <2DGameSDK/Scene.h>
+
+#include <chrono>
 #include <iostream>
+#include <thread>
 
 #include <SFML/Graphics.hpp>
 
@@ -91,11 +94,47 @@ int testEntity() {
   ent->Render(nullptr);
 }
 
+int testEntity2() {
+  cout << "Start Testentity 27" << endl;
+  auto cache = TextureCache();
+  auto tex = cache.Get("res/textures/testtile/testtile_0.png");
+  auto tex2 = cache.Get("res/textures/sample.png");
+  auto ent = new SpriteTransformableEntity(1, tex);
+  auto ent2 = new SpriteTransformableEntity(1, tex2);
+
+  auto scene = SceneGraph();
+  auto parent = scene.GetRoot()->AddChild(ent);
+  auto child = parent->AddChild(ent2);
+
+  sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
+  sf::CircleShape shape(100.f);
+  shape.setTexture(tex);
+  while(window.isOpen()) {
+    sf::Event event;
+    while(window.pollEvent(event)) {
+      if(event.type == sf::Event::Closed)
+        window.close();
+    }
+    window.clear();
+
+    ent->Render(&window);
+    ent2->Render(&window);
+    ent->GetTransformable()->move(1, 1);
+    ent2->GetTransformable()->rotate(5.0);
+    std::this_thread::sleep_for(std::chrono::milliseconds(20));
+    // window.draw(shape);
+    window.display();
+  }
+
+  return 0;
+}
+
 int main() {
   std::cout << "Hello Compiler" << std::endl;
 
   testEvents();
   testEntity();
+  testEntity2();
 
   // game::GameOptions options{
   //     "My Game", sf::Vector2i(800, 600), 50};
