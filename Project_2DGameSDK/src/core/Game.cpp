@@ -1,4 +1,4 @@
-#include "../shared/Game.h"
+#include "Game.h"
 
 namespace game {
 
@@ -36,6 +36,7 @@ namespace game {
       // Sync Sim Time
       int time = clock.getElapsedTime().asMilliseconds();
       if(sleepMillis > time) {
+        std::cout << "Sleeping " << sleepMillis - time << std::endl;
         std::this_thread::sleep_for(std::chrono::milliseconds(sleepMillis - time));
       }
       clock.restart();
@@ -48,7 +49,6 @@ namespace game {
   }
 
   void Game::tick() {
-    std::cout << "Tick..." << std::endl;
   }
 
   void Game::render() {

@@ -1,23 +1,34 @@
 #include "Event.h"
+#include "observable/ObservableBase.h"
+#include <map>
 #include <string>
 
 namespace game {
 
   class EventController {
+    static int eventId;
+
   public:
-    void Watch(std::string aId, Event* aEvent, void (*aOperation)(void));
-    void Unwatch(std::string aId);
-    void Tick();
+    EventController() {
+      eventId = 0;
+    }
+
+    void AddEvent(int key, ObservableBase* event) {
+      mEvents[eventId++] = event;
+    }
+
+    ObservableBase* GetEvent(int key) {
+      return mEvents[key];
+    }
+
+    void Tick() {
+      for(auto it = mEvents.begin(); it != mEvents.end(); ++it) {
+        it->second->Update();
+      }
+    }
 
   private:
-    struct observer;
-    std::vector<observer> mObservers;
-  };
-
-  struct EventController::observer {
-    std::string Id;
-    Event* Event;
-    void (*Operation)(void);
+    std::map<int, ObservableBase*> mEvents;
   };
 
 } // namespace game

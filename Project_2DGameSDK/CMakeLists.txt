@@ -7,7 +7,6 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_HOME_DIRECTORY}/libs/${PROJECT_NAME}
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_HOME_DIRECTORY}/libs/${PROJECT_NAME}/lib")
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_HOME_DIRECTORY}/libs/${PROJECT_NAME}/bin")
 
-
 # find sources
 file(GLOB_RECURSE SRCS 
     ./src/*.cpp
@@ -23,6 +22,8 @@ source_group("inc" FILES ${HDRS})
 
 include_directories(
     ${SFML_INCLUDE_DIR}
+    # include shared headers
+    ${PROJECT_SOURCE_DIR}/src/shared
 )
 
 set(LIBS_RELEASE)
@@ -32,6 +33,8 @@ endforeach()
 
 add_library(${PROJECT_NAME} SHARED ${SRCS} ${HDRS})
 target_link_libraries(${PROJECT_NAME} ${LIBS_RELEASE})
+
+set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
 
 # find shared headers in src/shared
 file(GLOB_RECURSE SHARED_HDRS 

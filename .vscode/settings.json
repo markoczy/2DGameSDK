@@ -35,7 +35,11 @@
         "tuple": "cpp",
         "typeinfo": "cpp",
         "utility": "cpp",
-        "functional": "cpp"
+        "functional": "cpp",
+        "chrono": "cpp",
+        "memory": "cpp",
+        "ratio": "cpp",
+        "thread": "cpp"
     },
     // C++ Format Style for Project 2DGameSDK:
     // see .clang-format file in project root
