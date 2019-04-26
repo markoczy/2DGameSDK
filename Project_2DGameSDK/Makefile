@@ -178,33 +178,6 @@ src/core/GameObject.cpp.s:
 	cd /d C:\Workspace\Git\2DGameSDK && $(MAKE) -f Project_2DGameSDK\CMakeFiles\2DGameSDK.dir\build.make Project_2DGameSDK/CMakeFiles/2DGameSDK.dir/src/core/GameObject.cpp.s
 .PHONY : src/core/GameObject.cpp.s
 
-src/core/event/observable/Obsevable.obj: src/core/event/observable/Obsevable.cpp.obj
-
-.PHONY : src/core/event/observable/Obsevable.obj
-
-# target to build an object file
-src/core/event/observable/Obsevable.cpp.obj:
-	cd /d C:\Workspace\Git\2DGameSDK && $(MAKE) -f Project_2DGameSDK\CMakeFiles\2DGameSDK.dir\build.make Project_2DGameSDK/CMakeFiles/2DGameSDK.dir/src/core/event/observable/Obsevable.cpp.obj
-.PHONY : src/core/event/observable/Obsevable.cpp.obj
-
-src/core/event/observable/Obsevable.i: src/core/event/observable/Obsevable.cpp.i
-
-.PHONY : src/core/event/observable/Obsevable.i
-
-# target to preprocess a source file
-src/core/event/observable/Obsevable.cpp.i:
-	cd /d C:\Workspace\Git\2DGameSDK && $(MAKE) -f Project_2DGameSDK\CMakeFiles\2DGameSDK.dir\build.make Project_2DGameSDK/CMakeFiles/2DGameSDK.dir/src/core/event/observable/Obsevable.cpp.i
-.PHONY : src/core/event/observable/Obsevable.cpp.i
-
-src/core/event/observable/Obsevable.s: src/core/event/observable/Obsevable.cpp.s
-
-.PHONY : src/core/event/observable/Obsevable.s
-
-# target to generate assembly for a file
-src/core/event/observable/Obsevable.cpp.s:
-	cd /d C:\Workspace\Git\2DGameSDK && $(MAKE) -f Project_2DGameSDK\CMakeFiles\2DGameSDK.dir\build.make Project_2DGameSDK/CMakeFiles/2DGameSDK.dir/src/core/event/observable/Obsevable.cpp.s
-.PHONY : src/core/event/observable/Obsevable.cpp.s
-
 src/core/event/observer/FunctionObserver.obj: src/core/event/observer/FunctionObserver.cpp.obj
 
 .PHONY : src/core/event/observer/FunctionObserver.obj
@@ -274,9 +247,6 @@ help:
 	@echo ... src/core/GameObject.obj
 	@echo ... src/core/GameObject.i
 	@echo ... src/core/GameObject.s
-	@echo ... src/core/event/observable/Obsevable.obj
-	@echo ... src/core/event/observable/Obsevable.i
-	@echo ... src/core/event/observable/Obsevable.s
 	@echo ... src/core/event/observer/FunctionObserver.obj
 	@echo ... src/core/event/observer/FunctionObserver.i
 	@echo ... src/core/event/observer/FunctionObserver.s

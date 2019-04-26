@@ -1,7 +1,8 @@
 #include <2DGameSDK/Game.h>
 #include <2DGameSDK/GameOptions.h>
-#include <2DGameSDK/MethodObserver.h>
-#include <2DGameSDK/Observer.h>
+#include <2DGameSDK/event/observable/Observable.h>
+#include <2DGameSDK/event/observer/MethodObserver.h>
+#include <2DGameSDK/event/observer/Observer.h>
 // #include <2DGameSDK/ResourceCache.h>
 #include <iostream>
 
@@ -27,6 +28,18 @@ public:
     std::cout << "Action inside class closure" << std::endl;
     c->MyAction();
   }
+};
+
+template <class TData>
+class Emitter : Observable<TData> {
+protected:
+  TData* triggered(bool* trigger) {
+    trigger = mData != nullptr;
+    return mData;
+  }
+
+private:
+  TData* mData = nullptr;
 };
 
 // template class Observer<MyClass>;

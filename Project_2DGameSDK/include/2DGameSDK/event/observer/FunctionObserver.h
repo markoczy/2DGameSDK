@@ -1,8 +1,8 @@
 #ifndef __FUNCTION_OBSERVER_H__
 #define __FUNCTION_OBSERVER_H__
 
-#include "Observer.h"
-#include "gamesdk_dll.h"
+#include "2DGameSDK/event/observer/Observer.h"
+#include "2DGameSDK/gamesdk_dll.h"
 
 namespace game {
 

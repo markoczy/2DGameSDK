@@ -1,4 +1,4 @@
-#include "event/observer/FunctionObserver.h"
+#include "2DGameSDK/event/observer/FunctionObserver.h"
 
 namespace game {
 

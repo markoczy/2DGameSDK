@@ -23,7 +23,7 @@ source_group("inc" FILES ${HDRS})
 include_directories(
     ${SFML_INCLUDE_DIR}
     # include shared headers
-    ${PROJECT_SOURCE_DIR}/src/shared
+    ${PROJECT_SOURCE_DIR}/include
 )
 
 set(LIBS_RELEASE)
@@ -38,8 +38,10 @@ set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
 
 # find shared headers in src/shared
 file(GLOB_RECURSE SHARED_HDRS 
-    ./src/shared/*.h
+    ./src/include/*.h
 )
 
-file(COPY ${SHARED_HDRS}
-     DESTINATION ${CMAKE_HOME_DIRECTORY}/libs/${PROJECT_NAME}/include/${PROJECT_NAME})
+file(COPY ./include/${PROJECT_NAME} DESTINATION ${CMAKE_HOME_DIRECTORY}/libs/${PROJECT_NAME}/include)
+
+# file(COPY ${SHARED_HDRS}
+#      DESTINATION ${CMAKE_HOME_DIRECTORY}/libs/${PROJECT_NAME}/include/${PROJECT_NAME})

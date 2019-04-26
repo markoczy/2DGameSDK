@@ -1,7 +1,7 @@
 #ifndef __OBSERVABLE_BASE_H__
 #define __OBSERVABLE_BASE_H__
 
-#include "gamesdk_dll.h"
+#include "2DGameSDK/gamesdk_dll.h"
 
 namespace game {
 

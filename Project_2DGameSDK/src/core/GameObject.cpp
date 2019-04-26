@@ -1,4 +1,4 @@
-#include "GameObject.h"
+#include "2DGameSDK/GameObject.h"
 
 namespace game {
 
