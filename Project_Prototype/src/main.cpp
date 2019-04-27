@@ -1,8 +1,8 @@
-#include <2DGameSDK/Game.h>
-#include <2DGameSDK/GameOptions.h>
-#include <2DGameSDK/event/observable/Observable.h>
-#include <2DGameSDK/event/observer/MethodObserver.h>
-#include <2DGameSDK/event/observer/Observer.h>
+#include <2DGameSDK/Core.h>
+#include <2DGameSDK/Event.h>
+// #include <2DGameSDK/event/observable/Observable.h>
+// #include <2DGameSDK/event/observer/MethodObserver.h>
+// #include <2DGameSDK/event/observer/Observer.h>
 // #include <2DGameSDK/ResourceCache.h>
 #include <iostream>
 
@@ -31,11 +31,20 @@ public:
 };
 
 template <class TData>
-class Emitter : Observable<TData> {
+class Emitter : public Observable<TData> {
+public:
+  void Emit(TData* data) {
+    // TODO destroy old??
+    mData = data;
+  }
+
 protected:
   TData* triggered(bool* trigger) {
-    trigger = mData != nullptr;
-    return mData;
+    // bool tr = mData != nullptr;
+    *trigger = mData != nullptr;
+    auto data = mData;
+    mData = nullptr;
+    return data;
   }
 
 private:
@@ -46,9 +55,17 @@ private:
 // template class MethodObserver<MyClass, ClassWithMethod>;
 
 int testObserver2() {
+  auto data = new MyClass();
   auto ctrl = ClassWithMethod();
   auto observer = MethodObserver<MyClass, ClassWithMethod>(&ctrl, &ClassWithMethod::Method);
-  observer.Callback(new MyClass());
+  // observer.Callback(new MyClass());
+
+  auto emitter = Emitter<MyClass>();
+  emitter.Subscribe(&observer);
+
+  cout << "*** Emitting data" << endl;
+  emitter.Emit(data);
+
   // auto observable = Observable<MyClass>();
   // auto observable = Observable<MyClass>();
   // observable.Subscribe(&observer);

@@ -1,5 +1,4 @@
-#include "Event.h"
-#include "observable/ObservableBase.h"
+#include <2DGameSDK/event/observable/ObservableBase.h>
 #include <map>
 #include <string>
 

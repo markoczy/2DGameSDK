@@ -1,7 +1,7 @@
 #ifndef __GAME_OPTIONS_H__
 #define __GAME_OPTIONS_H__
 
-#include "gamesdk_dll.h"
+#include <2DGameSDK/dll/gamesdk_dll.h>
 #include <SFML/System.hpp>
 
 namespace game {

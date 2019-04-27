@@ -1,4 +1,4 @@
-#include "2DGameSDK/ResourceCache.h"
+#include <2DGameSDK/core/ResourceCache.h>
 
 using namespace std;
 

@@ -4,6 +4,7 @@
             "name": "Win32",
             "includePath": [
                 "${workspaceFolder}/Project_2DGameSDK/src/**",
+                "${workspaceFolder}/Project_2DGameSDK/include/**",
                 "${workspaceFolder}/Project_Prototype/src/**",
                 "${workspaceFolder}/libs/**"
             ],

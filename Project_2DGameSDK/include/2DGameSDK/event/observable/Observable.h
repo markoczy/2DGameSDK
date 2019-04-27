@@ -1,9 +1,9 @@
 #ifndef __OBSERVABLE_H__
 #define __OBSERVABLE_H__
 
-#include "2DGameSDK/event/observer/Observer.h"
-#include "2DGameSDK/gamesdk_dll.h"
-#include "ObservableBase.h"
+#include <2DGameSDK/dll/gamesdk_dll.h>
+#include <2DGameSDK/event/observable/ObservableBase.h>
+#include <2DGameSDK/event/observer/Observer.h>
 #include <iostream>
 #include <vector>
 

@@ -1,7 +1,7 @@
 #ifndef __RESOURCE_CACHE_H__
 #define __RESOURCE_CACHE_H__
 
-#include "gamesdk_dll.h"
+#include <2DGameSDK/dll/gamesdk_dll.h>
 #include <map>
 #include <string>
 

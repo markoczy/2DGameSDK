@@ -1,8 +1,8 @@
 #ifndef __GAME_H__
 #define __GAME_H__
 
-#include "GameOptions.h"
-#include "gamesdk_dll.h"
+#include <2DGameSDK/core/GameOptions.h>
+#include <2DGameSDK/dll/gamesdk_dll.h>
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 #include <chrono>
