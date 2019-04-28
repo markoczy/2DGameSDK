@@ -95,7 +95,7 @@ int testEntity() {
 }
 
 int testEntity2() {
-  cout << "Start Testentity 27" << endl;
+  cout << "Start Testentity 28" << endl;
   auto cache = TextureCache();
   auto tex = cache.Get("res/textures/testtile/testtile_0.png");
   auto tex2 = cache.Get("res/textures/sample.png");
@@ -106,7 +106,12 @@ int testEntity2() {
   auto parent = scene.GetRoot()->AddChild(ent);
   auto child = parent->AddChild(ent2);
 
-  sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
+  sf::RenderWindow window(sf::VideoMode(600, 600), "SFML works!");
+  auto view = window.getView();
+  view.zoom(0.1);
+  view.setSize(200, 200);
+  window.setView(view);
+
   sf::CircleShape shape(100.f);
   shape.setTexture(tex);
   while(window.isOpen()) {

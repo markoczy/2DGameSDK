@@ -47,10 +47,10 @@ RM = "C:\Program Files (x86)\CMake\bin\cmake.exe" -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = E:\Coding\Git\2DGameSDK
+CMAKE_SOURCE_DIR = C:\Workspace\Git\2DGameSDK
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = E:\Coding\Git\2DGameSDK
+CMAKE_BINARY_DIR = C:\Workspace\Git\2DGameSDK
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -79,14 +79,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /d E:\Coding\Git\2DGameSDK && $(CMAKE_COMMAND) -E cmake_progress_start E:\Coding\Git\2DGameSDK\CMakeFiles E:\Coding\Git\2DGameSDK\Project_Prototype\CMakeFiles\progress.marks
-	cd /d E:\Coding\Git\2DGameSDK && $(MAKE) -f CMakeFiles\Makefile2 Project_Prototype/all
-	$(CMAKE_COMMAND) -E cmake_progress_start E:\Coding\Git\2DGameSDK\CMakeFiles 0
+	cd /d C:\Workspace\Git\2DGameSDK && $(CMAKE_COMMAND) -E cmake_progress_start C:\Workspace\Git\2DGameSDK\CMakeFiles C:\Workspace\Git\2DGameSDK\Project_Prototype\CMakeFiles\progress.marks
+	cd /d C:\Workspace\Git\2DGameSDK && $(MAKE) -f CMakeFiles\Makefile2 Project_Prototype/all
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Workspace\Git\2DGameSDK\CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /d E:\Coding\Git\2DGameSDK && $(MAKE) -f CMakeFiles\Makefile2 Project_Prototype/clean
+	cd /d C:\Workspace\Git\2DGameSDK && $(MAKE) -f CMakeFiles\Makefile2 Project_Prototype/clean
 .PHONY : clean
 
 # The main clean target
@@ -96,22 +96,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /d E:\Coding\Git\2DGameSDK && $(MAKE) -f CMakeFiles\Makefile2 Project_Prototype/preinstall
+	cd /d C:\Workspace\Git\2DGameSDK && $(MAKE) -f CMakeFiles\Makefile2 Project_Prototype/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /d E:\Coding\Git\2DGameSDK && $(MAKE) -f CMakeFiles\Makefile2 Project_Prototype/preinstall
+	cd /d C:\Workspace\Git\2DGameSDK && $(MAKE) -f CMakeFiles\Makefile2 Project_Prototype/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /d E:\Coding\Git\2DGameSDK && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles\Makefile.cmake 1
+	cd /d C:\Workspace\Git\2DGameSDK && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles\Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 Project_Prototype/CMakeFiles/Prototype.dir/rule:
-	cd /d E:\Coding\Git\2DGameSDK && $(MAKE) -f CMakeFiles\Makefile2 Project_Prototype/CMakeFiles/Prototype.dir/rule
+	cd /d C:\Workspace\Git\2DGameSDK && $(MAKE) -f CMakeFiles\Makefile2 Project_Prototype/CMakeFiles/Prototype.dir/rule
 .PHONY : Project_Prototype/CMakeFiles/Prototype.dir/rule
 
 # Convenience name for target.
@@ -121,7 +121,7 @@ Prototype: Project_Prototype/CMakeFiles/Prototype.dir/rule
 
 # fast build rule for target.
 Prototype/fast:
-	cd /d E:\Coding\Git\2DGameSDK && $(MAKE) -f Project_Prototype\CMakeFiles\Prototype.dir\build.make Project_Prototype/CMakeFiles/Prototype.dir/build
+	cd /d C:\Workspace\Git\2DGameSDK && $(MAKE) -f Project_Prototype\CMakeFiles\Prototype.dir\build.make Project_Prototype/CMakeFiles/Prototype.dir/build
 .PHONY : Prototype/fast
 
 src/main.obj: src/main.cpp.obj
@@ -130,7 +130,7 @@ src/main.obj: src/main.cpp.obj
 
 # target to build an object file
 src/main.cpp.obj:
-	cd /d E:\Coding\Git\2DGameSDK && $(MAKE) -f Project_Prototype\CMakeFiles\Prototype.dir\build.make Project_Prototype/CMakeFiles/Prototype.dir/src/main.cpp.obj
+	cd /d C:\Workspace\Git\2DGameSDK && $(MAKE) -f Project_Prototype\CMakeFiles\Prototype.dir\build.make Project_Prototype/CMakeFiles/Prototype.dir/src/main.cpp.obj
 .PHONY : src/main.cpp.obj
 
 src/main.i: src/main.cpp.i
@@ -139,7 +139,7 @@ src/main.i: src/main.cpp.i
 
 # target to preprocess a source file
 src/main.cpp.i:
-	cd /d E:\Coding\Git\2DGameSDK && $(MAKE) -f Project_Prototype\CMakeFiles\Prototype.dir\build.make Project_Prototype/CMakeFiles/Prototype.dir/src/main.cpp.i
+	cd /d C:\Workspace\Git\2DGameSDK && $(MAKE) -f Project_Prototype\CMakeFiles\Prototype.dir\build.make Project_Prototype/CMakeFiles/Prototype.dir/src/main.cpp.i
 .PHONY : src/main.cpp.i
 
 src/main.s: src/main.cpp.s
@@ -148,7 +148,7 @@ src/main.s: src/main.cpp.s
 
 # target to generate assembly for a file
 src/main.cpp.s:
-	cd /d E:\Coding\Git\2DGameSDK && $(MAKE) -f Project_Prototype\CMakeFiles\Prototype.dir\build.make Project_Prototype/CMakeFiles/Prototype.dir/src/main.cpp.s
+	cd /d C:\Workspace\Git\2DGameSDK && $(MAKE) -f Project_Prototype\CMakeFiles\Prototype.dir\build.make Project_Prototype/CMakeFiles/Prototype.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
 # Help Target
@@ -174,6 +174,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /d E:\Coding\Git\2DGameSDK && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles\Makefile.cmake 0
+	cd /d C:\Workspace\Git\2DGameSDK && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles\Makefile.cmake 0
 .PHONY : cmake_check_build_system
 
