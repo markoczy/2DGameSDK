@@ -84,7 +84,7 @@ public:
     cout << "MyEntity ticks.." << endl;
   }
 
-  void Render(sf::RenderTarget* target) {
+  void Render(sf::RenderTarget* targe, sf::RenderStates states = sf::RenderStates::Default) {
     cout << "MyEntity renders.." << endl;
   }
 };
@@ -96,7 +96,7 @@ int testEntity() {
 }
 
 int testEntity2() {
-  cout << "Start Testentity 29" << endl;
+  cout << "Start Testentity 30" << endl;
   auto cache = TextureCache();
   auto tex = AssetManager::GetTexture("res/textures/testtile/testtile_0.png");
   auto tex2 = AssetManager::GetTexture("res/textures/sample.png");
@@ -123,8 +123,9 @@ int testEntity2() {
     }
     window.clear();
 
-    ent->Render(&window);
-    ent2->Render(&window);
+    scene.Render(&window);
+    // ent->Render(&window);
+    // ent2->Render(&window);
     ent->GetTransformable()->move(1, 1);
     ent2->GetTransformable()->rotate(5.0);
     std::this_thread::sleep_for(std::chrono::milliseconds(20));

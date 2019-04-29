@@ -20,8 +20,8 @@ namespace game {
 
   void SpriteTransformableEntity::Tick() {}
 
-  void SpriteTransformableEntity::Render(sf::RenderTarget* target) {
-    auto states = RenderStates(mGraphNode->GetAccumulatedTransform());
+  void SpriteTransformableEntity::Render(sf::RenderTarget* target, sf::RenderStates states) {
+    // auto states = RenderStates(mGraphNode->GetAccumulatedTransform());
     target->draw(*mSprite, states);
   }
 

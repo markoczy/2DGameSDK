@@ -13,7 +13,7 @@ namespace game {
     ~SpriteTransformableEntity();
 
     virtual void Tick();
-    void Render(sf::RenderTarget* target);
+    void Render(sf::RenderTarget* target, sf::RenderStates states = sf::RenderStates::Default);
     sf::Transformable* GetTransformable();
 
   private:

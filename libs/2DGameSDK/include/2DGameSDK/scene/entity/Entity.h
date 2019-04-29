@@ -15,7 +15,7 @@ namespace game {
     int GetType();
 
     virtual void Tick() = 0;
-    virtual void Render(sf::RenderTarget* target) = 0;
+    virtual void Render(sf::RenderTarget* target, sf::RenderStates states = sf::RenderStates::Default) = 0;
 
   protected:
     int mType;

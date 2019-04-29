@@ -3,6 +3,7 @@
 
 #include <2DGameSDK/dll/gamesdk_dll.h>
 #include <2DGameSDK/scene/SceneGraphNode.h>
+#include <SFML/Graphics.hpp>
 
 namespace game {
 
@@ -12,6 +13,7 @@ namespace game {
     ~SceneGraph();
 
     void Tick();
+    void Render(sf::RenderTarget* target, sf::RenderStates states = sf::RenderStates::Default);
     SceneGraphNode* GetRoot();
 
   private:

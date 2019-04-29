@@ -11,6 +11,10 @@ namespace game {
     mRoot->Tick();
   }
 
+  void SceneGraph::Render(sf::RenderTarget* target, sf::RenderStates states) {
+    mRoot->Render(target, states);
+  }
+
   SceneGraphNode* SceneGraph::GetRoot() {
     return mRoot;
   }

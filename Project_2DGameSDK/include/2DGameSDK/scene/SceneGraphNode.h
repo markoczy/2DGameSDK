@@ -18,6 +18,8 @@ namespace game {
     bool IsRoot();
 
     void Tick();
+    void Render(sf::RenderTarget* target, sf::RenderStates states = sf::RenderStates::Default);
+
     sf::Transform GetCurTransform();
     sf::Transform GetAccumulatedTransform();
 

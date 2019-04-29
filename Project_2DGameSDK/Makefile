@@ -151,33 +151,6 @@ src/core/Game.cpp.s:
 	cd /d C:\Workspace\Git\2DGameSDK && $(MAKE) -f Project_2DGameSDK\CMakeFiles\2DGameSDK.dir\build.make Project_2DGameSDK/CMakeFiles/2DGameSDK.dir/src/core/Game.cpp.s
 .PHONY : src/core/Game.cpp.s
 
-src/core/GameObject.obj: src/core/GameObject.cpp.obj
-
-.PHONY : src/core/GameObject.obj
-
-# target to build an object file
-src/core/GameObject.cpp.obj:
-	cd /d C:\Workspace\Git\2DGameSDK && $(MAKE) -f Project_2DGameSDK\CMakeFiles\2DGameSDK.dir\build.make Project_2DGameSDK/CMakeFiles/2DGameSDK.dir/src/core/GameObject.cpp.obj
-.PHONY : src/core/GameObject.cpp.obj
-
-src/core/GameObject.i: src/core/GameObject.cpp.i
-
-.PHONY : src/core/GameObject.i
-
-# target to preprocess a source file
-src/core/GameObject.cpp.i:
-	cd /d C:\Workspace\Git\2DGameSDK && $(MAKE) -f Project_2DGameSDK\CMakeFiles\2DGameSDK.dir\build.make Project_2DGameSDK/CMakeFiles/2DGameSDK.dir/src/core/GameObject.cpp.i
-.PHONY : src/core/GameObject.cpp.i
-
-src/core/GameObject.s: src/core/GameObject.cpp.s
-
-.PHONY : src/core/GameObject.s
-
-# target to generate assembly for a file
-src/core/GameObject.cpp.s:
-	cd /d C:\Workspace\Git\2DGameSDK && $(MAKE) -f Project_2DGameSDK\CMakeFiles\2DGameSDK.dir\build.make Project_2DGameSDK/CMakeFiles/2DGameSDK.dir/src/core/GameObject.cpp.s
-.PHONY : src/core/GameObject.cpp.s
-
 src/core/asset/AssetManager.obj: src/core/asset/AssetManager.cpp.obj
 
 .PHONY : src/core/asset/AssetManager.obj
@@ -460,9 +433,6 @@ help:
 	@echo ... src/core/Game.obj
 	@echo ... src/core/Game.i
 	@echo ... src/core/Game.s
-	@echo ... src/core/GameObject.obj
-	@echo ... src/core/GameObject.i
-	@echo ... src/core/GameObject.s
 	@echo ... src/core/asset/AssetManager.obj
 	@echo ... src/core/asset/AssetManager.i
 	@echo ... src/core/asset/AssetManager.s

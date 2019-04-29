@@ -32,6 +32,17 @@ namespace game {
     }
   }
 
+  void SceneGraphNode::Render(sf::RenderTarget* target, sf::RenderStates states) {
+    // mRoot->Render(target, states);
+    if(mEntity != nullptr) {
+      mEntity->Render(target, states);
+      states = RenderStates(states.transform * mEntity->GetTransformable()->getTransform());
+    }
+    for(auto iChild : mChildren) {
+      iChild->Render(target, states);
+    }
+  }
+
   sf::Transform SceneGraphNode::GetCurTransform() {
     if(mEntity == nullptr) {
       return _ZERO_TRANSFORM;
