@@ -1,32 +1,45 @@
 #ifndef __RESOURCE_CACHE_H__
 #define __RESOURCE_CACHE_H__
 
-#include <2DGameSDK/dll/gamesdk_dll.h>
 #include <map>
 #include <string>
 
 #include <SFML/Graphics.hpp>
 
-template <class TResource>
-class GAMESDK_DLL ResourceCache {
-public:
-  virtual ~ResourceCache();
-  virtual TResource Get(const std::string& identifier);
-  virtual void Clear();
+namespace game {
 
-protected:
-  virtual TResource loadResource(const std::string& identifier) = 0;
-  bool mClearPointers = true;
-  std::map<std::string, TResource> mResources;
-};
+  template <class TResource>
+  class ResourceCache {
+  public:
+    virtual ~ResourceCache() {
+      Clear();
+    }
 
-class GAMESDK_DLL TextureCache : public ResourceCache<sf::Texture*> {
-public:
-  virtual sf::Texture* Get(const std::string& identifier);
-  virtual void Clear();
+    virtual TResource Get(const std::string& identifier) {
+      auto found = mResources.find(identifier);
+      if(found != mResources.end()) {
+        return found->second;
+      }
 
-private:
-  sf::Texture* loadResource(const std::string& identifier);
-};
+      auto res = loadResource(identifier);
+      return res;
+    }
+
+    virtual void Clear() {
+      if(mClearPointers) {
+        for(auto const& entry : mResources) {
+          delete entry.second;
+        }
+      }
+      mResources.clear();
+    }
+
+  protected:
+    virtual TResource loadResource(const std::string& identifier) = 0;
+    bool mClearPointers = true;
+    std::map<std::string, TResource> mResources;
+  };
+
+} // namespace game
 
 #endif

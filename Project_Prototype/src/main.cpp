@@ -96,10 +96,10 @@ int testEntity() {
 }
 
 int testEntity2() {
-  cout << "Start Testentity 28" << endl;
+  cout << "Start Testentity 29" << endl;
   auto cache = TextureCache();
-  auto tex = cache.Get("res/textures/testtile/testtile_0.png");
-  auto tex2 = cache.Get("res/textures/sample.png");
+  auto tex = AssetManager::GetTexture("res/textures/testtile/testtile_0.png");
+  auto tex2 = AssetManager::GetTexture("res/textures/sample.png");
   auto ent = new SpriteTransformableEntity(1, tex);
   auto ent2 = new SpriteTransformableEntity(1, tex2);
 
@@ -109,9 +109,9 @@ int testEntity2() {
 
   sf::RenderWindow window(sf::VideoMode(600, 600), "SFML works!");
   auto view = window.getView();
-  view.zoom(0.1);
-  view.setSize(200, 200);
-  window.setView(view);
+  // view.zoom(0.1);
+  // view.setSize(200, 200);
+  // window.setView(view);
 
   sf::CircleShape shape(100.f);
   shape.setTexture(tex);
@@ -147,7 +147,7 @@ int main() {
 
   // testEvents();
   // testEntity();
-  // testEntity2();
+  testEntity2();
   testTiles();
 
   // game::GameOptions options{
