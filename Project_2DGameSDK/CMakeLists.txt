@@ -22,6 +22,7 @@ source_group("inc" FILES ${HDRS})
 
 include_directories(
     ${SFML_INCLUDE_DIR}
+    ${JSON_INCLUDE_DIR}
     # include shared headers
     ${PROJECT_SOURCE_DIR}/include
 )

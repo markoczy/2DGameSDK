@@ -16,6 +16,10 @@ set(SFML_LIBRARIES ${SFML_SYSTEM_LIB} ${SFML_GRAPHICS_LIB} ${SFML_WINDOW_LIB})
 # (Windows only!) copy SFML DLL's for convenience
 set(SFML_DLL_DIR "${SFML_ROOT_DIR}/bin")
 
+# setup  nlohmann json
+set(JSON_ROOT_DIR "${CMAKE_HOME_DIRECTORY}/libs/nlohmann-json")
+set(JSON_INCLUDE_DIR "${JSON_ROOT_DIR}/include")
+
 # setup game sdk
 set(SDK_ROOT_DIR "${CMAKE_HOME_DIRECTORY}/libs/2DGameSDK")
 set(SDK_INCLUDE_DIR "${SDK_ROOT_DIR}/include")
