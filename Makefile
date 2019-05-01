@@ -122,6 +122,19 @@ depend:
 	$(MAKE) -f Project_2DGameSDK\CMakeFiles\2DGameSDK.dir\build.make Project_2DGameSDK/CMakeFiles/2DGameSDK.dir/build
 .PHONY : 2DGameSDK/fast
 
+#=============================================================================
+# Target rules for targets named Prototype
+
+# Build rule for target.
+Prototype: cmake_check_build_system
+	$(MAKE) -f CMakeFiles\Makefile2 Prototype
+.PHONY : Prototype
+
+# fast build rule for target.
+Prototype/fast:
+	$(MAKE) -f Project_Prototype\CMakeFiles\Prototype.dir\build.make Project_Prototype/CMakeFiles/Prototype.dir/build
+.PHONY : Prototype/fast
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -131,6 +144,7 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... 2DGameSDK
+	@echo ... Prototype
 .PHONY : help
 
 
