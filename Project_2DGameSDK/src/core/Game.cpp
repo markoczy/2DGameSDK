@@ -13,6 +13,7 @@ namespace game {
   }
 
   void Game::Run() {
+    LOGD("Game started");
     mWindow = new sf::RenderWindow(sf::VideoMode(mOptions.ScreenDim.x, mOptions.ScreenDim.y), mOptions.Title);
 
     int sleepMillis = int(1000.0 * (1.0 / mOptions.FramesPerSecond));
