@@ -1,5 +1,6 @@
 # Project Settings
 project (2DGameSDK)
+
 set(2DGameSDK_VERSION_MAJOR 1)
 set(2DGameSDK_VERSION_MINOR 0)
 
@@ -27,13 +28,23 @@ include_directories(
     ${PROJECT_SOURCE_DIR}/include
 )
 
+set(LIBS_DEBUG)
+foreach(lib; ${SFML_LIBRARIES_D})
+    list(APPEND LIBS_DEBUG debug ${lib})
+endforeach()
+
 set(LIBS_RELEASE)
 foreach(lib; ${SFML_LIBRARIES})
     list(APPEND LIBS_RELEASE optimized ${lib})
 endforeach()
 
 add_library(${PROJECT_NAME} SHARED ${SRCS} ${HDRS})
-target_link_libraries(${PROJECT_NAME} ${LIBS_RELEASE})
+
+if ("${CMAKE_BUILD_TYPE}" MATCHES Debug)
+    target_link_libraries(${PROJECT_NAME} ${LIBS_DEBUG})
+else ()
+    target_link_libraries(${PROJECT_NAME} ${LIBS_RELEASE})
+endif ("${CMAKE_BUILD_TYPE}" MATCHES Debug)
 
 set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
 

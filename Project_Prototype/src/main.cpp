@@ -168,7 +168,7 @@ int testWorldLoader() {
 }
 
 int main() {
-  std::cout << "Hello Compiler" << std::endl;
+  std::cout << "Hello Compiler 3" << std::endl;
 
   // testEvents();
   // testEntity();
