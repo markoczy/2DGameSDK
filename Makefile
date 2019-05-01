@@ -47,10 +47,10 @@ RM = "C:\Program Files (x86)\CMake\bin\cmake.exe" -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = E:\Coding\Git\2DGameSDK
+CMAKE_SOURCE_DIR = C:\Workspace\Git\2DGameSDK
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = E:\Coding\Git\2DGameSDK
+CMAKE_BINARY_DIR = C:\Workspace\Git\2DGameSDK
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -79,9 +79,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start E:\Coding\Git\2DGameSDK\CMakeFiles E:\Coding\Git\2DGameSDK\CMakeFiles\progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Workspace\Git\2DGameSDK\CMakeFiles C:\Workspace\Git\2DGameSDK\CMakeFiles\progress.marks
 	$(MAKE) -f CMakeFiles\Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start E:\Coding\Git\2DGameSDK\CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Workspace\Git\2DGameSDK\CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -122,19 +122,6 @@ depend:
 	$(MAKE) -f Project_2DGameSDK\CMakeFiles\2DGameSDK.dir\build.make Project_2DGameSDK/CMakeFiles/2DGameSDK.dir/build
 .PHONY : 2DGameSDK/fast
 
-#=============================================================================
-# Target rules for targets named Prototype
-
-# Build rule for target.
-Prototype: cmake_check_build_system
-	$(MAKE) -f CMakeFiles\Makefile2 Prototype
-.PHONY : Prototype
-
-# fast build rule for target.
-Prototype/fast:
-	$(MAKE) -f Project_Prototype\CMakeFiles\Prototype.dir\build.make Project_Prototype/CMakeFiles/Prototype.dir/build
-.PHONY : Prototype/fast
-
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -144,7 +131,6 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... 2DGameSDK
-	@echo ... Prototype
 .PHONY : help
 
 
