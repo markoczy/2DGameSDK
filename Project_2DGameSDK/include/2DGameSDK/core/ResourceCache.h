@@ -28,7 +28,8 @@ namespace game {
     virtual void Clear() {
       if(mClearPointers) {
         for(auto const& entry : mResources) {
-          delete entry.second;
+          // TODO avoid openGL error when in runnning state
+          // delete entry.second;
         }
       }
       mResources.clear();

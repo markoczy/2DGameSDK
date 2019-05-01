@@ -7,6 +7,7 @@
 #include <2DGameSDK/world/tilemap/TileLayer.h>
 #include <JSON/json.hpp>
 #include <fstream>
+#include <iomanip>
 #include <sstream>
 #include <string>
 
@@ -21,7 +22,7 @@ namespace game {
     static GameWorld* CreateGameWorld(std::string tilemapFile, std::string materialMapFile, std::string texturesPrefix);
 
   private:
-    static Tilemap loadTilemap(std::string filename);
+    static Tilemap* loadTilemap(std::string filename);
     static void loadTextures(Tilemap* tilemap, std::string prefix);
   };
 

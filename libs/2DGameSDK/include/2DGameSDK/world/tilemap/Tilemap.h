@@ -9,7 +9,7 @@ namespace game {
   struct Tilemap {
     int TileWidth, TileHeight;
     int TilesWide, TilesHigh;
-    std::vector<TileLayer> Layers;
+    std::vector<TileLayer*> Layers;
   };
 
 } // namespace game

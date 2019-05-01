@@ -158,7 +158,9 @@ int testWorldLoader() {
     }
     window.clear();
 
+    // cout << "before render" << endl;
     world->Render(&window);
+    // cout << "after render" << endl;
     // ent->Render(&window);
     // ent2->Render(&window);
     std::this_thread::sleep_for(std::chrono::milliseconds(20));
