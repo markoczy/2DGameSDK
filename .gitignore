@@ -3,3 +3,4 @@
 **/CMakeCache.txt
 **/cmake_install.cmake
 Project_*/bin/*
+**/Makefile
