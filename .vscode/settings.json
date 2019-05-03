@@ -51,4 +51,5 @@
     "search.exclude": {
         "libs/**": true
     },
+    "editor.tabSize": 2,
 }

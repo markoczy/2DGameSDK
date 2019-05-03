@@ -1,3 +1,4 @@
+#include <2DGameSDK/Common.h>
 #include <2DGameSDK/Core.h>
 #include <2DGameSDK/Event.h>
 #include <2DGameSDK/Scene.h>
