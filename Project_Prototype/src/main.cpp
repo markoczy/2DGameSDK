@@ -171,14 +171,55 @@ int testWorldLoader() {
   }
 }
 
+int testGame() {
+  cout << "Start testGame 2" << endl;
+  cout << "before create" << endl;
+  auto world = GameWorldFactory::CreateGameWorld("res/testmap/tilemap.json", "", "res/testmap/test-2_");
+  cout << "after create" << endl;
+
+  auto tex = AssetManager::GetTexture("res/textures/testtile/testtile_0.png");
+  auto tex2 = AssetManager::GetTexture("res/textures/sample.png");
+  auto ent = new SpriteTransformableEntity(1, tex);
+  auto ent2 = new SpriteTransformableEntity(1, tex2);
+
+  auto scene = new SceneGraph();
+  auto parent = scene->GetRoot()->AddChild(ent);
+  auto child = parent->AddChild(ent2);
+
+  vector<ObservableBase*> events;
+
+  GameOptions options{"My Game", sf::Vector2i(800, 600), 50};
+  game::Game app(options, scene, world, events);
+  app.Run();
+
+  // sf::RenderWindow window(sf::VideoMode(600, 600), "SFML works!");while(window.isOpen()) {
+  //   sf::Event event;
+  //   while(window.pollEvent(event)) {
+  //     if(event.type == sf::Event::Closed)
+  //       window.close();
+  //   }
+  //   window.clear();
+
+  //   // cout << "before render" << endl;
+  //   world->Render(&window);
+  //   // cout << "after render" << endl;
+  //   // ent->Render(&window);
+  //   // ent2->Render(&window);
+  //   std::this_thread::sleep_for(std::chrono::milliseconds(20));
+  //   // window.draw(shape);
+  //   window.display();
+  // }
+}
+
 int main() {
   std::cout << "Hello Compiler 4" << std::endl;
 
-  testEvents();
+  // testEvents();
   // testEntity();
   // testEntity2();
   // testTiles();
   // testWorldLoader();
+  testGame();
 
   // game::GameOptions options{
   //     "My Game", sf::Vector2i(800, 600), 50};

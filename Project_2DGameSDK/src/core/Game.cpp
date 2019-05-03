@@ -61,8 +61,10 @@ namespace game {
   }
 
   void Game::render() {
+    mWindow->clear();
     mState.World->Render(mWindow);
     mState.Scene->Render(mWindow);
+    mWindow->display();
   }
 
 } // namespace game
