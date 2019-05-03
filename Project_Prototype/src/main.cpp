@@ -7,6 +7,7 @@
 #include <chrono>
 #include <iostream>
 #include <thread>
+#include <tuple>
 
 #include <SFML/Graphics.hpp>
 
@@ -41,11 +42,11 @@ public:
   }
 
 protected:
-  typename Observable<TData>::TriggerData triggered() {
+  tuple<bool, TData*> triggered() {
     cout << "Called triggered of Emitter" << endl;
-    auto ret = Observable<TData>::TriggerData();
     // mData != nullptr,
     // mData};
+    auto ret = tuple<bool, TData*>(mData != nullptr, mData);
     mData = nullptr;
     return ret;
   }
@@ -171,13 +172,13 @@ int testWorldLoader() {
 }
 
 int main() {
-  std::cout << "Hello Compiler 3" << std::endl;
+  std::cout << "Hello Compiler 4" << std::endl;
 
-  // testEvents();
+  testEvents();
   // testEntity();
   // testEntity2();
   // testTiles();
-  testWorldLoader();
+  // testWorldLoader();
 
   // game::GameOptions options{
   //     "My Game", sf::Vector2i(800, 600), 50};

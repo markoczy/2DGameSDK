@@ -5,6 +5,7 @@
 #include <2DGameSDK/event/observable/ObservableBase.h>
 #include <2DGameSDK/event/observer/Observer.h>
 #include <iostream>
+#include <tuple>
 #include <vector>
 
 namespace game {
@@ -12,10 +13,6 @@ namespace game {
   template <class TData>
   class Observable : public ObservableBase {
   public:
-    struct TriggerData {
-      bool Triggered;
-      TData* Data;
-    };
     // void Emit(TData* data);
     void Subscribe(Observer<TData>* subscriber) {
       // void Subscribe(Observer<TData> subscriber) {
@@ -27,17 +24,17 @@ namespace game {
       bool trigger = false;
       auto data = triggered();
 
-      if(data.Triggered) {
+      if(std::get<0>(data)) {
         for(Observer<TData>* iObs : mObservers) {
+          std::cout << " Emitting Callback..." << std::endl;
           // LOGD("Emitting Callback...");
-          iObs->Callback(data.Data);
+          iObs->Callback(std::get<1>(data));
         }
       }
     }
 
   protected:
-    // TODO isocpp: avoid out parameters
-    virtual TriggerData triggered() = 0;
+    virtual std::tuple<bool, TData*> triggered() = 0;
 
   private:
     std::vector<Observer<TData>*> mObservers;

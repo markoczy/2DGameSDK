@@ -5,6 +5,7 @@
 #include <2DGameSDK/event/data/EmptyEventData.h>
 #include <2DGameSDK/event/observable/Observable.h>
 #include <SFML/Window.hpp>
+#include <tuple>
 
 namespace game {
 
@@ -14,7 +15,8 @@ namespace game {
 
   private:
     sf::Keyboard::Key mKey;
-    Observable<EmptyEventData>::TriggerData triggered();
+
+    virtual std::tuple<bool, EmptyEventData*> triggered();
   };
 } // namespace game
 
