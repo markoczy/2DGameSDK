@@ -41,13 +41,13 @@ public:
   }
 
 protected:
-  TData* triggered(bool* trigger) {
+  typename Observable<TData>::TriggerData triggered() {
     cout << "Called triggered of Emitter" << endl;
-    // bool tr = mData != nullptr;
-    *trigger = mData != nullptr;
-    auto data = mData;
+    auto ret = Observable<TData>::TriggerData();
+    // mData != nullptr,
+    // mData};
     mData = nullptr;
-    return data;
+    return ret;
   }
 
 private:

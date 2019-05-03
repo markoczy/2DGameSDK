@@ -14,7 +14,7 @@ namespace game {
 
   private:
     sf::Keyboard::Key mKey;
-    EmptyEventData* triggered(bool* trigger);
+    Observable<EmptyEventData>::TriggerData triggered();
   };
 } // namespace game
 

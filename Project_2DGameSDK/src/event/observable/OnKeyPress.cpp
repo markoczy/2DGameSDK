@@ -4,10 +4,10 @@ namespace game {
   OnKeyPress::OnKeyPress(sf::Keyboard::Key key) : mKey(key) {
   }
 
-  EmptyEventData* OnKeyPress::triggered(bool* trigger) {
-    auto triggered = sf::Keyboard::isKeyPressed(mKey);
-    trigger = &triggered;
-    return nullptr;
+  Observable<EmptyEventData>::TriggerData OnKeyPress::triggered() {
+    return TriggerData{
+        sf::Keyboard::isKeyPressed(mKey),
+        nullptr};
   }
 
 } // namespace game

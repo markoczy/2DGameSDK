@@ -12,6 +12,10 @@ namespace game {
   template <class TData>
   class Observable : public ObservableBase {
   public:
+    struct TriggerData {
+      bool Triggered;
+      TData* Data;
+    };
     // void Emit(TData* data);
     void Subscribe(Observer<TData>* subscriber) {
       // void Subscribe(Observer<TData> subscriber) {
@@ -21,19 +25,19 @@ namespace game {
 
     virtual void Update() {
       bool trigger = false;
-      TData* data = triggered(&trigger);
+      auto data = triggered();
 
-      if(trigger) {
+      if(data.Triggered) {
         for(Observer<TData>* iObs : mObservers) {
-          std::cout << "Emitting Callback..." << std::endl;
-          iObs->Callback(data);
+          // LOGD("Emitting Callback...");
+          iObs->Callback(data.Data);
         }
       }
     }
 
   protected:
     // TODO isocpp: avoid out parameters
-    virtual TData* triggered(bool* trigger) = 0;
+    virtual TriggerData triggered() = 0;
 
   private:
     std::vector<Observer<TData>*> mObservers;
