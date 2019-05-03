@@ -32,6 +32,7 @@ namespace game {
     }
 
   protected:
+    // TODO isocpp: avoid out parameters
     virtual TData* triggered(bool* trigger) = 0;
 
   private:

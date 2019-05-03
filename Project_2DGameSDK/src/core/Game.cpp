@@ -1,8 +1,13 @@
 #include <2DGameSDK/core/Game.h>
 
+using namespace std;
+
 namespace game {
 
-  Game::Game(GameOptions options) : mOptions(options) {
+  Game::Game(GameOptions options, SceneGraph* scene, GameWorld* world, std::vector<ObservableBase*> events) : mOptions(options), mState(GameState{scene, world}) {
+    for(auto iEvent : events) {
+      mEventCtrl.AddEvent(iEvent);
+    }
   }
 
   Game::~Game() {
@@ -13,19 +18,19 @@ namespace game {
   }
 
   void Game::Run() {
-    LOGD("Game started");
+    LOGI("Game started");
     mWindow = new sf::RenderWindow(sf::VideoMode(mOptions.ScreenDim.x, mOptions.ScreenDim.y), mOptions.Title);
+    mView = mWindow->getView();
 
     int sleepMillis = int(1000.0 * (1.0 / mOptions.FramesPerSecond));
     sf::Clock clock;
-
     clock.restart();
     while(mWindow->isOpen()) {
       // Handle window events
       sf::Event event;
       while(mWindow->pollEvent(event)) {
         if(event.type == sf::Event::Closed) {
-          std::cout << "close event" << std::endl;
+          LOGI("close event");
           Stop();
         }
       }
@@ -37,7 +42,7 @@ namespace game {
       // Sync Sim Time
       int time = clock.getElapsedTime().asMilliseconds();
       if(sleepMillis > time) {
-        std::cout << "Sleeping " << sleepMillis - time << std::endl;
+        LOGD("Sleeping " << sleepMillis - time);
         std::this_thread::sleep_for(std::chrono::milliseconds(sleepMillis - time));
       }
       clock.restart();
@@ -50,9 +55,14 @@ namespace game {
   }
 
   void Game::tick() {
+    mEventCtrl.Tick();
+    mState.World->Tick();
+    mState.Scene->Tick();
   }
 
   void Game::render() {
+    mState.World->Render(mWindow);
+    mState.Scene->Render(mWindow);
   }
 
 } // namespace game

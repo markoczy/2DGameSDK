@@ -3,10 +3,10 @@
 
 #include <SFML/Graphics.hpp>
 
-namespace game::glob {
+namespace game::constants {
   const sf::Vector2f SF_VEC2F_ZERO();
   const sf::Vector3f SF_VEC3F_ZERO();
 
-} // namespace game::glob
+} // namespace game::constants
 
 #endif
