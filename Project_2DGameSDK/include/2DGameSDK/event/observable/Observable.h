@@ -5,6 +5,7 @@
 #include <2DGameSDK/event/observable/ObservableBase.h>
 #include <2DGameSDK/event/observer/Observer.h>
 #include <iostream>
+#include <map>
 #include <tuple>
 #include <vector>
 
@@ -14,21 +15,27 @@ namespace game {
   class Observable : public ObservableBase {
   public:
     // void Emit(TData* data);
-    void Subscribe(Observer<TData>* subscriber) {
+    int Subscribe(Observer<TData>* subscriber) {
       // void Subscribe(Observer<TData> subscriber) {
-      mObservers.push_back(subscriber);
+      // mObservers.push_back(subscriber);
+      int id = mCounter;
+      mObservers[id] = subscriber;
+      mCounter++;
       std::cout << "Observer length: " << mObservers.size() << std::endl;
+      return id;
     }
+
+    void Unsubscribe(int id) {}
 
     virtual void Update() {
       bool trigger = false;
       auto data = triggered();
 
       if(std::get<0>(data)) {
-        for(Observer<TData>* iObs : mObservers) {
+        for(auto const& iObs : mObservers) {
           std::cout << " Emitting Callback..." << std::endl;
           // LOGD("Emitting Callback...");
-          iObs->Callback(std::get<1>(data));
+          iObs.second->Callback(std::get<1>(data));
         }
       }
     }
@@ -37,7 +44,9 @@ namespace game {
     virtual std::tuple<bool, TData*> triggered() = 0;
 
   private:
-    std::vector<Observer<TData>*> mObservers;
+    std::map<int, Observer<TData>*> mObservers;
+    // std::vector<Observer<TData>*> mObservers;
+    int mCounter;
   };
 
 } // namespace game

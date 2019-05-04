@@ -4,11 +4,13 @@ using namespace std;
 
 namespace game {
 
-  Game::Game(GameOptions options, SceneGraph* scene, GameWorld* world, std::vector<ObservableBase*> events) : mOptions(options), mState(GameState{scene, world}) {
-    for(auto iEvent : events) {
-      mEventCtrl.AddEvent(iEvent);
-    }
-  }
+  // ###########################################################################
+  // Constructor / Destructor
+  // ###########################################################################
+
+  Game::Game() : mState(GameState{nullptr, nullptr}) {}
+
+  Game::Game(GameOptions options, SceneGraph* scene, GameWorld* world) : mOptions(options), mState(GameState{scene, world}) {}
 
   Game::~Game() {
     if(mWindow != nullptr) {
@@ -16,6 +18,10 @@ namespace game {
       mWindow = nullptr;
     }
   }
+
+  // ###########################################################################
+  // Public Methods
+  // ###########################################################################
 
   void Game::Run() {
     LOGI("Game started");
@@ -53,6 +59,42 @@ namespace game {
     mWindow->close();
     std::cout << "stop call" << std::endl;
   }
+
+  // ####### Accessors (get/set) ###############################################
+
+  GameState Game::GetState() {
+    return mState;
+  }
+
+  SceneGraph* Game::GetScene() {
+    return mState.Scene;
+  }
+
+  void Game::SetScene(SceneGraph* scene) {
+    mState.Scene = scene;
+  }
+
+  GameWorld* Game::GetWorld() {
+    return mState.World;
+  }
+
+  void Game::SetWorld(GameWorld* world) {
+    mState.World = world;
+  }
+
+  // ####### Event Controller wrapper ##########################################
+
+  int Game::AddEvent(ObservableBase* event) {
+    mEventCtrl.AddEvent(event);
+  }
+
+  ObservableBase* Game::GetEvent(int identifier) {
+    return mEventCtrl.GetEvent(identifier);
+  }
+
+  // ###########################################################################
+  // Private / Protected Methods
+  // ###########################################################################
 
   void Game::tick() {
     mEventCtrl.Tick();

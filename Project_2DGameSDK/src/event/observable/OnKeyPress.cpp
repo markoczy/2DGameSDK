@@ -7,7 +7,11 @@ namespace game {
   }
 
   tuple<bool, EmptyEventData*> OnKeyPress::triggered() {
-    return make_tuple<bool, EmptyEventData*>(sf::Keyboard::isKeyPressed(mKey), nullptr);
+    bool pressed = sf::Keyboard::isKeyPressed(mKey);
+    if(pressed) {
+      LOGD("Keypress " << mKey << " triggered");
+    }
+    return tuple<bool, EmptyEventData*>(pressed, nullptr);
   }
 
 } // namespace game

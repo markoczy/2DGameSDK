@@ -9,7 +9,7 @@
 
 namespace game {
 
-  class OnKeyPress : public Observable<EmptyEventData> {
+  class GAMESDK_DLL OnKeyPress : public Observable<EmptyEventData> {
   public:
     OnKeyPress(sf::Keyboard::Key key);
 

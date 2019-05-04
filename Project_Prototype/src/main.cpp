@@ -10,6 +10,7 @@
 #include <tuple>
 
 #include <SFML/Graphics.hpp>
+#include <SFML/System.hpp>
 
 using namespace std;
 using namespace game;
@@ -171,7 +172,72 @@ int testWorldLoader() {
   }
 }
 
+const int PLAYER_TYPE = 200;
+
+class PlayerEntity : public SpriteTransformableEntity {
+public:
+  PlayerEntity(sf::Texture* texture,
+               float speed,
+               Observable<EmptyEventData>* up,
+               Observable<EmptyEventData>* down,
+               Observable<EmptyEventData>* left,
+               Observable<EmptyEventData>* right) : SpriteTransformableEntity(PLAYER_TYPE, texture), mSpeed(speed) {
+    //
+    //
+    //
+    auto upSubscriber = new MethodObserver<EmptyEventData, PlayerEntity>(this, &PlayerEntity::MoveUp);
+    auto downSubscriber = new MethodObserver<EmptyEventData, PlayerEntity>(this, &PlayerEntity::MoveDown);
+    auto leftSubscriber = new MethodObserver<EmptyEventData, PlayerEntity>(this, &PlayerEntity::MoveLeft);
+    auto rightSubscriber = new MethodObserver<EmptyEventData, PlayerEntity>(this, &PlayerEntity::MoveRight);
+
+    mUpSubscr = up->Subscribe(upSubscriber);
+    mDownSubscr = down->Subscribe(downSubscriber);
+    mLeftSubscr = left->Subscribe(leftSubscriber);
+    mRightSubscr = right->Subscribe(rightSubscriber);
+  }
+
+  ~PlayerEntity() {
+    mUp->Unsubscribe(mUpSubscr);
+  }
+
+  void Tick() {
+    if(mDt.x != 0 || mDt.y != 0) {
+      GetTransformable()->move(mDt);
+      mDt = sf::Vector2f();
+    }
+  }
+
+  void MoveUp(EmptyEventData* unused) {
+    mDt.y -= mSpeed;
+  }
+  void MoveDown(EmptyEventData* unused) {
+    mDt.y += mSpeed;
+  }
+  void MoveLeft(EmptyEventData* unused) {
+    mDt.x -= mSpeed;
+  }
+  void MoveRight(EmptyEventData* unused) {
+    mDt.x += mSpeed;
+  }
+
+private:
+  float mSpeed;
+  sf::Vector2f mDt;
+
+  // Needed for cleanup
+  Observable<EmptyEventData>* mUp;
+  Observable<EmptyEventData>* mDown;
+  Observable<EmptyEventData>* mLeft;
+  Observable<EmptyEventData>* mRight;
+  int mUpSubscr, mDownSubscr, mLeftSubscr, mRightSubscr;
+};
+
 int testGame() {
+  auto upPressed = new OnKeyPress(sf::Keyboard::Up);
+  auto downPressed = new OnKeyPress(sf::Keyboard::Down);
+  auto leftPressed = new OnKeyPress(sf::Keyboard::Left);
+  auto rightPressed = new OnKeyPress(sf::Keyboard::Right);
+
   cout << "Start testGame 2" << endl;
   cout << "before create" << endl;
   auto world = GameWorldFactory::CreateGameWorld("res/testmap/tilemap.json", "", "res/testmap/test-2_");
@@ -179,17 +245,22 @@ int testGame() {
 
   auto tex = AssetManager::GetTexture("res/textures/testtile/testtile_0.png");
   auto tex2 = AssetManager::GetTexture("res/textures/sample.png");
-  auto ent = new SpriteTransformableEntity(1, tex);
+  auto ent = new PlayerEntity(tex, 1.0, upPressed, downPressed, leftPressed, rightPressed);
   auto ent2 = new SpriteTransformableEntity(1, tex2);
 
   auto scene = new SceneGraph();
   auto parent = scene->GetRoot()->AddChild(ent);
   auto child = parent->AddChild(ent2);
 
-  vector<ObservableBase*> events;
+  // vector<ObservableBase*> events;
 
   GameOptions options{"My Game", sf::Vector2i(800, 600), 50};
-  game::Game app(options, scene, world, events);
+  game::Game app(options, scene, world);
+
+  app.AddEvent(upPressed);
+  app.AddEvent(downPressed);
+  app.AddEvent(leftPressed);
+  app.AddEvent(rightPressed);
   app.Run();
 
   // sf::RenderWindow window(sf::VideoMode(600, 600), "SFML works!");while(window.isOpen()) {
