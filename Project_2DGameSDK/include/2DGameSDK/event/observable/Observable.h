@@ -21,11 +21,12 @@ namespace game {
       int id = mCounter;
       mObservers[id] = subscriber;
       mCounter++;
-      std::cout << "Observer length: " << mObservers.size() << std::endl;
       return id;
     }
 
-    void Unsubscribe(int id) {}
+    void Unsubscribe(int id) {
+      mObservers.erase(id);
+    }
 
     virtual void Update() {
       bool trigger = false;
@@ -33,8 +34,6 @@ namespace game {
 
       if(std::get<0>(data)) {
         for(auto const& iObs : mObservers) {
-          std::cout << " Emitting Callback..." << std::endl;
-          // LOGD("Emitting Callback...");
           iObs.second->Callback(std::get<1>(data));
         }
       }

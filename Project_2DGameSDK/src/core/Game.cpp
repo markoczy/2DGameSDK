@@ -56,8 +56,8 @@ namespace game {
   }
 
   void Game::Stop() {
+    LOGI("Stop call");
     mWindow->close();
-    std::cout << "stop call" << std::endl;
   }
 
   // ####### Accessors (get/set) ###############################################

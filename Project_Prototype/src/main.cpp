@@ -185,19 +185,22 @@ public:
     //
     //
     //
-    auto upSubscriber = new MethodObserver<EmptyEventData, PlayerEntity>(this, &PlayerEntity::MoveUp);
-    auto downSubscriber = new MethodObserver<EmptyEventData, PlayerEntity>(this, &PlayerEntity::MoveDown);
-    auto leftSubscriber = new MethodObserver<EmptyEventData, PlayerEntity>(this, &PlayerEntity::MoveLeft);
-    auto rightSubscriber = new MethodObserver<EmptyEventData, PlayerEntity>(this, &PlayerEntity::MoveRight);
+    mUp = new MethodObserver<EmptyEventData, PlayerEntity>(this, &PlayerEntity::MoveUp);
+    mDown = new MethodObserver<EmptyEventData, PlayerEntity>(this, &PlayerEntity::MoveDown);
+    mLeft = new MethodObserver<EmptyEventData, PlayerEntity>(this, &PlayerEntity::MoveLeft);
+    mRight = new MethodObserver<EmptyEventData, PlayerEntity>(this, &PlayerEntity::MoveRight);
 
-    mUpSubscr = up->Subscribe(upSubscriber);
-    mDownSubscr = down->Subscribe(downSubscriber);
-    mLeftSubscr = left->Subscribe(leftSubscriber);
-    mRightSubscr = right->Subscribe(rightSubscriber);
+    mUp->SubscribeTo(up);
+    mDown->SubscribeTo(down);
+    mLeft->SubscribeTo(left);
+    mRight->SubscribeTo(right);
   }
 
   ~PlayerEntity() {
-    mUp->Unsubscribe(mUpSubscr);
+    delete mUp;
+    delete mDown;
+    delete mLeft;
+    delete mRight;
   }
 
   void Tick() {
@@ -222,14 +225,14 @@ public:
 
 private:
   float mSpeed;
+  // Delta Transform of current tick
   sf::Vector2f mDt;
 
   // Needed for cleanup
-  Observable<EmptyEventData>* mUp;
-  Observable<EmptyEventData>* mDown;
-  Observable<EmptyEventData>* mLeft;
-  Observable<EmptyEventData>* mRight;
-  int mUpSubscr, mDownSubscr, mLeftSubscr, mRightSubscr;
+  Observer<EmptyEventData>* mUp;
+  Observer<EmptyEventData>* mDown;
+  Observer<EmptyEventData>* mLeft;
+  Observer<EmptyEventData>* mRight;
 };
 
 int testGame() {
@@ -238,7 +241,7 @@ int testGame() {
   auto leftPressed = new OnKeyPress(sf::Keyboard::Left);
   auto rightPressed = new OnKeyPress(sf::Keyboard::Right);
 
-  cout << "Start testGame 2" << endl;
+  cout << "Start testGame 3" << endl;
   cout << "before create" << endl;
   auto world = GameWorldFactory::CreateGameWorld("res/testmap/tilemap.json", "", "res/testmap/test-2_");
   cout << "after create" << endl;

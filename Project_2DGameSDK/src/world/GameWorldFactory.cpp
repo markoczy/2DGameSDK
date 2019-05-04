@@ -11,19 +11,14 @@ namespace game {
   string getFilename(string prefix, int tile, int pad) {
     stringstream ss;
     ss << prefix;
-    // for(int i = 0; i < pad; i++) {
-    //   ss << '0';
-    // }
     ss << setfill('0') << setw(pad) << tile;
     ss << ".png";
     auto ret = ss.str();
-    cout << ret << endl;
     LOGD("Filename: " << ret);
     return ret;
   };
 
   GameWorld* GameWorldFactory::CreateGameWorld(std::string tilemapFile, std::string materialMapFile, std::string texturesPrefix) {
-    cout << "0" << endl;
     auto tilemap = loadTilemap(tilemapFile);
     loadTextures(tilemap, texturesPrefix);
     auto world = new GameWorld(tilemap, nullptr);
