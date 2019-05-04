@@ -172,8 +172,12 @@ int testWorldLoader() {
   }
 }
 
+// Type of player entity
 const int PLAYER_TYPE = 200;
 
+/**
+ * @brief Test Entity: Movement Controllable by given observables
+ */
 class PlayerEntity : public SpriteTransformableEntity {
 public:
   PlayerEntity(sf::Texture* texture,
@@ -213,12 +217,15 @@ public:
   void MoveUp(EmptyEventData* unused) {
     mDt.y -= mSpeed;
   }
+
   void MoveDown(EmptyEventData* unused) {
     mDt.y += mSpeed;
   }
+
   void MoveLeft(EmptyEventData* unused) {
     mDt.x -= mSpeed;
   }
+
   void MoveRight(EmptyEventData* unused) {
     mDt.x += mSpeed;
   }
@@ -235,6 +242,10 @@ private:
   Observer<EmptyEventData>* mRight;
 };
 
+/**
+ * @brief Test Entity: Rotates on every tick
+ * 
+ */
 class RotatingEntity : public SpriteTransformableEntity {
 public:
   RotatingEntity(sf::Texture* texture, float rotPerTick) : SpriteTransformableEntity(1, texture), mRot(rotPerTick) {
@@ -254,32 +265,37 @@ private:
 int testGame() {
   cout << "Start testGame 3" << endl;
 
+  // Create Keyboard Events
   auto upPressed = new OnKeyPress(sf::Keyboard::Up);
   auto downPressed = new OnKeyPress(sf::Keyboard::Down);
   auto leftPressed = new OnKeyPress(sf::Keyboard::Left);
   auto rightPressed = new OnKeyPress(sf::Keyboard::Right);
 
+  // Create Game World
   auto world = GameWorldFactory::CreateGameWorld("res/testmap/tilemap.json", "", "res/testmap/test-2_");
-  cout << "after create" << endl;
 
+  // Create Player entity and Rotating child entity
   auto tex = AssetManager::GetTexture("res/textures/sample.png");
   auto tex2 = AssetManager::GetTexture("res/textures/discus.png");
   auto ent = new PlayerEntity(tex, 2.0, upPressed, downPressed, leftPressed, rightPressed);
   auto ent2 = new RotatingEntity(tex2, 5.0);
 
+  // Layout entities in scene
   auto scene = new SceneGraph();
   auto parent = scene->GetRoot()->AddChild(ent);
   auto child = parent->AddChild(ent2);
 
-  // vector<ObservableBase*> events;
-
+  // Create game
   GameOptions options{"My Game", sf::Vector2i(800, 600), 2.0, 50};
   auto app = new Game(options, scene, world);
 
+  // Send Events to controller
   app->AddEvent(upPressed);
   app->AddEvent(downPressed);
   app->AddEvent(leftPressed);
   app->AddEvent(rightPressed);
+
+  // Run Game
   app->Run();
 }
 

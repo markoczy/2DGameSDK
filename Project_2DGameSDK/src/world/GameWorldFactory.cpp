@@ -101,31 +101,6 @@ namespace game {
             tile->Texture = AssetManager::GetTexture(fileName);
           }
         }
-        // auto tile = layer->TileAt(iTile);
-        // tile->tex = nullptr;
-        // int pad = 0;
-        // Texture* tex = 0;
-        // while(tex == 0 && pad < 5) {
-        //   string lName = getFilename(aPrefix, tile->tile, pad);
-
-        //   tex = aTexBase->Get(lName);
-        //   LOGD("Texture name: " << lName << ", Pointer: " << tex);
-        //   pad++;
-        // }
-
-        // if(tex == 0) {
-        //   LOGE("Tile texture " << aPrefix << tile->tile << " not found");
-        // } else {
-        //   GetTile(iLayer, iTile)->tex = tex;
-        // }
-
-        // mLayers[iLayer].tiles[iTile].tex = tex;
-        // mLayers[iLayer].tiles[iTile].tex = tex;
-
-        // stringstream ss;
-        // ss << aPrefix << tile.tile;
-        // auto lName = ss.str();
-        // aMap.layers[iLayer].tiles[iTile].tex = aTexBase->Get(lName);
       }
     }
   }
