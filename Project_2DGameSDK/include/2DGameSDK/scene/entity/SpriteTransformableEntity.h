@@ -16,7 +16,7 @@ namespace game {
     void Render(sf::RenderTarget* target, sf::RenderStates states = sf::RenderStates::Default);
     sf::Transformable* GetTransformable();
 
-  private:
+  protected:
     sf::Sprite* mSprite;
   };
 
