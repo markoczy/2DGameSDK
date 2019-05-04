@@ -60,6 +60,8 @@ namespace game {
      */
     GameWorld* GetWorld();
 
+    void SetOptions(GameOptions options);
+
     /**
      * @brief Set the Scene object
      * 

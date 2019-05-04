@@ -10,7 +10,9 @@ namespace game {
 
   Game::Game() : mState(GameState{nullptr, nullptr}) {}
 
-  Game::Game(GameOptions options, SceneGraph* scene, GameWorld* world) : mOptions(options), mState(GameState{scene, world}) {}
+  Game::Game(GameOptions options, SceneGraph* scene, GameWorld* world) : mOptions(options), mState(GameState{scene, world}) {
+    LOGD("Game contructor call");
+  }
 
   Game::~Game() {
     if(mWindow != nullptr) {
@@ -26,7 +28,16 @@ namespace game {
   void Game::Run() {
     LOGI("Game started");
     mWindow = new sf::RenderWindow(sf::VideoMode(mOptions.ScreenDim.x, mOptions.ScreenDim.y), mOptions.Title);
+    mWindow->setFramerateLimit(mOptions.FramesPerSecond);
+    mWindow->setVerticalSyncEnabled(true);
     mView = mWindow->getView();
+    if(mOptions.InitialZoom != 1.0) {
+      auto viewport = mView.getViewport();
+      viewport.width *= mOptions.InitialZoom;
+      viewport.height *= mOptions.InitialZoom;
+      mView.setViewport(viewport);
+      mWindow->setView(mView);
+    }
 
     int sleepMillis = int(1000.0 * (1.0 / mOptions.FramesPerSecond));
     sf::Clock clock;
@@ -76,6 +87,10 @@ namespace game {
 
   GameWorld* Game::GetWorld() {
     return mState.World;
+  }
+
+  void Game::SetOptions(GameOptions options) {
+    mOptions = options;
   }
 
   void Game::SetWorld(GameWorld* world) {
