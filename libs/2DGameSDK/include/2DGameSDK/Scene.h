@@ -3,6 +3,7 @@
 
 #include <2DGameSDK/scene/SceneGraph.h>
 #include <2DGameSDK/scene/SceneGraphNode.h>
+#include <2DGameSDK/scene/entity/AnimatedTransformableEntity.h>
 #include <2DGameSDK/scene/entity/Entity.h>
 #include <2DGameSDK/scene/entity/SpriteTransformableEntity.h>
 #include <2DGameSDK/scene/entity/TransformableEntity.h>

@@ -5,6 +5,7 @@
 #include <2DGameSDK/World.h>
 
 #include <chrono>
+#include <cmath>
 #include <iostream>
 #include <thread>
 #include <tuple>
@@ -249,7 +250,7 @@ private:
 class RotatingEntity : public SpriteTransformableEntity {
 public:
   RotatingEntity(sf::Texture* texture, float rotPerTick) : SpriteTransformableEntity(1, texture), mRot(rotPerTick) {
-    auto rect = mSprite->getTextureRect();
+    auto rect = mSprite.getTextureRect();
     cout << "Texture rect: w = " << rect.width << ", h = " << rect.height << endl;
     GetTransformable()->setOrigin(float(rect.width) / 2.0, float(rect.height) / 2.0);
   }
@@ -260,6 +261,90 @@ public:
 
 private:
   float mRot;
+};
+
+class Gta2PlayerEntity : public AnimatedTransformableEntity {
+public:
+  float offset = 90;
+  Gta2PlayerEntity(std::map<int, sf::Texture*> animationStates,
+                   float speed,
+                   float rotSpeed,
+                   Observable<EmptyEventData>* up,
+                   Observable<EmptyEventData>* down,
+                   Observable<EmptyEventData>* left,
+                   Observable<EmptyEventData>* right) : AnimatedTransformableEntity(PLAYER_TYPE, animationStates), mSpeed(speed), mRotSpeed(rotSpeed) {
+    //
+    //
+    //
+    mUp = new MethodObserver<EmptyEventData, Gta2PlayerEntity>(this, &Gta2PlayerEntity::MoveForward);
+    mDown = new MethodObserver<EmptyEventData, Gta2PlayerEntity>(this, &Gta2PlayerEntity::MoveBackward);
+    mLeft = new MethodObserver<EmptyEventData, Gta2PlayerEntity>(this, &Gta2PlayerEntity::RotLeft);
+    mRight = new MethodObserver<EmptyEventData, Gta2PlayerEntity>(this, &Gta2PlayerEntity::RotRight);
+
+    mUp->SubscribeTo(up);
+    mDown->SubscribeTo(down);
+    mLeft->SubscribeTo(left);
+    mRight->SubscribeTo(right);
+
+    SetAnimState(1);
+
+    auto rect = mCurState.getTextureRect();
+    GetTransformable()->setOrigin(9, 9);
+
+    GetTransformable()->setRotation(0);
+    float rot = offset;
+    float rotRad = (rot * 2.0 * 3.141) / 360.0;
+    // rot = (rot * 180.0) / (2.0 * 3.141);
+    mDir = sf::Vector2f(cos(rotRad), -sin(rotRad));
+  }
+
+  void Tick() {
+    // GetTransformable()->rotate(5.0);
+    auto transformable = GetTransformable();
+    if(mDw != 0) {
+      float rot = offset - transformable->getRotation() + mDw;
+      transformable->rotate(mDw);
+      float rotRad = (rot * 2.0 * 3.141) / 360.0;
+      // rot = (rot * 180.0) / (2.0 * 3.141);
+      mDir = sf::Vector2f(cos(rotRad), -sin(rotRad));
+      cout << "Rotation: " << rot << ", Dir.X: " << mDir.x << ", Dir.Y: " << mDir.y << endl;
+    } else if(mDt.x != 0 || mDt.y != 0) {
+      transformable->move(mDt);
+    }
+    mDt = sf::Vector2f();
+    mDw = 0.0;
+  }
+
+  void MoveForward(EmptyEventData* unused) {
+    mDt += mSpeed * mDir;
+  }
+
+  void MoveBackward(EmptyEventData* unused) {
+    mDt -= mSpeed * mDir;
+  }
+
+  void RotLeft(EmptyEventData* unused) {
+    mDw -= mRotSpeed;
+  }
+
+  void RotRight(EmptyEventData* unused) {
+    mDw += mRotSpeed;
+  }
+
+private:
+  float mSpeed, mRotSpeed;
+  // Delta Transform of current tick
+  sf::Vector2f mDt = sf::Vector2f();
+  // Delta Rotation of current tick
+  float mDw = 0;
+
+  sf::Vector2f mDir;
+
+  // Needed for cleanup
+  Observer<EmptyEventData>* mUp;
+  Observer<EmptyEventData>* mDown;
+  Observer<EmptyEventData>* mLeft;
+  Observer<EmptyEventData>* mRight;
 };
 
 int testGame() {
@@ -299,6 +384,49 @@ int testGame() {
   app->Run();
 }
 
+int testGame2() {
+  cout << "Start testGame2 1" << endl;
+
+  // Create Keyboard Events
+  auto upPressed = new OnKeyPress(sf::Keyboard::Up);
+  auto downPressed = new OnKeyPress(sf::Keyboard::Down);
+  auto leftPressed = new OnKeyPress(sf::Keyboard::Left);
+  auto rightPressed = new OnKeyPress(sf::Keyboard::Right);
+
+  // Create Game World
+  auto world = GameWorldFactory::CreateGameWorld("res/testmap/tilemap.json", "", "res/testmap/test-2_");
+
+  cout << "1" << endl;
+  // Create Player entity and Rotating child entity
+  auto tex = AssetManager::GetTexture("res/textures/gunner/gunner_idle.png");
+  cout << "2" << endl;
+  map<int, sf::Texture*> animStates;
+  animStates[1] = tex;
+  cout << "3" << endl;
+  auto ent = new Gta2PlayerEntity(animStates, 2.0, 5.0, upPressed, downPressed, leftPressed, rightPressed);
+
+  // Layout entities in scene
+  cout << "4" << endl;
+  auto scene = new SceneGraph();
+  auto parent = scene->GetRoot()->AddChild(ent);
+
+  // Create game
+  cout << "5" << endl;
+  GameOptions options{"My Game", sf::Vector2i(800, 600), 2.0, 50};
+  auto app = new Game(options, scene, world);
+
+  // Send Events to controller
+  cout << "6" << endl;
+  app->AddEvent(upPressed);
+  app->AddEvent(downPressed);
+  app->AddEvent(leftPressed);
+  app->AddEvent(rightPressed);
+
+  // Run Game
+  cout << "7" << endl;
+  app->Run();
+}
+
 int main() {
   std::cout << "Hello Compiler 28" << std::endl;
 
@@ -307,7 +435,8 @@ int main() {
   // testEntity2();
   // testTiles();
   // testWorldLoader();
-  testGame();
+  // testGame();
+  testGame2();
 
   // game::GameOptions options{
   //     "My Game", sf::Vector2i(800, 600), 50};

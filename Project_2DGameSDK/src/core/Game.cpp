@@ -59,7 +59,7 @@ namespace game {
       // Sync Sim Time
       int time = clock.getElapsedTime().asMilliseconds();
       if(sleepMillis > time) {
-        LOGD("Sleeping " << sleepMillis - time);
+        // LOGD("Sleeping " << sleepMillis - time);
         std::this_thread::sleep_for(std::chrono::milliseconds(sleepMillis - time));
       }
       clock.restart();

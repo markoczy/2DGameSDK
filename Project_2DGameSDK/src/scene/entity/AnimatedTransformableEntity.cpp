@@ -1,25 +1,28 @@
-#ifndef __ANIMATED_TRANSFORMABLE_ENTITY_H__
-#define __ANIMATED_TRANSFORMABLE_ENTITY_H__
 
-#include <2DGameSDK/scene/entity/TransformableEntity.h>
+#include <2DGameSDK/scene/entity/AnimatedTransformableEntity.h>
 
 namespace game {
 
-  class AnimatedTransformableEntity : public TransformableEntity {
-  public:
-    AnimatedTransformableEntity(int type, std::map<int, sf::Texture*> animationStates);
-    ~AnimatedTransformableEntity();
+  AnimatedTransformableEntity::AnimatedTransformableEntity(int type, std::map<int, sf::Texture*> animationStates) : TransformableEntity(type), mAnimStates(animationStates) {
+    mTransform = sf::Transformable();
+  }
 
-    virtual void Tick();
+  AnimatedTransformableEntity::~AnimatedTransformableEntity() {}
 
-    virtual void Render(sf::RenderTarget* target, sf::RenderStates states = sf::RenderStates::Default);
-    virtual sf::Transformable* GetTransformable();
+  void AnimatedTransformableEntity::Tick() {}
 
-  protected:
-    std::map<int, sf::Texture*> mAnimStates;
-    sf::Sprite mCurState;
-  };
+  void AnimatedTransformableEntity::Render(sf::RenderTarget* target, sf::RenderStates states) {
+    states.transform *= mTransform.getTransform();
+    target->draw(mCurState, states);
+  }
+
+  sf::Transformable* AnimatedTransformableEntity::GetTransformable() {
+    return &mTransform;
+  }
+
+  void AnimatedTransformableEntity::SetAnimState(int state) {
+    // TODO error state not found
+    mCurState = sf::Sprite(*mAnimStates[state]);
+  }
 
 } // namespace game
-
-#endif
