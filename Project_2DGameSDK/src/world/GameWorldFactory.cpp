@@ -11,19 +11,14 @@ namespace game {
   string getFilename(string prefix, int tile, int pad) {
     stringstream ss;
     ss << prefix;
-    // for(int i = 0; i < pad; i++) {
-    //   ss << '0';
-    // }
     ss << setfill('0') << setw(pad) << tile;
     ss << ".png";
     auto ret = ss.str();
-    cout << ret << endl;
     LOGD("Filename: " << ret);
     return ret;
   };
 
   GameWorld* GameWorldFactory::CreateGameWorld(std::string tilemapFile, std::string materialMapFile, std::string texturesPrefix) {
-    cout << "0" << endl;
     auto tilemap = loadTilemap(tilemapFile);
     loadTextures(tilemap, texturesPrefix);
     auto world = new GameWorld(tilemap, nullptr);
@@ -106,31 +101,6 @@ namespace game {
             tile->Texture = AssetManager::GetTexture(fileName);
           }
         }
-        // auto tile = layer->TileAt(iTile);
-        // tile->tex = nullptr;
-        // int pad = 0;
-        // Texture* tex = 0;
-        // while(tex == 0 && pad < 5) {
-        //   string lName = getFilename(aPrefix, tile->tile, pad);
-
-        //   tex = aTexBase->Get(lName);
-        //   LOGD("Texture name: " << lName << ", Pointer: " << tex);
-        //   pad++;
-        // }
-
-        // if(tex == 0) {
-        //   LOGE("Tile texture " << aPrefix << tile->tile << " not found");
-        // } else {
-        //   GetTile(iLayer, iTile)->tex = tex;
-        // }
-
-        // mLayers[iLayer].tiles[iTile].tex = tex;
-        // mLayers[iLayer].tiles[iTile].tex = tex;
-
-        // stringstream ss;
-        // ss << aPrefix << tile.tile;
-        // auto lName = ss.str();
-        // aMap.layers[iLayer].tiles[iTile].tex = aTexBase->Get(lName);
       }
     }
   }

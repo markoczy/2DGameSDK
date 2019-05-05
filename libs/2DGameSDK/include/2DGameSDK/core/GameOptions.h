@@ -6,9 +6,10 @@
 
 namespace game {
 
-  struct GAMESDK_DLL GameOptions {
+  struct GameOptions {
     std::string Title;
     sf::Vector2i ScreenDim;
+    float InitialZoom;
     int FramesPerSecond;
   };
 

@@ -13,12 +13,22 @@ namespace game {
   class Observer {
   public:
     Observer() {}
+    ~Observer() {
+      if(mSubscriptionId != -1) {
+        mObservable->Unsubscribe(mSubscriptionId);
+      }
+    }
+
     virtual void Callback(TData* data){};
+    void SubscribeTo(Observable<TData>* observable) {
+      // TODO handle already subscibed
+      mSubscriptionId = observable->Subscribe(this);
+      mObservable = observable;
+    }
 
   protected:
     int mSubscriptionId = -1;
     Observable<TData>* mObservable;
-    // void SubscribeTo(Observable<TData> observable);
   };
 
 } // namespace game
