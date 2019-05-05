@@ -17,7 +17,7 @@ namespace game {
     sf::Transformable* GetTransformable();
 
   protected:
-    sf::Sprite* mSprite;
+    sf::Sprite mSprite;
   };
 
 } // namespace game

@@ -11,22 +11,21 @@ namespace game {
   };
 
   SpriteTransformableEntity::SpriteTransformableEntity(int type, sf::Texture* texture) : TransformableEntity(type) {
-    mSprite = new Sprite(*texture);
+    mSprite = Sprite(*texture);
   }
 
   SpriteTransformableEntity::~SpriteTransformableEntity() {
-    delete mSprite;
   }
 
   void SpriteTransformableEntity::Tick() {}
 
   void SpriteTransformableEntity::Render(sf::RenderTarget* target, sf::RenderStates states) {
     // auto states = RenderStates(mGraphNode->GetAccumulatedTransform());
-    target->draw(*mSprite, states);
+    target->draw(mSprite, states);
   }
 
   sf::Transformable* SpriteTransformableEntity::GetTransformable() {
-    return mSprite;
+    return &mSprite;
   }
 
 } // namespace game
