@@ -263,9 +263,11 @@ private:
   float mRot;
 };
 
+static const float _OFFSET = 90;
+static const int _WALK_ANIM[] = {1, 2, 1, 0, 3, 4, 3, 0};
+
 class Gta2PlayerEntity : public AnimatedTransformableEntity {
 public:
-  float offset = 90;
   Gta2PlayerEntity(std::map<int, sf::Texture*> animationStates,
                    float speed,
                    float rotSpeed,
@@ -290,26 +292,40 @@ public:
 
     auto rect = mCurState.getTextureRect();
     GetTransformable()->setOrigin(9, 9);
+    GetTransformable()->move(9, 9);
 
     GetTransformable()->setRotation(0);
-    float rot = offset;
-    float rotRad = (rot * 2.0 * 3.141) / 360.0;
+    // float rot = offset;
+    // float rotRad = (rot * 2.0 * 3.141) / 360.0;
     // rot = (rot * 180.0) / (2.0 * 3.141);
-    mDir = sf::Vector2f(cos(rotRad), -sin(rotRad));
+    mDir = sf::Vector2f(0, -1);
   }
 
   void Tick() {
     // GetTransformable()->rotate(5.0);
     auto transformable = GetTransformable();
     if(mDw != 0) {
-      float rot = offset - transformable->getRotation() + mDw;
       transformable->rotate(mDw);
-      float rotRad = (rot * 2.0 * 3.141) / 360.0;
+      float rot = _OFFSET - transformable->getRotation();
+      float rotRad = (rot * 3.141) / 180.0;
       // rot = (rot * 180.0) / (2.0 * 3.141);
       mDir = sf::Vector2f(cos(rotRad), -sin(rotRad));
-      cout << "Rotation: " << rot << ", Dir.X: " << mDir.x << ", Dir.Y: " << mDir.y << endl;
+      // cout << "Rotation: " << rot << ", Dir.X: " << mDir.x << ", Dir.Y: " << mDir.y << endl;
     } else if(mDt.x != 0 || mDt.y != 0) {
       transformable->move(mDt);
+
+      // walk animation
+      SetAnimState(_WALK_ANIM[mCurWalk]);
+      mCurSkip++;
+      if(mCurSkip == 3) {
+        mCurWalk++;
+        mCurSkip = 0;
+      }
+      if(mCurWalk >= 8) {
+        mCurWalk = 0;
+      }
+    } else {
+      SetAnimState(0);
     }
     mDt = sf::Vector2f();
     mDw = 0.0;
@@ -332,6 +348,8 @@ public:
   }
 
 private:
+  int mCurWalk = 0;
+  int mCurSkip = 0;
   float mSpeed, mRotSpeed;
   // Delta Transform of current tick
   sf::Vector2f mDt = sf::Vector2f();
@@ -398,10 +416,18 @@ int testGame2() {
 
   cout << "1" << endl;
   // Create Player entity and Rotating child entity
-  auto tex = AssetManager::GetTexture("res/textures/gunner/gunner_idle.png");
+  auto idle = AssetManager::GetTexture("res/textures/gunner/gunner_idle.png");
+  auto walk0 = AssetManager::GetTexture("res/textures/gunner/gunner_walk0.png");
+  auto walk1 = AssetManager::GetTexture("res/textures/gunner/gunner_walk1.png");
+  auto walk2 = AssetManager::GetTexture("res/textures/gunner/gunner_walk2.png");
+  auto walk3 = AssetManager::GetTexture("res/textures/gunner/gunner_walk3.png");
   cout << "2" << endl;
   map<int, sf::Texture*> animStates;
-  animStates[1] = tex;
+  animStates[0] = idle;
+  animStates[1] = walk0;
+  animStates[2] = walk1;
+  animStates[3] = walk2;
+  animStates[4] = walk3;
   cout << "3" << endl;
   auto ent = new Gta2PlayerEntity(animStates, 2.0, 5.0, upPressed, downPressed, leftPressed, rightPressed);
 

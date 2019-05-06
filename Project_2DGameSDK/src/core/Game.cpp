@@ -59,8 +59,10 @@ namespace game {
       // Sync Sim Time
       int time = clock.getElapsedTime().asMilliseconds();
       if(sleepMillis > time) {
-        // LOGD("Sleeping " << sleepMillis - time);
+        LOGD("Sleeping " << sleepMillis - time);
         std::this_thread::sleep_for(std::chrono::milliseconds(sleepMillis - time));
+      } else {
+        LOGW("Overdue " << time - sleepMillis);
       }
       clock.restart();
     }
@@ -119,6 +121,7 @@ namespace game {
 
   void Game::render() {
     mWindow->clear();
+    // mWindow->clear(sf::Color(30, 30, 30));
     mState.World->Render(mWindow);
     mState.Scene->Render(mWindow);
     mWindow->display();
