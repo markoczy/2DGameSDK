@@ -3,7 +3,9 @@
 using namespace sf;
 
 namespace game {
-  GameWorld::GameWorld(Tilemap* tilemap, MaterialMap* materialMap) : mTilemap(tilemap), mMaterialMap(materialMap) {}
+  GameWorld::GameWorld(Tilemap* tilemap, MaterialMap* materialMap) : mTilemap(tilemap), mMaterialMap(materialMap) {
+    loadTilemap();
+  }
 
   GameWorld::~GameWorld() {
     // delete mTilemap;
@@ -15,14 +17,29 @@ namespace game {
   }
 
   void GameWorld::Render(sf::RenderTarget* target) {
+    Sprite sprite(*mTexture);
+    target->draw(sprite);
+  }
+
+  void GameWorld::loadTilemap() {
+    if(mTexture != nullptr) {
+      delete mTexture;
+    }
+
+    int mWidth = mTilemap->TileWidth * mTilemap->TilesWide;
+    int mHeight = mTilemap->TileHeight * mTilemap->TilesHigh;
+    mTexture = new Texture();
+    if(!mTexture->create(mWidth, mHeight)) {
+      LOGE("Texture creation failed");
+    }
+
     for(auto layer : mTilemap->Layers) {
       for(auto row : layer->Tiles) {
         for(auto tile : row) {
           if(tile->Texture != nullptr) {
-            // LOGD("Rendering Tile " << tile->Id << ": X=" << tile->X << " Y=" << tile->Y);
-            Sprite sprite(*tile->Texture);
-            sprite.setPosition(tile->X * mTilemap->TileWidth, tile->Y * mTilemap->TileHeight);
-            target->draw(sprite);
+            int x = tile->X * mTilemap->TileWidth;
+            int y = tile->Y * mTilemap->TileHeight;
+            mTexture->update(*tile->Texture, x, y);
           }
         }
       }

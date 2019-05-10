@@ -4,6 +4,8 @@ using namespace std;
 
 namespace game {
 
+  sf::Clock dbgClock;
+
   // ###########################################################################
   // Constructor / Destructor
   // ###########################################################################
@@ -29,7 +31,7 @@ namespace game {
     LOGI("Game started");
     mWindow = new sf::RenderWindow(sf::VideoMode(mOptions.ScreenDim.x, mOptions.ScreenDim.y), mOptions.Title);
     mWindow->setFramerateLimit(mOptions.FramesPerSecond);
-    mWindow->setVerticalSyncEnabled(true);
+    // mWindow->setVerticalSyncEnabled(true);
     mView = mWindow->getView();
     if(mOptions.InitialZoom != 1.0) {
       auto viewport = mView.getViewport();
@@ -54,16 +56,18 @@ namespace game {
 
       // Game cycle
       tick();
+      int tickTime = clock.getElapsedTime().asMilliseconds();
       render();
 
       // Sync Sim Time
       int time = clock.getElapsedTime().asMilliseconds();
       if(sleepMillis > time) {
-        LOGD("Sleeping " << sleepMillis - time);
+        // LOGD("Sleeping " << sleepMillis - time);
         std::this_thread::sleep_for(std::chrono::milliseconds(sleepMillis - time));
       } else {
         LOGW("Overdue " << time - sleepMillis);
       }
+      LOGD("Tick time:" << tickTime << ", Render Time: " << time - tickTime);
       clock.restart();
     }
   }
@@ -121,10 +125,15 @@ namespace game {
 
   void Game::render() {
     mWindow->clear();
-    // mWindow->clear(sf::Color(30, 30, 30));
+    dbgClock.restart();
     mState.World->Render(mWindow);
+    LOGD("Render World in: " << dbgClock.getElapsedTime().asMilliseconds());
+    dbgClock.restart();
     mState.Scene->Render(mWindow);
+    LOGD("Render Scene in: " << dbgClock.getElapsedTime().asMilliseconds());
+    dbgClock.restart();
     mWindow->display();
+    LOGD("Display in: " << dbgClock.getElapsedTime().asMilliseconds());
   }
 
 } // namespace game

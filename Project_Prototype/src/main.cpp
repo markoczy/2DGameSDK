@@ -403,7 +403,7 @@ int testGame() {
 }
 
 int testGame2() {
-  cout << "Start testGame2 1" << endl;
+  cout << "Start testGame2 2" << endl;
 
   // Create Keyboard Events
   auto upPressed = new OnKeyPress(sf::Keyboard::Up);

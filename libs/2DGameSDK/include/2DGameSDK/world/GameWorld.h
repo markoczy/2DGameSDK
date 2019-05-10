@@ -17,8 +17,12 @@ namespace game {
     void Render(sf::RenderTarget* target);
 
   private:
+    int mWidth, mHeight;
     Tilemap* mTilemap;
     MaterialMap* mMaterialMap;
+    sf::Texture* mTexture = nullptr;
+
+    void loadTilemap();
   };
 
 } // namespace game
