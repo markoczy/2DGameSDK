@@ -249,10 +249,13 @@ private:
  */
 class RotatingEntity : public SpriteTransformableEntity {
 public:
-  RotatingEntity(sf::Texture* texture, float rotPerTick) : SpriteTransformableEntity(1, texture), mRot(rotPerTick) {
+  RotatingEntity(sf::Texture* texture,
+                 float rotPerTick,
+                 sf::Vector2f pos = sf::Vector2f()) : SpriteTransformableEntity(1, texture), mRot(rotPerTick) {
     auto rect = mSprite.getTextureRect();
-    cout << "Texture rect: w = " << rect.width << ", h = " << rect.height << endl;
+    // cout << "Texture rect: w = " << rect.width << ", h = " << rect.height << endl;
     GetTransformable()->setOrigin(float(rect.width) / 2.0, float(rect.height) / 2.0);
+    GetTransformable()->setPosition(pos);
   }
 
   void Tick() {
@@ -274,7 +277,8 @@ public:
                    Observable<EmptyEventData>* up,
                    Observable<EmptyEventData>* down,
                    Observable<EmptyEventData>* left,
-                   Observable<EmptyEventData>* right) : AnimatedTransformableEntity(PLAYER_TYPE, animationStates), mSpeed(speed), mRotSpeed(rotSpeed) {
+                   Observable<EmptyEventData>* right,
+                   sf::Vector2f pos = sf::Vector2f()) : AnimatedTransformableEntity(PLAYER_TYPE, animationStates), mSpeed(speed), mRotSpeed(rotSpeed) {
     //
     //
     //
@@ -291,9 +295,8 @@ public:
     SetAnimState(1);
 
     auto rect = mCurState.getTextureRect();
-    GetTransformable()->setOrigin(9, 9);
-    GetTransformable()->move(9, 9);
-
+    GetTransformable()->setOrigin(float(rect.width) / 2.0, float(rect.height) / 2.0);
+    GetTransformable()->setPosition(pos);
     GetTransformable()->setRotation(0);
     // float rot = offset;
     // float rotRad = (rot * 2.0 * 3.141) / 360.0;
@@ -317,7 +320,7 @@ public:
       // walk animation
       SetAnimState(_WALK_ANIM[mCurWalk]);
       mCurSkip++;
-      if(mCurSkip == 3) {
+      if(mCurSkip == 5) {
         mCurWalk++;
         mCurSkip = 0;
       }
@@ -350,6 +353,89 @@ public:
 private:
   int mCurWalk = 0;
   int mCurSkip = 0;
+  float mSpeed, mRotSpeed;
+  // Delta Transform of current tick
+  sf::Vector2f mDt = sf::Vector2f();
+  // Delta Rotation of current tick
+  float mDw = 0;
+
+  sf::Vector2f mDir;
+
+  // Needed for cleanup
+  Observer<EmptyEventData>* mUp;
+  Observer<EmptyEventData>* mDown;
+  Observer<EmptyEventData>* mLeft;
+  Observer<EmptyEventData>* mRight;
+};
+
+class ChopperEntity : public SpriteTransformableEntity {
+public:
+  ChopperEntity(sf::Texture* tex,
+                float speed,
+                float rotSpeed,
+                Observable<EmptyEventData>* up,
+                Observable<EmptyEventData>* down,
+                Observable<EmptyEventData>* left,
+                Observable<EmptyEventData>* right,
+                sf::Vector2f pos = sf::Vector2f()) : SpriteTransformableEntity(PLAYER_TYPE, tex), mSpeed(speed), mRotSpeed(rotSpeed) {
+    //
+    //
+    //
+    mUp = new MethodObserver<EmptyEventData, ChopperEntity>(this, &ChopperEntity::MoveForward);
+    mDown = new MethodObserver<EmptyEventData, ChopperEntity>(this, &ChopperEntity::MoveBackward);
+    mLeft = new MethodObserver<EmptyEventData, ChopperEntity>(this, &ChopperEntity::RotLeft);
+    mRight = new MethodObserver<EmptyEventData, ChopperEntity>(this, &ChopperEntity::RotRight);
+
+    mUp->SubscribeTo(up);
+    mDown->SubscribeTo(down);
+    mLeft->SubscribeTo(left);
+    mRight->SubscribeTo(right);
+
+    // SetAnimState(1);
+    auto rect = mSprite.getTextureRect();
+    GetTransformable()->setOrigin(float(rect.width) / 2.0, float(rect.height) / 2.0);
+    GetTransformable()->setPosition(pos);
+    GetTransformable()->setRotation(0);
+    // float rot = offset;
+    // float rotRad = (rot * 2.0 * 3.141) / 360.0;
+    // rot = (rot * 180.0) / (2.0 * 3.141);
+    mDir = sf::Vector2f(0, -1);
+  }
+
+  void Tick() {
+    // GetTransformable()->rotate(5.0);
+    auto transformable = GetTransformable();
+    if(mDw != 0) {
+      transformable->rotate(mDw);
+      float rot = _OFFSET - transformable->getRotation();
+      float rotRad = (rot * 3.141) / 180.0;
+      // rot = (rot * 180.0) / (2.0 * 3.141);
+      mDir = sf::Vector2f(cos(rotRad), -sin(rotRad));
+      // cout << "Rotation: " << rot << ", Dir.X: " << mDir.x << ", Dir.Y: " << mDir.y << endl;
+    } else if(mDt.x != 0 || mDt.y != 0) {
+      transformable->move(mDt);
+    }
+    mDt = sf::Vector2f();
+    mDw = 0.0;
+  }
+
+  void MoveForward(EmptyEventData* unused) {
+    mDt += mSpeed * mDir;
+  }
+
+  void MoveBackward(EmptyEventData* unused) {
+    mDt -= mSpeed * mDir;
+  }
+
+  void RotLeft(EmptyEventData* unused) {
+    mDw -= mRotSpeed;
+  }
+
+  void RotRight(EmptyEventData* unused) {
+    mDw += mRotSpeed;
+  }
+
+private:
   float mSpeed, mRotSpeed;
   // Delta Transform of current tick
   sf::Vector2f mDt = sf::Vector2f();
@@ -429,7 +515,7 @@ int testGame2() {
   animStates[3] = walk2;
   animStates[4] = walk3;
   cout << "3" << endl;
-  auto ent = new Gta2PlayerEntity(animStates, 2.0, 5.0, upPressed, downPressed, leftPressed, rightPressed);
+  auto ent = new Gta2PlayerEntity(animStates, 1.0, 5.0, upPressed, downPressed, leftPressed, rightPressed, sf::Vector2f(30, 30));
 
   // Layout entities in scene
   cout << "4" << endl;
@@ -438,7 +524,7 @@ int testGame2() {
 
   // Create game
   cout << "5" << endl;
-  GameOptions options{"My Game", sf::Vector2i(510, 512), 2.0, 50};
+  GameOptions options{"My Game", sf::Vector2i(510, 512), 5.0, 50};
   auto app = new Game(options, scene, world);
 
   // Send Events to controller
@@ -453,6 +539,43 @@ int testGame2() {
   app->Run();
 }
 
+int chopperDemo() {
+  cout << "Start chopperDemo" << endl;
+
+  // Create Keyboard Events
+  auto upPressed = new OnKeyPress(sf::Keyboard::Up);
+  auto downPressed = new OnKeyPress(sf::Keyboard::Down);
+  auto leftPressed = new OnKeyPress(sf::Keyboard::Left);
+  auto rightPressed = new OnKeyPress(sf::Keyboard::Right);
+
+  // Create Game World
+  auto world = GameWorldFactory::CreateGameWorld("res/simple_grass/tilemap.json", "", "res/simple_grass/tile_");
+
+  // Create Player entity and Rotating child entity
+  auto tex = AssetManager::GetTexture("res/textures/heli/heli.png");
+  auto tex2 = AssetManager::GetTexture("res/textures/heli/rotor.png");
+  auto ent = new ChopperEntity(tex, 2.0, 5.0, upPressed, downPressed, leftPressed, rightPressed, sf::Vector2f(50, 50));
+  auto ent2 = new RotatingEntity(tex2, 15.0, sf::Vector2f(8, 15));
+
+  // Layout entities in scene
+  auto scene = new SceneGraph();
+  auto parent = scene->GetRoot()->AddChild(ent);
+  auto child = parent->AddChild(ent2);
+
+  // Create game
+  GameOptions options{"My Game", sf::Vector2i(510, 512), 2.0, 50};
+  auto app = new Game(options, scene, world);
+
+  // Send Events to controller
+  app->AddEvent(upPressed);
+  app->AddEvent(downPressed);
+  app->AddEvent(leftPressed);
+  app->AddEvent(rightPressed);
+
+  // Run Game
+  app->Run();
+}
+
 int main() {
   std::cout << "Hello Compiler 28" << std::endl;
 
@@ -462,7 +585,8 @@ int main() {
   // testTiles();
   // testWorldLoader();
   // testGame();
-  testGame2();
+  // testGame2();
+  chopperDemo();
 
   // game::GameOptions options{
   //     "My Game", sf::Vector2i(510, 512), 50};

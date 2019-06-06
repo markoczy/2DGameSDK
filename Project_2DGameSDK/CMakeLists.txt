@@ -13,7 +13,7 @@ file(GLOB_RECURSE SRCS
     ./src/*.cpp
 )
 source_group("src" FILES ${SRCS})
-add_definitions(-DDLLBUILD_GAMESDK -DGAMESDK_LOG_D)
+add_definitions(-DDLLBUILD_GAMESDK -DGAMESDK_LOG_E)
 
 # find headers
 file(GLOB_RECURSE HDRS 
