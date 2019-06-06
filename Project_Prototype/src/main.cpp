@@ -151,7 +151,7 @@ int testWorldLoader() {
   cout << "Start testWorldLoader 5" << endl;
   sf::RenderWindow window(sf::VideoMode(600, 600), "SFML works!");
   cout << "before create" << endl;
-  auto world = GameWorldFactory::CreateGameWorld("res/testmap/tilemap.json", "", "res/testmap/test-2_");
+  auto world = GameWorldFactory::CreateGameWorld("res/testmap/tilemap.json", "", "res/testmap/tile_");
   cout << "after create" << endl;
 
   while(window.isOpen()) {
@@ -375,7 +375,7 @@ int testGame() {
   auto rightPressed = new OnKeyPress(sf::Keyboard::Right);
 
   // Create Game World
-  auto world = GameWorldFactory::CreateGameWorld("res/testmap/tilemap.json", "", "res/testmap/test-2_");
+  auto world = GameWorldFactory::CreateGameWorld("res/testmap/tilemap.json", "", "res/testmap/tile_");
 
   // Create Player entity and Rotating child entity
   auto tex = AssetManager::GetTexture("res/textures/sample.png");
@@ -389,7 +389,7 @@ int testGame() {
   auto child = parent->AddChild(ent2);
 
   // Create game
-  GameOptions options{"My Game", sf::Vector2i(800, 600), 2.0, 50};
+  GameOptions options{"My Game", sf::Vector2i(510, 512), 2.0, 50};
   auto app = new Game(options, scene, world);
 
   // Send Events to controller
@@ -412,7 +412,7 @@ int testGame2() {
   auto rightPressed = new OnKeyPress(sf::Keyboard::Right);
 
   // Create Game World
-  auto world = GameWorldFactory::CreateGameWorld("res/testmap/tilemap.json", "", "res/testmap/test-2_");
+  auto world = GameWorldFactory::CreateGameWorld("res/testmap/tilemap.json", "", "res/testmap/tile_");
 
   cout << "1" << endl;
   // Create Player entity and Rotating child entity
@@ -438,7 +438,7 @@ int testGame2() {
 
   // Create game
   cout << "5" << endl;
-  GameOptions options{"My Game", sf::Vector2i(800, 600), 2.0, 50};
+  GameOptions options{"My Game", sf::Vector2i(510, 512), 2.0, 50};
   auto app = new Game(options, scene, world);
 
   // Send Events to controller
@@ -465,7 +465,7 @@ int main() {
   testGame2();
 
   // game::GameOptions options{
-  //     "My Game", sf::Vector2i(800, 600), 50};
+  //     "My Game", sf::Vector2i(510, 512), 50};
   // game::Game app(options);
   // app.Run();
 

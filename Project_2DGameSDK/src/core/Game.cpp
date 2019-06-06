@@ -124,7 +124,7 @@ namespace game {
   }
 
   void Game::render() {
-    mWindow->clear();
+    mWindow->clear(sf::Color(80, 80, 80));
     dbgClock.restart();
     mState.World->Render(mWindow);
     LOGD("Render World in: " << dbgClock.getElapsedTime().asMilliseconds());
