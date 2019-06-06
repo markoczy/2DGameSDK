@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1300</x>
+      <y>500</y>
+      <w>260</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;struct&gt;&gt;
+game::Tilemap
+--
++Layers: std::vector&lt;game::TileLayer&gt;
++TileWidth: int
++TileHeight: int
++TilesWide: int
++TilesHigh: int
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1300</x>
+      <y>650</y>
+      <w>210</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;struct&gt;&gt;
+game::MaterialMap
+--
++Materials: game::Material*[]
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1220</x>
+      <y>520</y>
+      <w>100</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;&gt;&gt;&gt;</panel_attributes>
+    <additional_attributes>80.0;80.0;50.0;80.0;50.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1220</x>
+      <y>540</y>
+      <w>100</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;&gt;&gt;&gt;</panel_attributes>
+    <additional_attributes>80.0;130.0;40.0;130.0;40.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>750</x>
+      <y>500</y>
+      <w>480</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>game::GameWorld
+--
+-mTileMap: game::TileMap*
+-mMaterialMap: game::MaterialMap*
+--
++GameWorld(tilemap: game::Tilemap*, materialMap: game::MaterialMap*)
++Tick()
++Render()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>730</x>
+      <y>460</y>
+      <w>850</w>
+      <h>280</h>
+    </coordinates>
+    <panel_attributes>World</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

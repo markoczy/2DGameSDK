@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>18</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>360</x>
+      <y>252</y>
+      <w>540</w>
+      <h>198</h>
+    </coordinates>
+    <panel_attributes>game::EventController
+--
+mEvents: std::map&lt;int, ObservableBase*&gt;
+--
++AddEvent(key: int, event: ObservableBase*)
++GetEvent(key: int): ObservableBase*
++Tick()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>324</x>
+      <y>162</y>
+      <w>954</w>
+      <h>324</h>
+    </coordinates>
+    <panel_attributes>Event</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>972</x>
+      <y>252</y>
+      <w>288</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>/ObservableBase/
+--
+--
+/+Update()/</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>882</x>
+      <y>306</y>
+      <w>126</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;50.0;10.0</additional_attributes>
+  </element>
+</diagram>

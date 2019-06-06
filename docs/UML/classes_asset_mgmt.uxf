@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>14</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>742</x>
+      <y>238</y>
+      <w>574</w>
+      <h>182</h>
+    </coordinates>
+    <panel_attributes>template=TResource: Object
+/ResourceCache/
+--
+#mResources: std::map&lt;std::string, TResource&gt;
+--
++GetResource(identifier: std::string&amp;): TResource
+/#createResource(identifier: std::string&amp;)/
+/#destroyResource(resource: TResource)/</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>140</x>
+      <y>252</y>
+      <w>462</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Singleton&gt;&gt;
+AssetManager
+--
+-mTextures: game::TextureCache
+--
++GetTexture(identifier: std::string&amp;): sf::Texture*</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>588</x>
+      <y>308</y>
+      <w>280</w>
+      <h>238</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;80.0;10.0;80.0;110.0;180.0;110.0;180.0;150.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>742</x>
+      <y>518</y>
+      <w>476</w>
+      <h>126</h>
+    </coordinates>
+    <panel_attributes>game::TextureCache
+--
+#mResources: std::map&lt;std::string, sf::Texture*&gt;
+--
+#createResource(identifier: std::string&amp;)
+#destroyResource(resource: sf::Texture*)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>980</x>
+      <y>406</y>
+      <w>224</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+&lt;&lt;bind&gt;&gt; (sf::Texture*)</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>112</x>
+      <y>182</y>
+      <w>1232</w>
+      <h>504</h>
+    </coordinates>
+    <panel_attributes>Asset</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

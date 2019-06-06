@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>15</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>615</x>
+      <y>570</y>
+      <w>525</w>
+      <h>255</h>
+    </coordinates>
+    <panel_attributes>/game::AnimatedTransformableEntity/
+--
+#mSprite: sf::Sprite*
+#mGraphNode: game::SceneGraphNode*
+--
++AnimatedTransformableEntity(type: int, 
+     animationStates: std::map&lt;int, sf::Texture*&gt;)
+/+Tick()/
++Render(target: sf::RenderTarget*)
++GetTransform(): sf::Transformable*
++SetAnimState(state: int)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>75</x>
+      <y>570</y>
+      <w>525</w>
+      <h>225</h>
+    </coordinates>
+    <panel_attributes>/game::SpriteTransformableEntity/
+--
+#mSprite: sf::Sprite*
+#mGraphNode: game::SceneGraphNode*
+--
++SpriteTransformableEntity(type: int, tex: sf::Texture*)
+/+Tick()/
++Render(target: sf::RenderTarget*)
++GetTransform(): sf::Transformable*</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>255</x>
+      <y>465</y>
+      <w>600</w>
+      <h>135</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0;380.0;50.0;380.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>75</x>
+      <y>270</y>
+      <w>480</w>
+      <h>210</h>
+    </coordinates>
+    <panel_attributes>/game::TransformableEntity/
+--
+#mGraphNode: game::SceneGraphNode*
+--
++TransformableEntity(type: int)
++SetGraphNode(node game::SceneGraphNode*)
+/+Tick()/
+/+Render(target: sf::RenderTarget*)/
+/+GetTransformable(): sf::Transformable*/
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>255</x>
+      <y>465</y>
+      <w>285</w>
+      <h>135</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0;170.0;50.0;170.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>45</x>
+      <y>210</y>
+      <w>1125</w>
+      <h>645</h>
+    </coordinates>
+    <panel_attributes>Scene</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
