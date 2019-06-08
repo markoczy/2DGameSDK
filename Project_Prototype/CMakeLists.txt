@@ -18,6 +18,9 @@ file(GLOB_RECURSE HDRS
 )
 source_group("inc" FILES ${HDRS})
 
+# IMPORTANT: SFML must have OpenGL loaded to use OpenGL functionalities
+find_package(OpenGL REQUIRED)
+
 include_directories(
     ${SFML_INCLUDE_DIR}
     ${JSON_INCLUDE_DIR}
@@ -25,12 +28,12 @@ include_directories(
 )
 
 set(LIBS_DEBUG)
-foreach(lib; ${SFML_LIBRARIES_D} ${SDK_LIBRARIES})
+foreach(lib; ${OPENGL_LIBRARIES} ${SFML_LIBRARIES_D} ${SDK_LIBRARIES})
     list(APPEND LIBS_DEBUG debug ${lib})
 endforeach()
 
 set(LIBS_RELEASE)
-foreach(lib; ${SFML_LIBRARIES} ${SDK_LIBRARIES})
+foreach(lib; ${OPENGL_LIBRARIES} ${SFML_LIBRARIES} ${SDK_LIBRARIES})
     list(APPEND LIBS_RELEASE optimized ${lib})
 endforeach()
 
@@ -44,8 +47,6 @@ if ("${CMAKE_BUILD_TYPE}" MATCHES Debug)
 else ()
     target_link_libraries(${PROJECT_NAME} ${LIBS_RELEASE})
 endif ("${CMAKE_BUILD_TYPE}" MATCHES Debug)
-
-
 
 # (Windows only!) copy SFML DLL's for convenience
 if ("${CMAKE_BUILD_TYPE}" MATCHES Debug)

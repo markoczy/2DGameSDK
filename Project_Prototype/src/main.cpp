@@ -4,6 +4,8 @@
 #include <2DGameSDK/Scene.h>
 #include <2DGameSDK/World.h>
 
+#include <SFML/OpenGL.hpp>
+
 #include <chrono>
 #include <cmath>
 #include <iostream>
@@ -88,7 +90,7 @@ public:
     cout << "MyEntity ticks.." << endl;
   }
 
-  void Render(sf::RenderTarget* targe, sf::RenderStates states = sf::RenderStates::Default) {
+  void Render(sf::RenderTarget* target, sf::RenderStates states = sf::RenderStates::Default) {
     cout << "MyEntity renders.." << endl;
   }
 };
@@ -100,7 +102,7 @@ int testEntity() {
 }
 
 int testEntity2() {
-  cout << "Start Testentity 30" << endl;
+  cout << "Start Testentity 31" << endl;
   auto cache = TextureCache();
   auto tex = AssetManager::GetTexture("res/textures/testtile/testtile_0.png");
   auto tex2 = AssetManager::GetTexture("res/textures/sample.png");
@@ -453,47 +455,119 @@ int testGame2() {
   app->Run();
 }
 
+int testGl() {
+  cout << "Start testGl" << endl;
+  sf::Clock clck;
+
+  // Create SFML Test sprite
+  auto tex = AssetManager::GetTexture("res/textures/sample.png");
+  sf::Sprite sprite(*tex);
+  sprite.setPosition(300, 200);
+  sprite.scale(20, 20);
+
+  // create the window
+  sf::RenderWindow window(sf::VideoMode(800, 600), "OpenGL", sf::Style::Default, sf::ContextSettings(32));
+  window.setVerticalSyncEnabled(true);
+
+  // activate the window
+  window.setActive(true);
+
+  // load resources, initialize the OpenGL states, ...
+  // Set color and depth clear value
+  glClearDepth(1.f);
+  glClearColor(0.f, 0.f, 0.f, 0.f);
+
+  // Enable Z-buffer read and write
+  glEnable(GL_DEPTH_TEST);
+  glDepthMask(GL_TRUE);
+
+  // Setup a perspective projection
+  glMatrixMode(GL_PROJECTION);
+  glLoadIdentity();
+
+  // run the main loop
+  bool running = true;
+  while(running) {
+    // handle events
+    sf::Event event;
+    while(window.pollEvent(event)) {
+      if(event.type == sf::Event::Closed) {
+        // end the program
+        running = false;
+      } else if(event.type == sf::Event::Resized) {
+        // adjust the viewport when the window is resized
+        glViewport(0, 0, event.size.width, event.size.height);
+      }
+    }
+
+    // clear the buffers
+
+    cout << "rendering..." << endl;
+
+    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
+    glRotatef(1, 1.f, 0.f, 0.f);
+    glRotatef(1, 0.f, 1.f, 0.f);
+    glRotatef(1, 0.f, 0.f, 1.f);
+
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glColor3f(0.5f, 0.0f, 1.0f); // (0.5, 0, 1) is half red and full blue, giving dark purple.
+    glBegin(GL_QUADS);
+
+    glVertex3f(-0.5, -0.5, -0.5);
+    glVertex3f(-0.5, 0.5, -0.5);
+    glVertex3f(0.5, 0.5, -0.5);
+    glVertex3f(0.5, -0.5, -0.5);
+
+    glVertex3f(-0.5, -0.5, 0.5);
+    glVertex3f(-0.5, 0.5, 0.5);
+    glVertex3f(0.5, 0.5, 0.5);
+    glVertex3f(0.5, -0.5, 0.5);
+
+    glVertex3f(-0.5, -0.5, -0.5);
+    glVertex3f(-0.5, 0.5, -0.5);
+    glVertex3f(-0.5, 0.5, 0.5);
+    glVertex3f(-0.5, -0.5, 0.5);
+
+    glVertex3f(0.5, -0.5, -0.5);
+    glVertex3f(0.5, 0.5, -0.5);
+    glVertex3f(0.5, 0.5, 0.5);
+    glVertex3f(0.5, -0.5, 0.5);
+
+    glVertex3f(-0.5, -0.5, 0.5);
+    glVertex3f(-0.5, -0.5, -0.5);
+    glVertex3f(0.5, -0.5, -0.5);
+    glVertex3f(0.5, -0.5, 0.5);
+
+    glVertex3f(-0.5, 0.5, 0.5);
+    glVertex3f(-0.5, 0.5, -0.5);
+    glVertex3f(0.5, 0.5, -0.5);
+    glVertex3f(0.5, 0.5, 0.5);
+
+    glEnd();
+
+    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+    // Important: Must push OpenGL State before drawing SFML Context
+    window.pushGLStates();
+
+    window.draw(sprite);
+
+    // Important: Must pop OpenGL State before calling display()
+    window.popGLStates();
+
+    // end the current frame (internally swaps the front and back buffers)
+    window.display();
+  }
+
+  // release resources...
+
+  return 0;
+}
+
 int main() {
-  std::cout << "Hello Compiler 28" << std::endl;
-
-  // testEvents();
-  // testEntity();
-  // testEntity2();
-  // testTiles();
-  // testWorldLoader();
-  // testGame();
-  testGame2();
-
-  // game::GameOptions options{
-  //     "My Game", sf::Vector2i(800, 600), 50};
-  // game::Game app(options);
-  // app.Run();
-
-  // sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-  // sf::CircleShape shape(100.f);
-  // shape.setFillColor(sf::Color::Blue);
-
-  // auto cache = TextureCache();
-
-  // auto assets = AssetManager();
-  // auto tex = cache.Get("res/textures/testtile/testtile_0.png");
-  // shape.setTexture(tex);
-
-  // while(window.isOpen()) {
-  //   sf::Event event;
-  //   while(window.pollEvent(event)) {
-  //     if(event.type == sf::Event::Closed)
-  //       window.close();
-  //   }
-  //   window.clear();
-  //   window.draw(shape);
-  //   window.display();
-  // }
-
-  // auto k = cache.Get("res/textures/testtile/testtile_0.png");
-  // cache.Clear();
-  // std::cout << "End." << std::endl;
-  // system("pause");
+  std::cout << "Hello Compiler 31" << std::endl;
+  testGl();
 
   return 0;
 }

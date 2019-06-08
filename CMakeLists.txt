@@ -38,6 +38,19 @@ set(SFML_DLL_DIR "${SFML_ROOT_DIR}/bin")
 set(JSON_ROOT_DIR "${CMAKE_HOME_DIRECTORY}/libs/nlohmann-json")
 set(JSON_INCLUDE_DIR "${JSON_ROOT_DIR}/include")
 
+
+################################################################################
+# Setup glew (not actually needed as sfml handles this)
+################################################################################
+# set(GLEW_VERSION "2.1.0")
+# set(GLEW_ROOT_DIR "${CMAKE_HOME_DIRECTORY}/libs/glew-${GLEW_VERSION}")
+# set(GLEW_INCLUDE_DIR "${GLEW_ROOT_DIR}/include")
+# set(GLEW_LIBRARIES_PATH "${GLEW_ROOT_DIR}/lib/Release/Win32")
+# set(GLEW_LIB "${GLEW_LIBRARIES_PATH}/glew32.lib")
+# set(GLEW_LIBRARIES ${GLEW_LIB})
+# set(GLEW_LIBRARY "${GLEW_LIB}")
+# set(GLEW_DLL_DIR "${GLEW_ROOT_DIR}/bin")
+
 ################################################################################
 # Setup game sdk
 ################################################################################
