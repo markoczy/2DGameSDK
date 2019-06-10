@@ -1,47 +1,54 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="14.3.0">
-  <zoom_level>10</zoom_level>
+  <zoom_level>6</zoom_level>
   <element>
     <id>UMLSequenceAllInOne</id>
     <coordinates>
       <x>0</x>
-      <y>120</y>
-      <w>2140</w>
-      <h>1510</h>
+      <y>420</y>
+      <w>1284</w>
+      <h>1014</h>
     </coordinates>
     <panel_attributes>title=Game Initialization
 obj=GameWorldFactory~gwf
-obj=scene: SceneGraph~sg
+obj=scene: SceneGraph~sg CREATED_LATER EXECUTION
 obj=Main Loop~main
-obj=game: Game~game
-obj=eventController: EventController~ec
+obj=game: Game~game CREATED_LATER EXECUTION
+obj=eventController: EventController~ec CREATED_LATER EXECUTION
 
 on=main
 
 // Create Game World
 main-&gt;&gt;&gt;gwf: CreateGameWorld(...); on=gwf
-gwf-&gt;gwf + :loadTilemap(...); on=gwf
+gwf-&gt;gwf + :loadTilemap(...)
+on=gwf
 off=gwf
-gwf-&gt;gwf + :loadTextures(...); on=gwf
+gwf-&gt;gwf + :loadTextures(...)
+on=gwf
 off=gwf
 gwf.&gt;main: world: GameWorld*; off=gwf
 
 // Create Scene
-main-&gt;&gt;&gt;sg: new(); on=sg;
-sg.&gt;main: scene: SceneGraph*; off=sg
+main-&gt;&gt;&gt;sg: new()
+sg.&gt;main; off=sg
 main-&gt;&gt;&gt;sg: GetRoot(...); on=sg;
 sg.&gt;main: root: SceneGraphNode*; off=sg
 combinedFragment=loop~loop1 main main; main:[More Entities to create...]
-main-&gt;main + :entity = new Entity(...); on=main
-off=main
-main-&gt;main + :node = root.AddChild(entity); on=main
-off=main; --=loop1;
+main-&gt;main + :new Entity(...)
+on=main
+main-&gt;main + :entity;off=main
+tick=
+main-&gt;main + :root.AddChild(entity)
+on=main
+off=main; --=loop1
 
 // Create Game
-main-&gt;main + :options = createOptions(...); on=main
-off=main
-main-&gt;&gt;&gt;game: new(options, world, scene); on=game;
-game-&gt;&gt;&gt;ec: new(); on=ec;
+main-&gt;main + :createOptions(...)
+on=main
+main-&gt;main + :options; off=main
+tick=
+main-&gt;&gt;&gt;game: new(options, world, scene)
+game-&gt;&gt;&gt;ec: new()
 ec-&gt;game :eventController: EventController*; off=ec
 game.&gt;main: game: Game*; off=game
 
@@ -55,13 +62,16 @@ game.&gt;main: eventId: int; off=game;
 
 // Run Game
 main-&gt;&gt;&gt;game: Run(); on=game;
-game-&gt;game + :init(); on=game
+game-&gt;game + :init()
+on=game
 off=game
 tick=
 combinedFragment=loop~loop4 game game; game:[interrupted == false]
-game-&gt;game + :tick(); on=game
+game-&gt;game + :tick()
+on=game
 off=game
-game-&gt;game + :render(); on=game
+game-&gt;game + :render()
+on=game
 off=game
 --=loop4;
 tick=
@@ -73,10 +83,10 @@ off=main</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>1590</x>
-      <y>1260</y>
-      <w>250</w>
-      <h>50</h>
+      <x>954</x>
+      <y>1176</y>
+      <w>150</w>
+      <h>30</h>
     </coordinates>
     <panel_attributes>bg=yellow
 See detailed Description
@@ -86,10 +96,10 @@ in "Game Loop" sequence diagram</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1590</x>
-      <y>1300</y>
-      <w>30</w>
-      <h>50</h>
+      <x>954</x>
+      <y>1200</y>
+      <w>18</w>
+      <h>30</h>
     </coordinates>
     <panel_attributes>lt=-</panel_attributes>
     <additional_attributes>10.0;30.0;10.0;10.0</additional_attributes>

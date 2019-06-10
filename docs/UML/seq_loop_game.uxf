@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="14.3.0">
-  <zoom_level>10</zoom_level>
+  <zoom_level>5</zoom_level>
   <element>
     <id>UMLSequenceAllInOne</id>
     <coordinates>
-      <x>0</x>
-      <y>40</y>
-      <w>2300</w>
-      <h>1100</h>
+      <x>125</x>
+      <y>250</y>
+      <w>1150</w>
+      <h>650</h>
     </coordinates>
     <panel_attributes>title=Game Loop
 obj=Main Loop~main
@@ -19,47 +19,55 @@ obj=scene: SceneGraph~scene
 on=main
 main-&gt;&gt;&gt;game: Run(...); on=game
 
-game-&gt;game + :init(); on=game
+game-&gt;game + :init();
+on=game
 off=game
 
 // Start loop
 combinedFragment=loop~loop1 game scene; game: [interrupted == false]
 
-game-&gt;game + :handleWindowEvents(); on=game
+game-&gt;game + :handleWindowEvents()
+on=game
 off=game
 
 // Tick Events
 game-&gt;&gt;&gt;ec: Tick(); on=ec; on=game
-ec-&gt;ec + :tickEvents(); on=ec
+ec-&gt;ec + :tickEvents()
+on=ec
 off=ec
 ec.&gt;game; off=ec; off=game
 
 // Tick World
 game-&gt;&gt;&gt;world: Tick(); on=world; on=game
-world-&gt;world + :tickTiles(); on=world
+world-&gt;world + :tickTiles()
+on=world
 off=world
 world.&gt;game; off=world; off=game
 
 // Tick Scene
 game-&gt;&gt;&gt;scene: Tick(); on=scene; on=game
-scene-&gt;scene + :tickEntities(); on=scene
+scene-&gt;scene + :tickEntities()
+on=scene
 off=scene
 scene.&gt;game; off=scene; off=game
 
 // Render World
 game-&gt;&gt;&gt;world: Render(); on=world; on=game
-world-&gt;world + :renderTiles(); on=world
+world-&gt;world + :renderTiles()
+on=world
 off=world
 world.&gt;game; off=world; off=game
 
 // Render Scene
 game-&gt;&gt;&gt;scene: Render(); on=scene; on=game
-scene-&gt;scene + :renderEntities(); on=scene
+scene-&gt;scene + :renderEntities()
+on=scene
 off=scene
 scene.&gt;game; off=scene; off=game
 
 
-game-&gt;game + :syncWait(); on=game
+game-&gt;game + :syncWait()
+on=game
 off=game
 --=loop1;
 tick=
