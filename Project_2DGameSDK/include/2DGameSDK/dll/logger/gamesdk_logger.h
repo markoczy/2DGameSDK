@@ -1,3 +1,14 @@
+/**
+ * @file gamesdk_logger.h
+ * @author Aleistar Markoczy (a.markoczy@gmail.com)
+ * @brief Holds the preprocessor defines for internal logging functions of the
+ * project 2DGameSDK
+ * @version 1.0
+ * @date 2019-06-11
+ * 
+ * @copyright Copyright (c) 2019
+ * 
+ */
 #ifndef __GAMESDK_LOGGER_H__
 #define __GAMESDK_LOGGER_H__
 
