@@ -2,7 +2,7 @@
 
 namespace game {
 
-  sf::Texture* TextureCache::loadResource(const std::string& identifier) {
+  sf::Texture* TextureCache::createResource(const std::string& identifier) {
     auto tex = new sf::Texture();
     tex->loadFromFile(identifier);
     mResources[identifier] = tex;

@@ -1,4 +1,13 @@
-
+/**
+ * @file Game.h
+ * @author Aleistar Markoczy (a.markoczy@gmail.com)
+ * @brief Game class
+ * @version 1.0
+ * @date 2019-06-11
+ * 
+ * @copyright Copyright (c) 2019
+ * 
+ */
 #ifndef __GAME_H__
 #define __GAME_H__
 
@@ -23,18 +32,27 @@ namespace game {
    */
   class GAMESDK_DLL Game {
   public:
+    /**
+     * @brief Default empty constructor, Game is unusable until options,
+     *        scene and world are set
+     */
     Game();
+
+    /**
+     * @brief Full constructor, sets all needed objects to run the game
+     * 
+     */
     Game(GameOptions options, SceneGraph* scene, GameWorld* world);
     ~Game();
 
     /**
-     * @brief Start the Game
+     * @brief Starts the Game
      * 
      */
     void Run();
 
     /**
-     * @brief Stop the Game
+     * @brief Stops the Game
      * 
      */
     void Stop();
@@ -47,19 +65,24 @@ namespace game {
     GameState GetState();
 
     /**
-     * @brief Get Reference of the SceneGraph
+     * @brief Retreives Reference of the SceneGraph
      * 
      * @return SceneGraph* The Scene Graph
      */
     SceneGraph* GetScene();
 
     /**
-     * @brief Get the Reference of the world
+     * @brief Retreives the Reference of the world
      * 
      * @return GameWorld* The GameWorld
      */
     GameWorld* GetWorld();
 
+    /**
+     * @brief Assigns the Game Options
+     * 
+     * @param options The Game Options
+     */
     void SetOptions(GameOptions options);
 
     /**
@@ -103,7 +126,16 @@ namespace game {
     ObservableBase* GetEvent(int id);
 
   private:
+    /**
+     * @brief Updates all Game Elements
+     * 
+     */
     void tick();
+
+    /**
+     * @brief Renders all Game Elements
+     * 
+     */
     void render();
 
     EventController mEventCtrl;
