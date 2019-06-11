@@ -39,9 +39,20 @@ namespace game {
 
   protected:
     /**
-     * @brief Private function to load the resource
+     * @brief Function that loads or creates the requested SFML Texture
+     * 
+     * @param identifier The unique identifier of the Texture
+     * 
+     * @return The SFML Texture
      */
     sf::Texture* createResource(const std::string& identifier);
+
+    /**
+     * @brief Functions that destroys the given SFML Texture
+     * 
+     * @param resource The Texture to destroy
+     */
+    virtual void destroyResource(sf::Texture* resource);
   };
 } // namespace game
 

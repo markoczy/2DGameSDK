@@ -55,11 +55,8 @@ namespace game {
      * 
      */
     virtual void Clear() {
-      if(mClearPointers) {
-        for(auto const& entry : mResources) {
-          // TODO avoid openGL error when in runnning state
-          // delete entry.second;
-        }
+      for(auto const& entry : mResources) {
+        destroyResource(entry.second);
       }
       mResources.clear();
     }
@@ -69,10 +66,18 @@ namespace game {
      * @brief Function that loads or creates the requested resource
      * 
      * @param identifier The unique identifier of the resource
+     * 
+     * @return The generic Resource
      */
     virtual TResource createResource(const std::string& identifier) = 0;
 
-    bool mClearPointers = true;
+    /**
+     * @brief Functions that destroys a given resource
+     * 
+     * @param resource The Resource to destroy
+     */
+    virtual void destroyResource(TResource resource) = 0;
+
     std::map<std::string, TResource> mResources;
   };
 
