@@ -29,5 +29,15 @@
                 "isDefault": true
             }
         },
+        {
+            "label": "build-docs",
+            "type": "shell",
+            "command": "doxygen",
+            "args": [
+                "Doxyfile",
+            ],
+            "problemMatcher": [],
+            "group": "none"
+        }
     ]
 }

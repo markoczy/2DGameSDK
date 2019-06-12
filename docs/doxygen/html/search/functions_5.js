@@ -11,6 +11,7 @@ var searchData=
   ['getscene',['GetScene',['../classgame_1_1_game.html#a296590b50aa4811567e0a5f080b97f39',1,'game::Game']]],
   ['getstate',['GetState',['../classgame_1_1_game.html#ae9458c7f9779d8e1230bfda78e35228f',1,'game::Game']]],
   ['gettexture',['GetTexture',['../classgame_1_1_asset_manager.html#a203d4b4446d0cf4a4de39d513e07281e',1,'game::AssetManager']]],
+  ['gettransformable',['GetTransformable',['../classgame_1_1_animated_transformable_entity.html#a60401fdc3c76b89dd4f8e084e6c43bb2',1,'game::AnimatedTransformableEntity::GetTransformable()'],['../classgame_1_1_sprite_transformable_entity.html#af2ce046a629bd068c7ec9ce987fef0a6',1,'game::SpriteTransformableEntity::GetTransformable()'],['../classgame_1_1_transformable_entity.html#a5cfd98c648c7308ab3e0da7559cde365',1,'game::TransformableEntity::GetTransformable()']]],
   ['gettype',['GetType',['../classgame_1_1_entity.html#aed0a3e2b73d49235bd3b317992df9a6a',1,'game::Entity']]],
   ['getworld',['GetWorld',['../classgame_1_1_game.html#a353def6296c17344ec04c92987476abf',1,'game::Game']]]
 ];

@@ -95,6 +95,11 @@ $(document).ready(function(){initNavTree('classgame_1_1_transformable_entity.htm
 <div class="title">game::TransformableEntity Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Abstract class that defines an <a class="el" href="classgame_1_1_entity.html" title="Defines a simple Game Object (no transformations)">Entity</a> that is Transformable and can be placed on the <a class="el" href="classgame_1_1_scene_graph.html" title="Directed acyclic Graph that represents the Game Object hierarchy.">SceneGraph</a>.  
+ <a href="classgame_1_1_transformable_entity.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_transformable_entity_8h_source.html">TransformableEntity.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for game::TransformableEntity:</div>
 <div class="dyncontent">
@@ -102,21 +107,24 @@ Inheritance diagram for game::TransformableEntity:</div>
   <img src="classgame_1_1_transformable_entity.png" usemap="#game::TransformableEntity_map" alt=""/>
   <map id="game::TransformableEntity_map" name="game::TransformableEntity_map">
 <area href="classgame_1_1_entity.html" title="Defines a simple Game Object (no transformations)" alt="game::Entity" shape="rect" coords="111,0,323,24"/>
-<area href="classgame_1_1_animated_transformable_entity.html" alt="game::AnimatedTransformableEntity" shape="rect" coords="0,112,212,136"/>
-<area href="classgame_1_1_sprite_transformable_entity.html" alt="game::SpriteTransformableEntity" shape="rect" coords="222,112,434,136"/>
+<area href="classgame_1_1_animated_transformable_entity.html" title="Entity that is transformable and that defines a set of animation states, where every state is represe..." alt="game::AnimatedTransformableEntity" shape="rect" coords="0,112,212,136"/>
+<area href="classgame_1_1_sprite_transformable_entity.html" title="Simple specialisation of the TransformableEntity class. Does not do anything during Tick()." alt="game::SpriteTransformableEntity" shape="rect" coords="222,112,434,136"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ad7799cb706f7b736503672057526e7ea"><td class="memItemLeft" align="right" valign="top"><a id="ad7799cb706f7b736503672057526e7ea"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>TransformableEntity</b> (int type)</td></tr>
+<tr class="memitem:ad7799cb706f7b736503672057526e7ea"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_transformable_entity.html#ad7799cb706f7b736503672057526e7ea">TransformableEntity</a> (int type)</td></tr>
+<tr class="memdesc:ad7799cb706f7b736503672057526e7ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new Transformable <a class="el" href="classgame_1_1_entity.html" title="Defines a simple Game Object (no transformations)">Entity</a> object.  <a href="#ad7799cb706f7b736503672057526e7ea">More...</a><br /></td></tr>
 <tr class="separator:ad7799cb706f7b736503672057526e7ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5281c250b2c47c65a9a12407d3b3bce3"><td class="memItemLeft" align="right" valign="top"><a id="a5281c250b2c47c65a9a12407d3b3bce3"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>SetGraphNode</b> (<a class="el" href="classgame_1_1_scene_graph_node.html">SceneGraphNode</a> *graphNode)</td></tr>
+<tr class="memitem:a673e70d20ce11b215f32078a9eba6217"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_transformable_entity.html#a673e70d20ce11b215f32078a9eba6217">~TransformableEntity</a> ()</td></tr>
+<tr class="memdesc:a673e70d20ce11b215f32078a9eba6217"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys the Transformable <a class="el" href="classgame_1_1_entity.html" title="Defines a simple Game Object (no transformations)">Entity</a> object.  <a href="#a673e70d20ce11b215f32078a9eba6217">More...</a><br /></td></tr>
+<tr class="separator:a673e70d20ce11b215f32078a9eba6217"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5281c250b2c47c65a9a12407d3b3bce3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_transformable_entity.html#a5281c250b2c47c65a9a12407d3b3bce3">SetGraphNode</a> (<a class="el" href="classgame_1_1_scene_graph_node.html">SceneGraphNode</a> *graphNode)</td></tr>
+<tr class="memdesc:a5281c250b2c47c65a9a12407d3b3bce3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the Graph Node object.  <a href="#a5281c250b2c47c65a9a12407d3b3bce3">More...</a><br /></td></tr>
 <tr class="separator:a5281c250b2c47c65a9a12407d3b3bce3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5cfd98c648c7308ab3e0da7559cde365"><td class="memItemLeft" align="right" valign="top"><a id="a5cfd98c648c7308ab3e0da7559cde365"></a>
-virtual sf::Transformable *&#160;</td><td class="memItemRight" valign="bottom"><b>GetTransformable</b> ()=0</td></tr>
+<tr class="memitem:a5cfd98c648c7308ab3e0da7559cde365"><td class="memItemLeft" align="right" valign="top">virtual sf::Transformable *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_transformable_entity.html#a5cfd98c648c7308ab3e0da7559cde365">GetTransformable</a> ()=0</td></tr>
+<tr class="memdesc:a5cfd98c648c7308ab3e0da7559cde365"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retreives the reference to the SFML Transformable wich can be used to apply transformations to the Transformable <a class="el" href="classgame_1_1_entity.html" title="Defines a simple Game Object (no transformations)">Entity</a>.  <a href="#a5cfd98c648c7308ab3e0da7559cde365">More...</a><br /></td></tr>
 <tr class="separator:a5cfd98c648c7308ab3e0da7559cde365"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classgame_1_1_entity"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classgame_1_1_entity')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classgame_1_1_entity.html">game::Entity</a></td></tr>
 <tr class="memitem:ae18cd4d004ed8c414001401743b1e0dc inherit pub_methods_classgame_1_1_entity"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_entity.html#ae18cd4d004ed8c414001401743b1e0dc">Entity</a> (int type)</td></tr>
@@ -135,7 +143,7 @@ virtual sf::Transformable *&#160;</td><td class="memItemRight" valign="bottom"><
 <tr class="memdesc:a867772bcbe42fa928eb238461707876d inherit pub_methods_classgame_1_1_entity"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the <a class="el" href="classgame_1_1_entity.html" title="Defines a simple Game Object (no transformations)">Entity</a>.  <a href="classgame_1_1_entity.html#a867772bcbe42fa928eb238461707876d">More...</a><br /></td></tr>
 <tr class="separator:a867772bcbe42fa928eb238461707876d inherit pub_methods_classgame_1_1_entity"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2352739f0c8abb0948a72338b11b1491 inherit pub_methods_classgame_1_1_entity"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_entity.html#a2352739f0c8abb0948a72338b11b1491">Render</a> (sf::RenderTarget *target, sf::RenderStates states=sf::RenderStates::Default)=0</td></tr>
-<tr class="memdesc:a2352739f0c8abb0948a72338b11b1491 inherit pub_methods_classgame_1_1_entity"><td class="mdescLeft">&#160;</td><td class="mdescRight">Renders the entity.  <a href="classgame_1_1_entity.html#a2352739f0c8abb0948a72338b11b1491">More...</a><br /></td></tr>
+<tr class="memdesc:a2352739f0c8abb0948a72338b11b1491 inherit pub_methods_classgame_1_1_entity"><td class="mdescLeft">&#160;</td><td class="mdescRight">Renders the <a class="el" href="classgame_1_1_entity.html" title="Defines a simple Game Object (no transformations)">Entity</a>.  <a href="classgame_1_1_entity.html#a2352739f0c8abb0948a72338b11b1491">More...</a><br /></td></tr>
 <tr class="separator:a2352739f0c8abb0948a72338b11b1491 inherit pub_methods_classgame_1_1_entity"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
@@ -151,6 +159,111 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>mType</b></td></tr>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>mId</b></td></tr>
 <tr class="separator:ae6a84789a6c2923b55b0df57192cd3a4 inherit pro_attribs_classgame_1_1_entity"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Abstract class that defines an <a class="el" href="classgame_1_1_entity.html" title="Defines a simple Game Object (no transformations)">Entity</a> that is Transformable and can be placed on the <a class="el" href="classgame_1_1_scene_graph.html" title="Directed acyclic Graph that represents the Game Object hierarchy.">SceneGraph</a>. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ad7799cb706f7b736503672057526e7ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad7799cb706f7b736503672057526e7ea">&#9670;&nbsp;</a></span>TransformableEntity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">game::TransformableEntity::TransformableEntity </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>type</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Creates a new Transformable <a class="el" href="classgame_1_1_entity.html" title="Defines a simple Game Object (no transformations)">Entity</a> object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">type</td><td>type The <a class="el" href="classgame_1_1_entity.html" title="Defines a simple Game Object (no transformations)">Entity</a> Type (does not affect anything and is meant to be used freely to identify entities of some kind) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a673e70d20ce11b215f32078a9eba6217"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a673e70d20ce11b215f32078a9eba6217">&#9670;&nbsp;</a></span>~TransformableEntity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">game::TransformableEntity::~TransformableEntity </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Destroys the Transformable <a class="el" href="classgame_1_1_entity.html" title="Defines a simple Game Object (no transformations)">Entity</a> object. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a5cfd98c648c7308ab3e0da7559cde365"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5cfd98c648c7308ab3e0da7559cde365">&#9670;&nbsp;</a></span>GetTransformable()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual sf::Transformable* game::TransformableEntity::GetTransformable </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Retreives the reference to the SFML Transformable wich can be used to apply transformations to the Transformable <a class="el" href="classgame_1_1_entity.html" title="Defines a simple Game Object (no transformations)">Entity</a>. </p>
+<dl class="section return"><dt>Returns</dt><dd>sf::Transformable* The Reference of the Transormable Object </dd></dl>
+
+<p>Implemented in <a class="el" href="classgame_1_1_animated_transformable_entity.html#a60401fdc3c76b89dd4f8e084e6c43bb2">game::AnimatedTransformableEntity</a>, and <a class="el" href="classgame_1_1_sprite_transformable_entity.html#af2ce046a629bd068c7ec9ce987fef0a6">game::SpriteTransformableEntity</a>.</p>
+
+</div>
+</div>
+<a id="a5281c250b2c47c65a9a12407d3b3bce3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5281c250b2c47c65a9a12407d3b3bce3">&#9670;&nbsp;</a></span>SetGraphNode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void game::TransformableEntity::SetGraphNode </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classgame_1_1_scene_graph_node.html">game::SceneGraphNode</a> *&#160;</td>
+          <td class="paramname"><em>graphNode</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set the Graph Node object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">graphNode</td><td>The corresponding <a class="el" href="classgame_1_1_scene_graph_node.html" title="Single Node of the Scene Graph.">SceneGraphNode</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>Project_2DGameSDK/include/2DGameSDK/scene/entity/<a class="el" href="_transformable_entity_8h_source.html">TransformableEntity.h</a></li>
 <li>Project_2DGameSDK/src/scene/entity/TransformableEntity.cpp</li>

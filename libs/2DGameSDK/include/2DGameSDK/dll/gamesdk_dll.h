@@ -1,3 +1,13 @@
+/**
+ * @file gamesdk_dll.h
+ * @author Aleistar Markoczy (a.markoczy@gmail.com)
+ * @brief Holds all configurations of the DLL build for project 2DGameSDK
+ * @version 1.0
+ * @date 2019-06-11
+ * 
+ * @copyright Copyright (c) 2019
+ * 
+ */
 #ifndef __GAMESDK_DLL_H__
 #define __GAMESDK_DLL_H__
 

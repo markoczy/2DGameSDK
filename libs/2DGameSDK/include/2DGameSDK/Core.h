@@ -1,3 +1,13 @@
+/**
+ * @file Core.h
+ * @author Aleistar Markoczy (a.markoczy@gmail.com)
+ * @brief All headers of the Core Package
+ * @version 1.0
+ * @date 2019-06-12
+ * 
+ * @copyright Copyright (c) 2019
+ * 
+ */
 #ifndef __GAMESDK_CORE_H__
 #define __GAMESDK_CORE_H__
 

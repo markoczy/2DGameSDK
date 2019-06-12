@@ -1,3 +1,13 @@
+/**
+ * @file Event.h
+ * @author Aleistar Markoczy (a.markoczy@gmail.com)
+ * @brief All Headers of the Event Package
+ * @version 1.0
+ * @date 2019-06-12
+ * 
+ * @copyright Copyright (c) 2019
+ * 
+ */
 #ifndef __GAMESDK_EVENT_H__
 #define __GAMESDK_EVENT_H__
 

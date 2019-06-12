@@ -5,5 +5,5 @@ var searchData=
   ['gamestate',['GameState',['../structgame_1_1_game_state.html',1,'game']]],
   ['gameworld',['GameWorld',['../classgame_1_1_game_world.html',1,'game']]],
   ['gameworldfactory',['GameWorldFactory',['../classgame_1_1_game_world_factory.html',1,'game']]],
-  ['genericeventdata',['GenericEventData',['../struct_generic_event_data.html',1,'']]]
+  ['genericeventdata',['GenericEventData',['../structgame_1_1_generic_event_data.html',1,'game']]]
 ];

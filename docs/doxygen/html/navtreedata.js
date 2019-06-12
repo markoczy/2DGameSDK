@@ -24,6 +24,10 @@ for the JavaScript code in this file
 var NAVTREE =
 [
   [ "2DGameSDK", "index.html", [
+    [ "2DGameSDK Documentation", "index.html", [
+      [ "Introduction", "index.html#intro", null ],
+      [ "Example", "index.html#example", null ]
+    ] ],
     [ "Namespaces", "namespaces.html", [
       [ "Namespace List", "namespaces.html", "namespaces_dup" ],
       [ "Namespace Members", "namespacemembers.html", [
@@ -48,8 +52,8 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"_animated_transformable_entity_8h_source.html",
-"structgame_1_1_tilemap.html#a854aeb9e6097b789ef8c9ac8a0426c06"
+"_animated_transformable_entity_8h.html",
+"structgame_1_1_tile.html#ace94bd4c529da78665a816096a044545"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

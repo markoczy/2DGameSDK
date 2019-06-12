@@ -18,7 +18,7 @@
 namespace game {
 
   /**
-   * @brief 
+   * @brief Directed acyclic Graph that represents the Game Object hierarchy
    * 
    */
   class GAMESDK_DLL SceneGraph {
