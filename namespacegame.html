@@ -103,6 +103,7 @@ $(document).ready(function(){initNavTree('namespacegame.html','');});
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_animated_transformable_entity.html">AnimatedTransformableEntity</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classgame_1_1_entity.html" title="Defines a simple Game Object (no transformations)">Entity</a> that is transformable and that defines a set of animation states, where every state is represented by it's own texture. The current animation state can be changed at measure to render a different texture for the entity.  <a href="classgame_1_1_animated_transformable_entity.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_asset_manager.html">AssetManager</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Static class that Loads and Caches all Assets (images, sounds etc.) used for the 2DGameSDK.  <a href="classgame_1_1_asset_manager.html#details">More...</a><br /></td></tr>
@@ -134,6 +135,9 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_game_world_factory.html">GameWorldFactory</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Factory to create a <a class="el" href="classgame_1_1_game.html" title="The Game is the main Controller of the 2DGameSDK, it is used to execute the main Game Loop,...">Game</a> World.  <a href="classgame_1_1_game_world_factory.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgame_1_1_generic_event_data.html">GenericEventData</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Event Data Object that can contain Data of any type.  <a href="structgame_1_1_generic_event_data.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgame_1_1_material.html">Material</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains all data that defines a <a class="el" href="structgame_1_1_material.html" title="Contains all data that defines a Material in the Game World.">Material</a> in the <a class="el" href="classgame_1_1_game.html" title="The Game is the main Controller of the 2DGameSDK, it is used to execute the main Game Loop,...">Game</a> World.  <a href="structgame_1_1_material.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -159,11 +163,13 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic Template to load and cache any resource.  <a href="classgame_1_1_resource_cache.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_scene_graph.html">SceneGraph</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Directed acyclic Graph that represents the <a class="el" href="classgame_1_1_game.html" title="The Game is the main Controller of the 2DGameSDK, it is used to execute the main Game Loop,...">Game</a> Object hierarchy.  <a href="classgame_1_1_scene_graph.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_scene_graph_node.html">SceneGraphNode</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Single Node of the Scene Graph.  <a href="classgame_1_1_scene_graph_node.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_sprite_transformable_entity.html">SpriteTransformableEntity</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simple specialisation of the <a class="el" href="classgame_1_1_transformable_entity.html" title="Abstract class that defines an Entity that is Transformable and can be placed on the SceneGraph.">TransformableEntity</a> class. Does not do anything during <a class="el" href="classgame_1_1_sprite_transformable_entity.html#a4876aeda0604ce3d345f7027ab847e7a" title="Updates the Entity.">Tick()</a>.  <a href="classgame_1_1_sprite_transformable_entity.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_texture_cache.html">TextureCache</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads and Caches SFML Textures.  <a href="classgame_1_1_texture_cache.html#details">More...</a><br /></td></tr>
@@ -178,6 +184,7 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains all data that defines the visual representtion of a <a class="el" href="classgame_1_1_game.html" title="The Game is the main Controller of the 2DGameSDK, it is used to execute the main Game Loop,...">Game</a> World.  <a href="structgame_1_1_tilemap.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_transformable_entity.html">TransformableEntity</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Abstract class that defines an <a class="el" href="classgame_1_1_entity.html" title="Defines a simple Game Object (no transformations)">Entity</a> that is Transformable and can be placed on the <a class="el" href="classgame_1_1_scene_graph.html" title="Directed acyclic Graph that represents the Game Object hierarchy.">SceneGraph</a>.  <a href="classgame_1_1_transformable_entity.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>

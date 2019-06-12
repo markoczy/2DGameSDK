@@ -14,7 +14,7 @@ var hierarchy =
     [ "game::GameState", "structgame_1_1_game_state.html", null ],
     [ "game::GameWorld", "classgame_1_1_game_world.html", null ],
     [ "game::GameWorldFactory", "classgame_1_1_game_world_factory.html", null ],
-    [ "GenericEventData< TData >", "struct_generic_event_data.html", null ],
+    [ "game::GenericEventData< TData >", "structgame_1_1_generic_event_data.html", null ],
     [ "game::Material", "structgame_1_1_material.html", null ],
     [ "game::MaterialMap", "structgame_1_1_material_map.html", null ],
     [ "game::ObservableBase", "classgame_1_1_observable_base.html", [

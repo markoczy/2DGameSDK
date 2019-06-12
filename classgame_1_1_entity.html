@@ -106,9 +106,9 @@ Inheritance diagram for game::Entity:</div>
  <div class="center">
   <img src="classgame_1_1_entity.png" usemap="#game::Entity_map" alt=""/>
   <map id="game::Entity_map" name="game::Entity_map">
-<area href="classgame_1_1_transformable_entity.html" alt="game::TransformableEntity" shape="rect" coords="111,56,323,80"/>
-<area href="classgame_1_1_animated_transformable_entity.html" alt="game::AnimatedTransformableEntity" shape="rect" coords="0,112,212,136"/>
-<area href="classgame_1_1_sprite_transformable_entity.html" alt="game::SpriteTransformableEntity" shape="rect" coords="222,112,434,136"/>
+<area href="classgame_1_1_transformable_entity.html" title="Abstract class that defines an Entity that is Transformable and can be placed on the SceneGraph." alt="game::TransformableEntity" shape="rect" coords="111,56,323,80"/>
+<area href="classgame_1_1_animated_transformable_entity.html" title="Entity that is transformable and that defines a set of animation states, where every state is represe..." alt="game::AnimatedTransformableEntity" shape="rect" coords="0,112,212,136"/>
+<area href="classgame_1_1_sprite_transformable_entity.html" title="Simple specialisation of the TransformableEntity class. Does not do anything during Tick()." alt="game::SpriteTransformableEntity" shape="rect" coords="222,112,434,136"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -130,7 +130,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a867772bcbe42fa928eb238461707876d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the <a class="el" href="classgame_1_1_entity.html" title="Defines a simple Game Object (no transformations)">Entity</a>.  <a href="#a867772bcbe42fa928eb238461707876d">More...</a><br /></td></tr>
 <tr class="separator:a867772bcbe42fa928eb238461707876d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2352739f0c8abb0948a72338b11b1491"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_entity.html#a2352739f0c8abb0948a72338b11b1491">Render</a> (sf::RenderTarget *target, sf::RenderStates states=sf::RenderStates::Default)=0</td></tr>
-<tr class="memdesc:a2352739f0c8abb0948a72338b11b1491"><td class="mdescLeft">&#160;</td><td class="mdescRight">Renders the entity.  <a href="#a2352739f0c8abb0948a72338b11b1491">More...</a><br /></td></tr>
+<tr class="memdesc:a2352739f0c8abb0948a72338b11b1491"><td class="mdescLeft">&#160;</td><td class="mdescRight">Renders the <a class="el" href="classgame_1_1_entity.html" title="Defines a simple Game Object (no transformations)">Entity</a>.  <a href="#a2352739f0c8abb0948a72338b11b1491">More...</a><br /></td></tr>
 <tr class="separator:a2352739f0c8abb0948a72338b11b1491"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
@@ -144,7 +144,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>mId</b></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Defines a simple <a class="el" href="classgame_1_1_game.html" title="The Game is the main Controller of the 2DGameSDK, it is used to execute the main Game Loop,...">Game</a> Object (no transformations) </p>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classgame_1_1_transformable_entity.html">TransformableEntity</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classgame_1_1_transformable_entity.html" title="Abstract class that defines an Entity that is Transformable and can be placed on the SceneGraph.">TransformableEntity</a> </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ae18cd4d004ed8c414001401743b1e0dc"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae18cd4d004ed8c414001401743b1e0dc">&#9670;&nbsp;</a></span>Entity()</h2>
@@ -266,7 +266,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>mId</b></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Renders the entity. </p>
+<p>Renders the <a class="el" href="classgame_1_1_entity.html" title="Defines a simple Game Object (no transformations)">Entity</a>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">target</td><td>The screen or texture to render on </td></tr>
@@ -304,7 +304,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>mId</b></td></tr>
 
 <p>Updates the <a class="el" href="classgame_1_1_entity.html" title="Defines a simple Game Object (no transformations)">Entity</a>. </p>
 
-<p>Implemented in <a class="el" href="classgame_1_1_sprite_transformable_entity.html#a4876aeda0604ce3d345f7027ab847e7a">game::SpriteTransformableEntity</a>, and <a class="el" href="classgame_1_1_animated_transformable_entity.html#ae039944b3bce50418c13d46c122d02ea">game::AnimatedTransformableEntity</a>.</p>
+<p>Implemented in <a class="el" href="classgame_1_1_animated_transformable_entity.html#ae039944b3bce50418c13d46c122d02ea">game::AnimatedTransformableEntity</a>, and <a class="el" href="classgame_1_1_sprite_transformable_entity.html#a4876aeda0604ce3d345f7027ab847e7a">game::SpriteTransformableEntity</a>.</p>
 
 </div>
 </div>

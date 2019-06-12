@@ -11,6 +11,7 @@ var namespacegame =
     [ "GameState", "structgame_1_1_game_state.html", "structgame_1_1_game_state" ],
     [ "GameWorld", "classgame_1_1_game_world.html", "classgame_1_1_game_world" ],
     [ "GameWorldFactory", "classgame_1_1_game_world_factory.html", null ],
+    [ "GenericEventData", "structgame_1_1_generic_event_data.html", "structgame_1_1_generic_event_data" ],
     [ "Material", "structgame_1_1_material.html", "structgame_1_1_material" ],
     [ "MaterialMap", "structgame_1_1_material_map.html", "structgame_1_1_material_map" ],
     [ "MethodObserver", "classgame_1_1_method_observer.html", "classgame_1_1_method_observer" ],
