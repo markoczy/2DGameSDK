@@ -38,6 +38,24 @@
             ],
             "problemMatcher": [],
             "group": "none"
+        },
+        {
+            "label": "push-docs",
+            "type": "shell",
+            "command": "git",
+            "args": [
+                "subtree",
+                "push",
+                "--prefix",
+                "docs/doxygen/html",
+                "origin",
+                "gh-pages"
+            ],
+            "dependsOn": [
+                "build-docs",
+            ],
+            "problemMatcher": [],
+            "group": "none"
         }
     ]
 }
