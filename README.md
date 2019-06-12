@@ -3,4 +3,4 @@
 ## Documentation
 
 See Full Doxygen generated Documentation at: 
-[https://markoczy.github.io/2DGameSDK/]()
+https://markoczy.github.io/2DGameSDK/
