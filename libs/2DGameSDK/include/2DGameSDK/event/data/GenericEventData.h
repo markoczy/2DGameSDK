@@ -11,18 +11,17 @@
 #ifndef __GENERIC_EVENT_DATA_H__
 #define __GENERIC_EVENT_DATA_H__
 
-/**
- * @brief Event Data Object that can contain Data of any type
- * 
- * @tparam TData The Type of Data
- */
 namespace game {
 
+  /**
+   * @brief Event Data Object that can contain Data of any type
+   * 
+   * @tparam TData The Type of Data
+   */
   template <class TData>
   struct GenericEventData {
     TData Data;
   };
-
 } // namespace game
 
 #endif

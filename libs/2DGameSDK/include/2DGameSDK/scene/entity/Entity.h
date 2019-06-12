@@ -59,7 +59,7 @@ namespace game {
     virtual void Tick() = 0;
 
     /**
-     * @brief Renders the entity
+     * @brief Renders the Entity
      * 
      * @param target The screen or texture to render on
      * @param states The initial Render States (transformation etc.)
