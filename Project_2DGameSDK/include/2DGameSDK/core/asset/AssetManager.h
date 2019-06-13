@@ -24,6 +24,12 @@ namespace game {
   class GAMESDK_DLL AssetManager {
   public:
     /**
+     * @brief Destroys the Asset Manager
+     * 
+     */
+    ~AssetManager();
+
+    /**
      * @brief Returns an SFML texture by it's identifier
      * 
      * @param identifier the unique identifier (i.e. path to the file)

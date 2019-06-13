@@ -19,19 +19,23 @@
 namespace game {
 
   /**
-   * @brief Generic Template to load and cache any resource
+   * @brief Generic Template to load and cache any resource. As the resources
+   *        cannot be cleared in the destructor, it is best practice to Clear()
+   *        the cache before deleting it.
    * 
    * @tparam TResource The resource Type
    */
   template <class TResource>
   class ResourceCache {
   public:
-    virtual ~ResourceCache() {
-      Clear();
-    }
+    /**
+     * @brief Destroys the Resource Cache
+     * 
+     */
+    ~ResourceCache() {}
 
     /**
-     * @brief Retreive a resource by it's identifier. If the resource was
+     * @brief Retreives a resource by it's identifier. If the resource was
      *        referenced before, the function returns the cached version. If
      *        it was not referenced before it will be loaded first.
      * 
@@ -39,7 +43,7 @@ namespace game {
      * 
      * @return The generic Resource
      */
-    virtual TResource Get(const std::string& identifier) {
+    TResource Get(const std::string& identifier) {
       auto found = mResources.find(identifier);
       if(found != mResources.end()) {
         return found->second;
@@ -54,7 +58,7 @@ namespace game {
      *        leads to undefined behaviour.
      * 
      */
-    virtual void Clear() {
+    void Clear() {
       for(auto const& entry : mResources) {
         destroyResource(entry.second);
       }
