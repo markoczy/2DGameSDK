@@ -6,6 +6,7 @@
                 "${workspaceFolder}/Project_2DGameSDK/src/**",
                 "${workspaceFolder}/Project_2DGameSDK/include/**",
                 "${workspaceFolder}/Project_Prototype/src/**",
+                "${workspaceFolder}/Project_Prototype/include/**",
                 "${workspaceFolder}/libs/**"
             ],
             "defines": [

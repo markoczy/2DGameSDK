@@ -22,6 +22,7 @@ include_directories(
     ${SFML_INCLUDE_DIR}
     ${JSON_INCLUDE_DIR}
     ${SDK_INCLUDE_DIR}
+    "include"
 )
 
 set(LIBS_DEBUG)
@@ -34,10 +35,8 @@ foreach(lib; ${SFML_LIBRARIES} ${SDK_LIBRARIES})
     list(APPEND LIBS_RELEASE optimized ${lib})
 endforeach()
 
-
 add_executable(${PROJECT_NAME} ${SRCS} ${HDRS})
 set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
-# add_dependencies (${PROJECT_NAME} 2DGameSDK)
 
 if ("${CMAKE_BUILD_TYPE}" MATCHES Debug)
     target_link_libraries(${PROJECT_NAME} ${LIBS_DEBUG})

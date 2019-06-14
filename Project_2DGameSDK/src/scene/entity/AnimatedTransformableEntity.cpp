@@ -24,6 +24,7 @@ namespace game {
     auto animState = mAnimStates.find(state);
     if(animState != mAnimStates.end()) {
       mCurState = sf::Sprite(*animState->second);
+      return;
     }
 
     std::stringstream ss;
