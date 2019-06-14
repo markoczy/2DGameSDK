@@ -88,7 +88,6 @@ $(document).ready(function(){initNavTree('classgame_1_1_texture_cache.html','');
 
 <div class="header">
   <div class="summary">
-<a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="classgame_1_1_texture_cache-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -110,16 +109,6 @@ Inheritance diagram for game::TextureCache:</div>
   </map>
 </div></div>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
-Public Member Functions</h2></td></tr>
-<tr class="memitem:a6068981138d9607ce0eea36684225ebe"><td class="memItemLeft" align="right" valign="top">virtual sf::Texture *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_texture_cache.html#a6068981138d9607ce0eea36684225ebe">Get</a> (const std::string &amp;identifier)</td></tr>
-<tr class="memdesc:a6068981138d9607ce0eea36684225ebe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns an SFML texture by it's identifier.  <a href="#a6068981138d9607ce0eea36684225ebe">More...</a><br /></td></tr>
-<tr class="separator:a6068981138d9607ce0eea36684225ebe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3dcb3fbdb837126cf325a7ef8ff96fd2"><td class="memItemLeft" align="right" valign="top"><a id="a3dcb3fbdb837126cf325a7ef8ff96fd2"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_texture_cache.html#a3dcb3fbdb837126cf325a7ef8ff96fd2">Clear</a> ()</td></tr>
-<tr class="memdesc:a3dcb3fbdb837126cf325a7ef8ff96fd2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears all cached SFML Textures. <br /></td></tr>
-<tr class="separator:a3dcb3fbdb837126cf325a7ef8ff96fd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
 <tr class="memitem:a3b263a400f659145b2eaa0b1a2a5c44c"><td class="memItemLeft" align="right" valign="top">sf::Texture *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_texture_cache.html#a3b263a400f659145b2eaa0b1a2a5c44c">createResource</a> (const std::string &amp;identifier)</td></tr>
@@ -131,6 +120,16 @@ Protected Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pub_methods_classgame_1_1_resource_cache"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classgame_1_1_resource_cache')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classgame_1_1_resource_cache.html">game::ResourceCache&lt; sf::Texture * &gt;</a></td></tr>
+<tr class="memitem:a4b8c9a43447fe44a80a5366c4ce1af1a inherit pub_methods_classgame_1_1_resource_cache"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_resource_cache.html#a4b8c9a43447fe44a80a5366c4ce1af1a">~ResourceCache</a> ()</td></tr>
+<tr class="memdesc:a4b8c9a43447fe44a80a5366c4ce1af1a inherit pub_methods_classgame_1_1_resource_cache"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys the Resource Cache.  <a href="classgame_1_1_resource_cache.html#a4b8c9a43447fe44a80a5366c4ce1af1a">More...</a><br /></td></tr>
+<tr class="separator:a4b8c9a43447fe44a80a5366c4ce1af1a inherit pub_methods_classgame_1_1_resource_cache"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adebb2060875d06ce5a8d0811063b17ef inherit pub_methods_classgame_1_1_resource_cache"><td class="memItemLeft" align="right" valign="top">sf::Texture *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_resource_cache.html#adebb2060875d06ce5a8d0811063b17ef">Get</a> (const std::string &amp;identifier)</td></tr>
+<tr class="memdesc:adebb2060875d06ce5a8d0811063b17ef inherit pub_methods_classgame_1_1_resource_cache"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retreives a resource by it's identifier. If the resource was referenced before, the function returns the cached version. If it was not referenced before it will be loaded first.  <a href="classgame_1_1_resource_cache.html#adebb2060875d06ce5a8d0811063b17ef">More...</a><br /></td></tr>
+<tr class="separator:adebb2060875d06ce5a8d0811063b17ef inherit pub_methods_classgame_1_1_resource_cache"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa69492e0ae8e11f2cc45a9372dea9a6d inherit pub_methods_classgame_1_1_resource_cache"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_resource_cache.html#aa69492e0ae8e11f2cc45a9372dea9a6d">Clear</a> ()</td></tr>
+<tr class="memdesc:aa69492e0ae8e11f2cc45a9372dea9a6d inherit pub_methods_classgame_1_1_resource_cache"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears all resources, referencing any resource after this call leads to undefined behaviour.  <a href="classgame_1_1_resource_cache.html#aa69492e0ae8e11f2cc45a9372dea9a6d">More...</a><br /></td></tr>
+<tr class="separator:aa69492e0ae8e11f2cc45a9372dea9a6d inherit pub_methods_classgame_1_1_resource_cache"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_classgame_1_1_resource_cache"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classgame_1_1_resource_cache')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classgame_1_1_resource_cache.html">game::ResourceCache&lt; sf::Texture * &gt;</a></td></tr>
 <tr class="memitem:a4cea34d5bef9c5ba3cfcd0a6483c56ee inherit pro_attribs_classgame_1_1_resource_cache"><td class="memItemLeft" align="right" valign="top"><a id="a4cea34d5bef9c5ba3cfcd0a6483c56ee"></a>
 std::map&lt; std::string, sf::Texture * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>mResources</b></td></tr>
@@ -209,43 +208,6 @@ std::map&lt; std::string, sf::Texture * &gt;&#160;</td><td class="memItemRight" 
 </dl>
 
 <p>Implements <a class="el" href="classgame_1_1_resource_cache.html#a9b84b8dc85fc2ec125213e2189ec1f2f">game::ResourceCache&lt; sf::Texture * &gt;</a>.</p>
-
-</div>
-</div>
-<a id="a6068981138d9607ce0eea36684225ebe"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6068981138d9607ce0eea36684225ebe">&#9670;&nbsp;</a></span>Get()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">sf::Texture * game::TextureCache::Get </td>
-          <td>(</td>
-          <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>identifier</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Returns an SFML texture by it's identifier. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">identifier</td><td>the unique identifier (i.e. path to the file)</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>The loaded or previously cached SFML Texture </dd></dl>
-
-<p>Reimplemented from <a class="el" href="classgame_1_1_resource_cache.html#a4809b4c07564b9bc86bcb7699234722e">game::ResourceCache&lt; sf::Texture * &gt;</a>.</p>
 
 </div>
 </div>

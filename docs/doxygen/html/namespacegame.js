@@ -1,7 +1,7 @@
 var namespacegame =
 [
     [ "AnimatedTransformableEntity", "classgame_1_1_animated_transformable_entity.html", "classgame_1_1_animated_transformable_entity" ],
-    [ "AssetManager", "classgame_1_1_asset_manager.html", null ],
+    [ "AssetManager", "classgame_1_1_asset_manager.html", "classgame_1_1_asset_manager" ],
     [ "EmptyEventData", "classgame_1_1_empty_event_data.html", null ],
     [ "Entity", "classgame_1_1_entity.html", "classgame_1_1_entity" ],
     [ "EventController", "classgame_1_1_event_controller.html", "classgame_1_1_event_controller" ],
