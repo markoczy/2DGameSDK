@@ -13,7 +13,13 @@ file(GLOB_RECURSE SRCS
     ./src/*.cpp
 )
 source_group("src" FILES ${SRCS})
-add_definitions(-DDLLBUILD_GAMESDK -DGAMESDK_LOG_E)
+
+if ("${CMAKE_BUILD_TYPE}" MATCHES Debug)
+    add_definitions(-DDLLBUILD_GAMESDK -DGAMESDK_LOG_D)
+else ()
+    add_definitions(-DDLLBUILD_GAMESDK -DGAMESDK_LOG_E)
+endif ("${CMAKE_BUILD_TYPE}" MATCHES Debug)
+
 
 # find headers
 file(GLOB_RECURSE HDRS 

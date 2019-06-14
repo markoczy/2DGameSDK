@@ -2,7 +2,35 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "cmake-mingw32-make",
+            "label": "cmake-mingw32-make-release",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                ".",
+                "-G",
+                "MinGW Makefiles",
+                "-DCMAKE_BUILD_TYPE=Release",
+            ],
+            "group": "none"
+        },
+        {
+            "label": "build-mingw32-make-release",
+            "type": "shell",
+            "command": "mingw32-make",
+            "args": [],
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "dependsOn": [
+                "cmake-mingw32-make-release",
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "cmake-mingw32-make-debug",
             "type": "shell",
             "command": "cmake",
             "args": [
@@ -14,7 +42,7 @@
             "group": "none"
         },
         {
-            "label": "make-mingw32-make",
+            "label": "build-mingw32-make-debug",
             "type": "shell",
             "command": "mingw32-make",
             "args": [],
@@ -22,12 +50,9 @@
                 "$gcc"
             ],
             "dependsOn": [
-                "cmake-mingw32-make",
+                "cmake-mingw32-make-debug",
             ],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            }
+            "group": "build"
         },
         {
             "label": "build-docs",
