@@ -11,6 +11,7 @@ namespace game {
 
   void TextureCache::destroyResource(sf::Texture* resource) {
     delete resource;
+    resource = nullptr;
   }
 
 } // namespace game

@@ -11,7 +11,12 @@ namespace game {
     }
   }
 
-  SceneGraphNode::~SceneGraphNode() {}
+  SceneGraphNode::~SceneGraphNode() {
+    for(auto iChild : mChildren) {
+      helpers::safeDelete(iChild);
+    }
+    helpers::safeDelete(mEntity);
+  }
 
   SceneGraphNode* SceneGraphNode::AddChild(TransformableEntity* entity) {
     auto node = new SceneGraphNode(this, entity);

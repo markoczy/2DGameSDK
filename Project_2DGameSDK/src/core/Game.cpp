@@ -17,10 +17,9 @@ namespace game {
   }
 
   Game::~Game() {
-    if(mWindow != nullptr) {
-      delete mWindow;
-      mWindow = nullptr;
-    }
+    helpers::safeDelete(mWindow);
+    helpers::safeDelete(mState.Scene);
+    helpers::safeDelete(mState.World);
   }
 
   // ###########################################################################

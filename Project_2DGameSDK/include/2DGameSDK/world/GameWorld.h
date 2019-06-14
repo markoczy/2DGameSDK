@@ -11,6 +11,7 @@
 #ifndef __GAME_WORLD_H__
 #define __GAME_WORLD_H__
 
+#include <2DGameSDK/common/Helpers.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
 #include <2DGameSDK/world/material/MaterialMap.h>
 #include <2DGameSDK/world/tilemap/Tilemap.h>
@@ -52,8 +53,8 @@ namespace game {
 
   private:
     int mWidth, mHeight;
-    Tilemap* mTilemap;
-    MaterialMap* mMaterialMap;
+    Tilemap* mTilemap = nullptr;
+    MaterialMap* mMaterialMap = nullptr;
     sf::Texture* mTexture = nullptr;
 
     void loadTilemap();

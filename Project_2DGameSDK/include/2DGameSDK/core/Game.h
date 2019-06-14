@@ -11,6 +11,7 @@
 #ifndef __GAME_H__
 #define __GAME_H__
 
+#include <2DGameSDK/common/Helpers.h>
 #include <2DGameSDK/core/GameOptions.h>
 #include <2DGameSDK/core/GameState.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>

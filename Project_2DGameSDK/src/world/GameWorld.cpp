@@ -8,8 +8,18 @@ namespace game {
   }
 
   GameWorld::~GameWorld() {
-    // delete mTilemap;
-    // delete mMaterialMap;
+    // Cleanup Tilemap
+    for(auto layer : mTilemap->Layers) {
+      for(auto row : layer->Tiles) {
+        for(auto tile : row) {
+          helpers::safeDelete(tile);
+        }
+      }
+      helpers::safeDelete(layer);
+    }
+
+    helpers::safeDelete(mTilemap);
+    helpers::safeDelete(mMaterialMap);
   }
 
   void GameWorld::Tick() {

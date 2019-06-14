@@ -22,7 +22,15 @@ namespace game {
    * 
    */
   struct GameState {
+    /**
+     * @brief The SceneGraph with all the Entities
+     * 
+     */
     SceneGraph* Scene;
+    /**
+     * @brief The GameWorld with Tilemap and MaterialMap
+     * 
+     */
     GameWorld* World;
   };
 

@@ -7,7 +7,7 @@ namespace game {
 
   EventController::~EventController() {
     for(auto it = mEvents.begin(); it != mEvents.end(); ++it) {
-      delete it->second;
+      helpers::safeDelete(it->second);
     }
     mEvents.clear();
   }

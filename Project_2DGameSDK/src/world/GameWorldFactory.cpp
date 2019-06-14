@@ -82,8 +82,6 @@ namespace game {
         }
         curLayer++;
         layersOut.push_back(layerOut);
-        // layerOut.tiles = tilesOut;
-        // mLayers.push_back(layerOut);
       }
       sort(layersOut.begin(), layersOut.end(), compareLayers);
       tilemapOut->Layers = layersOut;

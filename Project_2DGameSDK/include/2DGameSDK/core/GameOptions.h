@@ -23,9 +23,25 @@ namespace game {
    * 
    */
   struct GameOptions {
+    /**
+     * @brief Title of the Game, affects Window Title
+     * 
+     */
     std::string Title;
+    /**
+     * @brief Screen Dimensions
+     * 
+     */
     sf::Vector2i ScreenDim;
+    /**
+     * @brief Zoom at start
+     * 
+     */
     float InitialZoom;
+    /**
+     * @brief Framerate in 1/s
+     * 
+     */
     int FramesPerSecond;
   };
 
