@@ -21,8 +21,14 @@ namespace game {
   }
 
   void AnimatedTransformableEntity::SetAnimState(int state) {
-    // TODO error state not found
-    mCurState = sf::Sprite(*mAnimStates[state]);
+    auto animState = mAnimStates.find(state);
+    if(animState != mAnimStates.end()) {
+      mCurState = sf::Sprite(*animState->second);
+    }
+
+    std::stringstream ss;
+    ss << "Animation State " << state << " not found for Entity " << mId;
+    throw std::runtime_error(ss.str());
   }
 
 } // namespace game

@@ -10,8 +10,7 @@ namespace game {
     sf::Transform GetAccumulatedTransform();
   };
 
-  SpriteTransformableEntity::SpriteTransformableEntity(int type, sf::Texture* texture) : TransformableEntity(type) {
-    mSprite = Sprite(*texture);
+  SpriteTransformableEntity::SpriteTransformableEntity(int type, sf::Texture* texture) : TransformableEntity(type), mSprite(*texture) {
   }
 
   SpriteTransformableEntity::~SpriteTransformableEntity() {
@@ -20,7 +19,7 @@ namespace game {
   void SpriteTransformableEntity::Tick() {}
 
   void SpriteTransformableEntity::Render(sf::RenderTarget* target, sf::RenderStates states) {
-    // auto states = RenderStates(mGraphNode->GetAccumulatedTransform());
+    //* Note: The render states contain the accumulated transformation
     target->draw(mSprite, states);
   }
 

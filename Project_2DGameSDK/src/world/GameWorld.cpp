@@ -30,7 +30,7 @@ namespace game {
     int mHeight = mTilemap->TileHeight * mTilemap->TilesHigh;
     mTexture = new Texture();
     if(!mTexture->create(mWidth, mHeight)) {
-      LOGE("Texture creation failed");
+      throw std::runtime_error("Texture creation failed at load tilemap");
     }
 
     for(auto layer : mTilemap->Layers) {

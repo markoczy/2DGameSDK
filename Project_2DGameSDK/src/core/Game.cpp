@@ -118,22 +118,30 @@ namespace game {
   // ###########################################################################
 
   void Game::tick() {
-    mEventCtrl.Tick();
-    mState.World->Tick();
-    mState.Scene->Tick();
+    try {
+      mEventCtrl.Tick();
+      mState.World->Tick();
+      mState.Scene->Tick();
+    } catch(std::exception& e) {
+      LOGE("Error during tick: " << e.what());
+    }
   }
 
   void Game::render() {
-    mWindow->clear(sf::Color(80, 80, 80));
-    dbgClock.restart();
-    mState.World->Render(mWindow);
-    LOGD("Render World in: " << dbgClock.getElapsedTime().asMilliseconds());
-    dbgClock.restart();
-    mState.Scene->Render(mWindow);
-    LOGD("Render Scene in: " << dbgClock.getElapsedTime().asMilliseconds());
-    dbgClock.restart();
-    mWindow->display();
-    LOGD("Display in: " << dbgClock.getElapsedTime().asMilliseconds());
+    try {
+      mWindow->clear(sf::Color(80, 80, 80));
+      dbgClock.restart();
+      mState.World->Render(mWindow);
+      LOGD("Render World in: " << dbgClock.getElapsedTime().asMilliseconds());
+      dbgClock.restart();
+      mState.Scene->Render(mWindow);
+      LOGD("Render Scene in: " << dbgClock.getElapsedTime().asMilliseconds());
+      dbgClock.restart();
+      mWindow->display();
+      LOGD("Display in: " << dbgClock.getElapsedTime().asMilliseconds());
+    } catch(std::exception& e) {
+      LOGE("Error during render: " << e.what());
+    }
   }
 
 } // namespace game

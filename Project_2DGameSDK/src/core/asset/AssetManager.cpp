@@ -12,7 +12,7 @@ namespace game {
     try {
       return _textures.Get(identifier);
     } catch(std::exception& e) {
-      throw std::runtime_error("Texture " + identifier + " could not be created: " + e.what());
+      throw std::runtime_error("Failed to load or create texture " + identifier + ": " + e.what());
     }
   }
 

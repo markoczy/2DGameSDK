@@ -13,6 +13,7 @@
 
 #include <2DGameSDK/dll/gamesdk_dll.h>
 #include <2DGameSDK/scene/entity/TransformableEntity.h>
+#include <sstream>
 
 namespace game {
 
