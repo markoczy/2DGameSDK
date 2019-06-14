@@ -1,7 +1,7 @@
 var searchData=
 [
   ['callback',['Callback',['../classgame_1_1_function_observer.html#adbe4934ba8fe2e900e035706af339c39',1,'game::FunctionObserver::Callback()'],['../classgame_1_1_method_observer.html#a0acc18d0edb2acbc7415f887fa42804e',1,'game::MethodObserver::Callback()'],['../classgame_1_1_observer.html#af54f3f3029df1d526074ed93b418cc88',1,'game::Observer::Callback()']]],
-  ['clear',['Clear',['../classgame_1_1_resource_cache.html#ad415c853355d2523fdbf13fdc969acb3',1,'game::ResourceCache::Clear()'],['../classgame_1_1_texture_cache.html#a3dcb3fbdb837126cf325a7ef8ff96fd2',1,'game::TextureCache::Clear()']]],
+  ['clear',['Clear',['../classgame_1_1_resource_cache.html#aa69492e0ae8e11f2cc45a9372dea9a6d',1,'game::ResourceCache']]],
   ['common_2eh',['Common.h',['../_common_8h.html',1,'']]],
   ['constants_2eh',['Constants.h',['../_constants_8h.html',1,'']]],
   ['core_2eh',['Core.h',['../_core_8h.html',1,'']]],

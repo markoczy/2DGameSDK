@@ -2,7 +2,7 @@ var searchData=
 [
   ['game',['Game',['../classgame_1_1_game.html#a74cd9697144c5bb5ccf1d2cb71d56e41',1,'game::Game::Game()'],['../classgame_1_1_game.html#a0fef75649eb48727f2c22ece3ffa33ba',1,'game::Game::Game(GameOptions options, SceneGraph *scene, GameWorld *world)']]],
   ['gameworld',['GameWorld',['../classgame_1_1_game_world.html#a2d8246de861b0c78b7c45b0d8705224d',1,'game::GameWorld']]],
-  ['get',['Get',['../classgame_1_1_resource_cache.html#a4809b4c07564b9bc86bcb7699234722e',1,'game::ResourceCache::Get()'],['../classgame_1_1_texture_cache.html#a6068981138d9607ce0eea36684225ebe',1,'game::TextureCache::Get()']]],
+  ['get',['Get',['../classgame_1_1_resource_cache.html#adebb2060875d06ce5a8d0811063b17ef',1,'game::ResourceCache']]],
   ['getaccumulatedtransform',['GetAccumulatedTransform',['../classgame_1_1_scene_graph_node.html#a17628d590a0d4667258ba03ed57658d7',1,'game::SceneGraphNode']]],
   ['getcurtransform',['GetCurTransform',['../classgame_1_1_scene_graph_node.html#a49bbc665936b56ef374b1d14036f99d3',1,'game::SceneGraphNode']]],
   ['getevent',['GetEvent',['../classgame_1_1_game.html#a059ebdbf6bfc959abc136bd1b734bf3f',1,'game::Game::GetEvent()'],['../classgame_1_1_event_controller.html#a9f5836b96048dceedfa7621230bff62d',1,'game::EventController::GetEvent()']]],

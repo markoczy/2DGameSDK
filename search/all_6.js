@@ -14,7 +14,7 @@ var searchData=
   ['gameworldfactory_2eh',['GameWorldFactory.h',['../_game_world_factory_8h.html',1,'']]],
   ['genericeventdata',['GenericEventData',['../structgame_1_1_generic_event_data.html',1,'game']]],
   ['genericeventdata_2eh',['GenericEventData.h',['../_generic_event_data_8h.html',1,'']]],
-  ['get',['Get',['../classgame_1_1_resource_cache.html#a4809b4c07564b9bc86bcb7699234722e',1,'game::ResourceCache::Get()'],['../classgame_1_1_texture_cache.html#a6068981138d9607ce0eea36684225ebe',1,'game::TextureCache::Get()']]],
+  ['get',['Get',['../classgame_1_1_resource_cache.html#adebb2060875d06ce5a8d0811063b17ef',1,'game::ResourceCache']]],
   ['getaccumulatedtransform',['GetAccumulatedTransform',['../classgame_1_1_scene_graph_node.html#a17628d590a0d4667258ba03ed57658d7',1,'game::SceneGraphNode']]],
   ['getcurtransform',['GetCurTransform',['../classgame_1_1_scene_graph_node.html#a49bbc665936b56ef374b1d14036f99d3',1,'game::SceneGraphNode']]],
   ['getevent',['GetEvent',['../classgame_1_1_game.html#a059ebdbf6bfc959abc136bd1b734bf3f',1,'game::Game::GetEvent()'],['../classgame_1_1_event_controller.html#a9f5836b96048dceedfa7621230bff62d',1,'game::EventController::GetEvent()']]],

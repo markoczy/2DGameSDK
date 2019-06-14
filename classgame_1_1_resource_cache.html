@@ -97,19 +97,22 @@ $(document).ready(function(){initNavTree('classgame_1_1_resource_cache.html','')
 </div><!--header-->
 <div class="contents">
 
-<p>Generic Template to load and cache any resource.  
+<p>Generic Template to load and cache any resource. As the resources cannot be cleared in the destructor, it is best practice to <a class="el" href="classgame_1_1_resource_cache.html#aa69492e0ae8e11f2cc45a9372dea9a6d" title="Clears all resources, referencing any resource after this call leads to undefined behaviour.">Clear()</a> the cache before deleting it.  
  <a href="classgame_1_1_resource_cache.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_resource_cache_8h_source.html">ResourceCache.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a4809b4c07564b9bc86bcb7699234722e"><td class="memItemLeft" align="right" valign="top">virtual TResource&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_resource_cache.html#a4809b4c07564b9bc86bcb7699234722e">Get</a> (const std::string &amp;identifier)</td></tr>
-<tr class="memdesc:a4809b4c07564b9bc86bcb7699234722e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retreive a resource by it's identifier. If the resource was referenced before, the function returns the cached version. If it was not referenced before it will be loaded first.  <a href="#a4809b4c07564b9bc86bcb7699234722e">More...</a><br /></td></tr>
-<tr class="separator:a4809b4c07564b9bc86bcb7699234722e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad415c853355d2523fdbf13fdc969acb3"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_resource_cache.html#ad415c853355d2523fdbf13fdc969acb3">Clear</a> ()</td></tr>
-<tr class="memdesc:ad415c853355d2523fdbf13fdc969acb3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears all resources, referencing any resource after this call leads to undefined behaviour.  <a href="#ad415c853355d2523fdbf13fdc969acb3">More...</a><br /></td></tr>
-<tr class="separator:ad415c853355d2523fdbf13fdc969acb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b8c9a43447fe44a80a5366c4ce1af1a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_resource_cache.html#a4b8c9a43447fe44a80a5366c4ce1af1a">~ResourceCache</a> ()</td></tr>
+<tr class="memdesc:a4b8c9a43447fe44a80a5366c4ce1af1a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys the Resource Cache.  <a href="#a4b8c9a43447fe44a80a5366c4ce1af1a">More...</a><br /></td></tr>
+<tr class="separator:a4b8c9a43447fe44a80a5366c4ce1af1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adebb2060875d06ce5a8d0811063b17ef"><td class="memItemLeft" align="right" valign="top">TResource&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_resource_cache.html#adebb2060875d06ce5a8d0811063b17ef">Get</a> (const std::string &amp;identifier)</td></tr>
+<tr class="memdesc:adebb2060875d06ce5a8d0811063b17ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retreives a resource by it's identifier. If the resource was referenced before, the function returns the cached version. If it was not referenced before it will be loaded first.  <a href="#adebb2060875d06ce5a8d0811063b17ef">More...</a><br /></td></tr>
+<tr class="separator:adebb2060875d06ce5a8d0811063b17ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa69492e0ae8e11f2cc45a9372dea9a6d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_resource_cache.html#aa69492e0ae8e11f2cc45a9372dea9a6d">Clear</a> ()</td></tr>
+<tr class="memdesc:aa69492e0ae8e11f2cc45a9372dea9a6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears all resources, referencing any resource after this call leads to undefined behaviour.  <a href="#aa69492e0ae8e11f2cc45a9372dea9a6d">More...</a><br /></td></tr>
+<tr class="separator:aa69492e0ae8e11f2cc45a9372dea9a6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -130,16 +133,16 @@ std::map&lt; std::string, TResource &gt;&#160;</td><td class="memItemRight" vali
 <div class="textblock"><h3>template&lt;class TResource&gt;<br />
 class game::ResourceCache&lt; TResource &gt;</h3>
 
-<p>Generic Template to load and cache any resource. </p>
+<p>Generic Template to load and cache any resource. As the resources cannot be cleared in the destructor, it is best practice to <a class="el" href="classgame_1_1_resource_cache.html#aa69492e0ae8e11f2cc45a9372dea9a6d" title="Clears all resources, referencing any resource after this call leads to undefined behaviour.">Clear()</a> the cache before deleting it. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">TResource</td><td>The resource Type </td></tr>
   </table>
   </dd>
 </dl>
-</div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="ad415c853355d2523fdbf13fdc969acb3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad415c853355d2523fdbf13fdc969acb3">&#9670;&nbsp;</a></span>Clear()</h2>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a4b8c9a43447fe44a80a5366c4ce1af1a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4b8c9a43447fe44a80a5366c4ce1af1a">&#9670;&nbsp;</a></span>~ResourceCache()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -150,7 +153,7 @@ template&lt;class TResource&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void <a class="el" href="classgame_1_1_resource_cache.html">game::ResourceCache</a>&lt; TResource &gt;::Clear </td>
+          <td class="memname"><a class="el" href="classgame_1_1_resource_cache.html">game::ResourceCache</a>&lt; TResource &gt;::~<a class="el" href="classgame_1_1_resource_cache.html">ResourceCache</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -158,14 +161,42 @@ template&lt;class TResource&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destroys the Resource Cache. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="aa69492e0ae8e11f2cc45a9372dea9a6d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa69492e0ae8e11f2cc45a9372dea9a6d">&#9670;&nbsp;</a></span>Clear()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class TResource&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classgame_1_1_resource_cache.html">game::ResourceCache</a>&lt; TResource &gt;::Clear </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Clears all resources, referencing any resource after this call leads to undefined behaviour. </p>
-
-<p>Reimplemented in <a class="el" href="classgame_1_1_texture_cache.html#a3dcb3fbdb837126cf325a7ef8ff96fd2">game::TextureCache</a>.</p>
 
 </div>
 </div>
@@ -246,8 +277,8 @@ template&lt;class TResource&gt; </div>
 
 </div>
 </div>
-<a id="a4809b4c07564b9bc86bcb7699234722e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4809b4c07564b9bc86bcb7699234722e">&#9670;&nbsp;</a></span>Get()</h2>
+<a id="adebb2060875d06ce5a8d0811063b17ef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adebb2060875d06ce5a8d0811063b17ef">&#9670;&nbsp;</a></span>Get()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -258,7 +289,7 @@ template&lt;class TResource&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual TResource <a class="el" href="classgame_1_1_resource_cache.html">game::ResourceCache</a>&lt; TResource &gt;::Get </td>
+          <td class="memname">TResource <a class="el" href="classgame_1_1_resource_cache.html">game::ResourceCache</a>&lt; TResource &gt;::Get </td>
           <td>(</td>
           <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>identifier</em></td><td>)</td>
@@ -267,12 +298,12 @@ template&lt;class TResource&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Retreive a resource by it's identifier. If the resource was referenced before, the function returns the cached version. If it was not referenced before it will be loaded first. </p>
+<p>Retreives a resource by it's identifier. If the resource was referenced before, the function returns the cached version. If it was not referenced before it will be loaded first. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">identifier</td><td>The unique identifier (e.g. path to a file)</td></tr>
@@ -280,8 +311,6 @@ template&lt;class TResource&gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The generic Resource </dd></dl>
-
-<p>Reimplemented in <a class="el" href="classgame_1_1_texture_cache.html#a6068981138d9607ce0eea36684225ebe">game::TextureCache</a>.</p>
 
 </div>
 </div>

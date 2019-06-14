@@ -1,5 +1,8 @@
 var NAVTREEINDEX1 =
 {
+"structgame_1_1_tile.html#a7b8aee11390333139a251a23a825e968":[2,0,0,24,7],
+"structgame_1_1_tile.html#a8d53a15d303ba4966898011c87f25ee2":[2,0,0,24,0],
+"structgame_1_1_tile.html#ac67b0478f66a25f5006cf56148469292":[2,0,0,24,4],
 "structgame_1_1_tile.html#ace94bd4c529da78665a816096a044545":[2,0,0,24,2],
 "structgame_1_1_tile.html#ae62efcb0eaf294ccbc3a9ae4c6e90e42":[2,0,0,24,1],
 "structgame_1_1_tile_layer.html":[2,0,0,25],
