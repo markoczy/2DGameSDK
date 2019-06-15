@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>6</zoom_level>
+  <element>
+    <id>UMLSequenceAllInOne</id>
+    <coordinates>
+      <x>114</x>
+      <y>60</y>
+      <w>1284</w>
+      <h>606</h>
+    </coordinates>
+    <panel_attributes>title=Game Initialization (part 1)
+obj=GameWorldFactory~gwf
+obj=scene: SceneGraph~sg CREATED_LATER EXECUTION
+obj=Main Loop~main
+obj=game: Game~game CREATED_LATER EXECUTION
+obj=eventController: EventController~ec CREATED_LATER EXECUTION
+
+on=main
+
+// Create Game World
+main-&gt;&gt;&gt;gwf: CreateGameWorld(...); on=gwf
+gwf-&gt;gwf + :loadTilemap(...)
+on=gwf
+off=gwf
+gwf-&gt;gwf + :loadTextures(...)
+on=gwf
+off=gwf
+gwf.&gt;main: world: GameWorld*; off=gwf
+
+// Create Scene
+main-&gt;&gt;&gt;sg: new()
+sg.&gt;main; off=sg
+main-&gt;&gt;&gt;sg: GetRoot(...); on=sg;
+sg.&gt;main: root: SceneGraphNode*; off=sg
+combinedFragment=loop~loop1 main main; main:[More Entities to create...]
+main-&gt;main + :new Entity(...)
+on=main
+main-&gt;main + :entity;off=main
+tick=
+main-&gt;main + :root.AddChild(entity)
+on=main
+off=main; --=loop1
+
+// Create Game
+main-&gt;main + :createOptions(...)
+on=main
+main-&gt;main + :options; off=main
+tick=
+main-&gt;&gt;&gt;game: new(options, world, scene)
+game-&gt;&gt;&gt;ec: new()
+ec-&gt;game :eventController: EventController*; off=ec
+game.&gt;main: game: Game*; off=game
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
