@@ -62,6 +62,8 @@ namespace game {
      */
     sf::Transformable* GetTransformable();
 
+    virtual sf::FloatRect GetAABB();
+
   protected:
     sf::Sprite mSprite;
   };

@@ -133,7 +133,7 @@ namespace game {
       mState.World->Render(mWindow);
       LOGD("Render World in: " << dbgClock.getElapsedTime().asMilliseconds());
       dbgClock.restart();
-      mState.Scene->Render(mWindow);
+      mState.Scene->Render(mWindow, &mOptions);
       LOGD("Render Scene in: " << dbgClock.getElapsedTime().asMilliseconds());
       dbgClock.restart();
       mWindow->display();

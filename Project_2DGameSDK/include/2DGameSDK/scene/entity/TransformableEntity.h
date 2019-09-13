@@ -55,6 +55,8 @@ namespace game {
      */
     virtual sf::Transformable* GetTransformable() = 0;
 
+    virtual sf::FloatRect GetAABB() = 0;
+
   protected:
     SceneGraphNode* mGraphNode = nullptr;
   };

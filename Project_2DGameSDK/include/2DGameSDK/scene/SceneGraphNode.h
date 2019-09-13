@@ -12,6 +12,7 @@
 #define __SCENE_GRAPH_NODE_H__
 
 #include <2DGameSDK/common/Helpers.h>
+#include <2DGameSDK/core/GameOptions.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
 #include <2DGameSDK/scene/entity/TransformableEntity.h>
 #include <SFML/System.hpp>
@@ -66,7 +67,7 @@ namespace game {
      * @param target The screen or texture to render on
      * @param states The initial Render States (transformation etc.)
      */
-    void Render(sf::RenderTarget* target, sf::RenderStates states = sf::RenderStates::Default);
+    void Render(sf::RenderTarget* target, GameOptions* options, sf::RenderStates states = sf::RenderStates::Default);
 
     /**
      * @brief Retreives the Transformation of this Node only

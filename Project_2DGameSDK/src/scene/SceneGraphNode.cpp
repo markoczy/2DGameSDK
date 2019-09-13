@@ -37,14 +37,24 @@ namespace game {
     }
   }
 
-  void SceneGraphNode::Render(sf::RenderTarget* target, sf::RenderStates states) {
+  void SceneGraphNode::Render(sf::RenderTarget* target, GameOptions* options, sf::RenderStates states) {
     // mRoot->Render(target, states);
     if(mEntity != nullptr) {
       mEntity->Render(target, states);
       states = RenderStates(states.transform * mEntity->GetTransformable()->getTransform());
+
+      if(options->RenderAABB) {
+        auto aabb = mEntity->GetAABB();
+        auto rect = sf::RectangleShape(sf::Vector2f(aabb.width, aabb.height));
+        rect.setPosition(aabb.left, aabb.top);
+        rect.setOutlineColor(sf::Color::Magenta);
+        rect.setOutlineThickness(1);
+        rect.setFillColor(sf::Color::Transparent);
+        target->draw(rect);
+      }
     }
     for(auto iChild : mChildren) {
-      iChild->Render(target, states);
+      iChild->Render(target, options, states);
     }
   }
 

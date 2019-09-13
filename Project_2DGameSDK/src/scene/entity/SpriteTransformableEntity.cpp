@@ -27,4 +27,8 @@ namespace game {
     return &mSprite;
   }
 
+  sf::FloatRect SpriteTransformableEntity::GetAABB() {
+    return (mGraphNode->GetAccumulatedTransform() * mSprite.getTransform()).transformRect(mSprite.getLocalBounds());
+  }
+
 } // namespace game

@@ -3,6 +3,12 @@
 
 namespace game {
 
+  // SceneGraphNode forward Declaration
+  class SceneGraphNode {
+  public:
+    sf::Transform GetAccumulatedTransform();
+  };
+
   AnimatedTransformableEntity::AnimatedTransformableEntity(int type, std::map<int, sf::Texture*> animationStates) : TransformableEntity(type), mAnimStates(animationStates) {
     mTransform = sf::Transformable();
   }
@@ -30,6 +36,10 @@ namespace game {
     std::stringstream ss;
     ss << "Animation State " << state << " not found for Entity " << mId;
     throw std::runtime_error(ss.str());
+  }
+
+  sf::FloatRect AnimatedTransformableEntity::GetAABB() {
+    return (mGraphNode->GetAccumulatedTransform() * mTransform.getTransform()).transformRect(mCurState.getLocalBounds());
   }
 
 } // namespace game

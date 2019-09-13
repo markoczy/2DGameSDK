@@ -37,12 +37,16 @@ namespace game {
      * @brief Zoom at start
      * 
      */
-    float InitialZoom;
+    float InitialZoom = 1;
     /**
      * @brief Framerate in 1/s
      * 
      */
-    int FramesPerSecond;
+    int FramesPerSecond = 50;
+    /**
+     * @brief Wether to render the Axis Aligned Bounding Boxes
+     */
+    bool RenderAABB = false;
   };
 
   //   GAMESDK_DLL GameOptions DefaultOptions = GameOptions{

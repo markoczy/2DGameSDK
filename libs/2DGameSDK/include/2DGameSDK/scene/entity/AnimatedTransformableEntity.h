@@ -72,6 +72,8 @@ namespace game {
      */
     void SetAnimState(int state);
 
+    virtual sf::FloatRect GetAABB();
+
   protected:
     std::map<int, sf::Texture*> mAnimStates;
     sf::Sprite mCurState;
