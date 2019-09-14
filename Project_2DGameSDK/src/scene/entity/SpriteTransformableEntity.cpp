@@ -44,4 +44,7 @@ namespace game {
     return (mGraphNode->GetAccumulatedTransform() * mSprite.getTransform()).transformRect(mSprite.getLocalBounds());
   }
 
+  std::vector<sf::Vector2f> SpriteTransformableEntity::GetCollisionShape() {
+  }
+
 } // namespace game
