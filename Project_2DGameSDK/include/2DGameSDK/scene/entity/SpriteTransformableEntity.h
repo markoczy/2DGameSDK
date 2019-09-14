@@ -34,6 +34,8 @@ namespace game {
      */
     SpriteTransformableEntity(int type, sf::Texture* texture);
 
+    SpriteTransformableEntity(int type, sf::Texture* texture, std::vector<sf::Vector2f> collisionMask);
+
     /**
      * @brief Destroys the Sprite Transformable Entity
      * 
@@ -64,8 +66,11 @@ namespace game {
 
     virtual sf::FloatRect GetAABB();
 
+    virtual std::vector<sf::Vector2f> GetCollisionShape();
+
   protected:
     sf::Sprite mSprite;
+    sf::ConvexShape mCollisionMask;
   };
 
 } // namespace game

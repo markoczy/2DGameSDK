@@ -42,4 +42,8 @@ namespace game {
     return (mGraphNode->GetAccumulatedTransform() * mTransform.getTransform()).transformRect(mCurState.getLocalBounds());
   }
 
+  std::vector<sf::Vector2f> AnimatedTransformableEntity::GetCollisionShape() {
+    auto localBounds = mCurState.getLocalBounds();
+    }
+
 } // namespace game

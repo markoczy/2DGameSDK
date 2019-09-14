@@ -74,6 +74,8 @@ namespace game {
 
     virtual sf::FloatRect GetAABB();
 
+    virtual std::vector<sf::Vector2f> GetCollisionShape();
+
   protected:
     std::map<int, sf::Texture*> mAnimStates;
     sf::Sprite mCurState;
