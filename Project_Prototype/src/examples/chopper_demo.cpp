@@ -134,7 +134,7 @@ int chopperDemo() {
   auto child = parent->AddChild(ent2);
 
   // Create game
-  GameOptions options{"My Game", sf::Vector2i(512, 512), 2.0, 50, true};
+  GameOptions options{"My Game", sf::Vector2i(512, 512), 2.0, 50, true, true};
   auto app = new Game(options, scene, world);
 
   // Send Events to controller

@@ -11,9 +11,13 @@
 #ifndef __SPRITE_TRANSFORMABLE_ENTITY_H__
 #define __SPRITE_TRANSFORMABLE_ENTITY_H__
 
+#include <vector>
+
+#include <SFML/Graphics.hpp>
+
+#include <2DGameSDK/common/GraphicTools.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
 #include <2DGameSDK/scene/entity/TransformableEntity.h>
-#include <SFML/Graphics.hpp>
 
 namespace game {
 
@@ -66,11 +70,11 @@ namespace game {
 
     virtual sf::FloatRect GetAABB();
 
-    virtual std::vector<sf::Vector2f> GetCollisionShape();
+    virtual std::vector<sf::Vector2f> GetCollisionMask();
 
   protected:
     sf::Sprite mSprite;
-    sf::ConvexShape mCollisionMask;
+    std::vector<sf::Vector2f> mCollisionMask;
   };
 
 } // namespace game

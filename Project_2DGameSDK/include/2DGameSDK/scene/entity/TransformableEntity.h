@@ -57,7 +57,7 @@ namespace game {
 
     virtual sf::FloatRect GetAABB() = 0;
 
-    virtual std::vector<sf::Vector2f> GetCollisionShape() = 0;
+    virtual std::vector<sf::Vector2f> GetCollisionMask() = 0;
 
   protected:
     SceneGraphNode* mGraphNode = nullptr;

@@ -43,7 +43,14 @@
         "cstddef": "cpp",
         "forward_list": "cpp",
         "numeric": "cpp",
-        "valarray": "cpp"
+        "valarray": "cpp",
+        "atomic": "cpp",
+        "cstdarg": "cpp",
+        "algorithm": "cpp",
+        "iterator": "cpp",
+        "map": "cpp",
+        "memory_resource": "cpp",
+        "string": "cpp"
     },
     // C++ Format Style for Project 2DGameSDK:
     // see .clang-format file in project root

@@ -47,6 +47,10 @@ namespace game {
      * @brief Wether to render the Axis Aligned Bounding Boxes
      */
     bool RenderAABB = false;
+    /**
+     * @brief Wether to render the Collision Masks
+     */
+    bool RenderCollisionMask = false;
   };
 
   //   GAMESDK_DLL GameOptions DefaultOptions = GameOptions{

@@ -52,6 +52,20 @@ namespace game {
         rect.setFillColor(sf::Color::Transparent);
         target->draw(rect);
       }
+
+      if(options->RenderCollisionMask) {
+        auto collisionMask = mEntity->GetCollisionMask();
+        if(collisionMask.size() > 0) {
+          auto shape = sf::ConvexShape(collisionMask.size());
+          for(int i = 0; i < collisionMask.size(); i++) {
+            shape.setPoint(i, collisionMask[i]);
+          }
+          shape.setOutlineColor(sf::Color::Red);
+          shape.setOutlineThickness(1);
+          shape.setFillColor(sf::Color::Transparent);
+          target->draw(shape);
+        }
+      }
     }
     for(auto iChild : mChildren) {
       iChild->Render(target, options, states);

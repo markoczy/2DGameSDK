@@ -11,6 +11,7 @@
 #ifndef __GAMESDK_HELPERS_H__
 #define __GAMESDK_HELPERS_H__
 
+
 namespace game::helpers {
 
   template <class T>
@@ -20,6 +21,7 @@ namespace game::helpers {
       ptr = nullptr;
     }
   }
+
 
 } // namespace game::helpers
 
