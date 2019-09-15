@@ -12,6 +12,7 @@
 #define __GAMESDK_COMMON_H__
 
 #include <2DGameSDK/common/Constants.h>
+#include <2DGameSDK/common/GraphicTools.h>
 #include <2DGameSDK/common/Helpers.h>
 
 #endif

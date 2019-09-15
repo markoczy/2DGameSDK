@@ -11,12 +11,15 @@
 #ifndef __SCENE_GRAPH_NODE_H__
 #define __SCENE_GRAPH_NODE_H__
 
+#include <vector>
+
+#include <SFML/System.hpp>
+
+#include <2DGameSDK/common/GraphicTools.h>
 #include <2DGameSDK/common/Helpers.h>
 #include <2DGameSDK/core/GameOptions.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
 #include <2DGameSDK/scene/entity/TransformableEntity.h>
-#include <SFML/System.hpp>
-#include <vector>
 
 namespace game {
 

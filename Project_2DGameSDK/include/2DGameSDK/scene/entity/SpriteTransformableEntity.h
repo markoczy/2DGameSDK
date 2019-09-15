@@ -11,9 +11,13 @@
 #ifndef __SPRITE_TRANSFORMABLE_ENTITY_H__
 #define __SPRITE_TRANSFORMABLE_ENTITY_H__
 
+#include <vector>
+
+#include <SFML/Graphics.hpp>
+
+#include <2DGameSDK/common/GraphicTools.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
 #include <2DGameSDK/scene/entity/TransformableEntity.h>
-#include <SFML/Graphics.hpp>
 
 namespace game {
 
@@ -33,6 +37,8 @@ namespace game {
      * @param texture The Texture of the Entity
      */
     SpriteTransformableEntity(int type, sf::Texture* texture);
+
+    SpriteTransformableEntity(int type, sf::Texture* texture, std::vector<sf::Vector2f> collisionMask);
 
     /**
      * @brief Destroys the Sprite Transformable Entity
@@ -64,8 +70,11 @@ namespace game {
 
     virtual sf::FloatRect GetAABB();
 
+    virtual std::vector<sf::Vector2f> GetCollisionMask();
+
   protected:
     sf::Sprite mSprite;
+    std::vector<sf::Vector2f> mCollisionMask;
   };
 
 } // namespace game

@@ -11,6 +11,11 @@ namespace game {
   };
 
   SpriteTransformableEntity::SpriteTransformableEntity(int type, sf::Texture* texture) : TransformableEntity(type), mSprite(*texture) {
+    mCollisionMask = helpers::GrahicTools::GetRectBoundary(mSprite.getLocalBounds());
+  }
+
+  SpriteTransformableEntity::SpriteTransformableEntity(int type, sf::Texture* texture, std::vector<sf::Vector2f> collisionMask) : TransformableEntity(type), mSprite(*texture) {
+    mCollisionMask = collisionMask;
   }
 
   SpriteTransformableEntity::~SpriteTransformableEntity() {
@@ -29,6 +34,12 @@ namespace game {
 
   sf::FloatRect SpriteTransformableEntity::GetAABB() {
     return (mGraphNode->GetAccumulatedTransform() * mSprite.getTransform()).transformRect(mSprite.getLocalBounds());
+  }
+
+  std::vector<sf::Vector2f> SpriteTransformableEntity::GetCollisionMask() {
+    auto localToWorld = mGraphNode->GetAccumulatedTransform() * mSprite.getTransform();
+
+    return helpers::GrahicTools::TransformPoints(mCollisionMask, localToWorld);
   }
 
 } // namespace game
