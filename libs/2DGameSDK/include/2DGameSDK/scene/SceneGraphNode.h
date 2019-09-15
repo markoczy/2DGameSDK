@@ -49,7 +49,7 @@ namespace game {
      * @param entity 
      * @return SceneGraphNode* 
      */
-    SceneGraphNode* AddChild(TransformableEntity* entity);
+    // SceneGraphNode* AddChild(TransformableEntity* entity);
 
     /**
      * @brief Checks Wether the Node is a Root Node

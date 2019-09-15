@@ -11,6 +11,8 @@
 #ifndef __SCENE_GRAPH_H__
 #define __SCENE_GRAPH_H__
 
+#include <map>
+
 #include <2DGameSDK/core/GameOptions.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
 #include <2DGameSDK/scene/SceneGraphNode.h>
@@ -56,8 +58,11 @@ namespace game {
      */
     SceneGraphNode* GetRoot();
 
+    int AddEntity(TransformableEntity* entity, int parent = 0);
+
   private:
     SceneGraphNode* mRoot;
+    std::map<int, SceneGraphNode*> mNodes;
   };
 
 } // namespace game

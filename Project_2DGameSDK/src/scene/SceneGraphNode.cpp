@@ -18,11 +18,11 @@ namespace game {
     helpers::safeDelete(mEntity);
   }
 
-  SceneGraphNode* SceneGraphNode::AddChild(TransformableEntity* entity) {
-    auto node = new SceneGraphNode(this, entity);
-    mChildren.push_back(node);
-    return node;
-  }
+  // SceneGraphNode* SceneGraphNode::AddChild(TransformableEntity* entity) {
+  //   auto node = new SceneGraphNode(this, entity);
+  //   mChildren.push_back(node);
+  //   return node;
+  // }
 
   bool SceneGraphNode::IsRoot() {
     return mParent == nullptr;
