@@ -13,10 +13,11 @@
 
 #include <map>
 
+#include <SFML/Graphics.hpp>
+
 #include <2DGameSDK/core/GameOptions.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
 #include <2DGameSDK/scene/SceneGraphNode.h>
-#include <SFML/Graphics.hpp>
 
 namespace game {
 
@@ -26,6 +27,7 @@ namespace game {
    */
   class GAMESDK_DLL SceneGraph {
   public:
+    static const int ROOT_NODE = 0;
     /**
      * @brief Constructs a new Scene Graph object
      * 
@@ -56,13 +58,22 @@ namespace game {
      * 
      * @return SceneGraphNode* The Root Node
      */
-    SceneGraphNode* GetRoot();
+    // SceneGraphNode* GetRoot();
 
-    int AddEntity(TransformableEntity* entity, int parent = 0);
+    int AddEntity(TransformableEntity* entity, int parent = ROOT_NODE);
 
   private:
-    SceneGraphNode* mRoot;
-    std::map<int, SceneGraphNode*> mNodes;
+    struct Node {
+      TransformableEntity* Entity;
+      Node* Parent;
+      std::vector<Node*> Children;
+    };
+
+    static int idCounter;
+    std::map<int, Node*> mNodes;
+
+    void tickNodes(Node* current);
+    void renderNodes(Node* current, sf::RenderTarget* target, GameOptions* options, sf::RenderStates states = sf::RenderStates::Default);
   };
 
 } // namespace game
