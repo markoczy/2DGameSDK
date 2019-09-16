@@ -42,8 +42,8 @@ int minimalDemo() {
 
   // Layout entities in scene
   auto scene = new SceneGraph();
-  auto parent = scene->GetRoot()->AddChild(ent);
-  auto child = parent->AddChild(ent2);
+  auto parent = scene->AddEntity(ent); //GetRoot()->AddChild(ent);
+  auto child = scene->AddEntity(ent, parent); //parent->AddChild(ent2);
 
   // Create game
   GameOptions options{"My Game", sf::Vector2i(512, 512), 5.0, 50};
