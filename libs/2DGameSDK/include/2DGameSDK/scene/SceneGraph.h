@@ -53,27 +53,14 @@ namespace game {
      */
     void Render(sf::RenderTarget* target, GameOptions* options, sf::RenderStates states = sf::RenderStates::Default);
 
-    /**
-     * @brief Retreives the Root Node
-     * 
-     * @return SceneGraphNode* The Root Node
-     */
-    // SceneGraphNode* GetRoot();
-
     int AddEntity(TransformableEntity* entity, int parent = ROOT_NODE);
 
   private:
-    struct Node {
-      TransformableEntity* Entity;
-      Node* Parent;
-      std::vector<Node*> Children;
-    };
-
     static int idCounter;
-    std::map<int, Node*> mNodes;
+    std::map<int, SceneGraphNode*> mNodes;
 
-    void tickNodes(Node* current);
-    void renderNodes(Node* current, sf::RenderTarget* target, GameOptions* options, sf::RenderStates states = sf::RenderStates::Default);
+    void tickNodes(SceneGraphNode* current);
+    void renderNodes(SceneGraphNode* current, sf::RenderTarget* target, GameOptions* options, sf::RenderStates states = sf::RenderStates::Default);
   };
 
 } // namespace game

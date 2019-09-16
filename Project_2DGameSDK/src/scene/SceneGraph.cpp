@@ -1,12 +1,11 @@
 #include <2DGameSDK/scene/SceneGraph.h>
 
 namespace game {
-  // static int idCounter = SceneGraph::ROOT_NODE + 1;
   const int SceneGraph::ROOT_NODE;
   int SceneGraph::idCounter = ROOT_NODE + 1;
 
   SceneGraph::SceneGraph() {
-    mNodes[ROOT_NODE] = new Node{nullptr, nullptr};
+    mNodes[ROOT_NODE] = new SceneGraphNode(this, nullptr, nullptr);
   }
 
   SceneGraph::~SceneGraph() {
@@ -23,30 +22,27 @@ namespace game {
     renderNodes(mNodes[ROOT_NODE], target, options, states);
   }
 
-  // SceneGraphNode* SceneGraph::GetRoot() {
-  //   return mRoot;
-  // }
-
   int SceneGraph::AddEntity(TransformableEntity* entity, int parent) {
     auto parentNode = mNodes[parent];
-    auto node = new Node{entity, mNodes[parent]};
+    auto node = new SceneGraphNode(this, mNodes[parent], entity);
     mNodes[idCounter] = node;
-    parentNode->Children.push_back(node);
+    parentNode->mChildren.push_back(node);
     return idCounter++;
   }
 
-  void SceneGraph::tickNodes(Node* current) {
-    auto entity = current->Entity;
+  void SceneGraph::tickNodes(SceneGraphNode* current) {
+    auto entity = current->mEntity;
     if(entity != nullptr) {
       entity->Tick();
     }
-    for(auto iChild : current->Children) {
+    for(auto iChild : current->mChildren) {
       tickNodes(iChild);
     }
   }
 
-  void SceneGraph::renderNodes(Node* current, sf::RenderTarget* target, GameOptions* options, sf::RenderStates states) {
-    auto entity = current->Entity;
+  void SceneGraph::renderNodes(SceneGraphNode* current, sf::RenderTarget* target, GameOptions* options, sf::RenderStates states) {
+    auto entity = current->mEntity;
+
     if(entity != nullptr) {
       entity->Render(target, states);
       states = sf::RenderStates(states.transform * entity->GetTransformable()->getTransform());
@@ -87,7 +83,7 @@ namespace game {
         }
       }
     }
-    for(auto iChild : current->Children) {
+    for(auto iChild : current->mChildren) {
       renderNodes(iChild, target, options, states);
     }
   }

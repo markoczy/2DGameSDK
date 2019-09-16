@@ -5,83 +5,14 @@ using namespace sf;
 namespace game {
   const Transform _ZERO_TRANSFORM = Transform();
 
-  SceneGraphNode::SceneGraphNode(SceneGraphNode* parent, TransformableEntity* entity) : mParent(parent), mEntity(entity) {
+  SceneGraphNode::SceneGraphNode(SceneGraph* graph, SceneGraphNode* parent, TransformableEntity* entity) : mGraph(graph), mParent(parent), mEntity(entity) {
     if(entity != nullptr) {
       entity->SetGraphNode(this);
     }
   }
 
   SceneGraphNode::~SceneGraphNode() {
-    for(auto iChild : mChildren) {
-      helpers::safeDelete(iChild);
-    }
     helpers::safeDelete(mEntity);
-  }
-
-  // SceneGraphNode* SceneGraphNode::AddChild(TransformableEntity* entity) {
-  //   auto node = new SceneGraphNode(this, entity);
-  //   mChildren.push_back(node);
-  //   return node;
-  // }
-
-  bool SceneGraphNode::IsRoot() {
-    return mParent == nullptr;
-  }
-
-  void SceneGraphNode::Tick() {
-    if(mEntity != nullptr) {
-      mEntity->Tick();
-    }
-    for(auto iChild : mChildren) {
-      iChild->Tick();
-    }
-  }
-
-  void SceneGraphNode::Render(sf::RenderTarget* target, GameOptions* options, sf::RenderStates states) {
-    // mRoot->Render(target, states);
-    if(mEntity != nullptr) {
-      mEntity->Render(target, states);
-      states = RenderStates(states.transform * mEntity->GetTransformable()->getTransform());
-
-      if(options->RenderAABB) {
-        auto aabb = mEntity->GetAABB();
-
-        //* Render as Vertex Array
-        // auto vertexArray = helpers::GrahicTools::CreateUniformVertexArray(helpers::GrahicTools::GetRectBoundary(aabb), sf::LineStrip, sf::Color::Magenta);
-        // target->draw(vertexArray);
-
-        //* Render as Shape
-        auto rect = sf::RectangleShape(sf::Vector2f(aabb.width, aabb.height));
-        rect.setPosition(aabb.left, aabb.top);
-        rect.setOutlineColor(sf::Color::Magenta);
-        rect.setOutlineThickness(0.5);
-        rect.setFillColor(sf::Color::Transparent);
-        target->draw(rect);
-      }
-
-      if(options->RenderCollisionMask) {
-        auto collisionMask = mEntity->GetCollisionMask();
-
-        if(collisionMask.size() > 0) {
-          //* Render as Vertex Array
-          // auto vertexArray = helpers::GrahicTools::CreateUniformVertexArray(collisionMask, sf::LineStrip, sf::Color::Red);
-          // target->draw(vertexArray);
-
-          //* Render as Shape
-          auto shape = sf::ConvexShape(collisionMask.size());
-          for(int i = 0; i < collisionMask.size(); i++) {
-            shape.setPoint(i, collisionMask[i]);
-          }
-          shape.setOutlineColor(sf::Color::Red);
-          shape.setOutlineThickness(0.5);
-          shape.setFillColor(sf::Color::Transparent);
-          target->draw(shape);
-        }
-      }
-    }
-    for(auto iChild : mChildren) {
-      iChild->Render(target, options, states);
-    }
   }
 
   sf::Transform SceneGraphNode::GetCurTransform() {
