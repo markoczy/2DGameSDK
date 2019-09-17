@@ -16,6 +16,20 @@ namespace game {
 
   void SceneGraph::Tick() {
     tickNodes(mNodes[ROOT_NODE]);
+    for(auto i = mNodes.begin(); i != mNodes.end(); i = std::next(i)) {
+      for(auto j = std::next(i); j != mNodes.end(); j = std::next(j)) {
+        auto entA = i->second->mEntity;
+        auto entB = j->second->mEntity;
+        if(entA != nullptr && entA->IsCollidable() && entB != nullptr && entB->IsCollidable()) {
+          if(entA->GetAABB().intersects(entB->GetAABB())) {
+            if(helpers::GrahicTools::ShapesIntersect(entA->GetCollisionMask(), entB->GetCollisionMask())) {
+              entA->OnCollision(entB);
+              entB->OnCollision(entA);
+            }
+          }
+        }
+      }
+    }
   }
 
   void SceneGraph::Render(sf::RenderTarget* target, GameOptions* options, sf::RenderStates states) {

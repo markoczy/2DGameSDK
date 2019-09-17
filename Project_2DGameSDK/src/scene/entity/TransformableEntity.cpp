@@ -2,7 +2,7 @@
 
 namespace game {
 
-  TransformableEntity::TransformableEntity(int type) : Entity(type) {
+  TransformableEntity::TransformableEntity(int type, bool isCollidable) : Entity(type), mIsCollidable(isCollidable) {
   }
 
   TransformableEntity::~TransformableEntity() {}
@@ -10,4 +10,8 @@ namespace game {
   void TransformableEntity::SetGraphNode(game::SceneGraphNode* graphNode) {
     mGraphNode = graphNode;
   }
+
+  bool TransformableEntity::IsCollidable() {}
+
+  void TransformableEntity::OnCollision(TransformableEntity* other) {}
 } // namespace game

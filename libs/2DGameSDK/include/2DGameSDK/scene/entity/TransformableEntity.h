@@ -32,7 +32,7 @@ namespace game {
      * @param type type The Entity Type (does not affect anything and is meant
      *        to be used freely to identify entities of some kind)
      */
-    TransformableEntity(int type);
+    TransformableEntity(int type, bool isCollidable = false);
 
     /**
      * @brief Destroys the Transformable Entity object
@@ -47,6 +47,8 @@ namespace game {
      */
     void SetGraphNode(SceneGraphNode* graphNode);
 
+    bool IsCollidable();
+
     /**
      * @brief Retreives the reference to the SFML Transformable wich can
      *        be used to apply transformations to the Transformable Entity.
@@ -59,8 +61,11 @@ namespace game {
 
     virtual std::vector<sf::Vector2f> GetCollisionMask() = 0;
 
+    virtual void OnCollision(TransformableEntity* other);
+
   protected:
     SceneGraphNode* mGraphNode = nullptr;
+    bool mIsCollidable;
   };
 
 } // namespace game

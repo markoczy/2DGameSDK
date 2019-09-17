@@ -14,7 +14,7 @@ namespace game {
     mCollisionMask = helpers::GrahicTools::GetRectBoundary(mSprite.getLocalBounds());
   }
 
-  SpriteTransformableEntity::SpriteTransformableEntity(int type, sf::Texture* texture, std::vector<sf::Vector2f> collisionMask) : TransformableEntity(type), mSprite(*texture) {
+  SpriteTransformableEntity::SpriteTransformableEntity(int type, sf::Texture* texture, std::vector<sf::Vector2f> collisionMask) : TransformableEntity(type, true), mSprite(*texture) {
     mCollisionMask = collisionMask;
   }
 
