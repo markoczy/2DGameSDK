@@ -61,7 +61,7 @@ namespace game {
 
     virtual std::vector<sf::Vector2f> GetCollisionMask() = 0;
 
-    virtual void OnCollision(TransformableEntity* other);
+    virtual void OnCollision(TransformableEntity* other, sf::Vector2f point);
 
   protected:
     SceneGraphNode* mGraphNode = nullptr;

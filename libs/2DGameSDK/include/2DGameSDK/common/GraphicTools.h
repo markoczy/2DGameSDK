@@ -2,6 +2,7 @@
 #define __GAME_GRAPHICTOOLS_H__
 
 #include <cmath>
+#include <tuple>
 #include <vector>
 
 #include <SFML/Graphics.hpp>
@@ -16,9 +17,9 @@ namespace game::helpers {
 
     static sf::VertexArray CreateUniformVertexArray(std::vector<sf::Vector2f> points, sf::PrimitiveType type, sf::Color color);
 
-    static bool LinesIntersect(sf::Vector2f a1, sf::Vector2f b1, sf::Vector2f a2, sf::Vector2f b2);
+    static std::tuple<bool, sf::Vector2f> LinesIntersect(sf::Vector2f a1, sf::Vector2f b1, sf::Vector2f a2, sf::Vector2f b2);
 
-    static bool ShapesIntersect(std::vector<sf::Vector2f> shapeA, std::vector<sf::Vector2f> shapeB);
+    static std::tuple<bool, sf::Vector2f> ShapesIntersect(std::vector<sf::Vector2f> shapeA, std::vector<sf::Vector2f> shapeB);
 
   private:
     GrahicTools() {}

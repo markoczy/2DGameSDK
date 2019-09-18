@@ -22,9 +22,15 @@ namespace game {
         auto entB = j->second->mEntity;
         if(entA != nullptr && entA->IsCollidable() && entB != nullptr && entB->IsCollidable()) {
           if(entA->GetAABB().intersects(entB->GetAABB())) {
-            if(helpers::GrahicTools::ShapesIntersect(entA->GetCollisionMask(), entB->GetCollisionMask())) {
-              entA->OnCollision(entB);
-              entB->OnCollision(entA);
+            auto intersect = helpers::GrahicTools::ShapesIntersect(entA->GetCollisionMask(), entB->GetCollisionMask());
+            if(std::get<0>(intersect)) {
+              // TODO performance!!
+              auto pt = std::get<1>(intersect);
+              auto invA = entA->GetTransformable()->getTransform().getInverse();
+              auto invB = entB->GetTransformable()->getTransform().getInverse();
+
+              entA->OnCollision(entB, invA.transformPoint(pt));
+              entB->OnCollision(entA, invB.transformPoint(pt));
             }
           }
         }

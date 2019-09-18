@@ -97,9 +97,10 @@ public:
     mDw += mRotSpeed;
   }
 
-  void OnCollision(TransformableEntity* other) {
+  void OnCollision(TransformableEntity* other, sf::Vector2f point) {
     if(other->GetType() == _ENEMY_TYPE) {
-      std::cout << "Collision with enemy detected!!" << std::endl;
+      std::cout << "Collision with enemy detected!! Point: (" << point.x
+                << ", " << point.y << ")" << std::endl;
     }
   }
 

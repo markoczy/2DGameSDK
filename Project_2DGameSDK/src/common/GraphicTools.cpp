@@ -2,6 +2,8 @@
 
 namespace game::helpers {
 
+  const std::tuple<bool, sf::Vector2f> _NO_COLLISION = std::make_tuple(false, sf::Vector2f());
+
   std::vector<sf::Vector2f> GrahicTools::GetRectBoundary(sf::FloatRect rect) {
     auto ret = std::vector<sf::Vector2f>(4);
     ret[0] = sf::Vector2f(rect.left, rect.top);
@@ -28,25 +30,28 @@ namespace game::helpers {
     return ret;
   }
 
-  bool GrahicTools::LinesIntersect(sf::Vector2f a1, sf::Vector2f b1, sf::Vector2f a2, sf::Vector2f b2) {
+  std::tuple<bool, sf::Vector2f> GrahicTools::LinesIntersect(sf::Vector2f a1, sf::Vector2f b1, sf::Vector2f a2, sf::Vector2f b2) {
     //TODO check parallel
 
     float n = ((a1.x * (a2.y - b2.y) - a1.y * (a2.x - b2.x) + a2.x * b2.y - a2.y * b2.x) / (a1.x * (a2.y - b2.y) - a1.y * (a2.x - b2.x) + a2.x * b1.y - a2.y * b1.x + b1.x * b2.y - b1.y * b2.x));
-    if(n < 0 || n > 1) return false;
+    if(n < 0 || n > 1) return _NO_COLLISION;
 
     float m = ((a1.x * (a2.y - b1.y) - a1.y * (a2.x - b1.x) + a2.x * b1.y - a2.y * b1.x) / (a1.x * (a2.y - b2.y) - a1.y * (a2.x - b2.x) + a2.x * b1.y - a2.y * b1.x + b1.x * b2.y - b1.y * b2.x));
-    return (m >= 0 && m <= 1);
+    if(m < 0 || m > 1) return _NO_COLLISION;
+
+    return std::make_tuple(true, a1 + n * (b1 - a1));
   }
 
-  bool GrahicTools::ShapesIntersect(std::vector<sf::Vector2f> shapeA, std::vector<sf::Vector2f> shapeB) {
+  std::tuple<bool, sf::Vector2f> GrahicTools::ShapesIntersect(std::vector<sf::Vector2f> shapeA, std::vector<sf::Vector2f> shapeB) {
     for(int iA = 0; iA < shapeA.size() - 1; iA++) {
       for(int iB = 0; iB < shapeB.size() - 1; iB++) {
-        if(LinesIntersect(shapeA[iA], shapeA[iA + 1], shapeB[iB], shapeB[iB + 1])) {
-          return true;
+        auto res = LinesIntersect(shapeA[iA], shapeA[iA + 1], shapeB[iB], shapeB[iB + 1]);
+        if(std::get<0>(res)) {
+          return res;
         }
       }
     }
-    return false;
+    return _NO_COLLISION;
   }
 
 } // namespace game::helpers

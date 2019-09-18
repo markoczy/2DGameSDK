@@ -13,5 +13,5 @@ namespace game {
 
   bool TransformableEntity::IsCollidable() {}
 
-  void TransformableEntity::OnCollision(TransformableEntity* other) {}
+  void TransformableEntity::OnCollision(TransformableEntity* other, sf::Vector2f point) {}
 } // namespace game
