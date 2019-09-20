@@ -51,4 +51,4 @@
 
 ### Status
 
-- Warnings auflösen (`-Wall`) -> 1h
+- Warnings auflösen (`-Wall`, `-Wpedantic`, `-Wextra`) -> 2h

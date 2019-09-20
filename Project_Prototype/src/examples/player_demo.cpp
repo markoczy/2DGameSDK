@@ -45,19 +45,19 @@ public:
     }
   }
 
-  void MoveUp(EmptyEventData* unused) {
+  void MoveUp(EmptyEventData*) {
     mDt.y -= mSpeed;
   }
 
-  void MoveDown(EmptyEventData* unused) {
+  void MoveDown(EmptyEventData*) {
     mDt.y += mSpeed;
   }
 
-  void MoveLeft(EmptyEventData* unused) {
+  void MoveLeft(EmptyEventData*) {
     mDt.x -= mSpeed;
   }
 
-  void MoveRight(EmptyEventData* unused) {
+  void MoveRight(EmptyEventData*) {
     mDt.x += mSpeed;
   }
 

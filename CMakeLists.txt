@@ -13,7 +13,7 @@ if (NOT CMAKE_BUILD_TYPE)
 endif()
 
 # Show all warnings
-set(CMAKE_CXX_FLAGS "-Wall -Wpedantic")
+set(CMAKE_CXX_FLAGS "-Wall -Wextra -Wpedantic")
 
 ################################################################################
 # Setup sfml

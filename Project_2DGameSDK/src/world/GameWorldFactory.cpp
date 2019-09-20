@@ -6,7 +6,7 @@ namespace game {
 
   using json = nlohmann::json;
 
-  bool compareLayers(TileLayer* i, TileLayer* j) { return (i->Number < j->Number); };
+  bool compareLayers(TileLayer* i, TileLayer* j) { return (i->Number < j->Number); }
 
   string getFilename(string prefix, int tile, int pad) {
     stringstream ss;
@@ -16,9 +16,9 @@ namespace game {
     auto ret = ss.str();
     LOGD("Filename: " << ret);
     return ret;
-  };
+  }
 
-  GameWorld* GameWorldFactory::CreateGameWorld(std::string tilemapFile, std::string materialMapFile, std::string texturesPrefix) {
+  GameWorld* GameWorldFactory::CreateGameWorld(std::string tilemapFile, std::string /*materialMapFile*/, std::string texturesPrefix) {
     auto tilemap = loadTilemap(tilemapFile);
     loadTextures(tilemap, texturesPrefix);
     auto world = new GameWorld(tilemap, nullptr);
@@ -51,7 +51,7 @@ namespace game {
         layerOut->Name = name;
         layerOut->Number = number;
         layerOut->Tiles = std::vector<std::vector<Tile*>>(tilemapOut->TilesHigh);
-        for(int i = 0; i < layerOut->Tiles.size(); i++) {
+        for(unsigned int i = 0; i < layerOut->Tiles.size(); i++) {
           layerOut->Tiles[i] = std::vector<Tile*>(tilemapOut->TilesWide);
         }
 

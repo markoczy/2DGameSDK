@@ -93,7 +93,7 @@ namespace game {
 
           //* Render as Shape
           auto shape = sf::ConvexShape(collisionMask.size());
-          for(int i = 0; i < collisionMask.size(); i++) {
+          for(unsigned int i = 0; i < collisionMask.size(); i++) {
             shape.setPoint(i, collisionMask[i]);
           }
           shape.setOutlineColor(sf::Color::Red);

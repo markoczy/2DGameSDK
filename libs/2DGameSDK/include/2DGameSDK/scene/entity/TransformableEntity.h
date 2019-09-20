@@ -38,7 +38,7 @@ namespace game {
      * @brief Destroys the Transformable Entity object
      * 
      */
-    ~TransformableEntity();
+    virtual ~TransformableEntity();
 
     /**
      * @brief Set the Graph Node object

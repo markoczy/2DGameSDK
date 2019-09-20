@@ -11,7 +11,9 @@ namespace game {
     mGraphNode = graphNode;
   }
 
-  bool TransformableEntity::IsCollidable() {}
+  bool TransformableEntity::IsCollidable() {
+    return mIsCollidable;
+  }
 
-  void TransformableEntity::OnCollision(TransformableEntity* other, sf::Vector2f point) {}
+  void TransformableEntity::OnCollision(TransformableEntity*, sf::Vector2f) {}
 } // namespace game

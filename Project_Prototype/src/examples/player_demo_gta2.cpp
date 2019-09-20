@@ -67,19 +67,19 @@ public:
     mDw = 0.0;
   }
 
-  void MoveForward(EmptyEventData* unused) {
+  void MoveForward(EmptyEventData*) {
     mDt += mSpeed * mDir;
   }
 
-  void MoveBackward(EmptyEventData* unused) {
+  void MoveBackward(EmptyEventData*) {
     mDt -= mSpeed * mDir;
   }
 
-  void RotLeft(EmptyEventData* unused) {
+  void RotLeft(EmptyEventData*) {
     mDw -= mRotSpeed;
   }
 
-  void RotRight(EmptyEventData* unused) {
+  void RotRight(EmptyEventData*) {
     mDw += mRotSpeed;
   }
 
