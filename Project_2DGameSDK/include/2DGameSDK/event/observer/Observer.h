@@ -38,7 +38,7 @@ namespace game {
      *        Observable was registered with the SubscribeTo function.
      * 
      */
-    ~Observer() {
+    virtual ~Observer() {
       if(mSubscriptionId != -1) {
         mObservable->Unsubscribe(mSubscriptionId);
       }

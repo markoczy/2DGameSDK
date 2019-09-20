@@ -130,7 +130,7 @@ int playerDemoGTA2(float zoom) {
 
   // Layout entities in scene
   auto scene = new SceneGraph();
-  auto parent = scene->AddEntity(ent); // scene->GetRoot()->AddChild(ent);
+  scene->AddEntity(ent); // scene->GetRoot()->AddChild(ent);
 
   // Create game
   GameOptions options{"My Game", sf::Vector2i(512, 512), zoom, 50};
@@ -144,4 +144,6 @@ int playerDemoGTA2(float zoom) {
 
   // Run Game
   app->Run();
+
+  return 0;
 }

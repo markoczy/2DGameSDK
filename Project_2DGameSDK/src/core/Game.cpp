@@ -55,7 +55,7 @@ namespace game {
 
       // Game cycle
       tick();
-      int tickTime = clock.getElapsedTime().asMilliseconds();
+      IFLOGD(int tickTime = clock.getElapsedTime().asMilliseconds();)
       render();
 
       // Sync Sim Time
@@ -105,7 +105,7 @@ namespace game {
   // ####### Event Controller wrapper ##########################################
 
   int Game::AddEvent(ObservableBase* event) {
-    mEventCtrl.AddEvent(event);
+    return mEventCtrl.AddEvent(event);
   }
 
   ObservableBase* Game::GetEvent(int identifier) {

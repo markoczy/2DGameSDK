@@ -60,7 +60,6 @@ namespace game {
      * 
      */
     virtual void Update() {
-      bool trigger = false;
       auto data = triggered();
 
       if(std::get<0>(data)) {

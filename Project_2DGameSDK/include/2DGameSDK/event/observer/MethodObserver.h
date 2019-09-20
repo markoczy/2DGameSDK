@@ -31,6 +31,8 @@ namespace game {
   template <class TData, class TCallee>
   class MethodObserver : public Observer<TData> {
   public:
+    virtual ~MethodObserver() {}
+
     /**
      * @brief Creates a Method Observer
      * 

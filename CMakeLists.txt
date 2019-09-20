@@ -12,6 +12,9 @@ if (NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE Debug)
 endif()
 
+# Show all warnings
+set(CMAKE_CXX_FLAGS "-Wall -Wpedantic")
+
 ################################################################################
 # Setup sfml
 ################################################################################

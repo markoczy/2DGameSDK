@@ -178,13 +178,13 @@ int chopperDemo() {
   auto rotorCollisionMask = getRotorCollisionMask();
   auto ent2 = new RotatingEntity(_PLAYER_TYPE, tex2, rotorCollisionMask, 15.0, sf::Vector2f(8, 15));
 
-  auto tex3 = AssetManager::GetTexture("res/textures/heli/rotor.png");
+  // auto tex3 = AssetManager::GetTexture("res/textures/heli/rotor.png");
   auto enemy = new RotatingEntity(_ENEMY_TYPE, tex2, rotorCollisionMask, 15.0, sf::Vector2f(200, 200));
 
   // Layout entities in scene
   auto scene = new SceneGraph();
   auto parent = scene->AddEntity(ent); //scene->GetRoot()->AddChild(ent);
-  auto child = scene->AddEntity(ent2, parent); // parent->AddChild(ent2);
+  scene->AddEntity(ent2, parent); // parent->AddChild(ent2);
 
   scene->AddEntity(enemy);
 
@@ -200,4 +200,6 @@ int chopperDemo() {
 
   // Run Game
   app->Run();
+
+  return 0;
 }

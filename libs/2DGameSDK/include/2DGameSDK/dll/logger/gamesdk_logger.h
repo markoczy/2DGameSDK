@@ -29,6 +29,7 @@
 
 #ifdef GAMESDK_LOG_D
 #define LOGD(a) std::cout << "DEBUG   " << __FUNCTION__ << "(" << __LINE__ << ") " << a << std::endl;
+#define IFLOGD(a) a
 // define lower level
 #ifndef GAMESDK_LOG_I
 #define GAMESDK_LOG_I
@@ -37,6 +38,7 @@
 
 #ifdef GAMESDK_LOG_I
 #define LOGI(a) std::cout << "INFO    " << __FUNCTION__ << "(" << __LINE__ << ") " << a << std::endl;
+#define IFLOGI(a) a
 // define lower level
 #ifndef GAMESDK_LOG_W
 #define GAMESDK_LOG_W
@@ -45,6 +47,7 @@
 
 #ifdef GAMESDK_LOG_W
 #define LOGW(a) std::cout << "WARN    " << __FUNCTION__ << "(" << __LINE__ << ") " << a << std::endl;
+#define IFLOGW(a) a
 // define lower level
 #ifndef GAMESDK_LOG_E
 #define GAMESDK_LOG_E
@@ -53,22 +56,27 @@
 
 #ifdef GAMESDK_LOG_E
 #define LOGE(a) std::cout << "ERROR   " << __FUNCTION__ << "(" << __LINE__ << ") " << a << std::endl;
+#define IFLOGE(a) a
 #endif
 
 #ifndef GAMESDK_LOG_D
 #define LOGD(a)
+#define IFLOGD(a)
 #endif
 
 #ifndef GAMESDK_LOG_I
 #define LOGI(a)
+#define IFLOGI(a)
 #endif
 
 #ifndef GAMESDK_LOG_W
 #define LOGW(a)
+#define IFLOGW(a)
 #endif
 
 #ifndef GAMESDK_LOG_E
 #define LOGE(a)
+#define IFLOGE(a)
 #endif
 
 #endif

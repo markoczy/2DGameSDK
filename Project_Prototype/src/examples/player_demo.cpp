@@ -109,14 +109,14 @@ int playerDemo(float zoom) {
 
   // Create Player entity and Rotating child entity
   auto tex = AssetManager::GetTexture("res/textures/sample.png");
-  auto tex2 = AssetManager::GetTexture("res/textures/discus.png");
+  // auto tex2 = AssetManager::GetTexture("res/textures/discus.png");
   auto ent = new PlayerEntity(tex, 2.0, upPressed, downPressed, leftPressed, rightPressed);
-  auto ent2 = new RotatingEntity(tex2, 5.0);
+  // auto ent2 = new RotatingEntity(tex2, 5.0);
 
   // Layout entities in scene
   auto scene = new SceneGraph();
   auto parent = scene->AddEntity(ent); // scene->GetRoot()->AddChild(ent);
-  auto child = scene->AddEntity(ent, parent); // parent->AddChild(ent2);
+  scene->AddEntity(ent, parent); // parent->AddChild(ent2);
 
   // Create game
   GameOptions options{"My Game", sf::Vector2i(512, 512), zoom, 50};
@@ -130,4 +130,6 @@ int playerDemo(float zoom) {
 
   // Run Game
   app->Run();
+
+  return 0;
 }

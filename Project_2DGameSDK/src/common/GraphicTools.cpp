@@ -15,7 +15,7 @@ namespace game::helpers {
 
   std::vector<sf::Vector2f> GrahicTools::TransformPoints(std::vector<sf::Vector2f> vertices, sf::Transform transform) {
     auto ret = std::vector<sf::Vector2f>(vertices.size());
-    for(int i = 0; i < vertices.size(); i++) {
+    for(unsigned int i = 0; i < vertices.size(); i++) {
       ret[i] = transform.transformPoint(vertices[i]);
     }
     return ret;
@@ -23,7 +23,7 @@ namespace game::helpers {
 
   sf::VertexArray GrahicTools::CreateUniformVertexArray(std::vector<sf::Vector2f> points, sf::PrimitiveType type, sf::Color color) {
     auto ret = sf::VertexArray(type, points.size());
-    for(int i = 0; i < points.size(); i++) {
+    for(unsigned int i = 0; i < points.size(); i++) {
       ret[i].position = points[i];
       ret[i].color = color;
     }
@@ -43,8 +43,8 @@ namespace game::helpers {
   }
 
   std::tuple<bool, sf::Vector2f> GrahicTools::ShapesIntersect(std::vector<sf::Vector2f> shapeA, std::vector<sf::Vector2f> shapeB) {
-    for(int iA = 0; iA < shapeA.size() - 1; iA++) {
-      for(int iB = 0; iB < shapeB.size() - 1; iB++) {
+    for(unsigned int iA = 0; iA < shapeA.size() - 1; iA++) {
+      for(unsigned int iB = 0; iB < shapeB.size() - 1; iB++) {
         auto res = LinesIntersect(shapeA[iA], shapeA[iA + 1], shapeB[iB], shapeB[iB + 1]);
         if(std::get<0>(res)) {
           return res;

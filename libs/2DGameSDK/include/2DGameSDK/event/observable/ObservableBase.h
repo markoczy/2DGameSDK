@@ -20,6 +20,8 @@ namespace game {
    */
   class ObservableBase {
   public:
+    virtual ~ObservableBase() {}
+
     /**
      * @brief Updates the observable i.e. verifies if the observable was
      *        triggered. If triggered, the callback function of all registered
