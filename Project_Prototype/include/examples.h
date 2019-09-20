@@ -46,4 +46,6 @@ int playerDemoGTA2(float zoom = 2.0);
  */
 int chopperDemo();
 
+int box2dDemo();
+
 #endif

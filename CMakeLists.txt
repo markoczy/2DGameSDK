@@ -36,6 +36,19 @@ set(SFML_LIBRARIES_D ${SFML_SYSTEM_LIB_D} ${SFML_GRAPHICS_LIB_D} ${SFML_WINDOW_L
 set(SFML_DLL_DIR "${SFML_ROOT_DIR}/bin")
 
 ################################################################################
+# Setup Box2D
+################################################################################
+set(BOX2D_VERSION "2.3.1")
+set(BOX2D_ROOT_DIR "${CMAKE_HOME_DIRECTORY}/libs/BOX2D-${BOX2D_VERSION}")
+set(BOX2D_INCLUDE_DIR "${BOX2D_ROOT_DIR}/include")
+set(BOX2D_LIBRARIES_PATH "${BOX2D_ROOT_DIR}/lib")
+# Box2D libraries release
+set(BOX2D_LIB "${BOX2D_LIBRARIES_PATH}/libBox2D.dll.a")
+set(BOX2D_LIBRARIES ${BOX2D_LIB})
+# (Windows only!) copy BOX2D DLL's for convenience
+set(BOX2D_DLL_DIR "${BOX2D_ROOT_DIR}/bin")
+
+################################################################################
 # Setup  nlohmann json
 ################################################################################
 set(JSON_ROOT_DIR "${CMAKE_HOME_DIRECTORY}/libs/nlohmann-json")

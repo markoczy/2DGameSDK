@@ -30,17 +30,18 @@ source_group("inc" FILES ${HDRS})
 include_directories(
     ${SFML_INCLUDE_DIR}
     ${JSON_INCLUDE_DIR}
+    ${BOX2D_INCLUDE_DIR}
     # include shared headers
     ${PROJECT_SOURCE_DIR}/include
 )
 
 set(LIBS_DEBUG)
-foreach(lib; ${SFML_LIBRARIES_D})
+foreach(lib; ${SFML_LIBRARIES_D} ${BOX2D_LIBRARIES})
     list(APPEND LIBS_DEBUG debug ${lib})
 endforeach()
 
 set(LIBS_RELEASE)
-foreach(lib; ${SFML_LIBRARIES})
+foreach(lib; ${SFML_LIBRARIES} ${BOX2D_LIBRARIES})
     list(APPEND LIBS_RELEASE optimized ${lib})
 endforeach()
 
