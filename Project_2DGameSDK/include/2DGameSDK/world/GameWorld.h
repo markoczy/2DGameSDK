@@ -11,11 +11,13 @@
 #ifndef __GAME_WORLD_H__
 #define __GAME_WORLD_H__
 
+#include <Box2D/Box2D.h>
+#include <SFML/Graphics.hpp>
+
 #include <2DGameSDK/common/Helpers.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
 #include <2DGameSDK/world/material/MaterialMap.h>
 #include <2DGameSDK/world/tilemap/Tilemap.h>
-#include <SFML/Graphics.hpp>
 
 namespace game {
   /**
@@ -56,6 +58,7 @@ namespace game {
     Tilemap* mTilemap = nullptr;
     MaterialMap* mMaterialMap = nullptr;
     sf::Texture* mTexture = nullptr;
+    b2World* mPhysicsWorld = nullptr;
 
     void loadTilemap();
   };

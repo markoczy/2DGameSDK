@@ -20,6 +20,7 @@ namespace game {
 
     helpers::safeDelete(mTilemap);
     helpers::safeDelete(mMaterialMap);
+    helpers::safeDelete(mPhysicsWorld);
   }
 
   void GameWorld::Tick() {

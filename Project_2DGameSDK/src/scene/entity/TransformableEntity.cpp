@@ -16,4 +16,6 @@ namespace game {
   }
 
   void TransformableEntity::OnCollision(TransformableEntity*, sf::Vector2f) {}
+
+  b2Body* TransformableEntity::GetBody() { return nullptr; }
 } // namespace game

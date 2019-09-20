@@ -13,8 +13,10 @@
 
 #include <vector>
 
+#include <Box2D/Box2D.h>
 #include <SFML/Graphics.hpp>
 
+#include <2DGameSDK/common/Converters.h>
 #include <2DGameSDK/common/GraphicTools.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
 #include <2DGameSDK/scene/entity/TransformableEntity.h>
@@ -36,9 +38,17 @@ namespace game {
      * 
      * @param texture The Texture of the Entity
      */
-    SpriteTransformableEntity(int type, sf::Texture* texture);
+    SpriteTransformableEntity(int type,
+                              sf::Texture* texture,
+                              b2World* world,
+                              bool isCollidable = false,
+                              sf::Transformable initialTransform = sf::Transformable());
 
-    SpriteTransformableEntity(int type, sf::Texture* texture, std::vector<sf::Vector2f> collisionMask);
+    SpriteTransformableEntity(int type,
+                              sf::Texture* texture,
+                              std::vector<sf::Vector2f> collisionMask,
+                              b2World* world,
+                              sf::Transformable initialTransform = sf::Transformable());
 
     /**
      * @brief Destroys the Sprite Transformable Entity
@@ -75,6 +85,8 @@ namespace game {
   protected:
     sf::Sprite mSprite;
     std::vector<sf::Vector2f> mCollisionMask;
+    sf::Transformable mTransformable;
+    b2Body* mBody = nullptr;
   };
 
 } // namespace game

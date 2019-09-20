@@ -10,9 +10,9 @@ namespace game {
   // Constructor / Destructor
   // ###########################################################################
 
-  Game::Game() : mState(GameState{nullptr, nullptr}) {}
+  Game::Game(sf::Vector2f gravity) : mState(GameState{nullptr, nullptr}) {}
 
-  Game::Game(GameOptions options, SceneGraph* scene, GameWorld* world) : mOptions(options), mState(GameState{scene, world}) {
+  Game::Game(GameOptions options, SceneGraph* scene, GameWorld* world, sf::Vector2f, b2World* physics) : mOptions(options), mState(GameState{scene, world, physics}) {
     LOGD("Game contructor call");
   }
 

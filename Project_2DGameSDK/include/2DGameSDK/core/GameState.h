@@ -11,9 +11,11 @@
 #ifndef __GAME_STATE_H__
 #define __GAME_STATE_H__
 
+#include <Box2D/Box2D.h>
+#include <SFML/Graphics.hpp>
+
 #include <2DGameSDK/scene/SceneGraph.h>
 #include <2DGameSDK/world/GameWorld.h>
-#include <SFML/Graphics.hpp>
 
 namespace game {
   /**
@@ -32,6 +34,8 @@ namespace game {
      * 
      */
     GameWorld* World;
+
+    b2World* PhysicalWorld;
   };
 
 } // namespace game

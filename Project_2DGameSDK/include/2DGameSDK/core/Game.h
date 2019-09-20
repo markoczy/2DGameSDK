@@ -11,17 +11,20 @@
 #ifndef __GAME_H__
 #define __GAME_H__
 
+#include <chrono>
+#include <iostream>
+#include <thread>
+
+#include <Box2D/Box2D.h>
+#include <SFML/Graphics.hpp>
+#include <SFML/System.hpp>
+
 #include <2DGameSDK/common/Helpers.h>
 #include <2DGameSDK/core/GameOptions.h>
 #include <2DGameSDK/core/GameState.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
 #include <2DGameSDK/event/EventController.h>
 #include <2DGameSDK/event/observable/ObservableBase.h>
-#include <SFML/Graphics.hpp>
-#include <SFML/System.hpp>
-#include <chrono>
-#include <iostream>
-#include <thread>
 
 namespace game {
 
@@ -37,13 +40,13 @@ namespace game {
      * @brief Default empty constructor, Game is unusable until options,
      *        scene and world are set
      */
-    Game();
+    Game(sf::Vector2f gravity = sf::Vector2f());
 
     /**
      * @brief Full constructor, sets all needed objects to run the game
      * 
      */
-    Game(GameOptions options, SceneGraph* scene, GameWorld* world);
+    Game(GameOptions options, SceneGraph* scene, GameWorld* world, b2World* physics);
     ~Game();
 
     /**

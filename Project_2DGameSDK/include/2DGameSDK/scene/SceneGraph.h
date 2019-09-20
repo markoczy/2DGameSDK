@@ -13,6 +13,7 @@
 
 #include <map>
 
+#include <Box2D/Box2D.h>
 #include <SFML/Graphics.hpp>
 
 #include <2DGameSDK/core/GameOptions.h>
@@ -32,7 +33,7 @@ namespace game {
      * @brief Constructs a new Scene Graph object
      * 
      */
-    SceneGraph();
+    SceneGraph(b2World* physics);
 
     /**
      * @brief Destroys the Scene Graph object
@@ -53,11 +54,15 @@ namespace game {
      */
     void Render(sf::RenderTarget* target, GameOptions* options, sf::RenderStates states = sf::RenderStates::Default);
 
-    int AddEntity(TransformableEntity* entity, int parent = ROOT_NODE);
+    int AddEntity(TransformableEntity* entity);
+
+    int AddEntity(TransformableEntity* entity, int parent, b2JointDef jointDef);
 
   private:
     static int idCounter;
+
     std::map<int, SceneGraphNode*> mNodes;
+    b2World* mPhysics = nullptr;
 
     void tickNodes(SceneGraphNode* current);
     void renderNodes(SceneGraphNode* current, sf::RenderTarget* target, GameOptions* options, sf::RenderStates states = sf::RenderStates::Default);

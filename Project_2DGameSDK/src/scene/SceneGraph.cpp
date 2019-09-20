@@ -4,7 +4,7 @@ namespace game {
   const int SceneGraph::ROOT_NODE;
   int SceneGraph::idCounter = ROOT_NODE + 1;
 
-  SceneGraph::SceneGraph() {
+  SceneGraph::SceneGraph(b2World* physics) : mPhysics(physics) {
     mNodes[ROOT_NODE] = new SceneGraphNode(this, nullptr, nullptr);
   }
 
@@ -42,11 +42,24 @@ namespace game {
     renderNodes(mNodes[ROOT_NODE], target, options, states);
   }
 
-  int SceneGraph::AddEntity(TransformableEntity* entity, int parent) {
+  int SceneGraph::AddEntity(TransformableEntity* entity) {
+    auto root = mNodes[ROOT_NODE];
+    auto node = new SceneGraphNode(this, root, entity);
+    mNodes[idCounter] = node;
+    root->mChildren.push_back(node);
+    return idCounter++;
+  }
+
+  int SceneGraph::AddEntity(TransformableEntity* entity, int parent, b2JointDef jointDef) {
     auto parentNode = mNodes[parent];
     auto node = new SceneGraphNode(this, mNodes[parent], entity);
     mNodes[idCounter] = node;
     parentNode->mChildren.push_back(node);
+
+    jointDef.bodyA = parentNode->mEntity->GetBody();
+    jointDef.bodyB = entity->GetBody();
+    mPhysics->CreateJoint(&jointDef);
+
     return idCounter++;
   }
 

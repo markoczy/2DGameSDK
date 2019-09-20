@@ -11,9 +11,11 @@
 #ifndef __TRANSFORMABLE_ENTITY_H__
 #define __TRANSFORMABLE_ENTITY_H__
 
+#include <Box2D/Box2D.h>
+#include <SFML/Graphics.hpp>
+
 #include <2DGameSDK/dll/gamesdk_dll.h>
 #include <2DGameSDK/scene/entity/Entity.h>
-#include <SFML/Graphics.hpp>
 
 namespace game {
   // Forward declaration
@@ -60,6 +62,8 @@ namespace game {
     virtual sf::FloatRect GetAABB() = 0;
 
     virtual std::vector<sf::Vector2f> GetCollisionMask() = 0;
+
+    virtual b2Body* GetBody() = 0;
 
     virtual void OnCollision(TransformableEntity* other, sf::Vector2f point);
 
