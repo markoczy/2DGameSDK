@@ -52,3 +52,25 @@
 ### Status
 
 - Warnings auflösen (`-Wall`, `-Wpedantic`, `-Wextra`) -> 2h
+- POC Mit Box2D Physics Engine:
+  - Fehlschlag: Direkte Integration Physics im SceneGraph -> 4h
+    - Nach 4h konnten noch keine nennenswerte Ergebnisse erzielt werden
+      (siehe Branch `Box2dPOC2`)
+  - Einfache Physics Engine erstellt -> 1h
+    - Dokumentation nicht richtig gelesen (`SetBox`) -> 2h
+
+### Ausblick
+
+- Eine Physics Engine wäre eine hohe Bereicherung der Engine
+  - Wall und Entity Collisions über Physik möglich (auch ohne Reaction)
+  
+- Der Fehlversuch mit dem `SceneGraph` zeigt Schwierigkeiten mit Physics
+  - Physikalische Objekte müssen im SceneGraph Top-Level sein
+    (unter einander sind sie mit mech. Verbindungen verbunden)
+  - Nicht Physikalische `SceneGraph` pseudophysikalisch simulieren
+    (mit `body->SetTransform()`)
+  - Unteschiedliche Koordinaten Physikal, Visuell
+    - Phys. Welt lässt für Objekte einen Range von ca. 0.1m - 10m zu
+      Skalierung notwendig
+    - Phys. Welt geht vom Mittelpunkt des Objekts aus
+    - Phys. Welt ist y+ gegen Oben
