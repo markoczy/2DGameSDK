@@ -4,7 +4,164 @@
 using namespace std;
 using namespace game;
 
+float worldWidth = 50;
+float worldHeight = 30;
+
+int velocityIterations = 6;
+int positionIterations = 2;
+
+float groundWidth = 50;
+float groundHeight = 10;
+float groundX = 0;
+float groundY = 0;
+
+float boxWidth = 1;
+float boxHeight = 1;
+float boxX = 20;
+float boxY = 20;
+
+float getY(float hWorld, float hObject, float y) {
+  return hWorld - (hObject / 2) - y;
+}
+
+class PhysicalEntity {
+private:
+  sf::Vector2f mWorldDimension;
+  sf::Vector2f mDimension;
+
+  b2Body* mBody;
+  sf::RectangleShape* mSprite;
+
+  sf::Vector2f getPosition() {
+    auto pos = mBody->GetPosition();
+    float x = pos.x;
+    float y = mWorldDimension.y - pos.y;
+    return sf::Vector2f(x, y);
+  };
+
+public:
+  PhysicalEntity(b2World* world,
+                 bool isDynamic,
+                 sf::Texture* texture,
+                 sf::Vector2f position,
+                 sf::Vector2f dimension,
+                 sf::Vector2f worldDimension) : mDimension(dimension), mWorldDimension(worldDimension) {
+    b2BodyDef bodyDef;
+    bodyDef.type = isDynamic ? b2_dynamicBody : b2_staticBody;
+    float posX = position.x + dimension.x / 2;
+    float posY = worldDimension.y - position.y - dimension.y / 2;
+    bodyDef.position.Set(posX, posY);
+    mBody = world->CreateBody(&bodyDef);
+
+    b2PolygonShape shape;
+    shape.SetAsBox(dimension.x / 2, dimension.y / 2);
+
+    if(isDynamic) {
+      b2FixtureDef fixtureDef;
+      fixtureDef.shape = &shape;
+      fixtureDef.restitution = 0.5;
+      fixtureDef.density = 1.0f;
+      fixtureDef.friction = 0.3f;
+      mBody->CreateFixture(&fixtureDef);
+    } else {
+      mBody->CreateFixture(&shape, 0.0f);
+    }
+
+    mSprite = new sf::RectangleShape(dimension);
+    mSprite->setTexture(texture);
+    mSprite->setPosition(getPosition());
+    mSprite->setOrigin(dimension.x / 2, dimension.y / 2);
+  }
+
+  void Update(sf::Time dt) {}
+
+  void Render(sf::RenderTarget* target) {
+    auto pos = mBody->GetPosition();
+    float rot = (360 * mBody->GetAngle()) / 6.28;
+    mSprite->setPosition(getPosition());
+    // cout << "Angle is: " << mBody->GetAngle() << endl;
+    mSprite->setRotation(rot);
+
+    target->draw(*mSprite);
+  }
+
+  sf::Vector2f GetDimension() {
+    throw std::runtime_error("nyi");
+  }
+};
+
+std::vector<b2Vec2> getShape(float width, float height) {
+  std::vector<b2Vec2> ret(4);
+  ret[0] = b2Vec2(0, 0);
+  ret[1] = b2Vec2(width, 0);
+  ret[2] = b2Vec2(width, height);
+  ret[3] = b2Vec2(0, height);
+  return ret;
+}
+
 int box2dDemo() {
+  sf::Vector2f worldDim(worldWidth, worldHeight);
+  auto world = b2World(b2Vec2(0.0f, -10.0f));
+  vector<PhysicalEntity> entities;
+
+  sf::Texture boxTexture;
+  boxTexture.loadFromFile("res/textures/somebox.png");
+
+  auto box = PhysicalEntity(&world, true, &boxTexture, sf::Vector2f(20, 0), sf::Vector2f(1, 1), worldDim);
+  entities.push_back(box);
+
+  auto ground = PhysicalEntity(&world, false, &boxTexture, sf::Vector2f(0, 20), sf::Vector2f(50, 10), worldDim);
+  entities.push_back(ground);
+
+  for(int i = 0; i < 20; i++) {
+    auto x = rand() % 50 + 0;
+    auto y = rand() % 10 + 0;
+
+    auto ent = PhysicalEntity(&world, true, &boxTexture, sf::Vector2f(x, y), sf::Vector2f(1, 1), worldDim);
+    entities.push_back(ent);
+  }
+
+  sf::RenderWindow window(sf::VideoMode(800, 600), "SFML window");
+  window.setView(sf::View(sf::FloatRect(0, 0, worldWidth, worldHeight)));
+
+  sf::Clock spawnBox;
+  sf::Clock clock;
+  clock.restart();
+  while(window.isOpen()) {
+    auto time = clock.getElapsedTime();
+    clock.restart();
+    world.Step(time.asSeconds(), velocityIterations, positionIterations);
+
+    if(spawnBox.getElapsedTime().asMilliseconds() > 100) {
+      auto x = rand() % 50 + 0;
+      auto y = rand() % 10 + 0;
+
+      auto ent = PhysicalEntity(&world, true, &boxTexture, sf::Vector2f(x, y), sf::Vector2f(1, 1), worldDim);
+      entities.push_back(ent);
+      spawnBox.restart();
+    }
+
+    // Process events
+    sf::Event event;
+    while(window.pollEvent(event)) {
+      // Close window: exit
+      if(event.type == sf::Event::Closed)
+        window.close();
+    }
+
+    // Clear screen
+    window.clear(sf::Color::White);
+    for(auto iEnt : entities) {
+      iEnt.Render(&window);
+    }
+    // Update the window
+    window.display();
+  }
+
+  return 0;
+}
+
+int box2dDemoOld() {
   // Define the gravity vector.
   b2Vec2 gravity(0.0f, -10.0f);
 
@@ -13,7 +170,7 @@ int box2dDemo() {
 
   // Define the ground body.
   b2BodyDef groundBodyDef;
-  groundBodyDef.position.Set(0.0f, -10.0f);
+  groundBodyDef.position.Set(groundX, groundY);
 
   // Call the body factory which allocates memory for the ground body
   // from a pool and creates the ground box shape (also from a pool).
@@ -24,56 +181,88 @@ int box2dDemo() {
   b2PolygonShape groundBox;
 
   // The extents are the half-widths of the box.
-  groundBox.SetAsBox(50.0f, 10.0f);
-
+  groundBox.SetAsBox(groundWidth / 2, groundHeight / 2);
   // Add the ground fixture to the ground body.
   groundBody->CreateFixture(&groundBox, 0.0f);
+
+  // auto ground = sf::Sprite();
+  sf::RectangleShape ground;
+  ground.setFillColor(sf::Color::Green);
+  ground.setSize(sf::Vector2f(groundWidth, groundHeight));
+  // ground.setPosition(groundX, groundY);
 
   // Define the dynamic body. We set its position and call the body factory.
   b2BodyDef bodyDef;
   bodyDef.type = b2_dynamicBody;
-  bodyDef.position.Set(0.0f, 4.0f);
-  b2Body* body = world.CreateBody(&bodyDef);
+  bodyDef.position.Set(boxX, boxY);
+  b2Body* boxBody = world.CreateBody(&bodyDef);
 
   // Define another box shape for our dynamic body.
   b2PolygonShape dynamicBox;
-  dynamicBox.SetAsBox(1.0f, 1.0f);
-
+  auto boxShape = getShape(boxWidth, boxHeight);
+  dynamicBox.SetAsBox(boxWidth / 2, boxHeight / 2);
   // Define the dynamic body fixture.
   b2FixtureDef fixtureDef;
   fixtureDef.shape = &dynamicBox;
-
+  // fixtureDef.restitution = 1;
   // Set the box density to be non-zero, so it will be dynamic.
   fixtureDef.density = 1.0f;
-
   // Override the default friction.
   fixtureDef.friction = 0.3f;
-
   // Add the shape to the body.
-  body->CreateFixture(&fixtureDef);
+  boxBody->CreateFixture(&fixtureDef);
 
-  // Prepare for simulation. Typically we use a time step of 1/60 of a
-  // second (60Hz) and 10 iterations. This provides a high quality simulation
-  // in most game scenarios.
-  float32 timeStep = 1.0f / 60.0f;
-  int32 velocityIterations = 6;
-  int32 positionIterations = 2;
+  sf::RectangleShape box;
+  box.setFillColor(sf::Color::Blue);
+  box.setSize(sf::Vector2f(boxWidth, boxHeight));
 
-  // This is our little game loop.
-  for(int32 i = 0; i < 60; ++i) {
-    // Instruct the world to perform a single step of simulation.
-    // It is generally best to keep the time step and iterations fixed.
-    world.Step(timeStep, velocityIterations, positionIterations);
+  sf::RenderWindow window(sf::VideoMode(800, 600), "SFML window");
+  window.setView(sf::View(sf::FloatRect(0, 0, worldWidth, worldHeight)));
 
-    // Now print the position and angle of the body.
-    b2Vec2 position = body->GetPosition();
-    float32 angle = body->GetAngle();
+  sf::Clock clock;
+  clock.restart();
 
-    printf("%4.2f %4.2f %4.2f\n", position.x, position.y, angle);
+  sf::CircleShape groundZero = sf::CircleShape(0.5);
+  groundZero.setFillColor(sf::Color::Magenta);
+  sf::CircleShape boxZero = sf::CircleShape(0.5);
+  boxZero.setFillColor(sf::Color::Magenta);
+
+  // Start the game loop
+  while(window.isOpen()) {
+    auto time = clock.getElapsedTime();
+    clock.restart();
+    world.Step(time.asSeconds(), velocityIterations, positionIterations);
+
+    // Process events
+    sf::Event event;
+    while(window.pollEvent(event)) {
+      // Close window: exit
+      if(event.type == sf::Event::Closed)
+        window.close();
+    }
+
+    auto groundPos = groundBody->GetPosition();
+    ground.setPosition(groundPos.x, getY(worldHeight, groundHeight, groundPos.y));
+    groundZero.setPosition(groundPos.x, getY(worldHeight, groundHeight, groundPos.y));
+
+    auto boxPos = boxBody->GetPosition();
+    auto boxAngle = boxBody->GetAngle();
+    box.setPosition(boxPos.x, getY(worldHeight, boxHeight, boxPos.y));
+    boxZero.setPosition(boxPos.x, getY(worldHeight, boxHeight, boxPos.y));
+
+    // Clear screen
+    window.clear(sf::Color::White);
+    // Draw the sprite
+    window.draw(ground);
+    window.draw(groundZero);
+    window.draw(box);
+    window.draw(boxZero);
+    // Update the window
+    window.display();
+
+    printf("%4.2f %4.2f\n", groundPos.x, groundPos.y);
+    printf("%4.2f %4.2f %4.2f\n", boxPos.x, boxPos.y, boxAngle);
   }
-
-  // When the world destructor is called, all bodies and joints are freed. This can
-  // create orphaned pointers, so be careful about your world management.
 
   return 0;
 }
