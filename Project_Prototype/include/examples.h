@@ -10,11 +10,14 @@
 #include <chrono>
 #include <cmath>
 #include <iostream>
+#include <stdio.h>
 #include <thread>
 #include <tuple>
 
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
+
+#include <chipmunk/chipmunk.h>
 
 /**
  * @brief Creates two rotating Entities where the second is child of the first
@@ -45,5 +48,7 @@ int playerDemoGTA2(float zoom = 2.0);
  * @return int success state
  */
 int chopperDemo();
+
+int chipmunkDemo();
 
 #endif
