@@ -59,7 +59,7 @@ public:
     if(isDynamic) {
       b2FixtureDef fixtureDef;
       fixtureDef.shape = &shape;
-      fixtureDef.restitution = 0.5;
+      // fixtureDef.restitution = 1.0f;
       fixtureDef.density = 1.0f;
       fixtureDef.friction = 0.3f;
       mBody->CreateFixture(&fixtureDef);
@@ -110,7 +110,7 @@ int box2dDemo() {
   auto box = PhysicalEntity(&world, true, &boxTexture, sf::Vector2f(20, 0), sf::Vector2f(1, 1), worldDim);
   entities.push_back(box);
 
-  auto ground = PhysicalEntity(&world, false, &boxTexture, sf::Vector2f(0, 20), sf::Vector2f(50, 10), worldDim);
+  auto ground = PhysicalEntity(&world, false, &boxTexture, sf::Vector2f(0, 25), sf::Vector2f(50, 10), worldDim);
   entities.push_back(ground);
 
   for(int i = 0; i < 20; i++) {
