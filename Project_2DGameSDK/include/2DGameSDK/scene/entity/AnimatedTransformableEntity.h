@@ -62,7 +62,7 @@ namespace game {
      * 
      * @return sf::Transformable* The Reference of the Transormable Object
      */
-    virtual sf::Transformable* GetTransformable();
+    // virtual sf::Transformable* GetTransformable();
 
     /**
      * @brief Sets the current Animation State
@@ -76,10 +76,18 @@ namespace game {
 
     virtual std::vector<sf::Vector2f> GetCollisionMask();
 
+    virtual void OnParentTransformed(sf::Transform accumulated);
+
   protected:
+    // TODO anim states as sprite-collisionMask combination
     std::map<int, sf::Texture*> mAnimStates;
     sf::Sprite mCurState;
-    sf::Transformable mTransform;
+
+    sf::FloatRect mAABB;
+    std::vector<sf::Vector2f> mTransformedCollisionMask;
+
+    void updateAABB();
+    void updateCollisionMask();
   };
 
 } // namespace game

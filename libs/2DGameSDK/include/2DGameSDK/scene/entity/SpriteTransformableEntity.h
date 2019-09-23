@@ -66,15 +66,23 @@ namespace game {
      * 
      * @return sf::Transformable* The Reference of the Transormable Object
      */
-    sf::Transformable* GetTransformable();
+    // sf::Transformable* GetTransformable();
 
     virtual sf::FloatRect GetAABB();
 
     virtual std::vector<sf::Vector2f> GetCollisionMask();
 
+    virtual void OnParentTransformed(sf::Transform accumulated);
+
   protected:
     sf::Sprite mSprite;
     std::vector<sf::Vector2f> mCollisionMask;
+
+    sf::FloatRect mAABB;
+    std::vector<sf::Vector2f> mTransformedCollisionMask;
+
+    void updateAABB();
+    void updateCollisionMask();
   };
 
 } // namespace game

@@ -13,14 +13,12 @@
 
 #include <2DGameSDK/dll/gamesdk_dll.h>
 #include <2DGameSDK/scene/entity/Entity.h>
+
 #include <SFML/Graphics.hpp>
 
 namespace game {
   // Forward declaration
-  class SceneGraphNode {
-  public:
-    void OnEntityMoved(sf::Transform accumulated);
-  };
+  class SceneGraphNode;
 
   /**
    * @brief Abstract class that defines an Entity that is Transformable and can
@@ -82,6 +80,8 @@ namespace game {
     SceneGraphNode* mGraphNode = nullptr;
     sf::Transform mTransform;
     sf::Transform mAccTransform;
+    sf::Transform mFullTransform;
+
     bool mIsCollidable;
   };
 

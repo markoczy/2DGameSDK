@@ -23,15 +23,13 @@ namespace game {
   void SpriteTransformableEntity::Tick() {}
 
   void SpriteTransformableEntity::Render(sf::RenderTarget* target, sf::RenderStates states) {
-    states.transform = states.transform * mAccTransform;
-
-    //* Note: The render states contain the accumulated transformation
+    states.transform = states.transform * mFullTransform;
     target->draw(mSprite, states);
   }
 
-  sf::Transformable* SpriteTransformableEntity::GetTransformable() {
-    return &mSprite;
-  }
+  // sf::Transformable* SpriteTransformableEntity::GetTransformable() {
+  //   return &mSprite;
+  // }
 
   sf::FloatRect SpriteTransformableEntity::GetAABB() {
     return mAABB;
@@ -47,18 +45,18 @@ namespace game {
 
   void SpriteTransformableEntity::OnParentTransformed(sf::Transform accumulated) {
     TransformableEntity::OnParentTransformed(accumulated);
-    auto transform = GetAccumulatedTransform() * GetTransform();
 
-    updateAABB(transform);
-    updateCollisionMask(transform);
+    mFullTransform = GetAccumulatedTransform() * GetTransform();
+    updateAABB();
+    updateCollisionMask();
   }
 
-  void SpriteTransformableEntity::updateAABB(sf::Transform fullTransform) {
-    mAABB = fullTransform.transformRect(mSprite.getLocalBounds());
+  void SpriteTransformableEntity::updateAABB() {
+    mAABB = mFullTransform.transformRect(mSprite.getLocalBounds());
   }
 
-  void SpriteTransformableEntity::updateCollisionMask(sf::Transform fullTransform) {
-    mTransformedCollisionMask = helpers::GrahicTools::TransformPoints(mCollisionMask, fullTransform);
+  void SpriteTransformableEntity::updateCollisionMask() {
+    mTransformedCollisionMask = helpers::GrahicTools::TransformPoints(mCollisionMask, mFullTransform);
   }
 
 } // namespace game
