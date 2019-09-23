@@ -74,3 +74,21 @@
       Skalierung notwendig
     - Phys. Welt geht vom Mittelpunkt des Objekts aus
     - Phys. Welt ist y+ gegen Oben
+
+## 21.09.2019
+
+### Status
+
+- Chipmunk POC umgesetzt -> 6h
+
+### Ausblick
+
+- Vgl. Chipmnunk Box2D:
+  - Beide verwenden Objektzentrische Koordinaten
+  - Beide sind ausreichend dokumentiert (Beispiele + Dokumentation)
+  - Chipmunk API komfortabler und intuitiver (trotz C..)
+  - Box2D bietet mehr Möglichkeiten (e.g. Collision Sensor)
+  - Box2D bedingt Skalierung (Bereich: 0.1m-10m)
+  - Unterschiedliche Struktur:
+    - Box2D: `World > Body > Shape > Fixture` 
+    - Chipmunk: `Space > Body > Shape`
