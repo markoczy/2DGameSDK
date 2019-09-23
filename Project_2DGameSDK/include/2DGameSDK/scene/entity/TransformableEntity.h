@@ -17,7 +17,10 @@
 
 namespace game {
   // Forward declaration
-  class SceneGraphNode;
+  class SceneGraphNode {
+  public:
+    void OnEntityMoved(sf::Transform accumulated);
+  };
 
   /**
    * @brief Abstract class that defines an Entity that is Transformable and can
@@ -41,30 +44,44 @@ namespace game {
     virtual ~TransformableEntity();
 
     /**
+     * @brief Retreives the reference to the SFML Transformable wich can
+     *        be used to apply transformations to the Transformable Entity.
+     * 
+     * @return sf::Transformable* The Reference of the Transormable Object
+     */
+    // virtual sf::Transformable* GetTransformable() = 0;
+
+    bool IsCollidable();
+
+    virtual sf::Transform GetTransform();
+
+    virtual sf::Transform GetAccumulatedTransform();
+
+    /**
      * @brief Set the Graph Node object
      * 
      * @param graphNode The corresponding SceneGraphNode
      */
     void SetGraphNode(SceneGraphNode* graphNode);
 
-    bool IsCollidable();
+    virtual void SetTransform(sf::Transform transform);
 
-    /**
-     * @brief Retreives the reference to the SFML Transformable wich can
-     *        be used to apply transformations to the Transformable Entity.
-     * 
-     * @return sf::Transformable* The Reference of the Transormable Object
-     */
-    virtual sf::Transformable* GetTransformable() = 0;
+    virtual void Transform(sf::Transform transform);
+
+    virtual void OnParentTransformed(sf::Transform accumulated);
+
+    virtual void OnCollision(TransformableEntity* other, sf::Vector2f point);
+
+    // --- Pure virtual Functions: ---
 
     virtual sf::FloatRect GetAABB() = 0;
 
     virtual std::vector<sf::Vector2f> GetCollisionMask() = 0;
 
-    virtual void OnCollision(TransformableEntity* other, sf::Vector2f point);
-
   protected:
     SceneGraphNode* mGraphNode = nullptr;
+    sf::Transform mTransform;
+    sf::Transform mAccTransform;
     bool mIsCollidable;
   };
 

@@ -72,9 +72,17 @@ namespace game {
 
     virtual std::vector<sf::Vector2f> GetCollisionMask();
 
+    virtual void OnParentTransformed(sf::Transform accumulated);
+
   protected:
     sf::Sprite mSprite;
     std::vector<sf::Vector2f> mCollisionMask;
+
+    sf::FloatRect mAABB;
+    std::vector<sf::Vector2f> mTransformedCollisionMask;
+
+    void updateAABB(sf::Transform fullTransform);
+    void updateCollisionMask(sf::Transform fullTransform);
   };
 
 } // namespace game

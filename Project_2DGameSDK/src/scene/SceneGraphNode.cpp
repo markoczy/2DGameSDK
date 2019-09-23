@@ -15,20 +15,32 @@ namespace game {
     helpers::safeDelete(mEntity);
   }
 
-  sf::Transform SceneGraphNode::GetCurTransform() {
-    if(mEntity == nullptr) {
-      return _ZERO_TRANSFORM;
-    }
-    return mEntity->GetTransformable()->getTransform();
-  }
+  void SceneGraphNode::OnEntityTransformed(sf::Transform accumulated) {
+    for(auto iChild : mChildren) {
+      auto ent = iChild->mEntity;
+      if(ent != nullptr) {
+        ent->OnParentTransformed(accumulated);
+        auto parentTransform = ent->GetAccumulatedTransform() * ent->GetTransform();
 
-  sf::Transform SceneGraphNode::GetAccumulatedTransform() {
-    auto transform = Transform();
-    auto cur = mParent;
-    while(cur != nullptr) {
-      transform *= cur->GetCurTransform();
-      cur = cur->mParent;
+        //TODO recursive overhead..
+        iChild->OnEntityTransformed(parentTransform);
+      }
     }
-    return transform;
   }
+  // sf::Transform SceneGraphNode::GetCurTransform() {
+  //   if(mEntity == nullptr) {
+  //     return _ZERO_TRANSFORM;
+  //   }
+  //   return mEntity->GetTransformable()->getTransform();
+  // }
+
+  // sf::Transform SceneGraphNode::GetAccumulatedTransform() {
+  //   auto transform = Transform();
+  //   auto cur = mParent;
+  //   while(cur != nullptr) {
+  //     transform *= cur->GetCurTransform();
+  //     cur = cur->mParent;
+  //   }
+  //   return transform;
+  // }
 } // namespace game

@@ -26,8 +26,8 @@ namespace game {
             if(std::get<0>(intersect)) {
               // TODO performance!!
               auto pt = std::get<1>(intersect);
-              auto invA = entA->GetTransformable()->getTransform().getInverse();
-              auto invB = entB->GetTransformable()->getTransform().getInverse();
+              auto invA = entA->GetTransform().getInverse();
+              auto invB = entB->GetTransform().getInverse();
 
               entA->OnCollision(entB, invA.transformPoint(pt));
               entB->OnCollision(entA, invB.transformPoint(pt));
@@ -65,7 +65,7 @@ namespace game {
 
     if(entity != nullptr) {
       entity->Render(target, states);
-      states = sf::RenderStates(states.transform * entity->GetTransformable()->getTransform());
+      // states = sf::RenderStates(states.transform * entity->GetTransform());
 
       if(options->RenderAABB) {
         auto aabb = entity->GetAABB();
