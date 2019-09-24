@@ -92,3 +92,25 @@
   - Unterschiedliche Struktur:
     - Box2D: `World > Body > Shape > Fixture` 
     - Chipmunk: `Space > Body > Shape`
+
+## 24.09.2019
+
+### Status
+
+- Entity Refactoring umgesetzt -> 6h
+  - Funktion `GetTransformable` gelöscht, bessere Kapselung
+  - Neue Funktionen: `Transform`, `SetTransform`, `GetTransform`
+  - Entity wird nur aktualisiert wenn Parent oder Entity bewegt wird
+  - Kollisionsmasken und AABB können in der Entity gespeichert werden
+    und müssen nicht bei jeder Abfrage neu berechnet werden
+  - Klasse `TransformableEntity` Speichert alle Transformationen:
+    - Transformation der Entity selbst: `Transform`
+    - Akkumulierte Transformation der Parents: `AccTransform`
+    - Transformation Parents mal Transfomrtaion Ent.: `FullTransform`
+
+### Ausblick
+
+- Fixed Update Funktion?
+  - Möglichkeit alle Transformationen einmalig pro Tick zu berechnen
+  - Alternativen? (innerhalb Tick möglich da nicht sicher ob ein Parent
+    vorher aktualisiert wird, alternativ dies garantieren..)
