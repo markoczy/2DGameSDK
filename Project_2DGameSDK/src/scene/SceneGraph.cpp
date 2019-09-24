@@ -65,7 +65,6 @@ namespace game {
 
     if(entity != nullptr) {
       entity->Render(target, states);
-      // states = sf::RenderStates(states.transform * entity->GetTransform());
 
       if(options->RenderAABB) {
         auto aabb = entity->GetAABB();
