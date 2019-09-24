@@ -13,6 +13,7 @@
 
 #include <2DGameSDK/dll/gamesdk_dll.h>
 #include <2DGameSDK/scene/entity/Entity.h>
+
 #include <SFML/Graphics.hpp>
 
 namespace game {
@@ -40,6 +41,12 @@ namespace game {
      */
     virtual ~TransformableEntity();
 
+    bool IsCollidable();
+
+    virtual sf::Transform GetTransform();
+
+    virtual sf::Transform GetAccumulatedTransform();
+
     /**
      * @brief Set the Graph Node object
      * 
@@ -47,25 +54,29 @@ namespace game {
      */
     void SetGraphNode(SceneGraphNode* graphNode);
 
-    bool IsCollidable();
+    virtual void SetTransform(sf::Transform transform);
 
-    /**
-     * @brief Retreives the reference to the SFML Transformable wich can
-     *        be used to apply transformations to the Transformable Entity.
-     * 
-     * @return sf::Transformable* The Reference of the Transormable Object
-     */
-    virtual sf::Transformable* GetTransformable() = 0;
+    virtual void Transform(sf::Transform transform);
+
+    virtual void OnParentTransformed(sf::Transform accumulated);
+
+    virtual void OnCollision(TransformableEntity* other, sf::Vector2f point);
+
+    // --- Pure virtual Functions: ---
 
     virtual sf::FloatRect GetAABB() = 0;
 
     virtual std::vector<sf::Vector2f> GetCollisionMask() = 0;
 
-    virtual void OnCollision(TransformableEntity* other, sf::Vector2f point);
-
   protected:
     SceneGraphNode* mGraphNode = nullptr;
+    sf::Transform mTransform;
+    sf::Transform mAccTransform;
+    sf::Transform mFullTransform;
+
     bool mIsCollidable;
+
+    virtual void onEntityTransformed();
   };
 
 } // namespace game

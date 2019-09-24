@@ -46,19 +46,7 @@ namespace game {
      */
     ~SceneGraphNode();
 
-    /**
-     * @brief Retreives the Transformation of this Node only
-     *
-     * @return sf::Transform The current Transformation
-     */
-    sf::Transform GetCurTransform();
-
-    /**
-     * @brief Retreives the Transformation of all parent Nodes
-     *
-     * @return sf::Transform The accumulated Transformation
-     */
-    sf::Transform GetAccumulatedTransform();
+    void OnEntityTransformed(sf::Transform accumulated);
 
   private:
     friend class SceneGraph;

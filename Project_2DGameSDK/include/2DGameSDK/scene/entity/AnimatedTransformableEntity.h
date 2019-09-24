@@ -57,14 +57,6 @@ namespace game {
     virtual void Render(sf::RenderTarget* target, sf::RenderStates states = sf::RenderStates::Default);
 
     /**
-     * @brief Retreives the reference to the SFML Transformable wich can
-     *        be used to apply transformations to the Transformable Entity.
-     * 
-     * @return sf::Transformable* The Reference of the Transormable Object
-     */
-    virtual sf::Transformable* GetTransformable();
-
-    /**
      * @brief Sets the current Animation State
      * 
      * @param state The Animation State (must match to any key of the 
@@ -76,10 +68,18 @@ namespace game {
 
     virtual std::vector<sf::Vector2f> GetCollisionMask();
 
+    virtual void OnParentTransformed(sf::Transform accumulated);
+
   protected:
+    // TODO anim states as sprite-collisionMask combination
     std::map<int, sf::Texture*> mAnimStates;
     sf::Sprite mCurState;
-    sf::Transformable mTransform;
+
+    sf::FloatRect mAABB;
+    std::vector<sf::Vector2f> mTransformedCollisionMask;
+
+    void updateAABB();
+    void updateCollisionMask();
   };
 
 } // namespace game

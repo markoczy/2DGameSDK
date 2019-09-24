@@ -10,7 +10,7 @@ static const float _OFFSET = 90;
 
 /**
  * @brief Test Entity: Rotates on every tick
- * 
+ *
  */
 class RotatingEntity : public SpriteTransformableEntity {
 public:
@@ -20,17 +20,17 @@ public:
                  float rotPerTick,
                  sf::Vector2f pos = sf::Vector2f()) : SpriteTransformableEntity(type, texture, collisionMask), mRot(rotPerTick) {
     auto rect = mSprite.getTextureRect();
-    // cout << "Texture rect: w = " << rect.width << ", h = " << rect.height << endl;
-    GetTransformable()->setOrigin(float(rect.width) / 2.0, float(rect.height) / 2.0);
-    GetTransformable()->setPosition(pos);
+    mCenter = sf::Vector2f(rect.width / 2, rect.height / 2);
+    SetTransform(sf::Transform().translate(pos));
   }
 
   void Tick() {
-    GetTransformable()->rotate(mRot);
+    Transform(sf::Transform().rotate(mRot, mCenter));
   }
 
 private:
   float mRot;
+  sf::Vector2f mCenter;
 };
 
 class ChopperEntity : public SpriteTransformableEntity {
@@ -58,25 +58,22 @@ public:
     mRight->SubscribeTo(right);
 
     auto rect = mSprite.getTextureRect();
-    GetTransformable()->setOrigin(float(rect.width) / 2.0, float(rect.height) / 2.0);
-    GetTransformable()->setPosition(pos);
-    GetTransformable()->setRotation(0);
+    mCenter = sf::Vector2f(rect.width / 2, rect.height / 2);
+    SetTransform(sf::Transform().translate(pos));
     mDir = sf::Vector2f(0, -1);
   }
 
   void Tick() {
-    auto transformable = GetTransformable();
-    // rotate
+    sf::Transform transform;
     if(mDw != 0) {
-      transformable->rotate(mDw);
-      float rot = _OFFSET - transformable->getRotation();
-      float rotRad = (rot * 3.141) / 180.0;
-      mDir = sf::Vector2f(cos(rotRad), -sin(rotRad));
+      transform.rotate(mDw, mCenter);
+      mAngle += mDw;
     }
     // translate
     else if(mDt.x != 0 || mDt.y != 0) {
-      transformable->move(mDt);
+      transform.translate(mDt);
     }
+    Transform(transform);
     mDt = sf::Vector2f();
     mDw = 0.0;
   }
@@ -112,7 +109,9 @@ private:
   // Delta Rotation of current tick
   float mDw = 0;
 
+  float mAngle;
   sf::Vector2f mDir;
+  sf::Vector2f mCenter;
 
   // Needed for cleanup
   Observer<EmptyEventData>* mUp;
@@ -176,7 +175,7 @@ int chopperDemo() {
   auto ent = new ChopperEntity(tex, chopperCollisionMask, 2.0, 5.0, upPressed, downPressed, leftPressed, rightPressed, sf::Vector2f(50, 50));
 
   auto rotorCollisionMask = getRotorCollisionMask();
-  auto ent2 = new RotatingEntity(_PLAYER_TYPE, tex2, rotorCollisionMask, 15.0, sf::Vector2f(8, 15));
+  auto ent2 = new RotatingEntity(_PLAYER_TYPE, tex2, rotorCollisionMask, 15.0, sf::Vector2f(-5, 2));
 
   // auto tex3 = AssetManager::GetTexture("res/textures/heli/rotor.png");
   auto enemy = new RotatingEntity(_ENEMY_TYPE, tex2, rotorCollisionMask, 15.0, sf::Vector2f(200, 200));

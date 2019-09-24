@@ -32,23 +32,20 @@ public:
     mRight->SubscribeTo(right);
 
     SetAnimState(1);
-
     auto rect = mCurState.getTextureRect();
-    GetTransformable()->setOrigin(float(rect.width) / 2.0, float(rect.height) / 2.0);
-    GetTransformable()->setPosition(pos);
-    GetTransformable()->setRotation(0);
+    mCenter = sf::Vector2f(rect.width / 2, rect.height / 2);
+
+    SetTransform(sf::Transform().translate(pos));
     mDir = sf::Vector2f(0, -1);
   }
 
   void Tick() {
-    auto transformable = GetTransformable();
+    sf::Transform transform;
     if(mDw != 0) {
-      transformable->rotate(mDw);
-      float rot = _OFFSET - transformable->getRotation();
-      float rotRad = (rot * 3.141) / 180.0;
-      mDir = sf::Vector2f(cos(rotRad), -sin(rotRad));
+      transform.rotate(mDw, mCenter);
+      mAngle += mDw;
     } else if(mDt.x != 0 || mDt.y != 0) {
-      transformable->move(mDt);
+      transform.translate(mDt);
 
       // walk animation
       SetAnimState(_WALK_ANIM[mCurWalk]);
@@ -63,6 +60,7 @@ public:
     } else {
       SetAnimState(0);
     }
+    Transform(transform);
     mDt = sf::Vector2f();
     mDw = 0.0;
   }
@@ -84,6 +82,7 @@ public:
   }
 
 private:
+  sf::Vector2f mCenter;
   int mCurWalk = 0;
   int mCurSkip = 0;
   float mSpeed, mRotSpeed;
@@ -92,6 +91,7 @@ private:
   // Delta Rotation of current tick
   float mDw = 0;
 
+  float mAngle;
   sf::Vector2f mDir;
 
   // Needed for cleanup

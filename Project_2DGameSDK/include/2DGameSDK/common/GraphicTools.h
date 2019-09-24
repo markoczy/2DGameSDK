@@ -7,9 +7,12 @@
 
 #include <SFML/Graphics.hpp>
 
+#include <2DGameSDK/common/Constants.h>
+#include <2DGameSDK/dll/gamesdk_dll.h>
+
 namespace game::helpers {
 
-  class GrahicTools {
+  class GAMESDK_DLL GrahicTools {
   public:
     static std::vector<sf::Vector2f> GetRectBoundary(sf::FloatRect rect);
 
@@ -20,6 +23,8 @@ namespace game::helpers {
     static std::tuple<bool, sf::Vector2f> LinesIntersect(sf::Vector2f a1, sf::Vector2f b1, sf::Vector2f a2, sf::Vector2f b2);
 
     static std::tuple<bool, sf::Vector2f> ShapesIntersect(std::vector<sf::Vector2f> shapeA, std::vector<sf::Vector2f> shapeB);
+
+    sf::Transform GetRotationAroundPoint(sf::Vector2f pt, float angleDeg);
 
   private:
     GrahicTools() {}

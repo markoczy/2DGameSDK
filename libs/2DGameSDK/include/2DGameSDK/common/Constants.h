@@ -14,6 +14,13 @@
 #include <SFML/Graphics.hpp>
 
 namespace game::constants {
+
+  const float PI = 3.14159265358979323846;
+  const float PI_2 = 3.14159265358979323846;
+
+  const float DEG_TO_RAD = PI / 180;
+  const float RAD_TO_DEG = 180 / PI;
+
   /**
    * @brief SFML 2D Vector (0, 0)
    */

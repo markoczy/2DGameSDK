@@ -54,4 +54,15 @@ namespace game::helpers {
     return _NO_COLLISION;
   }
 
+  sf::Transform GrahicTools::GetRotationAroundPoint(sf::Vector2f pt, float angleDeg) {
+    float tx = pt.x;
+    float ty = pt.y;
+    float phi = constants::DEG_TO_RAD * angleDeg;
+    return sf::Transform(cos(phi), sin(phi), cos(phi) * tx + sin(phi) * ty - tx,
+                         -sin(phi), cos(phi), cos(phi) * ty - sin(phi) * tx - ty, 0, 0, 1);
+  }
+
+  // sf::Transform GraphicTools::GetRotationAroundPoint(sf::Vector2f pt, float angleDeg) {
+  // }
+
 } // namespace game::helpers

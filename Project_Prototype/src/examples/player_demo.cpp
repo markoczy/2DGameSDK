@@ -40,7 +40,8 @@ public:
 
   void Tick() {
     if(mDt.x != 0 || mDt.y != 0) {
-      GetTransformable()->move(mDt);
+      Transform(sf::Transform().translate(mDt));
+      // GetTransformable()->move(mDt);
       mDt = sf::Vector2f();
     }
   }
@@ -75,24 +76,27 @@ private:
 
 /**
  * @brief Test Entity: Rotates on every tick
- * 
+ *
  */
 class RotatingEntity : public SpriteTransformableEntity {
 public:
-  RotatingEntity(sf::Texture* texture,
+  RotatingEntity(int type,
+                 sf::Texture* texture,
+                 std::vector<sf::Vector2f> collisionMask,
                  float rotPerTick,
-                 sf::Vector2f pos = sf::Vector2f()) : SpriteTransformableEntity(1, texture), mRot(rotPerTick) {
+                 sf::Vector2f pos = sf::Vector2f()) : SpriteTransformableEntity(type, texture, collisionMask), mRot(rotPerTick) {
     auto rect = mSprite.getTextureRect();
-    GetTransformable()->setOrigin(float(rect.width) / 2.0, float(rect.height) / 2.0);
-    GetTransformable()->setPosition(pos);
+    mCenter = sf::Vector2f(rect.width / 2, rect.height / 2);
+    SetTransform(sf::Transform().translate(pos));
   }
 
   void Tick() {
-    GetTransformable()->rotate(mRot);
+    Transform(sf::Transform().rotate(mRot, mCenter));
   }
 
 private:
   float mRot;
+  sf::Vector2f mCenter;
 };
 
 int playerDemo(float zoom) {
