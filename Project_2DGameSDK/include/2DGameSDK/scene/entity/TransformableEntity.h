@@ -41,14 +41,6 @@ namespace game {
      */
     virtual ~TransformableEntity();
 
-    /**
-     * @brief Retreives the reference to the SFML Transformable wich can
-     *        be used to apply transformations to the Transformable Entity.
-     * 
-     * @return sf::Transformable* The Reference of the Transormable Object
-     */
-    // virtual sf::Transformable* GetTransformable() = 0;
-
     bool IsCollidable();
 
     virtual sf::Transform GetTransform();
@@ -83,6 +75,8 @@ namespace game {
     sf::Transform mFullTransform;
 
     bool mIsCollidable;
+
+    virtual void onEntityTransformed();
   };
 
 } // namespace game

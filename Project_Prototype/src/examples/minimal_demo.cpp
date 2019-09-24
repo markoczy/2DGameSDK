@@ -18,12 +18,7 @@ public:
     auto rect = mSprite.getTextureRect();
     mCenter = sf::Vector2f(rect.width / 2, rect.height / 2);
 
-    // mTransform = sf::Transform().translate(pos);
     SetTransform(sf::Transform().translate(pos));
-
-    // Set origin to center of the Texture
-    // GetTransformable()->setOrigin(float(rect.width) / 2.0, float(rect.height) / 2.0);
-    // GetTransformable()->setPosition(pos);
   }
 
   void Tick() {

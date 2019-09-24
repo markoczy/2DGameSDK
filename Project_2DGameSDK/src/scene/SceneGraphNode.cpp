@@ -27,20 +27,4 @@ namespace game {
       }
     }
   }
-  // sf::Transform SceneGraphNode::GetCurTransform() {
-  //   if(mEntity == nullptr) {
-  //     return _ZERO_TRANSFORM;
-  //   }
-  //   return mEntity->GetTransformable()->getTransform();
-  // }
-
-  // sf::Transform SceneGraphNode::GetAccumulatedTransform() {
-  //   auto transform = Transform();
-  //   auto cur = mParent;
-  //   while(cur != nullptr) {
-  //     transform *= cur->GetCurTransform();
-  //     cur = cur->mParent;
-  //   }
-  //   return transform;
-  // }
 } // namespace game

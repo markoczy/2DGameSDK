@@ -21,14 +21,11 @@ public:
                  sf::Vector2f pos = sf::Vector2f()) : SpriteTransformableEntity(type, texture, collisionMask), mRot(rotPerTick) {
     auto rect = mSprite.getTextureRect();
     mCenter = sf::Vector2f(rect.width / 2, rect.height / 2);
-    // cout << "Texture rect: w = " << rect.width << ", h = " << rect.height << endl;
-    // GetTransformable()->setOrigin(float(rect.width) / 2.0, float(rect.height) / 2.0);
     SetTransform(sf::Transform().translate(pos));
   }
 
   void Tick() {
     Transform(sf::Transform().rotate(mRot, mCenter));
-    // GetTransformable()->rotate(mRot);
   }
 
 private:
@@ -63,24 +60,14 @@ public:
     auto rect = mSprite.getTextureRect();
     mCenter = sf::Vector2f(rect.width / 2, rect.height / 2);
     SetTransform(sf::Transform().translate(pos));
-    //     GetTransformable()
-    //         ->setOrigin(float(rect.width) / 2.0, float(rect.height) / 2.0);
-    // GetTransformable()->setPosition(pos);
-    // GetTransformable()->setRotation(0);
     mDir = sf::Vector2f(0, -1);
   }
 
   void Tick() {
-    // auto transformable = GetTransformable();
-    // rotate
     sf::Transform transform;
     if(mDw != 0) {
       transform.rotate(mDw, mCenter);
       mAngle += mDw;
-
-      // float rot = _OFFSET - transformable->getRotation();
-      // float rotRad = (rot * 3.141) / 180.0;
-      // mDir = sf::Vector2f(cos(rotRad), -sin(rotRad));
     }
     // translate
     else if(mDt.x != 0 || mDt.y != 0) {

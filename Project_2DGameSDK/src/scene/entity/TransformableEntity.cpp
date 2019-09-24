@@ -33,19 +33,24 @@ namespace game {
     mTransform = transform;
     mFullTransform = mAccTransform * mTransform;
     if(mGraphNode != nullptr) mGraphNode->OnEntityTransformed(mFullTransform);
+    onEntityTransformed();
   }
 
   void TransformableEntity::Transform(sf::Transform transform) {
     mTransform = mTransform * transform;
     mFullTransform = mAccTransform * mTransform;
     if(mGraphNode != nullptr) mGraphNode->OnEntityTransformed(mFullTransform);
+    onEntityTransformed();
   }
 
   void TransformableEntity::OnParentTransformed(sf::Transform accumulated) {
     mAccTransform = accumulated;
     mFullTransform = accumulated * mTransform;
+    onEntityTransformed();
   }
 
   void TransformableEntity::OnCollision(TransformableEntity*, sf::Vector2f) {}
+
+  void TransformableEntity::onEntityTransformed() {}
 
 } // namespace game

@@ -3,12 +3,6 @@
 
 namespace game {
 
-  // SceneGraphNode forward Declaration
-  // class SceneGraphNode {
-  // public:
-  //   sf::Transform GetAccumulatedTransform();
-  // };
-
   AnimatedTransformableEntity::AnimatedTransformableEntity(int type, std::map<int, sf::Texture*> animationStates) : TransformableEntity(type), mAnimStates(animationStates) {
   }
 
@@ -20,10 +14,6 @@ namespace game {
     states.transform = states.transform * mFullTransform;
     target->draw(mCurState, states);
   }
-
-  // sf::Transformable* AnimatedTransformableEntity::GetTransformable() {
-  //   return &mTransform;
-  // }
 
   void AnimatedTransformableEntity::SetAnimState(int state) {
     auto animState = mAnimStates.find(state);
@@ -58,8 +48,6 @@ namespace game {
   }
 
   void AnimatedTransformableEntity::updateCollisionMask() {
-    // mTransformedCollisionMask = helpers::GrahicTools::TransformPoints(mCollisionMask, mFullTransform);
-
     // TODO collision masks anim entity
     mTransformedCollisionMask = std::vector<sf::Vector2f>();
   }

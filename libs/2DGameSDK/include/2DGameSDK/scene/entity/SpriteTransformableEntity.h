@@ -60,19 +60,9 @@ namespace game {
      */
     void Render(sf::RenderTarget* target, sf::RenderStates states = sf::RenderStates::Default);
 
-    /**
-     * @brief Retreives the reference to the SFML Transformable wich can
-     *        be used to apply transformations to the Transformable Entity.
-     * 
-     * @return sf::Transformable* The Reference of the Transormable Object
-     */
-    // sf::Transformable* GetTransformable();
-
     virtual sf::FloatRect GetAABB();
 
     virtual std::vector<sf::Vector2f> GetCollisionMask();
-
-    virtual void OnParentTransformed(sf::Transform accumulated);
 
   protected:
     sf::Sprite mSprite;
@@ -83,6 +73,8 @@ namespace game {
 
     void updateAABB();
     void updateCollisionMask();
+
+    virtual void onEntityTransformed();
   };
 
 } // namespace game
