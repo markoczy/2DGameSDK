@@ -58,6 +58,8 @@ namespace game {
 
     virtual void Transform(sf::Transform transform);
 
+    virtual void OnTickEnded();
+
     virtual void OnParentTransformed(sf::Transform accumulated);
 
     virtual void OnCollision(TransformableEntity* other, sf::Vector2f point);

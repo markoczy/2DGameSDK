@@ -20,6 +20,13 @@ namespace game {
 
   void SpriteTransformableEntity::Tick() {}
 
+  void SpriteTransformableEntity::OnTickEnded() {
+    if(mTransformationOccured) {
+      updateAABB();
+      updateCollisionMask();
+    }
+  }
+
   void SpriteTransformableEntity::Render(sf::RenderTarget* target, sf::RenderStates states) {
     states.transform = states.transform * mFullTransform;
     target->draw(mSprite, states);
@@ -42,8 +49,7 @@ namespace game {
   }
 
   void SpriteTransformableEntity::onEntityTransformed() {
-    updateAABB();
-    updateCollisionMask();
+    mTransformationOccured = true;
   }
 
 } // namespace game

@@ -52,6 +52,8 @@ namespace game {
      */
     virtual void Tick();
 
+    virtual void OnTickEnded();
+
     /**
      * @brief Renders the Entity
      * 
@@ -68,6 +70,7 @@ namespace game {
     sf::Sprite mSprite;
     std::vector<sf::Vector2f> mCollisionMask;
 
+    bool mTransformationOccured;
     sf::FloatRect mAABB;
     std::vector<sf::Vector2f> mTransformedCollisionMask;
 

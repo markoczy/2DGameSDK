@@ -43,6 +43,8 @@ namespace game {
     onEntityTransformed();
   }
 
+  void TransformableEntity::OnTickEnded() {}
+
   void TransformableEntity::OnParentTransformed(sf::Transform accumulated) {
     mAccTransform = accumulated;
     mFullTransform = accumulated * mTransform;

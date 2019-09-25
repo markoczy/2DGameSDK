@@ -17,6 +17,12 @@ namespace game {
   void SceneGraph::Tick() {
     tickNodes(mNodes[ROOT_NODE]);
     for(auto i = mNodes.begin(); i != mNodes.end(); i = std::next(i)) {
+      if(i->second->mEntity != nullptr) {
+        i->second->mEntity->OnTickEnded();
+      }
+    }
+
+    for(auto i = mNodes.begin(); i != mNodes.end(); i = std::next(i)) {
       for(auto j = std::next(i); j != mNodes.end(); j = std::next(j)) {
         auto entA = i->second->mEntity;
         auto entB = j->second->mEntity;
