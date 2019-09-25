@@ -121,6 +121,7 @@
 
 - Neues Event `OnTickEnded()` -> 0.5h
   - Aktualisierung Kollision erst nach `Tick()` (vor Kollisionscheck)
+- Kanban Tasks aktualisiert -> 0.5h PM
 
 ### Ausblick
 
