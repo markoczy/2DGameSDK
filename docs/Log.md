@@ -79,7 +79,7 @@
 
 ### Status
 
-- Chipmunk POC umgesetzt -> 6h
+- Chipmunk POC umgesetzt -> 4h
 
 ### Ausblick
 
