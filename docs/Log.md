@@ -114,3 +114,20 @@
   - Möglichkeit alle Transformationen einmalig pro Tick zu berechnen
   - Alternativen? (innerhalb Tick möglich da nicht sicher ob ein Parent
     vorher aktualisiert wird, alternativ dies garantieren..)
+
+## 25.09.2019
+
+### Status
+
+- Neues Event `OnTickEnded()` -> 0.5h
+  - Aktualisierung Kollision erst nach `Tick()` (vor Kollisionscheck)
+
+### Ausblick
+
+- **TBD:** Sollte der `GameState` bei jedem `Tick()` mitgegeben werden?
+  - Man kann einfache Statusvariablen im State speichern, dies wird 
+    vorausgesetzt um die Spiellogik aufzubauen
+  - Der `GameState` muss in diesem Fall generisch sein, mit Konsequenz dass
+    jedes Spielelemnt (`Scene`, `Entity`, ..) generisch sein muss
+  - Alternativ muss der Spielentwickler selbst mit statischen Klassen oder
+    globalen Variablen arbeiten
