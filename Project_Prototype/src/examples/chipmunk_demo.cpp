@@ -59,8 +59,9 @@ public:
     cpBodySetPosition(mBody, cpv(posX, posY));
 
     cpShape* shape = cpBoxShapeNew(mBody, dimension.x, dimension.y, 0);
-    cpShapeSetFriction(shape, 0.7);
-    cpShapeSetElasticity(shape, 1);
+    cpShapeSetMass(shape, 1);
+    cpShapeSetFriction(shape, 0.3);
+    cpShapeSetElasticity(shape, 0);
     cpSpaceAddShape(space, shape);
 
     mSprite = new sf::RectangleShape(dimension);
@@ -77,7 +78,7 @@ public:
     mSprite->setPosition(getPosition());
 
     auto rotRad = cpvtoangle(cpBodyGetRotation(mBody));
-    float rot = (360 * rotRad) / 6.28;
+    float rot = -(360 * rotRad) / 6.28;
     mSprite->setRotation(rot);
 
     target->draw(*mSprite);
@@ -119,7 +120,7 @@ int chipmunkDemo() {
   sf::Clock clock;
   clock.restart();
 
-  auto timeStep = sf::seconds(1 / 60.0);
+  auto timeStep = sf::seconds(1 / 200.0);
   while(window.isOpen()) {
     auto time = clock.getElapsedTime();
     clock.restart();
