@@ -80,7 +80,7 @@ public:
     float rot = (360 * mBody->GetAngle()) / 6.28;
     mSprite->setPosition(getPosition());
     // cout << "Angle is: " << mBody->GetAngle() << endl;
-    mSprite->setRotation(rot);
+    mSprite->setRotation(-rot);
 
     target->draw(*mSprite);
   }
