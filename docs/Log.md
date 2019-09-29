@@ -132,3 +132,9 @@
     jedes Spielelemnt (`Scene`, `Entity`, ..) generisch sein muss
   - Alternativ muss der Spielentwickler selbst mit statischen Klassen oder
     globalen Variablen arbeiten
+
+## 29.09.2019
+
+### Status
+
+- Zeitplanung und Arbeit am Pflichtenheft -> 12h PM
