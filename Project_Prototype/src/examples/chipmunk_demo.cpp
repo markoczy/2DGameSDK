@@ -112,7 +112,7 @@ int chipmunkDemo() {
   entities.push_back(left);
   entities.push_back(right);
 
-  for(int i = 0; i < 1000; i++) {
+  for(int i = 0; i < 500; i++) {
     auto x = rand() % 48 + 1;
     auto y = rand() % 5 + 0;
 
