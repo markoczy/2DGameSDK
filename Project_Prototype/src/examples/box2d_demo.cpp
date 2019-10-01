@@ -100,6 +100,77 @@ std::vector<b2Vec2> getShape(float width, float height) {
 }
 
 int box2dDemo() {
+  vector<PhysicalEntity> entities;
+  sf::Vector2f worldDim(worldWidth, worldHeight);
+  auto world = b2World(b2Vec2(0.0f, -10.0f));
+
+  sf::Texture boxTexture;
+  boxTexture.loadFromFile("res/textures/somebox.png");
+
+  // auto box = PhysicalEntity(space, true, &boxTexture, sf::Vector2f(20, 0), sf::Vector2f(1, 1), worldDim);
+  // entities.push_back(box);
+
+  auto ground = PhysicalEntity(&world, false, &boxTexture, sf::Vector2f(0, 25), sf::Vector2f(50, 10), worldDim);
+  auto left = PhysicalEntity(&world, false, &boxTexture, sf::Vector2f(49, 0), sf::Vector2f(1, 500), worldDim);
+  auto right = PhysicalEntity(&world, false, &boxTexture, sf::Vector2f(0, 0), sf::Vector2f(1, 500), worldDim);
+  entities.push_back(ground);
+  entities.push_back(left);
+  entities.push_back(right);
+
+  for(int i = 0; i < 500; i++) {
+    auto x = rand() % 48 + 1;
+    auto y = rand() % 5 + 0;
+
+    auto ent = PhysicalEntity(&world, true, &boxTexture, sf::Vector2f(x, y), sf::Vector2f(0.5, 0.5), worldDim);
+    entities.push_back(ent);
+  }
+
+  sf::RenderWindow window(sf::VideoMode(800, 600), "Box2DTest");
+  window.setView(sf::View(sf::FloatRect(0, 0, worldWidth, worldHeight)));
+
+  sf::Clock spawnBox;
+  sf::Clock clock;
+  sf::Clock bmClock;
+  clock.restart();
+
+  // auto timeStep = sf::seconds(1 / 60.0);
+  int ticks = 0;
+
+  while(window.isOpen()) {
+    auto time = clock.getElapsedTime();
+    clock.restart();
+
+    auto bmTime = bmClock.getElapsedTime();
+    if(bmTime >= sf::seconds(1)) {
+      cout << "FPS: " << ticks << endl;
+      ticks = 0;
+      bmClock.restart();
+    }
+
+    // Process events
+    sf::Event event;
+    while(window.pollEvent(event)) {
+      // Close window: exit
+      if(event.type == sf::Event::Closed)
+        window.close();
+    }
+
+    world.Step(time.asSeconds(), 10, 10);
+    ticks++;
+
+    // Clear screen
+    window.clear(sf::Color::White);
+    for(auto iEnt : entities) {
+      iEnt.Render(&window);
+    }
+    // Update the window
+    window.display();
+  }
+
+  return 0;
+}
+
+int box2dDemoNewer() {
   sf::Vector2f worldDim(worldWidth, worldHeight);
   auto world = b2World(b2Vec2(0.0f, -10.0f));
   vector<PhysicalEntity> entities;
