@@ -59,7 +59,7 @@ public:
     if(isDynamic) {
       b2FixtureDef fixtureDef;
       fixtureDef.shape = &shape;
-      // fixtureDef.restitution = 1.0f;
+      fixtureDef.restitution = 0.5f;
       fixtureDef.density = 1.0f;
       fixtureDef.friction = 0.3f;
       mBody->CreateFixture(&fixtureDef);
