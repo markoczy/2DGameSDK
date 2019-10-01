@@ -60,7 +60,7 @@ public:
       b2FixtureDef fixtureDef;
       fixtureDef.shape = &shape;
       fixtureDef.restitution = 0.5f;
-      fixtureDef.density = 1.0f;
+      fixtureDef.density = 0.001f;
       fixtureDef.friction = 0.3f;
       mBody->CreateFixture(&fixtureDef);
     } else {
