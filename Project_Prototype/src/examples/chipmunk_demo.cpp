@@ -23,8 +23,11 @@ float getY(float hWorld, float hObject, float y) {
   return hWorld - (hObject / 2) - y;
 }
 
+int entCounter = 0;
+
 class PhysicalEntity {
 private:
+  int mId;
   sf::Vector2f mWorldDimension;
   sf::Vector2f mDimension;
 
@@ -33,6 +36,7 @@ private:
 
   sf::Vector2f getPosition() {
     auto pos = cpBodyGetPosition(mBody); //mSpace->GetPosition();
+    // cout << "Ent" << mId << ", RawPos: (" << pos.x << ", " << pos.y << ")" << endl;
     float x = pos.x;
     float y = mWorldDimension.y - pos.y;
     return sf::Vector2f(x, y);
@@ -44,14 +48,14 @@ public:
                  sf::Texture* texture,
                  sf::Vector2f position,
                  sf::Vector2f dimension,
-                 sf::Vector2f worldDimension) : mDimension(dimension), mWorldDimension(worldDimension) {
+                 sf::Vector2f worldDimension) : mDimension(dimension), mWorldDimension(worldDimension), mId(entCounter++) {
     cpFloat mass = 1;
 
     if(isDynamic) {
       cpFloat moment = cpMomentForBox(mass, dimension.x, dimension.y);
       mBody = cpSpaceAddBody(space, cpBodyNew(mass, moment));
     } else {
-      mBody = cpSpaceGetStaticBody(space);
+      mBody = cpSpaceAddBody(space, cpBodyNewStatic());
     }
 
     float posX = position.x + dimension.x / 2;
@@ -65,16 +69,16 @@ public:
 
     mSprite = new sf::RectangleShape(dimension);
     mSprite->setTexture(texture);
-    mSprite->setPosition(getPosition());
     mSprite->setOrigin(dimension.x / 2, dimension.y / 2);
+    mSprite->setPosition(getPosition());
   }
 
   void Update(sf::Time dt) {}
 
   void Render(sf::RenderTarget* target) {
-    cpVect pos = cpBodyGetPosition(mBody);
-    // auto pos = mBody->GetPosition();
-    mSprite->setPosition(getPosition());
+    auto pos = getPosition();
+    // cout << "Ent" << mId << ", Pos: (" << pos.x << ", " << pos.y << ")" << endl;
+    mSprite->setPosition(pos);
 
     auto rotRad = cpvtoangle(cpBodyGetRotation(mBody));
     float rot = -(360 * rotRad) / 6.28;
@@ -98,6 +102,81 @@ int chipmunkDemo() {
   sf::Texture boxTexture;
   boxTexture.loadFromFile("res/textures/somebox.png");
 
+  // auto box = PhysicalEntity(space, true, &boxTexture, sf::Vector2f(20, 0), sf::Vector2f(1, 1), worldDim);
+  // entities.push_back(box);
+
+  auto ground = PhysicalEntity(space, false, &boxTexture, sf::Vector2f(0, 25), sf::Vector2f(50, 10), worldDim);
+  auto left = PhysicalEntity(space, false, &boxTexture, sf::Vector2f(49, 0), sf::Vector2f(1, 500), worldDim);
+  auto right = PhysicalEntity(space, false, &boxTexture, sf::Vector2f(0, 0), sf::Vector2f(1, 500), worldDim);
+  entities.push_back(ground);
+  entities.push_back(left);
+  entities.push_back(right);
+
+  for(int i = 0; i < 1000; i++) {
+    auto x = rand() % 48 + 1;
+    auto y = rand() % 5 + 0;
+
+    auto ent = PhysicalEntity(space, true, &boxTexture, sf::Vector2f(x, y), sf::Vector2f(0.5, 0.5), worldDim);
+    entities.push_back(ent);
+  }
+
+  sf::RenderWindow window(sf::VideoMode(800, 600), "ChipmunkTest");
+  window.setView(sf::View(sf::FloatRect(0, 0, worldWidth, worldHeight)));
+
+  sf::Clock spawnBox;
+  sf::Clock clock;
+  sf::Clock bmClock;
+  clock.restart();
+
+  cpSpaceSetIterations(space, 10);
+
+  // auto timeStep = sf::seconds(1 / 60.0);
+  int ticks = 0;
+
+  while(window.isOpen()) {
+    auto time = clock.getElapsedTime();
+    clock.restart();
+
+    auto bmTime = bmClock.getElapsedTime();
+    if(bmTime >= sf::seconds(1)) {
+      cout << "FPS: " << ticks << endl;
+      ticks = 0;
+      bmClock.restart();
+    }
+
+    // Process events
+    sf::Event event;
+    while(window.pollEvent(event)) {
+      // Close window: exit
+      if(event.type == sf::Event::Closed)
+        window.close();
+    }
+
+    cpSpaceStep(space, time.asSeconds());
+    ticks++;
+
+    // Clear screen
+    window.clear(sf::Color::White);
+    for(auto iEnt : entities) {
+      iEnt.Render(&window);
+    }
+    // Update the window
+    window.display();
+  }
+
+  return 0;
+}
+
+int chipmunkDemoNewer() {
+  sf::Vector2f worldDim(worldWidth, worldHeight);
+  vector<PhysicalEntity> entities;
+
+  auto space = cpSpaceNew();
+  cpSpaceSetGravity(space, cpv(0, -10));
+
+  sf::Texture boxTexture;
+  boxTexture.loadFromFile("res/textures/somebox.png");
+
   auto box = PhysicalEntity(space, true, &boxTexture, sf::Vector2f(20, 0), sf::Vector2f(1, 1), worldDim);
   entities.push_back(box);
 
@@ -112,7 +191,7 @@ int chipmunkDemo() {
     entities.push_back(ent);
   }
 
-  sf::RenderWindow window(sf::VideoMode(800, 600), "SFML window");
+  sf::RenderWindow window(sf::VideoMode(800, 600), "ChipmunkTest");
   window.setView(sf::View(sf::FloatRect(0, 0, worldWidth, worldHeight)));
 
   sf::Clock spawnBox;
