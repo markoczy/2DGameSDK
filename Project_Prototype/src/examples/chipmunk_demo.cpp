@@ -64,7 +64,7 @@ public:
 
     cpShape* shape = cpBoxShapeNew(mBody, dimension.x, dimension.y, 0);
     cpShapeSetFriction(shape, 0.3);
-    cpShapeSetElasticity(shape, 0);
+    cpShapeSetElasticity(shape, 0.5);
     cpSpaceAddShape(space, shape);
 
     mSprite = new sf::RectangleShape(dimension);
