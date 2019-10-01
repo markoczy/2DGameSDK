@@ -138,3 +138,10 @@
 ### Status
 
 - Zeitplanung und Arbeit am Pflichtenheft -> 12h PM
+
+
+## 01.10.2019
+
+### Status
+
+- Prototypes Benchmarking Setup -> 2h
