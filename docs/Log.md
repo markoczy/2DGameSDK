@@ -145,3 +145,4 @@
 ### Status
 
 - Prototypes Benchmarking Setup -> 2h
+- Komischer Bug (bei Bildschirmbewegung bewegen sich die Objekte) -> 0.5h
