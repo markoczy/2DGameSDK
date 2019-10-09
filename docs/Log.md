@@ -146,3 +146,20 @@
 
 - Prototypes Benchmarking Setup -> 2h
 - Komischer Bug (bei Bildschirmbewegung bewegen sich die Objekte) -> 0.5h
+
+## 04.10.2019
+
+### Status
+
+- Am Dokument gearbeitet -> 4h PM
+
+
+## 06.10.2019
+
+### Status
+
+- Erweiterung Physik POC, Scene Graph Integratio -> 5h
+
+### Ausblick
+
+- Erkenntniss dass SceneGraph Konzept und Physik Engine nur begrenzt kompatibel sind
