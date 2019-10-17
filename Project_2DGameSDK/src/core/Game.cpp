@@ -54,9 +54,9 @@ namespace game {
       }
 
       // Game cycle
-      tick();
+      OnTick();
       IFLOGD(int tickTime = clock.getElapsedTime().asMilliseconds();)
-      render();
+      OnRender();
 
       // Sync Sim Time
       int time = clock.getElapsedTime().asMilliseconds();
@@ -116,24 +116,24 @@ namespace game {
   // Private / Protected Methods
   // ###########################################################################
 
-  void Game::tick() {
+  void Game::OnTick() {
     try {
-      mEventCtrl.Tick();
-      mState.World->Tick();
-      mState.Scene->Tick();
+      mEventCtrl.OnTick();
+      mState.World->OnTick();
+      mState.Scene->OnTick();
     } catch(std::exception& e) {
       LOGE("Error during tick: " << e.what());
     }
   }
 
-  void Game::render() {
+  void Game::OnRender() {
     try {
       mWindow->clear(sf::Color(80, 80, 80));
       dbgClock.restart();
-      mState.World->Render(mWindow);
+      mState.World->OnRender(mWindow);
       LOGD("Render World in: " << dbgClock.getElapsedTime().asMilliseconds());
       dbgClock.restart();
-      mState.Scene->Render(mWindow, &mOptions);
+      mState.Scene->OnRender(mWindow, &mOptions);
       LOGD("Render Scene in: " << dbgClock.getElapsedTime().asMilliseconds());
       dbgClock.restart();
       mWindow->display();

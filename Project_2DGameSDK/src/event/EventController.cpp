@@ -21,7 +21,7 @@ namespace game {
     return mEvents[id];
   }
 
-  void EventController::Tick() {
+  void EventController::OnTick() {
     for(auto it = mEvents.begin(); it != mEvents.end(); ++it) {
       it->second->Update();
     }

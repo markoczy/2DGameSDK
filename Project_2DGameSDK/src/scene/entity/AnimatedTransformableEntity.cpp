@@ -8,10 +8,10 @@ namespace game {
 
   AnimatedTransformableEntity::~AnimatedTransformableEntity() {}
 
-  void AnimatedTransformableEntity::Tick() {}
+  void AnimatedTransformableEntity::OnTick() {}
 
-  void AnimatedTransformableEntity::Render(sf::RenderTarget* target, sf::RenderStates states) {
-    states.transform = states.transform * mFullTransform;
+  void AnimatedTransformableEntity::OnRender(sf::RenderTarget* target, sf::RenderStates states) {
+    states.transform = states.transform * mCombinedTransform;
     target->draw(mCurState, states);
   }
 
@@ -38,13 +38,13 @@ namespace game {
   void AnimatedTransformableEntity::OnParentTransformed(sf::Transform accumulated) {
     TransformableEntity::OnParentTransformed(accumulated);
 
-    mFullTransform = GetAccumulatedTransform() * GetTransform();
+    mCombinedTransform = GetAccumulatedTransform() * GetTransform();
     updateAABB();
     updateCollisionMask();
   }
 
   void AnimatedTransformableEntity::updateAABB() {
-    mAABB = mFullTransform.transformRect(mCurState.getLocalBounds());
+    mAABB = mCombinedTransform.transformRect(mCurState.getLocalBounds());
   }
 
   void AnimatedTransformableEntity::updateCollisionMask() {

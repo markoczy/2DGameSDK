@@ -1,74 +1,50 @@
-/**
- * @file Entity.h
- * @author Aleistar Markoczy (a.markoczy@gmail.com)
- * @brief Entity class
- * @version 1.0
- * @date 2019-06-12
- * 
- * @copyright Copyright (c) 2019
- * 
- */
+
 #ifndef __ENTITY_H__
 #define __ENTITY_H__
 
+#include <2DGameSDK/core/GameObject.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
-#include <SFML/Graphics.hpp>
 
 namespace game {
+  class SceneGraphNode;
 
-  /**
-   * @brief Defines a simple Game Object (no transformations)
-   * 
-   * @see TransformableEntity
-   * 
-   */
-  class GAMESDK_DLL Entity {
+  class GAMESDK_DLL Entity : public GameObject {
   public:
-    /**
-     * @brief Creates a new Entity object
-     * 
-     * @param type The Entity Type (does not affect anything and is meant
-     *        to be used freely to identify entities of some kind)
-     */
     Entity(int type);
+    virtual ~Entity();
+
+    virtual bool IsTransformable();
+    virtual bool IsCollidable();
+    virtual sf::Transform GetTransform();
+    virtual sf::Transform GetAccumulatedTransform();
+    virtual sf::Transform GetCombinedTransform();
+    virtual sf::FloatRect GetAABB();
+    virtual std::vector<sf::Vector2f> GetCollisionMask();
+
+    void SetTransform(sf::Transform transform);
 
     /**
-     * @brief Destroys the Entity object
+     * @brief Set the Graph Node object
      * 
+     * @param graphNode The corresponding SceneGraphNode
      */
-    ~Entity();
+    void SetGraphNode(game::SceneGraphNode* graphNode);
 
-    /**
-     * @brief Retreives the Id
-     * 
-     * @return int The Identifier
-     */
-    int GetId();
-
-    /**
-     * @brief Retreives the Type
-     * 
-     * @return int The Entity Type
-     */
-    int GetType();
-
-    /**
-     * @brief Updates the Entity
-     * 
-     */
-    virtual void Tick() = 0;
-
-    /**
-     * @brief Renders the Entity
-     * 
-     * @param target The screen or texture to render on
-     * @param states The initial Render States (transformation etc.)
-     */
-    virtual void Render(sf::RenderTarget* target, sf::RenderStates states = sf::RenderStates::Default) = 0;
+    void Transform(sf::Transform transform);
+    void OnParentTransformed(sf::Transform accumulated);
+    virtual void OnCollision(Entity* other, sf::Vector2f point);
+    virtual void OnTickEnded();
 
   protected:
-    int mType;
-    int mId;
+    // bool mIsCollidable = false;
+    SceneGraphNode* mGraphNode = nullptr;
+
+    virtual bool setTransform(sf::Transform transform);
+    virtual bool transform(sf::Transform transform);
+    virtual bool setAccumulatedTransform(sf::Transform accumulated);
+
+  private:
+    void onEntityTransformed();
   };
 
 } // namespace game

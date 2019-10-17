@@ -18,6 +18,7 @@
 #include <2DGameSDK/core/GameOptions.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
 #include <2DGameSDK/scene/SceneGraphNode.h>
+#include <2DGameSDK/scene/entity/Entity.h>
 
 namespace game {
 
@@ -43,7 +44,7 @@ namespace game {
      * @brief Updates all entities of the Scene Graph 
      * 
      */
-    void Tick();
+    void OnTick();
 
     /**
      * @brief Renders the Scene Graph with all it's contents
@@ -51,9 +52,9 @@ namespace game {
      * @param target The screen or texture to render on
      * @param states The initial Render States (transformation etc.)
      */
-    void Render(sf::RenderTarget* target, GameOptions* options, sf::RenderStates states = sf::RenderStates::Default);
+    void OnRender(sf::RenderTarget* target, GameOptions* options, sf::RenderStates states = sf::RenderStates::Default);
 
-    int AddEntity(TransformableEntity* entity, int parent = ROOT_NODE);
+    int AddEntity(Entity* entity, int parent = ROOT_NODE);
 
   private:
     static int idCounter;

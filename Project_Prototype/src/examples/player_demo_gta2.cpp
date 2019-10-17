@@ -39,7 +39,7 @@ public:
     mDir = sf::Vector2f(0, -1);
   }
 
-  void Tick() {
+  void OnTick() {
     sf::Transform transform;
     if(mDw != 0) {
       transform.rotate(mDw, mCenter);

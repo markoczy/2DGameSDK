@@ -23,7 +23,7 @@ namespace game {
 
   /**
    * @brief Simple specialisation of the TransformableEntity class. Does not
-   *        do anything during Tick().
+   *        do anything during OnTick().
    * 
    */
   class GAMESDK_DLL SpriteTransformableEntity : public TransformableEntity {
@@ -50,7 +50,7 @@ namespace game {
      * @brief Updates the Entity
      * 
      */
-    virtual void Tick();
+    virtual void OnTick();
 
     virtual void OnTickEnded();
 
@@ -60,7 +60,7 @@ namespace game {
      * @param target The screen or texture to render on
      * @param states The initial Render States (transformation etc.)
      */
-    void Render(sf::RenderTarget* target, sf::RenderStates states = sf::RenderStates::Default);
+    void OnRender(sf::RenderTarget* target, sf::RenderStates states = sf::RenderStates::Default);
 
     virtual sf::FloatRect GetAABB();
 

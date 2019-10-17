@@ -19,7 +19,7 @@
 #include <2DGameSDK/common/Helpers.h>
 #include <2DGameSDK/core/GameOptions.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
-#include <2DGameSDK/scene/entity/TransformableEntity.h>
+#include <2DGameSDK/scene/entity/Entity.h>
 
 namespace game {
 
@@ -38,7 +38,7 @@ namespace game {
      * @param parent The parent Node
      * @param entity The Game Entity on this Node
      */
-    SceneGraphNode(SceneGraph* graph, SceneGraphNode* parent, TransformableEntity* entity);
+    SceneGraphNode(SceneGraph* graph, SceneGraphNode* parent, Entity* entity);
 
     /**
      * @brief Destroys the Scene Graph Node object
@@ -53,7 +53,7 @@ namespace game {
 
     SceneGraph* mGraph = nullptr;
     SceneGraphNode* mParent = nullptr;
-    TransformableEntity* mEntity = nullptr;
+    Entity* mEntity = nullptr;
     std::vector<SceneGraphNode*> mChildren;
   };
 

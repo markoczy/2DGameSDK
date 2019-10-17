@@ -1,16 +1,15 @@
 #include <2DGameSDK/scene/entity/TransformableEntity.h>
 
 namespace game {
-  // Forward declaration
-  class SceneGraphNode {
-  public:
-    void OnEntityTransformed(sf::Transform accumulated);
-  };
 
   TransformableEntity::TransformableEntity(int type, bool isCollidable) : Entity(type), mIsCollidable(isCollidable) {
   }
 
   TransformableEntity::~TransformableEntity() {}
+
+  bool TransformableEntity::IsTransformable() {
+    return true;
+  }
 
   bool TransformableEntity::IsCollidable() {
     return mIsCollidable;
@@ -24,35 +23,30 @@ namespace game {
     return mAccTransform;
   }
 
-  void TransformableEntity::SetGraphNode(game::SceneGraphNode* graphNode) {
-    mGraphNode = graphNode;
-    mGraphNode->OnEntityTransformed(mAccTransform * mTransform);
+  sf::Transform TransformableEntity::GetCombinedTransform() {
+    return mCombinedTransform;
   }
 
-  void TransformableEntity::SetTransform(sf::Transform transform) {
+  bool TransformableEntity::setTransform(sf::Transform transform) {
     mTransform = transform;
-    mFullTransform = mAccTransform * mTransform;
-    if(mGraphNode != nullptr) mGraphNode->OnEntityTransformed(mFullTransform);
-    onEntityTransformed();
+    mCombinedTransform = mAccTransform * mTransform;
+    return true;
   }
 
-  void TransformableEntity::Transform(sf::Transform transform) {
+  bool TransformableEntity::transform(sf::Transform transform) {
     mTransform = mTransform * transform;
-    mFullTransform = mAccTransform * mTransform;
-    if(mGraphNode != nullptr) mGraphNode->OnEntityTransformed(mFullTransform);
-    onEntityTransformed();
+    mCombinedTransform = mAccTransform * mTransform;
+    return true;
+  }
+
+  bool TransformableEntity::setAccumulatedTransform(sf::Transform accumulated) {
+    mAccTransform = accumulated;
+    mCombinedTransform = mAccTransform * mTransform;
+    return true;
   }
 
   void TransformableEntity::OnTickEnded() {}
 
-  void TransformableEntity::OnParentTransformed(sf::Transform accumulated) {
-    mAccTransform = accumulated;
-    mFullTransform = accumulated * mTransform;
-    onEntityTransformed();
-  }
-
-  void TransformableEntity::OnCollision(TransformableEntity*, sf::Vector2f) {}
-
-  void TransformableEntity::onEntityTransformed() {}
+  void TransformableEntity::OnCollision(Entity*, sf::Vector2f) {}
 
 } // namespace game
