@@ -166,7 +166,7 @@ int chopperDemo() {
   auto rightPressed = new OnKeyPress(sf::Keyboard::Right);
 
   // Create Game World
-  auto world = GameWorldFactory::CreateGameWorld("res/simple_grass/tilemap.json", "", "res/simple_grass/tile_");
+  auto world = GameWorldFactory::CreateGameWorld("res/simple_grass_2/tilemap.json", "", "res/simple_grass_2/tile_");
 
   // Create Player entity and Rotating child entity
   auto tex = AssetManager::GetTexture("res/textures/heli/heli.png");
@@ -188,7 +188,7 @@ int chopperDemo() {
   scene->AddEntity(enemy);
 
   // Create game
-  GameOptions options{"My Game", sf::Vector2i(512, 512), 2.0, 50, true, true};
+  GameOptions options{"My Game", sf::Vector2i(512, 512), 2.0, 50, false, false};
   auto app = new Game(options, scene, world);
 
   // Send Events to controller
