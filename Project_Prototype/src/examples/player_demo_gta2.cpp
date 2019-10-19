@@ -10,14 +10,15 @@ static const int _WALK_ANIM[] = {1, 2, 1, 0, 3, 4, 3, 0};
 
 class Gta2PlayerEntity : public AnimatedTransformableEntity {
 public:
-  Gta2PlayerEntity(std::map<int, sf::Texture*> animationStates,
+  Gta2PlayerEntity(Game* game,
+                   std::map<int, sf::Texture*> animationStates,
                    float speed,
                    float rotSpeed,
                    Observable<EmptyEventData>* up,
                    Observable<EmptyEventData>* down,
                    Observable<EmptyEventData>* left,
                    Observable<EmptyEventData>* right,
-                   sf::Vector2f pos = sf::Vector2f()) : AnimatedTransformableEntity(_PLAYER_TYPE, animationStates), mSpeed(speed), mRotSpeed(rotSpeed) {
+                   sf::Vector2f pos = sf::Vector2f()) : AnimatedTransformableEntity(_PLAYER_TYPE, game, animationStates), mSpeed(speed), mRotSpeed(rotSpeed) {
     //
     //
     //
@@ -104,6 +105,10 @@ private:
 int playerDemoGTA2(float zoom) {
   cout << "Start playerDemoGTA2" << endl;
 
+  // Create game
+  auto game = new Game();
+  game->SetOptions(GameOptions{"My Game", sf::Vector2i(512, 512), zoom, 50});
+
   // Create Keyboard Events
   auto upPressed = new OnKeyPress(sf::Keyboard::Up);
   auto downPressed = new OnKeyPress(sf::Keyboard::Down);
@@ -112,6 +117,7 @@ int playerDemoGTA2(float zoom) {
 
   // Create Game World
   auto world = GameWorldFactory::CreateGameWorld("res/testmap/tilemap.json", "", "res/testmap/tile_");
+  game->SetWorld(world);
 
   // Create Player entity and Rotating child entity
   auto idle = AssetManager::GetTexture("res/textures/gunner/gunner_idle.png");
@@ -126,24 +132,21 @@ int playerDemoGTA2(float zoom) {
   animStates[2] = walk1;
   animStates[3] = walk2;
   animStates[4] = walk3;
-  auto ent = new Gta2PlayerEntity(animStates, 1.0, 5.0, upPressed, downPressed, leftPressed, rightPressed, sf::Vector2f(30, 30));
+  auto ent = new Gta2PlayerEntity(game, animStates, 1.0, 5.0, upPressed, downPressed, leftPressed, rightPressed, sf::Vector2f(30, 30));
 
   // Layout entities in scene
   auto scene = new SceneGraph();
   scene->AddEntity(ent); // scene->GetRoot()->AddChild(ent);
-
-  // Create game
-  GameOptions options{"My Game", sf::Vector2i(512, 512), zoom, 50};
-  auto app = new Game(options, scene, world);
+  game->SetScene(scene);
 
   // Send Events to controller
-  app->AddEvent(upPressed);
-  app->AddEvent(downPressed);
-  app->AddEvent(leftPressed);
-  app->AddEvent(rightPressed);
+  game->AddEvent(upPressed);
+  game->AddEvent(downPressed);
+  game->AddEvent(leftPressed);
+  game->AddEvent(rightPressed);
 
   // Run Game
-  app->Run();
+  game->Run();
 
   return 0;
 }

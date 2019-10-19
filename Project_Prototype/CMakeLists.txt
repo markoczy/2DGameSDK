@@ -20,6 +20,7 @@ source_group("inc" FILES ${HDRS})
 
 include_directories(
     ${SFML_INCLUDE_DIR}
+    ${CHIPMUNK_INCLUDE_DIR}
     ${JSON_INCLUDE_DIR}
     ${SDK_INCLUDE_DIR}
     "include"

@@ -14,12 +14,14 @@ namespace game {
 
   Game::Game(GameOptions options, SceneGraph* scene, GameWorld* world) : mOptions(options), mState(GameState{scene, world}) {
     LOGD("Game contructor call");
+    mPhysicalWorld = cpSpaceNew();
   }
 
   Game::~Game() {
     helpers::safeDelete(mWindow);
     helpers::safeDelete(mState.Scene);
     helpers::safeDelete(mState.World);
+    cpSpaceDestroy(mPhysicalWorld);
   }
 
   // ###########################################################################
@@ -54,9 +56,9 @@ namespace game {
       }
 
       // Game cycle
-      OnTick();
+      tick();
       IFLOGD(int tickTime = clock.getElapsedTime().asMilliseconds();)
-      OnRender();
+      render();
 
       // Sync Sim Time
       int time = clock.getElapsedTime().asMilliseconds();
@@ -74,6 +76,10 @@ namespace game {
   void Game::Stop() {
     LOGI("Stop call");
     mWindow->close();
+  }
+
+  cpSpace* Game::GetPhysicalWorld() {
+    return mPhysicalWorld;
   }
 
   // ####### Accessors (get/set) ###############################################
@@ -116,7 +122,7 @@ namespace game {
   // Private / Protected Methods
   // ###########################################################################
 
-  void Game::OnTick() {
+  void Game::tick() {
     try {
       mEventCtrl.OnTick();
       mState.World->OnTick();
@@ -126,7 +132,7 @@ namespace game {
     }
   }
 
-  void Game::OnRender() {
+  void Game::render() {
     try {
       mWindow->clear(sf::Color(80, 80, 80));
       dbgClock.restart();

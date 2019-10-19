@@ -36,6 +36,19 @@ set(SFML_LIBRARIES_D ${SFML_SYSTEM_LIB_D} ${SFML_GRAPHICS_LIB_D} ${SFML_WINDOW_L
 set(SFML_DLL_DIR "${SFML_ROOT_DIR}/bin")
 
 ################################################################################
+# Setup Chipmunk
+################################################################################
+set(CHIPMUNK_VERSION "7.0.3")
+set(CHIPMUNK_ROOT_DIR "${CMAKE_HOME_DIRECTORY}/libs/Chipmunk-${CHIPMUNK_VERSION}")
+set(CHIPMUNK_INCLUDE_DIR "${CHIPMUNK_ROOT_DIR}/include")
+set(CHIPMUNK_LIBRARIES_PATH "${CHIPMUNK_ROOT_DIR}/lib")
+# Box2D libraries release
+set(CHIPMUNK_LIB "${CHIPMUNK_LIBRARIES_PATH}/libchipmunk.dll.a")
+set(CHIPMUNK_LIBRARIES ${CHIPMUNK_LIB})
+# (Windows only!) copy CHIPMUNK DLL's for convenience
+set(CHIPMUNK_DLL_DIR "${CHIPMUNK_ROOT_DIR}/bin")
+
+################################################################################
 # Setup  nlohmann json
 ################################################################################
 set(JSON_ROOT_DIR "${CMAKE_HOME_DIRECTORY}/libs/nlohmann-json")

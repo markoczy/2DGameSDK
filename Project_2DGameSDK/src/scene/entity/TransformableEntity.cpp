@@ -2,7 +2,7 @@
 
 namespace game {
 
-  TransformableEntity::TransformableEntity(int type, bool isCollidable) : Entity(type), mIsCollidable(isCollidable) {
+  TransformableEntity::TransformableEntity(int type, Game* game, bool isCollidable) : Entity(type, game), mIsCollidable(isCollidable) {
   }
 
   TransformableEntity::~TransformableEntity() {}

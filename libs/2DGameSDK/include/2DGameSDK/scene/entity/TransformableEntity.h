@@ -11,6 +11,7 @@
 #ifndef __TRANSFORMABLE_ENTITY_H__
 #define __TRANSFORMABLE_ENTITY_H__
 
+#include <2DGameSDK/core/Game.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
 #include <2DGameSDK/scene/entity/Entity.h>
 
@@ -33,7 +34,7 @@ namespace game {
      * @param type type The Entity Type (does not affect anything and is meant
      *        to be used freely to identify entities of some kind)
      */
-    TransformableEntity(int type, bool isCollidable = false);
+    TransformableEntity(int type, Game* game, bool isCollidable = false);
 
     /**
      * @brief Destroys the Transformable Entity object

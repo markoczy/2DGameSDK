@@ -11,17 +11,22 @@
 #ifndef __GAME_H__
 #define __GAME_H__
 
+#include <chrono>
+#include <iostream>
+#include <thread>
+
+#include <SFML/Graphics.hpp>
+#include <SFML/System.hpp>
+#include <chipmunk/chipmunk.h>
+
 #include <2DGameSDK/common/Helpers.h>
 #include <2DGameSDK/core/GameOptions.h>
 #include <2DGameSDK/core/GameState.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
 #include <2DGameSDK/event/EventController.h>
 #include <2DGameSDK/event/observable/ObservableBase.h>
-#include <SFML/Graphics.hpp>
-#include <SFML/System.hpp>
-#include <chrono>
-#include <iostream>
-#include <thread>
+#include <2DGameSDK/scene/SceneGraph.h>
+#include <2DGameSDK/world/GameWorld.h>
 
 namespace game {
 
@@ -126,24 +131,28 @@ namespace game {
      */
     ObservableBase* GetEvent(int id);
 
+    // TODO encapsulation of physical world?
+    cpSpace* GetPhysicalWorld();
+
   private:
     /**
      * @brief Updates all Game Elements
      * 
      */
-    void OnTick();
+    void tick();
 
     /**
      * @brief Renders all Game Elements
      * 
      */
-    void OnRender();
+    void render();
 
     EventController mEventCtrl;
     GameOptions mOptions;
     GameState mState;
     sf::RenderWindow* mWindow;
     sf::View mView;
+    cpSpace* mPhysicalWorld;
   };
 } // namespace game
 

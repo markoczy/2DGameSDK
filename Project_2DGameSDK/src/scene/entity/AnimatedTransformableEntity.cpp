@@ -3,7 +3,7 @@
 
 namespace game {
 
-  AnimatedTransformableEntity::AnimatedTransformableEntity(int type, std::map<int, sf::Texture*> animationStates) : TransformableEntity(type), mAnimStates(animationStates) {
+  AnimatedTransformableEntity::AnimatedTransformableEntity(int type, Game* game, std::map<int, sf::Texture*> animationStates) : TransformableEntity(type, game), mAnimStates(animationStates) {
   }
 
   AnimatedTransformableEntity::~AnimatedTransformableEntity() {}
@@ -23,7 +23,7 @@ namespace game {
     }
 
     std::stringstream ss;
-    ss << "Animation State " << state << " not found for Entity " << mId;
+    ss << "Animation State " << state << " not found for Entity " << GetId();
     throw std::runtime_error(ss.str());
   }
 

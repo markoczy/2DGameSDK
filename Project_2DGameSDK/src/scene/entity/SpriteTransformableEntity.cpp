@@ -7,11 +7,11 @@ namespace game {
   // SceneGraphNode forward Declaration
   class SceneGraphNode;
 
-  SpriteTransformableEntity::SpriteTransformableEntity(int type, sf::Texture* texture) : TransformableEntity(type), mSprite(*texture) {
+  SpriteTransformableEntity::SpriteTransformableEntity(int type, Game* game, sf::Texture* texture) : TransformableEntity(type, game), mSprite(*texture) {
     mCollisionMask = helpers::GrahicTools::GetRectBoundary(mSprite.getLocalBounds());
   }
 
-  SpriteTransformableEntity::SpriteTransformableEntity(int type, sf::Texture* texture, std::vector<sf::Vector2f> collisionMask) : TransformableEntity(type, true), mSprite(*texture) {
+  SpriteTransformableEntity::SpriteTransformableEntity(int type, Game* game, sf::Texture* texture, std::vector<sf::Vector2f> collisionMask) : TransformableEntity(type, game, true), mSprite(*texture) {
     mCollisionMask = collisionMask;
   }
 
@@ -21,10 +21,10 @@ namespace game {
   void SpriteTransformableEntity::OnTick() {}
 
   void SpriteTransformableEntity::OnTickEnded() {
-    if(mTransformationOccured) {
-      updateAABB();
-      updateCollisionMask();
-    }
+    // if(mTransformationOccured) {
+    updateAABB();
+    updateCollisionMask();
+    // }
   }
 
   void SpriteTransformableEntity::OnRender(sf::RenderTarget* target, sf::RenderStates states) {

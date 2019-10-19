@@ -14,11 +14,12 @@ static const float _OFFSET = 90;
  */
 class RotatingEntity : public SpriteTransformableEntity {
 public:
-  RotatingEntity(int type,
+  RotatingEntity(Game* game,
+                 int type,
                  sf::Texture* texture,
                  std::vector<sf::Vector2f> collisionMask,
                  float rotPerTick,
-                 sf::Vector2f pos = sf::Vector2f()) : SpriteTransformableEntity(type, texture, collisionMask), mRot(rotPerTick) {
+                 sf::Vector2f pos = sf::Vector2f()) : SpriteTransformableEntity(type, game, texture, collisionMask), mRot(rotPerTick) {
     auto rect = mSprite.getTextureRect();
     mCenter = sf::Vector2f(rect.width / 2, rect.height / 2);
     SetTransform(sf::Transform().translate(pos));
@@ -28,6 +29,10 @@ public:
     Transform(sf::Transform().rotate(mRot, mCenter));
   }
 
+  bool IsCollidable() {
+    return true;
+  }
+
 private:
   float mRot;
   sf::Vector2f mCenter;
@@ -35,7 +40,8 @@ private:
 
 class ChopperEntity : public SpriteTransformableEntity {
 public:
-  ChopperEntity(sf::Texture* tex,
+  ChopperEntity(Game* game,
+                sf::Texture* tex,
                 std::vector<sf::Vector2f> collisionMask,
                 float speed,
                 float rotSpeed,
@@ -43,7 +49,7 @@ public:
                 Observable<EmptyEventData>* down,
                 Observable<EmptyEventData>* left,
                 Observable<EmptyEventData>* right,
-                sf::Vector2f pos = sf::Vector2f()) : SpriteTransformableEntity(_PLAYER_TYPE, tex, collisionMask), mSpeed(speed), mRotSpeed(rotSpeed) {
+                sf::Vector2f pos = sf::Vector2f()) : SpriteTransformableEntity(_PLAYER_TYPE, game, tex, collisionMask), mSpeed(speed), mRotSpeed(rotSpeed) {
     //
     //
     //
@@ -92,6 +98,10 @@ public:
 
   void RotRight(EmptyEventData*) {
     mDw += mRotSpeed;
+  }
+
+  bool IsCollidable() {
+    return true;
   }
 
   void OnCollision(Entity* other, sf::Vector2f point) {
@@ -165,40 +175,41 @@ int chopperDemo() {
   auto leftPressed = new OnKeyPress(sf::Keyboard::Left);
   auto rightPressed = new OnKeyPress(sf::Keyboard::Right);
 
+  // Create game
+  auto game = new Game();
+  game->SetOptions(GameOptions{"My Game", sf::Vector2i(512, 512), 2.0, 50, true, true});
+
   // Create Game World
   auto world = GameWorldFactory::CreateGameWorld("res/simple_grass/tilemap.json", "", "res/simple_grass/tile_");
+  game->SetWorld(world);
 
   // Create Player entity and Rotating child entity
   auto tex = AssetManager::GetTexture("res/textures/heli/heli.png");
   auto tex2 = AssetManager::GetTexture("res/textures/heli/rotor.png");
   auto chopperCollisionMask = getChopperCollisionMask();
-  auto ent = new ChopperEntity(tex, chopperCollisionMask, 2.0, 5.0, upPressed, downPressed, leftPressed, rightPressed, sf::Vector2f(50, 50));
+  auto ent = new ChopperEntity(game, tex, chopperCollisionMask, 2.0, 5.0, upPressed, downPressed, leftPressed, rightPressed, sf::Vector2f(50, 50));
 
   auto rotorCollisionMask = getRotorCollisionMask();
-  auto ent2 = new RotatingEntity(_PLAYER_TYPE, tex2, rotorCollisionMask, 15.0, sf::Vector2f(-5, 2));
+  auto ent2 = new RotatingEntity(game, _PLAYER_TYPE, tex2, rotorCollisionMask, 15.0, sf::Vector2f(-5, 2));
 
   // auto tex3 = AssetManager::GetTexture("res/textures/heli/rotor.png");
-  auto enemy = new RotatingEntity(_ENEMY_TYPE, tex2, rotorCollisionMask, 15.0, sf::Vector2f(200, 200));
+  auto enemy = new RotatingEntity(game, _ENEMY_TYPE, tex2, rotorCollisionMask, 15.0, sf::Vector2f(200, 200));
 
   // Layout entities in scene
   auto scene = new SceneGraph();
   auto parent = scene->AddEntity(ent); //scene->GetRoot()->AddChild(ent);
   scene->AddEntity(ent2, parent); // parent->AddChild(ent2);
-
   scene->AddEntity(enemy);
-
-  // Create game
-  GameOptions options{"My Game", sf::Vector2i(512, 512), 2.0, 50, true, true};
-  auto app = new Game(options, scene, world);
+  game->SetScene(scene);
 
   // Send Events to controller
-  app->AddEvent(upPressed);
-  app->AddEvent(downPressed);
-  app->AddEvent(leftPressed);
-  app->AddEvent(rightPressed);
+  game->AddEvent(upPressed);
+  game->AddEvent(downPressed);
+  game->AddEvent(leftPressed);
+  game->AddEvent(rightPressed);
 
   // Run Game
-  app->Run();
+  game->Run();
 
   return 0;
 }

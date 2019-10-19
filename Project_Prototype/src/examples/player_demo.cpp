@@ -11,12 +11,13 @@ const int _PLAYER_TYPE = 200;
  */
 class PlayerEntity : public SpriteTransformableEntity {
 public:
-  PlayerEntity(sf::Texture* texture,
+  PlayerEntity(Game* game,
+               sf::Texture* texture,
                float speed,
                Observable<EmptyEventData>* up,
                Observable<EmptyEventData>* down,
                Observable<EmptyEventData>* left,
-               Observable<EmptyEventData>* right) : SpriteTransformableEntity(_PLAYER_TYPE, texture), mSpeed(speed) {
+               Observable<EmptyEventData>* right) : SpriteTransformableEntity(_PLAYER_TYPE, game, texture), mSpeed(speed) {
     //
     //
     //
@@ -81,10 +82,11 @@ private:
 class RotatingEntity : public SpriteTransformableEntity {
 public:
   RotatingEntity(int type,
+                 Game* game,
                  sf::Texture* texture,
                  std::vector<sf::Vector2f> collisionMask,
                  float rotPerTick,
-                 sf::Vector2f pos = sf::Vector2f()) : SpriteTransformableEntity(type, texture, collisionMask), mRot(rotPerTick) {
+                 sf::Vector2f pos = sf::Vector2f()) : SpriteTransformableEntity(type, game, texture, collisionMask), mRot(rotPerTick) {
     auto rect = mSprite.getTextureRect();
     mCenter = sf::Vector2f(rect.width / 2, rect.height / 2);
     SetTransform(sf::Transform().translate(pos));
@@ -102,6 +104,10 @@ private:
 int playerDemo(float zoom) {
   cout << "Start playerDemo" << endl;
 
+  // Create game
+  auto game = new Game();
+  game->SetOptions(GameOptions{"My Game", sf::Vector2i(512, 512), zoom, 50});
+
   // Create Keyboard Events
   auto upPressed = new OnKeyPress(sf::Keyboard::Up);
   auto downPressed = new OnKeyPress(sf::Keyboard::Down);
@@ -110,11 +116,12 @@ int playerDemo(float zoom) {
 
   // Create Game World
   auto world = GameWorldFactory::CreateGameWorld("res/testmap/tilemap.json", "", "res/testmap/tile_");
+  game->SetWorld(world);
 
   // Create Player entity and Rotating child entity
   auto tex = AssetManager::GetTexture("res/textures/sample.png");
   // auto tex2 = AssetManager::GetTexture("res/textures/discus.png");
-  auto ent = new PlayerEntity(tex, 2.0, upPressed, downPressed, leftPressed, rightPressed);
+  auto ent = new PlayerEntity(game, tex, 2.0, upPressed, downPressed, leftPressed, rightPressed);
   // auto ent2 = new RotatingEntity(tex2, 5.0);
 
   // Layout entities in scene
@@ -122,18 +129,14 @@ int playerDemo(float zoom) {
   auto parent = scene->AddEntity(ent); // scene->GetRoot()->AddChild(ent);
   scene->AddEntity(ent, parent); // parent->AddChild(ent2);
 
-  // Create game
-  GameOptions options{"My Game", sf::Vector2i(512, 512), zoom, 50};
-  auto app = new Game(options, scene, world);
-
   // Send Events to controller
-  app->AddEvent(upPressed);
-  app->AddEvent(downPressed);
-  app->AddEvent(leftPressed);
-  app->AddEvent(rightPressed);
+  game->AddEvent(upPressed);
+  game->AddEvent(downPressed);
+  game->AddEvent(leftPressed);
+  game->AddEvent(rightPressed);
 
   // Run Game
-  app->Run();
+  game->Run();
 
   return 0;
 }

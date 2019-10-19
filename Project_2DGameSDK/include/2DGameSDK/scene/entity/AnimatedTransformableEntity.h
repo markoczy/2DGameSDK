@@ -11,6 +11,7 @@
 #ifndef __ANIMATED_TRANSFORMABLE_ENTITY_H__
 #define __ANIMATED_TRANSFORMABLE_ENTITY_H__
 
+#include <2DGameSDK/core/Game.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
 #include <2DGameSDK/scene/entity/TransformableEntity.h>
 #include <sstream>
@@ -34,7 +35,7 @@ namespace game {
      * 
      * @param animationStates The set of Animation States
      */
-    AnimatedTransformableEntity(int type, std::map<int, sf::Texture*> animationStates);
+    AnimatedTransformableEntity(int type, Game* game, std::map<int, sf::Texture*> animationStates);
 
     /**
      * @brief Destroys the Animated Transformable Entity

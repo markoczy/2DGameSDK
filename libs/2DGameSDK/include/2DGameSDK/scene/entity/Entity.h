@@ -5,12 +5,15 @@
 #include <2DGameSDK/core/GameObject.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
 
+#include <chipmunk/chipmunk.h>
+
 namespace game {
   class SceneGraphNode;
+  class Game;
 
   class GAMESDK_DLL Entity : public GameObject {
   public:
-    Entity(int type);
+    Entity(int type, Game* game);
     virtual ~Entity();
 
     virtual bool IsTransformable();
@@ -28,7 +31,7 @@ namespace game {
      * 
      * @param graphNode The corresponding SceneGraphNode
      */
-    void SetGraphNode(game::SceneGraphNode* graphNode);
+    void SetGraphNode(SceneGraphNode* graphNode);
 
     void Transform(sf::Transform transform);
     void OnParentTransformed(sf::Transform accumulated);
@@ -36,7 +39,6 @@ namespace game {
     virtual void OnTickEnded();
 
   protected:
-    // bool mIsCollidable = false;
     SceneGraphNode* mGraphNode = nullptr;
 
     virtual bool setTransform(sf::Transform transform);
