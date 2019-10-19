@@ -18,7 +18,7 @@ namespace game {
   SpriteTransformableEntity::~SpriteTransformableEntity() {
   }
 
-  void SpriteTransformableEntity::Tick() {}
+  void SpriteTransformableEntity::OnTick() {}
 
   void SpriteTransformableEntity::OnTickEnded() {
     if(mTransformationOccured) {
@@ -27,8 +27,8 @@ namespace game {
     }
   }
 
-  void SpriteTransformableEntity::Render(sf::RenderTarget* target, sf::RenderStates states) {
-    states.transform = states.transform * mFullTransform;
+  void SpriteTransformableEntity::OnRender(sf::RenderTarget* target, sf::RenderStates states) {
+    states.transform = states.transform * mCombinedTransform;
     target->draw(mSprite, states);
   }
 
@@ -41,11 +41,11 @@ namespace game {
   }
 
   void SpriteTransformableEntity::updateAABB() {
-    mAABB = mFullTransform.transformRect(mSprite.getLocalBounds());
+    mAABB = mCombinedTransform.transformRect(mSprite.getLocalBounds());
   }
 
   void SpriteTransformableEntity::updateCollisionMask() {
-    mTransformedCollisionMask = helpers::GrahicTools::TransformPoints(mCollisionMask, mFullTransform);
+    mTransformedCollisionMask = helpers::GrahicTools::TransformPoints(mCollisionMask, mCombinedTransform);
   }
 
   void SpriteTransformableEntity::onEntityTransformed() {

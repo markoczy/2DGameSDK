@@ -21,11 +21,11 @@ public:
     SetTransform(sf::Transform().translate(pos));
   }
 
-  void Tick() {
+  void OnTick() {
     Transform(sf::Transform().rotate(mRot, mCenter));
     auto pt = mTransform.transformPoint(sf::Vector2f());
     cout << "Transform: (" << pt.x << ", " << pt.x << ")" << endl;
-    pt = mFullTransform.transformPoint(sf::Vector2f());
+    pt = mCombinedTransform.transformPoint(sf::Vector2f());
     cout << "Full Transform: (" << pt.x << ", " << pt.x << ")" << endl;
   }
 

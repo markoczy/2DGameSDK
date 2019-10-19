@@ -38,7 +38,7 @@ public:
     delete mRight;
   }
 
-  void Tick() {
+  void OnTick() {
     if(mDt.x != 0 || mDt.y != 0) {
       Transform(sf::Transform().translate(mDt));
       // GetTransformable()->move(mDt);
@@ -90,7 +90,7 @@ public:
     SetTransform(sf::Transform().translate(pos));
   }
 
-  void Tick() {
+  void OnTick() {
     Transform(sf::Transform().rotate(mRot, mCenter));
   }
 

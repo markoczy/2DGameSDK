@@ -45,7 +45,7 @@
  *     GetTransformable()->setPosition(pos);
  *   }
  * 
- *   void Tick() {
+ *   void OnTick() {
  *     GetTransformable()->rotate(mRot);
  *   }
  * 

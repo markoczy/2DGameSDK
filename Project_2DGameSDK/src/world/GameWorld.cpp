@@ -22,11 +22,11 @@ namespace game {
     helpers::safeDelete(mMaterialMap);
   }
 
-  void GameWorld::Tick() {
+  void GameWorld::OnTick() {
     // TODO foreach tile -> tick
   }
 
-  void GameWorld::Render(sf::RenderTarget* target) {
+  void GameWorld::OnRender(sf::RenderTarget* target) {
     Sprite sprite(*mTexture);
     target->draw(sprite);
   }

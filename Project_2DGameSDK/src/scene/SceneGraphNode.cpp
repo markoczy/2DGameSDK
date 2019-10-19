@@ -5,7 +5,7 @@ using namespace sf;
 namespace game {
   const Transform _ZERO_TRANSFORM = Transform();
 
-  SceneGraphNode::SceneGraphNode(SceneGraph* graph, SceneGraphNode* parent, TransformableEntity* entity) : mGraph(graph), mParent(parent), mEntity(entity) {
+  SceneGraphNode::SceneGraphNode(SceneGraph* graph, SceneGraphNode* parent, Entity* entity) : mGraph(graph), mParent(parent), mEntity(entity) {
     if(entity != nullptr) {
       entity->SetGraphNode(this);
     }
@@ -22,7 +22,7 @@ namespace game {
         ent->OnParentTransformed(accumulated);
         auto parentTransform = ent->GetAccumulatedTransform() * ent->GetTransform();
 
-        //TODO recursive overhead..
+        //TODO recursive overhead.. (stack??)
         iChild->OnEntityTransformed(parentTransform);
       }
     }

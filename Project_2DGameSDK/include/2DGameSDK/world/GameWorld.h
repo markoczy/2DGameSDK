@@ -42,14 +42,14 @@ namespace game {
      * @brief Updates all Elements of the Game World
      * 
      */
-    void Tick();
+    void OnTick();
 
     /**
      * @brief Renders all Elements of the Game World
      * 
      * @param target The screen or texture to render on
      */
-    void Render(sf::RenderTarget* target);
+    void OnRender(sf::RenderTarget* target);
 
   private:
     int mWidth, mHeight;

@@ -14,7 +14,7 @@ namespace game {
     }
   }
 
-  void SceneGraph::Tick() {
+  void SceneGraph::OnTick() {
     tickNodes(mNodes[ROOT_NODE]);
     for(auto i = mNodes.begin(); i != mNodes.end(); i = std::next(i)) {
       if(i->second->mEntity != nullptr) {
@@ -44,11 +44,11 @@ namespace game {
     }
   }
 
-  void SceneGraph::Render(sf::RenderTarget* target, GameOptions* options, sf::RenderStates states) {
+  void SceneGraph::OnRender(sf::RenderTarget* target, GameOptions* options, sf::RenderStates states) {
     renderNodes(mNodes[ROOT_NODE], target, options, states);
   }
 
-  int SceneGraph::AddEntity(TransformableEntity* entity, int parent) {
+  int SceneGraph::AddEntity(Entity* entity, int parent) {
     auto parentNode = mNodes[parent];
     auto node = new SceneGraphNode(this, mNodes[parent], entity);
     mNodes[idCounter] = node;
@@ -59,7 +59,7 @@ namespace game {
   void SceneGraph::tickNodes(SceneGraphNode* current) {
     auto entity = current->mEntity;
     if(entity != nullptr) {
-      entity->Tick();
+      entity->OnTick();
     }
     for(auto iChild : current->mChildren) {
       tickNodes(iChild);
@@ -70,7 +70,7 @@ namespace game {
     auto entity = current->mEntity;
 
     if(entity != nullptr) {
-      entity->Render(target, states);
+      entity->OnRender(target, states);
 
       if(options->RenderAABB) {
         auto aabb = entity->GetAABB();

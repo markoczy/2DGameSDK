@@ -46,7 +46,7 @@ namespace game {
      * @brief Updates the Entity
      * 
      */
-    virtual void Tick();
+    virtual void OnTick();
 
     /**
      * @brief Renders the Entity
@@ -54,7 +54,7 @@ namespace game {
      * @param target The screen or texture to render on
      * @param states The initial Render States (transformation etc.)
      */
-    virtual void Render(sf::RenderTarget* target, sf::RenderStates states = sf::RenderStates::Default);
+    virtual void OnRender(sf::RenderTarget* target, sf::RenderStates states = sf::RenderStates::Default);
 
     /**
      * @brief Sets the current Animation State

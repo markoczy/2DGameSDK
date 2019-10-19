@@ -24,7 +24,7 @@ public:
     SetTransform(sf::Transform().translate(pos));
   }
 
-  void Tick() {
+  void OnTick() {
     Transform(sf::Transform().rotate(mRot, mCenter));
   }
 
@@ -63,7 +63,7 @@ public:
     mDir = sf::Vector2f(0, -1);
   }
 
-  void Tick() {
+  void OnTick() {
     sf::Transform transform;
     if(mDw != 0) {
       transform.rotate(mDw, mCenter);
@@ -94,7 +94,7 @@ public:
     mDw += mRotSpeed;
   }
 
-  void OnCollision(TransformableEntity* other, sf::Vector2f point) {
+  void OnCollision(Entity* other, sf::Vector2f point) {
     if(other->GetType() == _ENEMY_TYPE) {
       std::cout << "Collision with enemy detected!! Point: (" << point.x
                 << ", " << point.y << ")" << std::endl;

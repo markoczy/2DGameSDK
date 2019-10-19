@@ -41,44 +41,26 @@ namespace game {
      */
     virtual ~TransformableEntity();
 
-    bool IsCollidable();
+    virtual bool IsTransformable();
+    virtual bool IsCollidable();
 
     virtual sf::Transform GetTransform();
-
     virtual sf::Transform GetAccumulatedTransform();
+    virtual sf::Transform GetCombinedTransform();
 
-    /**
-     * @brief Set the Graph Node object
-     * 
-     * @param graphNode The corresponding SceneGraphNode
-     */
-    void SetGraphNode(SceneGraphNode* graphNode);
-
-    virtual void SetTransform(sf::Transform transform);
-
-    virtual void Transform(sf::Transform transform);
-
+    virtual void OnCollision(Entity* other, sf::Vector2f point);
     virtual void OnTickEnded();
 
-    virtual void OnParentTransformed(sf::Transform accumulated);
-
-    virtual void OnCollision(TransformableEntity* other, sf::Vector2f point);
-
-    // --- Pure virtual Functions: ---
-
-    virtual sf::FloatRect GetAABB() = 0;
-
-    virtual std::vector<sf::Vector2f> GetCollisionMask() = 0;
-
   protected:
-    SceneGraphNode* mGraphNode = nullptr;
     sf::Transform mTransform;
     sf::Transform mAccTransform;
-    sf::Transform mFullTransform;
+    sf::Transform mCombinedTransform;
 
     bool mIsCollidable;
 
-    virtual void onEntityTransformed();
+    virtual bool setTransform(sf::Transform transform);
+    virtual bool transform(sf::Transform transform);
+    virtual bool setAccumulatedTransform(sf::Transform accumulated);
   };
 
 } // namespace game

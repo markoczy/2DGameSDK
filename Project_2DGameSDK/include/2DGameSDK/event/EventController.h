@@ -59,7 +59,7 @@ namespace game {
      * @brief Updates all Events
      * 
      */
-    void Tick();
+    void OnTick();
 
   private:
     int mEventCounter = 0;

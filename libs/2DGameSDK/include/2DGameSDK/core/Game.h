@@ -131,13 +131,13 @@ namespace game {
      * @brief Updates all Game Elements
      * 
      */
-    void tick();
+    void OnTick();
 
     /**
      * @brief Renders all Game Elements
      * 
      */
-    void render();
+    void OnRender();
 
     EventController mEventCtrl;
     GameOptions mOptions;
