@@ -146,3 +146,39 @@
 
 - Prototypes Benchmarking Setup -> 2h
 - Komischer Bug (bei Bildschirmbewegung bewegen sich die Objekte) -> 0.5h
+
+## 04.10.2019
+
+### Status
+
+- Am Dokument gearbeitet -> 4h PM
+
+## 06.10.2019
+
+### Status
+
+- Erweiterung Physik POC, Scene Graph Integration -> 5h
+
+### Ausblick
+
+- SceneGraph Konzept und Physik Engine sind nur begrenzt kompatibel,
+  die Integration der Physik Engine würde viele Vorarbeiten kaputt
+  machen und dabei die Engine komplizierter machen.
+  
+## 08.10.2019
+
+### Status
+
+- Am Dokument gearbeitet -> 2h PM
+  
+## 09.10.2019
+
+### Status
+
+- Am Dokument gearbeitet -> 2h PM
+
+### Ausblick
+
+- Womöglich wäre es der beste Ansatz dem Spielentwickler die Wahl
+  zu lassen selbst eine Physik Engine einzubauen, dazu könnte ein
+  Prototyp hilfreich sein.
