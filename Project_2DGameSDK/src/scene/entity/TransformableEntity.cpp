@@ -3,6 +3,10 @@
 namespace game {
 
   TransformableEntity::TransformableEntity(int type, Game* game, bool isCollidable) : Entity(type, game), mIsCollidable(isCollidable) {
+    // mBody = cpBodyNewKinematic();
+    mBody = cpSpaceAddBody(game->GetPhysicalWorld(), cpBodyNewKinematic());
+    LOGD("Game Space: " << game->GetPhysicalWorld());
+    LOGD("Body Space: " << cpBodyGetSpace(mBody));
   }
 
   TransformableEntity::~TransformableEntity() {}

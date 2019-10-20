@@ -8,7 +8,8 @@ namespace game {
 
   const std::vector<sf::Vector2f> _EMPTY_MASK = std::vector<sf::Vector2f>();
 
-  Entity::Entity(int type, Game* game) : GameObject(type, game) {}
+  Entity::Entity(int type, Game* game) : GameObject(type, game) {
+  }
 
   Entity::~Entity() {}
 

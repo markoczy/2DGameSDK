@@ -28,16 +28,17 @@ namespace game {
         auto entB = j->second->mEntity;
         if(entA != nullptr && entA->IsCollidable() && entB != nullptr && entB->IsCollidable()) {
           if(entA->GetAABB().intersects(entB->GetAABB())) {
-            auto intersect = helpers::GrahicTools::ShapesIntersect(entA->GetCollisionMask(), entB->GetCollisionMask());
-            if(std::get<0>(intersect)) {
-              // TODO performance!!
-              auto pt = std::get<1>(intersect);
-              auto invA = entA->GetTransform().getInverse();
-              auto invB = entB->GetTransform().getInverse();
+            LOGD("BB Intersect");
+            // auto intersect = helpers::GrahicTools::ShapesIntersect(entA->GetCollisionMask(), entB->GetCollisionMask());
+            // if(std::get<0>(intersect)) {
+            //   // TODO performance!!
+            //   auto pt = std::get<1>(intersect);
+            //   auto invA = entA->GetTransform().getInverse();
+            //   auto invB = entB->GetTransform().getInverse();
 
-              entA->OnCollision(entB, invA.transformPoint(pt));
-              entB->OnCollision(entA, invB.transformPoint(pt));
-            }
+            //   entA->OnCollision(entB, invA.transformPoint(pt));
+            //   entB->OnCollision(entA, invB.transformPoint(pt));
+            // }
           }
         }
       }

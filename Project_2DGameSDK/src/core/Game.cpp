@@ -10,7 +10,10 @@ namespace game {
   // Constructor / Destructor
   // ###########################################################################
 
-  Game::Game() : mState(GameState{nullptr, nullptr}) {}
+  Game::Game() : mState(GameState{nullptr, nullptr}) {
+    LOGD("Game minimal contructor call");
+    mPhysicalWorld = cpSpaceNew();
+  }
 
   Game::Game(GameOptions options, SceneGraph* scene, GameWorld* world) : mOptions(options), mState(GameState{scene, world}) {
     LOGD("Game contructor call");
@@ -30,6 +33,7 @@ namespace game {
 
   void Game::Run() {
     LOGI("Game started");
+    cpSpaceSetIterations(mPhysicalWorld, 10);
     mWindow = new sf::RenderWindow(sf::VideoMode(mOptions.ScreenDim.x, mOptions.ScreenDim.y), mOptions.Title);
     mWindow->setFramerateLimit(mOptions.FramesPerSecond);
     // mWindow->setVerticalSyncEnabled(true);
@@ -60,8 +64,11 @@ namespace game {
       IFLOGD(int tickTime = clock.getElapsedTime().asMilliseconds();)
       render();
 
+      cpSpaceStep(mPhysicalWorld, clock.getElapsedTime().asSeconds());
+
       // Sync Sim Time
       int time = clock.getElapsedTime().asMilliseconds();
+
       if(sleepMillis > time) {
         // LOGD("Sleeping " << sleepMillis - time);
         std::this_thread::sleep_for(std::chrono::milliseconds(sleepMillis - time));

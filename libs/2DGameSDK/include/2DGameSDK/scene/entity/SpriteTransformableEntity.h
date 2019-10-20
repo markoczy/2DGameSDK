@@ -65,11 +65,11 @@ namespace game {
 
     virtual sf::FloatRect GetAABB();
 
-    virtual std::vector<sf::Vector2f> GetCollisionMask();
+    // virtual std::vector<sf::Vector2f> GetCollisionMask();
 
   protected:
     sf::Sprite mSprite;
-    std::vector<sf::Vector2f> mCollisionMask;
+    cpShape* mShape;
 
     bool mTransformationOccured;
     sf::FloatRect mAABB;

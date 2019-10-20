@@ -56,6 +56,7 @@ namespace game {
     sf::Transform mTransform;
     sf::Transform mAccTransform;
     sf::Transform mCombinedTransform;
+    cpBody* mBody = nullptr;
 
     bool mIsCollidable;
 
