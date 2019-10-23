@@ -7,6 +7,8 @@ namespace game {
   // SceneGraphNode forward Declaration
   class SceneGraphNode;
 
+  using namespace helpers;
+
   SpriteTransformableEntity::SpriteTransformableEntity(int type, Game* game, sf::Texture* texture) : TransformableEntity(type, game), mSprite(*texture) {
     auto rect = mSprite.getTextureRect();
     mShape = cpBoxShapeNew(mBody, rect.width, rect.height, 0);
@@ -33,19 +35,28 @@ namespace game {
     auto w = mSprite.getTextureRect().width;
     auto h = mSprite.getTextureRect().height;
 
-    auto origin = GetTransform().transformPoint(sf::Vector2f());
-    auto xunit = GetTransform().transformPoint(sf::Vector2f(1, 0));
-    auto dir = xunit - origin;
+    auto world = getGame()->GetWorld();
+    auto worldBounds = sf::FloatRect(0, 0, world->GetBounds().width, world->GetBounds().height);
+    auto localOrigin = GetTransform().transformPoint(sf::Vector2f());
+    auto transform =
+        GrahicTools::GetTransformVisualToPhysical(
+            localOrigin, sf::FloatRect(0, 0, w, h), worldBounds);
+
+    auto physicalOrigin = transform.transformPoint(sf::Vector2f());
+    auto physicalXUnit = transform.transformPoint(sf::Vector2f(1, 0));
+    auto physicalXDir = physicalXUnit - physicalOrigin;
     float angle;
-    if(dir.y == 1.0f) {
+    // ???
+    if(physicalXDir.y == 1.0f) {
       angle = constants::PI_2;
     } else {
-      angle = atan(dir.y / dir.x);
+      angle = atan(physicalXDir.y / physicalXDir.x);
     }
-    LOGD("Body Pos: (" << origin.x << ", " << origin.y << ")");
-    LOGD("Body Dir: (" << dir.x << ", " << dir.y << "), angle: " << angle);
-    cpBodySetPosition(mBody, cpv(origin.x + w / 2, origin.y - h / 2));
+    LOGD("Body Pos: (" << physicalOrigin.x << ", " << physicalOrigin.y << ")");
+    LOGD("Body Dir: (" << physicalXDir.x << ", " << physicalXDir.y << "), angle: " << angle);
+    cpBodySetPosition(mBody, cpv(physicalOrigin.x, physicalOrigin.y));
     cpBodySetAngle(mBody, angle);
+
     // cpBodySetAngle(mBody, GetTransform().
 
     // cpBodySetRot(mBody, cpv(pos.x, pos.y));
@@ -62,9 +73,24 @@ namespace game {
 
   sf::FloatRect SpriteTransformableEntity::GetAABB() {
     auto bb = cpShapeGetBB(mShape);
+
+    // TODO duplicate code
+    auto w = mSprite.getTextureRect().width;
+    auto h = mSprite.getTextureRect().height;
+    auto world = getGame()->GetWorld();
+    auto worldBounds = sf::FloatRect(0, 0, world->GetBounds().width, world->GetBounds().height);
+    auto localOrigin = GetTransform().transformPoint(sf::Vector2f());
+    auto transform =
+        GrahicTools::GetTransformPhysicalToVisual(
+            localOrigin, sf::FloatRect(0, 0, w, h), worldBounds);
+
+    auto visualBB = sf::FloatRect(bb.l, bb.t, bb.r - bb.l, bb.t - bb.b);
+    visualBB = transform.transformRect(visualBB);
+
     // LOGD("bb.l: " << bb.l << ", bb.t: " << bb.t << ", bb.b: " << bb.b << ", bb.r: " << bb.r);
     LOGD("bb.l: " << bb.l << ", bb.t: " << bb.t << ", bb.r - bb.l: " << bb.r - bb.l << ", bb.t - bb.b: " << bb.t - bb.b);
-    return sf::FloatRect(bb.l, bb.t, bb.r - bb.l, bb.t - bb.b);
+    LOGD("visualBB.l: " << visualBB.left << ", visualBB.t: " << visualBB.top << ", visualBB.width: " << visualBB.width << ", visualBB.height: " << visualBB.height);
+    return visualBB;
 
     // updateAABB();
     // return sf::FloatRect();

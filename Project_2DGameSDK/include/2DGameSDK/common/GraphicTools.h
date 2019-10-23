@@ -24,7 +24,11 @@ namespace game::helpers {
 
     static std::tuple<bool, sf::Vector2f> ShapesIntersect(std::vector<sf::Vector2f> shapeA, std::vector<sf::Vector2f> shapeB);
 
-    sf::Transform GetRotationAroundPoint(sf::Vector2f pt, float angleDeg);
+    static sf::Transform GetRotationAroundPoint(sf::Vector2f pt, float angleDeg);
+
+    static sf::Transform GetTransformVisualToPhysical(sf::Vector2f visual, sf::FloatRect objectBounds, sf::FloatRect worldBounds);
+
+    static sf::Transform GetTransformPhysicalToVisual(sf::Vector2f physical, sf::FloatRect objectBounds, sf::FloatRect worldBounds);
 
   private:
     GrahicTools() {}

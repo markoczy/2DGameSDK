@@ -51,8 +51,10 @@ namespace game {
      */
     void OnRender(sf::RenderTarget* target);
 
+    sf::IntRect GetBounds();
+
   private:
-    int mWidth, mHeight;
+    sf::IntRect mBounds;
     Tilemap* mTilemap = nullptr;
     MaterialMap* mMaterialMap = nullptr;
     sf::Texture* mTexture = nullptr;

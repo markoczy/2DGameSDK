@@ -62,6 +62,14 @@ namespace game::helpers {
                          -sin(phi), cos(phi), cos(phi) * ty - sin(phi) * tx - ty, 0, 0, 1);
   }
 
+  sf::Transform GrahicTools::GetTransformVisualToPhysical(sf::Vector2f visual, sf::FloatRect objectBounds, sf::FloatRect worldBounds) {
+    return sf::Transform().translate(visual.x + objectBounds.width / 2, worldBounds.height - visual.y - objectBounds.height / 2);
+  }
+
+  sf::Transform GrahicTools::GetTransformPhysicalToVisual(sf::Vector2f physical, sf::FloatRect objectBounds, sf::FloatRect worldBounds) {
+    return sf::Transform().translate(physical.x - objectBounds.width / 2, physical.y + objectBounds.height / 2 - worldBounds.height);
+  }
+
   // sf::Transform GraphicTools::GetRotationAroundPoint(sf::Vector2f pt, float angleDeg) {
   // }
 
