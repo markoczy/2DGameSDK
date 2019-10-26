@@ -14,6 +14,7 @@
 #include <vector>
 
 #include <SFML/Graphics.hpp>
+#include <chipmunk/chipmunk.h>
 
 #include <2DGameSDK/common/GraphicTools.h>
 #include <2DGameSDK/core/Game.h>
@@ -64,8 +65,7 @@ namespace game {
     void OnRender(sf::RenderTarget* target, sf::RenderStates states = sf::RenderStates::Default);
 
     virtual sf::FloatRect GetAABB();
-
-    // virtual std::vector<sf::Vector2f> GetCollisionMask();
+    virtual std::vector<sf::Vector2f> GetCollisionMask();
 
   protected:
     sf::Sprite mSprite;

@@ -63,6 +63,8 @@ namespace game {
      */
     void Stop();
 
+    GameOptions GetOptions();
+
     /**
      * @brief Returns a copy of the current game state
      * 

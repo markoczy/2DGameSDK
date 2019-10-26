@@ -91,6 +91,10 @@ namespace game {
 
   // ####### Accessors (get/set) ###############################################
 
+  GameOptions Game::GetOptions() {
+    return mOptions;
+  }
+
   GameState Game::GetState() {
     return mState;
   }

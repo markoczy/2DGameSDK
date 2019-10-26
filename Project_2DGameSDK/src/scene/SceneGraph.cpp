@@ -22,27 +22,27 @@ namespace game {
       }
     }
 
-    for(auto i = mNodes.begin(); i != mNodes.end(); i = std::next(i)) {
-      for(auto j = std::next(i); j != mNodes.end(); j = std::next(j)) {
-        auto entA = i->second->mEntity;
-        auto entB = j->second->mEntity;
-        if(entA != nullptr && entA->IsCollidable() && entB != nullptr && entB->IsCollidable()) {
-          if(entA->GetAABB().intersects(entB->GetAABB())) {
-            LOGD("BB Intersect");
-            // auto intersect = helpers::GrahicTools::ShapesIntersect(entA->GetCollisionMask(), entB->GetCollisionMask());
-            // if(std::get<0>(intersect)) {
-            //   // TODO performance!!
-            //   auto pt = std::get<1>(intersect);
-            //   auto invA = entA->GetTransform().getInverse();
-            //   auto invB = entB->GetTransform().getInverse();
+    // for(auto i = mNodes.begin(); i != mNodes.end(); i = std::next(i)) {
+    //   for(auto j = std::next(i); j != mNodes.end(); j = std::next(j)) {
+    //     auto entA = i->second->mEntity;
+    //     auto entB = j->second->mEntity;
+    // if(entA != nullptr && entA->IsCollidable() && entB != nullptr && entB->IsCollidable()) {
+    //   if(entA->GetAABB().intersects(entB->GetAABB())) {
+    //     LOGD("BB Intersect");
+    // auto intersect = helpers::GrahicTools::ShapesIntersect(entA->GetCollisionMask(), entB->GetCollisionMask());
+    // if(std::get<0>(intersect)) {
+    //   // TODO performance!!
+    //   auto pt = std::get<1>(intersect);
+    //   auto invA = entA->GetTransform().getInverse();
+    //   auto invB = entB->GetTransform().getInverse();
 
-            //   entA->OnCollision(entB, invA.transformPoint(pt));
-            //   entB->OnCollision(entA, invB.transformPoint(pt));
-            // }
-          }
-        }
-      }
-    }
+    //   entA->OnCollision(entB, invA.transformPoint(pt));
+    //   entB->OnCollision(entA, invB.transformPoint(pt));
+    // }
+    //   }
+    // }
+    //   }
+    // }
   }
 
   void SceneGraph::OnRender(sf::RenderTarget* target, GameOptions* options, sf::RenderStates states) {

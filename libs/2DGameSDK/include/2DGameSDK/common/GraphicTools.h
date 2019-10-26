@@ -6,6 +6,7 @@
 #include <vector>
 
 #include <SFML/Graphics.hpp>
+#include <chipmunk/chipmunk.h>
 
 #include <2DGameSDK/common/Constants.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
@@ -26,9 +27,9 @@ namespace game::helpers {
 
     static sf::Transform GetRotationAroundPoint(sf::Vector2f pt, float angleDeg);
 
-    static sf::Transform GetTransformVisualToPhysical(sf::Vector2f visual, sf::FloatRect objectBounds, sf::FloatRect worldBounds);
+    static cpVect GetPhysicalPos(sf::Vector2f visualPos, float totalHeight);
 
-    static sf::Transform GetTransformPhysicalToVisual(sf::Vector2f physical, sf::FloatRect objectBounds, sf::FloatRect worldBounds);
+    static sf::Vector2f GetVisualPos(cpVect physicalPos, float totalHeight);
 
   private:
     GrahicTools() {}

@@ -13,15 +13,14 @@ namespace game {
     auto rect = mSprite.getTextureRect();
     mShape = cpBoxShapeNew(mBody, rect.width, rect.height, 0);
     cpSpaceAddShape(game->GetPhysicalWorld(), mShape);
-    // mCollisionMask = helpers::GrahicTools::GetRectBoundary(mSprite.getLocalBounds());
+    mSprite.setOrigin(rect.width / 2, rect.height / 2);
   }
 
-  SpriteTransformableEntity::SpriteTransformableEntity(int type, Game* game, sf::Texture* texture, std::vector<sf::Vector2f> collisionMask) : TransformableEntity(type, game, true), mSprite(*texture) {
-    // TODO
+  SpriteTransformableEntity::SpriteTransformableEntity(int type, Game* game, sf::Texture* texture, std::vector<sf::Vector2f>) : TransformableEntity(type, game, true), mSprite(*texture) {
     auto rect = mSprite.getTextureRect();
     mShape = cpBoxShapeNew(mBody, rect.width, rect.height, 0);
     cpSpaceAddShape(game->GetPhysicalWorld(), mShape);
-    // mCollisionMask = collisionMask;
+    mSprite.setOrigin(rect.width / 2, rect.height / 2);
   }
 
   SpriteTransformableEntity::~SpriteTransformableEntity() {
@@ -32,38 +31,22 @@ namespace game {
   int rot = 0;
 
   void SpriteTransformableEntity::OnTickEnded() {
-    auto w = mSprite.getTextureRect().width;
-    auto h = mSprite.getTextureRect().height;
+    auto worldHeight = getGame()->GetWorld()->GetBounds().height;
+    auto localOrigin = GetCombinedTransform().transformPoint(sf::Vector2f());
+    auto localXUnit = GetCombinedTransform().transformPoint(sf::Vector2f(1, 0));
+    auto localDir = localXUnit - localOrigin;
+    auto physicalOrigin = GrahicTools::GetPhysicalPos(localOrigin, worldHeight);
 
-    auto world = getGame()->GetWorld();
-    auto worldBounds = sf::FloatRect(0, 0, world->GetBounds().width, world->GetBounds().height);
-    auto localOrigin = GetTransform().transformPoint(sf::Vector2f());
-    auto transform =
-        GrahicTools::GetTransformVisualToPhysical(
-            localOrigin, sf::FloatRect(0, 0, w, h), worldBounds);
+    float angle = -atan2(localDir.y, localDir.x);
 
-    auto physicalOrigin = transform.transformPoint(sf::Vector2f());
-    auto physicalXUnit = transform.transformPoint(sf::Vector2f(1, 0));
-    auto physicalXDir = physicalXUnit - physicalOrigin;
-    float angle;
-    // ???
-    if(physicalXDir.y == 1.0f) {
-      angle = constants::PI_2;
-    } else {
-      angle = atan(physicalXDir.y / physicalXDir.x);
+    if(GetType() == 200) {
+      LOGD("Body Pos: (" << physicalOrigin.x << ", " << physicalOrigin.y << "), angle: " << angle);
     }
-    LOGD("Body Pos: (" << physicalOrigin.x << ", " << physicalOrigin.y << ")");
-    LOGD("Body Dir: (" << physicalXDir.x << ", " << physicalXDir.y << "), angle: " << angle);
-    cpBodySetPosition(mBody, cpv(physicalOrigin.x, physicalOrigin.y));
+    cpBodySetPosition(mBody, physicalOrigin);
     cpBodySetAngle(mBody, angle);
 
-    // cpBodySetAngle(mBody, GetTransform().
-
-    // cpBodySetRot(mBody, cpv(pos.x, pos.y));
-    // if(mTransformationOccured) {
-    // updateAABB();
-    // updateCollisionMask();
-    // }0
+    if(getGame()->GetOptions().RenderAABB) updateAABB();
+    if(getGame()->GetOptions().RenderCollisionMask) updateCollisionMask();
   }
 
   void SpriteTransformableEntity::OnRender(sf::RenderTarget* target, sf::RenderStates states) {
@@ -72,41 +55,46 @@ namespace game {
   }
 
   sf::FloatRect SpriteTransformableEntity::GetAABB() {
-    auto bb = cpShapeGetBB(mShape);
-
-    // TODO duplicate code
-    auto w = mSprite.getTextureRect().width;
-    auto h = mSprite.getTextureRect().height;
-    auto world = getGame()->GetWorld();
-    auto worldBounds = sf::FloatRect(0, 0, world->GetBounds().width, world->GetBounds().height);
-    auto localOrigin = GetTransform().transformPoint(sf::Vector2f());
-    auto transform =
-        GrahicTools::GetTransformPhysicalToVisual(
-            localOrigin, sf::FloatRect(0, 0, w, h), worldBounds);
-
-    auto visualBB = sf::FloatRect(bb.l, bb.t, bb.r - bb.l, bb.t - bb.b);
-    visualBB = transform.transformRect(visualBB);
-
-    // LOGD("bb.l: " << bb.l << ", bb.t: " << bb.t << ", bb.b: " << bb.b << ", bb.r: " << bb.r);
-    LOGD("bb.l: " << bb.l << ", bb.t: " << bb.t << ", bb.r - bb.l: " << bb.r - bb.l << ", bb.t - bb.b: " << bb.t - bb.b);
-    LOGD("visualBB.l: " << visualBB.left << ", visualBB.t: " << visualBB.top << ", visualBB.width: " << visualBB.width << ", visualBB.height: " << visualBB.height);
-    return visualBB;
-
-    // updateAABB();
-    // return sf::FloatRect();
+    return mAABB;
   }
 
-  // std::vector<sf::Vector2f> SpriteTransformableEntity::GetCollisionMask() {
-  //   // return mTransformedCollisionMask;
-  //   cpShapeget
-  // }
+  std::vector<sf::Vector2f> SpriteTransformableEntity::GetCollisionMask() {
+    return mTransformedCollisionMask;
+  }
 
   void SpriteTransformableEntity::updateAABB() {
-    mAABB = mCombinedTransform.transformRect(mSprite.getLocalBounds());
+    auto bb = cpShapeCacheBB(mShape);
+    auto worldHeight = getGame()->GetWorld()->GetBounds().height;
+
+    auto topLeftVis = GrahicTools::GetVisualPos(cpv(bb.l, bb.t), worldHeight);
+    auto bottomRightVis = GrahicTools::GetVisualPos(cpv(bb.r, bb.b), worldHeight);
+    mAABB = sf::FloatRect(topLeftVis.x,
+                          topLeftVis.y,
+                          bottomRightVis.x - topLeftVis.x,
+                          bottomRightVis.y - topLeftVis.y);
+
+    LOGD("bb.l: " << bb.l << ", bb.t: " << bb.t << ", bb.r - bb.l: " << bb.r - bb.l << ", bb.t - bb.b: " << bb.t - bb.b);
+    LOGD("mAABB.l: " << mAABB.left << ", mAABB.t: " << mAABB.top << ", mAABB.width: " << mAABB.width << ", mAABB.height: " << mAABB.height);
   }
 
   void SpriteTransformableEntity::updateCollisionMask() {
-    // mTransformedCollisionMask = helpers::GrahicTools::TransformPoints(mCollisionMask, mCombinedTransform);
+    auto worldHeight = getGame()->GetWorld()->GetBounds().height;
+    auto physOrigin = cpBodyGetPosition(mBody);
+    auto visOrigin = GrahicTools::GetVisualPos(physOrigin, worldHeight);
+
+    float w = mSprite.getTextureRect().width;
+    float h = mSprite.getTextureRect().height;
+
+    // Handle Rotation
+    auto rotRad = cpBodyGetAngle(mBody);
+    float rot = -(360 * rotRad) / 6.28;
+    auto rotTransform = sf::Transform().rotate(rot, visOrigin);
+
+    mTransformedCollisionMask = std::vector<sf::Vector2f>();
+    mTransformedCollisionMask.push_back(rotTransform.transformPoint(sf::Vector2f(visOrigin.x - w / 2, visOrigin.y - h / 2)));
+    mTransformedCollisionMask.push_back(rotTransform.transformPoint(sf::Vector2f(visOrigin.x + w / 2, visOrigin.y - h / 2)));
+    mTransformedCollisionMask.push_back(rotTransform.transformPoint(sf::Vector2f(visOrigin.x + w / 2, visOrigin.y + h / 2)));
+    mTransformedCollisionMask.push_back(rotTransform.transformPoint(sf::Vector2f(visOrigin.x - w / 2, visOrigin.y + h / 2)));
   }
 
   void SpriteTransformableEntity::onEntityTransformed() {

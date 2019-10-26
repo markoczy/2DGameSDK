@@ -26,7 +26,8 @@ public:
   }
 
   void OnTick() {
-    Transform(sf::Transform().rotate(mRot, mCenter));
+    // Transform(sf::Transform().rotate(mRot, mCenter));
+    Transform(sf::Transform().rotate(mRot));
   }
 
   bool IsCollidable() {
@@ -72,7 +73,8 @@ public:
   void OnTick() {
     sf::Transform transform;
     if(mDw != 0) {
-      transform.rotate(mDw, mCenter);
+      // transform.rotate(mDw, mCenter);
+      transform.rotate(mDw);
       mAngle += mDw;
     }
     // translate
@@ -190,7 +192,8 @@ int chopperDemo() {
   auto ent = new ChopperEntity(game, tex, chopperCollisionMask, 2.0, 5.0, upPressed, downPressed, leftPressed, rightPressed, sf::Vector2f(50, 50));
 
   auto rotorCollisionMask = getRotorCollisionMask();
-  auto ent2 = new RotatingEntity(game, _PLAYER_TYPE, tex2, rotorCollisionMask, 15.0, sf::Vector2f(-5, 2));
+  // auto ent2 = new RotatingEntity(game, 1, tex2, rotorCollisionMask, 15.0, sf::Vector2f(-5, 2));
+  auto ent2 = new RotatingEntity(game, 1, tex2, rotorCollisionMask, 15.0, sf::Vector2f(0, 0));
 
   // auto tex3 = AssetManager::GetTexture("res/textures/heli/rotor.png");
   auto enemy = new RotatingEntity(game, _ENEMY_TYPE, tex2, rotorCollisionMask, 15.0, sf::Vector2f(200, 200));
