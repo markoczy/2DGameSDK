@@ -17,7 +17,7 @@ namespace game {
 
     int retA = entA->OnCollision(type, entB, arb);
     int retB = entB->OnCollision(type, entA, arb);
-    return retA & retB;
+    return retA | retB;
   }
 
   unsigned char collisionBegin(cpArbiter* arb, cpSpace* space, cpDataPointer data) {

@@ -15,6 +15,7 @@ namespace game {
     mShape = cpBoxShapeNew(mBody, rect.width, rect.height, 0);
     cpSpaceAddShape(game->GetPhysicalWorld(), mShape);
     cpShapeSetCollisionType(mShape, CollisionType::Default);
+    cpShapeSetSensor(mShape, true);
     mSprite.setOrigin(rect.width / 2, rect.height / 2);
   }
 
@@ -23,6 +24,7 @@ namespace game {
     mShape = cpBoxShapeNew(mBody, rect.width, rect.height, 0);
     cpSpaceAddShape(game->GetPhysicalWorld(), mShape);
     cpShapeSetCollisionType(mShape, CollisionType::Default);
+    cpShapeSetSensor(mShape, true);
     mSprite.setOrigin(rect.width / 2, rect.height / 2);
   }
 
