@@ -16,9 +16,11 @@
 #include <SFML/Graphics.hpp>
 #include <chipmunk/chipmunk.h>
 
+#include <2DGameSDK/common/Constants.h>
 #include <2DGameSDK/common/GraphicTools.h>
 #include <2DGameSDK/core/Game.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
+#include <2DGameSDK/physics/CollisionType.h>
 #include <2DGameSDK/scene/entity/TransformableEntity.h>
 
 namespace game {

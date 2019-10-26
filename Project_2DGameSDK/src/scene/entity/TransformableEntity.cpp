@@ -5,6 +5,7 @@ namespace game {
   TransformableEntity::TransformableEntity(int type, Game* game, bool isCollidable) : Entity(type, game), mIsCollidable(isCollidable) {
     // mBody = cpBodyNewKinematic();
     mBody = cpSpaceAddBody(game->GetPhysicalWorld(), cpBodyNewKinematic());
+    cpBodySetUserData(mBody, this);
     LOGD("Game Space: " << game->GetPhysicalWorld());
     LOGD("Body Space: " << cpBodyGetSpace(mBody));
   }
@@ -50,7 +51,5 @@ namespace game {
   }
 
   void TransformableEntity::OnTickEnded() {}
-
-  void TransformableEntity::OnCollision(Entity*, sf::Vector2f) {}
 
 } // namespace game

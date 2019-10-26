@@ -1,6 +1,7 @@
 #include <2DGameSDK/scene/entity/SpriteTransformableEntity.h>
 
 using namespace sf;
+using namespace game::constants;
 
 namespace game {
 
@@ -13,6 +14,7 @@ namespace game {
     auto rect = mSprite.getTextureRect();
     mShape = cpBoxShapeNew(mBody, rect.width, rect.height, 0);
     cpSpaceAddShape(game->GetPhysicalWorld(), mShape);
+    cpShapeSetCollisionType(mShape, CollisionType::Default);
     mSprite.setOrigin(rect.width / 2, rect.height / 2);
   }
 
@@ -20,6 +22,7 @@ namespace game {
     auto rect = mSprite.getTextureRect();
     mShape = cpBoxShapeNew(mBody, rect.width, rect.height, 0);
     cpSpaceAddShape(game->GetPhysicalWorld(), mShape);
+    cpShapeSetCollisionType(mShape, CollisionType::Default);
     mSprite.setOrigin(rect.width / 2, rect.height / 2);
   }
 

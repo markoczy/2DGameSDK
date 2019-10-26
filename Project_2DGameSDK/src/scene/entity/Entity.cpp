@@ -46,7 +46,9 @@ namespace game {
 
   void Entity::OnTickEnded() {}
 
-  void Entity::OnCollision(Entity*, sf::Vector2f) {}
+  int Entity::OnCollision(CollisionEventType type, Entity* other, cpArbiter* arb) {
+    return 0;
+  }
 
   bool Entity::setTransform(sf::Transform) { return false; }
   bool Entity::transform(sf::Transform) { return false; }

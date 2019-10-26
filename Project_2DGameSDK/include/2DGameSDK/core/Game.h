@@ -19,17 +19,20 @@
 #include <SFML/System.hpp>
 #include <chipmunk/chipmunk.h>
 
+#include <2DGameSDK/common/Constants.h>
 #include <2DGameSDK/common/Helpers.h>
 #include <2DGameSDK/core/GameOptions.h>
 #include <2DGameSDK/core/GameState.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
 #include <2DGameSDK/event/EventController.h>
 #include <2DGameSDK/event/observable/ObservableBase.h>
+#include <2DGameSDK/physics/CollisionEventType.h>
+#include <2DGameSDK/physics/CollisionType.h>
 #include <2DGameSDK/scene/SceneGraph.h>
+#include <2DGameSDK/scene/entity/Entity.h>
 #include <2DGameSDK/world/GameWorld.h>
 
 namespace game {
-
   /**
    * @brief The Game is the main Controller of the 2DGameSDK, it is used
    *        to execute the main Game Loop, Process Events and Update/Render all
@@ -44,11 +47,6 @@ namespace game {
      */
     Game();
 
-    /**
-     * @brief Full constructor, sets all needed objects to run the game
-     * 
-     */
-    Game(GameOptions options, SceneGraph* scene, GameWorld* world);
     ~Game();
 
     /**

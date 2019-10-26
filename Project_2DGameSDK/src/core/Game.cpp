@@ -1,8 +1,40 @@
 #include <2DGameSDK/core/Game.h>
 
 using namespace std;
+using namespace game::constants;
 
 namespace game {
+
+  unsigned char collisionFunc(CollisionEventType type, cpArbiter* arb) {
+    cpBody* bodyA;
+    cpBody* bodyB;
+    cpArbiterGetBodies(arb, &bodyA, &bodyB);
+
+    auto entA = (Entity*)cpBodyGetUserData(bodyA);
+    auto entB = (Entity*)cpBodyGetUserData(bodyB);
+
+    // cout << "Collision Begin: " << entA->GetId() << " and " << entB->GetId() << endl;
+
+    int retA = entA->OnCollision(type, entB, arb);
+    int retB = entB->OnCollision(type, entA, arb);
+    return retA & retB;
+  }
+
+  unsigned char collisionBegin(cpArbiter* arb, cpSpace* space, cpDataPointer data) {
+    return collisionFunc(CollisionEventType::Begin, arb);
+  }
+
+  unsigned char collisionPreSolve(cpArbiter* arb, cpSpace* space, cpDataPointer data) {
+    return collisionFunc(CollisionEventType::PreSolve, arb);
+  }
+
+  void collisionPostSolve(cpArbiter* arb, cpSpace* space, cpDataPointer data) {
+    collisionFunc(CollisionEventType::PostSolve, arb);
+  }
+
+  void collisionSeparate(cpArbiter* arb, cpSpace* space, cpDataPointer data) {
+    collisionFunc(CollisionEventType::Separate, arb);
+  }
 
   sf::Clock dbgClock;
 
@@ -13,11 +45,13 @@ namespace game {
   Game::Game() : mState(GameState{nullptr, nullptr}) {
     LOGD("Game minimal contructor call");
     mPhysicalWorld = cpSpaceNew();
-  }
+    auto collisionHandler = cpSpaceAddCollisionHandler(mPhysicalWorld, CollisionType::Default, CollisionType::Default);
+    // auto collisionHandler = cpSpaceAddDefaultCollisionHandler(mPhysicalWorld);
 
-  Game::Game(GameOptions options, SceneGraph* scene, GameWorld* world) : mOptions(options), mState(GameState{scene, world}) {
-    LOGD("Game contructor call");
-    mPhysicalWorld = cpSpaceNew();
+    collisionHandler->beginFunc = &collisionBegin;
+    collisionHandler->preSolveFunc = &collisionPreSolve;
+    collisionHandler->postSolveFunc = &collisionPostSolve;
+    collisionHandler->separateFunc = &collisionSeparate;
   }
 
   Game::~Game() {

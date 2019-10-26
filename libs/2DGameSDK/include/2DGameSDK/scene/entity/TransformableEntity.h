@@ -13,6 +13,7 @@
 
 #include <2DGameSDK/core/Game.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
+#include <2DGameSDK/physics/CollisionEventType.h>
 #include <2DGameSDK/scene/entity/Entity.h>
 
 #include <SFML/Graphics.hpp>
@@ -49,7 +50,6 @@ namespace game {
     virtual sf::Transform GetAccumulatedTransform();
     virtual sf::Transform GetCombinedTransform();
 
-    virtual void OnCollision(Entity* other, sf::Vector2f point);
     virtual void OnTickEnded();
 
   protected:

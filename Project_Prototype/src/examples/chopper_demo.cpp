@@ -26,7 +26,6 @@ public:
   }
 
   void OnTick() {
-    // Transform(sf::Transform().rotate(mRot, mCenter));
     Transform(sf::Transform().rotate(mRot));
   }
 
@@ -106,11 +105,33 @@ public:
     return true;
   }
 
-  void OnCollision(Entity* other, sf::Vector2f point) {
-    if(other->GetType() == _ENEMY_TYPE) {
-      std::cout << "Collision with enemy detected!! Point: (" << point.x
-                << ", " << point.y << ")" << std::endl;
+  int OnCollision(CollisionEventType type, Entity* other, cpArbiter* arb) {
+    // if(other->GetType() == _ENEMY_TYPE) {
+    //   std::cout << "Collision with enemy detected!! Point: (" << point.x
+    //             << ", " << point.y << ")" << std::endl;
+    // }
+    std::string typeStr;
+    switch(type) {
+    case CollisionEventType::Begin:
+      typeStr = "Begin";
+      break;
+    case CollisionEventType::PreSolve:
+      typeStr = "Pre Solve";
+      break;
+    case CollisionEventType::PostSolve:
+      typeStr = "Post Solve";
+      break;
+    case CollisionEventType::Separate:
+      typeStr = "Separate";
+      break;
     }
+
+    if(other->GetType() == _ENEMY_TYPE) {
+      std::cout << "Collision with Enemy: " << typeStr << std::endl;
+      return 1;
+    }
+    // std::cout << "Registered Collision Event " << typeStr << " cur: " << GetId() << " other " << other->GetId() << std::endl;
+    return 0;
   }
 
 private:
@@ -193,7 +214,7 @@ int chopperDemo() {
 
   auto rotorCollisionMask = getRotorCollisionMask();
   // auto ent2 = new RotatingEntity(game, 1, tex2, rotorCollisionMask, 15.0, sf::Vector2f(-5, 2));
-  auto ent2 = new RotatingEntity(game, 1, tex2, rotorCollisionMask, 15.0, sf::Vector2f(0, 0));
+  auto ent2 = new RotatingEntity(game, _PLAYER_TYPE, tex2, rotorCollisionMask, 15.0, sf::Vector2f(0, 0));
 
   // auto tex3 = AssetManager::GetTexture("res/textures/heli/rotor.png");
   auto enemy = new RotatingEntity(game, _ENEMY_TYPE, tex2, rotorCollisionMask, 15.0, sf::Vector2f(200, 200));
