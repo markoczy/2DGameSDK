@@ -40,7 +40,7 @@ namespace game {
      * 
      * @param texture The Texture of the Entity
      */
-    SpriteTransformableEntity(int type, Game* game, sf::Texture* texture);
+    SpriteTransformableEntity(int type, Game* game, sf::Texture* texture, bool isCollidable = false);
 
     SpriteTransformableEntity(int type, Game* game, sf::Texture* texture, std::vector<sf::Vector2f> collisionMask);
 

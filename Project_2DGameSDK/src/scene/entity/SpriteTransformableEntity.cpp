@@ -10,7 +10,7 @@ namespace game {
 
   using namespace helpers;
 
-  SpriteTransformableEntity::SpriteTransformableEntity(int type, Game* game, sf::Texture* texture) : TransformableEntity(type, game), mSprite(*texture) {
+  SpriteTransformableEntity::SpriteTransformableEntity(int type, Game* game, sf::Texture* texture, bool isCollidable) : TransformableEntity(type, game, isCollidable), mSprite(*texture) {
     auto rect = mSprite.getTextureRect();
     mShape = cpBoxShapeNew(mBody, rect.width, rect.height, 0);
     cpSpaceAddShape(game->GetPhysicalWorld(), mShape);
@@ -44,9 +44,7 @@ namespace game {
 
     float angle = -atan2(localDir.y, localDir.x);
 
-    if(GetType() == 200) {
-      LOGD("Body Pos: (" << physicalOrigin.x << ", " << physicalOrigin.y << "), angle: " << angle);
-    }
+    LOGD("Body Pos: (" << physicalOrigin.x << ", " << physicalOrigin.y << "), angle: " << angle);
     cpBodySetPosition(mBody, physicalOrigin);
     cpBodySetAngle(mBody, angle);
 

@@ -50,8 +50,6 @@ namespace game {
     virtual sf::Transform GetAccumulatedTransform();
     virtual sf::Transform GetCombinedTransform();
 
-    virtual void OnTickEnded();
-
   protected:
     sf::Transform mTransform;
     sf::Transform mAccTransform;

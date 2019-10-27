@@ -1,4 +1,4 @@
-#include <2DGameSDK/common/GraphicTools.h>
+#include <2DGameSDK/common/graphics/GraphicTools.h>
 
 namespace game::helpers {
 

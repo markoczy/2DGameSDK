@@ -14,6 +14,7 @@ namespace game {
     auto entB = (Entity*)cpBodyGetUserData(bodyB);
 
     // cout << "Collision Begin: " << entA->GetId() << " and " << entB->GetId() << endl;
+    if(!entA->IsCollidable() || !entB->IsCollidable()) return 0;
 
     int retA = entA->OnCollision(type, entB, arb);
     int retB = entB->OnCollision(type, entA, arb);
@@ -58,6 +59,7 @@ namespace game {
     helpers::safeDelete(mWindow);
     helpers::safeDelete(mState.Scene);
     helpers::safeDelete(mState.World);
+    helpers::safeDelete(mPointConverter);
     cpSpaceDestroy(mPhysicalWorld);
   }
 
@@ -137,6 +139,10 @@ namespace game {
     return mState.Scene;
   }
 
+  PointConverter* Game::GetPointConverter() {
+    return mPointConverter;
+  }
+
   void Game::SetScene(SceneGraph* scene) {
     mState.Scene = scene;
   }
@@ -151,6 +157,9 @@ namespace game {
 
   void Game::SetWorld(GameWorld* world) {
     mState.World = world;
+
+    helpers::safeDelete(mPointConverter);
+    mPointConverter = new PointConverter(world->GetBounds().width, world->GetBounds().height);
   }
 
   // ####### Event Controller wrapper ##########################################

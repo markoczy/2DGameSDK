@@ -17,7 +17,7 @@
 #include <chipmunk/chipmunk.h>
 
 #include <2DGameSDK/common/Constants.h>
-#include <2DGameSDK/common/GraphicTools.h>
+#include <2DGameSDK/common/graphics/GraphicTools.h>
 #include <2DGameSDK/core/Game.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
 #include <2DGameSDK/physics/CollisionType.h>
@@ -40,7 +40,7 @@ namespace game {
      * 
      * @param texture The Texture of the Entity
      */
-    SpriteTransformableEntity(int type, Game* game, sf::Texture* texture);
+    SpriteTransformableEntity(int type, Game* game, sf::Texture* texture, bool isCollidable = false);
 
     SpriteTransformableEntity(int type, Game* game, sf::Texture* texture, std::vector<sf::Vector2f> collisionMask);
 

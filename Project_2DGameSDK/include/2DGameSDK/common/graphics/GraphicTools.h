@@ -11,7 +11,7 @@
 #include <2DGameSDK/common/Constants.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
 
-namespace game::helpers {
+namespace game {
 
   class GAMESDK_DLL GrahicTools {
   public:
@@ -35,6 +35,6 @@ namespace game::helpers {
     GrahicTools() {}
   };
 
-} // namespace game::helpers
+} // namespace game
 
 #endif

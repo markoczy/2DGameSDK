@@ -21,6 +21,7 @@
 
 #include <2DGameSDK/common/Constants.h>
 #include <2DGameSDK/common/Helpers.h>
+#include <2DGameSDK/common/graphics/PointConverter.h>
 #include <2DGameSDK/core/GameOptions.h>
 #include <2DGameSDK/core/GameState.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
@@ -83,6 +84,8 @@ namespace game {
      * @return GameWorld* The GameWorld
      */
     GameWorld* GetWorld();
+
+    PointConverter* GetPointConverter();
 
     /**
      * @brief Assigns the Game Options
@@ -152,7 +155,8 @@ namespace game {
     GameState mState;
     sf::RenderWindow* mWindow;
     sf::View mView;
-    cpSpace* mPhysicalWorld;
+    cpSpace* mPhysicalWorld = nullptr;
+    PointConverter* mPointConverter = nullptr;
   };
 } // namespace game
 

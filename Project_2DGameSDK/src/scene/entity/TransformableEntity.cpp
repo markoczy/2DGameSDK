@@ -6,8 +6,6 @@ namespace game {
     // mBody = cpBodyNewKinematic();
     mBody = cpSpaceAddBody(game->GetPhysicalWorld(), cpBodyNewKinematic());
     cpBodySetUserData(mBody, this);
-    LOGD("Game Space: " << game->GetPhysicalWorld());
-    LOGD("Body Space: " << cpBodyGetSpace(mBody));
   }
 
   TransformableEntity::~TransformableEntity() {}
@@ -49,7 +47,5 @@ namespace game {
     mCombinedTransform = mAccTransform * mTransform;
     return true;
   }
-
-  void TransformableEntity::OnTickEnded() {}
 
 } // namespace game
