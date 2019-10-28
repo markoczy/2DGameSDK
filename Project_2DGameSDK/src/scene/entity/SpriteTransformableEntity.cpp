@@ -14,7 +14,7 @@ namespace game {
     auto rect = mSprite.getTextureRect();
     mSprite.setOrigin(rect.width / 2, rect.height / 2);
 
-    mShape = new RectangleShape(rect.width, rect.height);
+    mShape = new RectangleShape(getGame(), rect.width, rect.height);
     mShape->AttachToBody(getGame()->GetPhysicalWorld(), mBody);
     // mShape = cpBoxShapeNew(mBody, rect.width, rect.height, 0);
     // cpSpaceAddShape(game->GetPhysicalWorld(), mShape);
@@ -26,7 +26,7 @@ namespace game {
     auto rect = mSprite.getTextureRect();
     mSprite.setOrigin(rect.width / 2, rect.height / 2);
 
-    mShape = new RectangleShape(rect.width, rect.height);
+    mShape = new RectangleShape(getGame(), rect.width, rect.height);
     mShape->AttachToBody(getGame()->GetPhysicalWorld(), mBody);
 
     // mShape = cpBoxShapeNew(mBody, rect.width, rect.height, 0);
@@ -63,7 +63,7 @@ namespace game {
     states.transform = states.transform * mCombinedTransform;
     target->draw(mSprite, states);
 
-    if(getGame()->GetOptions().RenderCollisionMask) mShape->Render(target, getGame()->GetPointConverter(), sf::Color::Red, 0.5);
+    if(getGame()->GetOptions().RenderCollisionMask) mShape->Render(target, sf::Color::Red, 0.5);
   }
 
   sf::FloatRect SpriteTransformableEntity::GetAABB() {

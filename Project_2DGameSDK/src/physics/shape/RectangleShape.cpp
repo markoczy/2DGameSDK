@@ -1,7 +1,8 @@
 #include <2DGameSDK/physics/shape/RectangleShape.h>
 
 namespace game {
-  RectangleShape::RectangleShape(float width, float height) : Shape(ShapeType::Rectangle), mWidth(width), mHeight(height) {}
+
+  RectangleShape::RectangleShape(Game* game, float width, float height) : Shape(ShapeType::Rectangle, game), mWidth(width), mHeight(height) {}
 
   cpShape* RectangleShape::initShape(cpSpace* space, cpBody* body) {
     auto shape = cpBoxShapeNew(GetRefBody(), mWidth, mHeight, 0);
@@ -11,7 +12,8 @@ namespace game {
     return shape;
   }
 
-  void RectangleShape::Render(sf::RenderTarget* target, PointConverter* converter, sf::Color color, float stroke) {
+  void RectangleShape::Render(sf::RenderTarget* target, sf::Color color, float stroke) {
+    auto converter = getGame()->GetPointConverter();
     auto body = GetRefBody();
     auto physOrigin = cpBodyGetPosition(body);
     auto visOrigin = converter->GetVisualPos(physOrigin);
