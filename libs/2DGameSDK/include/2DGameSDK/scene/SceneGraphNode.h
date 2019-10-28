@@ -15,8 +15,8 @@
 
 #include <SFML/System.hpp>
 
-#include <2DGameSDK/common/GraphicTools.h>
 #include <2DGameSDK/common/Helpers.h>
+#include <2DGameSDK/common/graphics/GraphicTools.h>
 #include <2DGameSDK/core/GameOptions.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
 #include <2DGameSDK/scene/entity/Entity.h>

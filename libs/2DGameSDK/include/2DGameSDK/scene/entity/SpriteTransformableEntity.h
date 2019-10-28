@@ -17,10 +17,12 @@
 #include <chipmunk/chipmunk.h>
 
 #include <2DGameSDK/common/Constants.h>
-#include <2DGameSDK/common/GraphicTools.h>
+#include <2DGameSDK/common/graphics/GraphicTools.h>
 #include <2DGameSDK/core/Game.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
 #include <2DGameSDK/physics/CollisionType.h>
+#include <2DGameSDK/physics/shape/RectangleShape.h>
+#include <2DGameSDK/physics/shape/Shape.h>
 #include <2DGameSDK/scene/entity/TransformableEntity.h>
 
 namespace game {
@@ -71,7 +73,7 @@ namespace game {
 
   protected:
     sf::Sprite mSprite;
-    cpShape* mShape;
+    Shape* mShape = nullptr;
 
     bool mTransformationOccured;
     sf::FloatRect mAABB;

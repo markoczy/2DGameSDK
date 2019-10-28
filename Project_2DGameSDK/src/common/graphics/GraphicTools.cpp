@@ -1,6 +1,6 @@
 #include <2DGameSDK/common/graphics/GraphicTools.h>
 
-namespace game::helpers {
+namespace game {
 
   const std::tuple<bool, sf::Vector2f> _NO_COLLISION = std::make_tuple(false, sf::Vector2f());
 
@@ -69,4 +69,4 @@ namespace game::helpers {
   sf::Vector2f GrahicTools::GetVisualPos(cpVect physicalPos, float totalHeight) {
     return sf::Vector2f(physicalPos.x, totalHeight - physicalPos.y);
   }
-} // namespace game::helpers
+} // namespace game

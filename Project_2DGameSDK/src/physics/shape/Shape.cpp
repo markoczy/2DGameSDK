@@ -11,15 +11,15 @@ namespace game {
     mShape = initShape(space, body);
   }
 
-  cpSpace* Shape::getRefSpace() {
+  cpSpace* Shape::GetRefSpace() {
     return mSpace;
   }
 
-  cpBody* Shape::getRefBody() {
+  cpBody* Shape::GetRefBody() {
     return mBody;
   }
 
-  cpShape* Shape::getRefShape() {
+  cpShape* Shape::GetRefShape() {
     return mShape;
   }
 

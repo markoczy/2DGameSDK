@@ -67,25 +67,25 @@ namespace game {
         target->draw(rect);
       }
 
-      if(options->RenderCollisionMask) {
-        auto collisionMask = entity->GetCollisionMask();
+      // if(options->RenderCollisionMask) {
+      //   auto collisionMask = entity->GetCollisionMask();
 
-        if(collisionMask.size() > 0) {
-          //* Render as Vertex Array
-          // auto vertexArray = helpers::GrahicTools::CreateUniformVertexArray(collisionMask, sf::LineStrip, sf::Color::Red);
-          // target->draw(vertexArray);
+      //   if(collisionMask.size() > 0) {
+      //     //* Render as Vertex Array
+      //     // auto vertexArray = helpers::GrahicTools::CreateUniformVertexArray(collisionMask, sf::LineStrip, sf::Color::Red);
+      //     // target->draw(vertexArray);
 
-          //* Render as Shape
-          auto shape = sf::ConvexShape(collisionMask.size());
-          for(unsigned int i = 0; i < collisionMask.size(); i++) {
-            shape.setPoint(i, collisionMask[i]);
-          }
-          shape.setOutlineColor(sf::Color::Red);
-          shape.setOutlineThickness(0.5);
-          shape.setFillColor(sf::Color::Transparent);
-          target->draw(shape);
-        }
-      }
+      //     //* Render as Shape
+      //     auto shape = sf::ConvexShape(collisionMask.size());
+      //     for(unsigned int i = 0; i < collisionMask.size(); i++) {
+      //       shape.setPoint(i, collisionMask[i]);
+      //     }
+      //     shape.setOutlineColor(sf::Color::Red);
+      //     shape.setOutlineThickness(0.5);
+      //     shape.setFillColor(sf::Color::Transparent);
+      //     target->draw(shape);
+      //   }
+      // }
     }
     for(auto iChild : current->mChildren) {
       renderNodes(iChild, target, options, states);

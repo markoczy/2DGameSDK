@@ -12,20 +12,27 @@ namespace game {
 
   SpriteTransformableEntity::SpriteTransformableEntity(int type, Game* game, sf::Texture* texture, bool isCollidable) : TransformableEntity(type, game, isCollidable), mSprite(*texture) {
     auto rect = mSprite.getTextureRect();
-    mShape = cpBoxShapeNew(mBody, rect.width, rect.height, 0);
-    cpSpaceAddShape(game->GetPhysicalWorld(), mShape);
-    cpShapeSetCollisionType(mShape, CollisionType::Default);
-    cpShapeSetSensor(mShape, true);
     mSprite.setOrigin(rect.width / 2, rect.height / 2);
+
+    mShape = new RectangleShape(rect.width, rect.height);
+    mShape->AttachToBody(getGame()->GetPhysicalWorld(), mBody);
+    // mShape = cpBoxShapeNew(mBody, rect.width, rect.height, 0);
+    // cpSpaceAddShape(game->GetPhysicalWorld(), mShape);
+    // cpShapeSetCollisionType(mShape, CollisionType::Default);
+    // cpShapeSetSensor(mShape, true);
   }
 
   SpriteTransformableEntity::SpriteTransformableEntity(int type, Game* game, sf::Texture* texture, std::vector<sf::Vector2f>) : TransformableEntity(type, game, true), mSprite(*texture) {
     auto rect = mSprite.getTextureRect();
-    mShape = cpBoxShapeNew(mBody, rect.width, rect.height, 0);
-    cpSpaceAddShape(game->GetPhysicalWorld(), mShape);
-    cpShapeSetCollisionType(mShape, CollisionType::Default);
-    cpShapeSetSensor(mShape, true);
     mSprite.setOrigin(rect.width / 2, rect.height / 2);
+
+    mShape = new RectangleShape(rect.width, rect.height);
+    mShape->AttachToBody(getGame()->GetPhysicalWorld(), mBody);
+
+    // mShape = cpBoxShapeNew(mBody, rect.width, rect.height, 0);
+    // cpSpaceAddShape(game->GetPhysicalWorld(), mShape);
+    // cpShapeSetCollisionType(mShape, CollisionType::Default);
+    // cpShapeSetSensor(mShape, true);
   }
 
   SpriteTransformableEntity::~SpriteTransformableEntity() {
@@ -55,6 +62,8 @@ namespace game {
   void SpriteTransformableEntity::OnRender(sf::RenderTarget* target, sf::RenderStates states) {
     states.transform = states.transform * mCombinedTransform;
     target->draw(mSprite, states);
+
+    if(getGame()->GetOptions().RenderCollisionMask) mShape->Render(target, getGame()->GetPointConverter(), sf::Color::Red, 0.5);
   }
 
   sf::FloatRect SpriteTransformableEntity::GetAABB() {
@@ -66,7 +75,7 @@ namespace game {
   }
 
   void SpriteTransformableEntity::updateAABB() {
-    auto bb = cpShapeCacheBB(mShape);
+    auto bb = cpShapeCacheBB(mShape->GetRefShape());
     auto worldHeight = getGame()->GetWorld()->GetBounds().height;
 
     auto topLeftVis = GrahicTools::GetVisualPos(cpv(bb.l, bb.t), worldHeight);
