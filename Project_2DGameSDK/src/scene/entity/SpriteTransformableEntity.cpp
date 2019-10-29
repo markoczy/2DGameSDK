@@ -14,7 +14,7 @@ namespace game {
     auto rect = mSprite.getTextureRect();
     mSprite.setOrigin(rect.width / 2, rect.height / 2);
 
-    mShape = new RectangleShape(getGame(), rect.width, rect.height);
+    mShape = new RectangleSensorShape(getGame(), rect.width, rect.height);
     mShape->AttachToBody(getGame()->GetPhysicalWorld(), mBody);
     // mShape = cpBoxShapeNew(mBody, rect.width, rect.height, 0);
     // cpSpaceAddShape(game->GetPhysicalWorld(), mShape);
@@ -26,7 +26,7 @@ namespace game {
     auto rect = mSprite.getTextureRect();
     mSprite.setOrigin(rect.width / 2, rect.height / 2);
 
-    mShape = new RectangleShape(getGame(), rect.width, rect.height);
+    mShape = new RectangleSensorShape(getGame(), rect.width, rect.height);
     mShape->AttachToBody(getGame()->GetPhysicalWorld(), mBody);
 
     // mShape = cpBoxShapeNew(mBody, rect.width, rect.height, 0);

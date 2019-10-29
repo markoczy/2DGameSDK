@@ -1,5 +1,5 @@
-#ifndef __RECTANGLE_SHAPE_H__
-#define __RECTANGLE_SHAPE_H__
+#ifndef __RECTANGLE_SENSOR_SHAPE_H__
+#define __RECTANGLE_SENSOR_SHAPE_H__
 
 #include <vector>
 
@@ -13,9 +13,9 @@
 #include <2DGameSDK/physics/shape/Shape.h>
 
 namespace game {
-  class GAMESDK_DLL RectangleShape : public Shape {
+  class GAMESDK_DLL RectangleSensorShape : public Shape {
   public:
-    RectangleShape(Game* game, float width, float height);
+    RectangleSensorShape(Game* game, float width, float height);
 
     virtual void Render(sf::RenderTarget* target, sf::Color color = sf::Color::Black, float stroke = 0.5);
 

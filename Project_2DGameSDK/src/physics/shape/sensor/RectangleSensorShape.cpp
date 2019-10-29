@@ -1,10 +1,10 @@
-#include <2DGameSDK/physics/shape/RectangleShape.h>
+#include <2DGameSDK/physics/shape/sensor/RectangleSensorShape.h>
 
 namespace game {
 
-  RectangleShape::RectangleShape(Game* game, float width, float height) : Shape(ShapeType::Rectangle, game), mWidth(width), mHeight(height) {}
+  RectangleSensorShape::RectangleSensorShape(Game* game, float width, float height) : Shape(ShapeType::Rectangle, game), mWidth(width), mHeight(height) {}
 
-  cpShape* RectangleShape::initShape(cpSpace* space, cpBody* body) {
+  cpShape* RectangleSensorShape::initShape(cpSpace* space, cpBody* body) {
     auto shape = cpBoxShapeNew(GetRefBody(), mWidth, mHeight, 0);
     cpSpaceAddShape(space, shape);
     cpShapeSetCollisionType(shape, CollisionType::Default);
@@ -12,7 +12,7 @@ namespace game {
     return shape;
   }
 
-  void RectangleShape::Render(sf::RenderTarget* target, sf::Color color, float stroke) {
+  void RectangleSensorShape::Render(sf::RenderTarget* target, sf::Color color, float stroke) {
     auto converter = getGame()->GetPointConverter();
     auto body = GetRefBody();
     auto physOrigin = cpBodyGetPosition(body);
