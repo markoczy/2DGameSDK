@@ -182,3 +182,63 @@
 - Womöglich wäre es der beste Ansatz dem Spielentwickler die Wahl
   zu lassen selbst eine Physik Engine einzubauen, dazu könnte ein
   Prototyp hilfreich sein.
+  
+## 11.10.2019
+
+### Status
+
+- Arbeit am Pflichtenheft -> 8h PM
+
+## 12.10.2019
+
+### Status
+
+- Arbeit am Pflichtenheft -> 4h PM
+
+## 16.10.2019
+
+### Status
+
+- Projektmeeting -> 1h PM
+
+### Ausblick
+
+- Physik Engine neu evaluieren (Sollte möglich sein, Unity etc. schaffen es auch)
+
+## 18.10.2019
+
+### Status
+
+- Pflichtenheft abgeschlossen -> 4h PM
+- Entity Refactoring für Physik -> 4h
+
+## 19.10.2019
+
+### Status
+
+- Physik Engine: Entities und Kollisionen -> 4h
+
+## 25.10.2019
+
+### Status
+
+- Physik Engine: Entities und Kollisionen -> 8h
+
+## 26.10.2019
+
+### Status
+
+- Physik Engine: Shapes -> 6h
+
+## 28.10.2019
+
+### Status
+
+- Physik Engine: Shapes -> 2h
+
+## 29.10.2019
+
+### Status
+
+- Physik Engine: Shapes -> 1h
+
