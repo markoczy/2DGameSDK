@@ -31,6 +31,7 @@ namespace game {
     Game* getGame();
 
     virtual cpShape* initShape(cpSpace* space, cpBody* body) = 0;
+    virtual void initProperties(cpSpace* space, cpBody* body, cpShape* shape) = 0;
 
   private:
     ShapeType mType;
