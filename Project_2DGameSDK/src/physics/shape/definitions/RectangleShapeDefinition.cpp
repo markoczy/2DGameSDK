@@ -3,16 +3,11 @@
 namespace game {
 
   RectangleShapeDefinition::RectangleShapeDefinition(Game* game, float width, float height) : Shape(ShapeType::Rectangle, game), mWidth(width), mHeight(height) {
-  }
+    }
 
   void RectangleShapeDefinition::Render(sf::RenderTarget* target, sf::Color color, float stroke) {
-    auto converter = getGame()->GetPointConverter();
-    auto body = GetRefBody();
-    auto physOrigin = cpBodyGetPosition(body);
-    auto visOrigin = converter->GetVisualPos(physOrigin);
-
-    auto rotRad = cpBodyGetAngle(body);
-    float rot = -(360 * rotRad) / 6.28;
+    auto visOrigin = getVisualPosition();
+    float rot = getVisualRotation();
     auto transform = sf::Transform().translate(visOrigin).rotate(rot, visOrigin);
     auto shape = sf::RectangleShape(sf::Vector2f(mWidth, mHeight));
     shape.setOrigin(mWidth / 2, mHeight / 2);
