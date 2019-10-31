@@ -44,7 +44,7 @@ namespace game {
      */
     SpriteTransformableEntity(int type, Game* game, sf::Texture* texture, bool isCollidable = false);
 
-    SpriteTransformableEntity(int type, Game* game, sf::Texture* texture, std::vector<sf::Vector2f> collisionMask);
+    SpriteTransformableEntity(int type, Game* game, sf::Texture* texture, std::vector<Shape*> shapes);
 
     /**
      * @brief Destroys the Sprite Transformable Entity
@@ -73,7 +73,7 @@ namespace game {
 
   protected:
     sf::Sprite mSprite;
-    Shape* mShape = nullptr;
+    std::vector<Shape*> mShapes;
 
     bool mTransformationOccured;
     sf::FloatRect mAABB;

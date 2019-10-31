@@ -14,7 +14,7 @@ source_group("src" FILES ${SRCS})
 
 # find headers
 file(GLOB_RECURSE HDRS 
-    ./src/*.h
+    ./include/*.h
 )
 source_group("inc" FILES ${HDRS})
 
@@ -27,12 +27,12 @@ include_directories(
 )
 
 set(LIBS_DEBUG)
-foreach(lib; ${SFML_LIBRARIES_D} ${SDK_LIBRARIES})
+foreach(lib; ${SFML_LIBRARIES_D} ${SDK_LIBRARIES} ${CHIPMUNK_LIBRARIES})
     list(APPEND LIBS_DEBUG debug ${lib})
 endforeach()
 
 set(LIBS_RELEASE)
-foreach(lib; ${SFML_LIBRARIES} ${SDK_LIBRARIES})
+foreach(lib; ${SFML_LIBRARIES} ${SDK_LIBRARIES} ${CHIPMUNK_LIBRARIES})
     list(APPEND LIBS_RELEASE optimized ${lib})
 endforeach()
 

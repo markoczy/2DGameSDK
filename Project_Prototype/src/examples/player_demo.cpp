@@ -75,32 +75,6 @@ private:
   Observer<EmptyEventData>* mRight;
 };
 
-/**
- * @brief Test Entity: Rotates on every tick
- *
- */
-class RotatingEntity : public SpriteTransformableEntity {
-public:
-  RotatingEntity(int type,
-                 Game* game,
-                 sf::Texture* texture,
-                 std::vector<sf::Vector2f> collisionMask,
-                 float rotPerTick,
-                 sf::Vector2f pos = sf::Vector2f()) : SpriteTransformableEntity(type, game, texture, collisionMask), mRot(rotPerTick) {
-    auto rect = mSprite.getTextureRect();
-    mCenter = sf::Vector2f(rect.width / 2, rect.height / 2);
-    SetTransform(sf::Transform().translate(pos));
-  }
-
-  void OnTick() {
-    Transform(sf::Transform().rotate(mRot, mCenter));
-  }
-
-private:
-  float mRot;
-  sf::Vector2f mCenter;
-};
-
 int playerDemo(float zoom) {
   cout << "Start playerDemo" << endl;
 

@@ -14,6 +14,7 @@ namespace game {
   public:
     RectangleSensorShape(Game* game, float width, float height);
 
+  protected:
     virtual void initProperties(cpSpace* space, cpBody* body, cpShape* shape);
   };
 } // namespace game

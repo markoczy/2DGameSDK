@@ -8,7 +8,7 @@ namespace game {
   void PolygonShapeDefinition::Render(sf::RenderTarget* target, sf::Color color, float stroke) {
     auto shape = sf::ConvexShape(mVertices.size());
     for(size_t i = 0; i < mVertices.size(); i++) {
-      shape.setPoint(i, sf::Vector2f(mVertices[i].x, mVertices[i].y));
+      shape.setPoint(i, sf::Vector2f(mVertices[i].x, -mVertices[i].y));
     }
 
     shape.setPosition(getVisualPosition());

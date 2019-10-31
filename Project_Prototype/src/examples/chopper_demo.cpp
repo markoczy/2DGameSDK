@@ -17,16 +17,16 @@ public:
   RotatingEntity(Game* game,
                  int type,
                  sf::Texture* texture,
-                 std::vector<sf::Vector2f> collisionMask,
+                 Shape* shape,
                  float rotPerTick,
-                 sf::Vector2f pos = sf::Vector2f()) : SpriteTransformableEntity(type, game, texture, collisionMask), mRot(rotPerTick) {
+                 sf::Vector2f pos = sf::Vector2f()) : SpriteTransformableEntity(type, game, texture, vector<Shape*>({shape})), mRot(rotPerTick) {
     auto rect = mSprite.getTextureRect();
     mCenter = sf::Vector2f(rect.width / 2, rect.height / 2);
     SetTransform(sf::Transform().translate(pos));
   }
 
   void OnTick() {
-    Transform(sf::Transform().rotate(mRot));
+    // Transform(sf::Transform().rotate(mRot));
   }
 
   bool IsCollidable() {
@@ -42,14 +42,14 @@ class ChopperEntity : public SpriteTransformableEntity {
 public:
   ChopperEntity(Game* game,
                 sf::Texture* tex,
-                std::vector<sf::Vector2f> collisionMask,
+                Shape* shape,
                 float speed,
                 float rotSpeed,
                 Observable<EmptyEventData>* up,
                 Observable<EmptyEventData>* down,
                 Observable<EmptyEventData>* left,
                 Observable<EmptyEventData>* right,
-                sf::Vector2f pos = sf::Vector2f()) : SpriteTransformableEntity(_PLAYER_TYPE, game, tex, collisionMask), mSpeed(speed), mRotSpeed(rotSpeed) {
+                sf::Vector2f pos = sf::Vector2f()) : SpriteTransformableEntity(_PLAYER_TYPE, game, tex, vector<Shape*>({shape})), mSpeed(speed), mRotSpeed(rotSpeed) {
     //
     //
     //
@@ -153,7 +153,11 @@ private:
   Observer<EmptyEventData>* mRight;
 };
 
-std::vector<sf::Vector2f> getChopperCollisionMask() {
+Shape* getChopperCollisionMask(Game* game) {
+  return new RectangleSensorShape(game, 16, 32);
+}
+
+std::vector<sf::Vector2f> getChopperCollisionMask2() {
   auto ret = std::vector<sf::Vector2f>();
   ret.push_back(sf::Vector2f(7, 0));
   ret.push_back(sf::Vector2f(3, 7));
@@ -172,7 +176,26 @@ std::vector<sf::Vector2f> getChopperCollisionMask() {
   return ret;
 }
 
-std::vector<sf::Vector2f> getRotorCollisionMask() {
+Shape* getRotorCollisionMask(Game* game) {
+  auto verts = vector<cpVect>();
+
+  verts.push_back(cpv(1, 13));
+  verts.push_back(cpv(-1, 13));
+  verts.push_back(cpv(-1, 1));
+  verts.push_back(cpv(-13, 1));
+  verts.push_back(cpv(-13, -1));
+  verts.push_back(cpv(-1, -1));
+  verts.push_back(cpv(-1, -13));
+  verts.push_back(cpv(1, -13));
+  verts.push_back(cpv(1, -1));
+  verts.push_back(cpv(13, -1));
+  verts.push_back(cpv(13, 1));
+  verts.push_back(cpv(1, 1));
+
+  return new PolygonSensorShape(game, verts);
+}
+
+std::vector<sf::Vector2f> getRotorCollisionMask2() {
   auto ret = std::vector<sf::Vector2f>();
   ret.push_back(sf::Vector2f(12, 0));
   ret.push_back(sf::Vector2f(12, 12));
@@ -198,9 +221,12 @@ int chopperDemo() {
   auto leftPressed = new OnKeyPress(sf::Keyboard::Left);
   auto rightPressed = new OnKeyPress(sf::Keyboard::Right);
 
+  auto f1Pressed = new OnKeyPress(sf::Keyboard::F1);
+  auto f2Pressed = new OnKeyPress(sf::Keyboard::F2);
+
   // Create game
   auto game = new Game();
-  game->SetOptions(GameOptions{"My Game", sf::Vector2i(512, 512), 2.0, 50, true, true});
+  game->SetOptions(GameOptions{"My Game", sf::Vector2i(512, 512), 2.0, 1, false, true});
 
   // Create Game World
   auto world = GameWorldFactory::CreateGameWorld("res/simple_grass/tilemap.json", "", "res/simple_grass/tile_");
@@ -209,15 +235,16 @@ int chopperDemo() {
   // Create Player entity and Rotating child entity
   auto tex = AssetManager::GetTexture("res/textures/heli/heli.png");
   auto tex2 = AssetManager::GetTexture("res/textures/heli/rotor.png");
-  auto chopperCollisionMask = getChopperCollisionMask();
+  auto chopperCollisionMask = getChopperCollisionMask(game);
   auto ent = new ChopperEntity(game, tex, chopperCollisionMask, 2.0, 5.0, upPressed, downPressed, leftPressed, rightPressed, sf::Vector2f(50, 50));
 
-  auto rotorCollisionMask = getRotorCollisionMask();
   // auto ent2 = new RotatingEntity(game, 1, tex2, rotorCollisionMask, 15.0, sf::Vector2f(-5, 2));
+  auto rotorCollisionMask = getRotorCollisionMask(game);
   auto ent2 = new RotatingEntity(game, _PLAYER_TYPE, tex2, rotorCollisionMask, 15.0, sf::Vector2f(0, 0));
 
   // auto tex3 = AssetManager::GetTexture("res/textures/heli/rotor.png");
-  auto enemy = new RotatingEntity(game, _ENEMY_TYPE, tex2, rotorCollisionMask, 15.0, sf::Vector2f(200, 200));
+  auto enemyCollisionMask = getRotorCollisionMask(game);
+  auto enemy = new RotatingEntity(game, _ENEMY_TYPE, tex2, enemyCollisionMask, 15.0, sf::Vector2f(200, 200));
 
   // Layout entities in scene
   auto scene = new SceneGraph();
@@ -231,6 +258,8 @@ int chopperDemo() {
   game->AddEvent(downPressed);
   game->AddEvent(leftPressed);
   game->AddEvent(rightPressed);
+  game->AddEvent(f1Pressed);
+  game->AddEvent(f2Pressed);
 
   // Run Game
   game->Run();

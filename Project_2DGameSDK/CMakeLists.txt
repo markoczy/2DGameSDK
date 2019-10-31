@@ -23,7 +23,7 @@ endif ("${CMAKE_BUILD_TYPE}" MATCHES Debug)
 
 # find headers
 file(GLOB_RECURSE HDRS 
-    ./src/*.h
+    ./include/*.h
 )
 source_group("inc" FILES ${HDRS})
 
