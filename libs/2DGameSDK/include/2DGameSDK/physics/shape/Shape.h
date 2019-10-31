@@ -29,6 +29,8 @@ namespace game {
 
   protected:
     Game* getGame();
+    sf::Vector2f getVisualPosition();
+    float getVisualRotation();
 
     virtual cpShape* initShape(cpSpace* space, cpBody* body) = 0;
     virtual void initProperties(cpSpace* space, cpBody* body, cpShape* shape) = 0;

@@ -1,8 +1,9 @@
-#ifndef __RECTANGLE_SHAPE_DEFINITION_H__
-#define __RECTANGLE_SHAPE_DEFINITION_H__
+#ifndef __POLYGON_SHAPE_DEFINITION_H__
+#define __POLYGON_SHAPE_DEFINITION_H__
 
 #include <SFML/Graphics.hpp>
 #include <chipmunk/chipmunk.h>
+#include <vector>
 
 #include <2DGameSDK/dll/gamesdk_dll.h>
 #include <2DGameSDK/physics/CollisionType.h>
@@ -10,19 +11,17 @@
 #include <2DGameSDK/physics/shape/ShapeType.h>
 
 namespace game {
-  class GAMESDK_DLL RectangleShapeDefinition : public Shape {
+  class GAMESDK_DLL PolygonShapeDefinition : public Shape {
   public:
-    RectangleShapeDefinition(Game* game, float width, float height);
+    PolygonShapeDefinition(Game* game, std::vector<cpVect> vertices);
 
     virtual void Render(sf::RenderTarget* target, sf::Color color = sf::Color::Black, float stroke = 0.5);
 
   protected:
-    float mWidth;
-    float mHeight;
+    std::vector<cpVect> mVertices;
 
     virtual cpShape* initShape(cpSpace* space, cpBody* body);
   };
-
 } // namespace game
 
 #endif

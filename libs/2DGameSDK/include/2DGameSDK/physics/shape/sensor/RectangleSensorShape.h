@@ -8,7 +8,6 @@
 
 #include <2DGameSDK/physics/shape/Shape.h>
 #include <2DGameSDK/physics/shape/definitions/RectangleShapeDefinition.h>
-#include <2DGameSDK/physics/shape/properties/SensorShapeProperties.h>
 
 namespace game {
   class GAMESDK_DLL RectangleSensorShape : public RectangleShapeDefinition {

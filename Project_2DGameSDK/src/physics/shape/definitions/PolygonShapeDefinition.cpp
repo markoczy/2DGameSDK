@@ -5,7 +5,7 @@ namespace game {
   PolygonShapeDefinition::PolygonShapeDefinition(Game* game, std::vector<cpVect> vertices) : Shape(ShapeType::Polygon, game), mVertices(vertices) {
   }
 
-  void PolygonShapeDefinition::Render(sf::RenderTarget* target, sf::Color color = sf::Color::Black, float stroke = 0.5) {
+  void PolygonShapeDefinition::Render(sf::RenderTarget* target, sf::Color color, float stroke) {
     auto shape = sf::ConvexShape(mVertices.size());
     for(size_t i = 0; i < mVertices.size(); i++) {
       shape.setPoint(i, sf::Vector2f(mVertices[i].x, mVertices[i].y));
