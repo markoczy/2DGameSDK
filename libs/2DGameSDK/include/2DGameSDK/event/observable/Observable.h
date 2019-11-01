@@ -76,7 +76,7 @@ namespace game {
      * @return A tuple that specifies wether the event was triggered (value 0)
      *         and optionally contains the trigger data (value 1).
      */
-    virtual std::tuple<bool, TData*> triggered() = 0;
+    virtual std::tuple<bool, TData> triggered() = 0;
 
   private:
     std::map<int, Observer<TData>*> mObservers;

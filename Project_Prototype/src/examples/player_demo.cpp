@@ -14,17 +14,17 @@ public:
   PlayerEntity(Game* game,
                sf::Texture* texture,
                float speed,
-               Observable<EmptyEventData>* up,
-               Observable<EmptyEventData>* down,
-               Observable<EmptyEventData>* left,
-               Observable<EmptyEventData>* right) : SpriteTransformableEntity(_PLAYER_TYPE, game, texture), mSpeed(speed) {
+               Observable<sf::Keyboard::Key>* up,
+               Observable<sf::Keyboard::Key>* down,
+               Observable<sf::Keyboard::Key>* left,
+               Observable<sf::Keyboard::Key>* right) : SpriteTransformableEntity(_PLAYER_TYPE, game, texture), mSpeed(speed) {
     //
     //
     //
-    mUp = new MethodObserver<EmptyEventData, PlayerEntity>(this, &PlayerEntity::MoveUp);
-    mDown = new MethodObserver<EmptyEventData, PlayerEntity>(this, &PlayerEntity::MoveDown);
-    mLeft = new MethodObserver<EmptyEventData, PlayerEntity>(this, &PlayerEntity::MoveLeft);
-    mRight = new MethodObserver<EmptyEventData, PlayerEntity>(this, &PlayerEntity::MoveRight);
+    mUp = new MethodObserver<sf::Keyboard::Key, PlayerEntity>(this, &PlayerEntity::MoveUp);
+    mDown = new MethodObserver<sf::Keyboard::Key, PlayerEntity>(this, &PlayerEntity::MoveDown);
+    mLeft = new MethodObserver<sf::Keyboard::Key, PlayerEntity>(this, &PlayerEntity::MoveLeft);
+    mRight = new MethodObserver<sf::Keyboard::Key, PlayerEntity>(this, &PlayerEntity::MoveRight);
 
     mUp->SubscribeTo(up);
     mDown->SubscribeTo(down);
@@ -47,19 +47,19 @@ public:
     }
   }
 
-  void MoveUp(EmptyEventData*) {
+  void MoveUp(sf::Keyboard::Key) {
     mDt.y -= mSpeed;
   }
 
-  void MoveDown(EmptyEventData*) {
+  void MoveDown(sf::Keyboard::Key) {
     mDt.y += mSpeed;
   }
 
-  void MoveLeft(EmptyEventData*) {
+  void MoveLeft(sf::Keyboard::Key) {
     mDt.x -= mSpeed;
   }
 
-  void MoveRight(EmptyEventData*) {
+  void MoveRight(sf::Keyboard::Key) {
     mDt.x += mSpeed;
   }
 
@@ -69,10 +69,10 @@ private:
   sf::Vector2f mDt;
 
   // Needed for cleanup
-  Observer<EmptyEventData>* mUp;
-  Observer<EmptyEventData>* mDown;
-  Observer<EmptyEventData>* mLeft;
-  Observer<EmptyEventData>* mRight;
+  Observer<sf::Keyboard::Key>* mUp;
+  Observer<sf::Keyboard::Key>* mDown;
+  Observer<sf::Keyboard::Key>* mLeft;
+  Observer<sf::Keyboard::Key>* mRight;
 };
 
 int playerDemo(float zoom) {

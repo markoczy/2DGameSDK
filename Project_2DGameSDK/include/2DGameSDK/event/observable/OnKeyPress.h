@@ -23,7 +23,7 @@ namespace game {
    * @brief Observable that triggers whenever a given Key is pressed
    * 
    */
-  class GAMESDK_DLL OnKeyPress : public Observable<EmptyEventData> {
+  class GAMESDK_DLL OnKeyPress : public Observable<sf::Keyboard::Key> {
   public:
     /**
      * @brief Creates a new OnKeyPress Event
@@ -41,7 +41,7 @@ namespace game {
      * @return A tuple that specifies wether the key was pressed (value 0)
      *         event data (value 1) is always empty.
      */
-    virtual std::tuple<bool, EmptyEventData*> triggered();
+    virtual std::tuple<bool, sf::Keyboard::Key> triggered();
   };
 } // namespace game
 

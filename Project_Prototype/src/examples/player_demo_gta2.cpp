@@ -14,18 +14,18 @@ public:
                    std::map<int, sf::Texture*> animationStates,
                    float speed,
                    float rotSpeed,
-                   Observable<EmptyEventData>* up,
-                   Observable<EmptyEventData>* down,
-                   Observable<EmptyEventData>* left,
-                   Observable<EmptyEventData>* right,
+                   Observable<sf::Keyboard::Key>* up,
+                   Observable<sf::Keyboard::Key>* down,
+                   Observable<sf::Keyboard::Key>* left,
+                   Observable<sf::Keyboard::Key>* right,
                    sf::Vector2f pos = sf::Vector2f()) : AnimatedTransformableEntity(_PLAYER_TYPE, game, animationStates), mSpeed(speed), mRotSpeed(rotSpeed) {
     //
     //
     //
-    mUp = new MethodObserver<EmptyEventData, Gta2PlayerEntity>(this, &Gta2PlayerEntity::MoveForward);
-    mDown = new MethodObserver<EmptyEventData, Gta2PlayerEntity>(this, &Gta2PlayerEntity::MoveBackward);
-    mLeft = new MethodObserver<EmptyEventData, Gta2PlayerEntity>(this, &Gta2PlayerEntity::RotLeft);
-    mRight = new MethodObserver<EmptyEventData, Gta2PlayerEntity>(this, &Gta2PlayerEntity::RotRight);
+    mUp = new MethodObserver<sf::Keyboard::Key, Gta2PlayerEntity>(this, &Gta2PlayerEntity::MoveForward);
+    mDown = new MethodObserver<sf::Keyboard::Key, Gta2PlayerEntity>(this, &Gta2PlayerEntity::MoveBackward);
+    mLeft = new MethodObserver<sf::Keyboard::Key, Gta2PlayerEntity>(this, &Gta2PlayerEntity::RotLeft);
+    mRight = new MethodObserver<sf::Keyboard::Key, Gta2PlayerEntity>(this, &Gta2PlayerEntity::RotRight);
 
     mUp->SubscribeTo(up);
     mDown->SubscribeTo(down);
@@ -66,19 +66,19 @@ public:
     mDw = 0.0;
   }
 
-  void MoveForward(EmptyEventData*) {
+  void MoveForward(sf::Keyboard::Key) {
     mDt += mSpeed * mDir;
   }
 
-  void MoveBackward(EmptyEventData*) {
+  void MoveBackward(sf::Keyboard::Key) {
     mDt -= mSpeed * mDir;
   }
 
-  void RotLeft(EmptyEventData*) {
+  void RotLeft(sf::Keyboard::Key) {
     mDw -= mRotSpeed;
   }
 
-  void RotRight(EmptyEventData*) {
+  void RotRight(sf::Keyboard::Key) {
     mDw += mRotSpeed;
   }
 
@@ -96,10 +96,10 @@ private:
   sf::Vector2f mDir;
 
   // Needed for cleanup
-  Observer<EmptyEventData>* mUp;
-  Observer<EmptyEventData>* mDown;
-  Observer<EmptyEventData>* mLeft;
-  Observer<EmptyEventData>* mRight;
+  Observer<sf::Keyboard::Key>* mUp;
+  Observer<sf::Keyboard::Key>* mDown;
+  Observer<sf::Keyboard::Key>* mLeft;
+  Observer<sf::Keyboard::Key>* mRight;
 };
 
 int playerDemoGTA2(float zoom) {

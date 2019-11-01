@@ -26,7 +26,7 @@ public:
   }
 
   void OnTick() {
-    // Transform(sf::Transform().rotate(mRot));
+    Transform(sf::Transform().rotate(mRot));
   }
 
   bool IsCollidable() {
@@ -45,18 +45,18 @@ public:
                 Shape* shape,
                 float speed,
                 float rotSpeed,
-                Observable<EmptyEventData>* up,
-                Observable<EmptyEventData>* down,
-                Observable<EmptyEventData>* left,
-                Observable<EmptyEventData>* right,
+                Observable<sf::Keyboard::Key>* up,
+                Observable<sf::Keyboard::Key>* down,
+                Observable<sf::Keyboard::Key>* left,
+                Observable<sf::Keyboard::Key>* right,
                 sf::Vector2f pos = sf::Vector2f()) : SpriteTransformableEntity(_PLAYER_TYPE, game, tex, vector<Shape*>({shape})), mSpeed(speed), mRotSpeed(rotSpeed) {
     //
     //
     //
-    mUp = new MethodObserver<EmptyEventData, ChopperEntity>(this, &ChopperEntity::MoveForward);
-    mDown = new MethodObserver<EmptyEventData, ChopperEntity>(this, &ChopperEntity::MoveBackward);
-    mLeft = new MethodObserver<EmptyEventData, ChopperEntity>(this, &ChopperEntity::RotLeft);
-    mRight = new MethodObserver<EmptyEventData, ChopperEntity>(this, &ChopperEntity::RotRight);
+    mUp = new MethodObserver<sf::Keyboard::Key, ChopperEntity>(this, &ChopperEntity::MoveForward);
+    mDown = new MethodObserver<sf::Keyboard::Key, ChopperEntity>(this, &ChopperEntity::MoveBackward);
+    mLeft = new MethodObserver<sf::Keyboard::Key, ChopperEntity>(this, &ChopperEntity::RotLeft);
+    mRight = new MethodObserver<sf::Keyboard::Key, ChopperEntity>(this, &ChopperEntity::RotRight);
 
     mUp->SubscribeTo(up);
     mDown->SubscribeTo(down);
@@ -85,19 +85,19 @@ public:
     mDw = 0.0;
   }
 
-  void MoveForward(EmptyEventData*) {
+  void MoveForward(sf::Keyboard::Key) {
     mDt += mSpeed * mDir;
   }
 
-  void MoveBackward(EmptyEventData*) {
+  void MoveBackward(sf::Keyboard::Key) {
     mDt -= mSpeed * mDir;
   }
 
-  void RotLeft(EmptyEventData*) {
+  void RotLeft(sf::Keyboard::Key) {
     mDw -= mRotSpeed;
   }
 
-  void RotRight(EmptyEventData*) {
+  void RotRight(sf::Keyboard::Key) {
     mDw += mRotSpeed;
   }
 
@@ -147,33 +147,14 @@ private:
   sf::Vector2f mCenter;
 
   // Needed for cleanup
-  Observer<EmptyEventData>* mUp;
-  Observer<EmptyEventData>* mDown;
-  Observer<EmptyEventData>* mLeft;
-  Observer<EmptyEventData>* mRight;
+  Observer<sf::Keyboard::Key>* mUp;
+  Observer<sf::Keyboard::Key>* mDown;
+  Observer<sf::Keyboard::Key>* mLeft;
+  Observer<sf::Keyboard::Key>* mRight;
 };
 
 Shape* getChopperCollisionMask(Game* game) {
   return new RectangleSensorShape(game, 16, 32);
-}
-
-std::vector<sf::Vector2f> getChopperCollisionMask2() {
-  auto ret = std::vector<sf::Vector2f>();
-  ret.push_back(sf::Vector2f(7, 0));
-  ret.push_back(sf::Vector2f(3, 7));
-  ret.push_back(sf::Vector2f(3, 11));
-  ret.push_back(sf::Vector2f(0, 12));
-  ret.push_back(sf::Vector2f(1, 21));
-  ret.push_back(sf::Vector2f(7, 32));
-
-  ret.push_back(sf::Vector2f(9, 32));
-  ret.push_back(sf::Vector2f(15, 21));
-  ret.push_back(sf::Vector2f(16, 12));
-  ret.push_back(sf::Vector2f(13, 11));
-  ret.push_back(sf::Vector2f(13, 7));
-  ret.push_back(sf::Vector2f(9, 0));
-
-  return ret;
 }
 
 Shape* getRotorCollisionMask(Game* game) {
@@ -195,22 +176,34 @@ Shape* getRotorCollisionMask(Game* game) {
   return new PolygonSensorShape(game, verts);
 }
 
-std::vector<sf::Vector2f> getRotorCollisionMask2() {
-  auto ret = std::vector<sf::Vector2f>();
-  ret.push_back(sf::Vector2f(12, 0));
-  ret.push_back(sf::Vector2f(12, 12));
-  ret.push_back(sf::Vector2f(0, 12));
-  ret.push_back(sf::Vector2f(0, 14));
-  ret.push_back(sf::Vector2f(12, 14));
-  ret.push_back(sf::Vector2f(12, 26));
-  ret.push_back(sf::Vector2f(14, 26));
-  ret.push_back(sf::Vector2f(14, 14));
-  ret.push_back(sf::Vector2f(26, 14));
-  ret.push_back(sf::Vector2f(26, 12));
-  ret.push_back(sf::Vector2f(14, 12));
-  ret.push_back(sf::Vector2f(14, 0));
-  return ret;
-}
+class GameController {
+public:
+  GameController(Game* game) : mGame(game) {}
+
+  void HandleKeyPress(sf::Keyboard::Key key) {
+    auto options = mGame->GetOptions();
+    switch(key) {
+    case sf::Keyboard::Key::F1:
+      options.RenderCollisionMask = false;
+      break;
+    case sf::Keyboard::Key::F2:
+      options.RenderCollisionMask = true;
+      break;
+    case sf::Keyboard::Key::F3:
+      options.RenderAABB = false;
+      break;
+    case sf::Keyboard::Key::F4:
+      options.RenderAABB = true;
+      break;
+    default:
+      break;
+    }
+    mGame->SetOptions(options);
+  }
+
+private:
+  Game* mGame = nullptr;
+};
 
 int chopperDemo() {
   cout << "Start chopperDemo" << endl;
@@ -223,10 +216,18 @@ int chopperDemo() {
 
   auto f1Pressed = new OnKeyPress(sf::Keyboard::F1);
   auto f2Pressed = new OnKeyPress(sf::Keyboard::F2);
+  auto f3Pressed = new OnKeyPress(sf::Keyboard::F3);
+  auto f4Pressed = new OnKeyPress(sf::Keyboard::F4);
 
   // Create game
   auto game = new Game();
-  game->SetOptions(GameOptions{"My Game", sf::Vector2i(512, 512), 2.0, 1, false, true});
+  game->SetOptions(GameOptions{"My Game", sf::Vector2i(512, 512), 2.0, 50, false, false});
+
+  auto gameController = new GameController(game);
+  f1Pressed->Subscribe(new MethodObserver<sf::Keyboard::Key, GameController>(gameController, &gameController->HandleKeyPress));
+  f2Pressed->Subscribe(new MethodObserver<sf::Keyboard::Key, GameController>(gameController, &gameController->HandleKeyPress));
+  f3Pressed->Subscribe(new MethodObserver<sf::Keyboard::Key, GameController>(gameController, &gameController->HandleKeyPress));
+  f4Pressed->Subscribe(new MethodObserver<sf::Keyboard::Key, GameController>(gameController, &gameController->HandleKeyPress));
 
   // Create Game World
   auto world = GameWorldFactory::CreateGameWorld("res/simple_grass/tilemap.json", "", "res/simple_grass/tile_");
@@ -258,8 +259,11 @@ int chopperDemo() {
   game->AddEvent(downPressed);
   game->AddEvent(leftPressed);
   game->AddEvent(rightPressed);
+
   game->AddEvent(f1Pressed);
   game->AddEvent(f2Pressed);
+  game->AddEvent(f3Pressed);
+  game->AddEvent(f4Pressed);
 
   // Run Game
   game->Run();
