@@ -51,21 +51,21 @@ namespace game {
     if(entity != nullptr) {
       entity->OnRender(target, states);
 
-      if(options->RenderAABB) {
-        auto aabb = entity->GetAABB();
+      // if(options->RenderAABB) {
+      //   auto aabb = entity->GetAABB();
 
-        //* Render as Vertex Array
-        // auto vertexArray = helpers::GrahicTools::CreateUniformVertexArray(helpers::GrahicTools::GetRectBoundary(aabb), sf::LineStrip, sf::Color::Magenta);
-        // target->draw(vertexArray);
+      //   //* Render as Vertex Array
+      //   // auto vertexArray = helpers::GrahicTools::CreateUniformVertexArray(helpers::GrahicTools::GetRectBoundary(aabb), sf::LineStrip, sf::Color::Magenta);
+      //   // target->draw(vertexArray);
 
-        //* Render as Shape
-        auto rect = sf::RectangleShape(sf::Vector2f(aabb.width, aabb.height));
-        rect.setPosition(aabb.left, aabb.top);
-        rect.setOutlineColor(sf::Color::Magenta);
-        rect.setOutlineThickness(0.5);
-        rect.setFillColor(sf::Color::Transparent);
-        target->draw(rect);
-      }
+      //   //* Render as Shape
+      //   auto rect = sf::RectangleShape(sf::Vector2f(aabb.width, aabb.height));
+      //   rect.setPosition(aabb.left, aabb.top);
+      //   rect.setOutlineColor(sf::Color::Magenta);
+      //   rect.setOutlineThickness(0.5);
+      //   rect.setFillColor(sf::Color::Transparent);
+      //   target->draw(rect);
+      // }
 
       // if(options->RenderCollisionMask) {
       //   auto collisionMask = entity->GetCollisionMask();

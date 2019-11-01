@@ -17,10 +17,6 @@ namespace game {
     auto shape = new RectangleSensorShape(getGame(), rect.width, rect.height);
     shape->AttachToBody(getGame()->GetPhysicalWorld(), mBody);
     mShapes.push_back(shape);
-    // mShape = cpBoxShapeNew(mBody, rect.width, rect.height, 0);
-    // cpSpaceAddShape(game->GetPhysicalWorld(), mShape);
-    // cpShapeSetCollisionType(mShape, CollisionType::Default);
-    // cpShapeSetSensor(mShape, true);
   }
 
   SpriteTransformableEntity::SpriteTransformableEntity(int type, Game* game, sf::Texture* texture, std::vector<Shape*> shapes) : TransformableEntity(type, game, true), mSprite(*texture) {
@@ -30,7 +26,7 @@ namespace game {
     mShapes = shapes;
     auto space = getGame()->GetPhysicalWorld();
     for(auto shape : mShapes) {
-      shape->AttachToBody(getGame()->GetPhysicalWorld(), mBody);
+      shape->AttachToBody(space, mBody);
     }
   }
 
@@ -54,7 +50,7 @@ namespace game {
     cpBodySetPosition(mBody, physicalOrigin);
     cpBodySetAngle(mBody, angle);
 
-    if(getGame()->GetOptions().RenderAABB) updateAABB();
+    // if(getGame()->GetOptions().RenderAABB) updateAABB();
     // if(getGame()->GetOptions().RenderCollisionMask) updateCollisionMask();
   }
 
@@ -62,10 +58,12 @@ namespace game {
     states.transform = states.transform * mCombinedTransform;
     target->draw(mSprite, states);
 
-    if(getGame()->GetOptions().RenderCollisionMask) {
-      for(auto shape : mShapes) {
-        shape->Render(target, sf::Color::Red, 0.5);
-      }
+    auto options = getGame()->GetOptions();
+    if(!(options.RenderCollisionMask || options.RenderAABB)) return;
+
+    for(auto shape : mShapes) {
+      if(options.RenderCollisionMask) shape->Render(target, sf::Color::Red, 0.5);
+      if(options.RenderAABB) shape->RenderAABB(target, sf::Color::Magenta, 0.5);
     }
   }
 
@@ -91,26 +89,6 @@ namespace game {
 
     LOGD("bb.l: " << bb.l << ", bb.t: " << bb.t << ", bb.r - bb.l: " << bb.r - bb.l << ", bb.t - bb.b: " << bb.t - bb.b);
     LOGD("mAABB.l: " << mAABB.left << ", mAABB.t: " << mAABB.top << ", mAABB.width: " << mAABB.width << ", mAABB.height: " << mAABB.height);
-  }
-
-  void SpriteTransformableEntity::updateCollisionMask() {
-    auto worldHeight = getGame()->GetWorld()->GetBounds().height;
-    auto physOrigin = cpBodyGetPosition(mBody);
-    auto visOrigin = GrahicTools::GetVisualPos(physOrigin, worldHeight);
-
-    float w = mSprite.getTextureRect().width;
-    float h = mSprite.getTextureRect().height;
-
-    // Handle Rotation
-    auto rotRad = cpBodyGetAngle(mBody);
-    float rot = -(360 * rotRad) / 6.28;
-    auto rotTransform = sf::Transform().rotate(rot, visOrigin);
-
-    mTransformedCollisionMask = std::vector<sf::Vector2f>();
-    mTransformedCollisionMask.push_back(rotTransform.transformPoint(sf::Vector2f(visOrigin.x - w / 2, visOrigin.y - h / 2)));
-    mTransformedCollisionMask.push_back(rotTransform.transformPoint(sf::Vector2f(visOrigin.x + w / 2, visOrigin.y - h / 2)));
-    mTransformedCollisionMask.push_back(rotTransform.transformPoint(sf::Vector2f(visOrigin.x + w / 2, visOrigin.y + h / 2)));
-    mTransformedCollisionMask.push_back(rotTransform.transformPoint(sf::Vector2f(visOrigin.x - w / 2, visOrigin.y + h / 2)));
   }
 
   void SpriteTransformableEntity::onEntityTransformed() {

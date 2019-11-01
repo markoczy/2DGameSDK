@@ -22,6 +22,8 @@ namespace game {
 
     virtual void Render(sf::RenderTarget* target, sf::Color color = sf::Color::Black, float stroke = 0.5) = 0;
 
+    virtual void RenderAABB(sf::RenderTarget* target, sf::Color color = sf::Color::Black, float stroke = 0.5);
+
     ShapeType GetType();
     cpSpace* GetRefSpace();
     cpBody* GetRefBody();

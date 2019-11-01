@@ -27,6 +27,29 @@ namespace game {
     return mShape;
   }
 
+  void Shape::RenderAABB(sf::RenderTarget* target, sf::Color color, float stroke) {
+    auto bb = cpShapeCacheBB(mShape);
+
+    // auto topLeftVis = GrahicTools::GetVisualPos(cpv(bb.l, bb.t), worldHeight);
+    auto conv = getGame()->GetPointConverter();
+    auto topLeftVis = conv->GetVisualPos(cpv(bb.l, bb.t));
+    auto bottomRightVis = conv->GetVisualPos(cpv(bb.r, bb.b));
+    auto visBB = sf::FloatRect(topLeftVis.x,
+                               topLeftVis.y,
+                               bottomRightVis.x - topLeftVis.x,
+                               bottomRightVis.y - topLeftVis.y);
+
+    auto rect = sf::RectangleShape(sf::Vector2f(visBB.width, visBB.height));
+    rect.setPosition(visBB.left, visBB.top);
+    rect.setOutlineColor(sf::Color::Magenta);
+    rect.setOutlineThickness(0.5);
+    rect.setFillColor(sf::Color::Transparent);
+    target->draw(rect);
+
+    // LOGD("bb.l: " << bb.l << ", bb.t: " << bb.t << ", bb.r - bb.l: " << bb.r - bb.l << ", bb.t - bb.b: " << bb.t - bb.b);
+    // LOGD("visBB.l: " << visBB.left << ", visBB.t: " << visBB.top << ", visBB.width: " << visBB.width << ", visBB.height: " << visBB.height);
+  }
+
   Game* Shape::getGame() {
     return mGame;
   }
