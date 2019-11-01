@@ -35,8 +35,6 @@ namespace game {
 
   void SpriteTransformableEntity::OnTick() {}
 
-  int rot = 0;
-
   void SpriteTransformableEntity::OnTickEnded() {
     auto worldHeight = getGame()->GetWorld()->GetBounds().height;
     auto localOrigin = GetCombinedTransform().transformPoint(sf::Vector2f());
@@ -49,9 +47,6 @@ namespace game {
     LOGD("Body Pos: (" << physicalOrigin.x << ", " << physicalOrigin.y << "), angle: " << angle);
     cpBodySetPosition(mBody, physicalOrigin);
     cpBodySetAngle(mBody, angle);
-
-    // if(getGame()->GetOptions().RenderAABB) updateAABB();
-    // if(getGame()->GetOptions().RenderCollisionMask) updateCollisionMask();
   }
 
   void SpriteTransformableEntity::OnRender(sf::RenderTarget* target, sf::RenderStates states) {
@@ -65,34 +60,6 @@ namespace game {
       if(options.RenderCollisionMask) shape->Render(target, sf::Color::Red, 0.5);
       if(options.RenderAABB) shape->RenderAABB(target, sf::Color::Magenta, 0.5);
     }
-  }
-
-  sf::FloatRect SpriteTransformableEntity::GetAABB() {
-    return mAABB;
-  }
-
-  std::vector<sf::Vector2f> SpriteTransformableEntity::GetCollisionMask() {
-    return mTransformedCollisionMask;
-  }
-
-  void SpriteTransformableEntity::updateAABB() {
-    // TODO hardcoded
-    auto bb = cpShapeCacheBB(mShapes[0]->GetRefShape());
-    auto worldHeight = getGame()->GetWorld()->GetBounds().height;
-
-    auto topLeftVis = GrahicTools::GetVisualPos(cpv(bb.l, bb.t), worldHeight);
-    auto bottomRightVis = GrahicTools::GetVisualPos(cpv(bb.r, bb.b), worldHeight);
-    mAABB = sf::FloatRect(topLeftVis.x,
-                          topLeftVis.y,
-                          bottomRightVis.x - topLeftVis.x,
-                          bottomRightVis.y - topLeftVis.y);
-
-    LOGD("bb.l: " << bb.l << ", bb.t: " << bb.t << ", bb.r - bb.l: " << bb.r - bb.l << ", bb.t - bb.b: " << bb.t - bb.b);
-    LOGD("mAABB.l: " << mAABB.left << ", mAABB.t: " << mAABB.top << ", mAABB.width: " << mAABB.width << ", mAABB.height: " << mAABB.height);
-  }
-
-  void SpriteTransformableEntity::onEntityTransformed() {
-    mTransformationOccured = true;
   }
 
 } // namespace game

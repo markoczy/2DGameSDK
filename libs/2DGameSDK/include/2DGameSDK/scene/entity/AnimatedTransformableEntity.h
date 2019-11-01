@@ -65,22 +65,10 @@ namespace game {
      */
     void SetAnimState(int state);
 
-    virtual sf::FloatRect GetAABB();
-
-    virtual std::vector<sf::Vector2f> GetCollisionMask();
-
-    virtual void OnParentTransformed(sf::Transform accumulated);
-
   protected:
     // TODO anim states as sprite-collisionMask combination
     std::map<int, sf::Texture*> mAnimStates;
     sf::Sprite mCurState;
-
-    sf::FloatRect mAABB;
-    std::vector<sf::Vector2f> mTransformedCollisionMask;
-
-    void updateAABB();
-    void updateCollisionMask();
   };
 
 } // namespace game

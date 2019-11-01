@@ -27,29 +27,4 @@ namespace game {
     throw std::runtime_error(ss.str());
   }
 
-  sf::FloatRect AnimatedTransformableEntity::GetAABB() {
-    return mAABB;
-  }
-
-  std::vector<sf::Vector2f> AnimatedTransformableEntity::GetCollisionMask() {
-    return mTransformedCollisionMask;
-  }
-
-  void AnimatedTransformableEntity::OnParentTransformed(sf::Transform accumulated) {
-    TransformableEntity::OnParentTransformed(accumulated);
-
-    mCombinedTransform = GetAccumulatedTransform() * GetTransform();
-    updateAABB();
-    updateCollisionMask();
-  }
-
-  void AnimatedTransformableEntity::updateAABB() {
-    mAABB = mCombinedTransform.transformRect(mCurState.getLocalBounds());
-  }
-
-  void AnimatedTransformableEntity::updateCollisionMask() {
-    // TODO collision masks anim entity
-    mTransformedCollisionMask = std::vector<sf::Vector2f>();
-  }
-
 } // namespace game

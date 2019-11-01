@@ -6,8 +6,6 @@ namespace game {
     void OnEntityTransformed(sf::Transform accumulated);
   };
 
-  const std::vector<sf::Vector2f> _EMPTY_MASK = std::vector<sf::Vector2f>();
-
   Entity::Entity(int type, Game* game) : GameObject(type, game) {
   }
 
@@ -22,10 +20,6 @@ namespace game {
   sf::Transform Entity::GetAccumulatedTransform() { return sf::Transform::Identity; }
 
   sf::Transform Entity::GetCombinedTransform() { return sf::Transform::Identity; }
-
-  sf::FloatRect Entity::GetAABB() { return sf::FloatRect(); }
-
-  std::vector<sf::Vector2f> Entity::GetCollisionMask() { return _EMPTY_MASK; }
 
   void Entity::SetTransform(sf::Transform transform) {
     if(IsTransformable() && this->setTransform(transform)) onEntityTransformed();

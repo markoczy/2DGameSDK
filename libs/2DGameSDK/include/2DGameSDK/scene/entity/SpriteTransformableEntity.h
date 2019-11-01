@@ -68,21 +68,9 @@ namespace game {
      */
     void OnRender(sf::RenderTarget* target, sf::RenderStates states = sf::RenderStates::Default);
 
-    virtual sf::FloatRect GetAABB();
-    virtual std::vector<sf::Vector2f> GetCollisionMask();
-
   protected:
     sf::Sprite mSprite;
     std::vector<Shape*> mShapes;
-
-    bool mTransformationOccured;
-    sf::FloatRect mAABB;
-    std::vector<sf::Vector2f> mTransformedCollisionMask;
-
-    void updateAABB();
-    void updateCollisionMask();
-
-    virtual void onEntityTransformed();
   };
 
 } // namespace game

@@ -22,8 +22,6 @@ namespace game {
     virtual sf::Transform GetTransform();
     virtual sf::Transform GetAccumulatedTransform();
     virtual sf::Transform GetCombinedTransform();
-    virtual sf::FloatRect GetAABB();
-    virtual std::vector<sf::Vector2f> GetCollisionMask();
 
     void SetTransform(sf::Transform transform);
 
