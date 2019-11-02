@@ -21,8 +21,8 @@
 #include <2DGameSDK/core/Game.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
 #include <2DGameSDK/physics/CollisionType.h>
-#include <2DGameSDK/physics/shape/Shape.h>
 #include <2DGameSDK/physics/shape/sensor/RectangleSensorShape.h>
+#include <2DGameSDK/physics/shape/types/SensorShape.h>
 #include <2DGameSDK/scene/entity/TransformableEntity.h>
 
 namespace game {
@@ -44,7 +44,7 @@ namespace game {
      */
     SpriteTransformableEntity(int type, Game* game, sf::Texture* texture, bool isCollidable = false);
 
-    SpriteTransformableEntity(int type, Game* game, sf::Texture* texture, std::vector<Shape*> shapes);
+    SpriteTransformableEntity(int type, Game* game, sf::Texture* texture, std::vector<SensorShape*> shapes);
 
     /**
      * @brief Destroys the Sprite Transformable Entity
@@ -70,7 +70,7 @@ namespace game {
 
   protected:
     sf::Sprite mSprite;
-    std::vector<Shape*> mShapes;
+    std::vector<SensorShape*> mShapes;
   };
 
 } // namespace game

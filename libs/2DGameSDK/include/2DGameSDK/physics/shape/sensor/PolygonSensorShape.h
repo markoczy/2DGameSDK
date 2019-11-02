@@ -7,15 +7,13 @@
 #include <chipmunk/chipmunk.h>
 
 #include <2DGameSDK/physics/shape/Shape.h>
-#include <2DGameSDK/physics/shape/definitions/PolygonShapeDefinition.h>
+#include <2DGameSDK/physics/shape/definitions/PolygonShape.h>
+#include <2DGameSDK/physics/shape/types/SensorShape.h>
 
 namespace game {
-  class GAMESDK_DLL PolygonSensorShape : public PolygonShapeDefinition {
+  class GAMESDK_DLL PolygonSensorShape : public SensorShape, public PolygonShape {
   public:
     PolygonSensorShape(Game* game, std::vector<cpVect> vertices);
-
-  protected:
-    virtual void initProperties(cpSpace* space, cpBody* body, cpShape* shape);
   };
 
 } // namespace game

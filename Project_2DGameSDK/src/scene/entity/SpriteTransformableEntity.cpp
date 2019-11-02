@@ -19,7 +19,7 @@ namespace game {
     mShapes.push_back(shape);
   }
 
-  SpriteTransformableEntity::SpriteTransformableEntity(int type, Game* game, sf::Texture* texture, std::vector<Shape*> shapes) : TransformableEntity(type, game, true), mSprite(*texture) {
+  SpriteTransformableEntity::SpriteTransformableEntity(int type, Game* game, sf::Texture* texture, std::vector<SensorShape*> shapes) : TransformableEntity(type, game, true), mSprite(*texture) {
     auto rect = mSprite.getTextureRect();
     mSprite.setOrigin(rect.width / 2, rect.height / 2);
 

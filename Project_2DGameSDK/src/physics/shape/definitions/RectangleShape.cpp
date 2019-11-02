@@ -1,11 +1,11 @@
-#include <2DGameSDK/physics/shape/definitions/RectangleShapeDefinition.h>
+#include <2DGameSDK/physics/shape/definitions/RectangleShape.h>
 
 namespace game {
 
-  RectangleShapeDefinition::RectangleShapeDefinition(Game* game, float width, float height) : Shape(ShapeType::Rectangle, game), mWidth(width), mHeight(height) {
+  RectangleShape::RectangleShape(Game* game, float width, float height) : Shape(ShapeType::Rectangle, game), mWidth(width), mHeight(height) {
   }
 
-  void RectangleShapeDefinition::Render(sf::RenderTarget* target, sf::Color color, float stroke) {
+  void RectangleShape::Render(sf::RenderTarget* target, sf::Color color, float stroke) {
     auto visOrigin = getVisualPosition();
     float rot = getVisualRotation();
     auto transform = sf::Transform().translate(visOrigin).rotate(rot, visOrigin);
@@ -19,7 +19,7 @@ namespace game {
     target->draw(shape);
   }
 
-  cpShape* RectangleShapeDefinition::initShape(cpSpace* space, cpBody* body) {
+  cpShape* RectangleShape::initShape(cpSpace* space, cpBody* body) {
     auto shape = cpBoxShapeNew(body, mWidth, mHeight, 0);
     cpSpaceAddShape(space, shape);
     cpShapeSetSensor(shape, true);

@@ -17,9 +17,9 @@ public:
   RotatingEntity(Game* game,
                  int type,
                  sf::Texture* texture,
-                 Shape* shape,
+                 SensorShape* shape,
                  float rotPerTick,
-                 sf::Vector2f pos = sf::Vector2f()) : SpriteTransformableEntity(type, game, texture, vector<Shape*>({shape})), mRot(rotPerTick) {
+                 sf::Vector2f pos = sf::Vector2f()) : SpriteTransformableEntity(type, game, texture, vector<SensorShape*>({shape})), mRot(rotPerTick) {
     auto rect = mSprite.getTextureRect();
     mCenter = sf::Vector2f(rect.width / 2, rect.height / 2);
     SetTransform(sf::Transform().translate(pos));
@@ -42,14 +42,14 @@ class ChopperEntity : public SpriteTransformableEntity {
 public:
   ChopperEntity(Game* game,
                 sf::Texture* tex,
-                Shape* shape,
+                SensorShape* shape,
                 float speed,
                 float rotSpeed,
                 Observable<sf::Keyboard::Key>* up,
                 Observable<sf::Keyboard::Key>* down,
                 Observable<sf::Keyboard::Key>* left,
                 Observable<sf::Keyboard::Key>* right,
-                sf::Vector2f pos = sf::Vector2f()) : SpriteTransformableEntity(_PLAYER_TYPE, game, tex, vector<Shape*>({shape})), mSpeed(speed), mRotSpeed(rotSpeed) {
+                sf::Vector2f pos = sf::Vector2f()) : SpriteTransformableEntity(_PLAYER_TYPE, game, tex, vector<SensorShape*>({shape})), mSpeed(speed), mRotSpeed(rotSpeed) {
     //
     //
     //
@@ -153,11 +153,11 @@ private:
   Observer<sf::Keyboard::Key>* mRight;
 };
 
-Shape* getChopperCollisionMask(Game* game) {
+SensorShape* getChopperCollisionMask(Game* game) {
   return new RectangleSensorShape(game, 16, 32);
 }
 
-Shape* getRotorCollisionMask(Game* game) {
+SensorShape* getRotorCollisionMask(Game* game) {
   auto verts = vector<cpVect>();
 
   verts.push_back(cpv(1, 13));

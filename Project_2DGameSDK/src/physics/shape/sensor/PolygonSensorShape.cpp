@@ -2,11 +2,6 @@
 
 namespace game {
 
-  PolygonSensorShape::PolygonSensorShape(Game* game, std::vector<cpVect> vertices) : PolygonShapeDefinition(game, vertices) {
-  }
-
-  void PolygonSensorShape::initProperties(cpSpace* space, cpBody* body, cpShape* shape) {
-    cpShapeSetCollisionType(shape, CollisionType::Default);
-    cpShapeSetSensor(shape, true);
+  PolygonSensorShape::PolygonSensorShape(Game* game, std::vector<cpVect> vertices) : Shape(ShapeType::Polygon, game), SensorShape(ShapeType::Polygon, game), PolygonShape(game, vertices) {
   }
 } // namespace game
