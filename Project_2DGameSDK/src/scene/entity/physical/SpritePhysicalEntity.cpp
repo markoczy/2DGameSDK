@@ -36,6 +36,7 @@ namespace game {
     auto conv = getGame()->GetPointConverter();
     auto pos = conv->GetVisualPos(cpBodyGetPosition(mBody));
     auto angle = -cpBodyGetAngle(mBody);
+    LOGD("Pos: (" << pos.x << ", " << pos.y << "), Angle: " << angle);
 
     mSprite.setPosition(pos);
     mSprite.setRotation(angle);
@@ -50,4 +51,20 @@ namespace game {
       if(options.RenderAABB) shape->RenderAABB(target, sf::Color::Magenta, 0.5);
     }
   }
+
+  void SpritePhysicalEntity::SetTransform(sf::Transform transform) {
+    auto worldHeight = getGame()->GetWorld()->GetBounds().height;
+    auto localOrigin = transform.transformPoint(sf::Vector2f());
+    auto localXUnit = transform.transformPoint(sf::Vector2f(1, 0));
+    auto localDir = localXUnit - localOrigin;
+    auto physicalOrigin = GrahicTools::GetPhysicalPos(localOrigin, worldHeight);
+    float angle = -atan2(localDir.y, localDir.x);
+
+    LOGD("Body Pos: (" << physicalOrigin.x << ", " << physicalOrigin.y << "), angle: " << angle);
+    cpBodySetPosition(mBody, physicalOrigin);
+    cpBodySetAngle(mBody, angle);
+  }
+
+  void SpritePhysicalEntity::OnTick() {}
+
 } // namespace game

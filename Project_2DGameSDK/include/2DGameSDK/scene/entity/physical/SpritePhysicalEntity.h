@@ -23,6 +23,11 @@ namespace game {
 
     void OnRender(sf::RenderTarget* target, sf::RenderStates states = sf::RenderStates::Default);
 
+    virtual void OnTick();
+
+    // TODO better concept
+    virtual void SetTransform(sf::Transform transform);
+
   protected:
     sf::Sprite mSprite;
     std::vector<DynamicShape*> mShapes;

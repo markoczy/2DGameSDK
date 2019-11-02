@@ -48,4 +48,6 @@ int playerDemoGTA2(float zoom = 2.0);
  */
 int chopperDemo();
 
+int physicsDemo();
+
 #endif
