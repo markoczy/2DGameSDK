@@ -3,7 +3,7 @@
 namespace game {
 
   RectangleShapeDefinition::RectangleShapeDefinition(Game* game, float width, float height) : Shape(ShapeType::Rectangle, game), mWidth(width), mHeight(height) {
-    }
+  }
 
   void RectangleShapeDefinition::Render(sf::RenderTarget* target, sf::Color color, float stroke) {
     auto visOrigin = getVisualPosition();
@@ -22,7 +22,6 @@ namespace game {
   cpShape* RectangleShapeDefinition::initShape(cpSpace* space, cpBody* body) {
     auto shape = cpBoxShapeNew(body, mWidth, mHeight, 0);
     cpSpaceAddShape(space, shape);
-    cpShapeSetCollisionType(shape, CollisionType::Default);
     cpShapeSetSensor(shape, true);
     return shape;
   }

@@ -30,7 +30,6 @@ namespace game {
   void Shape::RenderAABB(sf::RenderTarget* target, sf::Color color, float stroke) {
     auto bb = cpShapeCacheBB(mShape);
 
-    // auto topLeftVis = GrahicTools::GetVisualPos(cpv(bb.l, bb.t), worldHeight);
     auto conv = getGame()->GetPointConverter();
     auto topLeftVis = conv->GetVisualPos(cpv(bb.l, bb.t));
     auto bottomRightVis = conv->GetVisualPos(cpv(bb.r, bb.b));
