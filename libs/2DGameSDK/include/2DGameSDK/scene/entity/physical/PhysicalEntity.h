@@ -20,7 +20,6 @@ namespace game {
 
     //? Outsource to Entity??
     virtual void SetMass(float mass);
-    virtual void SetElasticity(float elasticity);
     virtual void SetMoment(float moment);
 
     virtual void SetVelocity(cpVect velocity);
@@ -31,7 +30,6 @@ namespace game {
   protected:
     bool mIsCollidable;
     cpBody* mBody = nullptr;
-    cpShape* mShape = nullptr;
   };
 
 } // namespace game

@@ -16,12 +16,8 @@ namespace game {
     return mIsCollidable;
   }
 
-  //? Outsource to Entity??
   void PhysicalEntity::SetMass(float mass) {
     cpBodySetMass(mBody, mass);
-  }
-
-  void PhysicalEntity::SetElasticity(float elasticity) {
   }
 
   void PhysicalEntity::SetMoment(float moment) {

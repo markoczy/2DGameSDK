@@ -14,9 +14,11 @@ namespace game {
     auto rect = mSprite.getTextureRect();
     mSprite.setOrigin(rect.width / 2, rect.height / 2);
 
-    auto shape = new RectangleSensorShape(getGame(), rect.width, rect.height);
-    shape->AttachToBody(getGame()->GetPhysicalWorld(), mBody);
-    mShapes.push_back(shape);
+    if(isCollidable) {
+      auto shape = new RectangleSensorShape(getGame(), rect.width, rect.height);
+      shape->AttachToBody(getGame()->GetPhysicalWorld(), mBody);
+      mShapes.push_back(shape);
+    }
   }
 
   SpriteTransformableEntity::SpriteTransformableEntity(int type, Game* game, sf::Texture* texture, std::vector<SensorShape*> shapes) : TransformableEntity(type, game, true), mSprite(*texture) {
