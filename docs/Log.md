@@ -230,6 +230,16 @@
 
 - Physik Engine: Shapes -> 6h
 
+## 27.10.2019
+
+### Status
+
+- Projektmeeting -> 1h PM
+
+### Ausblick
+
+- Kapselung der Physikalischen Types könnte notwendig sein
+
 ## 28.10.2019
 
 ### Status
@@ -242,3 +252,34 @@
 
 - Physik Engine: Shapes -> 1h
 
+## 01.11.2019
+
+### Status
+
+- Physik Engine: Dynamic Shapes -> 2h
+- Physik Engine: Physical Entities -> 2h
+
+### Ausblick
+
+- Für Shapes wurde ein Konzept mit `virtual inheritance` gewählt
+- Wäre `virtual inheritance` auch für Entities sinnvoll?
+
+## 02.11.2019
+
+### Status
+
+- Dynamic Entities -> 8h
+
+## 03.11.2019
+
+### Status
+
+- POC virtual inheritance für Entities -> 2h
+
+### Ausblick
+
+- Entities, Virtual Inheritance: 
+  - Der Preis jeweils die Grandparent Klasse `Entity` zu 
+    initialisieren ist zu hoch.
+  - Das Konzept ist zu schwerfällig und wird verworfen (Konsequenz:
+    mehr duplicated Code..)
