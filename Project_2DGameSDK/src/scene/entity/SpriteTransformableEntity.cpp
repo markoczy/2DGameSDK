@@ -10,8 +10,8 @@ namespace game {
 
   using namespace helpers;
 
-  SpriteTransformableEntity::SpriteTransformableEntity(int type, Game* game, sf::Texture* texture, bool isCollidable) : TransformableEntity(type, game, isCollidable), mSprite(*texture) {
-    auto rect = mSprite.getTextureRect();
+  SpriteTransformableEntity::SpriteTransformableEntity(int type, Game* game, sf::Texture* texture, std::vector<SensorShape*> shapes, bool isCollidable) : TransformableEntity(type, game, shapes, isCollidable), mSprite(*texture) {
+    auto rect = mSprite.getLocalBounds();
     mSprite.setOrigin(rect.width / 2, rect.height / 2);
 
     if(isCollidable) {
@@ -21,18 +21,12 @@ namespace game {
     }
   }
 
-  SpriteTransformableEntity::SpriteTransformableEntity(int type, Game* game, sf::Texture* texture, std::vector<SensorShape*> shapes) : TransformableEntity(type, game, true), mSprite(*texture) {
-    auto rect = mSprite.getTextureRect();
-    mSprite.setOrigin(rect.width / 2, rect.height / 2);
-
-    mShapes = shapes;
-    auto space = getGame()->GetPhysicalWorld();
-    for(auto shape : mShapes) {
-      shape->AttachToBody(space, mBody);
-    }
+  SpriteTransformableEntity::~SpriteTransformableEntity() {
   }
 
-  SpriteTransformableEntity::~SpriteTransformableEntity() {
+  void SpriteTransformableEntity::SetSize(sf::Vector2f size) {
+    auto rect = mSprite.getLocalBounds();
+    mSprite.setScale(size.x / rect.width, size.y / rect.height);
   }
 
   void SpriteTransformableEntity::OnTick() {}
@@ -54,6 +48,13 @@ namespace game {
   void SpriteTransformableEntity::OnRender(sf::RenderTarget* target, sf::RenderStates states) {
     states.transform = states.transform * mCombinedTransform;
     target->draw(mSprite, states);
+
+    auto origin = mCombinedTransform.transformPoint(sf::Vector2f());
+    auto s = sf::CircleShape(3);
+    s.setOrigin(3, 3);
+    s.setFillColor(sf::Color::Green);
+    s.setPosition(origin);
+    target->draw(s);
 
     auto options = getGame()->GetOptions();
     if(!(options.RenderCollisionMask || options.RenderAABB)) return;

@@ -2,10 +2,14 @@
 
 namespace game {
 
-  TransformableEntity::TransformableEntity(int type, Game* game, bool isCollidable) : Entity(type, game), mIsCollidable(isCollidable) {
-    // mBody = cpBodyNewKinematic();
+  TransformableEntity::TransformableEntity(int type, Game* game, std::vector<SensorShape*> shapes, bool isCollidable) : Entity(type, game), mShapes(shapes), mIsCollidable(isCollidable) {
     mBody = cpSpaceAddBody(game->GetPhysicalWorld(), cpBodyNewKinematic());
     cpBodySetUserData(mBody, this);
+
+    auto space = getGame()->GetPhysicalWorld();
+    for(auto shape : mShapes) {
+      shape->AttachToBody(space, mBody);
+    }
   }
 
   TransformableEntity::~TransformableEntity() {}

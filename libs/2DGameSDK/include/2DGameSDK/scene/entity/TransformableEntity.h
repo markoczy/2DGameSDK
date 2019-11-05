@@ -14,6 +14,8 @@
 #include <2DGameSDK/core/Game.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
 #include <2DGameSDK/physics/CollisionEventType.h>
+#include <2DGameSDK/physics/shape/sensor/RectangleSensorShape.h>
+#include <2DGameSDK/physics/shape/types/SensorShape.h>
 #include <2DGameSDK/scene/entity/Entity.h>
 
 #include <SFML/Graphics.hpp>
@@ -35,7 +37,7 @@ namespace game {
      * @param type type The Entity Type (does not affect anything and is meant
      *        to be used freely to identify entities of some kind)
      */
-    TransformableEntity(int type, Game* game, bool isCollidable = false);
+    TransformableEntity(int type, Game* game, std::vector<SensorShape*> shapes = std::vector<SensorShape*>(), bool isCollidable = false);
 
     /**
      * @brief Destroys the Transformable Entity object
@@ -55,7 +57,7 @@ namespace game {
     sf::Transform mAccTransform;
     sf::Transform mCombinedTransform;
     cpBody* mBody = nullptr;
-
+    std::vector<SensorShape*> mShapes;
     bool mIsCollidable;
 
     virtual bool setTransform(sf::Transform transform);

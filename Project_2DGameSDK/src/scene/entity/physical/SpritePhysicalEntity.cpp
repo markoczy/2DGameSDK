@@ -7,7 +7,7 @@ namespace game {
 
   using namespace helpers;
 
-  SpritePhysicalEntity::SpritePhysicalEntity(int type, Game* game, sf::Texture* texture, bool isCollidable) : PhysicalEntity(type, game, isCollidable), mSprite(*texture) {
+  SpritePhysicalEntity::SpritePhysicalEntity(int type, Game* game, sf::Texture* texture, std::vector<DynamicShape*> shapes, bool isCollidable) : PhysicalEntity(type, game, shapes, isCollidable), mSprite(*texture) {
     auto rect = mSprite.getTextureRect();
     mSprite.setOrigin(rect.width / 2, rect.height / 2);
 
@@ -18,18 +18,13 @@ namespace game {
     }
   }
 
-  SpritePhysicalEntity::SpritePhysicalEntity(int type, Game* game, sf::Texture* texture, std::vector<DynamicShape*> shapes) : PhysicalEntity(type, game, true), mSprite(*texture) {
-    auto rect = mSprite.getTextureRect();
-    mSprite.setOrigin(rect.width / 2, rect.height / 2);
-
-    mShapes = shapes;
-    auto space = getGame()->GetPhysicalWorld();
-    for(auto shape : mShapes) {
-      shape->AttachToBody(space, mBody);
-    }
+  SpritePhysicalEntity::~SpritePhysicalEntity() {
   }
 
-  SpritePhysicalEntity::~SpritePhysicalEntity() {
+  void SpritePhysicalEntity::SetSize(sf::Vector2f size) {
+    auto rect = mSprite.getTextureRect();
+    mSprite.setScale(size.x / rect.width, size.y / rect.height);
+    mSprite.setOrigin(size.x / 2, size.y / 2);
   }
 
   void SpritePhysicalEntity::OnRender(sf::RenderTarget* target, sf::RenderStates states) {

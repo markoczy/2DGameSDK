@@ -42,15 +42,19 @@ namespace game {
      * 
      * @param texture The Texture of the Entity
      */
-    SpriteTransformableEntity(int type, Game* game, sf::Texture* texture, bool isCollidable = false);
-
-    SpriteTransformableEntity(int type, Game* game, sf::Texture* texture, std::vector<SensorShape*> shapes);
+    SpriteTransformableEntity(int type,
+                              Game* game,
+                              sf::Texture* texture,
+                              std::vector<SensorShape*> shapes = std::vector<SensorShape*>(),
+                              bool isCollidable = false);
 
     /**
      * @brief Destroys the Sprite Transformable Entity
      * 
      */
     ~SpriteTransformableEntity();
+
+    virtual void SetSize(sf::Vector2f size);
 
     /**
      * @brief Updates the Entity
@@ -70,7 +74,6 @@ namespace game {
 
   protected:
     sf::Sprite mSprite;
-    std::vector<SensorShape*> mShapes;
   };
 
 } // namespace game

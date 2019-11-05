@@ -60,4 +60,7 @@
         "docs/**": true
     },
     "editor.tabSize": 2,
+    "files.exclude": {
+        "libs/2DGameSDK/**": true
+    },
 }

@@ -82,6 +82,8 @@ namespace game {
       mWindow->setView(mView);
     }
 
+    float step = 1.0f / mOptions.FramesPerSecond;
+
     int sleepMillis = int(1000.0 * (1.0 / mOptions.FramesPerSecond));
     sf::Clock clock;
     clock.restart();
@@ -100,7 +102,8 @@ namespace game {
       IFLOGD(int tickTime = clock.getElapsedTime().asMilliseconds();)
       render();
 
-      cpSpaceStep(mPhysicalWorld, clock.getElapsedTime().asSeconds());
+      // Chipmunk recommends to use fixed time steps
+      cpSpaceStep(mPhysicalWorld, step);
 
       // Sync Sim Time
       int time = clock.getElapsedTime().asMilliseconds();

@@ -17,10 +17,13 @@ int physicsDemo() {
   auto boxTx = AssetManager::GetTexture("res/textures/box/box.png");
 
   auto scene = new SceneGraph();
-  auto ground = new SpriteTransformableEntity(1, game, boxTx, true);
+  auto ground = new SpriteTransformableEntity(1, game, boxTx);
+  ground->SetSize(sf::Vector2f(200, 60));
   ground->SetTransform(sf::Transform().translate(100, 200));
-  auto box = new SpritePhysicalEntity(1, game, boxTx, true);
+  auto box = new SpritePhysicalEntity(1, game, boxTx);
   box->SetTransform(sf::Transform().translate(100, 100));
+  box->SetMass(2000);
+  box->SetMoment(cpMomentForBox(1000, 20, 20));
 
   scene->AddEntity(ground);
   scene->AddEntity(box);

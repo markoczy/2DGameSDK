@@ -5,13 +5,17 @@
 
 #include <2DGameSDK/core/Game.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
+#include <2DGameSDK/physics/shape/types/DynamicShape.h>
 #include <2DGameSDK/scene/entity/Entity.h>
 
 namespace game {
 
   class GAMESDK_DLL PhysicalEntity : public Entity {
   public:
-    PhysicalEntity(int type, Game* game, bool isCollidable = false, float mass = 1, float moment = 1);
+    PhysicalEntity(int type,
+                   Game* game,
+                   std::vector<DynamicShape*> shapes = std::vector<DynamicShape*>(),
+                   bool isCollidable = false);
 
     ~PhysicalEntity();
 
@@ -30,6 +34,7 @@ namespace game {
   protected:
     bool mIsCollidable;
     cpBody* mBody = nullptr;
+    std::vector<DynamicShape*> mShapes;
   };
 
 } // namespace game
