@@ -9,6 +9,7 @@ namespace game {
     mBody = body;
 
     mShape = initShape(space, body);
+    initProperties(space, body, mShape);
   }
 
   ShapeType Shape::GetType() {

@@ -14,11 +14,11 @@ namespace game {
     auto rect = mSprite.getLocalBounds();
     mSprite.setOrigin(rect.width / 2, rect.height / 2);
 
-    if(isCollidable) {
-      auto shape = new RectangleSensorShape(getGame(), rect.width, rect.height);
-      shape->AttachToBody(getGame()->GetPhysicalWorld(), mBody);
-      mShapes.push_back(shape);
-    }
+    // if(isCollidable) {
+    //   auto shape = new RectangleSensorShape(getGame(), rect.width, rect.height);
+    //   shape->AttachToBody(getGame()->GetPhysicalWorld(), mBody);
+    //   mShapes.push_back(shape);
+    // }
   }
 
   SpriteTransformableEntity::~SpriteTransformableEntity() {

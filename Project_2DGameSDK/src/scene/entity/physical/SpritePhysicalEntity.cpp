@@ -11,11 +11,11 @@ namespace game {
     auto rect = mSprite.getTextureRect();
     mSprite.setOrigin(rect.width / 2, rect.height / 2);
 
-    if(isCollidable) {
-      auto shape = new RectangleDynamicShape(getGame(), rect.width, rect.height);
-      shape->AttachToBody(getGame()->GetPhysicalWorld(), mBody);
-      mShapes.push_back(shape);
-    }
+    // if(isCollidable && shapes.size() == 0) {
+    //   auto shape = new RectangleDynamicShape(getGame(), rect.width, rect.height);
+    //   shape->AttachToBody(getGame()->GetPhysicalWorld(), mBody);
+    //   mShapes.push_back(shape);
+    // }
   }
 
   SpritePhysicalEntity::~SpritePhysicalEntity() {
