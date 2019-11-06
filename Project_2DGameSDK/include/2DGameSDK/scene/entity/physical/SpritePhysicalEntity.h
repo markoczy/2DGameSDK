@@ -14,7 +14,6 @@
 namespace game {
 
   class GAMESDK_DLL SpritePhysicalEntity : public PhysicalEntity {
-  private:
   public:
     SpritePhysicalEntity(int type,
                          Game* game,

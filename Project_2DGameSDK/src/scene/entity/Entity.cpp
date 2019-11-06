@@ -11,7 +11,7 @@ namespace game {
 
   Entity::~Entity() {}
 
-  bool Entity::IsTransformable() { return false; }
+  bool Entity::IsKinematic() { return false; }
 
   bool Entity::IsCollidable() { return false; }
 
@@ -22,7 +22,7 @@ namespace game {
   sf::Transform Entity::GetCombinedTransform() { return sf::Transform::Identity; }
 
   void Entity::SetTransform(sf::Transform transform) {
-    if(IsTransformable() && this->setTransform(transform)) onEntityTransformed();
+    if(IsKinematic() && this->setTransform(transform)) onEntityTransformed();
   }
 
   void Entity::SetGraphNode(SceneGraphNode* graphNode) {
@@ -31,11 +31,11 @@ namespace game {
   }
 
   void Entity::Transform(sf::Transform transform) {
-    if(IsTransformable() && this->transform(transform)) onEntityTransformed();
+    if(IsKinematic() && this->transform(transform)) onEntityTransformed();
   }
 
   void Entity::OnParentTransformed(sf::Transform accumulated) {
-    if(IsTransformable()) setAccumulatedTransform(accumulated);
+    if(IsKinematic()) setAccumulatedTransform(accumulated);
   }
 
   void Entity::OnTickEnded() {}

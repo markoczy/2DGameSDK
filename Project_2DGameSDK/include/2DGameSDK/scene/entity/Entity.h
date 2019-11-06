@@ -17,7 +17,7 @@ namespace game {
     Entity(int type, Game* game);
     virtual ~Entity();
 
-    virtual bool IsTransformable();
+    virtual bool IsKinematic();
     virtual bool IsCollidable();
     virtual sf::Transform GetTransform();
     virtual sf::Transform GetAccumulatedTransform();

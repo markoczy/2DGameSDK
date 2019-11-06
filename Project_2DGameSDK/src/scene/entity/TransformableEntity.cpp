@@ -14,7 +14,7 @@ namespace game {
 
   TransformableEntity::~TransformableEntity() {}
 
-  bool TransformableEntity::IsTransformable() {
+  bool TransformableEntity::IsKinematic() {
     return true;
   }
 

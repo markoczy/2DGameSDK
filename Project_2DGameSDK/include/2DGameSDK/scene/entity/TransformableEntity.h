@@ -45,7 +45,7 @@ namespace game {
      */
     virtual ~TransformableEntity();
 
-    virtual bool IsTransformable();
+    virtual bool IsKinematic();
     virtual bool IsCollidable();
 
     virtual sf::Transform GetTransform();

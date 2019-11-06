@@ -22,8 +22,6 @@ namespace game {
   cpShape* PolygonShape::initShape(cpSpace* space, cpBody* body) {
     auto shape = cpPolyShapeNewRaw(body, mVertices.size(), &mVertices[0], 0);
     cpSpaceAddShape(space, shape);
-    cpShapeSetCollisionType(shape, CollisionType::Default);
-    cpShapeSetSensor(shape, true);
     return shape;
   }
 } // namespace game

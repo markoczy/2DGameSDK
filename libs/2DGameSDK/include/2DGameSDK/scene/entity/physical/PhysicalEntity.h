@@ -19,10 +19,9 @@ namespace game {
 
     ~PhysicalEntity();
 
-    virtual bool IsTransformable();
+    virtual bool IsKinematic();
     virtual bool IsCollidable();
 
-    //? Outsource to Entity??
     virtual void SetMass(float mass);
     virtual void SetMoment(float moment);
 

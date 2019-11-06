@@ -1,8 +1,12 @@
 #ifndef __DYNAMIC_SHAPE_H__
 #define __DYNAMIC_SHAPE_H__
 
+#include <chipmunk/chipmunk.h>
+
+#include <2DGameSDK/core/Game.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
 #include <2DGameSDK/physics/shape/Shape.h>
+#include <2DGameSDK/physics/shape/ShapeType.h>
 
 namespace game {
   class GAMESDK_DLL DynamicShape : virtual public Shape {

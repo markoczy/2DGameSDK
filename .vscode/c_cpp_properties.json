@@ -8,7 +8,8 @@
                 "${workspaceFolder}/Project_Prototype/src/**",
                 "${workspaceFolder}/Project_Prototype/include/**",
                 "${workspaceFolder}/libs/**",
-                "${workspaceFolder}/libs/SFML-2.5.1/include"
+                "${workspaceFolder}/libs/SFML-2.5.1/include",
+                "${workspaceFolder}/libs/Chipmunk-7.0.3/include"
             ],
             "defines": [
                 "_DEBUG",

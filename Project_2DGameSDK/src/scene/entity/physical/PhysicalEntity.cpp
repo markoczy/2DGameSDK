@@ -13,7 +13,7 @@ namespace game {
 
   PhysicalEntity::~PhysicalEntity() {}
 
-  bool PhysicalEntity::IsTransformable() {
+  bool PhysicalEntity::IsKinematic() {
     return false;
   }
 

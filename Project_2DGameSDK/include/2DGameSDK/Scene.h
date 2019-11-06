@@ -19,5 +19,6 @@
 #include <2DGameSDK/scene/entity/TransformableEntity.h>
 #include <2DGameSDK/scene/entity/physical/PhysicalEntity.h>
 #include <2DGameSDK/scene/entity/physical/SpritePhysicalEntity.h>
+#include <2DGameSDK/scene/entity/physical/SpriteStaticEntity.h>
 
 #endif
