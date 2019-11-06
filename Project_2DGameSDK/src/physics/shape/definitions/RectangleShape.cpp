@@ -21,7 +21,6 @@ namespace game {
 
   cpShape* RectangleShape::initShape(cpSpace* space, cpBody* body) {
     auto shape = cpBoxShapeNew(body, mWidth, mHeight, 0);
-    cpSpaceAddShape(space, shape);
     return shape;
   }
 

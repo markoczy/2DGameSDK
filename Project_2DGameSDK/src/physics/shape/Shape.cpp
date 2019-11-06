@@ -10,6 +10,7 @@ namespace game {
 
     mShape = initShape(space, body);
     initProperties(space, body, mShape);
+    cpSpaceAddShape(space, mShape);
   }
 
   ShapeType Shape::GetType() {
