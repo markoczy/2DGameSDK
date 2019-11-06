@@ -283,3 +283,23 @@
     initialisieren ist zu hoch.
   - Das Konzept ist zu schwerfällig und wird verworfen (Konsequenz:
     mehr duplicated Code..)
+
+## 05.11.2019
+
+### Status
+
+- Spritebased Entities überarbeitet -> 2
+  - Shapes sind nun auf level der Transformable und Physical 
+    entities
+- `SetSize` Methode für Spritebased Entities (Caveat: Bei SFML `setScale` bleibt der
+  Mittelpunkt gleich)
+
+### Ausblick
+
+- Statische Entities implementieren
+- `IsTransformable` sollte besser `IsKinematic` heissen (da dies nicht impliziert
+  dass `SetTransform` nicht erlaubt ist)
+- `SetTransform` auf Entity Level muss überdacht werden:
+  - Physical Entities haben zwar `SetTransform` sind aber nicht kinematisch
+  - Jeder Entitytyp sollte selbst entscheiden wie `SetTransform` ausgeführt wird
+    womöglich ist der aktuelle Ansatz mit der `protected` Methode korrigierbar
