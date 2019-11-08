@@ -22,9 +22,9 @@ namespace game {
     void SetElasticity(float elasticity);
 
   protected:
-    float mDensity = 1;
-    float mMass = 1;
-    float mFriction = 1;
+    float mDensity = 0;
+    float mMass = 0;
+    float mFriction = 0;
     float mElasticity = 0;
 
     virtual void initProperties(cpSpace* space, cpBody* body, cpShape* shape);

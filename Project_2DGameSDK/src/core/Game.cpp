@@ -99,15 +99,14 @@ namespace game {
 
       // Game cycle
       tick();
-      IFLOGD(int tickTime = clock.getElapsedTime().asMilliseconds();)
-      render();
-
       // Chipmunk recommends to use fixed time steps
       cpSpaceStep(mPhysicalWorld, step);
 
+      IFLOGD(int tickTime = clock.getElapsedTime().asMilliseconds();)
+      render();
+
       // Sync Sim Time
       int time = clock.getElapsedTime().asMilliseconds();
-
       if(sleepMillis > time) {
         // LOGD("Sleeping " << sleepMillis - time);
         std::this_thread::sleep_for(std::chrono::milliseconds(sleepMillis - time));

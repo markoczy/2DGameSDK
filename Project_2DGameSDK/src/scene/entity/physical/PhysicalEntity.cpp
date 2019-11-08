@@ -2,7 +2,7 @@
 
 namespace game {
   PhysicalEntity::PhysicalEntity(int type, Game* game, std::vector<DynamicShape*> shapes, bool isCollidable) : Entity(type, game), mShapes(shapes), mIsCollidable(isCollidable) {
-    mBody = cpSpaceAddBody(game->GetPhysicalWorld(), cpBodyNew(1, 1));
+    mBody = cpSpaceAddBody(game->GetPhysicalWorld(), cpBodyNew(0, 0));
     cpBodySetUserData(mBody, this);
 
     auto space = getGame()->GetPhysicalWorld();

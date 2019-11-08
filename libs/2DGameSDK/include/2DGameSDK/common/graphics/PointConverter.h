@@ -14,6 +14,9 @@ namespace game {
     cpVect GetPhysicalPos(sf::Vector2f visualPos);
     sf::Vector2f GetVisualPos(cpVect physicalPos);
 
+    float GetVisualAngle(float physicalAngle);
+    float GetPhysicalAngle(float visualAngle);
+
   private:
     float mWidth;
     float mHeight;

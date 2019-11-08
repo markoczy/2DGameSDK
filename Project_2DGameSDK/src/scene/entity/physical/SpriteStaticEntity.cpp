@@ -20,7 +20,7 @@ namespace game {
   void SpriteStaticEntity::OnRender(sf::RenderTarget* target, sf::RenderStates states) {
     auto conv = getGame()->GetPointConverter();
     auto pos = conv->GetVisualPos(cpBodyGetPosition(mBody));
-    auto angle = -cpBodyGetAngle(mBody);
+    auto angle = conv->GetVisualAngle(cpBodyGetAngle(mBody));
     LOGD("Pos: (" << pos.x << ", " << pos.y << "), Angle: " << angle);
 
     mSprite.setPosition(pos);

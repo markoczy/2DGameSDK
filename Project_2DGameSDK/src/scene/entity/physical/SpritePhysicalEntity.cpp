@@ -24,13 +24,12 @@ namespace game {
   void SpritePhysicalEntity::SetSize(sf::Vector2f size) {
     auto rect = mSprite.getTextureRect();
     mSprite.setScale(size.x / rect.width, size.y / rect.height);
-    mSprite.setOrigin(size.x / 2, size.y / 2);
   }
 
   void SpritePhysicalEntity::OnRender(sf::RenderTarget* target, sf::RenderStates states) {
     auto conv = getGame()->GetPointConverter();
     auto pos = conv->GetVisualPos(cpBodyGetPosition(mBody));
-    auto angle = -cpBodyGetAngle(mBody);
+    auto angle = conv->GetVisualAngle(cpBodyGetAngle(mBody));
     LOGD("Pos: (" << pos.x << ", " << pos.y << "), Angle: " << angle);
 
     mSprite.setPosition(pos);

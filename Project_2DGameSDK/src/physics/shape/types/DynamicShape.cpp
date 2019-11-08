@@ -5,10 +5,10 @@ namespace game {
 
   void DynamicShape::initProperties(cpSpace* space, cpBody* body, cpShape* shape) {
     cpShapeSetCollisionType(shape, CollisionType::Default);
-    cpShapeSetDensity(shape, mDensity);
-    cpShapeSetMass(shape, mMass);
-    cpShapeSetFriction(shape, mFriction);
-    cpShapeSetElasticity(shape, mElasticity);
+    if(mDensity != 0) cpShapeSetDensity(shape, mDensity);
+    if(mMass != 0) cpShapeSetMass(shape, mMass);
+    if(mFriction != 0) cpShapeSetFriction(shape, mFriction);
+    if(mElasticity != 0) cpShapeSetElasticity(shape, mElasticity);
   }
 
   void DynamicShape::SetDensity(float density) {

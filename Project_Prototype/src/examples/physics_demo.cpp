@@ -17,14 +17,21 @@ int physicsDemo() {
   auto boxTx = AssetManager::GetTexture("res/textures/box/box.png");
 
   auto scene = new SceneGraph();
-  auto ground = new SpriteStaticEntity(1, game, boxTx, {new RectangleDynamicShape(game, 200, 60)}, true);
+
+  auto groundShape = new RectangleDynamicShape(game, 200, 60);
+  groundShape->SetElasticity(1);
+  groundShape->SetFriction(0.3);
+  auto ground = new SpriteStaticEntity(1, game, boxTx, {groundShape}, true);
   ground->SetSize(sf::Vector2f(200, 60));
   ground->SetTransform(sf::Transform().translate(100, 200));
 
-  auto box = new SpritePhysicalEntity(2, game, boxTx, {new RectangleDynamicShape(game, boxTx->getSize().x, boxTx->getSize().y)}, true);
-  box->SetTransform(sf::Transform().translate(100, 100));
-  box->SetMass(2000);
-  box->SetMoment(cpMomentForBox(1000, 20, 20));
+  auto shape = new RectangleDynamicShape(game, 5, 5);
+  shape->SetElasticity(1);
+  shape->SetDensity(1);
+  shape->SetFriction(0.3);
+  auto box = new SpritePhysicalEntity(2, game, boxTx, {shape}, true);
+  box->SetSize(sf::Vector2f(5, 5));
+  box->SetTransform(sf::Transform().translate(100, 100).rotate(10));
 
   scene->AddEntity(ground);
   scene->AddEntity(box);
