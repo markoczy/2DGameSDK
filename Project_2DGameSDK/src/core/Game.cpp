@@ -47,7 +47,7 @@ namespace game {
     LOGD("Game minimal contructor call");
     mPhysicalWorld = cpSpaceNew();
     auto collisionHandler = cpSpaceAddCollisionHandler(mPhysicalWorld, CollisionType::Default, CollisionType::Default);
-    // auto collisionHandler = cpSpaceAddDefaultCollisionHandler(mPhysicalWorld);
+    cpSpaceSetCollisionSlop(mPhysicalWorld, 0.01);
 
     collisionHandler->beginFunc = &collisionBegin;
     collisionHandler->preSolveFunc = &collisionPreSolve;
