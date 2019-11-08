@@ -16,4 +16,8 @@ namespace game {
   bool StaticEntity::IsKinematic() { return false; }
 
   bool StaticEntity::IsCollidable() { return mIsCollidable; }
+
+  int StaticEntity::OnCollision(CollisionEventType type, Entity* other, cpArbiter* arb) {
+    return 1;
+  }
 } // namespace game

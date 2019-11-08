@@ -8,7 +8,7 @@ int physicsDemo() {
 
   // Create game
   auto game = new Game();
-  game->SetOptions(GameOptions{"My Game", sf::Vector2i(512, 512), 2.0, 50, true, true});
+  game->SetOptions(GameOptions{"My Game", sf::Vector2i(512, 512), 2.0, 50, false, true});
 
   // Create Game World
   auto world = GameWorldFactory::CreateGameWorld("res/simple_grass/tilemap.json", "", "res/simple_grass/tile_");
@@ -20,7 +20,8 @@ int physicsDemo() {
   auto ground = new SpriteStaticEntity(1, game, boxTx, {new RectangleDynamicShape(game, 200, 60)}, true);
   ground->SetSize(sf::Vector2f(200, 60));
   ground->SetTransform(sf::Transform().translate(100, 200));
-  auto box = new SpritePhysicalEntity(1, game, boxTx, {new RectangleDynamicShape(game, boxTx->getSize().x, boxTx->getSize().y)}, true);
+
+  auto box = new SpritePhysicalEntity(2, game, boxTx, {new RectangleDynamicShape(game, boxTx->getSize().x, boxTx->getSize().y)}, true);
   box->SetTransform(sf::Transform().translate(100, 100));
   box->SetMass(2000);
   box->SetMoment(cpMomentForBox(1000, 20, 20));

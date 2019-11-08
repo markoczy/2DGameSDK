@@ -45,4 +45,8 @@ namespace game {
     cpBodySetTorque(mBody, torque);
   }
 
+  int PhysicalEntity::OnCollision(CollisionEventType type, Entity* other, cpArbiter* arb) {
+    return 1;
+  }
+
 } // namespace game

@@ -20,11 +20,12 @@ namespace game {
     virtual bool IsKinematic();
     virtual bool IsCollidable();
 
+    virtual int OnCollision(CollisionEventType type, Entity* other, cpArbiter* arb);
+
   protected:
     bool mIsCollidable;
     std::vector<Shape*> mShapes;
     cpBody* mBody = nullptr;
-
   };
 } // namespace game
 

@@ -22,7 +22,7 @@ namespace game {
   sf::Transform Entity::GetCombinedTransform() { return sf::Transform::Identity; }
 
   void Entity::SetTransform(sf::Transform transform) {
-    if(IsKinematic() && this->setTransform(transform)) onEntityTransformed();
+    if(this->setTransform(transform)) onEntityTransformed();
   }
 
   void Entity::SetGraphNode(SceneGraphNode* graphNode) {
@@ -31,7 +31,7 @@ namespace game {
   }
 
   void Entity::Transform(sf::Transform transform) {
-    if(IsKinematic() && this->transform(transform)) onEntityTransformed();
+    if(this->transform(transform)) onEntityTransformed();
   }
 
   void Entity::OnParentTransformed(sf::Transform accumulated) {

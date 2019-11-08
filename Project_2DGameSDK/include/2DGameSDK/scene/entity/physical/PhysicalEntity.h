@@ -30,6 +30,8 @@ namespace game {
     virtual void SetAngularVelocity(float angularVelocity);
     virtual void SetTorque(float torque);
 
+    virtual int OnCollision(CollisionEventType type, Entity* other, cpArbiter* arb);
+
   protected:
     bool mIsCollidable;
     cpBody* mBody = nullptr;

@@ -47,7 +47,7 @@ namespace game {
     }
   }
 
-  void SpritePhysicalEntity::SetTransform(sf::Transform transform) {
+  bool SpritePhysicalEntity::setTransform(sf::Transform transform) {
     auto worldHeight = getGame()->GetWorld()->GetBounds().height;
     auto localOrigin = transform.transformPoint(sf::Vector2f());
     auto localXUnit = transform.transformPoint(sf::Vector2f(1, 0));
@@ -58,6 +58,7 @@ namespace game {
     LOGD("Body Pos: (" << physicalOrigin.x << ", " << physicalOrigin.y << "), angle: " << angle);
     cpBodySetPosition(mBody, physicalOrigin);
     cpBodySetAngle(mBody, angle);
+    cpSpaceReindexShapesForBody(getGame()->GetPhysicalWorld(), mBody);
   }
 
   void SpritePhysicalEntity::OnTick() {}

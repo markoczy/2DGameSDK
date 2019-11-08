@@ -28,11 +28,11 @@ namespace game {
 
     virtual void OnTick();
 
-    // TODO better concept
-    virtual void SetTransform(sf::Transform transform);
-
   protected:
     sf::Sprite mSprite;
+
+    // TODO better concept
+    virtual bool setTransform(sf::Transform transform);
   };
 
 } // namespace game
