@@ -1,15 +1,15 @@
 /**
- * @file TransformableEntity.h
+ * @file KinematicEntity.h
  * @author Aleistar Markoczy (a.markoczy@gmail.com)
- * @brief Transformable Entity class
+ * @brief Kinematic Entity class
  * @version 1.0
  * @date 2019-06-13
  * 
  * @copyright Copyright (c) 2019
  * 
  */
-#ifndef __TRANSFORMABLE_ENTITY_H__
-#define __TRANSFORMABLE_ENTITY_H__
+#ifndef __KINEMATIC_ENTITY_H__
+#define __KINEMATIC_ENTITY_H__
 
 #include <2DGameSDK/core/Game.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
@@ -29,7 +29,7 @@ namespace game {
    *        be placed on the SceneGraph.
    * 
    */
-  class GAMESDK_DLL TransformableEntity : public Entity {
+  class GAMESDK_DLL KinematicEntity : public Entity {
   public:
     /**
      * @brief Creates a new Transformable Entity object
@@ -37,13 +37,13 @@ namespace game {
      * @param type type The Entity Type (does not affect anything and is meant
      *        to be used freely to identify entities of some kind)
      */
-    TransformableEntity(int type, Game* game, std::vector<SensorShape*> shapes = std::vector<SensorShape*>(), bool isCollidable = false);
+    KinematicEntity(int type, Game* game, std::vector<SensorShape*> shapes = std::vector<SensorShape*>(), bool isCollidable = false);
 
     /**
      * @brief Destroys the Transformable Entity object
      * 
      */
-    virtual ~TransformableEntity();
+    virtual ~KinematicEntity();
 
     virtual bool IsKinematic();
     virtual bool IsCollidable();

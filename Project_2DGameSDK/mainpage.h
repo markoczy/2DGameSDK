@@ -34,11 +34,11 @@
  * // Type of player entity
  * const int _PLAYER_TYPE = 200;
  * 
- * class RotatingEntity : public SpriteTransformableEntity {
+ * class RotatingEntity : public SpriteKinematicEntity {
  * public:
  *   RotatingEntity(sf::Texture* texture,
  *                  float rotPerTick,
- *                  sf::Vector2f pos = sf::Vector2f()) : SpriteTransformableEntity(1, texture), mRot(rotPerTick) {
+ *                  sf::Vector2f pos = sf::Vector2f()) : SpriteKinematicEntity(1, texture), mRot(rotPerTick) {
  *     auto rect = mSprite.getTextureRect();
  *     // Set origin to center of the Texture
  *     GetTransformable()->setOrigin(float(rect.width) / 2.0, float(rect.height) / 2.0);

@@ -1,4 +1,4 @@
-#include <2DGameSDK/scene/entity/SpriteTransformableEntity.h>
+#include <2DGameSDK/scene/entity/kinematic/SpriteKinematicEntity.h>
 
 using namespace sf;
 using namespace game::constants;
@@ -10,7 +10,7 @@ namespace game {
 
   using namespace helpers;
 
-  SpriteTransformableEntity::SpriteTransformableEntity(int type, Game* game, sf::Texture* texture, std::vector<SensorShape*> shapes, bool isCollidable) : TransformableEntity(type, game, shapes, isCollidable), mSprite(*texture) {
+  SpriteKinematicEntity::SpriteKinematicEntity(int type, Game* game, sf::Texture* texture, std::vector<SensorShape*> shapes, bool isCollidable) : KinematicEntity(type, game, shapes, isCollidable), mSprite(*texture) {
     auto rect = mSprite.getLocalBounds();
     mSprite.setOrigin(rect.width / 2, rect.height / 2);
 
@@ -21,17 +21,17 @@ namespace game {
     // }
   }
 
-  SpriteTransformableEntity::~SpriteTransformableEntity() {
+  SpriteKinematicEntity::~SpriteKinematicEntity() {
   }
 
-  void SpriteTransformableEntity::SetSize(sf::Vector2f size) {
+  void SpriteKinematicEntity::SetSize(sf::Vector2f size) {
     auto rect = mSprite.getLocalBounds();
     mSprite.setScale(size.x / rect.width, size.y / rect.height);
   }
 
-  void SpriteTransformableEntity::OnTick() {}
+  void SpriteKinematicEntity::OnTick() {}
 
-  void SpriteTransformableEntity::OnTickEnded() {
+  void SpriteKinematicEntity::OnTickEnded() {
     auto worldHeight = getGame()->GetWorld()->GetBounds().height;
     auto localOrigin = GetCombinedTransform().transformPoint(sf::Vector2f());
     auto localXUnit = GetCombinedTransform().transformPoint(sf::Vector2f(1, 0));
@@ -45,7 +45,7 @@ namespace game {
     cpBodySetAngle(mBody, angle);
   }
 
-  void SpriteTransformableEntity::OnRender(sf::RenderTarget* target, sf::RenderStates states) {
+  void SpriteKinematicEntity::OnRender(sf::RenderTarget* target, sf::RenderStates states) {
     states.transform = states.transform * mCombinedTransform;
     target->draw(mSprite, states);
 

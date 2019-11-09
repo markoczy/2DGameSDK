@@ -1,5 +1,5 @@
 /**
- * @file SpriteTransformableEntity.h
+ * @file SpriteKinematicEntity.h
  * @author Aleistar Markoczy (a.markoczy@gmail.com)
  * @brief Sprite Transformable Entity class
  * @version 1.0
@@ -8,8 +8,8 @@
  * @copyright Copyright (c) 2019
  * 
  */
-#ifndef __SPRITE_TRANSFORMABLE_ENTITY_H__
-#define __SPRITE_TRANSFORMABLE_ENTITY_H__
+#ifndef __SPRITE_KINEMATIC_ENTITY_H__
+#define __SPRITE_KINEMATIC_ENTITY_H__
 
 #include <vector>
 
@@ -23,16 +23,16 @@
 #include <2DGameSDK/physics/CollisionType.h>
 #include <2DGameSDK/physics/shape/sensor/RectangleSensorShape.h>
 #include <2DGameSDK/physics/shape/types/SensorShape.h>
-#include <2DGameSDK/scene/entity/TransformableEntity.h>
+#include <2DGameSDK/scene/entity/definitions/KinematicEntity.h>
 
 namespace game {
 
   /**
-   * @brief Simple specialisation of the TransformableEntity class. Does not
+   * @brief Simple specialisation of the KinematicEntity class. Does not
    *        do anything during OnTick().
    * 
    */
-  class GAMESDK_DLL SpriteTransformableEntity : public TransformableEntity {
+  class GAMESDK_DLL SpriteKinematicEntity : public KinematicEntity {
   public:
     /**
      * @brief Creates a new Sprite Transformable Entity object
@@ -42,17 +42,17 @@ namespace game {
      * 
      * @param texture The Texture of the Entity
      */
-    SpriteTransformableEntity(int type,
-                              Game* game,
-                              sf::Texture* texture,
-                              std::vector<SensorShape*> shapes = std::vector<SensorShape*>(),
-                              bool isCollidable = false);
+    SpriteKinematicEntity(int type,
+                          Game* game,
+                          sf::Texture* texture,
+                          std::vector<SensorShape*> shapes = std::vector<SensorShape*>(),
+                          bool isCollidable = false);
 
     /**
      * @brief Destroys the Sprite Transformable Entity
      * 
      */
-    ~SpriteTransformableEntity();
+    ~SpriteKinematicEntity();
 
     virtual void SetSize(sf::Vector2f size);
 

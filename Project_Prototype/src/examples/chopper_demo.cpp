@@ -12,14 +12,14 @@ static const float _OFFSET = 90;
  * @brief Test Entity: Rotates on every tick
  *
  */
-class RotatingEntity : public SpriteTransformableEntity {
+class RotatingEntity : public SpriteKinematicEntity {
 public:
   RotatingEntity(Game* game,
                  int type,
                  sf::Texture* texture,
                  SensorShape* shape,
                  float rotPerTick,
-                 sf::Vector2f pos = sf::Vector2f()) : SpriteTransformableEntity(type, game, texture, vector<SensorShape*>({shape})), mRot(rotPerTick) {
+                 sf::Vector2f pos = sf::Vector2f()) : SpriteKinematicEntity(type, game, texture, vector<SensorShape*>({shape})), mRot(rotPerTick) {
     auto rect = mSprite.getTextureRect();
     mCenter = sf::Vector2f(rect.width / 2, rect.height / 2);
     SetTransform(sf::Transform().translate(pos));
@@ -38,7 +38,7 @@ private:
   sf::Vector2f mCenter;
 };
 
-class ChopperEntity : public SpriteTransformableEntity {
+class ChopperEntity : public SpriteKinematicEntity {
 public:
   ChopperEntity(Game* game,
                 sf::Texture* tex,
@@ -49,7 +49,7 @@ public:
                 Observable<sf::Keyboard::Key>* down,
                 Observable<sf::Keyboard::Key>* left,
                 Observable<sf::Keyboard::Key>* right,
-                sf::Vector2f pos = sf::Vector2f()) : SpriteTransformableEntity(_PLAYER_TYPE, game, tex, vector<SensorShape*>({shape})), mSpeed(speed), mRotSpeed(rotSpeed) {
+                sf::Vector2f pos = sf::Vector2f()) : SpriteKinematicEntity(_PLAYER_TYPE, game, tex, vector<SensorShape*>({shape})), mSpeed(speed), mRotSpeed(rotSpeed) {
     //
     //
     //

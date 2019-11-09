@@ -9,7 +9,7 @@ const int _PLAYER_TYPE = 200;
 /**
  * @brief Test Entity: Movement Controllable by given observables
  */
-class PlayerEntity : public SpriteTransformableEntity {
+class PlayerEntity : public SpriteKinematicEntity {
 public:
   PlayerEntity(Game* game,
                sf::Texture* texture,
@@ -17,7 +17,7 @@ public:
                Observable<sf::Keyboard::Key>* up,
                Observable<sf::Keyboard::Key>* down,
                Observable<sf::Keyboard::Key>* left,
-               Observable<sf::Keyboard::Key>* right) : SpriteTransformableEntity(_PLAYER_TYPE, game, texture), mSpeed(speed) {
+               Observable<sf::Keyboard::Key>* right) : SpriteKinematicEntity(_PLAYER_TYPE, game, texture), mSpeed(speed) {
     //
     //
     //

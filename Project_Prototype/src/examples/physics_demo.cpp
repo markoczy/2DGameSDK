@@ -6,7 +6,7 @@ using namespace game;
 const int _PLAYER_TYPE = 200;
 const int _GROUND_TYPE = 100;
 
-class PhysPlayerEntity : public SpritePhysicalEntity {
+class PhysPlayerEntity : public SpriteDynamicEntity {
 public:
   PhysPlayerEntity(Game* game,
                    sf::Texture* texture,
@@ -16,7 +16,7 @@ public:
                    Observable<sf::Keyboard::Key>* up,
                    Observable<sf::Keyboard::Key>* down,
                    Observable<sf::Keyboard::Key>* left,
-                   Observable<sf::Keyboard::Key>* right) : SpritePhysicalEntity(_PLAYER_TYPE, game, texture, shapes, true), mSpeed(speed), mJumpForce(jumpForce) {
+                   Observable<sf::Keyboard::Key>* right) : SpriteDynamicEntity(_PLAYER_TYPE, game, texture, shapes, true), mSpeed(speed), mJumpForce(jumpForce) {
     //
     //
     //
@@ -121,7 +121,7 @@ int demo1() {
   shape->SetElasticity(1);
   shape->SetDensity(0.1);
   shape->SetFriction(0.3);
-  auto box = new SpritePhysicalEntity(2, game, boxTx, {shape}, true);
+  auto box = new SpriteDynamicEntity(2, game, boxTx, {shape}, true);
   box->SetSize(sf::Vector2f(5, 5));
   box->SetTransform(sf::Transform().translate(100, 100).rotate(10));
 

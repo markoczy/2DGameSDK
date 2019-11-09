@@ -1,32 +1,23 @@
-#include <2DGameSDK/scene/entity/physical/SpritePhysicalEntity.h>
+#include <2DGameSDK/scene/entity/static/SpriteStaticEntity.h>
 
 namespace game {
 
-  // SceneGraphNode forward Declaration
-  class SceneGraphNode;
-
   using namespace helpers;
 
-  SpritePhysicalEntity::SpritePhysicalEntity(int type, Game* game, sf::Texture* texture, std::vector<DynamicShape*> shapes, bool isCollidable) : PhysicalEntity(type, game, shapes, isCollidable), mSprite(*texture) {
+  SpriteStaticEntity::SpriteStaticEntity(int type, Game* game, sf::Texture* texture, std::vector<Shape*> shapes, bool isCollidable) : StaticEntity(type, game, shapes, isCollidable), mSprite(*texture) {
     auto rect = mSprite.getTextureRect();
     mSprite.setOrigin(rect.width / 2, rect.height / 2);
-
-    // if(isCollidable && shapes.size() == 0) {
-    //   auto shape = new RectangleDynamicShape(getGame(), rect.width, rect.height);
-    //   shape->AttachToBody(getGame()->GetPhysicalWorld(), mBody);
-    //   mShapes.push_back(shape);
-    // }
   }
 
-  SpritePhysicalEntity::~SpritePhysicalEntity() {
+  SpriteStaticEntity::~SpriteStaticEntity() {
   }
 
-  void SpritePhysicalEntity::SetSize(sf::Vector2f size) {
+  void SpriteStaticEntity::SetSize(sf::Vector2f size) {
     auto rect = mSprite.getTextureRect();
     mSprite.setScale(size.x / rect.width, size.y / rect.height);
   }
 
-  void SpritePhysicalEntity::OnRender(sf::RenderTarget* target, sf::RenderStates states) {
+  void SpriteStaticEntity::OnRender(sf::RenderTarget* target, sf::RenderStates states) {
     auto conv = getGame()->GetPointConverter();
     auto pos = conv->GetVisualPos(cpBodyGetPosition(mBody));
     auto angle = conv->GetVisualAngle(cpBodyGetAngle(mBody));
@@ -46,7 +37,7 @@ namespace game {
     }
   }
 
-  bool SpritePhysicalEntity::setTransform(sf::Transform transform) {
+  bool SpriteStaticEntity::setTransform(sf::Transform transform) {
     auto worldHeight = getGame()->GetWorld()->GetBounds().height;
     auto localOrigin = transform.transformPoint(sf::Vector2f());
     auto localXUnit = transform.transformPoint(sf::Vector2f(1, 0));
@@ -58,8 +49,9 @@ namespace game {
     cpBodySetPosition(mBody, physicalOrigin);
     cpBodySetAngle(mBody, angle);
     cpSpaceReindexShapesForBody(getGame()->GetPhysicalWorld(), mBody);
+    return true;
   }
 
-  void SpritePhysicalEntity::OnTick() {}
+  void SpriteStaticEntity::OnTick() {}
 
 } // namespace game

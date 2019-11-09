@@ -1,5 +1,5 @@
-#ifndef __PHYSICAL_ENTITY_H__
-#define __PHYSICAL_ENTITY_H__
+#ifndef __DYNAMIC_ENTITY_H__
+#define __DYNAMIC_ENTITY_H__
 
 #include <chipmunk/chipmunk.h>
 
@@ -10,14 +10,14 @@
 
 namespace game {
 
-  class GAMESDK_DLL PhysicalEntity : public Entity {
+  class GAMESDK_DLL DynamicEntity : public Entity {
   public:
-    PhysicalEntity(int type,
-                   Game* game,
-                   std::vector<DynamicShape*> shapes = std::vector<DynamicShape*>(),
-                   bool isCollidable = false);
+    DynamicEntity(int type,
+                  Game* game,
+                  std::vector<DynamicShape*> shapes = std::vector<DynamicShape*>(),
+                  bool isCollidable = false);
 
-    ~PhysicalEntity();
+    ~DynamicEntity();
 
     virtual bool IsKinematic();
     virtual bool IsCollidable();

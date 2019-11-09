@@ -1,5 +1,5 @@
-#ifndef __SPRITE_PHYSICAL_ENTITY_H__
-#define __SPRITE_PHYSICAL_ENTITY_H__
+#ifndef __SPRITE_DYNAMIC_ENTITY_H__
+#define __SPRITE_DYNAMIC_ENTITY_H__
 
 #include <vector>
 
@@ -9,18 +9,18 @@
 #include <2DGameSDK/core/Game.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
 #include <2DGameSDK/physics/shape/dynamic/RectangleDynamicShape.h>
-#include <2DGameSDK/scene/entity/physical/PhysicalEntity.h>
+#include <2DGameSDK/scene/entity/definitions/DynamicEntity.h>
 
 namespace game {
 
-  class GAMESDK_DLL SpritePhysicalEntity : public PhysicalEntity {
+  class GAMESDK_DLL SpriteDynamicEntity : public DynamicEntity {
   public:
-    SpritePhysicalEntity(int type,
-                         Game* game,
-                         sf::Texture* texture,
-                         std::vector<DynamicShape*> shapes = std::vector<DynamicShape*>(),
-                         bool isCollidable = false);
-    ~SpritePhysicalEntity();
+    SpriteDynamicEntity(int type,
+                        Game* game,
+                        sf::Texture* texture,
+                        std::vector<DynamicShape*> shapes = std::vector<DynamicShape*>(),
+                        bool isCollidable = false);
+    ~SpriteDynamicEntity();
 
     void SetSize(sf::Vector2f size);
 

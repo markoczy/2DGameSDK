@@ -1,8 +1,8 @@
-#include <2DGameSDK/scene/entity/TransformableEntity.h>
+#include <2DGameSDK/scene/entity/definitions/KinematicEntity.h>
 
 namespace game {
 
-  TransformableEntity::TransformableEntity(int type, Game* game, std::vector<SensorShape*> shapes, bool isCollidable) : Entity(type, game), mShapes(shapes), mIsCollidable(isCollidable) {
+  KinematicEntity::KinematicEntity(int type, Game* game, std::vector<SensorShape*> shapes, bool isCollidable) : Entity(type, game), mShapes(shapes), mIsCollidable(isCollidable) {
     mBody = cpSpaceAddBody(game->GetPhysicalWorld(), cpBodyNewKinematic());
     cpBodySetUserData(mBody, this);
 
@@ -12,41 +12,41 @@ namespace game {
     }
   }
 
-  TransformableEntity::~TransformableEntity() {}
+  KinematicEntity::~KinematicEntity() {}
 
-  bool TransformableEntity::IsKinematic() {
+  bool KinematicEntity::IsKinematic() {
     return true;
   }
 
-  bool TransformableEntity::IsCollidable() {
+  bool KinematicEntity::IsCollidable() {
     return mIsCollidable;
   }
 
-  sf::Transform TransformableEntity::GetTransform() {
+  sf::Transform KinematicEntity::GetTransform() {
     return mTransform;
   }
 
-  sf::Transform TransformableEntity::GetAccumulatedTransform() {
+  sf::Transform KinematicEntity::GetAccumulatedTransform() {
     return mAccTransform;
   }
 
-  sf::Transform TransformableEntity::GetCombinedTransform() {
+  sf::Transform KinematicEntity::GetCombinedTransform() {
     return mCombinedTransform;
   }
 
-  bool TransformableEntity::setTransform(sf::Transform transform) {
+  bool KinematicEntity::setTransform(sf::Transform transform) {
     mTransform = transform;
     mCombinedTransform = mAccTransform * mTransform;
     return true;
   }
 
-  bool TransformableEntity::transform(sf::Transform transform) {
+  bool KinematicEntity::transform(sf::Transform transform) {
     mTransform = mTransform * transform;
     mCombinedTransform = mAccTransform * mTransform;
     return true;
   }
 
-  bool TransformableEntity::setAccumulatedTransform(sf::Transform accumulated) {
+  bool KinematicEntity::setAccumulatedTransform(sf::Transform accumulated) {
     mAccTransform = accumulated;
     mCombinedTransform = mAccTransform * mTransform;
     return true;

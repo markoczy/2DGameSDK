@@ -10,12 +10,12 @@ const int _PLAYER_TYPE = 200;
  * @brief Make an Entity that rotates on the Screen
  * 
  */
-class RotatingEntity : public SpriteTransformableEntity {
+class RotatingEntity : public SpriteKinematicEntity {
 public:
   RotatingEntity(Game* game,
                  sf::Texture* texture,
                  float rotPerTick,
-                 sf::Vector2f pos = sf::Vector2f()) : SpriteTransformableEntity(1, game, texture), mRot(rotPerTick) {
+                 sf::Vector2f pos = sf::Vector2f()) : SpriteKinematicEntity(1, game, texture), mRot(rotPerTick) {
     auto rect = mSprite.getTextureRect();
     mCenter = sf::Vector2f(rect.width / 2, rect.height / 2);
 

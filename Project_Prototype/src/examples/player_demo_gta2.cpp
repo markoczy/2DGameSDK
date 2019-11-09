@@ -8,7 +8,7 @@ const int _PLAYER_TYPE = 200;
 static const float _OFFSET = 90;
 static const int _WALK_ANIM[] = {1, 2, 1, 0, 3, 4, 3, 0};
 
-class Gta2PlayerEntity : public AnimatedTransformableEntity {
+class Gta2PlayerEntity : public AnimatedKinematicEntity {
 public:
   Gta2PlayerEntity(Game* game,
                    std::map<int, sf::Texture*> animationStates,
@@ -18,7 +18,7 @@ public:
                    Observable<sf::Keyboard::Key>* down,
                    Observable<sf::Keyboard::Key>* left,
                    Observable<sf::Keyboard::Key>* right,
-                   sf::Vector2f pos = sf::Vector2f()) : AnimatedTransformableEntity(_PLAYER_TYPE, game, animationStates), mSpeed(speed), mRotSpeed(rotSpeed) {
+                   sf::Vector2f pos = sf::Vector2f()) : AnimatedKinematicEntity(_PLAYER_TYPE, game, animationStates), mSpeed(speed), mRotSpeed(rotSpeed) {
     //
     //
     //

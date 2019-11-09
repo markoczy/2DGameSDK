@@ -5,7 +5,7 @@
 
 #include <2DGameSDK/core/Game.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
-#include <2DGameSDK/scene/entity/physical/StaticEntity.h>
+#include <2DGameSDK/scene/entity/definitions/StaticEntity.h>
 
 namespace game {
   class GAMESDK_DLL SpriteStaticEntity : public StaticEntity {
