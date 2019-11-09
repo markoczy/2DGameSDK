@@ -15,7 +15,7 @@ namespace game {
     SpriteStaticEntity(int type,
                        Game* game,
                        sf::Texture* texture,
-                       std::vector<KinematicShape*> shapes = std::vector<KinematicShape*>(),
+                       std::vector<StaticShape*> shapes = std::vector<StaticShape*>(),
                        bool isCollidable = false);
 
     ~SpriteStaticEntity();
