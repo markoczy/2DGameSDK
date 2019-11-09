@@ -8,23 +8,24 @@ const int _PLAYER_TYPE = 200;
 static const float _OFFSET = 90;
 static const int _WALK_ANIM[] = {1, 2, 1, 0, 3, 4, 3, 0};
 
-class Gta2PlayerEntity : public AnimatedTransformableEntity {
+class Gta2PlayerEntity : public AnimatedKinematicEntity {
 public:
-  Gta2PlayerEntity(std::map<int, sf::Texture*> animationStates,
+  Gta2PlayerEntity(Game* game,
+                   std::map<int, sf::Texture*> animationStates,
                    float speed,
                    float rotSpeed,
-                   Observable<EmptyEventData>* up,
-                   Observable<EmptyEventData>* down,
-                   Observable<EmptyEventData>* left,
-                   Observable<EmptyEventData>* right,
-                   sf::Vector2f pos = sf::Vector2f()) : AnimatedTransformableEntity(_PLAYER_TYPE, animationStates), mSpeed(speed), mRotSpeed(rotSpeed) {
+                   Observable<sf::Keyboard::Key>* up,
+                   Observable<sf::Keyboard::Key>* down,
+                   Observable<sf::Keyboard::Key>* left,
+                   Observable<sf::Keyboard::Key>* right,
+                   sf::Vector2f pos = sf::Vector2f()) : AnimatedKinematicEntity(_PLAYER_TYPE, game, animationStates), mSpeed(speed), mRotSpeed(rotSpeed) {
     //
     //
     //
-    mUp = new MethodObserver<EmptyEventData, Gta2PlayerEntity>(this, &Gta2PlayerEntity::MoveForward);
-    mDown = new MethodObserver<EmptyEventData, Gta2PlayerEntity>(this, &Gta2PlayerEntity::MoveBackward);
-    mLeft = new MethodObserver<EmptyEventData, Gta2PlayerEntity>(this, &Gta2PlayerEntity::RotLeft);
-    mRight = new MethodObserver<EmptyEventData, Gta2PlayerEntity>(this, &Gta2PlayerEntity::RotRight);
+    mUp = new MethodObserver<sf::Keyboard::Key, Gta2PlayerEntity>(this, &Gta2PlayerEntity::MoveForward);
+    mDown = new MethodObserver<sf::Keyboard::Key, Gta2PlayerEntity>(this, &Gta2PlayerEntity::MoveBackward);
+    mLeft = new MethodObserver<sf::Keyboard::Key, Gta2PlayerEntity>(this, &Gta2PlayerEntity::RotLeft);
+    mRight = new MethodObserver<sf::Keyboard::Key, Gta2PlayerEntity>(this, &Gta2PlayerEntity::RotRight);
 
     mUp->SubscribeTo(up);
     mDown->SubscribeTo(down);
@@ -65,19 +66,19 @@ public:
     mDw = 0.0;
   }
 
-  void MoveForward(EmptyEventData*) {
+  void MoveForward(sf::Keyboard::Key) {
     mDt += mSpeed * mDir;
   }
 
-  void MoveBackward(EmptyEventData*) {
+  void MoveBackward(sf::Keyboard::Key) {
     mDt -= mSpeed * mDir;
   }
 
-  void RotLeft(EmptyEventData*) {
+  void RotLeft(sf::Keyboard::Key) {
     mDw -= mRotSpeed;
   }
 
-  void RotRight(EmptyEventData*) {
+  void RotRight(sf::Keyboard::Key) {
     mDw += mRotSpeed;
   }
 
@@ -95,14 +96,18 @@ private:
   sf::Vector2f mDir;
 
   // Needed for cleanup
-  Observer<EmptyEventData>* mUp;
-  Observer<EmptyEventData>* mDown;
-  Observer<EmptyEventData>* mLeft;
-  Observer<EmptyEventData>* mRight;
+  Observer<sf::Keyboard::Key>* mUp;
+  Observer<sf::Keyboard::Key>* mDown;
+  Observer<sf::Keyboard::Key>* mLeft;
+  Observer<sf::Keyboard::Key>* mRight;
 };
 
 int playerDemoGTA2(float zoom) {
   cout << "Start playerDemoGTA2" << endl;
+
+  // Create game
+  auto game = new Game();
+  game->SetOptions(GameOptions{"My Game", sf::Vector2i(512, 512), zoom, 50});
 
   // Create Keyboard Events
   auto upPressed = new OnKeyPress(sf::Keyboard::Up);
@@ -112,6 +117,7 @@ int playerDemoGTA2(float zoom) {
 
   // Create Game World
   auto world = GameWorldFactory::CreateGameWorld("res/testmap/tilemap.json", "", "res/testmap/tile_");
+  game->SetWorld(world);
 
   // Create Player entity and Rotating child entity
   auto idle = AssetManager::GetTexture("res/textures/gunner/gunner_idle.png");
@@ -126,24 +132,21 @@ int playerDemoGTA2(float zoom) {
   animStates[2] = walk1;
   animStates[3] = walk2;
   animStates[4] = walk3;
-  auto ent = new Gta2PlayerEntity(animStates, 1.0, 5.0, upPressed, downPressed, leftPressed, rightPressed, sf::Vector2f(30, 30));
+  auto ent = new Gta2PlayerEntity(game, animStates, 1.0, 5.0, upPressed, downPressed, leftPressed, rightPressed, sf::Vector2f(30, 30));
 
   // Layout entities in scene
   auto scene = new SceneGraph();
   scene->AddEntity(ent); // scene->GetRoot()->AddChild(ent);
-
-  // Create game
-  GameOptions options{"My Game", sf::Vector2i(512, 512), zoom, 50};
-  auto app = new Game(options, scene, world);
+  game->SetScene(scene);
 
   // Send Events to controller
-  app->AddEvent(upPressed);
-  app->AddEvent(downPressed);
-  app->AddEvent(leftPressed);
-  app->AddEvent(rightPressed);
+  game->AddEvent(upPressed);
+  game->AddEvent(downPressed);
+  game->AddEvent(leftPressed);
+  game->AddEvent(rightPressed);
 
   // Run Game
-  app->Run();
+  game->Run();
 
   return 0;
 }

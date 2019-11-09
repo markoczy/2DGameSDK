@@ -12,20 +12,25 @@ static const float _OFFSET = 90;
  * @brief Test Entity: Rotates on every tick
  *
  */
-class RotatingEntity : public SpriteTransformableEntity {
+class RotatingEntity : public SpriteKinematicEntity {
 public:
-  RotatingEntity(int type,
+  RotatingEntity(Game* game,
+                 int type,
                  sf::Texture* texture,
-                 std::vector<sf::Vector2f> collisionMask,
+                 KinematicShape* shape,
                  float rotPerTick,
-                 sf::Vector2f pos = sf::Vector2f()) : SpriteTransformableEntity(type, texture, collisionMask), mRot(rotPerTick) {
+                 sf::Vector2f pos = sf::Vector2f()) : SpriteKinematicEntity(type, game, texture, vector<KinematicShape*>({shape})), mRot(rotPerTick) {
     auto rect = mSprite.getTextureRect();
     mCenter = sf::Vector2f(rect.width / 2, rect.height / 2);
     SetTransform(sf::Transform().translate(pos));
   }
 
   void OnTick() {
-    Transform(sf::Transform().rotate(mRot, mCenter));
+    Transform(sf::Transform().rotate(mRot));
+  }
+
+  bool IsCollidable() {
+    return true;
   }
 
 private:
@@ -33,24 +38,25 @@ private:
   sf::Vector2f mCenter;
 };
 
-class ChopperEntity : public SpriteTransformableEntity {
+class ChopperEntity : public SpriteKinematicEntity {
 public:
-  ChopperEntity(sf::Texture* tex,
-                std::vector<sf::Vector2f> collisionMask,
+  ChopperEntity(Game* game,
+                sf::Texture* tex,
+                KinematicShape* shape,
                 float speed,
                 float rotSpeed,
-                Observable<EmptyEventData>* up,
-                Observable<EmptyEventData>* down,
-                Observable<EmptyEventData>* left,
-                Observable<EmptyEventData>* right,
-                sf::Vector2f pos = sf::Vector2f()) : SpriteTransformableEntity(_PLAYER_TYPE, tex, collisionMask), mSpeed(speed), mRotSpeed(rotSpeed) {
+                Observable<sf::Keyboard::Key>* up,
+                Observable<sf::Keyboard::Key>* down,
+                Observable<sf::Keyboard::Key>* left,
+                Observable<sf::Keyboard::Key>* right,
+                sf::Vector2f pos = sf::Vector2f()) : SpriteKinematicEntity(_PLAYER_TYPE, game, tex, vector<KinematicShape*>({shape})), mSpeed(speed), mRotSpeed(rotSpeed) {
     //
     //
     //
-    mUp = new MethodObserver<EmptyEventData, ChopperEntity>(this, &ChopperEntity::MoveForward);
-    mDown = new MethodObserver<EmptyEventData, ChopperEntity>(this, &ChopperEntity::MoveBackward);
-    mLeft = new MethodObserver<EmptyEventData, ChopperEntity>(this, &ChopperEntity::RotLeft);
-    mRight = new MethodObserver<EmptyEventData, ChopperEntity>(this, &ChopperEntity::RotRight);
+    mUp = new MethodObserver<sf::Keyboard::Key, ChopperEntity>(this, &ChopperEntity::MoveForward);
+    mDown = new MethodObserver<sf::Keyboard::Key, ChopperEntity>(this, &ChopperEntity::MoveBackward);
+    mLeft = new MethodObserver<sf::Keyboard::Key, ChopperEntity>(this, &ChopperEntity::RotLeft);
+    mRight = new MethodObserver<sf::Keyboard::Key, ChopperEntity>(this, &ChopperEntity::RotRight);
 
     mUp->SubscribeTo(up);
     mDown->SubscribeTo(down);
@@ -66,7 +72,8 @@ public:
   void OnTick() {
     sf::Transform transform;
     if(mDw != 0) {
-      transform.rotate(mDw, mCenter);
+      // transform.rotate(mDw, mCenter);
+      transform.rotate(mDw);
       mAngle += mDw;
     }
     // translate
@@ -78,27 +85,53 @@ public:
     mDw = 0.0;
   }
 
-  void MoveForward(EmptyEventData*) {
+  void MoveForward(sf::Keyboard::Key) {
     mDt += mSpeed * mDir;
   }
 
-  void MoveBackward(EmptyEventData*) {
+  void MoveBackward(sf::Keyboard::Key) {
     mDt -= mSpeed * mDir;
   }
 
-  void RotLeft(EmptyEventData*) {
+  void RotLeft(sf::Keyboard::Key) {
     mDw -= mRotSpeed;
   }
 
-  void RotRight(EmptyEventData*) {
+  void RotRight(sf::Keyboard::Key) {
     mDw += mRotSpeed;
   }
 
-  void OnCollision(Entity* other, sf::Vector2f point) {
-    if(other->GetType() == _ENEMY_TYPE) {
-      std::cout << "Collision with enemy detected!! Point: (" << point.x
-                << ", " << point.y << ")" << std::endl;
+  bool IsCollidable() {
+    return true;
+  }
+
+  int OnCollision(CollisionEventType type, Entity* other, cpArbiter*) {
+    // if(other->GetType() == _ENEMY_TYPE) {
+    //   std::cout << "Collision with enemy detected!! Point: (" << point.x
+    //             << ", " << point.y << ")" << std::endl;
+    // }
+    std::string typeStr;
+    switch(type) {
+    case CollisionEventType::Begin:
+      typeStr = "Begin";
+      break;
+    case CollisionEventType::PreSolve:
+      typeStr = "Pre Solve";
+      break;
+    case CollisionEventType::PostSolve:
+      typeStr = "Post Solve";
+      break;
+    case CollisionEventType::Separate:
+      typeStr = "Separate";
+      break;
     }
+
+    if(other->GetType() == _ENEMY_TYPE) {
+      std::cout << "Collision with Enemy: " << typeStr << std::endl;
+      return 1;
+    }
+    // std::cout << "Registered Collision Event " << typeStr << " cur: " << GetId() << " other " << other->GetId() << std::endl;
+    return 0;
   }
 
 private:
@@ -114,47 +147,63 @@ private:
   sf::Vector2f mCenter;
 
   // Needed for cleanup
-  Observer<EmptyEventData>* mUp;
-  Observer<EmptyEventData>* mDown;
-  Observer<EmptyEventData>* mLeft;
-  Observer<EmptyEventData>* mRight;
+  Observer<sf::Keyboard::Key>* mUp;
+  Observer<sf::Keyboard::Key>* mDown;
+  Observer<sf::Keyboard::Key>* mLeft;
+  Observer<sf::Keyboard::Key>* mRight;
 };
 
-std::vector<sf::Vector2f> getChopperCollisionMask() {
-  auto ret = std::vector<sf::Vector2f>();
-  ret.push_back(sf::Vector2f(7, 0));
-  ret.push_back(sf::Vector2f(3, 7));
-  ret.push_back(sf::Vector2f(3, 11));
-  ret.push_back(sf::Vector2f(0, 12));
-  ret.push_back(sf::Vector2f(1, 21));
-  ret.push_back(sf::Vector2f(7, 32));
-
-  ret.push_back(sf::Vector2f(9, 32));
-  ret.push_back(sf::Vector2f(15, 21));
-  ret.push_back(sf::Vector2f(16, 12));
-  ret.push_back(sf::Vector2f(13, 11));
-  ret.push_back(sf::Vector2f(13, 7));
-  ret.push_back(sf::Vector2f(9, 0));
-
-  return ret;
+KinematicShape* getChopperCollisionMask(Game* game) {
+  return new RectangleKinematicShape(game, 16, 32);
 }
 
-std::vector<sf::Vector2f> getRotorCollisionMask() {
-  auto ret = std::vector<sf::Vector2f>();
-  ret.push_back(sf::Vector2f(12, 0));
-  ret.push_back(sf::Vector2f(12, 12));
-  ret.push_back(sf::Vector2f(0, 12));
-  ret.push_back(sf::Vector2f(0, 14));
-  ret.push_back(sf::Vector2f(12, 14));
-  ret.push_back(sf::Vector2f(12, 26));
-  ret.push_back(sf::Vector2f(14, 26));
-  ret.push_back(sf::Vector2f(14, 14));
-  ret.push_back(sf::Vector2f(26, 14));
-  ret.push_back(sf::Vector2f(26, 12));
-  ret.push_back(sf::Vector2f(14, 12));
-  ret.push_back(sf::Vector2f(14, 0));
-  return ret;
+KinematicShape* getRotorCollisionMask(Game* game) {
+  auto verts = vector<cpVect>();
+
+  verts.push_back(cpv(1, 13));
+  verts.push_back(cpv(-1, 13));
+  verts.push_back(cpv(-1, 1));
+  verts.push_back(cpv(-13, 1));
+  verts.push_back(cpv(-13, -1));
+  verts.push_back(cpv(-1, -1));
+  verts.push_back(cpv(-1, -13));
+  verts.push_back(cpv(1, -13));
+  verts.push_back(cpv(1, -1));
+  verts.push_back(cpv(13, -1));
+  verts.push_back(cpv(13, 1));
+  verts.push_back(cpv(1, 1));
+
+  return new PolygonKinematicShape(game, verts);
 }
+
+class GameController {
+public:
+  GameController(Game* game) : mGame(game) {}
+
+  void HandleKeyPress(sf::Keyboard::Key key) {
+    auto options = mGame->GetOptions();
+    switch(key) {
+    case sf::Keyboard::Key::F1:
+      options.RenderCollisionMask = false;
+      break;
+    case sf::Keyboard::Key::F2:
+      options.RenderCollisionMask = true;
+      break;
+    case sf::Keyboard::Key::F3:
+      options.RenderAABB = false;
+      break;
+    case sf::Keyboard::Key::F4:
+      options.RenderAABB = true;
+      break;
+    default:
+      break;
+    }
+    mGame->SetOptions(options);
+  }
+
+private:
+  Game* mGame = nullptr;
+};
 
 int chopperDemo() {
   cout << "Start chopperDemo" << endl;
@@ -165,40 +214,59 @@ int chopperDemo() {
   auto leftPressed = new OnKeyPress(sf::Keyboard::Left);
   auto rightPressed = new OnKeyPress(sf::Keyboard::Right);
 
+  auto f1Pressed = new OnKeyPress(sf::Keyboard::F1);
+  auto f2Pressed = new OnKeyPress(sf::Keyboard::F2);
+  auto f3Pressed = new OnKeyPress(sf::Keyboard::F3);
+  auto f4Pressed = new OnKeyPress(sf::Keyboard::F4);
+
+  // Create game
+  auto game = new Game();
+  game->SetOptions(GameOptions{"My Game", sf::Vector2i(512, 512), 2.0, 50, false, false});
+
+  auto gameController = new GameController(game);
+  f1Pressed->Subscribe(new MethodObserver<sf::Keyboard::Key, GameController>(gameController, &gameController->HandleKeyPress));
+  f2Pressed->Subscribe(new MethodObserver<sf::Keyboard::Key, GameController>(gameController, &gameController->HandleKeyPress));
+  f3Pressed->Subscribe(new MethodObserver<sf::Keyboard::Key, GameController>(gameController, &gameController->HandleKeyPress));
+  f4Pressed->Subscribe(new MethodObserver<sf::Keyboard::Key, GameController>(gameController, &gameController->HandleKeyPress));
+
   // Create Game World
   auto world = GameWorldFactory::CreateGameWorld("res/simple_grass/tilemap.json", "", "res/simple_grass/tile_");
+  game->SetWorld(world);
 
   // Create Player entity and Rotating child entity
   auto tex = AssetManager::GetTexture("res/textures/heli/heli.png");
   auto tex2 = AssetManager::GetTexture("res/textures/heli/rotor.png");
-  auto chopperCollisionMask = getChopperCollisionMask();
-  auto ent = new ChopperEntity(tex, chopperCollisionMask, 2.0, 5.0, upPressed, downPressed, leftPressed, rightPressed, sf::Vector2f(50, 50));
+  auto chopperCollisionMask = getChopperCollisionMask(game);
+  auto ent = new ChopperEntity(game, tex, chopperCollisionMask, 2.0, 5.0, upPressed, downPressed, leftPressed, rightPressed, sf::Vector2f(50, 50));
 
-  auto rotorCollisionMask = getRotorCollisionMask();
-  auto ent2 = new RotatingEntity(_PLAYER_TYPE, tex2, rotorCollisionMask, 15.0, sf::Vector2f(-5, 2));
+  // auto ent2 = new RotatingEntity(game, 1, tex2, rotorCollisionMask, 15.0, sf::Vector2f(-5, 2));
+  auto rotorCollisionMask = getRotorCollisionMask(game);
+  auto ent2 = new RotatingEntity(game, _PLAYER_TYPE, tex2, rotorCollisionMask, 15.0, sf::Vector2f(0, 0));
 
   // auto tex3 = AssetManager::GetTexture("res/textures/heli/rotor.png");
-  auto enemy = new RotatingEntity(_ENEMY_TYPE, tex2, rotorCollisionMask, 15.0, sf::Vector2f(200, 200));
+  auto enemyCollisionMask = getRotorCollisionMask(game);
+  auto enemy = new RotatingEntity(game, _ENEMY_TYPE, tex2, enemyCollisionMask, 15.0, sf::Vector2f(200, 200));
 
   // Layout entities in scene
   auto scene = new SceneGraph();
   auto parent = scene->AddEntity(ent); //scene->GetRoot()->AddChild(ent);
   scene->AddEntity(ent2, parent); // parent->AddChild(ent2);
-
   scene->AddEntity(enemy);
-
-  // Create game
-  GameOptions options{"My Game", sf::Vector2i(512, 512), 2.0, 50, true, true};
-  auto app = new Game(options, scene, world);
+  game->SetScene(scene);
 
   // Send Events to controller
-  app->AddEvent(upPressed);
-  app->AddEvent(downPressed);
-  app->AddEvent(leftPressed);
-  app->AddEvent(rightPressed);
+  game->AddEvent(upPressed);
+  game->AddEvent(downPressed);
+  game->AddEvent(leftPressed);
+  game->AddEvent(rightPressed);
+
+  game->AddEvent(f1Pressed);
+  game->AddEvent(f2Pressed);
+  game->AddEvent(f3Pressed);
+  game->AddEvent(f4Pressed);
 
   // Run Game
-  app->Run();
+  game->Run();
 
   return 0;
 }

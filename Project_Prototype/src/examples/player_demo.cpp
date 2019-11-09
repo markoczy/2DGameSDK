@@ -9,21 +9,22 @@ const int _PLAYER_TYPE = 200;
 /**
  * @brief Test Entity: Movement Controllable by given observables
  */
-class PlayerEntity : public SpriteTransformableEntity {
+class PlayerEntity : public SpriteKinematicEntity {
 public:
-  PlayerEntity(sf::Texture* texture,
+  PlayerEntity(Game* game,
+               sf::Texture* texture,
                float speed,
-               Observable<EmptyEventData>* up,
-               Observable<EmptyEventData>* down,
-               Observable<EmptyEventData>* left,
-               Observable<EmptyEventData>* right) : SpriteTransformableEntity(_PLAYER_TYPE, texture), mSpeed(speed) {
+               Observable<sf::Keyboard::Key>* up,
+               Observable<sf::Keyboard::Key>* down,
+               Observable<sf::Keyboard::Key>* left,
+               Observable<sf::Keyboard::Key>* right) : SpriteKinematicEntity(_PLAYER_TYPE, game, texture), mSpeed(speed) {
     //
     //
     //
-    mUp = new MethodObserver<EmptyEventData, PlayerEntity>(this, &PlayerEntity::MoveUp);
-    mDown = new MethodObserver<EmptyEventData, PlayerEntity>(this, &PlayerEntity::MoveDown);
-    mLeft = new MethodObserver<EmptyEventData, PlayerEntity>(this, &PlayerEntity::MoveLeft);
-    mRight = new MethodObserver<EmptyEventData, PlayerEntity>(this, &PlayerEntity::MoveRight);
+    mUp = new MethodObserver<sf::Keyboard::Key, PlayerEntity>(this, &PlayerEntity::MoveUp);
+    mDown = new MethodObserver<sf::Keyboard::Key, PlayerEntity>(this, &PlayerEntity::MoveDown);
+    mLeft = new MethodObserver<sf::Keyboard::Key, PlayerEntity>(this, &PlayerEntity::MoveLeft);
+    mRight = new MethodObserver<sf::Keyboard::Key, PlayerEntity>(this, &PlayerEntity::MoveRight);
 
     mUp->SubscribeTo(up);
     mDown->SubscribeTo(down);
@@ -46,19 +47,19 @@ public:
     }
   }
 
-  void MoveUp(EmptyEventData*) {
+  void MoveUp(sf::Keyboard::Key) {
     mDt.y -= mSpeed;
   }
 
-  void MoveDown(EmptyEventData*) {
+  void MoveDown(sf::Keyboard::Key) {
     mDt.y += mSpeed;
   }
 
-  void MoveLeft(EmptyEventData*) {
+  void MoveLeft(sf::Keyboard::Key) {
     mDt.x -= mSpeed;
   }
 
-  void MoveRight(EmptyEventData*) {
+  void MoveRight(sf::Keyboard::Key) {
     mDt.x += mSpeed;
   }
 
@@ -68,39 +69,18 @@ private:
   sf::Vector2f mDt;
 
   // Needed for cleanup
-  Observer<EmptyEventData>* mUp;
-  Observer<EmptyEventData>* mDown;
-  Observer<EmptyEventData>* mLeft;
-  Observer<EmptyEventData>* mRight;
-};
-
-/**
- * @brief Test Entity: Rotates on every tick
- *
- */
-class RotatingEntity : public SpriteTransformableEntity {
-public:
-  RotatingEntity(int type,
-                 sf::Texture* texture,
-                 std::vector<sf::Vector2f> collisionMask,
-                 float rotPerTick,
-                 sf::Vector2f pos = sf::Vector2f()) : SpriteTransformableEntity(type, texture, collisionMask), mRot(rotPerTick) {
-    auto rect = mSprite.getTextureRect();
-    mCenter = sf::Vector2f(rect.width / 2, rect.height / 2);
-    SetTransform(sf::Transform().translate(pos));
-  }
-
-  void OnTick() {
-    Transform(sf::Transform().rotate(mRot, mCenter));
-  }
-
-private:
-  float mRot;
-  sf::Vector2f mCenter;
+  Observer<sf::Keyboard::Key>* mUp;
+  Observer<sf::Keyboard::Key>* mDown;
+  Observer<sf::Keyboard::Key>* mLeft;
+  Observer<sf::Keyboard::Key>* mRight;
 };
 
 int playerDemo(float zoom) {
   cout << "Start playerDemo" << endl;
+
+  // Create game
+  auto game = new Game();
+  game->SetOptions(GameOptions{"My Game", sf::Vector2i(512, 512), zoom, 50});
 
   // Create Keyboard Events
   auto upPressed = new OnKeyPress(sf::Keyboard::Up);
@@ -110,11 +90,12 @@ int playerDemo(float zoom) {
 
   // Create Game World
   auto world = GameWorldFactory::CreateGameWorld("res/testmap/tilemap.json", "", "res/testmap/tile_");
+  game->SetWorld(world);
 
   // Create Player entity and Rotating child entity
   auto tex = AssetManager::GetTexture("res/textures/sample.png");
   // auto tex2 = AssetManager::GetTexture("res/textures/discus.png");
-  auto ent = new PlayerEntity(tex, 2.0, upPressed, downPressed, leftPressed, rightPressed);
+  auto ent = new PlayerEntity(game, tex, 2.0, upPressed, downPressed, leftPressed, rightPressed);
   // auto ent2 = new RotatingEntity(tex2, 5.0);
 
   // Layout entities in scene
@@ -122,18 +103,14 @@ int playerDemo(float zoom) {
   auto parent = scene->AddEntity(ent); // scene->GetRoot()->AddChild(ent);
   scene->AddEntity(ent, parent); // parent->AddChild(ent2);
 
-  // Create game
-  GameOptions options{"My Game", sf::Vector2i(512, 512), zoom, 50};
-  auto app = new Game(options, scene, world);
-
   // Send Events to controller
-  app->AddEvent(upPressed);
-  app->AddEvent(downPressed);
-  app->AddEvent(leftPressed);
-  app->AddEvent(rightPressed);
+  game->AddEvent(upPressed);
+  game->AddEvent(downPressed);
+  game->AddEvent(leftPressed);
+  game->AddEvent(rightPressed);
 
   // Run Game
-  app->Run();
+  game->Run();
 
   return 0;
 }

@@ -20,7 +20,7 @@ namespace game {
    * 
    */
   template <class TData, class TCallee>
-  using ObserverMethod = void (TCallee::*)(TData*);
+  using ObserverMethod = void (TCallee::*)(TData);
 
   /**
    * @brief Observer specialisation that uses a given method of a given class 
@@ -50,7 +50,7 @@ namespace game {
      * @param data The Data coming from the Observable.
      * 
      */
-    void Callback(TData* data) {
+    void Callback(TData data) {
       std::invoke(mFunc, mCallee, data);
     }
 

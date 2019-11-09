@@ -14,9 +14,15 @@
 #include <vector>
 
 #include <SFML/Graphics.hpp>
+#include <chipmunk/chipmunk.h>
 
-#include <2DGameSDK/common/GraphicTools.h>
+#include <2DGameSDK/common/Constants.h>
+#include <2DGameSDK/common/graphics/GraphicTools.h>
+#include <2DGameSDK/core/Game.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
+#include <2DGameSDK/physics/CollisionType.h>
+#include <2DGameSDK/physics/shape/sensor/RectangleSensorShape.h>
+#include <2DGameSDK/physics/shape/types/SensorShape.h>
 #include <2DGameSDK/scene/entity/TransformableEntity.h>
 
 namespace game {
@@ -36,15 +42,19 @@ namespace game {
      * 
      * @param texture The Texture of the Entity
      */
-    SpriteTransformableEntity(int type, sf::Texture* texture);
-
-    SpriteTransformableEntity(int type, sf::Texture* texture, std::vector<sf::Vector2f> collisionMask);
+    SpriteTransformableEntity(int type,
+                              Game* game,
+                              sf::Texture* texture,
+                              std::vector<SensorShape*> shapes = std::vector<SensorShape*>(),
+                              bool isCollidable = false);
 
     /**
      * @brief Destroys the Sprite Transformable Entity
      * 
      */
     ~SpriteTransformableEntity();
+
+    virtual void SetSize(sf::Vector2f size);
 
     /**
      * @brief Updates the Entity
@@ -62,22 +72,8 @@ namespace game {
      */
     void OnRender(sf::RenderTarget* target, sf::RenderStates states = sf::RenderStates::Default);
 
-    virtual sf::FloatRect GetAABB();
-
-    virtual std::vector<sf::Vector2f> GetCollisionMask();
-
   protected:
     sf::Sprite mSprite;
-    std::vector<sf::Vector2f> mCollisionMask;
-
-    bool mTransformationOccured;
-    sf::FloatRect mAABB;
-    std::vector<sf::Vector2f> mTransformedCollisionMask;
-
-    void updateAABB();
-    void updateCollisionMask();
-
-    virtual void onEntityTransformed();
   };
 
 } // namespace game

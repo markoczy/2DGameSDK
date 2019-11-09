@@ -6,13 +6,12 @@ namespace game {
     void OnEntityTransformed(sf::Transform accumulated);
   };
 
-  const std::vector<sf::Vector2f> _EMPTY_MASK = std::vector<sf::Vector2f>();
-
-  Entity::Entity(int type) : GameObject(type) {}
+  Entity::Entity(int type, Game* game) : GameObject(type, game) {
+  }
 
   Entity::~Entity() {}
 
-  bool Entity::IsTransformable() { return false; }
+  bool Entity::IsKinematic() { return false; }
 
   bool Entity::IsCollidable() { return false; }
 
@@ -22,30 +21,28 @@ namespace game {
 
   sf::Transform Entity::GetCombinedTransform() { return sf::Transform::Identity; }
 
-  sf::FloatRect Entity::GetAABB() { return sf::FloatRect(); }
-
-  std::vector<sf::Vector2f> Entity::GetCollisionMask() { return _EMPTY_MASK; }
-
   void Entity::SetTransform(sf::Transform transform) {
-    if(IsTransformable() && this->setTransform(transform)) onEntityTransformed();
+    if(this->setTransform(transform)) onEntityTransformed();
   }
 
-  void Entity::SetGraphNode(game::SceneGraphNode* graphNode) {
+  void Entity::SetGraphNode(SceneGraphNode* graphNode) {
     mGraphNode = graphNode;
     mGraphNode->OnEntityTransformed(GetCombinedTransform());
   }
 
   void Entity::Transform(sf::Transform transform) {
-    if(IsTransformable() && this->transform(transform)) onEntityTransformed();
+    if(this->transform(transform)) onEntityTransformed();
   }
 
   void Entity::OnParentTransformed(sf::Transform accumulated) {
-    if(IsTransformable()) setAccumulatedTransform(accumulated);
+    if(IsKinematic()) setAccumulatedTransform(accumulated);
   }
 
   void Entity::OnTickEnded() {}
 
-  void Entity::OnCollision(Entity*, sf::Vector2f) {}
+  int Entity::OnCollision(CollisionEventType, Entity*, cpArbiter*) {
+    return 0;
+  }
 
   bool Entity::setTransform(sf::Transform) { return false; }
   bool Entity::transform(sf::Transform) { return false; }

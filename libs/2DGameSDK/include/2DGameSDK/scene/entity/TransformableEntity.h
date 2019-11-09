@@ -11,7 +11,11 @@
 #ifndef __TRANSFORMABLE_ENTITY_H__
 #define __TRANSFORMABLE_ENTITY_H__
 
+#include <2DGameSDK/core/Game.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
+#include <2DGameSDK/physics/CollisionEventType.h>
+#include <2DGameSDK/physics/shape/sensor/RectangleSensorShape.h>
+#include <2DGameSDK/physics/shape/types/SensorShape.h>
 #include <2DGameSDK/scene/entity/Entity.h>
 
 #include <SFML/Graphics.hpp>
@@ -33,7 +37,7 @@ namespace game {
      * @param type type The Entity Type (does not affect anything and is meant
      *        to be used freely to identify entities of some kind)
      */
-    TransformableEntity(int type, bool isCollidable = false);
+    TransformableEntity(int type, Game* game, std::vector<SensorShape*> shapes = std::vector<SensorShape*>(), bool isCollidable = false);
 
     /**
      * @brief Destroys the Transformable Entity object
@@ -41,21 +45,19 @@ namespace game {
      */
     virtual ~TransformableEntity();
 
-    virtual bool IsTransformable();
+    virtual bool IsKinematic();
     virtual bool IsCollidable();
 
     virtual sf::Transform GetTransform();
     virtual sf::Transform GetAccumulatedTransform();
     virtual sf::Transform GetCombinedTransform();
 
-    virtual void OnCollision(Entity* other, sf::Vector2f point);
-    virtual void OnTickEnded();
-
   protected:
     sf::Transform mTransform;
     sf::Transform mAccTransform;
     sf::Transform mCombinedTransform;
-
+    cpBody* mBody = nullptr;
+    std::vector<SensorShape*> mShapes;
     bool mIsCollidable;
 
     virtual bool setTransform(sf::Transform transform);

@@ -11,6 +11,7 @@
 #ifndef __ANIMATED_TRANSFORMABLE_ENTITY_H__
 #define __ANIMATED_TRANSFORMABLE_ENTITY_H__
 
+#include <2DGameSDK/core/Game.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
 #include <2DGameSDK/scene/entity/TransformableEntity.h>
 #include <sstream>
@@ -34,7 +35,7 @@ namespace game {
      * 
      * @param animationStates The set of Animation States
      */
-    AnimatedTransformableEntity(int type, std::map<int, sf::Texture*> animationStates);
+    AnimatedTransformableEntity(int type, Game* game, std::map<int, sf::Texture*> animationStates);
 
     /**
      * @brief Destroys the Animated Transformable Entity
@@ -64,22 +65,10 @@ namespace game {
      */
     void SetAnimState(int state);
 
-    virtual sf::FloatRect GetAABB();
-
-    virtual std::vector<sf::Vector2f> GetCollisionMask();
-
-    virtual void OnParentTransformed(sf::Transform accumulated);
-
   protected:
     // TODO anim states as sprite-collisionMask combination
     std::map<int, sf::Texture*> mAnimStates;
     sf::Sprite mCurState;
-
-    sf::FloatRect mAABB;
-    std::vector<sf::Vector2f> mTransformedCollisionMask;
-
-    void updateAABB();
-    void updateCollisionMask();
   };
 
 } // namespace game

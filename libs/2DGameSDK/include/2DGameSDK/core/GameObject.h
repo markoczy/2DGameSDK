@@ -11,10 +11,12 @@
 #ifndef __GAME_OBJECT_H__
 #define __GAME_OBJECT_H__
 
-#include <2DGameSDK/dll/gamesdk_dll.h>
 #include <SFML/Graphics.hpp>
 
+#include <2DGameSDK/dll/gamesdk_dll.h>
+
 namespace game {
+  class Game;
 
   /**
    * @brief Defines a simple Game Object (no transformations)
@@ -30,7 +32,7 @@ namespace game {
      * @param type The GameObject Type (does not affect anything and is meant
      *        to be used freely to identify entities of some kind)
      */
-    GameObject(int type, int zIndex = 0);
+    GameObject(int type, Game* game);
 
     /**
      * @brief Destroys the GameObject
@@ -54,6 +56,8 @@ namespace game {
 
     int GetZIndex();
 
+    void SetZIndex(int zIndex);
+
     /**
      * @brief Updates the GameObject
      * 
@@ -69,9 +73,14 @@ namespace game {
     virtual void OnRender(sf::RenderTarget* target, sf::RenderStates states = sf::RenderStates::Default) = 0;
 
   protected:
-    int mType;
-    int mId;
-    int mZIndex;
+    Game* getGame();
+    void setType(int type);
+
+  private:
+    int mType = 0;
+    int mId = 0;
+    int mZIndex = 0;
+    Game* mGame = nullptr;
   };
 
 } // namespace game

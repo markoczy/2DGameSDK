@@ -50,7 +50,7 @@ namespace game {
      * 
      * @param data The Data that is emitted from the Observable
      */
-    virtual void Callback(TData* data) = 0;
+    virtual void Callback(TData data) = 0;
 
     /**
      * @brief Subscribes the Observable to the given Observable and stores

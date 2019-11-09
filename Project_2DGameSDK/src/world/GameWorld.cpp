@@ -31,15 +31,19 @@ namespace game {
     target->draw(sprite);
   }
 
+  sf::IntRect GameWorld::GetBounds() {
+    return mBounds;
+  }
+
   void GameWorld::loadTilemap() {
     if(mTexture != nullptr) {
       delete mTexture;
     }
 
-    int mWidth = mTilemap->TileWidth * mTilemap->TilesWide;
-    int mHeight = mTilemap->TileHeight * mTilemap->TilesHigh;
+    mBounds.width = mTilemap->TileWidth * mTilemap->TilesWide;
+    mBounds.height = mTilemap->TileHeight * mTilemap->TilesHigh;
     mTexture = new Texture();
-    if(!mTexture->create(mWidth, mHeight)) {
+    if(!mTexture->create(mBounds.width, mBounds.height)) {
       throw std::runtime_error("Texture creation failed at load tilemap");
     }
 

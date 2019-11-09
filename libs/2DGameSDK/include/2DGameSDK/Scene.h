@@ -13,9 +13,14 @@
 
 #include <2DGameSDK/scene/SceneGraph.h>
 #include <2DGameSDK/scene/SceneGraphNode.h>
-#include <2DGameSDK/scene/entity/AnimatedTransformableEntity.h>
+
 #include <2DGameSDK/scene/entity/Entity.h>
-#include <2DGameSDK/scene/entity/SpriteTransformableEntity.h>
-#include <2DGameSDK/scene/entity/TransformableEntity.h>
+#include <2DGameSDK/scene/entity/definitions/DynamicEntity.h>
+#include <2DGameSDK/scene/entity/definitions/KinematicEntity.h>
+#include <2DGameSDK/scene/entity/definitions/StaticEntity.h>
+#include <2DGameSDK/scene/entity/dynamic/SpriteDynamicEntity.h>
+#include <2DGameSDK/scene/entity/kinematic/AnimatedKinematicEntity.h>
+#include <2DGameSDK/scene/entity/kinematic/SpriteKinematicEntity.h>
+#include <2DGameSDK/scene/entity/static/SpriteStaticEntity.h>
 
 #endif

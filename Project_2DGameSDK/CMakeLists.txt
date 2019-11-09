@@ -23,24 +23,25 @@ endif ("${CMAKE_BUILD_TYPE}" MATCHES Debug)
 
 # find headers
 file(GLOB_RECURSE HDRS 
-    ./src/*.h
+    ./include/*.h
 )
 source_group("inc" FILES ${HDRS})
 
 include_directories(
     ${SFML_INCLUDE_DIR}
+    ${CHIPMUNK_INCLUDE_DIR}
     ${JSON_INCLUDE_DIR}
     # include shared headers
     ${PROJECT_SOURCE_DIR}/include
 )
 
 set(LIBS_DEBUG)
-foreach(lib; ${SFML_LIBRARIES_D})
+foreach(lib; ${SFML_LIBRARIES_D} ${CHIPMUNK_LIBRARIES})
     list(APPEND LIBS_DEBUG debug ${lib})
 endforeach()
 
 set(LIBS_RELEASE)
-foreach(lib; ${SFML_LIBRARIES})
+foreach(lib; ${SFML_LIBRARIES} ${CHIPMUNK_LIBRARIES})
     list(APPEND LIBS_RELEASE optimized ${lib})
 endforeach()
 
@@ -60,6 +61,11 @@ file(GLOB_RECURSE SHARED_HDRS
 )
 
 file(COPY ./include/${PROJECT_NAME} DESTINATION ${CMAKE_HOME_DIRECTORY}/libs/${PROJECT_NAME}/include)
+
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "${CHIPMUNK_DLL_DIR}/libchipmunk.dll"
+        "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}")
 
 # file(COPY ${SHARED_HDRS}
 #      DESTINATION ${CMAKE_HOME_DIRECTORY}/libs/${PROJECT_NAME}/include/${PROJECT_NAME})

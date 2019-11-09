@@ -11,20 +11,29 @@
 #ifndef __GAME_H__
 #define __GAME_H__
 
+#include <chrono>
+#include <iostream>
+#include <thread>
+
+#include <SFML/Graphics.hpp>
+#include <SFML/System.hpp>
+#include <chipmunk/chipmunk.h>
+
+#include <2DGameSDK/common/Constants.h>
 #include <2DGameSDK/common/Helpers.h>
+#include <2DGameSDK/common/graphics/PointConverter.h>
 #include <2DGameSDK/core/GameOptions.h>
 #include <2DGameSDK/core/GameState.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
 #include <2DGameSDK/event/EventController.h>
 #include <2DGameSDK/event/observable/ObservableBase.h>
-#include <SFML/Graphics.hpp>
-#include <SFML/System.hpp>
-#include <chrono>
-#include <iostream>
-#include <thread>
+#include <2DGameSDK/physics/CollisionEventType.h>
+#include <2DGameSDK/physics/CollisionType.h>
+#include <2DGameSDK/scene/SceneGraph.h>
+#include <2DGameSDK/scene/entity/Entity.h>
+#include <2DGameSDK/world/GameWorld.h>
 
 namespace game {
-
   /**
    * @brief The Game is the main Controller of the 2DGameSDK, it is used
    *        to execute the main Game Loop, Process Events and Update/Render all
@@ -39,11 +48,6 @@ namespace game {
      */
     Game();
 
-    /**
-     * @brief Full constructor, sets all needed objects to run the game
-     * 
-     */
-    Game(GameOptions options, SceneGraph* scene, GameWorld* world);
     ~Game();
 
     /**
@@ -57,6 +61,8 @@ namespace game {
      * 
      */
     void Stop();
+
+    GameOptions GetOptions();
 
     /**
      * @brief Returns a copy of the current game state
@@ -78,6 +84,8 @@ namespace game {
      * @return GameWorld* The GameWorld
      */
     GameWorld* GetWorld();
+
+    PointConverter* GetPointConverter();
 
     /**
      * @brief Assigns the Game Options
@@ -126,24 +134,29 @@ namespace game {
      */
     ObservableBase* GetEvent(int id);
 
+    // TODO encapsulation of physical world?
+    cpSpace* GetPhysicalWorld();
+
   private:
     /**
      * @brief Updates all Game Elements
      * 
      */
-    void OnTick();
+    void tick();
 
     /**
      * @brief Renders all Game Elements
      * 
      */
-    void OnRender();
+    void render();
 
     EventController mEventCtrl;
     GameOptions mOptions;
     GameState mState;
     sf::RenderWindow* mWindow;
     sf::View mView;
+    cpSpace* mPhysicalWorld = nullptr;
+    PointConverter* mPointConverter = nullptr;
   };
 } // namespace game
 

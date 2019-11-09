@@ -4,22 +4,24 @@
 
 #include <2DGameSDK/core/GameObject.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
+#include <2DGameSDK/physics/CollisionEventType.h>
+
+#include <chipmunk/chipmunk.h>
 
 namespace game {
   class SceneGraphNode;
+  class Game;
 
   class GAMESDK_DLL Entity : public GameObject {
   public:
-    Entity(int type);
+    Entity(int type, Game* game);
     virtual ~Entity();
 
-    virtual bool IsTransformable();
+    virtual bool IsKinematic();
     virtual bool IsCollidable();
     virtual sf::Transform GetTransform();
     virtual sf::Transform GetAccumulatedTransform();
     virtual sf::Transform GetCombinedTransform();
-    virtual sf::FloatRect GetAABB();
-    virtual std::vector<sf::Vector2f> GetCollisionMask();
 
     void SetTransform(sf::Transform transform);
 
@@ -28,15 +30,14 @@ namespace game {
      * 
      * @param graphNode The corresponding SceneGraphNode
      */
-    void SetGraphNode(game::SceneGraphNode* graphNode);
+    void SetGraphNode(SceneGraphNode* graphNode);
 
     void Transform(sf::Transform transform);
     void OnParentTransformed(sf::Transform accumulated);
-    virtual void OnCollision(Entity* other, sf::Vector2f point);
+    virtual int OnCollision(CollisionEventType type, Entity* other, cpArbiter* arb);
     virtual void OnTickEnded();
 
   protected:
-    // bool mIsCollidable = false;
     SceneGraphNode* mGraphNode = nullptr;
 
     virtual bool setTransform(sf::Transform transform);
