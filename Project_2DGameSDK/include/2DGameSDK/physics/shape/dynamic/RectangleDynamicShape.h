@@ -8,8 +8,8 @@
 
 #include <2DGameSDK/dll/gamesdk_dll.h>
 #include <2DGameSDK/physics/shape/Shape.h>
-#include <2DGameSDK/physics/shape/definitions/RectangleShape.h>
-#include <2DGameSDK/physics/shape/types/DynamicShape.h>
+#include <2DGameSDK/physics/shape/definitions/DynamicShape.h>
+#include <2DGameSDK/physics/shape/shapes/RectangleShape.h>
 
 namespace game {
   class GAMESDK_DLL RectangleDynamicShape : public DynamicShape, public RectangleShape {

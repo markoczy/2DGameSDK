@@ -1,4 +1,4 @@
-#include <2DGameSDK/physics/shape/types/DynamicShape.h>
+#include <2DGameSDK/physics/shape/definitions/DynamicShape.h>
 
 namespace game {
   DynamicShape::DynamicShape(ShapeType type, Game* game) : Shape(type, game) {}

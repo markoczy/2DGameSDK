@@ -1,4 +1,4 @@
-#include <2DGameSDK/physics/shape/definitions/RectangleShape.h>
+#include <2DGameSDK/physics/shape/shapes/RectangleShape.h>
 
 namespace game {
 

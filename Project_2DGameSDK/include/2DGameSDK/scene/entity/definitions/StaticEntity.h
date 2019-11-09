@@ -4,7 +4,7 @@
 #include <vector>
 
 #include <2DGameSDK/dll/gamesdk_dll.h>
-#include <2DGameSDK/physics/shape/types/KinematicShape.h>
+#include <2DGameSDK/physics/shape/definitions/KinematicShape.h>
 #include <2DGameSDK/scene/entity/Entity.h>
 
 namespace game {

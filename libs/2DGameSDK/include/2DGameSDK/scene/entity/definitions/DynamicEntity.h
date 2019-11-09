@@ -5,7 +5,7 @@
 
 #include <2DGameSDK/core/Game.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
-#include <2DGameSDK/physics/shape/types/DynamicShape.h>
+#include <2DGameSDK/physics/shape/definitions/DynamicShape.h>
 #include <2DGameSDK/scene/entity/Entity.h>
 
 namespace game {

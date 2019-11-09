@@ -14,8 +14,8 @@
 #include <2DGameSDK/core/Game.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
 #include <2DGameSDK/physics/CollisionEventType.h>
+#include <2DGameSDK/physics/shape/definitions/KinematicShape.h>
 #include <2DGameSDK/physics/shape/kinematic/RectangleKinematicShape.h>
-#include <2DGameSDK/physics/shape/types/KinematicShape.h>
 #include <2DGameSDK/scene/entity/Entity.h>
 
 #include <SFML/Graphics.hpp>

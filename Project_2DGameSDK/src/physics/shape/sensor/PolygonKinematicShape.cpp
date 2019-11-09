@@ -2,6 +2,6 @@
 
 namespace game {
 
-  PolygonKinematicShape::PolygonKinematicShape(Game* game, std::vector<cpVect> vertices) : Shape(ShapeType::Polygon, game), KinematicShape(ShapeType::Polygon, game), PolygonShape(game, vertices) {
+  PolygonKinematicShape::PolygonKinematicShape(Game* game, std::vector<cpVect> vertices, bool isSensor) : Shape(ShapeType::Polygon, game), KinematicShape(ShapeType::Polygon, game, isSensor), PolygonShape(game, vertices) {
   }
 } // namespace game

@@ -1,4 +1,4 @@
-#include <2DGameSDK/physics/shape/definitions/PolygonShape.h>
+#include <2DGameSDK/physics/shape/shapes/PolygonShape.h>
 
 namespace game {
 

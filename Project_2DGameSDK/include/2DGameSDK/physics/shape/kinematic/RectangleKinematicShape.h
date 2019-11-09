@@ -7,13 +7,13 @@
 #include <chipmunk/chipmunk.h>
 
 #include <2DGameSDK/physics/shape/Shape.h>
-#include <2DGameSDK/physics/shape/definitions/RectangleShape.h>
-#include <2DGameSDK/physics/shape/types/KinematicShape.h>
+#include <2DGameSDK/physics/shape/definitions/KinematicShape.h>
+#include <2DGameSDK/physics/shape/shapes/RectangleShape.h>
 
 namespace game {
   class GAMESDK_DLL RectangleKinematicShape : public KinematicShape, public RectangleShape {
   public:
-    RectangleKinematicShape(Game* game, float width, float height);
+    RectangleKinematicShape(Game* game, float width, float height, bool isSensor = true);
   };
 } // namespace game
 

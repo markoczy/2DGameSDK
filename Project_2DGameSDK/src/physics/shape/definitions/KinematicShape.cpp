@@ -1,4 +1,4 @@
-#include <2DGameSDK/physics/shape/types/KinematicShape.h>
+#include <2DGameSDK/physics/shape/definitions/KinematicShape.h>
 
 namespace game {
 

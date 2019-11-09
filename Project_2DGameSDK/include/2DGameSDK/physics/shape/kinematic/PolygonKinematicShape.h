@@ -7,13 +7,13 @@
 #include <chipmunk/chipmunk.h>
 
 #include <2DGameSDK/physics/shape/Shape.h>
-#include <2DGameSDK/physics/shape/definitions/PolygonShape.h>
-#include <2DGameSDK/physics/shape/types/KinematicShape.h>
+#include <2DGameSDK/physics/shape/definitions/KinematicShape.h>
+#include <2DGameSDK/physics/shape/shapes/PolygonShape.h>
 
 namespace game {
   class GAMESDK_DLL PolygonKinematicShape : public KinematicShape, public PolygonShape {
   public:
-    PolygonKinematicShape(Game* game, std::vector<cpVect> vertices);
+    PolygonKinematicShape(Game* game, std::vector<cpVect> vertices, bool isSensor = true);
   };
 
 } // namespace game
