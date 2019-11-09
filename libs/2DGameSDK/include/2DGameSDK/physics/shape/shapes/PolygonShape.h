@@ -1,5 +1,5 @@
-#ifndef __POLYGON_SHAPE_DEFINITION_H__
-#define __POLYGON_SHAPE_DEFINITION_H__
+#ifndef __POLYGON_SHAPE_H__
+#define __POLYGON_SHAPE_H__
 
 #include <vector>
 

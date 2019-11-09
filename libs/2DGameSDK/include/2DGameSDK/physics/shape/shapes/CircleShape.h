@@ -1,7 +1,5 @@
-#ifndef __POLYGON_SHAPE_H__
-#define __POLYGON_SHAPE_H__
-
-#include <vector>
+#ifndef __CIRCLE_SHAPE_H__
+#define __CIRCLE_SHAPE_H__
 
 #include <SFML/Graphics.hpp>
 #include <chipmunk/chipmunk.h>
@@ -12,18 +10,19 @@
 #include <2DGameSDK/physics/shape/ShapeType.h>
 
 namespace game {
-
-  class GAMESDK_DLL PolygonShape : virtual public Shape {
+  class GAMESDK_DLL CircleShape : virtual public Shape {
   public:
-    PolygonShape(Game* game, std::vector<cpVect> vertices);
+    CircleShape(Game* game, float radius, cpVect offset = cpv(0, 0));
 
     virtual void Render(sf::RenderTarget* target, sf::Color color = sf::Color::Black, float stroke = 0.5);
 
   protected:
-    std::vector<cpVect> mVertices;
+    float mRadius;
+    cpVect mOffset;
 
     virtual cpShape* initShape(cpSpace* space, cpBody* body);
   };
+
 } // namespace game
 
 #endif

@@ -1,5 +1,5 @@
-#ifndef __RECTANGLE_SHAPE_DEFINITION_H__
-#define __RECTANGLE_SHAPE_DEFINITION_H__
+#ifndef __RECTANGLE_SHAPE_H__
+#define __RECTANGLE_SHAPE_H__
 
 #include <SFML/Graphics.hpp>
 #include <chipmunk/chipmunk.h>

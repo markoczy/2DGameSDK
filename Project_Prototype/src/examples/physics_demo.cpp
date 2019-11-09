@@ -171,6 +171,7 @@ int demo2() {
   float playerW = 1;
   float playerH = 1;
   float playerMass = 5;
+  // auto shape = new CircleDynamicShape(game, 1);
   auto shape = new RectangleDynamicShape(game, playerW, playerH);
   shape->SetElasticity(0.1);
   // shape->SetDensity(1);
