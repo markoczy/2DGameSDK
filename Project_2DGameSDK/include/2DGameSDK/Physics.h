@@ -9,9 +9,9 @@
 #include <2DGameSDK/physics/shape/definitions/PolygonShape.h>
 #include <2DGameSDK/physics/shape/definitions/RectangleShape.h>
 #include <2DGameSDK/physics/shape/dynamic/RectangleDynamicShape.h>
-#include <2DGameSDK/physics/shape/sensor/PolygonSensorShape.h>
-#include <2DGameSDK/physics/shape/sensor/RectangleSensorShape.h>
+#include <2DGameSDK/physics/shape/kinematic/PolygonKinematicShape.h>
+#include <2DGameSDK/physics/shape/kinematic/RectangleKinematicShape.h>
 #include <2DGameSDK/physics/shape/types/DynamicShape.h>
-#include <2DGameSDK/physics/shape/types/SensorShape.h>
+#include <2DGameSDK/physics/shape/types/KinematicShape.h>
 
 #endif

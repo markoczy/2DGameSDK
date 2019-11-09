@@ -21,8 +21,8 @@
 #include <2DGameSDK/core/Game.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
 #include <2DGameSDK/physics/CollisionType.h>
-#include <2DGameSDK/physics/shape/sensor/RectangleSensorShape.h>
-#include <2DGameSDK/physics/shape/types/SensorShape.h>
+#include <2DGameSDK/physics/shape/kinematic/RectangleKinematicShape.h>
+#include <2DGameSDK/physics/shape/types/KinematicShape.h>
 #include <2DGameSDK/scene/entity/definitions/KinematicEntity.h>
 
 namespace game {
@@ -45,7 +45,7 @@ namespace game {
     SpriteKinematicEntity(int type,
                           Game* game,
                           sf::Texture* texture,
-                          std::vector<SensorShape*> shapes = std::vector<SensorShape*>(),
+                          std::vector<KinematicShape*> shapes = std::vector<KinematicShape*>(),
                           bool isCollidable = false);
 
     /**

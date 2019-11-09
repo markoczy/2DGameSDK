@@ -2,7 +2,7 @@
 
 namespace game {
 
-  KinematicEntity::KinematicEntity(int type, Game* game, std::vector<SensorShape*> shapes, bool isCollidable) : Entity(type, game), mShapes(shapes), mIsCollidable(isCollidable) {
+  KinematicEntity::KinematicEntity(int type, Game* game, std::vector<KinematicShape*> shapes, bool isCollidable) : Entity(type, game), mShapes(shapes), mIsCollidable(isCollidable) {
     mBody = cpSpaceAddBody(game->GetPhysicalWorld(), cpBodyNewKinematic());
     cpBodySetUserData(mBody, this);
 
