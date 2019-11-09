@@ -20,7 +20,7 @@ namespace game {
     }
   }
 
-  void KinematicShape::initProperties(cpSpace* space, cpBody* body, cpShape* shape) {
+  void KinematicShape::initProperties(cpSpace*, cpBody*, cpShape* shape) {
     cpShapeSetCollisionType(shape, CollisionType::Default);
     if(mIsSensor) cpShapeSetSensor(shape, true);
     if(mFriction != 0) cpShapeSetFriction(shape, mFriction);

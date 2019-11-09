@@ -3,7 +3,7 @@
 namespace game {
   DynamicShape::DynamicShape(ShapeType type, Game* game) : Shape(type, game) {}
 
-  void DynamicShape::initProperties(cpSpace* space, cpBody* body, cpShape* shape) {
+  void DynamicShape::initProperties(cpSpace*, cpBody*, cpShape* shape) {
     cpShapeSetCollisionType(shape, CollisionType::Default);
     if(mDensity != 0) cpShapeSetDensity(shape, mDensity);
     if(mMass != 0) cpShapeSetMass(shape, mMass);

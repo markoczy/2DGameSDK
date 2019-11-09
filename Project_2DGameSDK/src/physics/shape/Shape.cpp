@@ -42,8 +42,8 @@ namespace game {
 
     auto rect = sf::RectangleShape(sf::Vector2f(visBB.width, visBB.height));
     rect.setPosition(visBB.left, visBB.top);
-    rect.setOutlineColor(sf::Color::Magenta);
-    rect.setOutlineThickness(0.5);
+    rect.setOutlineColor(color);
+    rect.setOutlineThickness(stroke);
     rect.setFillColor(sf::Color::Transparent);
     target->draw(rect);
 

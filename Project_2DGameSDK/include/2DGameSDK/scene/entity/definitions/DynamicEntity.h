@@ -34,8 +34,8 @@ namespace game {
 
   protected:
     bool mIsCollidable;
-    cpBody* mBody = nullptr;
     std::vector<DynamicShape*> mShapes;
+    cpBody* mBody = nullptr;
   };
 
 } // namespace game

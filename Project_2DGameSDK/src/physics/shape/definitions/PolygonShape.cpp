@@ -19,7 +19,7 @@ namespace game {
     target->draw(shape);
   }
 
-  cpShape* PolygonShape::initShape(cpSpace* space, cpBody* body) {
+  cpShape* PolygonShape::initShape(cpSpace*, cpBody* body) {
     auto shape = cpPolyShapeNewRaw(body, mVertices.size(), &mVertices[0], 0);
     return shape;
   }

@@ -21,19 +21,19 @@ namespace game {
     return retA | retB;
   }
 
-  unsigned char collisionBegin(cpArbiter* arb, cpSpace* space, cpDataPointer data) {
+  unsigned char collisionBegin(cpArbiter* arb, cpSpace*, cpDataPointer) {
     return collisionFunc(CollisionEventType::Begin, arb);
   }
 
-  unsigned char collisionPreSolve(cpArbiter* arb, cpSpace* space, cpDataPointer data) {
+  unsigned char collisionPreSolve(cpArbiter* arb, cpSpace*, cpDataPointer) {
     return collisionFunc(CollisionEventType::PreSolve, arb);
   }
 
-  void collisionPostSolve(cpArbiter* arb, cpSpace* space, cpDataPointer data) {
+  void collisionPostSolve(cpArbiter* arb, cpSpace*, cpDataPointer) {
     collisionFunc(CollisionEventType::PostSolve, arb);
   }
 
-  void collisionSeparate(cpArbiter* arb, cpSpace* space, cpDataPointer data) {
+  void collisionSeparate(cpArbiter* arb, cpSpace*, cpDataPointer) {
     collisionFunc(CollisionEventType::Separate, arb);
   }
 

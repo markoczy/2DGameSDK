@@ -8,7 +8,6 @@ namespace game {
   void RectangleShape::Render(sf::RenderTarget* target, sf::Color color, float stroke) {
     auto visOrigin = getVisualPosition();
     float rot = getVisualRotation();
-    auto transform = sf::Transform().translate(visOrigin).rotate(rot, visOrigin);
     auto shape = sf::RectangleShape(sf::Vector2f(mWidth, mHeight));
     shape.setOrigin(mWidth / 2, mHeight / 2);
     shape.setPosition(visOrigin);
@@ -19,7 +18,7 @@ namespace game {
     target->draw(shape);
   }
 
-  cpShape* RectangleShape::initShape(cpSpace* space, cpBody* body) {
+  cpShape* RectangleShape::initShape(cpSpace*, cpBody* body) {
     auto shape = cpBoxShapeNew(body, mWidth, mHeight, 0);
     return shape;
   }

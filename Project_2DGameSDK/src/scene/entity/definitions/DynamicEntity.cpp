@@ -1,7 +1,7 @@
 #include <2DGameSDK/scene/entity/definitions/DynamicEntity.h>
 
 namespace game {
-  DynamicEntity::DynamicEntity(int type, Game* game, std::vector<DynamicShape*> shapes, bool isCollidable) : Entity(type, game), mShapes(shapes), mIsCollidable(isCollidable) {
+  DynamicEntity::DynamicEntity(int type, Game* game, std::vector<DynamicShape*> shapes, bool isCollidable) : Entity(type, game), mIsCollidable(isCollidable), mShapes(shapes) {
     mBody = cpSpaceAddBody(game->GetPhysicalWorld(), cpBodyNew(0, 0));
     cpBodySetUserData(mBody, this);
 
@@ -45,7 +45,7 @@ namespace game {
     cpBodySetTorque(mBody, torque);
   }
 
-  int DynamicEntity::OnCollision(CollisionEventType type, Entity* other, cpArbiter* arb) {
+  int DynamicEntity::OnCollision(CollisionEventType, Entity*, cpArbiter*) {
     return 1;
   }
 

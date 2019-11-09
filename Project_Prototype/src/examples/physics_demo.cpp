@@ -66,7 +66,7 @@ public:
     // SetForce(cpv(mSpeed, 0));
   }
 
-  int OnCollision(CollisionEventType type, Entity* other, cpArbiter* arb) {
+  int OnCollision(CollisionEventType type, Entity* other, cpArbiter*) {
     if(other->GetType() == _GROUND_TYPE) {
       if(type == CollisionEventType::Begin) {
         cout << "Touching floor" << endl;

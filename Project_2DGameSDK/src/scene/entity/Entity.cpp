@@ -40,7 +40,7 @@ namespace game {
 
   void Entity::OnTickEnded() {}
 
-  int Entity::OnCollision(CollisionEventType type, Entity* other, cpArbiter* arb) {
+  int Entity::OnCollision(CollisionEventType, Entity*, cpArbiter*) {
     return 0;
   }
 

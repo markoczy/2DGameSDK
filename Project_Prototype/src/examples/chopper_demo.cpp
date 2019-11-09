@@ -105,7 +105,7 @@ public:
     return true;
   }
 
-  int OnCollision(CollisionEventType type, Entity* other, cpArbiter* arb) {
+  int OnCollision(CollisionEventType type, Entity* other, cpArbiter*) {
     // if(other->GetType() == _ENEMY_TYPE) {
     //   std::cout << "Collision with enemy detected!! Point: (" << point.x
     //             << ", " << point.y << ")" << std::endl;

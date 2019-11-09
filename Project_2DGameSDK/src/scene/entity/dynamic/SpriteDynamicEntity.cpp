@@ -58,6 +58,7 @@ namespace game {
     cpBodySetPosition(mBody, physicalOrigin);
     cpBodySetAngle(mBody, angle);
     cpSpaceReindexShapesForBody(getGame()->GetPhysicalWorld(), mBody);
+    return true;
   }
 
   void SpriteDynamicEntity::OnTick() {}
