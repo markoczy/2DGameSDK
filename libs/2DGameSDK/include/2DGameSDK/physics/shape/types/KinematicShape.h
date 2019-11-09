@@ -11,8 +11,14 @@ namespace game {
   public:
     KinematicShape(ShapeType type, Game* game, bool isSensor = true);
 
+    void SetFriction(float friction);
+
+    void SetElasticity(float elasticity);
+
   protected:
     bool mIsSensor = false;
+    float mFriction = 0;
+    float mElasticity = 0;
 
     virtual void initProperties(cpSpace* space, cpBody* body, cpShape* shape);
   };

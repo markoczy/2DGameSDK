@@ -3,6 +3,8 @@
 
 #include <vector>
 
+#include <SFML/Graphics.hpp>
+
 #include <2DGameSDK/core/Game.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
 #include <2DGameSDK/scene/entity/definitions/StaticEntity.h>
@@ -13,7 +15,7 @@ namespace game {
     SpriteStaticEntity(int type,
                        Game* game,
                        sf::Texture* texture,
-                       std::vector<Shape*> shapes = std::vector<Shape*>(),
+                       std::vector<KinematicShape*> shapes = std::vector<KinematicShape*>(),
                        bool isCollidable = false);
 
     ~SpriteStaticEntity();

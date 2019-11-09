@@ -110,7 +110,7 @@ int demo1() {
 
   auto scene = new SceneGraph();
 
-  auto groundShape = new RectangleDynamicShape(game, 200, 60);
+  auto groundShape = new RectangleKinematicShape(game, 200, 60);
   groundShape->SetElasticity(1);
   groundShape->SetFriction(0.3);
   auto ground = new SpriteStaticEntity(1, game, boxTx, {groundShape}, true);
@@ -161,10 +161,9 @@ int demo2() {
 
   float groundW = 50;
   float groundH = 5;
-  auto groundShape = new RectangleDynamicShape(game, groundW, groundH);
+  auto groundShape = new RectangleKinematicShape(game, groundW, groundH);
   groundShape->SetElasticity(0.1);
   groundShape->SetFriction(0.7);
-  groundShape->SetDensity(1);
   auto ground = new SpriteStaticEntity(_GROUND_TYPE, game, boxTx, {groundShape}, true);
   ground->SetSize(sf::Vector2f(groundW, groundH));
   ground->SetTransform(sf::Transform().translate(25, 47.5));

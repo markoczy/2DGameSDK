@@ -1,7 +1,7 @@
 #include <2DGameSDK/scene/entity/definitions/StaticEntity.h>
 
 namespace game {
-  StaticEntity::StaticEntity(int type, Game* game, std::vector<Shape*> shapes, bool isCollidable) : Entity(type, game), mShapes(shapes), mIsCollidable(isCollidable) {
+  StaticEntity::StaticEntity(int type, Game* game, std::vector<KinematicShape*> shapes, bool isCollidable) : Entity(type, game), mShapes(shapes), mIsCollidable(isCollidable) {
     mBody = cpSpaceAddBody(game->GetPhysicalWorld(), cpBodyNewStatic());
     cpBodySetUserData(mBody, this);
 

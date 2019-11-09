@@ -4,7 +4,7 @@ namespace game {
 
   using namespace helpers;
 
-  SpriteStaticEntity::SpriteStaticEntity(int type, Game* game, sf::Texture* texture, std::vector<Shape*> shapes, bool isCollidable) : StaticEntity(type, game, shapes, isCollidable), mSprite(*texture) {
+  SpriteStaticEntity::SpriteStaticEntity(int type, Game* game, sf::Texture* texture, std::vector<KinematicShape*> shapes, bool isCollidable) : StaticEntity(type, game, shapes, isCollidable), mSprite(*texture) {
     auto rect = mSprite.getTextureRect();
     mSprite.setOrigin(rect.width / 2, rect.height / 2);
   }
