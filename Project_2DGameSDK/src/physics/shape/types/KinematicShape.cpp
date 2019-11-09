@@ -2,11 +2,11 @@
 
 namespace game {
 
-  KinematicShape::KinematicShape(ShapeType type, Game* game) : Shape(type, game) {}
+  KinematicShape::KinematicShape(ShapeType type, Game* game, bool isSensor) : Shape(type, game), mIsSensor(isSensor) {}
 
   void KinematicShape::initProperties(cpSpace* space, cpBody* body, cpShape* shape) {
     cpShapeSetCollisionType(shape, CollisionType::Default);
-    cpShapeSetSensor(shape, true);
+    if(mIsSensor) cpShapeSetSensor(shape, true);
   }
 
 } // namespace game

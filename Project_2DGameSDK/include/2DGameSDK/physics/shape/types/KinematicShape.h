@@ -9,9 +9,11 @@
 namespace game {
   class GAMESDK_DLL KinematicShape : virtual public Shape {
   public:
-    KinematicShape(ShapeType type, Game* game);
+    KinematicShape(ShapeType type, Game* game, bool isSensor = true);
 
   protected:
+    bool mIsSensor = false;
+
     virtual void initProperties(cpSpace* space, cpBody* body, cpShape* shape);
   };
 } // namespace game
