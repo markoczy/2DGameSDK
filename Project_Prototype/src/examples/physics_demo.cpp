@@ -95,6 +95,35 @@ private:
   Observer<sf::Keyboard::Key>* mRight;
 };
 
+class GameController {
+public:
+  GameController(Game* game) : mGame(game) {}
+
+  void HandleKeyPress(sf::Keyboard::Key key) {
+    auto options = mGame->GetOptions();
+    switch(key) {
+    case sf::Keyboard::Key::F1:
+      options.RenderCollisionMask = false;
+      break;
+    case sf::Keyboard::Key::F2:
+      options.RenderCollisionMask = true;
+      break;
+    case sf::Keyboard::Key::F3:
+      options.RenderAABB = false;
+      break;
+    case sf::Keyboard::Key::F4:
+      options.RenderAABB = true;
+      break;
+    default:
+      break;
+    }
+    mGame->SetOptions(options);
+  }
+
+private:
+  Game* mGame = nullptr;
+};
+
 int demo1() {
   cout << "Physics Demo" << endl;
 
@@ -138,6 +167,17 @@ int demo1() {
   return 0;
 }
 
+SpriteStaticEntity* getBox(Game* game, float w, float h, float x, float y) {
+  auto shape = new RectangleStaticShape(game, w, h, false);
+  shape->SetElasticity(0.1);
+  shape->SetFriction(0.7);
+
+  auto ret = new SpriteStaticEntity(_GROUND_TYPE, game, AssetManager::GetTexture("res/textures/box/box.png"), {shape}, true);
+  ret->SetSize(sf::Vector2f(w, h));
+  ret->SetTransform(sf::Transform().translate(x, y));
+  return ret;
+}
+
 int demo2() {
   cout << "Physics Demo" << endl;
 
@@ -150,6 +190,17 @@ int demo2() {
   auto downPressed = new OnKeyPress(sf::Keyboard::Down);
   auto leftPressed = new OnKeyPress(sf::Keyboard::Left);
   auto rightPressed = new OnKeyPress(sf::Keyboard::Right);
+
+  auto f1Pressed = new OnKeyPress(sf::Keyboard::F1);
+  auto f2Pressed = new OnKeyPress(sf::Keyboard::F2);
+  auto f3Pressed = new OnKeyPress(sf::Keyboard::F3);
+  auto f4Pressed = new OnKeyPress(sf::Keyboard::F4);
+
+  auto gameController = new GameController(game);
+  f1Pressed->Subscribe(new MethodObserver<sf::Keyboard::Key, GameController>(gameController, &gameController->HandleKeyPress));
+  f2Pressed->Subscribe(new MethodObserver<sf::Keyboard::Key, GameController>(gameController, &gameController->HandleKeyPress));
+  f3Pressed->Subscribe(new MethodObserver<sf::Keyboard::Key, GameController>(gameController, &gameController->HandleKeyPress));
+  f4Pressed->Subscribe(new MethodObserver<sf::Keyboard::Key, GameController>(gameController, &gameController->HandleKeyPress));
 
   // Create Game World
   auto world = GameWorldFactory::CreateGameWorld("res/simple_grass/tilemap.json", "", "res/simple_grass/tile_");
@@ -176,14 +227,31 @@ int demo2() {
   shape->SetElasticity(0.1);
   // shape->SetDensity(1);
   shape->SetFriction(0.7);
-  auto box = new PhysPlayerEntity(game, boxTx, 50, 1000, {shape}, upPressed, downPressed, leftPressed, rightPressed);
-  box->SetSize(sf::Vector2f(playerW, playerH));
-  box->SetTransform(sf::Transform().translate(25, 5));
-  box->SetMass(playerMass);
-  box->SetMoment(cpMomentForBox(playerMass, playerW, playerH));
+  auto player = new PhysPlayerEntity(game, boxTx, 50, 1100, {shape}, upPressed, downPressed, leftPressed, rightPressed);
+  player->SetSize(sf::Vector2f(playerW, playerH));
+  player->SetTransform(sf::Transform().translate(5, 15));
+  player->SetMass(playerMass);
+  player->SetMoment(cpMomentForBox(playerMass, playerW, playerH));
 
   scene->AddEntity(ground);
-  scene->AddEntity(box);
+  scene->AddEntity(getBox(game, 5, 2.5, 10, 43.75));
+  scene->AddEntity(getBox(game, 5, 2.5, 15, 43.75));
+  scene->AddEntity(getBox(game, 5, 2.5, 15, 41.25));
+
+  scene->AddEntity(getBox(game, 5, 2.5, 25, 43.75));
+  scene->AddEntity(getBox(game, 5, 2.5, 25, 41.25));
+
+  scene->AddEntity(getBox(game, 5, 2.5, 30, 41.25));
+  scene->AddEntity(getBox(game, 5, 2.5, 30, 38.75));
+
+  scene->AddEntity(getBox(game, 5, 2.5, 40, 36.25));
+
+  scene->AddEntity(getBox(game, 5, 10, 45, 32.5));
+
+  scene->AddEntity(getBox(game, 5, 2.5, 30, 22.5));
+  scene->AddEntity(getBox(game, 5, 2.5, 25, 22.5));
+
+  scene->AddEntity(player);
   game->SetScene(scene);
 
   // Send Events to controller
@@ -191,6 +259,11 @@ int demo2() {
   game->AddEvent(downPressed);
   game->AddEvent(leftPressed);
   game->AddEvent(rightPressed);
+
+  game->AddEvent(f1Pressed);
+  game->AddEvent(f2Pressed);
+  game->AddEvent(f3Pressed);
+  game->AddEvent(f4Pressed);
 
   auto space = game->GetPhysicalWorld();
   cpSpaceSetGravity(space, cpv(0, -10));

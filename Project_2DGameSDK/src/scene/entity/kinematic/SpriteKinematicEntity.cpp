@@ -49,19 +49,12 @@ namespace game {
     states.transform = states.transform * mCombinedTransform;
     target->draw(mSprite, states);
 
-    auto origin = mCombinedTransform.transformPoint(sf::Vector2f());
-    auto s = sf::CircleShape(3);
-    s.setOrigin(3, 3);
-    s.setFillColor(sf::Color::Green);
-    s.setPosition(origin);
-    target->draw(s);
-
     auto options = getGame()->GetOptions();
     if(!(options.RenderCollisionMask || options.RenderAABB)) return;
 
     for(auto shape : mShapes) {
-      if(options.RenderCollisionMask) shape->Render(target, sf::Color::Red, 0.5);
-      if(options.RenderAABB) shape->RenderAABB(target, sf::Color::Magenta, 0.5);
+      if(options.RenderCollisionMask) shape->Render(target, sf::Color::Red, 1.0 / options.InitialZoom);
+      if(options.RenderAABB) shape->RenderAABB(target, sf::Color::Magenta, 1.0 / options.InitialZoom);
     }
   }
 

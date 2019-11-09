@@ -32,8 +32,8 @@ namespace game {
     if(!(options.RenderCollisionMask || options.RenderAABB)) return;
 
     for(auto shape : mShapes) {
-      if(options.RenderCollisionMask) shape->Render(target, sf::Color::Red, 0.5);
-      if(options.RenderAABB) shape->RenderAABB(target, sf::Color::Magenta, 0.5);
+      if(options.RenderCollisionMask) shape->Render(target, sf::Color::Red, 1.0 / options.InitialZoom);
+      if(options.RenderAABB) shape->RenderAABB(target, sf::Color::Magenta, 1.0 / options.InitialZoom);
     }
   }
 

@@ -76,8 +76,8 @@ namespace game {
     mView = mWindow->getView();
     if(mOptions.InitialZoom != 1.0) {
       auto viewport = mView.getViewport();
-      viewport.width *= mOptions.InitialZoom;
-      viewport.height *= mOptions.InitialZoom;
+      viewport.width = mOptions.InitialZoom;
+      viewport.height = mOptions.InitialZoom;
       mView.setViewport(viewport);
       mWindow->setView(mView);
     }
