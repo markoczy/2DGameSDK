@@ -303,3 +303,23 @@
   - Physical Entities haben zwar `SetTransform` sind aber nicht kinematisch
   - Jeder Entitytyp sollte selbst entscheiden wie `SetTransform` ausgeführt wird
     womöglich ist der aktuelle Ansatz mit der `protected` Methode korrigierbar
+
+## 08.11.2019
+
+### Status
+
+- Physik und Phys. Kollisionen endlich umgesetzt -> 6h
+  - Komplikation: Chipmunk CollisionShapes müssen nach Bewegung aktualisiert werden 
+    mit `cpSpaceReindexShape`
+    
+## 09.11.2019
+
+### Status
+
+- Physik Engine: Refactoring, Static Shapes, Cleanup -> 8h
+
+### Ausblick
+
+- Advanced Materials: JSON mit Shape Definition und Materialeigenschaften
+- Physics-First Koordinaten?
+- Umrechnungsfaktor Pixel zu Meter -> `PoseConverter`
