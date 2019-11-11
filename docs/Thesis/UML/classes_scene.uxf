@@ -1,0 +1,505 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>6</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>492</x>
+      <y>510</y>
+      <w>168</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>/GameObject/
+--
+-mType: int
+-mZIndex: int
+--
++GameObject(type: int, game: Game*)
+/+OnTick()/
+/+OnRender()/</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>432</x>
+      <y>630</y>
+      <w>276</w>
+      <h>168</h>
+    </coordinates>
+    <panel_attributes>/Entity/
+--
+#mGraphNode: SceneGraphNode*
+--
++Entity(type: int, game: Game*)
++IsKinematic(): bool
++IsCollidable(): bool
++GetTransform(): sf::Transform
++GetAccumulatedTransform(): sf::Transform
++GetCombinedTransform(): sf::Transform
++SetTransform(transform: sf::Transform)
++SetAccumulatedTransform(transform: sf::Transform)
++SetGraphNode(graphNode: SceneGraphNode*)
++Transform(sf::Transform transform)
++OnParentTransformed(sf::Transform accumulated);
++OnCollision(CollisionEventType type, Entity* other, cpArbiter* arb): int
++OnTickEnded()
+#onEntityTransformed()
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>24</x>
+      <y>1086</y>
+      <w>252</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>SpriteDynamicEntity
+--
+#mSprite: sf::Sprite
+--
++SpriteDynamicEntity(type: int, game: Game*, sprite: sf::Sprite)
++SetSize(size: sf::Vector2f)
++OnTick()
++OnRender()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>438</x>
+      <y>858</y>
+      <w>276</w>
+      <h>192</h>
+    </coordinates>
+    <panel_attributes>/KinematicEntity/
+--
+#mBody: cpBody*
+#mTransform: sf::Transform
+#mAccTransform: sf::Transform
+#mCombinedTransform: sf::Transform
+#mIsCollidable: bool
+#mShapes: KinematicShape*[]
+--
++KinematicEntity(type: int, game: Game*)
++IsKinematic(): bool
++IsCollidable(): bool
++GetTransform(): sf::Transform
++GetAccumulatedTransform(): sf::Transform
++GetCombinedTransform(): sf::Transform
++SetTransform(transform: sf::Transform)
++SetAccumulatedTransform(transform: sf::Transform)
++Transform(sf::Transform transform)
++OnCollision(CollisionEventType type, Entity* other, cpArbiter* arb): int
+#onEntityTransformed()
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>744</x>
+      <y>858</y>
+      <w>276</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>/StaticEntity/
+--
+#mBody: cpBody*
+#mIsCollidable: bool
+#mShapes: StaticShape*[]
+--
++StaticEntity(type: int, game: Game*)
++IsKinematic(): bool
++IsCollidable(): bool
++OnCollision(CollisionEventType type, Entity* other, cpArbiter* arb): int
+#onEntityTransformed()
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>138</x>
+      <y>858</y>
+      <w>276</w>
+      <h>174</h>
+    </coordinates>
+    <panel_attributes>/DynamicEntity/
+--
+#mBody: cpBody*
+#mIsCollidable: bool
+#mShapes: DynamicShape*[]
+--
++DynamicEntity(type: int, game: Game*)
++IsKinematic(): bool
++IsCollidable(): bool
++SetMass(mass: float)
++SetMoment(moment: float)
++SetVelocity(velocity: cpVect)
++SetForce(force: cpVect)
++SetAngularVelocity(omega: float)
++SetTorque(torque: float)
++OnCollision(CollisionEventType type, Entity* other, cpArbiter* arb): int
+#onEntityTransformed()
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>684</x>
+      <y>1080</y>
+      <w>252</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>SpriteStaticEntity
+--
+#mSprite: sf::Sprite
+--
++SpriteKinematicEntity(type: int, game: Game*, sprite: sf::Sprite)
++SetSize(size: sf::Vector2f)
++OnTick()
++OnRender()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>348</x>
+      <y>1098</y>
+      <w>252</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>SpriteKinematicEntity
+--
+#mSprite: sf::Sprite
+--
++SpriteKinematicEntity(type: int, game: Game*, sprite: sf::Sprite)
++SetSize(size: sf::Vector2f)
++OnTick()
++OnRender()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>516</x>
+      <y>1188</y>
+      <w>252</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>AnimatedKinematicEntity
+--
+#mSprite: sf::Sprite
+--
++AnimatedKinematicEntity(type: int, game: Game*, states: std::map)
++SetAnimState(stat: int)
++SetSize(size: sf::Vector2f)
++OnTick()
++OnRender()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>174</x>
+      <y>1188</y>
+      <w>252</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>AnimatedDynamicEntity
+--
+#mSprite: sf::Sprite
+--
++AnimatedDynamicEntity(type: int, game: Game*, states: std::map)
++SetAnimState(stat: int)
++SetSize(size: sf::Vector2f)
++OnTick()
++OnRender()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>858</x>
+      <y>1170</y>
+      <w>252</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>AnimatedStaticEntity
+--
+#mSprite: sf::Sprite
+--
++AnimatedKinematicEntity(type: int, game: Game*, states: std::map)
++SetAnimState(stat: int)
++SetSize(size: sf::Vector2f)
++OnTick()
++OnRender()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>564</x>
+      <y>576</y>
+      <w>18</w>
+      <h>66</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>564</x>
+      <y>792</y>
+      <w>18</w>
+      <h>78</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;110.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>564</x>
+      <y>792</y>
+      <w>330</w>
+      <h>78</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0;530.0;70.0;530.0;110.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>276</x>
+      <y>792</y>
+      <w>306</w>
+      <h>78</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>490.0;10.0;490.0;70.0;10.0;70.0;10.0;110.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>144</x>
+      <y>1026</y>
+      <w>144</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>220.0;10.0;220.0;60.0;10.0;60.0;10.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>270</x>
+      <y>1026</y>
+      <w>54</w>
+      <h>174</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0;70.0;60.0;70.0;270.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>468</x>
+      <y>1044</y>
+      <w>108</w>
+      <h>66</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>160.0;10.0;160.0;50.0;10.0;50.0;10.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>558</x>
+      <y>1044</y>
+      <w>102</w>
+      <h>156</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0;150.0;50.0;150.0;240.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>804</x>
+      <y>960</y>
+      <w>90</w>
+      <h>132</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>130.0;10.0;130.0;100.0;10.0;100.0;10.0;200.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>876</x>
+      <y>960</y>
+      <w>120</w>
+      <h>222</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;100.0;180.0;100.0;180.0;350.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>738</x>
+      <y>732</y>
+      <w>102</w>
+      <h>66</h>
+    </coordinates>
+    <panel_attributes>bg=yellow
+Kinematische
+Entities können
+beliebig transformiert
+werden, erfahren aber
+keine Physikalischen
+Kräfte
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>912</x>
+      <y>768</y>
+      <w>108</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>bg=yellow
+Statische Entities können
+nicht transformiert
+werden und erfahren
+keine Physikalischen
+Kräfte
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>138</x>
+      <y>732</y>
+      <w>102</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>bg=yellow
+Dynamische Entities 
+werden von der Physik 
+Engine simuliert,
+sie können nicht ohne 
+weiteres transformiert
+werden, sondern müssen
+durch Setzen von Kraft 
+und Geschwindigkeit 
+bewegt werden.
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>174</x>
+      <y>822</y>
+      <w>18</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>660</x>
+      <y>792</y>
+      <w>132</w>
+      <h>78</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;110.0;200.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>954</x>
+      <y>822</y>
+      <w>18</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;60.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>306</x>
+      <y>696</y>
+      <w>114</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>bg=yellow
+Callback um akkumulierte
+Transformation zu aktuali-
+sieren</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>342</x>
+      <y>732</y>
+      <w>102</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0;150.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>324</x>
+      <y>792</y>
+      <w>90</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>bg=yellow
+Kollisions-Callback</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>360</x>
+      <y>762</y>
+      <w>84</w>
+      <h>42</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;50.0;10.0;10.0;120.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>6</x>
+      <y>480</y>
+      <w>1122</w>
+      <h>816</h>
+    </coordinates>
+    <panel_attributes>Scene</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
