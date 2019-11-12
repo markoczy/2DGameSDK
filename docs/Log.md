@@ -323,3 +323,19 @@
 - Advanced Materials: JSON mit Shape Definition und Materialeigenschaften
 - Physics-First Koordinaten?
 - Umrechnungsfaktor Pixel zu Meter -> `PoseConverter`
+
+## 11.11.2019
+
+### Status
+
+- Meeting Experte -> 1h PM
+  - USP Definieren sehr wichtig! ("noch so ein Teil, warum??")
+  - Keine Kritik zum Vorgehen
+- Klassendiagramme: Scene, Physics 1 -> 2h PM
+
+### 12.11.2019
+
+### Ausblick
+
+- PoseConverter momentan Quick and Dirty, muss nach dep. inv. umgebaut werden
+  sodass Weltangaben dynamisch geladen werden
