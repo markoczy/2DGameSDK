@@ -32,7 +32,7 @@ namespace game {
   void Shape::RenderAABB(sf::RenderTarget* target, sf::Color color, float stroke) {
     auto bb = cpShapeCacheBB(mShape);
 
-    auto conv = getGame()->GetPointConverter();
+    auto conv = getGame()->GetPoseConverter();
     auto topLeftVis = conv->GetVisualPos(cpv(bb.l, bb.t));
     auto bottomRightVis = conv->GetVisualPos(cpv(bb.r, bb.b));
     auto visBB = sf::FloatRect(topLeftVis.x,
@@ -56,7 +56,7 @@ namespace game {
   }
 
   sf::Vector2f Shape::getVisualPosition() {
-    auto converter = getGame()->GetPointConverter();
+    auto converter = getGame()->GetPoseConverter();
     auto physOrigin = cpBodyGetPosition(mBody);
     return converter->GetVisualPos(physOrigin);
   }

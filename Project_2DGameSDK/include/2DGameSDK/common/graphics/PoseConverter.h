@@ -8,9 +8,9 @@
 
 namespace game {
 
-  class GAMESDK_DLL PointConverter {
+  class GAMESDK_DLL PoseConverter {
   public:
-    PointConverter(float worldWidth, float worldHeight);
+    PoseConverter(float worldWidth, float worldHeight);
     cpVect GetPhysicalPos(sf::Vector2f visualPos);
     sf::Vector2f GetVisualPos(cpVect physicalPos);
 

@@ -59,7 +59,7 @@ namespace game {
     helpers::safeDelete(mWindow);
     helpers::safeDelete(mState.Scene);
     helpers::safeDelete(mState.World);
-    helpers::safeDelete(mPointConverter);
+    helpers::safeDelete(mPoseConverter);
     cpSpaceDestroy(mPhysicalWorld);
   }
 
@@ -141,8 +141,8 @@ namespace game {
     return mState.Scene;
   }
 
-  PointConverter* Game::GetPointConverter() {
-    return mPointConverter;
+  PoseConverter* Game::GetPoseConverter() {
+    return mPoseConverter;
   }
 
   void Game::SetScene(SceneGraph* scene) {
@@ -160,8 +160,8 @@ namespace game {
   void Game::SetWorld(GameWorld* world) {
     mState.World = world;
 
-    helpers::safeDelete(mPointConverter);
-    mPointConverter = new PointConverter(world->GetBounds().width, world->GetBounds().height);
+    helpers::safeDelete(mPoseConverter);
+    mPoseConverter = new PoseConverter(world->GetBounds().width, world->GetBounds().height);
   }
 
   // ####### Event Controller wrapper ##########################################

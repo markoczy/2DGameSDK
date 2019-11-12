@@ -6,7 +6,7 @@
 #include <SFML/Graphics.hpp>
 #include <chipmunk/chipmunk.h>
 
-#include <2DGameSDK/common/graphics/PointConverter.h>
+#include <2DGameSDK/common/graphics/PoseConverter.h>
 #include <2DGameSDK/core/Game.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
 #include <2DGameSDK/physics/shape/ShapeType.h>

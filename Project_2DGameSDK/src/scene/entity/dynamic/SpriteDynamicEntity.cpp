@@ -27,7 +27,7 @@ namespace game {
   }
 
   void SpriteDynamicEntity::OnRender(sf::RenderTarget* target, sf::RenderStates states) {
-    auto conv = getGame()->GetPointConverter();
+    auto conv = getGame()->GetPoseConverter();
     auto pos = conv->GetVisualPos(cpBodyGetPosition(mBody));
     auto angle = conv->GetVisualAngle(cpBodyGetAngle(mBody));
     LOGD("Pos: (" << pos.x << ", " << pos.y << "), Angle: " << angle);
