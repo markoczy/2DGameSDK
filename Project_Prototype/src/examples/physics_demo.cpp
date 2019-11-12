@@ -183,7 +183,7 @@ int demo2() {
 
   // Create game
   auto game = new Game();
-  game->SetOptions(GameOptions{"My Game", sf::Vector2i(200, 200), 4.0, 60, false, false});
+  game->SetOptions(GameOptions{"My Game", sf::Vector2i(200, 200), 2.0, 60, false, false, 0.5});
 
   // Create Keyboard Events
   auto upPressed = new OnKeyPress(sf::Keyboard::Up);
@@ -229,7 +229,7 @@ int demo2() {
   shape->SetFriction(0.7);
   auto player = new PhysPlayerEntity(game, boxTx, 50, 1100, {shape}, upPressed, downPressed, leftPressed, rightPressed);
   player->SetSize(sf::Vector2f(playerW, playerH));
-  player->SetTransform(sf::Transform().translate(5, 15));
+  player->SetTransform(sf::Transform().translate(10, 15));
   player->SetMass(playerMass);
   player->SetMoment(cpMomentForBox(playerMass, playerW, playerH));
 

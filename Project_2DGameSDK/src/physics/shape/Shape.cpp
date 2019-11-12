@@ -57,13 +57,12 @@ namespace game {
 
   sf::Vector2f Shape::getVisualPosition() {
     auto converter = getGame()->GetPoseConverter();
-    auto physOrigin = cpBodyGetPosition(mBody);
-    return converter->GetVisualPos(physOrigin);
+    return converter->GetVisualPos(cpBodyGetPosition(mBody));
   }
 
   float Shape::getVisualRotation() {
-    auto rotRad = cpBodyGetAngle(mBody);
-    return -(360 * rotRad) / 6.28;
+    auto converter = getGame()->GetPoseConverter();
+    return converter->GetVisualAngle(cpBodyGetAngle(mBody));
   }
 
 } // namespace game

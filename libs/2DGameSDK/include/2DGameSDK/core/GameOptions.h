@@ -51,6 +51,8 @@ namespace game {
      * @brief Wether to render the Collision Masks
      */
     bool RenderCollisionMask = false;
+
+    float MeterPerPixel = 1.0;
   };
 
   //   GAMESDK_DLL GameOptions DefaultOptions = GameOptions{

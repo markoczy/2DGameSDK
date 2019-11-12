@@ -161,7 +161,7 @@ namespace game {
     mState.World = world;
 
     helpers::safeDelete(mPoseConverter);
-    mPoseConverter = new PoseConverter(world->GetBounds().width, world->GetBounds().height);
+    mPoseConverter = new PoseConverter(world->GetBounds().width, world->GetBounds().height, mOptions.MeterPerPixel);
   }
 
   // ####### Event Controller wrapper ##########################################

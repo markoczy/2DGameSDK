@@ -19,6 +19,7 @@ namespace game {
   }
 
   cpShape* RectangleShape::initShape(cpSpace*, cpBody* body) {
+    auto conv = getGame()->GetPoseConverter();
     auto shape = cpBoxShapeNew(body, mWidth, mHeight, 0);
     return shape;
   }
