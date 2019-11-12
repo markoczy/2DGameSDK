@@ -47,15 +47,13 @@ namespace game {
   }
 
   bool SpriteDynamicEntity::setTransform(sf::Transform transform) {
-    auto worldHeight = getGame()->GetWorld()->GetBounds().height;
-    auto localOrigin = transform.transformPoint(sf::Vector2f());
-    auto localXUnit = transform.transformPoint(sf::Vector2f(1, 0));
-    auto localDir = localXUnit - localOrigin;
-    auto physicalOrigin = GrahicTools::GetPhysicalPos(localOrigin, worldHeight);
-    float angle = -atan2(localDir.y, localDir.x);
+    auto origin = transform.transformPoint(sf::Vector2f());
+    auto xUnit = transform.transformPoint(sf::Vector2f(1, 0));
+    auto dir = xUnit - origin;
+    float angle = atan2(dir.y, dir.x);
 
-    LOGD("Body Pos: (" << physicalOrigin.x << ", " << physicalOrigin.y << "), angle: " << angle);
-    cpBodySetPosition(mBody, physicalOrigin);
+    LOGD("Body Pos: (" << origin.x << ", " << origin.y << "), angle: " << angle);
+    cpBodySetPosition(mBody, cpv(origin.x, origin.y));
     cpBodySetAngle(mBody, angle);
     cpSpaceReindexShapesForBody(getGame()->GetPhysicalWorld(), mBody);
     return true;
