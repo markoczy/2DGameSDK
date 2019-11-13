@@ -78,8 +78,10 @@ public:
     }
     // translate
     else if(mDt.x != 0 || mDt.y != 0) {
+      cout << "mDt: (" << mDt.x << ", " << mDt.y << ")" << endl;
       transform.translate(mDt);
     }
+    auto pos = transform.transformPoint(sf::Vector2f());
     Transform(transform);
     mDt = sf::Vector2f();
     mDw = 0.0;
@@ -94,11 +96,11 @@ public:
   }
 
   void RotLeft(sf::Keyboard::Key) {
-    mDw -= mRotSpeed;
+    mDw += mRotSpeed;
   }
 
   void RotRight(sf::Keyboard::Key) {
-    mDw += mRotSpeed;
+    mDw -= mRotSpeed;
   }
 
   bool IsCollidable() {
@@ -221,7 +223,7 @@ int chopperDemo() {
 
   // Create game
   auto game = new Game();
-  game->SetOptions(GameOptions{"My Game", sf::Vector2i(512, 512), 2.0, 50, false, false});
+  game->SetOptions(GameOptions{"My Game", sf::Vector2i(512, 512), 1.0, 50, false, false});
 
   auto gameController = new GameController(game);
   f1Pressed->Subscribe(new MethodObserver<sf::Keyboard::Key, GameController>(gameController, &gameController->HandleKeyPress));
