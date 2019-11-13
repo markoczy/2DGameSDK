@@ -339,3 +339,18 @@
 
 - PoseConverter momentan Quick and Dirty, muss nach dep. inv. umgebaut werden
   sodass Weltangaben dynamisch geladen werden
+
+## 13.11.2019
+
+### Status
+
+- Projektmeeting -> 1h PM
+  - Neue Struktur Shapes: Strategy Pattern
+  - Dep. Inv. Refactoring niedrig priorisieren
+  - Physics-First Refactoring OK
+- Physics-First für SceneGraph -> 2h
+
+### Ausblick
+
+- TODO: Grafik Funktionen für `Transform` to `Pose` umrechnung
+  - `Pose` Datentyp
