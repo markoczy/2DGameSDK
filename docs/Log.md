@@ -349,8 +349,12 @@
   - Dep. Inv. Refactoring niedrig priorisieren
   - Physics-First Refactoring OK
 - Physics-First für SceneGraph -> 2h
+  - Schwierigkeit: `KinematicEntity.Transform` (relative Transformation setzen)
+    SFML geht davon aus, dass die Ausrichtung nach unten ist, cp nach oben.
 
 ### Ausblick
 
 - TODO: Grafik Funktionen für `Transform` to `Pose` umrechnung
   - `Pose` Datentyp
+- Können die komplizierten Umrechnungen bei `KinematicEntity.Transform`
+  umgangen werden?
