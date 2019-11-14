@@ -10,12 +10,6 @@ namespace game {
   SpriteDynamicEntity::SpriteDynamicEntity(int type, Game* game, sf::Texture* texture, std::vector<DynamicShape*> shapes, bool isCollidable) : DynamicEntity(type, game, shapes, isCollidable), mSprite(*texture) {
     auto rect = mSprite.getTextureRect();
     mSprite.setOrigin(rect.width / 2, rect.height / 2);
-
-    // if(isCollidable && shapes.size() == 0) {
-    //   auto shape = new RectangleDynamicShape(getGame(), rect.width, rect.height);
-    //   shape->AttachToBody(getGame()->GetPhysicalWorld(), mBody);
-    //   mShapes.push_back(shape);
-    // }
   }
 
   SpriteDynamicEntity::~SpriteDynamicEntity() {
