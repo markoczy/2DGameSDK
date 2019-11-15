@@ -2,7 +2,7 @@
 
 namespace game {
 
-  StaticShapeDefinition::StaticShapeDefinition(Shape* shape, float friction, float elasticity, bool isSensor) : mShape(shape), mFriction(friction), mElasticity(elasticity), mIsSensor(isSensor) {}
+  StaticShapeDefinition::StaticShapeDefinition(float friction, float elasticity, bool isSensor) : mFriction(friction), mElasticity(elasticity), mIsSensor(isSensor) {}
 
   void StaticShapeDefinition::InitProperties(cpSpace*, cpBody*, cpShape* shape) {
     cpShapeSetCollisionType(shape, CollisionType::Default);

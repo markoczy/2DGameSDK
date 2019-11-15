@@ -2,7 +2,7 @@
 
 namespace game {
 
-  KinematicEntity::KinematicEntity(int type, Game* game, std::vector<KinematicShape*> shapes, bool isCollidable) : Entity(type, game), mShapes(shapes), mIsCollidable(isCollidable) {
+  KinematicEntity::KinematicEntity(int type, Game* game, std::vector<Shape*> shapes, bool isCollidable) : Entity(type, game), mShapes(shapes), mIsCollidable(isCollidable) {
     mBody = cpSpaceAddBody(game->GetPhysicalWorld(), cpBodyNewKinematic());
     cpBodySetUserData(mBody, this);
 
@@ -41,7 +41,6 @@ namespace game {
   }
 
   bool KinematicEntity::transform(sf::Transform transform) {
-    auto conv = getGame()->GetPoseConverter();
     auto origin = transform.transformPoint(sf::Vector2f());
     auto xUnit = transform.transformPoint(sf::Vector2f(1, 0));
     auto dir = xUnit - origin;

@@ -2,7 +2,7 @@
 
 namespace game {
 
-  KinematicShapeDefinition::KinematicShapeDefinition(Shape* shape, float friction, float elasticity, bool isSensor) : mShape(shape), mFriction(friction), mElasticity(elasticity), mIsSensor(isSensor) {}
+  KinematicShapeDefinition::KinematicShapeDefinition(float friction, float elasticity, bool isSensor) : mFriction(friction), mElasticity(elasticity), mIsSensor(isSensor) {}
 
   void KinematicShapeDefinition::InitProperties(cpSpace*, cpBody*, cpShape* shape) {
     cpShapeSetCollisionType(shape, CollisionType::Default);

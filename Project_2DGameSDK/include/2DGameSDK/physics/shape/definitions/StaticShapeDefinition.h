@@ -4,20 +4,20 @@
 #include <chipmunk/chipmunk.h>
 
 #include <2DGameSDK/dll/gamesdk_dll.h>
-#include <2DGameSDK/physics/shape/Shape.h>
+#include <2DGameSDK/physics/CollisionType.h>
+#include <2DGameSDK/physics/shape/definitions/ShapeDefinition.h>
 
 namespace game {
-  class GAMESDK_DLL StaticShapeDefinition : virtual public Shape {
+  class GAMESDK_DLL StaticShapeDefinition : public ShapeDefinition {
   public:
-    StaticShapeDefinition(Shape* shape, float friction, float elasticity, bool isSensor = true);
+    StaticShapeDefinition(float friction, float elasticity, bool isSensor = true);
 
     virtual void InitProperties(cpSpace* space, cpBody* body, cpShape* shape);
 
   protected:
-    Shape* mShape = nullptr;
-    bool mIsSensor = false;
     float mFriction = 0;
     float mElasticity = 0;
+    bool mIsSensor = false;
   };
 } // namespace game
 

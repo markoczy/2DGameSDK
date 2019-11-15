@@ -10,13 +10,14 @@
 #include <2DGameSDK/core/Game.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
 #include <2DGameSDK/physics/shape/ShapeType.h>
+#include <2DGameSDK/physics/shape/definitions/ShapeDefinition.h>
 
 namespace game {
   // class Game;
 
   class GAMESDK_DLL Shape {
   public:
-    Shape(ShapeType type, Game* game);
+    Shape(ShapeType type, Game* game, ShapeDefinition* definition);
 
     void AttachToBody(cpSpace* space, cpBody* body);
 
@@ -35,11 +36,11 @@ namespace game {
     float getVisualRotation();
 
     virtual cpShape* initShape(cpSpace* space, cpBody* body) = 0;
-    virtual void initProperties(cpSpace* space, cpBody* body, cpShape* shape) = 0;
 
   private:
     ShapeType mType;
     Game* mGame = nullptr;
+    ShapeDefinition* mDefinition = nullptr;
     cpSpace* mSpace = nullptr;
     cpBody* mBody = nullptr;
     cpShape* mShape = nullptr;

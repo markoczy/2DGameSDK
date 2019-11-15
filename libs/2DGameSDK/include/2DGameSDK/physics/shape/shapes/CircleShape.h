@@ -8,11 +8,12 @@
 #include <2DGameSDK/physics/CollisionType.h>
 #include <2DGameSDK/physics/shape/Shape.h>
 #include <2DGameSDK/physics/shape/ShapeType.h>
+#include <2DGameSDK/physics/shape/definitions/ShapeDefinition.h>
 
 namespace game {
-  class GAMESDK_DLL CircleShape : virtual public Shape {
+  class GAMESDK_DLL CircleShape : public Shape {
   public:
-    CircleShape(Game* game, float radius, cpVect offset = cpv(0, 0));
+    CircleShape(Game* game, ShapeDefinition* definition, float radius, cpVect offset = cpv(0, 0));
 
     virtual void Render(sf::RenderTarget* target, sf::Color color = sf::Color::Black, float stroke = 0.5);
 

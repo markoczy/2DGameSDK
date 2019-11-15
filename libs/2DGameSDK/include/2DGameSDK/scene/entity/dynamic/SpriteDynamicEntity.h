@@ -8,7 +8,7 @@
 
 #include <2DGameSDK/core/Game.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
-#include <2DGameSDK/physics/shape/dynamic/RectangleDynamicShape.h>
+#include <2DGameSDK/physics/shape/Shape.h>
 #include <2DGameSDK/scene/entity/definitions/DynamicEntity.h>
 
 namespace game {
@@ -18,7 +18,7 @@ namespace game {
     SpriteDynamicEntity(int type,
                         Game* game,
                         sf::Texture* texture,
-                        std::vector<DynamicShape*> shapes = std::vector<DynamicShape*>(),
+                        std::vector<Shape*> shapes = std::vector<Shape*>(),
                         bool isCollidable = false);
     ~SpriteDynamicEntity();
 

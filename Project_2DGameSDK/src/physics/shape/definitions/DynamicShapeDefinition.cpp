@@ -1,7 +1,7 @@
 #include <2DGameSDK/physics/shape/definitions/DynamicShapeDefinition.h>
 
 namespace game {
-  DynamicShapeDefinition::DynamicShapeDefinition(Shape* shape, float mass, float friction, float elasticity, bool useDensityForMass) : mShape(shape), mMass(mass), mFriction(friction), mElasticity(elasticity), mUseDensity(useDensityForMass) {}
+  DynamicShapeDefinition::DynamicShapeDefinition(float mass, float friction, float elasticity, bool useDensityForMass) : mMass(mass), mFriction(friction), mElasticity(elasticity), mUseDensity(useDensityForMass) {}
 
   void DynamicShapeDefinition::InitProperties(cpSpace*, cpBody*, cpShape* shape) {
     cpShapeSetCollisionType(shape, CollisionType::Default);

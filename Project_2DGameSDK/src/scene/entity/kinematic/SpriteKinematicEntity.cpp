@@ -10,7 +10,7 @@ namespace game {
 
   using namespace helpers;
 
-  SpriteKinematicEntity::SpriteKinematicEntity(int type, Game* game, sf::Texture* texture, std::vector<KinematicShape*> shapes, bool isCollidable) : KinematicEntity(type, game, shapes, isCollidable), mSprite(*texture) {
+  SpriteKinematicEntity::SpriteKinematicEntity(int type, Game* game, sf::Texture* texture, std::vector<Shape*> shapes, bool isCollidable) : KinematicEntity(type, game, shapes, isCollidable), mSprite(*texture) {
     auto rect = mSprite.getLocalBounds();
     mSprite.setOrigin(rect.width / 2, rect.height / 2);
   }

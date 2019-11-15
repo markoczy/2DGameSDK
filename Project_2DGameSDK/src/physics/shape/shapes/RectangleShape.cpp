@@ -2,7 +2,7 @@
 
 namespace game {
 
-  RectangleShape::RectangleShape(Game* game, float width, float height) : Shape(ShapeType::Rectangle, game), mWidth(width), mHeight(height) {
+  RectangleShape::RectangleShape(Game* game, ShapeDefinition* definition, float width, float height) : Shape(ShapeType::Rectangle, game, definition), mWidth(width), mHeight(height) {
   }
 
   void RectangleShape::Render(sf::RenderTarget* target, sf::Color color, float stroke) {
@@ -19,7 +19,6 @@ namespace game {
   }
 
   cpShape* RectangleShape::initShape(cpSpace*, cpBody* body) {
-    auto conv = getGame()->GetPoseConverter();
     auto shape = cpBoxShapeNew(body, mWidth, mHeight, 0);
     return shape;
   }

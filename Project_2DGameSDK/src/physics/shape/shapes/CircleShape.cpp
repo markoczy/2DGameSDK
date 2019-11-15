@@ -2,7 +2,7 @@
 
 namespace game {
 
-  CircleShape::CircleShape(Game* game, float radius, cpVect offset) : Shape(ShapeType::Polygon, game), mRadius(radius), mOffset(offset) {
+  CircleShape::CircleShape(Game* game, ShapeDefinition* definition, float radius, cpVect offset) : Shape(ShapeType::Polygon, game, definition), mRadius(radius), mOffset(offset) {
   }
 
   void CircleShape::Render(sf::RenderTarget* target, sf::Color color, float stroke) {

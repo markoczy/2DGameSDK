@@ -10,9 +10,9 @@
 #include <2DGameSDK/physics/shape/ShapeType.h>
 
 namespace game {
-  class GAMESDK_DLL RectangleShape : virtual public Shape {
+  class GAMESDK_DLL RectangleShape : public Shape {
   public:
-    RectangleShape(Game* game, float width, float height);
+    RectangleShape(Game* game, ShapeDefinition* definition, float width, float height);
 
     virtual void Render(sf::RenderTarget* target, sf::Color color = sf::Color::Black, float stroke = 0.5);
 

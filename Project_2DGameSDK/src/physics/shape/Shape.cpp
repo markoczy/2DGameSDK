@@ -2,14 +2,14 @@
 
 namespace game {
 
-  Shape::Shape(ShapeType type, Game* game) : mType(type), mGame(game) {}
+  Shape::Shape(ShapeType type, Game* game, ShapeDefinition* definition) : mType(type), mGame(game), mDefinition(definition) {}
 
   void Shape::AttachToBody(cpSpace* space, cpBody* body) {
     mSpace = space;
     mBody = body;
 
     mShape = initShape(space, body);
-    initProperties(space, body, mShape);
+    mDefinition->InitProperties(space, body, mShape);
     cpSpaceAddShape(space, mShape);
   }
 
@@ -46,9 +46,6 @@ namespace game {
     rect.setOutlineThickness(stroke);
     rect.setFillColor(sf::Color::Transparent);
     target->draw(rect);
-
-    // LOGD("bb.l: " << bb.l << ", bb.t: " << bb.t << ", bb.r - bb.l: " << bb.r - bb.l << ", bb.t - bb.b: " << bb.t - bb.b);
-    // LOGD("visBB.l: " << visBB.left << ", visBB.t: " << visBB.top << ", visBB.width: " << visBB.width << ", visBB.height: " << visBB.height);
   }
 
   Game* Shape::getGame() {

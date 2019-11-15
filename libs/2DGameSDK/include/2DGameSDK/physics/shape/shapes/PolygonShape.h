@@ -10,12 +10,13 @@
 #include <2DGameSDK/physics/CollisionType.h>
 #include <2DGameSDK/physics/shape/Shape.h>
 #include <2DGameSDK/physics/shape/ShapeType.h>
+#include <2DGameSDK/physics/shape/definitions/ShapeDefinition.h>
 
 namespace game {
 
-  class GAMESDK_DLL PolygonShape : virtual public Shape {
+  class GAMESDK_DLL PolygonShape : public Shape {
   public:
-    PolygonShape(Game* game, std::vector<cpVect> vertices);
+    PolygonShape(Game* game, ShapeDefinition* definition, std::vector<cpVect> vertices);
 
     virtual void Render(sf::RenderTarget* target, sf::Color color = sf::Color::Black, float stroke = 0.5);
 

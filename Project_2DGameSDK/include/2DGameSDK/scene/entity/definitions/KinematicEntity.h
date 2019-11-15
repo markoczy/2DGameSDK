@@ -14,8 +14,7 @@
 #include <2DGameSDK/core/Game.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
 #include <2DGameSDK/physics/CollisionEventType.h>
-#include <2DGameSDK/physics/shape/definitions/KinematicShape.h>
-#include <2DGameSDK/physics/shape/kinematic/RectangleKinematicShape.h>
+#include <2DGameSDK/physics/shape/Shape.h>
 #include <2DGameSDK/scene/entity/Entity.h>
 
 #include <SFML/Graphics.hpp>
@@ -37,7 +36,7 @@ namespace game {
      * @param type type The Entity Type (does not affect anything and is meant
      *        to be used freely to identify entities of some kind)
      */
-    KinematicEntity(int type, Game* game, std::vector<KinematicShape*> shapes = std::vector<KinematicShape*>(), bool isCollidable = false);
+    KinematicEntity(int type, Game* game, std::vector<Shape*> shapes = std::vector<Shape*>(), bool isCollidable = false);
 
     /**
      * @brief Destroys the Transformable Entity object
@@ -57,7 +56,7 @@ namespace game {
     sf::Transform mAccTransform;
     sf::Transform mCombinedTransform;
     cpBody* mBody = nullptr;
-    std::vector<KinematicShape*> mShapes;
+    std::vector<Shape*> mShapes;
     bool mIsCollidable;
 
     virtual bool setTransform(sf::Transform transform);

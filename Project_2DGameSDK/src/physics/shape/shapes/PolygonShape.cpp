@@ -2,7 +2,7 @@
 
 namespace game {
 
-  PolygonShape::PolygonShape(Game* game, std::vector<cpVect> vertices) : Shape(ShapeType::Polygon, game), mVertices(vertices) {
+  PolygonShape::PolygonShape(Game* game, ShapeDefinition* definition, std::vector<cpVect> vertices) : Shape(ShapeType::Polygon, game, definition), mVertices(vertices) {
   }
 
   void PolygonShape::Render(sf::RenderTarget* target, sf::Color color, float stroke) {

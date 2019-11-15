@@ -12,7 +12,7 @@ public:
                    sf::Texture* texture,
                    float speed,
                    float jumpForce,
-                   vector<DynamicShape*> shapes,
+                   vector<Shape*> shapes,
                    Observable<sf::Keyboard::Key>* up,
                    Observable<sf::Keyboard::Key>* down,
                    Observable<sf::Keyboard::Key>* left,
@@ -139,17 +139,12 @@ int demo1() {
 
   auto scene = new SceneGraph();
 
-  auto groundShape = new RectangleStaticShape(game, 200, 60, false);
-  groundShape->SetElasticity(1);
-  groundShape->SetFriction(0.3);
+  auto groundShape = ShapeFactory::CreateStaticRectangleShape(game, 200, 60, 1, 0.3);
   auto ground = new SpriteStaticEntity(1, game, boxTx, {groundShape}, true);
   ground->SetSize(sf::Vector2f(200, 60));
   ground->SetTransform(sf::Transform().translate(100, 200));
 
-  auto shape = new RectangleDynamicShape(game, 5, 5);
-  shape->SetElasticity(1);
-  shape->SetDensity(0.1);
-  shape->SetFriction(0.3);
+  auto shape = ShapeFactory::CreateDynamicRectangleShape(game, 5, 5, 0.1, 0.3, 1, true);
   auto box = new SpriteDynamicEntity(2, game, boxTx, {shape}, true);
   box->SetSize(sf::Vector2f(5, 5));
   box->SetTransform(sf::Transform().translate(100, 100).rotate(10));
@@ -168,10 +163,7 @@ int demo1() {
 }
 
 SpriteStaticEntity* getBox(Game* game, float w, float h, float x, float y) {
-  auto shape = new RectangleStaticShape(game, w, h, false);
-  shape->SetElasticity(0.1);
-  shape->SetFriction(0.7);
-
+  auto shape = ShapeFactory::CreateStaticRectangleShape(game, w, h, 0.7, 0.1, false);
   auto ret = new SpriteStaticEntity(_GROUND_TYPE, game, AssetManager::GetTexture("res/textures/box/box.png"), {shape}, true);
   ret->SetSize(sf::Vector2f(w, h));
   ret->SetTransform(sf::Transform().translate(x, y));
@@ -212,9 +204,7 @@ int demo2() {
 
   float groundW = 50;
   float groundH = 5;
-  auto groundShape = new RectangleStaticShape(game, groundW, groundH, false);
-  groundShape->SetElasticity(0.1);
-  groundShape->SetFriction(0.7);
+  auto groundShape = ShapeFactory::CreateStaticRectangleShape(game, groundW, groundH, 0.7, 0.1);
   auto ground = new SpriteStaticEntity(_GROUND_TYPE, game, boxTx, {groundShape}, true);
   ground->SetSize(sf::Vector2f(groundW, groundH));
   ground->SetTransform(sf::Transform().translate(25, 47.5));
@@ -223,10 +213,7 @@ int demo2() {
   float playerH = 1;
   float playerMass = 5;
   // auto shape = new CircleDynamicShape(game, 1);
-  auto shape = new RectangleDynamicShape(game, playerW, playerH);
-  shape->SetElasticity(0.1);
-  // shape->SetDensity(1);
-  shape->SetFriction(0.7);
+  auto shape = ShapeFactory::CreateDynamicRectangleShape(game, playerW, playerH, 1, 0.7, 0.1);
   auto player = new PhysPlayerEntity(game, boxTx, 50, 1100, {shape}, upPressed, downPressed, leftPressed, rightPressed);
   player->SetSize(sf::Vector2f(playerW, playerH));
   player->SetTransform(sf::Transform().translate(10, 15));
@@ -307,9 +294,7 @@ int demo3() {
 
   float groundW = 50;
   float groundH = 5;
-  auto groundShape = new RectangleStaticShape(game, groundW, groundH, false);
-  groundShape->SetElasticity(0.1);
-  groundShape->SetFriction(0.7);
+  auto groundShape = ShapeFactory::CreateStaticRectangleShape(game, groundW, groundH, 0.7, 0.1, false);
   auto ground = new SpriteStaticEntity(_GROUND_TYPE, game, boxTx, {groundShape}, true);
   ground->SetSize(sf::Vector2f(groundW, groundH));
   ground->SetTransform(sf::Transform().translate(25, 2.5));
@@ -319,10 +304,7 @@ int demo3() {
   float playerH = 1;
   float playerMass = 5;
   // auto shape = new CircleDynamicShape(game, 1);
-  auto shape = new RectangleDynamicShape(game, playerW, playerH);
-  shape->SetElasticity(0.1);
-  // shape->SetDensity(1);
-  shape->SetFriction(0.7);
+  auto shape = ShapeFactory::CreateDynamicRectangleShape(game, playerW, playerH, 1, 0.7, 0.1);
   auto player = new PhysPlayerEntity(game, boxTx, 50, 1100, {shape}, upPressed, downPressed, leftPressed, rightPressed);
   player->SetSize(sf::Vector2f(playerW, playerH));
   player->SetTransform(sf::Transform().translate(10, 15));
