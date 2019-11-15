@@ -7,7 +7,7 @@ namespace game {
 
   using namespace helpers;
 
-  SpriteDynamicEntity::SpriteDynamicEntity(int type, Game* game, sf::Texture* texture, std::vector<Shape*> shapes, bool isCollidable) : DynamicEntity(type, game, shapes, isCollidable), mSprite(*texture) {
+  SpriteDynamicEntity::SpriteDynamicEntity(int type, Game* game, sf::Texture* texture, std::vector<Shape<DynamicShapeDefinition>*> shapes, bool isCollidable) : DynamicEntity(type, game, shapes, isCollidable), mSprite(*texture) {
     auto rect = mSprite.getTextureRect();
     mSprite.setOrigin(rect.width / 2, rect.height / 2);
   }

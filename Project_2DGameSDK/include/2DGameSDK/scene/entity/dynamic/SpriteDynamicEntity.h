@@ -9,6 +9,7 @@
 #include <2DGameSDK/core/Game.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
 #include <2DGameSDK/physics/shape/Shape.h>
+#include <2DGameSDK/physics/shape/definitions/DynamicShapeDefinition.h>
 #include <2DGameSDK/scene/entity/definitions/DynamicEntity.h>
 
 namespace game {
@@ -18,7 +19,7 @@ namespace game {
     SpriteDynamicEntity(int type,
                         Game* game,
                         sf::Texture* texture,
-                        std::vector<Shape*> shapes = std::vector<Shape*>(),
+                        std::vector<Shape<DynamicShapeDefinition>*> shapes = std::vector<Shape<DynamicShapeDefinition>*>(),
                         bool isCollidable = false);
     ~SpriteDynamicEntity();
 

@@ -11,17 +11,31 @@
 #include <2DGameSDK/physics/shape/definitions/ShapeDefinition.h>
 
 namespace game {
-  class GAMESDK_DLL CircleShape : public Shape {
+  template <class TDefinition>
+  class GAMESDK_DLL CircleShape : public Shape<TDefinition> {
   public:
-    CircleShape(Game* game, ShapeDefinition* definition, float radius, cpVect offset = cpv(0, 0));
+    CircleShape(Game* game, TDefinition* definition, float radius, cpVect offset = cpv(0, 0)) : Shape<TDefinition>(ShapeType::Polygon, game, definition), mRadius(radius), mOffset(offset) {
+    }
 
-    virtual void Render(sf::RenderTarget* target, sf::Color color = sf::Color::Black, float stroke = 0.5);
+    virtual void Render(sf::RenderTarget* target, sf::Color color = sf::Color::Black, float stroke = 0.5) {
+      auto shape = sf::CircleShape(mRadius);
+      shape.setOrigin(sf::Vector2f(mRadius, mRadius));
+      shape.setPosition(Shape<TDefinition>::getVisualPosition());
+      shape.setRotation(Shape<TDefinition>::getVisualRotation());
+      shape.setOutlineColor(color);
+      shape.setOutlineThickness(stroke);
+      shape.setFillColor(sf::Color::Transparent);
+      target->draw(shape);
+    }
 
   protected:
     float mRadius;
     cpVect mOffset;
 
-    virtual cpShape* initShape(cpSpace* space, cpBody* body);
+    virtual cpShape* initShape(cpSpace*, cpBody* body) {
+      auto shape = cpCircleShapeNew(body, mRadius, mOffset);
+      return shape;
+    }
   };
 
 } // namespace game

@@ -15,25 +15,71 @@
 namespace game {
   // class Game;
 
+  template <class TDefinition>
   class GAMESDK_DLL Shape {
   public:
-    Shape(ShapeType type, Game* game, ShapeDefinition* definition);
+    Shape(ShapeType type, Game* game, TDefinition* definition) : mType(type), mGame(game), mDefinition(definition) {}
 
-    void AttachToBody(cpSpace* space, cpBody* body);
+    void AttachToBody(cpSpace* space, cpBody* body) {
+      mSpace = space;
+      mBody = body;
+
+      mShape = initShape(space, body);
+      mDefinition->InitProperties(space, body, mShape);
+      cpSpaceAddShape(space, mShape);
+    }
 
     virtual void Render(sf::RenderTarget* target, sf::Color color = sf::Color::Black, float stroke = 0.5) = 0;
 
-    virtual void RenderAABB(sf::RenderTarget* target, sf::Color color = sf::Color::Black, float stroke = 0.5);
+    virtual void RenderAABB(sf::RenderTarget* target, sf::Color color = sf::Color::Black, float stroke = 0.5) {
+      auto bb = cpShapeCacheBB(mShape);
 
-    ShapeType GetType();
-    cpSpace* GetRefSpace();
-    cpBody* GetRefBody();
-    cpShape* GetRefShape();
+      auto conv = getGame()->GetPoseConverter();
+      auto topLeftVis = conv->GetVisualPos(cpv(bb.l, bb.t));
+      auto bottomRightVis = conv->GetVisualPos(cpv(bb.r, bb.b));
+      auto visBB = sf::FloatRect(topLeftVis.x,
+                                 topLeftVis.y,
+                                 bottomRightVis.x - topLeftVis.x,
+                                 bottomRightVis.y - topLeftVis.y);
+
+      auto rect = sf::RectangleShape(sf::Vector2f(visBB.width, visBB.height));
+      rect.setPosition(visBB.left, visBB.top);
+      rect.setOutlineColor(color);
+      rect.setOutlineThickness(stroke);
+      rect.setFillColor(sf::Color::Transparent);
+      target->draw(rect);
+    }
+
+    ShapeType GetType() {
+      return mType;
+    }
+
+    cpSpace* GetRefSpace() {
+      return mSpace;
+    }
+
+    cpBody* GetRefBody() {
+      return mBody;
+    }
+
+    cpShape* GetRefShape() {
+      return mShape;
+    }
 
   protected:
-    Game* getGame();
-    sf::Vector2f getVisualPosition();
-    float getVisualRotation();
+    Game* getGame() {
+      return mGame;
+    }
+
+    sf::Vector2f getVisualPosition() {
+      auto converter = getGame()->GetPoseConverter();
+      return converter->GetVisualPos(cpBodyGetPosition(mBody));
+    }
+
+    float getVisualRotation() {
+      auto converter = getGame()->GetPoseConverter();
+      return converter->GetVisualAngle(cpBodyGetAngle(mBody));
+    }
 
     virtual cpShape* initShape(cpSpace* space, cpBody* body) = 0;
 
@@ -45,6 +91,7 @@ namespace game {
     cpBody* mBody = nullptr;
     cpShape* mShape = nullptr;
   };
+
 } // namespace game
 
 #endif

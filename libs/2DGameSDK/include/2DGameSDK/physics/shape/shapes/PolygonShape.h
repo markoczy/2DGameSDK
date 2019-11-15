@@ -14,16 +14,32 @@
 
 namespace game {
 
-  class GAMESDK_DLL PolygonShape : public Shape {
+  template <class TDefinition>
+  class GAMESDK_DLL PolygonShape : public Shape<TDefinition> {
   public:
-    PolygonShape(Game* game, ShapeDefinition* definition, std::vector<cpVect> vertices);
+    PolygonShape(Game* game, TDefinition* definition, std::vector<cpVect> vertices) : Shape<TDefinition>(ShapeType::Polygon, game, definition), mVertices(vertices) {}
 
-    virtual void Render(sf::RenderTarget* target, sf::Color color = sf::Color::Black, float stroke = 0.5);
+    virtual void Render(sf::RenderTarget* target, sf::Color color = sf::Color::Black, float stroke = 0.5) {
+      auto shape = sf::ConvexShape(mVertices.size());
+      for(size_t i = 0; i < mVertices.size(); i++) {
+        shape.setPoint(i, sf::Vector2f(mVertices[i].x, -mVertices[i].y));
+      }
+
+      shape.setPosition(Shape<TDefinition>::getVisualPosition());
+      shape.setRotation(Shape<TDefinition>::getVisualRotation());
+      shape.setOutlineColor(color);
+      shape.setOutlineThickness(stroke);
+      shape.setFillColor(sf::Color::Transparent);
+      target->draw(shape);
+    }
 
   protected:
     std::vector<cpVect> mVertices;
 
-    virtual cpShape* initShape(cpSpace* space, cpBody* body);
+    virtual cpShape* initShape(cpSpace*, cpBody* body) {
+      auto shape = cpPolyShapeNewRaw(body, mVertices.size(), &mVertices[0], 0);
+      return shape;
+    }
   };
 } // namespace game
 

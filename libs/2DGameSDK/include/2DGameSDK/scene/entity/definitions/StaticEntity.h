@@ -5,6 +5,7 @@
 
 #include <2DGameSDK/dll/gamesdk_dll.h>
 #include <2DGameSDK/physics/shape/Shape.h>
+#include <2DGameSDK/physics/shape/definitions/StaticShapeDefinition.h>
 #include <2DGameSDK/scene/entity/Entity.h>
 
 namespace game {
@@ -12,7 +13,7 @@ namespace game {
   public:
     StaticEntity(int type,
                  Game* game,
-                 std::vector<Shape*> shapes = std::vector<Shape*>(),
+                 std::vector<Shape<StaticShapeDefinition>*> shapes = std::vector<Shape<StaticShapeDefinition>*>(),
                  bool isCollidable = false);
 
     ~StaticEntity();
@@ -24,7 +25,7 @@ namespace game {
 
   protected:
     bool mIsCollidable;
-    std::vector<Shape*> mShapes;
+    std::vector<Shape<StaticShapeDefinition>*> mShapes;
     cpBody* mBody = nullptr;
   };
 } // namespace game

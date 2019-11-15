@@ -6,6 +6,7 @@
 #include <2DGameSDK/core/Game.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
 #include <2DGameSDK/physics/shape/Shape.h>
+#include <2DGameSDK/physics/shape/definitions/DynamicShapeDefinition.h>
 #include <2DGameSDK/scene/entity/Entity.h>
 
 namespace game {
@@ -14,7 +15,7 @@ namespace game {
   public:
     DynamicEntity(int type,
                   Game* game,
-                  std::vector<Shape*> shapes = std::vector<Shape*>(),
+                  std::vector<Shape<DynamicShapeDefinition>*> shapes = std::vector<Shape<DynamicShapeDefinition>*>(),
                   bool isCollidable = false);
 
     ~DynamicEntity();
@@ -34,7 +35,7 @@ namespace game {
 
   protected:
     bool mIsCollidable;
-    std::vector<Shape*> mShapes;
+    std::vector<Shape<DynamicShapeDefinition>*> mShapes;
     cpBody* mBody = nullptr;
   };
 

@@ -1,48 +1,48 @@
 #include <2DGameSDK/physics/shape/ShapeFactory.h>
 
 namespace game {
-  RectangleShape* ShapeFactory::CreateStaticRectangleShape(Game* game, float width, float height, float friction, float elasticity, bool isSensor) {
+  RectangleShape<StaticShapeDefinition>* ShapeFactory::CreateStaticRectangleShape(Game* game, float width, float height, float friction, float elasticity, bool isSensor) {
     auto def = new StaticShapeDefinition(friction, elasticity, isSensor);
-    return new RectangleShape(game, def, width, height);
+    return new RectangleShape<StaticShapeDefinition>(game, def, width, height);
   }
 
-  RectangleShape* ShapeFactory::CreateKinematicRectangleShape(Game* game, float width, float height, float friction, float elasticity, bool isSensor) {
+  RectangleShape<KinematicShapeDefinition>* ShapeFactory::CreateKinematicRectangleShape(Game* game, float width, float height, float friction, float elasticity, bool isSensor) {
     auto def = new KinematicShapeDefinition(friction, elasticity, isSensor);
-    return new RectangleShape(game, def, width, height);
+    return new RectangleShape<KinematicShapeDefinition>(game, def, width, height);
   }
 
-  RectangleShape* ShapeFactory::CreateDynamicRectangleShape(Game* game, float width, float height, float mass, float friction, float elasticity, bool useDensityForMass) {
+  RectangleShape<DynamicShapeDefinition>* ShapeFactory::CreateDynamicRectangleShape(Game* game, float width, float height, float mass, float friction, float elasticity, bool useDensityForMass) {
     auto def = new DynamicShapeDefinition(mass, friction, elasticity, useDensityForMass);
-    return new RectangleShape(game, def, width, height);
+    return new RectangleShape<DynamicShapeDefinition>(game, def, width, height);
   }
 
-  PolygonShape* ShapeFactory::CreateStaticPolygonShape(Game* game, std::vector<cpVect> vertices, float friction, float elasticity, bool isSensor) {
+  PolygonShape<StaticShapeDefinition>* ShapeFactory::CreateStaticPolygonShape(Game* game, std::vector<cpVect> vertices, float friction, float elasticity, bool isSensor) {
     auto def = new StaticShapeDefinition(friction, elasticity, isSensor);
-    return new PolygonShape(game, def, vertices);
+    return new PolygonShape<StaticShapeDefinition>(game, def, vertices);
   }
 
-  PolygonShape* ShapeFactory::CreateKinematicPolygonShape(Game* game, std::vector<cpVect> vertices, float friction, float elasticity, bool isSensor) {
+  PolygonShape<KinematicShapeDefinition>* ShapeFactory::CreateKinematicPolygonShape(Game* game, std::vector<cpVect> vertices, float friction, float elasticity, bool isSensor) {
     auto def = new KinematicShapeDefinition(friction, elasticity, isSensor);
-    return new PolygonShape(game, def, vertices);
+    return new PolygonShape<KinematicShapeDefinition>(game, def, vertices);
   }
 
-  PolygonShape* ShapeFactory::CreateDynamicPolygonShape(Game* game, std::vector<cpVect> vertices, float mass, float friction, float elasticity, bool useDensityForMass) {
+  PolygonShape<DynamicShapeDefinition>* ShapeFactory::CreateDynamicPolygonShape(Game* game, std::vector<cpVect> vertices, float mass, float friction, float elasticity, bool useDensityForMass) {
     auto def = new DynamicShapeDefinition(mass, friction, elasticity, useDensityForMass);
-    return new PolygonShape(game, def, vertices);
+    return new PolygonShape<DynamicShapeDefinition>(game, def, vertices);
   }
 
-  CircleShape* ShapeFactory::CreateStaticCircleShape(Game* game, float radius, float friction, float elasticity, cpVect offset, bool isSensor) {
+  CircleShape<StaticShapeDefinition>* ShapeFactory::CreateStaticCircleShape(Game* game, float radius, float friction, float elasticity, cpVect offset, bool isSensor) {
     auto def = new StaticShapeDefinition(friction, elasticity, isSensor);
-    return new CircleShape(game, def, radius, offset);
+    return new CircleShape<StaticShapeDefinition>(game, def, radius, offset);
   }
 
-  CircleShape* ShapeFactory::CreateKinematicCircleShape(Game* game, float radius, float friction, float elasticity, cpVect offset, bool isSensor) {
+  CircleShape<KinematicShapeDefinition>* ShapeFactory::CreateKinematicCircleShape(Game* game, float radius, float friction, float elasticity, cpVect offset, bool isSensor) {
     auto def = new KinematicShapeDefinition(friction, elasticity, isSensor);
-    return new CircleShape(game, def, radius, offset);
+    return new CircleShape<KinematicShapeDefinition>(game, def, radius, offset);
   }
 
-  CircleShape* ShapeFactory::CreateDynamicCircleShape(Game* game, float radius, float mass, float friction, float elasticity, cpVect offset, bool useDensityForMass) {
+  CircleShape<DynamicShapeDefinition>* ShapeFactory::CreateDynamicCircleShape(Game* game, float radius, float mass, float friction, float elasticity, cpVect offset, bool useDensityForMass) {
     auto def = new DynamicShapeDefinition(mass, friction, elasticity, useDensityForMass);
-    return new CircleShape(game, def, radius, offset);
+    return new CircleShape<DynamicShapeDefinition>(game, def, radius, offset);
   }
 } // namespace game

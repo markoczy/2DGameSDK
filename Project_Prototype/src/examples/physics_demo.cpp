@@ -12,7 +12,7 @@ public:
                    sf::Texture* texture,
                    float speed,
                    float jumpForce,
-                   vector<Shape*> shapes,
+                   vector<Shape<DynamicShapeDefinition>*> shapes,
                    Observable<sf::Keyboard::Key>* up,
                    Observable<sf::Keyboard::Key>* down,
                    Observable<sf::Keyboard::Key>* left,

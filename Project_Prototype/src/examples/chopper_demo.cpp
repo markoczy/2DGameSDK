@@ -17,9 +17,9 @@ public:
   RotatingEntity(Game* game,
                  int type,
                  sf::Texture* texture,
-                 Shape* shape,
+                 Shape<KinematicShapeDefinition>* shape,
                  float rotPerTick,
-                 sf::Vector2f pos = sf::Vector2f()) : SpriteKinematicEntity(type, game, texture, vector<Shape*>({shape})), mRot(rotPerTick) {
+                 sf::Vector2f pos = sf::Vector2f()) : SpriteKinematicEntity(type, game, texture, vector<Shape<KinematicShapeDefinition>*>({shape})), mRot(rotPerTick) {
     auto rect = mSprite.getTextureRect();
     mCenter = sf::Vector2f(rect.width / 2, rect.height / 2);
     SetTransform(sf::Transform().translate(pos));
@@ -42,14 +42,14 @@ class ChopperEntity : public SpriteKinematicEntity {
 public:
   ChopperEntity(Game* game,
                 sf::Texture* tex,
-                Shape* shape,
+                Shape<KinematicShapeDefinition>* shape,
                 float speed,
                 float rotSpeed,
                 Observable<sf::Keyboard::Key>* up,
                 Observable<sf::Keyboard::Key>* down,
                 Observable<sf::Keyboard::Key>* left,
                 Observable<sf::Keyboard::Key>* right,
-                sf::Vector2f pos = sf::Vector2f()) : SpriteKinematicEntity(_PLAYER_TYPE, game, tex, vector<Shape*>({shape})), mSpeed(speed), mRotSpeed(rotSpeed) {
+                sf::Vector2f pos = sf::Vector2f()) : SpriteKinematicEntity(_PLAYER_TYPE, game, tex, vector<Shape<KinematicShapeDefinition>*>({shape})), mSpeed(speed), mRotSpeed(rotSpeed) {
     //
     //
     //
@@ -81,7 +81,7 @@ public:
       cout << "mDt: (" << mDt.x << ", " << mDt.y << ")" << endl;
       transform.translate(mDt);
     }
-    auto pos = transform.transformPoint(sf::Vector2f());
+    // auto pos = transform.transformPoint(sf::Vector2f());
     Transform(transform);
     mDt = sf::Vector2f();
     mDw = 0.0;
@@ -155,11 +155,11 @@ private:
   Observer<sf::Keyboard::Key>* mRight;
 };
 
-RectangleShape* getChopperCollisionMask(Game* game) {
+RectangleShape<KinematicShapeDefinition>* getChopperCollisionMask(Game* game) {
   return ShapeFactory::CreateKinematicRectangleShape(game, 16, 32, 0, 0);
 }
 
-PolygonShape* getRotorCollisionMask(Game* game) {
+PolygonShape<KinematicShapeDefinition>* getRotorCollisionMask(Game* game) {
   auto verts = vector<cpVect>();
 
   verts.push_back(cpv(1, 13));
