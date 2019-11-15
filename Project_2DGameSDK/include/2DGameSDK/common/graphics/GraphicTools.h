@@ -25,8 +25,6 @@ namespace game {
 
     static std::tuple<bool, sf::Vector2f> ShapesIntersect(std::vector<sf::Vector2f> shapeA, std::vector<sf::Vector2f> shapeB);
 
-    static sf::Transform GetRotationAroundPoint(sf::Vector2f pt, float angleDeg);
-
     static cpVect GetPhysicalPos(sf::Vector2f visualPos, float totalHeight);
 
     static sf::Vector2f GetVisualPos(cpVect physicalPos, float totalHeight);

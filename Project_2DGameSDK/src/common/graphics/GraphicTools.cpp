@@ -54,14 +54,6 @@ namespace game {
     return _NO_COLLISION;
   }
 
-  sf::Transform GrahicTools::GetRotationAroundPoint(sf::Vector2f pt, float angleDeg) {
-    float tx = pt.x;
-    float ty = pt.y;
-    float phi = constants::DEG_TO_RAD * angleDeg;
-    return sf::Transform(cos(phi), sin(phi), cos(phi) * tx + sin(phi) * ty - tx,
-                         -sin(phi), cos(phi), cos(phi) * ty - sin(phi) * tx - ty, 0, 0, 1);
-  }
-
   cpVect GrahicTools::GetPhysicalPos(sf::Vector2f visualPos, float totalHeight) {
     return cpv(visualPos.x, totalHeight - visualPos.y);
   }

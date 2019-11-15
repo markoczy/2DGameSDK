@@ -26,27 +26,16 @@ namespace game {
   void SpriteKinematicEntity::OnTick() {}
 
   void SpriteKinematicEntity::OnTickEnded() {
-    auto origin = GetCombinedTransform().transformPoint(sf::Vector2f());
-    auto xUnit = GetCombinedTransform().transformPoint(sf::Vector2f(1, 0));
-    auto dir = xUnit - origin;
-    float angle = -atan2(dir.y, dir.x);
+    auto pose = getGame()->GetPoseConverter()->GetPhysicalPose(GetCombinedTransform());
 
-    LOGD("Body Pos: (" << origin.x << ", " << origin.y << "), angle: " << angle);
-    cpBodySetPosition(mBody, cpv(origin.x, origin.y));
-    cpBodySetAngle(mBody, angle);
+    LOGD("Body Pos: (" << pose.origin.x << ", " << pose.origin.y << "), angle: " << pose.angle);
+    cpBodySetPosition(mBody, pose.origin);
+    cpBodySetAngle(mBody, pose.angle);
   }
 
   void SpriteKinematicEntity::OnRender(sf::RenderTarget* target, sf::RenderStates states) {
-    auto origin = GetCombinedTransform().transformPoint(sf::Vector2f());
-    auto xUnit = GetCombinedTransform().transformPoint(sf::Vector2f(1, 0));
-    auto conv = getGame()->GetPoseConverter();
-    auto visOrigin = conv->GetVisualPos(cpv(origin.x, origin.y));
-    auto visXUnit = conv->GetVisualPos(cpv(xUnit.x, xUnit.y));
-    auto visDir = visXUnit - visOrigin;
-    float visAngle = conv->GetVisualAngle(-atan2(visDir.y, visDir.x));
-    // float visAngle = atan2(visDir.y, visDir.x);
-
-    states.transform = states.transform * sf::Transform().translate(visOrigin).rotate(visAngle);
+    auto visTransform = getGame()->GetPoseConverter()->GetVisualTransform(GetCombinedTransform());
+    states.transform = states.transform * visTransform;
     target->draw(mSprite, states);
 
     auto options = getGame()->GetOptions();

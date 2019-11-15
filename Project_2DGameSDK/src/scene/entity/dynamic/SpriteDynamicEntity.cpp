@@ -21,13 +21,15 @@ namespace game {
   }
 
   void SpriteDynamicEntity::OnRender(sf::RenderTarget* target, sf::RenderStates states) {
-    auto conv = getGame()->GetPoseConverter();
-    auto pos = conv->GetVisualPos(cpBodyGetPosition(mBody));
-    auto angle = conv->GetVisualAngle(cpBodyGetAngle(mBody));
-    LOGD("Pos: (" << pos.x << ", " << pos.y << "), Angle: " << angle);
+    auto physPose = Pose<cpVect>{
+        cpBodyGetPosition(mBody),
+        (float)cpBodyGetAngle(mBody)};
+    auto visPose = getGame()->GetPoseConverter()->GetVisualPose(physPose);
 
-    mSprite.setPosition(pos);
-    mSprite.setRotation(angle);
+    LOGD("Pos: (" << visPose.origin.x << ", " << visPose.origin.y << "), Angle: " << visPose.angle);
+
+    mSprite.setPosition(visPose.origin);
+    mSprite.setRotation(visPose.angle);
 
     target->draw(mSprite, states);
 
