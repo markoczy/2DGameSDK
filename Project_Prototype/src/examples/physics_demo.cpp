@@ -179,11 +179,11 @@ SpriteStaticEntity* getBox(Game* game, float w, float h, float x, float y) {
 }
 
 int demo2() {
-  cout << "Physics Demo" << endl;
+  cout << "Physics Demo 2" << endl;
 
   // Create game
   auto game = new Game();
-  game->SetOptions(GameOptions{"My Game", sf::Vector2i(200, 200), 4.0, 60, false, false});
+  game->SetOptions(GameOptions{"My Game", sf::Vector2i(200, 200), 2.0, 60, false, false, 0.5});
 
   // Create Keyboard Events
   auto upPressed = new OnKeyPress(sf::Keyboard::Up);
@@ -229,7 +229,7 @@ int demo2() {
   shape->SetFriction(0.7);
   auto player = new PhysPlayerEntity(game, boxTx, 50, 1100, {shape}, upPressed, downPressed, leftPressed, rightPressed);
   player->SetSize(sf::Vector2f(playerW, playerH));
-  player->SetTransform(sf::Transform().translate(5, 15));
+  player->SetTransform(sf::Transform().translate(10, 15));
   player->SetMass(playerMass);
   player->SetMoment(cpMomentForBox(playerMass, playerW, playerH));
 
@@ -274,6 +274,101 @@ int demo2() {
   return 0;
 }
 
+int demo3() {
+  cout << "Physics Demo 3" << endl;
+  // Create game
+  auto game = new Game();
+  game->SetOptions(GameOptions{"My Game", sf::Vector2i(200, 200), 4.0, 60, false, false, 1});
+
+  // Create Keyboard Events
+  auto upPressed = new OnKeyPress(sf::Keyboard::Up);
+  auto downPressed = new OnKeyPress(sf::Keyboard::Down);
+  auto leftPressed = new OnKeyPress(sf::Keyboard::Left);
+  auto rightPressed = new OnKeyPress(sf::Keyboard::Right);
+
+  auto f1Pressed = new OnKeyPress(sf::Keyboard::F1);
+  auto f2Pressed = new OnKeyPress(sf::Keyboard::F2);
+  auto f3Pressed = new OnKeyPress(sf::Keyboard::F3);
+  auto f4Pressed = new OnKeyPress(sf::Keyboard::F4);
+
+  auto gameController = new GameController(game);
+  f1Pressed->Subscribe(new MethodObserver<sf::Keyboard::Key, GameController>(gameController, &gameController->HandleKeyPress));
+  f2Pressed->Subscribe(new MethodObserver<sf::Keyboard::Key, GameController>(gameController, &gameController->HandleKeyPress));
+  f3Pressed->Subscribe(new MethodObserver<sf::Keyboard::Key, GameController>(gameController, &gameController->HandleKeyPress));
+  f4Pressed->Subscribe(new MethodObserver<sf::Keyboard::Key, GameController>(gameController, &gameController->HandleKeyPress));
+
+  // Create Game World
+  auto world = GameWorldFactory::CreateGameWorld("res/simple_grass/tilemap.json", "", "res/simple_grass/tile_");
+  game->SetWorld(world);
+
+  auto boxTx = AssetManager::GetTexture("res/textures/box/box.png");
+
+  auto scene = new SceneGraph();
+
+  float groundW = 50;
+  float groundH = 5;
+  auto groundShape = new RectangleStaticShape(game, groundW, groundH, false);
+  groundShape->SetElasticity(0.1);
+  groundShape->SetFriction(0.7);
+  auto ground = new SpriteStaticEntity(_GROUND_TYPE, game, boxTx, {groundShape}, true);
+  ground->SetSize(sf::Vector2f(groundW, groundH));
+  ground->SetTransform(sf::Transform().translate(25, 2.5));
+  scene->AddEntity(ground);
+
+  float playerW = 1;
+  float playerH = 1;
+  float playerMass = 5;
+  // auto shape = new CircleDynamicShape(game, 1);
+  auto shape = new RectangleDynamicShape(game, playerW, playerH);
+  shape->SetElasticity(0.1);
+  // shape->SetDensity(1);
+  shape->SetFriction(0.7);
+  auto player = new PhysPlayerEntity(game, boxTx, 50, 1100, {shape}, upPressed, downPressed, leftPressed, rightPressed);
+  player->SetSize(sf::Vector2f(playerW, playerH));
+  player->SetTransform(sf::Transform().translate(10, 15));
+  player->SetMass(playerMass);
+  player->SetMoment(cpMomentForBox(playerMass, playerW, playerH));
+  scene->AddEntity(player);
+
+  // scene->AddEntity(getBox(game, 5, 2.5, 10, 43.75));
+  // scene->AddEntity(getBox(game, 5, 2.5, 15, 43.75));
+  // scene->AddEntity(getBox(game, 5, 2.5, 15, 41.25));
+
+  // scene->AddEntity(getBox(game, 5, 2.5, 25, 43.75));
+  // scene->AddEntity(getBox(game, 5, 2.5, 25, 41.25));
+
+  // scene->AddEntity(getBox(game, 5, 2.5, 30, 41.25));
+  // scene->AddEntity(getBox(game, 5, 2.5, 30, 38.75));
+
+  // scene->AddEntity(getBox(game, 5, 2.5, 40, 36.25));
+
+  // scene->AddEntity(getBox(game, 5, 10, 45, 32.5));
+
+  // scene->AddEntity(getBox(game, 5, 2.5, 30, 22.5));
+  // scene->AddEntity(getBox(game, 5, 2.5, 25, 22.5));
+
+  game->SetScene(scene);
+
+  // Send Events to controller
+  game->AddEvent(upPressed);
+  game->AddEvent(downPressed);
+  game->AddEvent(leftPressed);
+  game->AddEvent(rightPressed);
+
+  game->AddEvent(f1Pressed);
+  game->AddEvent(f2Pressed);
+  game->AddEvent(f3Pressed);
+  game->AddEvent(f4Pressed);
+
+  auto space = game->GetPhysicalWorld();
+  cpSpaceSetGravity(space, cpv(0, -10));
+
+  // Run Game
+  game->Run();
+
+  return 0;
+}
+
 int physicsDemo() {
-  return demo2();
+  return demo3();
 }

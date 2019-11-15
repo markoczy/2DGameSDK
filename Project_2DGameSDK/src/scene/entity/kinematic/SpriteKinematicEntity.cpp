@@ -13,12 +13,6 @@ namespace game {
   SpriteKinematicEntity::SpriteKinematicEntity(int type, Game* game, sf::Texture* texture, std::vector<KinematicShape*> shapes, bool isCollidable) : KinematicEntity(type, game, shapes, isCollidable), mSprite(*texture) {
     auto rect = mSprite.getLocalBounds();
     mSprite.setOrigin(rect.width / 2, rect.height / 2);
-
-    // if(isCollidable) {
-    //   auto shape = new RectangleKinematicShape(getGame(), rect.width, rect.height);
-    //   shape->AttachToBody(getGame()->GetPhysicalWorld(), mBody);
-    //   mShapes.push_back(shape);
-    // }
   }
 
   SpriteKinematicEntity::~SpriteKinematicEntity() {
@@ -32,21 +26,16 @@ namespace game {
   void SpriteKinematicEntity::OnTick() {}
 
   void SpriteKinematicEntity::OnTickEnded() {
-    auto worldHeight = getGame()->GetWorld()->GetBounds().height;
-    auto localOrigin = GetCombinedTransform().transformPoint(sf::Vector2f());
-    auto localXUnit = GetCombinedTransform().transformPoint(sf::Vector2f(1, 0));
-    auto localDir = localXUnit - localOrigin;
-    auto physicalOrigin = GrahicTools::GetPhysicalPos(localOrigin, worldHeight);
+    auto pose = getGame()->GetPoseConverter()->GetPhysicalPose(GetCombinedTransform());
 
-    float angle = -atan2(localDir.y, localDir.x);
-
-    LOGD("Body Pos: (" << physicalOrigin.x << ", " << physicalOrigin.y << "), angle: " << angle);
-    cpBodySetPosition(mBody, physicalOrigin);
-    cpBodySetAngle(mBody, angle);
+    LOGD("Body Pos: (" << pose.origin.x << ", " << pose.origin.y << "), angle: " << pose.angle);
+    cpBodySetPosition(mBody, pose.origin);
+    cpBodySetAngle(mBody, pose.angle);
   }
 
   void SpriteKinematicEntity::OnRender(sf::RenderTarget* target, sf::RenderStates states) {
-    states.transform = states.transform * mCombinedTransform;
+    auto visTransform = getGame()->GetPoseConverter()->GetVisualTransform(GetCombinedTransform());
+    states.transform = states.transform * visTransform;
     target->draw(mSprite, states);
 
     auto options = getGame()->GetOptions();

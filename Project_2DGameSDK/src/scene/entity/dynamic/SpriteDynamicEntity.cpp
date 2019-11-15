@@ -10,12 +10,6 @@ namespace game {
   SpriteDynamicEntity::SpriteDynamicEntity(int type, Game* game, sf::Texture* texture, std::vector<DynamicShape*> shapes, bool isCollidable) : DynamicEntity(type, game, shapes, isCollidable), mSprite(*texture) {
     auto rect = mSprite.getTextureRect();
     mSprite.setOrigin(rect.width / 2, rect.height / 2);
-
-    // if(isCollidable && shapes.size() == 0) {
-    //   auto shape = new RectangleDynamicShape(getGame(), rect.width, rect.height);
-    //   shape->AttachToBody(getGame()->GetPhysicalWorld(), mBody);
-    //   mShapes.push_back(shape);
-    // }
   }
 
   SpriteDynamicEntity::~SpriteDynamicEntity() {
@@ -27,13 +21,15 @@ namespace game {
   }
 
   void SpriteDynamicEntity::OnRender(sf::RenderTarget* target, sf::RenderStates states) {
-    auto conv = getGame()->GetPoseConverter();
-    auto pos = conv->GetVisualPos(cpBodyGetPosition(mBody));
-    auto angle = conv->GetVisualAngle(cpBodyGetAngle(mBody));
-    LOGD("Pos: (" << pos.x << ", " << pos.y << "), Angle: " << angle);
+    auto physPose = Pose<cpVect>{
+        cpBodyGetPosition(mBody),
+        (float)cpBodyGetAngle(mBody)};
+    auto visPose = getGame()->GetPoseConverter()->GetVisualPose(physPose);
 
-    mSprite.setPosition(pos);
-    mSprite.setRotation(angle);
+    LOGD("Pos: (" << visPose.origin.x << ", " << visPose.origin.y << "), Angle: " << visPose.angle);
+
+    mSprite.setPosition(visPose.origin);
+    mSprite.setRotation(visPose.angle);
 
     target->draw(mSprite, states);
 
@@ -47,15 +43,13 @@ namespace game {
   }
 
   bool SpriteDynamicEntity::setTransform(sf::Transform transform) {
-    auto worldHeight = getGame()->GetWorld()->GetBounds().height;
-    auto localOrigin = transform.transformPoint(sf::Vector2f());
-    auto localXUnit = transform.transformPoint(sf::Vector2f(1, 0));
-    auto localDir = localXUnit - localOrigin;
-    auto physicalOrigin = GrahicTools::GetPhysicalPos(localOrigin, worldHeight);
-    float angle = -atan2(localDir.y, localDir.x);
+    auto origin = transform.transformPoint(sf::Vector2f());
+    auto xUnit = transform.transformPoint(sf::Vector2f(1, 0));
+    auto dir = xUnit - origin;
+    float angle = atan2(dir.y, dir.x);
 
-    LOGD("Body Pos: (" << physicalOrigin.x << ", " << physicalOrigin.y << "), angle: " << angle);
-    cpBodySetPosition(mBody, physicalOrigin);
+    LOGD("Body Pos: (" << origin.x << ", " << origin.y << "), angle: " << angle);
+    cpBodySetPosition(mBody, cpv(origin.x, origin.y));
     cpBodySetAngle(mBody, angle);
     cpSpaceReindexShapesForBody(getGame()->GetPhysicalWorld(), mBody);
     return true;

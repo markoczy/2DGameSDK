@@ -41,7 +41,15 @@ namespace game {
   }
 
   bool KinematicEntity::transform(sf::Transform transform) {
-    mTransform = mTransform * transform;
+    auto conv = getGame()->GetPoseConverter();
+    auto origin = transform.transformPoint(sf::Vector2f());
+    auto xUnit = transform.transformPoint(sf::Vector2f(1, 0));
+    auto dir = xUnit - origin;
+    float angle = atan2(dir.y, dir.x);
+    float visAngle = (360 * angle) / 6.28;
+    auto newT = sf::Transform().translate(origin.x, -origin.y).rotate(visAngle);
+
+    mTransform = mTransform * newT;
     mCombinedTransform = mAccTransform * mTransform;
     return true;
   }

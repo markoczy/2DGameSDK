@@ -18,9 +18,7 @@ namespace game::constants {
   const float PI = 3.14159265358979323846;
   const float PI_2 = 1.57079632679489661923;
   const float PI_4 = 0.785398163397448309615;
-
-  const float DEG_TO_RAD = PI / 180;
-  const float RAD_TO_DEG = 180 / PI;
+  const float PI_X_2 = 6.28318530717958647692;
 
   /**
    * @brief SFML 2D Vector (0, 0)

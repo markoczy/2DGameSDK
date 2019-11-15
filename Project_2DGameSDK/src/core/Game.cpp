@@ -73,14 +73,12 @@ namespace game {
     mWindow = new sf::RenderWindow(sf::VideoMode(mOptions.ScreenDim.x, mOptions.ScreenDim.y), mOptions.Title);
     mWindow->setFramerateLimit(mOptions.FramesPerSecond);
     // mWindow->setVerticalSyncEnabled(true);
+
     mView = mWindow->getView();
-    if(mOptions.InitialZoom != 1.0) {
-      auto viewport = mView.getViewport();
-      viewport.width = mOptions.InitialZoom;
-      viewport.height = mOptions.InitialZoom;
-      mView.setViewport(viewport);
-      mWindow->setView(mView);
-    }
+    auto sz = mView.getSize() / mOptions.InitialZoom;
+    mView.setSize(sz);
+    mView.setCenter(sz.x / 2, mState.World->GetBounds().height - sz.y / 2);
+    mWindow->setView(mView);
 
     float step = 1.0f / mOptions.FramesPerSecond;
 
@@ -161,7 +159,7 @@ namespace game {
     mState.World = world;
 
     helpers::safeDelete(mPoseConverter);
-    mPoseConverter = new PoseConverter(world->GetBounds().width, world->GetBounds().height);
+    mPoseConverter = new PoseConverter(world->GetBounds().width, world->GetBounds().height, mOptions.MeterPerPixel);
   }
 
   // ####### Event Controller wrapper ##########################################
