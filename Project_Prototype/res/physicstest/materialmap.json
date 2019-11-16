@@ -1,0 +1,21 @@
+{
+  "materials": [
+    {
+      "tile": 0,
+      "shapes": [
+        {
+          "shape": "rect",
+          "width": 16,
+          "height": 16,
+          "friction": 0.7,
+          "elasticity": 0.1,
+          "sensor": false
+        }
+      ]
+    },
+    {
+      "tile": 1,
+      "shapes": []
+    }
+  ]
+}
