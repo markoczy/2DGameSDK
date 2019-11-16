@@ -17,7 +17,7 @@ namespace game {
 
   void SpriteDynamicEntity::SetSize(sf::Vector2f size) {
     auto rect = mSprite.getTextureRect();
-    mSprite.setScale(size.x / rect.width, size.y / rect.height);
+    mSprite.setScale(getGame()->GetPoseConverter()->GetVisualScale(sf::Vector2f(rect.width, rect.height), size));
   }
 
   void SpriteDynamicEntity::OnRender(sf::RenderTarget* target, sf::RenderStates states) {

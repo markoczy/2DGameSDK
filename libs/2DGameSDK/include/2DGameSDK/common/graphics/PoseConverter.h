@@ -28,6 +28,8 @@ namespace game {
     Pose<sf::Vector2f> GetVisualPose(Pose<cpVect> physicalPose);
     sf::Transform GetVisualTransform(sf::Transform physicalTransform);
 
+    sf::Vector2f GetVisualScale(sf::Vector2f textureSize, sf::Vector2f requiredPhysicalSize);
+
   private:
     float mWidth;
     float mHeight;

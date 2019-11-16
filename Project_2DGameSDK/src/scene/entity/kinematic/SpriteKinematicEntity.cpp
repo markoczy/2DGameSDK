@@ -19,8 +19,8 @@ namespace game {
   }
 
   void SpriteKinematicEntity::SetSize(sf::Vector2f size) {
-    auto rect = mSprite.getLocalBounds();
-    mSprite.setScale(size.x / rect.width, size.y / rect.height);
+    auto rect = mSprite.getTextureRect();
+    mSprite.setScale(getGame()->GetPoseConverter()->GetVisualScale(sf::Vector2f(rect.width, rect.height), size));
   }
 
   void SpriteKinematicEntity::OnTick() {}

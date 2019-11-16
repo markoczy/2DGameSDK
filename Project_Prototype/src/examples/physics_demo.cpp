@@ -265,7 +265,7 @@ int demo3() {
   cout << "Physics Demo 3" << endl;
   // Create game
   auto game = new Game();
-  game->SetOptions(GameOptions{"My Game", sf::Vector2i(200, 200), 4.0, 60, false, false, 1});
+  game->SetOptions(GameOptions{"My Game", sf::Vector2i(512, 512), 1, 60, false, false, 0.1});
 
   // Create Keyboard Events
   auto upPressed = new OnKeyPress(sf::Keyboard::Up);
@@ -292,12 +292,12 @@ int demo3() {
 
   auto scene = new SceneGraph();
 
-  float groundW = 50;
+  float groundW = 51.2;
   float groundH = 5;
   auto groundShape = ShapeFactory::CreateStaticRectangleShape(game, groundW, groundH, 0.7, 0.1, false);
   auto ground = new SpriteStaticEntity(_GROUND_TYPE, game, boxTx, {groundShape}, true);
   ground->SetSize(sf::Vector2f(groundW, groundH));
-  ground->SetTransform(sf::Transform().translate(25, 2.5));
+  ground->SetTransform(sf::Transform().translate(25.6, 2.5));
   scene->AddEntity(ground);
 
   float playerW = 1;
@@ -311,6 +311,10 @@ int demo3() {
   player->SetMass(playerMass);
   player->SetMoment(cpMomentForBox(playerMass, playerW, playerH));
   scene->AddEntity(player);
+
+  auto box = new SpriteStaticEntity(_GROUND_TYPE, game, boxTx, {}, false);
+  box->SetTransform(sf::Transform().translate(20, 15));
+  scene->AddEntity(box);
 
   // scene->AddEntity(getBox(game, 5, 2.5, 10, 43.75));
   // scene->AddEntity(getBox(game, 5, 2.5, 15, 43.75));
@@ -344,6 +348,8 @@ int demo3() {
 
   auto space = game->GetPhysicalWorld();
   cpSpaceSetGravity(space, cpv(0, -10));
+
+  std::cout << "World size: (" << game->GetWorld()->GetBounds().width << ", " << game->GetWorld()->GetBounds().height << ")" << std::endl;
 
   // Run Game
   game->Run();

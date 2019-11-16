@@ -2,7 +2,7 @@
 
 namespace game {
 
-  PoseConverter::PoseConverter(float worldWidth, float worldHeight, float meterPerPixel) : mWidth(worldWidth), mHeight(worldHeight), mPxToMeter(meterPerPixel) {}
+  PoseConverter::PoseConverter(float worldWidth, float worldHeight, float meterPerPixel) : mWidth(worldWidth * meterPerPixel), mHeight(worldHeight * meterPerPixel), mPxToMeter(meterPerPixel) {}
 
   cpVect PoseConverter::GetPhysicalPos(sf::Vector2f visualPos) {
     return cpv(visualPos.x * mPxToMeter, (mHeight - visualPos.y) * mPxToMeter);
@@ -58,9 +58,10 @@ namespace game {
     auto visDir = visXUnit - visOrigin;
     float visAngle = GetVisualAngle(-atan2(visDir.y, visDir.x));
     return sf::Transform().translate(visOrigin).rotate(visAngle);
-    // return {
-    //     visOrigin,
-    //     visAngle};
+  }
+
+  sf::Vector2f PoseConverter::GetVisualScale(sf::Vector2f txSize, sf::Vector2f physSize) {
+    return sf::Vector2f((physSize.x / mPxToMeter) / txSize.x, (physSize.y / mPxToMeter) / txSize.y);
   }
 
 } // namespace game
