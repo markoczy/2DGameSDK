@@ -33,6 +33,10 @@ namespace game {
       target->draw(shape);
     }
 
+    virtual Shape<TDefinition>* CopyTemplate() {
+      return new PolygonShape<TDefinition>(this->getGame(), this->getDefinition()->Copy(), mVertices);
+    }
+
   protected:
     std::vector<cpVect> mVertices;
 

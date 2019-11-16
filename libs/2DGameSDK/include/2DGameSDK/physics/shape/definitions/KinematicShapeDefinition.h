@@ -9,11 +9,13 @@
 #include <2DGameSDK/physics/shape/definitions/ShapeDefinition.h>
 
 namespace game {
-  class GAMESDK_DLL KinematicShapeDefinition : public ShapeDefinition {
+  class GAMESDK_DLL KinematicShapeDefinition : public ShapeDefinition<KinematicShapeDefinition> {
   public:
     KinematicShapeDefinition(float friction, float elasticity, bool isSensor = true);
 
     virtual void InitProperties(cpSpace* space, cpBody* body, cpShape* shape);
+
+    virtual KinematicShapeDefinition* Copy();
 
   protected:
     float mFriction = 0;

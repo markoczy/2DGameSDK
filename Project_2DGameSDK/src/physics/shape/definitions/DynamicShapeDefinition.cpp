@@ -14,4 +14,8 @@ namespace game {
     if(mFriction != 0) cpShapeSetFriction(shape, mFriction);
     if(mElasticity != 0) cpShapeSetElasticity(shape, mElasticity);
   }
+
+  DynamicShapeDefinition* DynamicShapeDefinition::Copy() {
+    return new DynamicShapeDefinition(mMass, mFriction, mElasticity, mUseDensity);
+  }
 } // namespace game
