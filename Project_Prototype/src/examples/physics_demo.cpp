@@ -132,7 +132,7 @@ int demo1() {
   game->SetOptions(GameOptions{"My Game", sf::Vector2i(512, 512), 2.0, 50, false, true});
 
   // Create Game World
-  auto world = GameWorldFactory::CreateGameWorld("res/simple_grass/tilemap.json", "", "res/simple_grass/tile_");
+  auto world = GameWorldFactory::CreateGameWorld(game, "res/simple_grass/tilemap.json", "", "res/simple_grass/tile_");
   game->SetWorld(world);
 
   auto boxTx = AssetManager::GetTexture("res/textures/box/box.png");
@@ -195,7 +195,7 @@ int demo2() {
   f4Pressed->Subscribe(new MethodObserver<sf::Keyboard::Key, GameController>(gameController, &gameController->HandleKeyPress));
 
   // Create Game World
-  auto world = GameWorldFactory::CreateGameWorld("res/simple_grass/tilemap.json", "", "res/simple_grass/tile_");
+  auto world = GameWorldFactory::CreateGameWorld(game, "res/simple_grass/tilemap.json", "", "res/simple_grass/tile_");
   game->SetWorld(world);
 
   auto boxTx = AssetManager::GetTexture("res/textures/box/box.png");
@@ -285,7 +285,7 @@ int demo3() {
   f4Pressed->Subscribe(new MethodObserver<sf::Keyboard::Key, GameController>(gameController, &gameController->HandleKeyPress));
 
   // Create Game World
-  auto world = GameWorldFactory::CreateGameWorld("res/physicstest/tilemap.json", "", "res/physicstest/tile_");
+  auto world = GameWorldFactory::CreateGameWorld(game, "res/physicstest/tilemap.json", "res/physicstest/materialmap.json", "res/physicstest/tile_");
   game->SetWorld(world);
 
   auto boxTx = AssetManager::GetTexture("res/textures/box/box.png");

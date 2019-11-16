@@ -11,14 +11,23 @@
 #ifndef __MATERIAL_H__
 #define __MATERIAL_H__
 
+#include <vector>
+
+// #include<2DGameSDK/physics/shape/Shape.h>
+#include <2DGameSDK/physics/shape/definitions/StaticShapeDefinition.h>
+
 namespace game {
+  template <class TDefinition>
+  class Shape;
 
   /**
    * @brief Contains all data that defines a Material in the Game World
    * 
    */
   struct Material {
-    bool Solid, Destructive;
+    int TileID = 0;
+    std::string Name = "";
+    std::vector<Shape<StaticShapeDefinition>*> Shapes = std::vector<Shape<StaticShapeDefinition>*>();
   };
 
 } // namespace game

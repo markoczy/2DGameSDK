@@ -43,7 +43,7 @@ int minimalDemo() {
   game->SetOptions(GameOptions{"My Game", sf::Vector2i(512, 512), 5.0, 50});
 
   // Create Game World
-  auto world = GameWorldFactory::CreateGameWorld("res/simple_grass/tilemap.json", "", "res/simple_grass/tile_");
+  auto world = GameWorldFactory::CreateGameWorld(game, "res/simple_grass/tilemap.json", "", "res/simple_grass/tile_");
   game->SetWorld(world);
   cout << "GameWorld created." << endl;
 

@@ -18,10 +18,14 @@ namespace game {
     return ret;
   }
 
-  GameWorld* GameWorldFactory::CreateGameWorld(std::string tilemapFile, std::string /*materialMapFile*/, std::string texturesPrefix) {
+  GameWorld* GameWorldFactory::CreateGameWorld(Game* game, std::string tilemapFile, std::string materialMapFile, std::string texturesPrefix) {
     auto tilemap = loadTilemap(tilemapFile);
     loadTextures(tilemap, texturesPrefix);
-    auto world = new GameWorld(tilemap, nullptr);
+    MaterialMap* materialMap = nullptr;
+    if(materialMapFile != "") {
+      materialMap = loadMaterialMap(game, materialMapFile);
+    }
+    auto world = new GameWorld(tilemap, materialMap);
     return world;
   }
 
@@ -89,6 +93,73 @@ namespace game {
     } catch(std::exception& e) {
       stringstream ss;
       ss << "Failed to load tilemap: " << e.what();
+      throw std::runtime_error(ss.str());
+    }
+  }
+
+  MaterialMap* GameWorldFactory::loadMaterialMap(Game* game, std::string filename) {
+    try {
+      ifstream ifs(filename);
+      json data;
+      ifs >> data;
+      auto ret = new MaterialMap();
+
+      auto materials = data["materials"];
+      int curMaterial = 0;
+      while(materials[curMaterial] != nullptr) {
+        auto material = materials[curMaterial];
+        auto materialOut = Material();
+        materialOut.TileID = material["tile"].get<int>();
+        LOGD("Material " << curMaterial << " tileID: " << materialOut.TileID);
+        materialOut.Name = material["name"].get<string>();
+        LOGD("Material " << curMaterial << " name: " << materialOut.Name);
+
+        int curShape = 0;
+        auto shapes = material["shapes"];
+        while(shapes[curShape] != nullptr) {
+          auto shape = shapes[curShape];
+
+          float friction = shape["friction"].get<float>();
+          LOGD("Shape " << curMaterial << "-" << curShape << " friction: " << friction);
+          float elasticity = shape["elasticity"].get<float>();
+          LOGD("Shape " << curMaterial << "-" << curShape << " elasticity: " << elasticity);
+          bool sensor = shape["sensor"].get<bool>();
+          LOGD("Shape " << curMaterial << "-" << curShape << " sensor: " << sensor);
+
+          Shape<StaticShapeDefinition>* shapeOut = nullptr;
+          string def = shape["shape"].get<string>();
+          LOGD("Shape " << curMaterial << "-" << curShape << " definition: " << def);
+          if(def == "rect" || def == "rectangle") {
+            float width = shape["width"].get<float>();
+            LOGD("Shape " << curMaterial << "-" << curShape << " width: " << width);
+            float height = shape["height"].get<float>();
+            LOGD("Shape " << curMaterial << "-" << curShape << " height: " << height);
+            shapeOut = ShapeFactory::CreateStaticRectangleShape(game, width, height, friction, elasticity, sensor);
+          } else if(def == "circle") {
+            // TODO
+            LOGE("Unimplemented circle shape");
+          } else if(def == "poly" || def == "polygon") {
+            // TODO
+            LOGE("Unimplemented polygon shape");
+          } else {
+            LOGE("Bad definition type: " + def);
+          }
+
+          if(shapeOut != nullptr) {
+            materialOut.Shapes.push_back(shapeOut);
+          }
+
+          ret->Materials[materialOut.TileID] = materialOut;
+          curShape++;
+        }
+
+        curMaterial++;
+      }
+      return ret;
+
+    } catch(const std::exception& e) {
+      stringstream ss;
+      ss << "Failed to load materialmap: " << e.what();
       throw std::runtime_error(ss.str());
     }
   }
