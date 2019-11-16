@@ -18,6 +18,7 @@
 
 #include <JSON/json.hpp>
 
+#include <2DGameSDK/core/Game.h>
 #include <2DGameSDK/core/asset/AssetManager.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
 #include <2DGameSDK/physics/shape/Shape.h>
@@ -36,8 +37,6 @@
 // #include <algorithm>
 
 namespace game {
-  class Game;
-
   /**
    * @brief Factory to create a Game World
    * 
@@ -73,6 +72,8 @@ namespace game {
      * @param prefix The textures prefix
      */
     static void loadTextures(Tilemap* tilemap, std::string prefix);
+
+    static void loadMaterials(Game* game, Tilemap* tilemap, MaterialMap* materialMap);
   };
 
 } // namespace game

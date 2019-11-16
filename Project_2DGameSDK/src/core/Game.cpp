@@ -10,10 +10,17 @@ namespace game {
     cpBody* bodyB;
     cpArbiterGetBodies(arb, &bodyA, &bodyB);
 
-    auto entA = (Entity*)cpBodyGetUserData(bodyA);
-    auto entB = (Entity*)cpBodyGetUserData(bodyB);
+    auto udataA = cpBodyGetUserData(bodyA);
+    auto udataB = cpBodyGetUserData(bodyB);
 
-    // cout << "Collision Begin: " << entA->GetId() << " and " << entB->GetId() << endl;
+    // World collision
+    if(udataA == nullptr || udataB == nullptr) {
+      return 1;
+    }
+
+    auto entA = (Entity*)udataA;
+    auto entB = (Entity*)udataB;
+
     if(!entA->IsCollidable() || !entB->IsCollidable()) return 0;
 
     int retA = entA->OnCollision(type, entB, arb);

@@ -24,6 +24,7 @@ namespace game {
     MaterialMap* materialMap = nullptr;
     if(materialMapFile != "") {
       materialMap = loadMaterialMap(game, materialMapFile);
+      loadMaterials(game, tilemap, materialMap);
     }
     auto world = new GameWorld(tilemap, materialMap);
     return world;
@@ -103,6 +104,7 @@ namespace game {
       json data;
       ifs >> data;
       auto ret = new MaterialMap();
+      float pxToMeter = game->GetOptions().MeterPerPixel;
 
       auto materials = data["materials"];
       int curMaterial = 0;
@@ -134,7 +136,7 @@ namespace game {
             LOGD("Shape " << curMaterial << "-" << curShape << " width: " << width);
             float height = shape["height"].get<float>();
             LOGD("Shape " << curMaterial << "-" << curShape << " height: " << height);
-            shapeOut = ShapeFactory::CreateStaticRectangleShape(game, width, height, friction, elasticity, sensor);
+            shapeOut = ShapeFactory::CreateStaticRectangleShape(game, width * pxToMeter, height * pxToMeter, friction, elasticity, sensor);
           } else if(def == "circle") {
             // TODO
             LOGE("Unimplemented circle shape");
@@ -149,10 +151,10 @@ namespace game {
             materialOut.Shapes.push_back(shapeOut);
           }
 
-          ret->Materials[materialOut.TileID] = materialOut;
           curShape++;
         }
 
+        ret->Materials[materialOut.TileID] = materialOut;
         curMaterial++;
       }
       return ret;
@@ -182,6 +184,41 @@ namespace game {
       stringstream ss;
       ss << "Failed to load textures: " << e.what();
       throw std::runtime_error(ss.str());
+    }
+  }
+
+  void GameWorldFactory::loadMaterials(Game* game, Tilemap* tilemap, MaterialMap* materialMap) {
+    if(tilemap == nullptr || materialMap == nullptr) {
+      LOGI("Not loading any materials");
+      return;
+    }
+
+    // Pose converter is not initialized yet so we have to convert lowlevel
+    float height = tilemap->TileHeight * tilemap->TilesHigh;
+    float pxToMeter = game->GetOptions().MeterPerPixel;
+
+    auto space = game->GetPhysicalWorld();
+    for(auto layer : tilemap->Layers) {
+      for(auto row : layer->Tiles) {
+        for(auto tile : row) {
+          if(tile->Tile == -1) {
+            continue;
+          }
+
+          Material material = materialMap->Materials[tile->Tile];
+          auto matBody = cpSpaceAddBody(space, cpBodyNewStatic());
+
+          auto visualPos = sf::Vector2f((tile->X + 0.5) * tilemap->TileWidth, (tile->Y + 0.5) * tilemap->TileHeight);
+          auto pos = cpv(visualPos.x * pxToMeter, (height - visualPos.y) * pxToMeter);
+
+          for(auto shape : material.Shapes) {
+            auto copy = shape->CopyTemplate();
+            copy->AttachToBody(space, matBody);
+          }
+          cpBodySetPosition(matBody, pos);
+          cpSpaceReindexShapesForBody(space, matBody);
+        }
+      }
     }
   }
 } // namespace game
