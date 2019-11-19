@@ -5,6 +5,7 @@
 
 #include <2DGameSDK/core/Game.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
+#include <2DGameSDK/physics/CollisionTarget.h>
 #include <2DGameSDK/physics/shape/Shape.h>
 #include <2DGameSDK/physics/shape/definitions/DynamicShapeDefinition.h>
 #include <2DGameSDK/scene/entity/Entity.h>

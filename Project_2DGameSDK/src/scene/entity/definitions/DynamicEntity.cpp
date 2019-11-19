@@ -3,7 +3,7 @@
 namespace game {
   DynamicEntity::DynamicEntity(int type, Game* game, std::vector<Shape<DynamicShapeDefinition>*> shapes, bool isCollidable) : Entity(type, game), mIsCollidable(isCollidable), mShapes(shapes) {
     mBody = cpSpaceAddBody(game->GetPhysicalWorld(), cpBodyNew(0, 0));
-    cpBodySetUserData(mBody, this);
+    cpBodySetUserData(mBody, new CollisionTarget(this));
 
     auto space = getGame()->GetPhysicalWorld();
     for(auto shape : mShapes) {

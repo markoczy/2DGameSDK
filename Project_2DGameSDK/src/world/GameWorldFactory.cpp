@@ -222,7 +222,7 @@ namespace game {
             copy->AttachToBody(space, matBody);
           }
           cpBodySetPosition(matBody, pos);
-          cpBodySetUserData(matBody, tile);
+          cpBodySetUserData(matBody, new CollisionTarget(tile));
           cpSpaceReindexShapesForBody(space, matBody); //?
           tile->Material = material;
         }

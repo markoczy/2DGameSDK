@@ -3,7 +3,7 @@
 namespace game {
   StaticEntity::StaticEntity(int type, Game* game, std::vector<Shape<StaticShapeDefinition>*> shapes, bool isCollidable) : Entity(type, game), mIsCollidable(isCollidable), mShapes(shapes) {
     mBody = cpSpaceAddBody(game->GetPhysicalWorld(), cpBodyNewStatic());
-    cpBodySetUserData(mBody, this);
+    cpBodySetUserData(mBody, new CollisionTarget(this));
 
     auto space = getGame()->GetPhysicalWorld();
     for(auto shape : mShapes) {

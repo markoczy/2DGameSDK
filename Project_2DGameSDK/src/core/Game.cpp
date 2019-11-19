@@ -22,34 +22,21 @@ namespace game {
     cpBody* bodyB;
     cpArbiterGetBodies(arb, &bodyA, &bodyB);
 
-    auto udataA = cpBodyGetUserData(bodyA);
-    auto udataB = cpBodyGetUserData(bodyB);
+    auto targetA = (CollisionTarget*)cpBodyGetUserData(bodyA);
+    auto targetB = (CollisionTarget*)cpBodyGetUserData(bodyB);
 
-    // if(true) {
-    //   return 1;
-    // }
-
-    // World collision
-    // if(udataA == nullptr || udataB == nullptr) {
-    //   return 1;
-    // }
-
-    auto objA = (Entity*)udataA;
-    auto objB = (GameObject*)udataB;
-    std::cout << "TypeA: " << (int)objA->GetObjectType() << ", TypeB: " << (int)objB->GetObjectType() << std::endl;
-
-    bool aIsEntity = objA->GetObjectType() == ObjectType::Entity;
-    bool bIsEntity = objB->GetObjectType() == ObjectType::Entity;
+    bool aIsEntity = targetA->GetType() == ObjectType::Entity;
+    bool bIsEntity = targetB->GetType() == ObjectType::Entity;
 
     if(aIsEntity) {
       if(bIsEntity) {
-        return collideEntities(type, arb, (Entity*)objA, (Entity*)objB);
+        return collideEntities(type, arb, (Entity*)targetA->GetTarget(), (Entity*)targetB->GetTarget());
       } else {
-        return collideEntityTile(type, arb, (Entity*)objA, (Tile*)objB);
+        return collideEntityTile(type, arb, (Entity*)targetA->GetTarget(), (Tile*)targetB->GetTarget());
       }
     } else {
       if(bIsEntity) {
-        return collideEntityTile(type, arb, (Entity*)objB, (Tile*)objA);
+        return collideEntityTile(type, arb, (Entity*)targetB->GetTarget(), (Tile*)targetA->GetTarget());
       }
     }
     return 0;

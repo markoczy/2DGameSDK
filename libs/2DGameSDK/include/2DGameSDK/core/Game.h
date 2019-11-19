@@ -28,6 +28,7 @@
 #include <2DGameSDK/event/EventController.h>
 #include <2DGameSDK/event/observable/ObservableBase.h>
 #include <2DGameSDK/physics/CollisionEventType.h>
+#include <2DGameSDK/physics/CollisionTarget.h>
 #include <2DGameSDK/physics/CollisionType.h>
 #include <2DGameSDK/scene/SceneGraph.h>
 #include <2DGameSDK/scene/entity/Entity.h>
