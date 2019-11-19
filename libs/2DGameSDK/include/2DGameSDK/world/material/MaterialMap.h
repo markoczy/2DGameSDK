@@ -20,7 +20,7 @@ namespace game {
    * 
    */
   struct MaterialMap {
-    std::map<int, Material> Materials = std::map<int, Material>();
+    std::map<int, Material*> Materials = std::map<int, Material*>();
   };
 
 } // namespace game

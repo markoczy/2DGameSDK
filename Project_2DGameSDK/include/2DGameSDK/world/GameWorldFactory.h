@@ -60,7 +60,7 @@ namespace game {
      * @param filename The path to the file
      * @return Tilemap* The created Tilemap
      */
-    static Tilemap* loadTilemap(std::string filename);
+    static Tilemap* loadTilemap(Game* game, std::string filename);
 
     static MaterialMap* loadMaterialMap(Game* game, std::string filename);
 

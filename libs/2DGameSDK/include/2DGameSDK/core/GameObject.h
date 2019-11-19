@@ -48,6 +48,8 @@ namespace game {
      */
     int GetId();
 
+    ObjectType GetObjectType();
+
   protected:
     Game* getGame();
 

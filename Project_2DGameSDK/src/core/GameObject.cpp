@@ -11,6 +11,10 @@ namespace game {
     return mId;
   }
 
+  ObjectType GameObject::GetObjectType() {
+    return mObjectType;
+  }
+
   Game* GameObject::getGame() {
     return mGame;
   }

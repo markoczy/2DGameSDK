@@ -19,7 +19,7 @@ namespace game {
   }
 
   GameWorld* GameWorldFactory::CreateGameWorld(Game* game, std::string tilemapFile, std::string materialMapFile, std::string texturesPrefix) {
-    auto tilemap = loadTilemap(tilemapFile);
+    auto tilemap = loadTilemap(game, tilemapFile);
     loadTextures(tilemap, texturesPrefix);
     MaterialMap* materialMap = nullptr;
     if(materialMapFile != "") {
@@ -30,7 +30,7 @@ namespace game {
     return world;
   }
 
-  Tilemap* GameWorldFactory::loadTilemap(std::string filename) {
+  Tilemap* GameWorldFactory::loadTilemap(Game* game, std::string filename) {
     try {
       ifstream ifs(filename);
       json data;
@@ -67,9 +67,9 @@ namespace game {
         while(tiles[curTile] != nullptr) {
           // LOGD("Processing Tile: " << curTile);
           auto tile = tiles[curTile];
-          auto tileOut = new Tile();
+          auto tileOut = new Tile(game);
 
-          tileOut->Tile = tile["tile"].get<int>();
+          tileOut->TileID = tile["tile"].get<int>();
           // LOGD("Tile: " << tileOut.Tile);
           tileOut->Id = tile["index"].get<int>();
           // LOGD("Id " << tileOut.Id);
@@ -110,11 +110,11 @@ namespace game {
       int curMaterial = 0;
       while(materials[curMaterial] != nullptr) {
         auto material = materials[curMaterial];
-        auto materialOut = Material();
-        materialOut.TileID = material["tile"].get<int>();
-        LOGD("Material " << curMaterial << " tileID: " << materialOut.TileID);
-        materialOut.Name = material["name"].get<string>();
-        LOGD("Material " << curMaterial << " name: " << materialOut.Name);
+        auto materialOut = new Material();
+        materialOut->TileID = material["tile"].get<int>();
+        LOGD("Material " << curMaterial << " tileID: " << materialOut->TileID);
+        materialOut->Name = material["name"].get<string>();
+        LOGD("Material " << curMaterial << " name: " << materialOut->Name);
 
         int curShape = 0;
         auto shapes = material["shapes"];
@@ -148,13 +148,13 @@ namespace game {
           }
 
           if(shapeOut != nullptr) {
-            materialOut.Shapes.push_back(shapeOut);
+            materialOut->Shapes.push_back(shapeOut);
           }
 
           curShape++;
         }
 
-        ret->Materials[materialOut.TileID] = materialOut;
+        ret->Materials[materialOut->TileID] = materialOut;
         curMaterial++;
       }
       return ret;
@@ -173,8 +173,8 @@ namespace game {
         for(unsigned int iY = 0; iY < layer->Tiles.size(); iY++) {
           for(unsigned int iX = 0; iX < layer->Tiles[iY].size(); iX++) {
             auto tile = layer->Tiles[iY][iX];
-            if(tile->Tile > -1) {
-              string fileName = getFilename(prefix, tile->Tile, 2);
+            if(tile->TileID > -1) {
+              string fileName = getFilename(prefix, tile->TileID, 2);
               tile->Texture = AssetManager::GetTexture(fileName);
             }
           }
@@ -201,22 +201,23 @@ namespace game {
     for(auto layer : tilemap->Layers) {
       for(auto row : layer->Tiles) {
         for(auto tile : row) {
-          if(tile->Tile == -1) {
+          if(tile->TileID == -1) {
             continue;
           }
 
-          Material material = materialMap->Materials[tile->Tile];
+          auto material = materialMap->Materials[tile->TileID];
           auto matBody = cpSpaceAddBody(space, cpBodyNewStatic());
 
           auto visualPos = sf::Vector2f((tile->X + 0.5) * tilemap->TileWidth, (tile->Y + 0.5) * tilemap->TileHeight);
           auto pos = cpv(visualPos.x * pxToMeter, (height - visualPos.y) * pxToMeter);
 
-          for(auto shape : material.Shapes) {
+          for(auto shape : material->Shapes) {
             auto copy = shape->CopyTemplate();
             copy->AttachToBody(space, matBody);
           }
           cpBodySetPosition(matBody, pos);
           cpSpaceReindexShapesForBody(space, matBody);
+          tile->Material = material;
         }
       }
     }
