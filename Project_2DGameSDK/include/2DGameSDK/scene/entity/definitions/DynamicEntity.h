@@ -32,6 +32,7 @@ namespace game {
     virtual void SetTorque(float torque);
 
     virtual int OnCollision(CollisionEventType type, Entity* other, cpArbiter* arb);
+    virtual int OnWorldCollision(CollisionEventType type, Tile* tile, cpArbiter* arb);
 
   protected:
     bool mIsCollidable;

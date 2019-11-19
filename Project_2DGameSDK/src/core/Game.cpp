@@ -5,6 +5,18 @@ using namespace game::constants;
 
 namespace game {
 
+  unsigned char collideEntities(CollisionEventType type, cpArbiter* arb, Entity* entA, Entity* entB) {
+    if(!entA->IsCollidable() || !entB->IsCollidable()) return 0;
+    int retA = entA->OnCollision(type, entB, arb);
+    int retB = entB->OnCollision(type, entA, arb);
+    return retA | retB;
+  }
+
+  unsigned char collideEntityTile(CollisionEventType type, cpArbiter* arb, Entity* entity, Tile* tile) {
+    if(!entity->IsCollidable()) return 0;
+    return entity->OnWorldCollision(type, tile, arb);
+  }
+
   unsigned char collisionFunc(CollisionEventType type, cpArbiter* arb) {
     cpBody* bodyA;
     cpBody* bodyB;
@@ -13,19 +25,34 @@ namespace game {
     auto udataA = cpBodyGetUserData(bodyA);
     auto udataB = cpBodyGetUserData(bodyB);
 
+    // if(true) {
+    //   return 1;
+    // }
+
     // World collision
-    if(udataA == nullptr || udataB == nullptr) {
-      return 1;
+    // if(udataA == nullptr || udataB == nullptr) {
+    //   return 1;
+    // }
+
+    auto objA = (Entity*)udataA;
+    auto objB = (GameObject*)udataB;
+    std::cout << "TypeA: " << (int)objA->GetObjectType() << ", TypeB: " << (int)objB->GetObjectType() << std::endl;
+
+    bool aIsEntity = objA->GetObjectType() == ObjectType::Entity;
+    bool bIsEntity = objB->GetObjectType() == ObjectType::Entity;
+
+    if(aIsEntity) {
+      if(bIsEntity) {
+        return collideEntities(type, arb, (Entity*)objA, (Entity*)objB);
+      } else {
+        return collideEntityTile(type, arb, (Entity*)objA, (Tile*)objB);
+      }
+    } else {
+      if(bIsEntity) {
+        return collideEntityTile(type, arb, (Entity*)objB, (Tile*)objA);
+      }
     }
-
-    auto entA = (Entity*)udataA;
-    auto entB = (Entity*)udataB;
-
-    if(!entA->IsCollidable() || !entB->IsCollidable()) return 0;
-
-    int retA = entA->OnCollision(type, entB, arb);
-    int retB = entB->OnCollision(type, entA, arb);
-    return retA | retB;
+    return 0;
   }
 
   unsigned char collisionBegin(cpArbiter* arb, cpSpace*, cpDataPointer) {

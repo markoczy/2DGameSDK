@@ -15,6 +15,7 @@
 
 #include <2DGameSDK/common/types/ObjectType.h>
 #include <2DGameSDK/core/GameObject.h>
+#include <2DGameSDK/dll/gamesdk_dll.h>
 #include <2DGameSDK/world/material/Material.h>
 
 namespace game {
@@ -24,7 +25,7 @@ namespace game {
    * @brief Contains all data that defines a single Tile of the Tile Map
    * 
    */
-  class Tile : public GameObject {
+  class GAMESDK_DLL Tile : public GameObject {
   public:
     Tile(Game* game);
 

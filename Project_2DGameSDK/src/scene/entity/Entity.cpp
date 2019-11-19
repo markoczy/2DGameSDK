@@ -48,6 +48,10 @@ namespace game {
     return 0;
   }
 
+  int Entity::OnWorldCollision(CollisionEventType type, Tile* tile, cpArbiter* arb) {
+    return 0;
+  }
+
   bool Entity::setTransform(sf::Transform) { return false; }
   bool Entity::transform(sf::Transform) { return false; }
   bool Entity::setAccumulatedTransform(sf::Transform) { return false; }

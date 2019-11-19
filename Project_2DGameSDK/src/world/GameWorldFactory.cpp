@@ -113,8 +113,14 @@ namespace game {
         auto materialOut = new Material();
         materialOut->TileID = material["tile"].get<int>();
         LOGD("Material " << curMaterial << " tileID: " << materialOut->TileID);
-        materialOut->Name = material["name"].get<string>();
-        LOGD("Material " << curMaterial << " name: " << materialOut->Name);
+        if(material["name"] != nullptr) {
+          materialOut->Name = material["name"].get<string>();
+          LOGD("Material " << curMaterial << " name: " << materialOut->Name);
+        }
+        if(material["type"] != nullptr) {
+          materialOut->Type = material["type"].get<int>();
+          LOGD("Material " << curMaterial << " type: " << materialOut->Type);
+        }
 
         int curShape = 0;
         auto shapes = material["shapes"];
@@ -216,7 +222,8 @@ namespace game {
             copy->AttachToBody(space, matBody);
           }
           cpBodySetPosition(matBody, pos);
-          cpSpaceReindexShapesForBody(space, matBody);
+          cpBodySetUserData(matBody, tile);
+          cpSpaceReindexShapesForBody(space, matBody); //?
           tile->Material = material;
         }
       }

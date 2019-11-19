@@ -49,4 +49,8 @@ namespace game {
     return 1;
   }
 
+  int DynamicEntity::OnWorldCollision(CollisionEventType, Tile*, cpArbiter*) {
+    return 1;
+  }
+
 } // namespace game

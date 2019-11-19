@@ -26,6 +26,7 @@ namespace game {
    */
   struct Material {
     int TileID = 0;
+    int Type = 0;
     std::string Name = "";
     std::vector<Shape<StaticShapeDefinition>*> Shapes = std::vector<Shape<StaticShapeDefinition>*>();
   };

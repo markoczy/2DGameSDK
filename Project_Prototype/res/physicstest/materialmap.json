@@ -3,6 +3,7 @@
     {
       "tile": 0,
       "name": "ground",
+      "type": 100,
       "shapes": [
         {
           "shape": "rect",
@@ -16,6 +17,7 @@
     },
     {
       "tile": 1,
+      "type": 200,
       "name": "back",
       "shapes": []
     }

@@ -6,6 +6,7 @@
 #include <2DGameSDK/core/GameObject.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
 #include <2DGameSDK/physics/CollisionEventType.h>
+#include <2DGameSDK/world/tilemap/Tile.h>
 
 #include <chipmunk/chipmunk.h>
 
@@ -44,6 +45,7 @@ namespace game {
     void Transform(sf::Transform transform);
     void OnParentTransformed(sf::Transform accumulated);
     virtual int OnCollision(CollisionEventType type, Entity* other, cpArbiter* arb);
+    virtual int OnWorldCollision(CollisionEventType type, Tile* tile, cpArbiter* arb);
 
     /**
      * @brief Updates the Entity

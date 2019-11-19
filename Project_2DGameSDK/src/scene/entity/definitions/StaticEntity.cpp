@@ -20,4 +20,8 @@ namespace game {
   int StaticEntity::OnCollision(CollisionEventType, Entity*, cpArbiter*) {
     return 1;
   }
+
+  int StaticEntity::OnWorldCollision(CollisionEventType, Tile*, cpArbiter*) {
+    return 1;
+  }
 } // namespace game
