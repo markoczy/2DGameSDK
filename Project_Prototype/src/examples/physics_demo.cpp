@@ -78,6 +78,20 @@ public:
     }
 
     return 1;
+    // return 0;
+  }
+
+  int OnWorldCollision(CollisionEventType type, Tile* tile, cpArbiter*) {
+    if(tile->Material->Type == _GROUND_TYPE) {
+      if(type == CollisionEventType::Begin) {
+        cout << "Touching floor" << endl;
+        touchingFloor = true;
+      } else if(type == CollisionEventType::Separate) {
+        cout << "Separated floor" << endl;
+        touchingFloor = false;
+      }
+    }
+    return 1;
   }
 
 private:
@@ -132,7 +146,7 @@ int demo1() {
   game->SetOptions(GameOptions{"My Game", sf::Vector2i(512, 512), 2.0, 50, false, true});
 
   // Create Game World
-  auto world = GameWorldFactory::CreateGameWorld("res/simple_grass/tilemap.json", "", "res/simple_grass/tile_");
+  auto world = GameWorldFactory::CreateGameWorld(game, "res/simple_grass/tilemap.json", "", "res/simple_grass/tile_");
   game->SetWorld(world);
 
   auto boxTx = AssetManager::GetTexture("res/textures/box/box.png");
@@ -195,7 +209,7 @@ int demo2() {
   f4Pressed->Subscribe(new MethodObserver<sf::Keyboard::Key, GameController>(gameController, &gameController->HandleKeyPress));
 
   // Create Game World
-  auto world = GameWorldFactory::CreateGameWorld("res/simple_grass/tilemap.json", "", "res/simple_grass/tile_");
+  auto world = GameWorldFactory::CreateGameWorld(game, "res/simple_grass/tilemap.json", "", "res/simple_grass/tile_");
   game->SetWorld(world);
 
   auto boxTx = AssetManager::GetTexture("res/textures/box/box.png");
@@ -285,20 +299,20 @@ int demo3() {
   f4Pressed->Subscribe(new MethodObserver<sf::Keyboard::Key, GameController>(gameController, &gameController->HandleKeyPress));
 
   // Create Game World
-  auto world = GameWorldFactory::CreateGameWorld("res/simple_grass/tilemap.json", "", "res/simple_grass/tile_");
+  auto world = GameWorldFactory::CreateGameWorld(game, "res/physicstest/tilemap.json", "res/physicstest/materialmap.json", "res/physicstest/tile_");
   game->SetWorld(world);
 
   auto boxTx = AssetManager::GetTexture("res/textures/box/box.png");
 
   auto scene = new SceneGraph();
 
-  float groundW = 51.2;
-  float groundH = 5;
-  auto groundShape = ShapeFactory::CreateStaticRectangleShape(game, groundW, groundH, 0.7, 0.1, false);
-  auto ground = new SpriteStaticEntity(_GROUND_TYPE, game, boxTx, {groundShape}, true);
-  ground->SetSize(sf::Vector2f(groundW, groundH));
-  ground->SetTransform(sf::Transform().translate(25.6, 2.5));
-  scene->AddEntity(ground);
+  // float groundW = 51.2;
+  // float groundH = 5;
+  // auto groundShape = ShapeFactory::CreateStaticRectangleShape(game, groundW, groundH, 0.7, 0.1, false);
+  // auto ground = new SpriteStaticEntity(_GROUND_TYPE, game, boxTx, {groundShape}, true);
+  // ground->SetSize(sf::Vector2f(groundW, groundH));
+  // ground->SetTransform(sf::Transform().translate(25.6, 2.5));
+  // scene->AddEntity(ground);
 
   float playerW = 1;
   float playerH = 1;

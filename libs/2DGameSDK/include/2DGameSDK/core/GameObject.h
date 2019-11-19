@@ -13,6 +13,7 @@
 
 #include <SFML/Graphics.hpp>
 
+#include <2DGameSDK/common/types/ObjectType.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
 
 namespace game {
@@ -32,7 +33,7 @@ namespace game {
      * @param type The GameObject Type (does not affect anything and is meant
      *        to be used freely to identify entities of some kind)
      */
-    GameObject(int type, Game* game);
+    GameObject(ObjectType objType, Game* game);
 
     /**
      * @brief Destroys the GameObject
@@ -47,39 +48,14 @@ namespace game {
      */
     int GetId();
 
-    /**
-     * @brief Retreives the Type
-     * 
-     * @return int The GameObject Type
-     */
-    int GetType();
-
-    int GetZIndex();
-
-    void SetZIndex(int zIndex);
-
-    /**
-     * @brief Updates the GameObject
-     * 
-     */
-    virtual void OnTick() = 0;
-
-    /**
-     * @brief Renders the GameObject
-     * 
-     * @param target The screen or texture to render on
-     * @param states The initial Render States (transformation etc.)
-     */
-    virtual void OnRender(sf::RenderTarget* target, sf::RenderStates states = sf::RenderStates::Default) = 0;
+    ObjectType GetObjectType();
 
   protected:
     Game* getGame();
-    void setType(int type);
 
   private:
-    int mType = 0;
+    ObjectType mObjectType = ObjectType::Unknown;
     int mId = 0;
-    int mZIndex = 0;
     Game* mGame = nullptr;
   };
 

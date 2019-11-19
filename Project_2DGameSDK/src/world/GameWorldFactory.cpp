@@ -18,14 +18,19 @@ namespace game {
     return ret;
   }
 
-  GameWorld* GameWorldFactory::CreateGameWorld(std::string tilemapFile, std::string /*materialMapFile*/, std::string texturesPrefix) {
-    auto tilemap = loadTilemap(tilemapFile);
+  GameWorld* GameWorldFactory::CreateGameWorld(Game* game, std::string tilemapFile, std::string materialMapFile, std::string texturesPrefix) {
+    auto tilemap = loadTilemap(game, tilemapFile);
     loadTextures(tilemap, texturesPrefix);
-    auto world = new GameWorld(tilemap, nullptr);
+    MaterialMap* materialMap = nullptr;
+    if(materialMapFile != "") {
+      materialMap = loadMaterialMap(game, materialMapFile);
+      loadMaterials(game, tilemap, materialMap);
+    }
+    auto world = new GameWorld(tilemap, materialMap);
     return world;
   }
 
-  Tilemap* GameWorldFactory::loadTilemap(std::string filename) {
+  Tilemap* GameWorldFactory::loadTilemap(Game* game, std::string filename) {
     try {
       ifstream ifs(filename);
       json data;
@@ -62,9 +67,9 @@ namespace game {
         while(tiles[curTile] != nullptr) {
           // LOGD("Processing Tile: " << curTile);
           auto tile = tiles[curTile];
-          auto tileOut = new Tile();
+          auto tileOut = new Tile(game);
 
-          tileOut->Tile = tile["tile"].get<int>();
+          tileOut->TileID = tile["tile"].get<int>();
           // LOGD("Tile: " << tileOut.Tile);
           tileOut->Id = tile["index"].get<int>();
           // LOGD("Id " << tileOut.Id);
@@ -93,6 +98,80 @@ namespace game {
     }
   }
 
+  MaterialMap* GameWorldFactory::loadMaterialMap(Game* game, std::string filename) {
+    try {
+      ifstream ifs(filename);
+      json data;
+      ifs >> data;
+      auto ret = new MaterialMap();
+      float pxToMeter = game->GetOptions().MeterPerPixel;
+
+      auto materials = data["materials"];
+      int curMaterial = 0;
+      while(materials[curMaterial] != nullptr) {
+        auto material = materials[curMaterial];
+        auto materialOut = new Material();
+        materialOut->TileID = material["tile"].get<int>();
+        LOGD("Material " << curMaterial << " tileID: " << materialOut->TileID);
+        if(material["name"] != nullptr) {
+          materialOut->Name = material["name"].get<string>();
+          LOGD("Material " << curMaterial << " name: " << materialOut->Name);
+        }
+        if(material["type"] != nullptr) {
+          materialOut->Type = material["type"].get<int>();
+          LOGD("Material " << curMaterial << " type: " << materialOut->Type);
+        }
+
+        int curShape = 0;
+        auto shapes = material["shapes"];
+        while(shapes[curShape] != nullptr) {
+          auto shape = shapes[curShape];
+
+          float friction = shape["friction"].get<float>();
+          LOGD("Shape " << curMaterial << "-" << curShape << " friction: " << friction);
+          float elasticity = shape["elasticity"].get<float>();
+          LOGD("Shape " << curMaterial << "-" << curShape << " elasticity: " << elasticity);
+          bool sensor = shape["sensor"].get<bool>();
+          LOGD("Shape " << curMaterial << "-" << curShape << " sensor: " << sensor);
+
+          Shape<StaticShapeDefinition>* shapeOut = nullptr;
+          string def = shape["shape"].get<string>();
+          LOGD("Shape " << curMaterial << "-" << curShape << " definition: " << def);
+          if(def == "rect" || def == "rectangle") {
+            float width = shape["width"].get<float>();
+            LOGD("Shape " << curMaterial << "-" << curShape << " width: " << width);
+            float height = shape["height"].get<float>();
+            LOGD("Shape " << curMaterial << "-" << curShape << " height: " << height);
+            shapeOut = ShapeFactory::CreateStaticRectangleShape(game, width * pxToMeter, height * pxToMeter, friction, elasticity, sensor);
+          } else if(def == "circle") {
+            // TODO
+            LOGE("Unimplemented circle shape");
+          } else if(def == "poly" || def == "polygon") {
+            // TODO
+            LOGE("Unimplemented polygon shape");
+          } else {
+            LOGE("Bad definition type: " + def);
+          }
+
+          if(shapeOut != nullptr) {
+            materialOut->Shapes.push_back(shapeOut);
+          }
+
+          curShape++;
+        }
+
+        ret->Materials[materialOut->TileID] = materialOut;
+        curMaterial++;
+      }
+      return ret;
+
+    } catch(const std::exception& e) {
+      stringstream ss;
+      ss << "Failed to load materialmap: " << e.what();
+      throw std::runtime_error(ss.str());
+    }
+  }
+
   void GameWorldFactory::loadTextures(Tilemap* tilemap, std::string prefix) {
     try {
       for(unsigned int iLayer = 0; iLayer < tilemap->Layers.size(); iLayer++) {
@@ -100,8 +179,8 @@ namespace game {
         for(unsigned int iY = 0; iY < layer->Tiles.size(); iY++) {
           for(unsigned int iX = 0; iX < layer->Tiles[iY].size(); iX++) {
             auto tile = layer->Tiles[iY][iX];
-            if(tile->Tile > -1) {
-              string fileName = getFilename(prefix, tile->Tile, 2);
+            if(tile->TileID > -1) {
+              string fileName = getFilename(prefix, tile->TileID, 2);
               tile->Texture = AssetManager::GetTexture(fileName);
             }
           }
@@ -111,6 +190,43 @@ namespace game {
       stringstream ss;
       ss << "Failed to load textures: " << e.what();
       throw std::runtime_error(ss.str());
+    }
+  }
+
+  void GameWorldFactory::loadMaterials(Game* game, Tilemap* tilemap, MaterialMap* materialMap) {
+    if(tilemap == nullptr || materialMap == nullptr) {
+      LOGI("Not loading any materials");
+      return;
+    }
+
+    // Pose converter is not initialized yet so we have to convert lowlevel
+    float height = tilemap->TileHeight * tilemap->TilesHigh;
+    float pxToMeter = game->GetOptions().MeterPerPixel;
+
+    auto space = game->GetPhysicalWorld();
+    for(auto layer : tilemap->Layers) {
+      for(auto row : layer->Tiles) {
+        for(auto tile : row) {
+          if(tile->TileID == -1) {
+            continue;
+          }
+
+          auto material = materialMap->Materials[tile->TileID];
+          auto matBody = cpSpaceAddBody(space, cpBodyNewStatic());
+
+          auto visualPos = sf::Vector2f((tile->X + 0.5) * tilemap->TileWidth, (tile->Y + 0.5) * tilemap->TileHeight);
+          auto pos = cpv(visualPos.x * pxToMeter, (height - visualPos.y) * pxToMeter);
+
+          for(auto shape : material->Shapes) {
+            auto copy = shape->CopyTemplate();
+            copy->AttachToBody(space, matBody);
+          }
+          cpBodySetPosition(matBody, pos);
+          cpBodySetUserData(matBody, new CollisionTarget(tile));
+          cpSpaceReindexShapesForBody(space, matBody); //?
+          tile->Material = material;
+        }
+      }
     }
   }
 } // namespace game

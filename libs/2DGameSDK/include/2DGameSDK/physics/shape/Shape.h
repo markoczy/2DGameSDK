@@ -29,6 +29,22 @@ namespace game {
       cpSpaceAddShape(space, mShape);
     }
 
+    ShapeType GetType() {
+      return mType;
+    }
+
+    cpSpace* GetRefSpace() {
+      return mSpace;
+    }
+
+    cpBody* GetRefBody() {
+      return mBody;
+    }
+
+    cpShape* GetRefShape() {
+      return mShape;
+    }
+
     virtual void Render(sf::RenderTarget* target, sf::Color color = sf::Color::Black, float stroke = 0.5) = 0;
 
     virtual void RenderAABB(sf::RenderTarget* target, sf::Color color = sf::Color::Black, float stroke = 0.5) {
@@ -50,25 +66,15 @@ namespace game {
       target->draw(rect);
     }
 
-    ShapeType GetType() {
-      return mType;
-    }
-
-    cpSpace* GetRefSpace() {
-      return mSpace;
-    }
-
-    cpBody* GetRefBody() {
-      return mBody;
-    }
-
-    cpShape* GetRefShape() {
-      return mShape;
-    }
+    virtual Shape<TDefinition>* CopyTemplate() = 0;
 
   protected:
     Game* getGame() {
       return mGame;
+    }
+
+    TDefinition* getDefinition() {
+      return mDefinition;
     }
 
     sf::Vector2f getVisualPosition() {
@@ -86,7 +92,7 @@ namespace game {
   private:
     ShapeType mType;
     Game* mGame = nullptr;
-    ShapeDefinition* mDefinition = nullptr;
+    TDefinition* mDefinition = nullptr;
     cpSpace* mSpace = nullptr;
     cpBody* mBody = nullptr;
     cpShape* mShape = nullptr;

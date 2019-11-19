@@ -9,11 +9,13 @@
 #include <2DGameSDK/physics/shape/definitions/ShapeDefinition.h>
 
 namespace game {
-  class GAMESDK_DLL DynamicShapeDefinition : public ShapeDefinition {
+  class GAMESDK_DLL DynamicShapeDefinition : public ShapeDefinition<DynamicShapeDefinition> {
   public:
     DynamicShapeDefinition(float mass, float friction, float elasticity, bool useDensityForMass = false);
 
     virtual void InitProperties(cpSpace* space, cpBody* body, cpShape* shape);
+
+    virtual DynamicShapeDefinition* Copy();
 
   protected:
     float mMass = 0;

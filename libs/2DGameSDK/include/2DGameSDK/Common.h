@@ -14,5 +14,7 @@
 #include <2DGameSDK/common/Constants.h>
 #include <2DGameSDK/common/Helpers.h>
 #include <2DGameSDK/common/graphics/GraphicTools.h>
+#include <2DGameSDK/common/types/ObjectType.h>
+// #include <2DGameSDK/common/types/Pose.h>
 
 #endif

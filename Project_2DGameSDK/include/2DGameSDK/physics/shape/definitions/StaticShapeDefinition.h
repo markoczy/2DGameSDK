@@ -8,11 +8,13 @@
 #include <2DGameSDK/physics/shape/definitions/ShapeDefinition.h>
 
 namespace game {
-  class GAMESDK_DLL StaticShapeDefinition : public ShapeDefinition {
+  class GAMESDK_DLL StaticShapeDefinition : public ShapeDefinition<StaticShapeDefinition> {
   public:
     StaticShapeDefinition(float friction, float elasticity, bool isSensor = true);
 
     virtual void InitProperties(cpSpace* space, cpBody* body, cpShape* shape);
+
+    virtual StaticShapeDefinition* Copy();
 
   protected:
     float mFriction = 0;

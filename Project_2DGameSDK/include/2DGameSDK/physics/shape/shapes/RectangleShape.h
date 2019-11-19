@@ -29,6 +29,10 @@ namespace game {
       target->draw(shape);
     }
 
+    virtual Shape<TDefinition>* CopyTemplate() {
+      return new RectangleShape<TDefinition>(this->getGame(), this->getDefinition()->Copy(), mWidth, mHeight);
+    }
+
   protected:
     float mWidth;
     float mHeight;

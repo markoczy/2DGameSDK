@@ -6,7 +6,7 @@ namespace game {
     void OnEntityTransformed(sf::Transform accumulated);
   };
 
-  Entity::Entity(int type, Game* game) : GameObject(type, game) {
+  Entity::Entity(int type, Game* game) : GameObject(ObjectType::Entity, game), mType(type) {
   }
 
   Entity::~Entity() {}
@@ -14,6 +14,10 @@ namespace game {
   bool Entity::IsKinematic() { return false; }
 
   bool Entity::IsCollidable() { return false; }
+
+  int Entity::GetType() {
+    return mType;
+  }
 
   sf::Transform Entity::GetTransform() { return sf::Transform::Identity; }
 
@@ -41,6 +45,10 @@ namespace game {
   void Entity::OnTickEnded() {}
 
   int Entity::OnCollision(CollisionEventType, Entity*, cpArbiter*) {
+    return 0;
+  }
+
+  int Entity::OnWorldCollision(CollisionEventType type, Tile* tile, cpArbiter* arb) {
     return 0;
   }
 

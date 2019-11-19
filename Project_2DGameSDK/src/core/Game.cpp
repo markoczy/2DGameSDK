@@ -5,20 +5,41 @@ using namespace game::constants;
 
 namespace game {
 
+  unsigned char collideEntities(CollisionEventType type, cpArbiter* arb, Entity* entA, Entity* entB) {
+    if(!entA->IsCollidable() || !entB->IsCollidable()) return 0;
+    int retA = entA->OnCollision(type, entB, arb);
+    int retB = entB->OnCollision(type, entA, arb);
+    return retA | retB;
+  }
+
+  unsigned char collideEntityTile(CollisionEventType type, cpArbiter* arb, Entity* entity, Tile* tile) {
+    if(!entity->IsCollidable()) return 0;
+    return entity->OnWorldCollision(type, tile, arb);
+  }
+
   unsigned char collisionFunc(CollisionEventType type, cpArbiter* arb) {
     cpBody* bodyA;
     cpBody* bodyB;
     cpArbiterGetBodies(arb, &bodyA, &bodyB);
 
-    auto entA = (Entity*)cpBodyGetUserData(bodyA);
-    auto entB = (Entity*)cpBodyGetUserData(bodyB);
+    auto targetA = (CollisionTarget*)cpBodyGetUserData(bodyA);
+    auto targetB = (CollisionTarget*)cpBodyGetUserData(bodyB);
 
-    // cout << "Collision Begin: " << entA->GetId() << " and " << entB->GetId() << endl;
-    if(!entA->IsCollidable() || !entB->IsCollidable()) return 0;
+    bool aIsEntity = targetA->GetType() == ObjectType::Entity;
+    bool bIsEntity = targetB->GetType() == ObjectType::Entity;
 
-    int retA = entA->OnCollision(type, entB, arb);
-    int retB = entB->OnCollision(type, entA, arb);
-    return retA | retB;
+    if(aIsEntity) {
+      if(bIsEntity) {
+        return collideEntities(type, arb, (Entity*)targetA->GetTarget(), (Entity*)targetB->GetTarget());
+      } else {
+        return collideEntityTile(type, arb, (Entity*)targetA->GetTarget(), (Tile*)targetB->GetTarget());
+      }
+    } else {
+      if(bIsEntity) {
+        return collideEntityTile(type, arb, (Entity*)targetB->GetTarget(), (Tile*)targetA->GetTarget());
+      }
+    }
+    return 0;
   }
 
   unsigned char collisionBegin(cpArbiter* arb, cpSpace*, cpDataPointer) {

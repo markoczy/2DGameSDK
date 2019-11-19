@@ -89,7 +89,7 @@ int playerDemo(float zoom) {
   auto rightPressed = new OnKeyPress(sf::Keyboard::Right);
 
   // Create Game World
-  auto world = GameWorldFactory::CreateGameWorld("res/testmap/tilemap.json", "", "res/testmap/tile_");
+  auto world = GameWorldFactory::CreateGameWorld(game, "res/testmap/tilemap.json", "", "res/testmap/tile_");
   game->SetWorld(world);
 
   // Create Player entity and Rotating child entity

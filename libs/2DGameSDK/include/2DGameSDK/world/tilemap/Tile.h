@@ -11,17 +11,26 @@
 #ifndef __TILE_H__
 #define __TILE_H__
 
-#include <2DGameSDK/world/material/Material.h>
 #include <SFML/Graphics.hpp>
 
+#include <2DGameSDK/common/types/ObjectType.h>
+#include <2DGameSDK/core/GameObject.h>
+#include <2DGameSDK/dll/gamesdk_dll.h>
+#include <2DGameSDK/world/material/Material.h>
+
 namespace game {
+  class Game;
 
   /**
    * @brief Contains all data that defines a single Tile of the Tile Map
    * 
    */
-  struct Tile {
-    int Id, Tile, X, Y, Rot;
+  class GAMESDK_DLL Tile : public GameObject {
+  public:
+    Tile(Game* game);
+
+    // as this is a Plain Data Object, all members are public
+    int Id, TileID, X, Y, Rot;
     bool FlipX, FlipY;
     sf::Texture* Texture;
     Material* Material;

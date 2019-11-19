@@ -11,4 +11,8 @@ namespace game {
     if(mElasticity != 0) cpShapeSetElasticity(shape, mElasticity);
   }
 
+  StaticShapeDefinition* StaticShapeDefinition::Copy() {
+    return new StaticShapeDefinition(mFriction, mElasticity, mIsSensor);
+  }
+
 } // namespace game

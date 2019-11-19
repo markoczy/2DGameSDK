@@ -3,31 +3,23 @@
 namespace game {
   int _entityCounter = 0;
 
-  GameObject::GameObject(int type, Game* game) : mType(type), mId(_entityCounter++), mGame(game) {}
+  GameObject::GameObject(ObjectType objType, Game* game) : mObjectType(objType), mId(_entityCounter++), mGame(game) {
+    // if(objType != ObjectType::Tile) {
+    //   std::cout << "Init GameObject, objType: " << (int)objType << std::endl;
+    // }
+  }
 
   GameObject::~GameObject() {}
-
-  int GameObject::GetType() {
-    return mType;
-  }
 
   int GameObject::GetId() {
     return mId;
   }
 
-  int GameObject::GetZIndex() {
-    return mZIndex;
-  }
-
-  void GameObject::SetZIndex(int zIndex) {
-    mZIndex = zIndex;
+  ObjectType GameObject::GetObjectType() {
+    return mObjectType;
   }
 
   Game* GameObject::getGame() {
     return mGame;
-  }
-
-  void GameObject::setType(int type) {
-    mType = type;
   }
 } // namespace game

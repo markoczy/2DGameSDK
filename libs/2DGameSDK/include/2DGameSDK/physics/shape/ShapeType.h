@@ -3,9 +3,9 @@
 
 namespace game {
   enum ShapeType {
-    Rectangle,
-    Polygon,
-    Circle
+    Rectangle = 1,
+    Polygon = 2,
+    Circle = 3
   };
 } // namespace game
 

@@ -28,6 +28,10 @@ namespace game {
       target->draw(shape);
     }
 
+    virtual Shape<TDefinition>* CopyTemplate() {
+      return new CircleShape<TDefinition>(this->getGame(), this->getDefinition()->Copy(), mRadius, mOffset);
+    }
+
   protected:
     float mRadius;
     cpVect mOffset;
