@@ -48,7 +48,7 @@ namespace game {
     return 0;
   }
 
-  int Entity::OnWorldCollision(CollisionEventType type, Tile* tile, cpArbiter* arb) {
+  int Entity::OnWorldCollision(CollisionEventType, Tile*, cpArbiter*) {
     return 0;
   }
 

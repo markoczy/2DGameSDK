@@ -50,6 +50,20 @@ namespace game {
 
     ObjectType GetObjectType();
 
+    int GetZIndex();
+
+    void SetZIndex(int zIndex);
+
+    virtual void OnTick();
+
+    /**
+     * @brief Renders the GameObject
+     * 
+     * @param target The screen or texture to render on
+     * @param states The initial Render States (transformation etc.)
+     */
+    virtual void OnRender(sf::RenderTarget* target, sf::RenderStates states = sf::RenderStates::Default);
+
   protected:
     Game* getGame();
 
@@ -57,6 +71,7 @@ namespace game {
     ObjectType mObjectType = ObjectType::Unknown;
     int mId = 0;
     Game* mGame = nullptr;
+    int mZIndex = 0;
   };
 
 } // namespace game

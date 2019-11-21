@@ -47,21 +47,7 @@ namespace game {
     virtual int OnCollision(CollisionEventType type, Entity* other, cpArbiter* arb);
     virtual int OnWorldCollision(CollisionEventType type, Tile* tile, cpArbiter* arb);
 
-    /**
-     * @brief Updates the Entity
-     * 
-     */
-    virtual void OnTick() = 0;
-
     virtual void OnTickEnded();
-
-    /**
-     * @brief Renders the Entity
-     * 
-     * @param target The screen or texture to render on
-     * @param states The initial Render States (transformation etc.)
-     */
-    virtual void OnRender(sf::RenderTarget* target, sf::RenderStates states = sf::RenderStates::Default) = 0;
 
   protected:
     int mType = 0;

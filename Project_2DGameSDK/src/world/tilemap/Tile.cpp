@@ -2,4 +2,6 @@
 
 namespace game {
   Tile::Tile(Game* game) : GameObject(ObjectType::Tile, game) {}
+
+  Tile::~Tile() {}
 } // namespace game

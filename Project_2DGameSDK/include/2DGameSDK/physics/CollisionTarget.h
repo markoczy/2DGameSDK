@@ -12,8 +12,8 @@ namespace game {
     GameObject* GetTarget();
 
   private:
-    ObjectType mType;
     GameObject* mTarget;
+    ObjectType mType;
   };
 } // namespace game
 

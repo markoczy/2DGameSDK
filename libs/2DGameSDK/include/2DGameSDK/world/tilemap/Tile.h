@@ -28,6 +28,7 @@ namespace game {
   class GAMESDK_DLL Tile : public GameObject {
   public:
     Tile(Game* game);
+    virtual ~Tile();
 
     // as this is a Plain Data Object, all members are public
     int Id, TileID, X, Y, Rot;

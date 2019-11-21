@@ -19,6 +19,18 @@ namespace game {
     return mObjectType;
   }
 
+  int GameObject::GetZIndex() {
+    return mZIndex;
+  }
+
+  void GameObject::SetZIndex(int zIndex) {
+    mZIndex = zIndex;
+  }
+
+  void GameObject::OnTick() {}
+
+  void GameObject::OnRender(sf::RenderTarget*, sf::RenderStates) {}
+
   Game* GameObject::getGame() {
     return mGame;
   }
