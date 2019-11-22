@@ -3,8 +3,10 @@
 using namespace sf;
 
 namespace game {
-  GameWorld::GameWorld(Tilemap* tilemap, MaterialMap* materialMap) : mTilemap(tilemap), mMaterialMap(materialMap) {
-    loadTilemap();
+  GameWorld::GameWorld(Game* game, Tilemap* tilemap, MaterialMap* materialMap) : mGame(game), mTilemap(tilemap), mMaterialMap(materialMap) {
+    // loadTilemap();
+    mBounds.width = mTilemap->TileWidth * mTilemap->TilesWide;
+    mBounds.height = mTilemap->TileHeight * mTilemap->TilesHigh;
   }
 
   GameWorld::~GameWorld() {
@@ -22,41 +24,40 @@ namespace game {
     helpers::safeDelete(mMaterialMap);
   }
 
-  void GameWorld::OnTick() {
-    // TODO foreach tile -> tick
-  }
-
-  void GameWorld::OnRender(sf::RenderTarget* target) {
-    Sprite sprite(*mTexture);
-    target->draw(sprite);
-  }
-
   sf::IntRect GameWorld::GetBounds() {
     return mBounds;
   }
 
   void GameWorld::loadTilemap() {
-    if(mTexture != nullptr) {
-      delete mTexture;
-    }
+    // for(auto layer : mTilemap->Layers) {
+    //   for(auto row : layer->Tiles) {
+    //     for(auto tile : row) {
+    //       mGame->GetStateManager()->AddObject(tile);
+    //     }
+    //   }
+    // }
 
-    mBounds.width = mTilemap->TileWidth * mTilemap->TilesWide;
-    mBounds.height = mTilemap->TileHeight * mTilemap->TilesHigh;
-    mTexture = new Texture();
-    if(!mTexture->create(mBounds.width, mBounds.height)) {
-      throw std::runtime_error("Texture creation failed at load tilemap");
-    }
+    // if(mTexture != nullptr) {
+    //   delete mTexture;
+    // }
 
-    for(auto layer : mTilemap->Layers) {
-      for(auto row : layer->Tiles) {
-        for(auto tile : row) {
-          if(tile->Texture != nullptr) {
-            int x = tile->X * mTilemap->TileWidth;
-            int y = tile->Y * mTilemap->TileHeight;
-            mTexture->update(*tile->Texture, x, y);
-          }
-        }
-      }
-    }
+    // mBounds.width = mTilemap->TileWidth * mTilemap->TilesWide;
+    // mBounds.height = mTilemap->TileHeight * mTilemap->TilesHigh;
+    // mTexture = new Texture();
+    // if(!mTexture->create(mBounds.width, mBounds.height)) {
+    //   throw std::runtime_error("Texture creation failed at load tilemap");
+    // }
+
+    // for(auto layer : mTilemap->Layers) {
+    //   for(auto row : layer->Tiles) {
+    //     for(auto tile : row) {
+    //       if(tile->Texture != nullptr) {
+    //         int x = tile->X * mTilemap->TileWidth;
+    //         int y = tile->Y * mTilemap->TileHeight;
+    //         mTexture->update(*tile->Texture, x, y);
+    //       }
+    //     }
+    //   }
+    // }
   }
 } // namespace game

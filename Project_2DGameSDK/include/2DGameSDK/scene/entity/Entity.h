@@ -3,20 +3,20 @@
 #define __ENTITY_H__
 
 #include <2DGameSDK/common/types/ObjectType.h>
+#include <2DGameSDK/common/types/base/GameBase.h>
 #include <2DGameSDK/core/GameObject.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
 #include <2DGameSDK/physics/CollisionEventType.h>
-#include <2DGameSDK/world/tilemap/Tile.h>
 
 #include <chipmunk/chipmunk.h>
 
 namespace game {
+  class Tile;
   class SceneGraphNode;
-  class Game;
 
   class GAMESDK_DLL Entity : public GameObject {
   public:
-    Entity(int type, Game* game);
+    Entity(int type, GameBase* game);
     virtual ~Entity();
 
     virtual bool IsKinematic();

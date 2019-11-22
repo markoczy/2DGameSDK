@@ -13,7 +13,9 @@
 
 #include <SFML/Graphics.hpp>
 
+#include <2DGameSDK/common/Helpers.h>
 #include <2DGameSDK/common/types/ObjectType.h>
+#include <2DGameSDK/common/types/base/GameBase.h>
 #include <2DGameSDK/core/GameObject.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
 #include <2DGameSDK/world/material/Material.h>
@@ -27,14 +29,31 @@ namespace game {
    */
   class GAMESDK_DLL Tile : public GameObject {
   public:
-    Tile(Game* game);
+    struct Definition {
+      int Id, TileID, X, Y, Rot;
+      bool FlipX, FlipY;
+    };
+
+    Tile(GameBase* game, Tile::Definition defintion);
     virtual ~Tile();
 
-    // as this is a Plain Data Object, all members are public
-    int Id, TileID, X, Y, Rot;
-    bool FlipX, FlipY;
-    sf::Texture* Texture;
-    Material* Material;
+    sf::Texture* GetTexture();
+
+    Material* GetMaterial();
+
+    Tile::Definition* GetDefinition();
+
+    void SetTexture(sf::Texture* texture);
+
+    void SetMaterial(Material* material);
+
+    virtual void OnRender(sf::RenderTarget* target, sf::RenderStates states = sf::RenderStates::Default);
+
+  private:
+    Definition mDefinition;
+    sf::Texture* mTexture = nullptr;
+    Material* mMaterial = nullptr;
+    sf::Sprite* mSprite = nullptr;
   };
 
 } // namespace game

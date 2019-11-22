@@ -6,7 +6,7 @@ namespace game {
     void OnEntityTransformed(sf::Transform accumulated);
   };
 
-  Entity::Entity(int type, Game* game) : GameObject(ObjectType::Entity, game), mType(type) {
+  Entity::Entity(int type, GameBase* game) : GameObject(ObjectType::Entity, game), mType(type) {
   }
 
   Entity::~Entity() {}

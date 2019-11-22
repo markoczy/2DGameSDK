@@ -14,11 +14,11 @@
 #include <SFML/Graphics.hpp>
 
 #include <2DGameSDK/common/types/ObjectType.h>
+#include <2DGameSDK/common/types/base/GameBase.h>
+#include <2DGameSDK/common/types/base/StateManagerBase.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
 
 namespace game {
-  class Game;
-
   /**
    * @brief Defines a simple Game Object (no transformations)
    * 
@@ -33,7 +33,7 @@ namespace game {
      * @param type The GameObject Type (does not affect anything and is meant
      *        to be used freely to identify entities of some kind)
      */
-    GameObject(ObjectType objType, Game* game);
+    GameObject(ObjectType objType, GameBase* game);
 
     /**
      * @brief Destroys the GameObject
@@ -64,13 +64,15 @@ namespace game {
      */
     virtual void OnRender(sf::RenderTarget* target, sf::RenderStates states = sf::RenderStates::Default);
 
+    static bool SortByZOrder(GameObject* a, GameObject* b);
+
   protected:
-    Game* getGame();
+    GameBase* getGame();
 
   private:
     ObjectType mObjectType = ObjectType::Unknown;
     int mId = 0;
-    Game* mGame = nullptr;
+    GameBase* mGame = nullptr;
     int mZIndex = 0;
   };
 

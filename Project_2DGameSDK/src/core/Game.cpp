@@ -64,7 +64,7 @@ namespace game {
   // Constructor / Destructor
   // ###########################################################################
 
-  Game::Game() : mState(GameState{nullptr, nullptr}) {
+  Game::Game() {
     LOGD("Game minimal contructor call");
     mPhysicalWorld = cpSpaceNew();
     auto collisionHandler = cpSpaceAddCollisionHandler(mPhysicalWorld, CollisionType::Default, CollisionType::Default);
@@ -78,8 +78,6 @@ namespace game {
 
   Game::~Game() {
     helpers::safeDelete(mWindow);
-    helpers::safeDelete(mState.Scene);
-    helpers::safeDelete(mState.World);
     helpers::safeDelete(mPoseConverter);
     cpSpaceDestroy(mPhysicalWorld);
   }
@@ -95,18 +93,19 @@ namespace game {
     mWindow->setFramerateLimit(mOptions.FramesPerSecond);
     // mWindow->setVerticalSyncEnabled(true);
 
+    auto world = mStateManager.GetWorld();
     mView = mWindow->getView();
     auto sz = mView.getSize() / mOptions.InitialZoom;
     mView.setSize(sz);
-    mView.setCenter(sz.x / 2, mState.World->GetBounds().height - sz.y / 2);
+    mView.setCenter(sz.x / 2, world->GetBounds().height - sz.y / 2);
     mWindow->setView(mView);
 
     float step = 1.0f / mOptions.FramesPerSecond;
 
     int sleepMillis = int(1000.0 * (1.0 / mOptions.FramesPerSecond));
     sf::Clock clock;
-    clock.restart();
     while(mWindow->isOpen()) {
+      clock.restart();
       // Handle window events
       sf::Event event;
       while(mWindow->pollEvent(event)) {
@@ -117,23 +116,27 @@ namespace game {
       }
 
       // Game cycle
+      dbgClock.restart();
       tick();
+      LOGD("Tick in: " << dbgClock.getElapsedTime().asMilliseconds());
       // Chipmunk recommends to use fixed time steps
+      dbgClock.restart();
       cpSpaceStep(mPhysicalWorld, step);
+      LOGD("Phys update in: " << dbgClock.getElapsedTime().asMilliseconds());
 
-      IFLOGD(int tickTime = clock.getElapsedTime().asMilliseconds();)
+      dbgClock.restart();
       render();
+      LOGD("Render in: " << dbgClock.getElapsedTime().asMilliseconds());
 
       // Sync Sim Time
       int time = clock.getElapsedTime().asMilliseconds();
+      LOGD("Total Cycle time: " << time);
       if(sleepMillis > time) {
         // LOGD("Sleeping " << sleepMillis - time);
         std::this_thread::sleep_for(std::chrono::milliseconds(sleepMillis - time));
       } else {
         LOGW("Overdue " << time - sleepMillis);
       }
-      LOGD("Tick time:" << tickTime << ", Render Time: " << time - tickTime);
-      clock.restart();
     }
   }
 
@@ -152,12 +155,12 @@ namespace game {
     return mOptions;
   }
 
-  GameState Game::GetState() {
-    return mState;
+  StateManagerBase* Game::GetStateManager() {
+    return &mStateManager;
   }
 
   SceneGraph* Game::GetScene() {
-    return mState.Scene;
+    return mStateManager.GetScene();
   }
 
   PoseConverter* Game::GetPoseConverter() {
@@ -165,11 +168,11 @@ namespace game {
   }
 
   void Game::SetScene(SceneGraph* scene) {
-    mState.Scene = scene;
+    mStateManager.SetScene(scene);
   }
 
   GameWorld* Game::GetWorld() {
-    return mState.World;
+    return mStateManager.GetWorld();
   }
 
   void Game::SetOptions(GameOptions options) {
@@ -177,7 +180,7 @@ namespace game {
   }
 
   void Game::SetWorld(GameWorld* world) {
-    mState.World = world;
+    mStateManager.SetWorld(world);
 
     helpers::safeDelete(mPoseConverter);
     mPoseConverter = new PoseConverter(world->GetBounds().width, world->GetBounds().height, mOptions.MeterPerPixel);
@@ -200,8 +203,7 @@ namespace game {
   void Game::tick() {
     try {
       mEventCtrl.OnTick();
-      mState.World->OnTick();
-      mState.Scene->OnTick();
+      mStateManager.OnTick();
     } catch(std::exception& e) {
       LOGE("Error during tick: " << e.what());
     }
@@ -210,15 +212,8 @@ namespace game {
   void Game::render() {
     try {
       mWindow->clear(sf::Color(80, 80, 80));
-      dbgClock.restart();
-      mState.World->OnRender(mWindow);
-      LOGD("Render World in: " << dbgClock.getElapsedTime().asMilliseconds());
-      dbgClock.restart();
-      mState.Scene->OnRender(mWindow, &mOptions);
-      LOGD("Render Scene in: " << dbgClock.getElapsedTime().asMilliseconds());
-      dbgClock.restart();
+      mStateManager.OnRender(mWindow);
       mWindow->display();
-      LOGD("Display in: " << dbgClock.getElapsedTime().asMilliseconds());
     } catch(std::exception& e) {
       LOGE("Error during render: " << e.what());
     }

@@ -26,7 +26,7 @@ namespace game {
       materialMap = loadMaterialMap(game, materialMapFile);
       loadMaterials(game, tilemap, materialMap);
     }
-    auto world = new GameWorld(tilemap, materialMap);
+    auto world = new GameWorld(game, tilemap, materialMap);
     return world;
   }
 
@@ -67,21 +67,21 @@ namespace game {
         while(tiles[curTile] != nullptr) {
           // LOGD("Processing Tile: " << curTile);
           auto tile = tiles[curTile];
-          auto tileOut = new Tile(game);
+          auto tileOut = Tile::Definition();
 
-          tileOut->TileID = tile["tile"].get<int>();
+          tileOut.TileID = tile["tile"].get<int>();
           // LOGD("Tile: " << tileOut.Tile);
-          tileOut->Id = tile["index"].get<int>();
+          tileOut.Id = tile["index"].get<int>();
           // LOGD("Id " << tileOut.Id);
-          tileOut->Rot = tile["rot"].get<int>();
+          tileOut.Rot = tile["rot"].get<int>();
           // LOGD("Rot " << tileOut.Rot);
-          tileOut->X = tile["x"].get<int>();
+          tileOut.X = tile["x"].get<int>();
           // LOGD("X " << tileOut.X);
-          tileOut->Y = tile["y"].get<int>();
+          tileOut.Y = tile["y"].get<int>();
           // LOGD("Y " << tileOut.Y);
-          tileOut->FlipX = tile["flipX"].get<bool>();
+          tileOut.FlipX = tile["flipX"].get<bool>();
           // LOGD("FlipX " << tileOut.FlipX);
-          layerOut->Tiles[tileOut->Y][tileOut->X] = tileOut;
+          layerOut->Tiles[tileOut.Y][tileOut.X] = new Tile(game, tileOut);
 
           curTile++;
         }
@@ -99,6 +99,7 @@ namespace game {
   }
 
   MaterialMap* GameWorldFactory::loadMaterialMap(Game* game, std::string filename) {
+    LOGI("Start");
     try {
       ifstream ifs(filename);
       json data;
@@ -163,6 +164,7 @@ namespace game {
         ret->Materials[materialOut->TileID] = materialOut;
         curMaterial++;
       }
+      LOGI("Done");
       return ret;
 
     } catch(const std::exception& e) {
@@ -173,15 +175,17 @@ namespace game {
   }
 
   void GameWorldFactory::loadTextures(Tilemap* tilemap, std::string prefix) {
+    LOGI("Start");
     try {
       for(unsigned int iLayer = 0; iLayer < tilemap->Layers.size(); iLayer++) {
         auto layer = tilemap->Layers[iLayer];
         for(unsigned int iY = 0; iY < layer->Tiles.size(); iY++) {
           for(unsigned int iX = 0; iX < layer->Tiles[iY].size(); iX++) {
             auto tile = layer->Tiles[iY][iX];
-            if(tile->TileID > -1) {
-              string fileName = getFilename(prefix, tile->TileID, 2);
-              tile->Texture = AssetManager::GetTexture(fileName);
+            auto def = tile->GetDefinition();
+            if(def->TileID > -1) {
+              string fileName = getFilename(prefix, def->TileID, 2);
+              tile->SetTexture(AssetManager::GetTexture(fileName));
             }
           }
         }
@@ -191,9 +195,11 @@ namespace game {
       ss << "Failed to load textures: " << e.what();
       throw std::runtime_error(ss.str());
     }
+    LOGI("Done");
   }
 
   void GameWorldFactory::loadMaterials(Game* game, Tilemap* tilemap, MaterialMap* materialMap) {
+    LOGI("Start");
     if(tilemap == nullptr || materialMap == nullptr) {
       LOGI("Not loading any materials");
       return;
@@ -207,14 +213,15 @@ namespace game {
     for(auto layer : tilemap->Layers) {
       for(auto row : layer->Tiles) {
         for(auto tile : row) {
-          if(tile->TileID == -1) {
+          auto def = tile->GetDefinition();
+          if(def->TileID == -1) {
             continue;
           }
 
-          auto material = materialMap->Materials[tile->TileID];
+          auto material = materialMap->Materials[def->TileID];
           auto matBody = cpSpaceAddBody(space, cpBodyNewStatic());
 
-          auto visualPos = sf::Vector2f((tile->X + 0.5) * tilemap->TileWidth, (tile->Y + 0.5) * tilemap->TileHeight);
+          auto visualPos = sf::Vector2f((def->X + 0.5) * tilemap->TileWidth, (def->Y + 0.5) * tilemap->TileHeight);
           auto pos = cpv(visualPos.x * pxToMeter, (height - visualPos.y) * pxToMeter);
 
           for(auto shape : material->Shapes) {
@@ -224,9 +231,10 @@ namespace game {
           cpBodySetPosition(matBody, pos);
           cpBodySetUserData(matBody, new CollisionTarget(tile));
           cpSpaceReindexShapesForBody(space, matBody); //?
-          tile->Material = material;
+          tile->SetMaterial(material);
         }
       }
     }
+    LOGI("Done");
   }
 } // namespace game

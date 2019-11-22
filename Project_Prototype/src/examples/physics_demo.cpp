@@ -82,7 +82,7 @@ public:
   }
 
   int OnWorldCollision(CollisionEventType type, Tile* tile, cpArbiter*) {
-    if(tile->Material->Type == _GROUND_TYPE) {
+    if(tile->GetMaterial()->Type == _GROUND_TYPE) {
       if(type == CollisionEventType::Begin) {
         cout << "Touching floor" << endl;
         touchingFloor = true;
@@ -151,7 +151,7 @@ int demo1() {
 
   auto boxTx = AssetManager::GetTexture("res/textures/box/box.png");
 
-  auto scene = new SceneGraph();
+  auto scene = new SceneGraph(game);
 
   auto groundShape = ShapeFactory::CreateStaticRectangleShape(game, 200, 60, 1, 0.3);
   auto ground = new SpriteStaticEntity(1, game, boxTx, {groundShape}, true);
@@ -214,7 +214,7 @@ int demo2() {
 
   auto boxTx = AssetManager::GetTexture("res/textures/box/box.png");
 
-  auto scene = new SceneGraph();
+  auto scene = new SceneGraph(game);
 
   float groundW = 50;
   float groundH = 5;
@@ -304,7 +304,7 @@ int demo3() {
 
   auto boxTx = AssetManager::GetTexture("res/textures/box/box.png");
 
-  auto scene = new SceneGraph();
+  auto scene = new SceneGraph(game);
 
   // float groundW = 51.2;
   // float groundH = 5;

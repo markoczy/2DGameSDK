@@ -250,7 +250,7 @@ int chopperDemo() {
   auto enemy = new RotatingEntity(game, _ENEMY_TYPE, tex2, enemyCollisionMask, 15.0, sf::Vector2f(200, 200));
 
   // Layout entities in scene
-  auto scene = new SceneGraph();
+  auto scene = new SceneGraph(game);
   auto parent = scene->AddEntity(ent); //scene->GetRoot()->AddChild(ent);
   scene->AddEntity(ent2, parent); // parent->AddChild(ent2);
   scene->AddEntity(enemy);

@@ -135,7 +135,7 @@ int playerDemoGTA2(float zoom) {
   auto ent = new Gta2PlayerEntity(game, animStates, 1.0, 5.0, upPressed, downPressed, leftPressed, rightPressed, sf::Vector2f(30, 30));
 
   // Layout entities in scene
-  auto scene = new SceneGraph();
+  auto scene = new SceneGraph(game);
   scene->AddEntity(ent); // scene->GetRoot()->AddChild(ent);
   game->SetScene(scene);
 

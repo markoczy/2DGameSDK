@@ -22,8 +22,11 @@
 #include <2DGameSDK/common/Constants.h>
 #include <2DGameSDK/common/Helpers.h>
 #include <2DGameSDK/common/graphics/PoseConverter.h>
+#include <2DGameSDK/common/types/base/GameBase.h>
+#include <2DGameSDK/common/types/base/StateManagerBase.h>
 #include <2DGameSDK/core/GameOptions.h>
 #include <2DGameSDK/core/GameState.h>
+#include <2DGameSDK/core/state/StateManager.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
 #include <2DGameSDK/event/EventController.h>
 #include <2DGameSDK/event/observable/ObservableBase.h>
@@ -41,7 +44,7 @@ namespace game {
    *        Entities and the World.
    * 
    */
-  class GAMESDK_DLL Game {
+  class GAMESDK_DLL Game : public GameBase {
   public:
     /**
      * @brief Default empty constructor, Game is unusable until options,
@@ -65,12 +68,7 @@ namespace game {
 
     GameOptions GetOptions();
 
-    /**
-     * @brief Returns a copy of the current game state
-     * 
-     * @return GameState the current state
-     */
-    GameState GetState();
+    StateManagerBase* GetStateManager();
 
     /**
      * @brief Retreives Reference of the SceneGraph
@@ -135,7 +133,7 @@ namespace game {
      */
     ObservableBase* GetEvent(int id);
 
-    // TODO encapsulation of physical world?
+    //? encapsulation of physical world?
     cpSpace* GetPhysicalWorld();
 
   private:
@@ -151,9 +149,9 @@ namespace game {
      */
     void render();
 
+    StateManager mStateManager;
     EventController mEventCtrl;
     GameOptions mOptions;
-    GameState mState;
     sf::RenderWindow* mWindow;
     sf::View mView;
     cpSpace* mPhysicalWorld = nullptr;

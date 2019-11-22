@@ -3,10 +3,8 @@
 namespace game {
   int _entityCounter = 0;
 
-  GameObject::GameObject(ObjectType objType, Game* game) : mObjectType(objType), mId(_entityCounter++), mGame(game) {
-    // if(objType != ObjectType::Tile) {
-    //   std::cout << "Init GameObject, objType: " << (int)objType << std::endl;
-    // }
+  GameObject::GameObject(ObjectType objType, GameBase* game) : mObjectType(objType), mId(_entityCounter++), mGame(game) {
+    mGame->GetStateManager()->AddObject(this);
   }
 
   GameObject::~GameObject() {}
@@ -31,7 +29,12 @@ namespace game {
 
   void GameObject::OnRender(sf::RenderTarget*, sf::RenderStates) {}
 
-  Game* GameObject::getGame() {
+  bool GameObject::SortByZOrder(GameObject* a, GameObject* b) {
+    return a->GetZIndex() > b->GetZIndex();
+  }
+
+  GameBase* GameObject::getGame() {
     return mGame;
   }
+
 } // namespace game

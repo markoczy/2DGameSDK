@@ -99,7 +99,7 @@ int playerDemo(float zoom) {
   // auto ent2 = new RotatingEntity(tex2, 5.0);
 
   // Layout entities in scene
-  auto scene = new SceneGraph();
+  auto scene = new SceneGraph(game);
   auto parent = scene->AddEntity(ent); // scene->GetRoot()->AddChild(ent);
   scene->AddEntity(ent, parent); // parent->AddChild(ent2);
 

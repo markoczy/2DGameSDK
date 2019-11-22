@@ -65,7 +65,7 @@
  *   auto ent2 = new RotatingEntity(tex, 10.0);
  * 
  *   // Layout entities in scene
- *   auto scene = new SceneGraph();
+ *   auto scene = new SceneGraph(game);
  *   auto parent = scene->GetRoot()->AddChild(ent);
  *   auto child = parent->AddChild(ent2);
  * 
