@@ -52,6 +52,8 @@ namespace game {
 
     virtual void OnTick();
 
+    virtual void OnTickEnded();
+
   protected:
     GameBase* getGame();
 

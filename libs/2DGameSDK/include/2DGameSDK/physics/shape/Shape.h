@@ -84,7 +84,7 @@ namespace game {
 
     float getVisualRotation() {
       auto converter = getGame()->GetPoseConverter();
-      return converter->GetVisualAngle(cpBodyGetAngle(mBody));
+      return -converter->GetVisualAngle(cpBodyGetAngle(mBody));
     }
 
     virtual cpShape* initShape(cpSpace* space, cpBody* body) = 0;

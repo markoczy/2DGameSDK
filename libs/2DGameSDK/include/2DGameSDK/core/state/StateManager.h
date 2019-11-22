@@ -5,8 +5,10 @@
 #include <map>
 
 #include <2DGameSDK/common/Helpers.h>
+#include <2DGameSDK/common/types/base/GameBase.h>
 #include <2DGameSDK/common/types/base/StateManagerBase.h>
 #include <2DGameSDK/core/GameObject.h>
+#include <2DGameSDK/core/GameOptions.h>
 #include <2DGameSDK/core/VisualObject.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
 
@@ -16,7 +18,7 @@ namespace game {
 
   class StateManager : public StateManagerBase {
   public:
-    StateManager();
+    StateManager(GameBase* game);
     ~StateManager();
 
     GameWorld* GetWorld();
@@ -42,6 +44,7 @@ namespace game {
     void OnZOrderChanged();
 
   private:
+    GameBase* mGame = nullptr;
     GameWorld* mWorld = nullptr;
     SceneGraph* mScene = nullptr;
     std::map<int, GameObject*> mObjects;

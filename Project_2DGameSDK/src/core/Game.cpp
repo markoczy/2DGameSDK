@@ -64,7 +64,7 @@ namespace game {
   // Constructor / Destructor
   // ###########################################################################
 
-  Game::Game() {
+  Game::Game() : mStateManager(this) {
     LOGD("Game minimal contructor call");
     mPhysicalWorld = cpSpaceNew();
     auto collisionHandler = cpSpaceAddCollisionHandler(mPhysicalWorld, CollisionType::Default, CollisionType::Default);
@@ -204,6 +204,7 @@ namespace game {
     try {
       mEventCtrl.OnTick();
       mStateManager.OnTick();
+      mStateManager.OnTickEnded();
     } catch(std::exception& e) {
       LOGE("Error during tick: " << e.what());
     }

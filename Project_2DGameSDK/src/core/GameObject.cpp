@@ -19,6 +19,8 @@ namespace game {
 
   void GameObject::OnTick() {}
 
+  void GameObject::OnTickEnded() {}
+
   GameBase* GameObject::getGame() {
     return mGame;
   }

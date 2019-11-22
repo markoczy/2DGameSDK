@@ -2,7 +2,7 @@
 
 namespace game {
 
-  StateManager::StateManager() {
+  StateManager::StateManager(GameBase* game) : mGame(game) {
   }
 
   StateManager::~StateManager() {
@@ -44,7 +44,11 @@ namespace game {
     }
   }
 
-  void StateManager::OnTickEnded() {}
+  void StateManager::OnTickEnded() {
+    for(auto entry : mObjects) {
+      entry.second->OnTickEnded();
+    }
+  }
 
   void StateManager::OnRender(sf::RenderTarget* target) {
     int cnt = 0;
@@ -54,6 +58,11 @@ namespace game {
         cnt++;
       }
     }
+
+    // bool renderAABB = mGame->GetOptions().RenderAABB;
+    // bool renderCollisionMasks = mGame->GetOptions().RenderCollisionMask;
+    // if(renderAABB || renderCollisionMasks) {
+    // }
     LOGD("Rendered " << cnt << " Objects");
   }
 
