@@ -4,20 +4,20 @@ using namespace sf;
 
 namespace game {
   GameWorld::GameWorld(Game* game, Tilemap* tilemap, MaterialMap* materialMap) : mGame(game), mTilemap(tilemap), mMaterialMap(materialMap) {
-    // loadTilemap();
     mBounds.width = mTilemap->TileWidth * mTilemap->TilesWide;
     mBounds.height = mTilemap->TileHeight * mTilemap->TilesHigh;
+    loadTilemap();
   }
 
   GameWorld::~GameWorld() {
     // Cleanup Tilemap
     for(auto layer : mTilemap->Layers) {
-      for(auto row : layer->Tiles) {
+      for(auto row : layer->GetTiles()) {
         for(auto tile : row) {
           helpers::safeDelete(tile);
         }
       }
-      helpers::safeDelete(layer);
+      // helpers::safeDelete(layer);
     }
 
     helpers::safeDelete(mTilemap);
@@ -29,13 +29,9 @@ namespace game {
   }
 
   void GameWorld::loadTilemap() {
-    // for(auto layer : mTilemap->Layers) {
-    //   for(auto row : layer->Tiles) {
-    //     for(auto tile : row) {
-    //       mGame->GetStateManager()->AddObject(tile);
-    //     }
-    //   }
-    // }
+    for(auto layer : mTilemap->Layers) {
+      mGame->GetStateManager()->AddVisualObject(layer);
+    }
 
     // if(mTexture != nullptr) {
     //   delete mTexture;
