@@ -27,33 +27,14 @@ namespace game {
    * @brief Contains all data that defines a single Tile of the Tile Map
    * 
    */
-  class GAMESDK_DLL Tile : public GameObject {
+  struct GAMESDK_DLL Tile {
   public:
-    struct Definition {
-      int Id, TileID, X, Y, Rot;
-      bool FlipX, FlipY;
-    };
+    int Id, TileID, X, Y, Rot;
+    bool FlipX, FlipY;
 
-    Tile(GameBase* game, Tile::Definition defintion);
-    virtual ~Tile();
-
-    sf::Texture* GetTexture();
-
-    Material* GetMaterial();
-
-    Tile::Definition* GetDefinition();
-
-    void SetTexture(sf::Texture* texture);
-
-    void SetMaterial(Material* material);
-
-    virtual void OnRender(sf::RenderTarget* target, sf::RenderStates states = sf::RenderStates::Default);
-
-  private:
-    Definition mDefinition;
-    sf::Texture* mTexture = nullptr;
-    Material* mMaterial = nullptr;
-    sf::Sprite* mSprite = nullptr;
+    sf::Texture* Texture = nullptr;
+    Material* Material = nullptr;
+    sf::Sprite* Sprite = nullptr;
   };
 
 } // namespace game

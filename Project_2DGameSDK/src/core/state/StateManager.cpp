@@ -30,8 +30,11 @@ namespace game {
 
   void StateManager::AddObject(GameObject* object) {
     mObjects[object->GetId()] = object;
-    mRenderObjects.push_back(object);
     LOGD("Adding Object " << object->GetId() << " of Type: " << (int)object->GetObjectType() << ", size now: " << mRenderObjects.size());
+  }
+
+  void StateManager::AddVisualObject(VisualObject* object) {
+    mRenderObjects.push_back(object);
     OnZOrderChanged();
   }
 
@@ -55,7 +58,7 @@ namespace game {
   }
 
   void StateManager::OnZOrderChanged() {
-    std::sort(mRenderObjects.begin(), mRenderObjects.end(), GameObject::SortByZOrder);
+    std::sort(mRenderObjects.begin(), mRenderObjects.end(), VisualObject::SortByZOrder);
   }
 
 } // namespace game

@@ -7,12 +7,12 @@
 namespace game {
   class CollisionTarget {
   public:
-    CollisionTarget(GameObject* target);
+    CollisionTarget(void* target, ObjectType type);
     ObjectType GetType();
-    GameObject* GetTarget();
+    void* GetTarget();
 
   private:
-    GameObject* mTarget;
+    void* mTarget;
     ObjectType mType;
   };
 } // namespace game

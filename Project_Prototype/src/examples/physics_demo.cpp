@@ -78,11 +78,10 @@ public:
     }
 
     return 1;
-    // return 0;
   }
 
   int OnWorldCollision(CollisionEventType type, Tile* tile, cpArbiter*) {
-    if(tile->GetMaterial()->Type == _GROUND_TYPE) {
+    if(tile->Material->Type == _GROUND_TYPE) {
       if(type == CollisionEventType::Begin) {
         cout << "Touching floor" << endl;
         touchingFloor = true;

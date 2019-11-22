@@ -7,6 +7,7 @@
 #include <2DGameSDK/common/Helpers.h>
 #include <2DGameSDK/common/types/base/StateManagerBase.h>
 #include <2DGameSDK/core/GameObject.h>
+#include <2DGameSDK/core/VisualObject.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
 
 namespace game {
@@ -30,6 +31,8 @@ namespace game {
 
     void AddObject(GameObject* object);
 
+    void AddVisualObject(VisualObject* object);
+
     void OnTick();
 
     void OnTickEnded();
@@ -42,7 +45,7 @@ namespace game {
     GameWorld* mWorld = nullptr;
     SceneGraph* mScene = nullptr;
     std::map<int, GameObject*> mObjects;
-    std::vector<GameObject*> mRenderObjects;
+    std::vector<VisualObject*> mRenderObjects;
   };
 } // namespace game
 

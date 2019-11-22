@@ -50,21 +50,7 @@ namespace game {
 
     ObjectType GetObjectType();
 
-    int GetZIndex();
-
-    void SetZIndex(int zIndex);
-
     virtual void OnTick();
-
-    /**
-     * @brief Renders the GameObject
-     * 
-     * @param target The screen or texture to render on
-     * @param states The initial Render States (transformation etc.)
-     */
-    virtual void OnRender(sf::RenderTarget* target, sf::RenderStates states = sf::RenderStates::Default);
-
-    static bool SortByZOrder(GameObject* a, GameObject* b);
 
   protected:
     GameBase* getGame();

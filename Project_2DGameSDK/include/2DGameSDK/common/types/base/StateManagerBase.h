@@ -7,6 +7,7 @@ namespace game {
   class GameWorld;
   class SceneGraph;
   class GameObject;
+  class VisualObject;
 
   class StateManagerBase {
   public:
@@ -21,6 +22,8 @@ namespace game {
     virtual void SetScene(SceneGraph* scene) = 0;
 
     virtual void AddObject(GameObject* object) = 0;
+
+    virtual void AddVisualObject(VisualObject* object) = 0;
 
     virtual void OnTick() = 0;
 

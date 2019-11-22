@@ -17,21 +17,7 @@ namespace game {
     return mObjectType;
   }
 
-  int GameObject::GetZIndex() {
-    return mZIndex;
-  }
-
-  void GameObject::SetZIndex(int zIndex) {
-    mZIndex = zIndex;
-  }
-
   void GameObject::OnTick() {}
-
-  void GameObject::OnRender(sf::RenderTarget*, sf::RenderStates) {}
-
-  bool GameObject::SortByZOrder(GameObject* a, GameObject* b) {
-    return a->GetZIndex() > b->GetZIndex();
-  }
 
   GameBase* GameObject::getGame() {
     return mGame;

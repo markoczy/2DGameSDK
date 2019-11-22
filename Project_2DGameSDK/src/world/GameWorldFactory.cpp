@@ -30,7 +30,7 @@ namespace game {
     return world;
   }
 
-  Tilemap* GameWorldFactory::loadTilemap(Game* game, std::string filename) {
+  Tilemap* GameWorldFactory::loadTilemap(Game*, std::string filename) {
     try {
       ifstream ifs(filename);
       json data;
@@ -67,21 +67,21 @@ namespace game {
         while(tiles[curTile] != nullptr) {
           // LOGD("Processing Tile: " << curTile);
           auto tile = tiles[curTile];
-          auto tileOut = Tile::Definition();
+          auto tileOut = new Tile();
 
-          tileOut.TileID = tile["tile"].get<int>();
+          tileOut->TileID = tile["tile"].get<int>();
           // LOGD("Tile: " << tileOut.Tile);
-          tileOut.Id = tile["index"].get<int>();
+          tileOut->Id = tile["index"].get<int>();
           // LOGD("Id " << tileOut.Id);
-          tileOut.Rot = tile["rot"].get<int>();
+          tileOut->Rot = tile["rot"].get<int>();
           // LOGD("Rot " << tileOut.Rot);
-          tileOut.X = tile["x"].get<int>();
+          tileOut->X = tile["x"].get<int>();
           // LOGD("X " << tileOut.X);
-          tileOut.Y = tile["y"].get<int>();
+          tileOut->Y = tile["y"].get<int>();
           // LOGD("Y " << tileOut.Y);
-          tileOut.FlipX = tile["flipX"].get<bool>();
+          tileOut->FlipX = tile["flipX"].get<bool>();
           // LOGD("FlipX " << tileOut.FlipX);
-          layerOut->Tiles[tileOut.Y][tileOut.X] = new Tile(game, tileOut);
+          layerOut->Tiles[tileOut->Y][tileOut->X] = tileOut;
 
           curTile++;
         }
@@ -182,10 +182,9 @@ namespace game {
         for(unsigned int iY = 0; iY < layer->Tiles.size(); iY++) {
           for(unsigned int iX = 0; iX < layer->Tiles[iY].size(); iX++) {
             auto tile = layer->Tiles[iY][iX];
-            auto def = tile->GetDefinition();
-            if(def->TileID > -1) {
-              string fileName = getFilename(prefix, def->TileID, 2);
-              tile->SetTexture(AssetManager::GetTexture(fileName));
+            if(tile->TileID > -1) {
+              string fileName = getFilename(prefix, tile->TileID, 2);
+              tile->Texture = AssetManager::GetTexture(fileName);
             }
           }
         }
@@ -213,15 +212,14 @@ namespace game {
     for(auto layer : tilemap->Layers) {
       for(auto row : layer->Tiles) {
         for(auto tile : row) {
-          auto def = tile->GetDefinition();
-          if(def->TileID == -1) {
+          if(tile->TileID == -1) {
             continue;
           }
 
-          auto material = materialMap->Materials[def->TileID];
+          auto material = materialMap->Materials[tile->TileID];
           auto matBody = cpSpaceAddBody(space, cpBodyNewStatic());
 
-          auto visualPos = sf::Vector2f((def->X + 0.5) * tilemap->TileWidth, (def->Y + 0.5) * tilemap->TileHeight);
+          auto visualPos = sf::Vector2f((tile->X + 0.5) * tilemap->TileWidth, (tile->Y + 0.5) * tilemap->TileHeight);
           auto pos = cpv(visualPos.x * pxToMeter, (height - visualPos.y) * pxToMeter);
 
           for(auto shape : material->Shapes) {
@@ -229,9 +227,9 @@ namespace game {
             copy->AttachToBody(space, matBody);
           }
           cpBodySetPosition(matBody, pos);
-          cpBodySetUserData(matBody, new CollisionTarget(tile));
+          cpBodySetUserData(matBody, new CollisionTarget(tile, ObjectType::Tile));
           cpSpaceReindexShapesForBody(space, matBody); //?
-          tile->SetMaterial(material);
+          tile->Material = material;
         }
       }
     }
