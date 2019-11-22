@@ -2,6 +2,7 @@
 #ifndef __ENTITY_H__
 #define __ENTITY_H__
 
+#include <2DGameSDK/common/Constants.h>
 #include <2DGameSDK/common/types/ObjectType.h>
 #include <2DGameSDK/common/types/base/GameBase.h>
 #include <2DGameSDK/core/GameObject.h>
@@ -55,7 +56,7 @@ namespace game {
 
   protected:
     int mType = 0;
-    int mZIndex = 0;
+    int mZIndex = constants::DEFAULT_ZINDEX_ENTITY;
     SceneGraphNode* mGraphNode = nullptr;
 
     virtual bool setTransform(sf::Transform transform);
