@@ -6,7 +6,9 @@ namespace game {
 
   using json = nlohmann::json;
 
-  bool compareLayers(TileLayer* i, TileLayer* j) { return (i->Number < j->Number); }
+  bool compareLayers(TileLayer* i, TileLayer* j) {
+    return i->GetNumber() < j->GetNumber();
+  }
 
   string getFilename(string prefix, int tile, int pad) {
     stringstream ss;
@@ -26,11 +28,11 @@ namespace game {
       materialMap = loadMaterialMap(game, materialMapFile);
       loadMaterials(game, tilemap, materialMap);
     }
-    auto world = new GameWorld(tilemap, materialMap);
+    auto world = new GameWorld(game, tilemap, materialMap);
     return world;
   }
 
-  Tilemap* GameWorldFactory::loadTilemap(Game* game, std::string filename) {
+  Tilemap* GameWorldFactory::loadTilemap(Game*, std::string filename) {
     try {
       ifstream ifs(filename);
       json data;
@@ -46,18 +48,33 @@ namespace game {
       tilemapOut->TilesWide = data["tileswide"];
       tilemapOut->TilesHigh = data["tileshigh"];
 
+      auto worldBounds = sf::IntRect(0, 0, tilemapOut->TilesWide * tilemapOut->TileWidth, tilemapOut->TilesHigh * tilemapOut->TileHeight);
+      auto tileBounds = sf::IntRect(0, 0, tilemapOut->TileWidth, tilemapOut->TileHeight);
+
       // Loop Layers
       while(layers[curLayer] != nullptr) {
         auto layer = layers[curLayer];
-        string name = layer["name"].get<string>();
-        int number = layer["number"].get<int>();
 
-        auto layerOut = new TileLayer();
-        layerOut->Name = name;
-        layerOut->Number = number;
-        layerOut->Tiles = std::vector<std::vector<Tile*>>(tilemapOut->TilesHigh);
-        for(unsigned int i = 0; i < layerOut->Tiles.size(); i++) {
-          layerOut->Tiles[i] = std::vector<Tile*>(tilemapOut->TilesWide);
+        auto layerOut = new TileLayer(worldBounds, tileBounds);
+        if(layer["name"] != nullptr) {
+          layerOut->SetName(layer["name"].get<string>());
+        }
+
+        if(layer["number"] != nullptr) {
+          layerOut->SetNumber(layer["number"].get<int>());
+        } else {
+          LOGW("No number specified for layer");
+        }
+
+        if(layer["zindex"] != nullptr) {
+          layerOut->SetNumber(layer["zindex"].get<int>());
+        } else {
+          layerOut->SetZIndex(constants::DEFAULT_ZINDEX_WORLD + layerOut->GetNumber());
+        }
+
+        auto tilesOut = std::vector<std::vector<Tile*>>(tilemapOut->TilesHigh);
+        for(unsigned int i = 0; i < tilesOut.size(); i++) {
+          tilesOut[i] = std::vector<Tile*>(tilemapOut->TilesWide);
         }
 
         int curTile = 0;
@@ -67,7 +84,7 @@ namespace game {
         while(tiles[curTile] != nullptr) {
           // LOGD("Processing Tile: " << curTile);
           auto tile = tiles[curTile];
-          auto tileOut = new Tile(game);
+          auto tileOut = new Tile();
 
           tileOut->TileID = tile["tile"].get<int>();
           // LOGD("Tile: " << tileOut.Tile);
@@ -81,12 +98,13 @@ namespace game {
           // LOGD("Y " << tileOut.Y);
           tileOut->FlipX = tile["flipX"].get<bool>();
           // LOGD("FlipX " << tileOut.FlipX);
-          layerOut->Tiles[tileOut->Y][tileOut->X] = tileOut;
+          tilesOut[tileOut->Y][tileOut->X] = tileOut;
 
           curTile++;
         }
-        curLayer++;
+        layerOut->SetTiles(tilesOut);
         layersOut.push_back(layerOut);
+        curLayer++;
       }
       sort(layersOut.begin(), layersOut.end(), compareLayers);
       tilemapOut->Layers = layersOut;
@@ -99,6 +117,7 @@ namespace game {
   }
 
   MaterialMap* GameWorldFactory::loadMaterialMap(Game* game, std::string filename) {
+    LOGI("Start");
     try {
       ifstream ifs(filename);
       json data;
@@ -163,6 +182,7 @@ namespace game {
         ret->Materials[materialOut->TileID] = materialOut;
         curMaterial++;
       }
+      LOGI("Done");
       return ret;
 
     } catch(const std::exception& e) {
@@ -173,27 +193,32 @@ namespace game {
   }
 
   void GameWorldFactory::loadTextures(Tilemap* tilemap, std::string prefix) {
+    LOGI("Start");
     try {
       for(unsigned int iLayer = 0; iLayer < tilemap->Layers.size(); iLayer++) {
         auto layer = tilemap->Layers[iLayer];
-        for(unsigned int iY = 0; iY < layer->Tiles.size(); iY++) {
-          for(unsigned int iX = 0; iX < layer->Tiles[iY].size(); iX++) {
-            auto tile = layer->Tiles[iY][iX];
+        auto tiles = layer->GetTiles();
+        for(unsigned int iY = 0; iY < tiles.size(); iY++) {
+          for(unsigned int iX = 0; iX < tiles[iY].size(); iX++) {
+            auto tile = tiles[iY][iX];
             if(tile->TileID > -1) {
               string fileName = getFilename(prefix, tile->TileID, 2);
               tile->Texture = AssetManager::GetTexture(fileName);
             }
           }
         }
+        layer->OnTexturesLoaded();
       }
     } catch(const std::exception& e) {
       stringstream ss;
       ss << "Failed to load textures: " << e.what();
       throw std::runtime_error(ss.str());
     }
+    LOGI("Done");
   }
 
   void GameWorldFactory::loadMaterials(Game* game, Tilemap* tilemap, MaterialMap* materialMap) {
+    LOGI("Start");
     if(tilemap == nullptr || materialMap == nullptr) {
       LOGI("Not loading any materials");
       return;
@@ -205,7 +230,7 @@ namespace game {
 
     auto space = game->GetPhysicalWorld();
     for(auto layer : tilemap->Layers) {
-      for(auto row : layer->Tiles) {
+      for(auto row : layer->GetTiles()) {
         for(auto tile : row) {
           if(tile->TileID == -1) {
             continue;
@@ -222,11 +247,12 @@ namespace game {
             copy->AttachToBody(space, matBody);
           }
           cpBodySetPosition(matBody, pos);
-          cpBodySetUserData(matBody, new CollisionTarget(tile));
+          cpBodySetUserData(matBody, new CollisionTarget(tile, ObjectType::Tile));
           cpSpaceReindexShapesForBody(space, matBody); //?
           tile->Material = material;
         }
       }
     }
+    LOGI("Done");
   }
 } // namespace game

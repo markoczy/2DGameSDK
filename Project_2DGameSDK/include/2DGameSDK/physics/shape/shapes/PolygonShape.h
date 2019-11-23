@@ -6,6 +6,8 @@
 #include <SFML/Graphics.hpp>
 #include <chipmunk/chipmunk.h>
 
+#include <2DGameSDK/common/graphics/PoseConverter.h>
+#include <2DGameSDK/common/types/base/GameBase.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
 #include <2DGameSDK/physics/CollisionType.h>
 #include <2DGameSDK/physics/shape/Shape.h>
@@ -17,7 +19,7 @@ namespace game {
   template <class TDefinition>
   class GAMESDK_DLL PolygonShape : public Shape<TDefinition> {
   public:
-    PolygonShape(Game* game, TDefinition* definition, std::vector<cpVect> vertices) : Shape<TDefinition>(ShapeType::Polygon, game, definition), mVertices(vertices) {}
+    PolygonShape(GameBase* game, TDefinition* definition, std::vector<cpVect> vertices) : Shape<TDefinition>(ShapeType::Polygon, game, definition), mVertices(vertices) {}
 
     virtual void Render(sf::RenderTarget* target, sf::Color color = sf::Color::Black, float stroke = 0.5) {
       auto shape = sf::ConvexShape(mVertices.size());

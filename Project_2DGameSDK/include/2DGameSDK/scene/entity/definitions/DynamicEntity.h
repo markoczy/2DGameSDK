@@ -3,7 +3,7 @@
 
 #include <chipmunk/chipmunk.h>
 
-#include <2DGameSDK/core/Game.h>
+#include <2DGameSDK/common/types/base/GameBase.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
 #include <2DGameSDK/physics/CollisionTarget.h>
 #include <2DGameSDK/physics/shape/Shape.h>
@@ -15,7 +15,7 @@ namespace game {
   class GAMESDK_DLL DynamicEntity : public Entity {
   public:
     DynamicEntity(int type,
-                  Game* game,
+                  GameBase* game,
                   std::vector<Shape<DynamicShapeDefinition>*> shapes = std::vector<Shape<DynamicShapeDefinition>*>(),
                   bool isCollidable = false);
 

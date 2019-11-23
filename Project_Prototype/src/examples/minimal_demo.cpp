@@ -54,7 +54,7 @@ int minimalDemo() {
   // auto ent2 = new RotatingEntity(tex, 10.0);
 
   // Layout entities in scene
-  auto scene = new SceneGraph();
+  auto scene = new SceneGraph(game);
   auto parent = scene->AddEntity(ent); //GetRoot()->AddChild(ent);
   cout << "Entity added." << endl;
   scene->AddEntity(ent, parent); //parent->AddChild(ent2);

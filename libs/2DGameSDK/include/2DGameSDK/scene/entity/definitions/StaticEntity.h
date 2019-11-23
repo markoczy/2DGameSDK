@@ -3,6 +3,7 @@
 
 #include <vector>
 
+#include <2DGameSDK/common/types/base/GameBase.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
 #include <2DGameSDK/physics/CollisionTarget.h>
 #include <2DGameSDK/physics/shape/Shape.h>
@@ -13,7 +14,7 @@ namespace game {
   class GAMESDK_DLL StaticEntity : public Entity {
   public:
     StaticEntity(int type,
-                 Game* game,
+                 GameBase* game,
                  std::vector<Shape<StaticShapeDefinition>*> shapes = std::vector<Shape<StaticShapeDefinition>*>(),
                  bool isCollidable = false);
 

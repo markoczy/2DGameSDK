@@ -4,6 +4,8 @@
 #include <SFML/Graphics.hpp>
 #include <chipmunk/chipmunk.h>
 
+#include <2DGameSDK/common/graphics/PoseConverter.h>
+#include <2DGameSDK/common/types/base/GameBase.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
 #include <2DGameSDK/physics/CollisionType.h>
 #include <2DGameSDK/physics/shape/Shape.h>
@@ -14,7 +16,7 @@ namespace game {
   template <class TDefinition>
   class GAMESDK_DLL CircleShape : public Shape<TDefinition> {
   public:
-    CircleShape(Game* game, TDefinition* definition, float radius, cpVect offset = cpv(0, 0)) : Shape<TDefinition>(ShapeType::Polygon, game, definition), mRadius(radius), mOffset(offset) {
+    CircleShape(GameBase* game, TDefinition* definition, float radius, cpVect offset = cpv(0, 0)) : Shape<TDefinition>(ShapeType::Polygon, game, definition), mRadius(radius), mOffset(offset) {
     }
 
     virtual void Render(sf::RenderTarget* target, sf::Color color = sf::Color::Black, float stroke = 0.5) {

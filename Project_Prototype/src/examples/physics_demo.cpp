@@ -78,7 +78,6 @@ public:
     }
 
     return 1;
-    // return 0;
   }
 
   int OnWorldCollision(CollisionEventType type, Tile* tile, cpArbiter*) {
@@ -151,7 +150,7 @@ int demo1() {
 
   auto boxTx = AssetManager::GetTexture("res/textures/box/box.png");
 
-  auto scene = new SceneGraph();
+  auto scene = new SceneGraph(game);
 
   auto groundShape = ShapeFactory::CreateStaticRectangleShape(game, 200, 60, 1, 0.3);
   auto ground = new SpriteStaticEntity(1, game, boxTx, {groundShape}, true);
@@ -214,7 +213,7 @@ int demo2() {
 
   auto boxTx = AssetManager::GetTexture("res/textures/box/box.png");
 
-  auto scene = new SceneGraph();
+  auto scene = new SceneGraph(game);
 
   float groundW = 50;
   float groundH = 5;
@@ -304,7 +303,7 @@ int demo3() {
 
   auto boxTx = AssetManager::GetTexture("res/textures/box/box.png");
 
-  auto scene = new SceneGraph();
+  auto scene = new SceneGraph(game);
 
   // float groundW = 51.2;
   // float groundH = 5;

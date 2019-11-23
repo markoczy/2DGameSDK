@@ -38,7 +38,7 @@ namespace game {
     auto origin = transform.transformPoint(sf::Vector2f());
     auto xUnit = transform.transformPoint(sf::Vector2f(1, 0));
     auto dir = xUnit - origin;
-    float angle = -atan2(dir.y, dir.x);
+    float angle = atan2(dir.y, dir.x);
     return {
         cpv(origin.x, origin.y),
         angle};

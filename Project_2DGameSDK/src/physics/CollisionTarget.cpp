@@ -1,13 +1,15 @@
 #include <2DGameSDK/physics/CollisionTarget.h>
 
 namespace game {
-  CollisionTarget::CollisionTarget(GameObject* target) : mTarget(target), mType(target->GetObjectType()) {}
+
+  CollisionTarget::CollisionTarget(void* target, ObjectType type) : mTarget(target), mType(type) {
+  }
 
   ObjectType CollisionTarget::GetType() {
     return mType;
   }
 
-  GameObject* CollisionTarget::GetTarget() {
+  void* CollisionTarget::GetTarget() {
     return mTarget;
   }
 

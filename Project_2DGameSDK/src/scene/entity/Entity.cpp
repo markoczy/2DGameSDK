@@ -6,7 +6,8 @@ namespace game {
     void OnEntityTransformed(sf::Transform accumulated);
   };
 
-  Entity::Entity(int type, Game* game) : GameObject(ObjectType::Entity, game), mType(type) {
+  Entity::Entity(int type, GameBase* game) : GameObject(ObjectType::Entity, game), mType(type) {
+    game->GetStateManager()->AddVisualObject(this);
   }
 
   Entity::~Entity() {}
@@ -19,11 +20,17 @@ namespace game {
     return mType;
   }
 
+  int Entity::GetZIndex() { return mZIndex; }
+
   sf::Transform Entity::GetTransform() { return sf::Transform::Identity; }
 
   sf::Transform Entity::GetAccumulatedTransform() { return sf::Transform::Identity; }
 
   sf::Transform Entity::GetCombinedTransform() { return sf::Transform::Identity; }
+
+  void Entity::SetZIndex(int zIndex) {
+    mZIndex = zIndex;
+  }
 
   void Entity::SetTransform(sf::Transform transform) {
     if(this->setTransform(transform)) onEntityTransformed();

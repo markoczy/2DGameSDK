@@ -4,7 +4,7 @@ namespace game {
   const int SceneGraph::ROOT_NODE;
   int SceneGraph::idCounter = ROOT_NODE + 1;
 
-  SceneGraph::SceneGraph() {
+  SceneGraph::SceneGraph(GameBase* game) : mGame(game) {
     mNodes[ROOT_NODE] = new SceneGraphNode(this, nullptr, nullptr);
   }
 
@@ -21,10 +21,6 @@ namespace game {
         i->second->mEntity->OnTickEnded();
       }
     }
-  }
-
-  void SceneGraph::OnRender(sf::RenderTarget* target, GameOptions* options, sf::RenderStates states) {
-    renderNodes(mNodes[ROOT_NODE], target, options, states);
   }
 
   int SceneGraph::AddEntity(Entity* entity, int parent) {

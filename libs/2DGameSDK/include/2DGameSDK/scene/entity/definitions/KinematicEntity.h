@@ -11,7 +11,7 @@
 #ifndef __KINEMATIC_ENTITY_H__
 #define __KINEMATIC_ENTITY_H__
 
-#include <2DGameSDK/core/Game.h>
+#include <2DGameSDK/common/types/base/GameBase.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
 #include <2DGameSDK/physics/CollisionEventType.h>
 #include <2DGameSDK/physics/CollisionTarget.h>
@@ -38,7 +38,7 @@ namespace game {
      * @param type type The Entity Type (does not affect anything and is meant
      *        to be used freely to identify entities of some kind)
      */
-    KinematicEntity(int type, Game* game, std::vector<Shape<KinematicShapeDefinition>*> shapes = std::vector<Shape<KinematicShapeDefinition>*>(), bool isCollidable = false);
+    KinematicEntity(int type, GameBase* game, std::vector<Shape<KinematicShapeDefinition>*> shapes = std::vector<Shape<KinematicShapeDefinition>*>(), bool isCollidable = false);
 
     /**
      * @brief Destroys the Transformable Entity object

@@ -2,21 +2,23 @@
 #ifndef __ENTITY_H__
 #define __ENTITY_H__
 
+#include <2DGameSDK/common/Constants.h>
 #include <2DGameSDK/common/types/ObjectType.h>
+#include <2DGameSDK/common/types/base/GameBase.h>
 #include <2DGameSDK/core/GameObject.h>
+#include <2DGameSDK/core/VisualObject.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
 #include <2DGameSDK/physics/CollisionEventType.h>
-#include <2DGameSDK/world/tilemap/Tile.h>
 
 #include <chipmunk/chipmunk.h>
 
 namespace game {
+  class Tile;
   class SceneGraphNode;
-  class Game;
 
-  class GAMESDK_DLL Entity : public GameObject {
+  class GAMESDK_DLL Entity : public GameObject, public VisualObject {
   public:
-    Entity(int type, Game* game);
+    Entity(int type, GameBase* game);
     virtual ~Entity();
 
     virtual bool IsKinematic();
@@ -29,10 +31,13 @@ namespace game {
      */
     int GetType();
 
+    int GetZIndex();
+
     virtual sf::Transform GetTransform();
     virtual sf::Transform GetAccumulatedTransform();
     virtual sf::Transform GetCombinedTransform();
 
+    void SetZIndex(int zIndex);
     void SetTransform(sf::Transform transform);
 
     /**
@@ -51,6 +56,7 @@ namespace game {
 
   protected:
     int mType = 0;
+    int mZIndex = constants::DEFAULT_ZINDEX_ENTITY;
     SceneGraphNode* mGraphNode = nullptr;
 
     virtual bool setTransform(sf::Transform transform);

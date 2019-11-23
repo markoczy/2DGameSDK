@@ -50,7 +50,8 @@
         "iterator": "cpp",
         "map": "cpp",
         "memory_resource": "cpp",
-        "string": "cpp"
+        "string": "cpp",
+        "queue": "cpp"
     },
     // C++ Format Style for Project 2DGameSDK:
     // see .clang-format file in project root

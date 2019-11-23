@@ -14,6 +14,8 @@
 #include <SFML/Graphics.hpp>
 
 namespace game::constants {
+  const int DEFAULT_ZINDEX_ENTITY = 100;
+  const int DEFAULT_ZINDEX_WORLD = 0;
 
   const float PI = 3.14159265358979323846;
   const float PI_2 = 1.57079632679489661923;

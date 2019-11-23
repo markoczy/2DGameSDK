@@ -13,7 +13,9 @@
 
 #include <SFML/Graphics.hpp>
 
+#include <2DGameSDK/common/Helpers.h>
 #include <2DGameSDK/common/types/ObjectType.h>
+#include <2DGameSDK/common/types/base/GameBase.h>
 #include <2DGameSDK/core/GameObject.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
 #include <2DGameSDK/world/material/Material.h>
@@ -25,16 +27,14 @@ namespace game {
    * @brief Contains all data that defines a single Tile of the Tile Map
    * 
    */
-  class GAMESDK_DLL Tile : public GameObject {
+  struct GAMESDK_DLL Tile {
   public:
-    Tile(Game* game);
-    virtual ~Tile();
-
-    // as this is a Plain Data Object, all members are public
     int Id, TileID, X, Y, Rot;
     bool FlipX, FlipY;
-    sf::Texture* Texture;
-    Material* Material;
+
+    sf::Texture* Texture = nullptr;
+    Material* Material = nullptr;
+    sf::Sprite* Sprite = nullptr;
   };
 
 } // namespace game

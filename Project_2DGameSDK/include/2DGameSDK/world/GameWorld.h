@@ -11,7 +11,11 @@
 #ifndef __GAME_WORLD_H__
 #define __GAME_WORLD_H__
 
+#include <queue>
+#include <vector>
+
 #include <2DGameSDK/common/Helpers.h>
+#include <2DGameSDK/core/Game.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
 #include <2DGameSDK/world/material/MaterialMap.h>
 #include <2DGameSDK/world/tilemap/Tilemap.h>
@@ -30,7 +34,7 @@ namespace game {
      * @param tilemap The Tile representation
      * @param materialMap The Material assignment
      */
-    GameWorld(Tilemap* tilemap, MaterialMap* materialMap);
+    GameWorld(Game* game, Tilemap* tilemap, MaterialMap* materialMap);
 
     /**
      * @brief Destroys the Game World object
@@ -38,26 +42,13 @@ namespace game {
      */
     ~GameWorld();
 
-    /**
-     * @brief Updates all Elements of the Game World
-     * 
-     */
-    void OnTick();
-
-    /**
-     * @brief Renders all Elements of the Game World
-     * 
-     * @param target The screen or texture to render on
-     */
-    void OnRender(sf::RenderTarget* target);
-
     sf::IntRect GetBounds();
 
   private:
     sf::IntRect mBounds;
+    Game* mGame = nullptr;
     Tilemap* mTilemap = nullptr;
     MaterialMap* mMaterialMap = nullptr;
-    sf::Texture* mTexture = nullptr;
 
     void loadTilemap();
   };
