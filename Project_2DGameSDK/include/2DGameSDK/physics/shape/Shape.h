@@ -7,7 +7,7 @@
 #include <chipmunk/chipmunk.h>
 
 #include <2DGameSDK/common/graphics/PoseConverter.h>
-#include <2DGameSDK/core/Game.h>
+#include <2DGameSDK/common/types/base/GameBase.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
 #include <2DGameSDK/physics/shape/ShapeType.h>
 #include <2DGameSDK/physics/shape/definitions/ShapeDefinition.h>
@@ -18,7 +18,7 @@ namespace game {
   template <class TDefinition>
   class GAMESDK_DLL Shape {
   public:
-    Shape(ShapeType type, Game* game, TDefinition* definition) : mType(type), mGame(game), mDefinition(definition) {}
+    Shape(ShapeType type, GameBase* game, TDefinition* definition) : mType(type), mGame(game), mDefinition(definition) {}
 
     void AttachToBody(cpSpace* space, cpBody* body) {
       mSpace = space;
@@ -69,7 +69,7 @@ namespace game {
     virtual Shape<TDefinition>* CopyTemplate() = 0;
 
   protected:
-    Game* getGame() {
+    GameBase* getGame() {
       return mGame;
     }
 
@@ -84,14 +84,14 @@ namespace game {
 
     float getVisualRotation() {
       auto converter = getGame()->GetPoseConverter();
-      return -converter->GetVisualAngle(cpBodyGetAngle(mBody));
+      return converter->GetVisualAngle(cpBodyGetAngle(mBody));
     }
 
     virtual cpShape* initShape(cpSpace* space, cpBody* body) = 0;
 
   private:
     ShapeType mType;
-    Game* mGame = nullptr;
+    GameBase* mGame = nullptr;
     TDefinition* mDefinition = nullptr;
     cpSpace* mSpace = nullptr;
     cpBody* mBody = nullptr;
