@@ -45,7 +45,7 @@ namespace game {
     auto xUnit = transform.transformPoint(sf::Vector2f(1, 0));
     auto dir = xUnit - origin;
     float angle = atan2(dir.y, dir.x);
-    float visAngle = (360 * angle) / 6.28;
+    float visAngle = (180 * angle) / constants::PI;
     auto newT = sf::Transform().translate(origin.x, -origin.y).rotate(visAngle);
 
     mTransform = mTransform * newT;
