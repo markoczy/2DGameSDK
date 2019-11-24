@@ -68,6 +68,8 @@ namespace game {
 
     GameOptions GetOptions();
 
+    sf::Window* GetWindow();
+
     StateManagerBase* GetStateManager();
 
     /**

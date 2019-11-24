@@ -151,6 +151,10 @@ namespace game {
 
   // ####### Accessors (get/set) ###############################################
 
+  sf::Window* Game::GetWindow() {
+    return mWindow;
+  }
+
   GameOptions Game::GetOptions() {
     return mOptions;
   }

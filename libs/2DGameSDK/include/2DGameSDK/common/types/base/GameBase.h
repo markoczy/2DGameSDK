@@ -1,6 +1,7 @@
 #ifndef __GAME_BASE_H__
 #define __GAME_BASE_H__
 
+#include <SFML/Graphics.hpp>
 #include <chipmunk/chipmunk.h>
 
 namespace game {
@@ -18,6 +19,8 @@ namespace game {
     virtual void Stop() = 0;
 
     virtual GameOptions GetOptions() = 0;
+
+    virtual sf::Window* GetWindow() = 0;
 
     virtual StateManagerBase* GetStateManager() = 0;
 
