@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>7</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>175</x>
+      <y>644</y>
+      <w>343</w>
+      <h>161</h>
+    </coordinates>
+    <panel_attributes>game::Game
+--
+-mStateManager: game::StateManager
+-mEventCtrl: game::EventController
+-mOptions: game::GameOptions
+-mWindow: sf::RenderWindow*
+-mView: sf::View
+-mPhysicalWorld: cpSpace*
+-mPoseConverter: PoseConverter*
+--
++Game(options: GameOptions, scene: *SceneGraph, world: *GameWorld)
++Run()
++Stop()
+-tick()
+-render()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>301</x>
+      <y>581</y>
+      <w>91</w>
+      <h>21</h>
+    </coordinates>
+    <panel_attributes>/game::GameBase/
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>329</x>
+      <y>595</y>
+      <w>21</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>413</x>
+      <y>581</y>
+      <w>133</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>bg=yellow
+Abstrakte Basisklasse
+(Siehe Common Package)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>567</x>
+      <y>644</y>
+      <w>217</w>
+      <h>161</h>
+    </coordinates>
+    <panel_attributes>game::StateManager
+--
+-mGame: game::GameBase*
+-mWorld: game::GameWorld*
+-mScene: game::SceneGraph*
+-mObjects: std::map&lt;int, GameObject*&gt;
+-mRenderObjects: std::vector&lt;VisualObject*&gt;
+--
++StateManager(game: game::GameBase*)
++AddObject(object: game::GameObject*)
++AddVisualObject(object: game::VisualObject*)
++OnTick()
++OnTickEnded()
++OnRender()
++OnZOrderChanged()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>511</x>
+      <y>644</y>
+      <w>70</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;30.0;50.0;30.0;50.0;10.0;80.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>840</x>
+      <y>616</y>
+      <w>294</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>/game::GameObject/
+--
+-mObjectType: game::ObjectType
+-mGame: game::GameBase*
+-mId: int
+--
+/+OnTick()/
+/+OnTickEnded()/</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>840</x>
+      <y>721</y>
+      <w>322</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>/game::VisualObject/
+--
+--
+/+OnRender()/
+/+GetZIndex(): int/
+_+SortByZOrder(a: game::VisualObject*, b: game::VisualObject*): bool_</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>777</x>
+      <y>616</y>
+      <w>77</w>
+      <h>98</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;120.0;50.0;120.0;50.0;10.0;90.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>777</x>
+      <y>707</y>
+      <w>77</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;50.0;10.0;50.0;30.0;90.0;30.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>154</x>
+      <y>553</y>
+      <w>1022</w>
+      <h>553</h>
+    </coordinates>
+    <panel_attributes>Core</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>196</x>
+      <y>861</y>
+      <w>294</w>
+      <h>77</h>
+    </coordinates>
+    <panel_attributes>/game::CameraController/
+--
+-mGame: game::GameBase*
+--
++CameraController(game: game::GameBase*)
+/+OnTick()/
+/+GetView(): sf::View/</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>196</x>
+      <y>980</y>
+      <w>245</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>game::DefaultCameraController
+--
+--
++GetBounds(): sf::FloatRect
++SetZoom(zoom: float)
++SetCenter(center: sf::Vector2f)
++OnTick()
++GetView()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>301</x>
+      <y>931</y>
+      <w>21</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>455</x>
+      <y>980</y>
+      <w>245</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>game::BoundedFollowCameraController
+--
+--
+TBD...
+
+(Konzept: Kann einer Entity folgen aber nicht die
+Weltbegrenzungen passieren)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>301</x>
+      <y>931</y>
+      <w>294</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0;400.0;40.0;400.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>385</x>
+      <y>581</y>
+      <w>42</w>
+      <h>21</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;40.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>175</x>
+      <y>826</y>
+      <w>546</w>
+      <h>259</h>
+    </coordinates>
+    <panel_attributes>Camera</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

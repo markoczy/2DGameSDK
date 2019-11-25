@@ -4,15 +4,15 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1472</x>
-      <y>208</y>
+      <x>760</x>
+      <y>280</y>
       <w>344</w>
-      <h>224</h>
+      <h>232</h>
     </coordinates>
     <panel_attributes>template=TDefinition: ShapeDefinition
 /game::Shape/
 --
--mType: ShapeType
+-mType: game::ShapeType
 -mDefinition: TDefinition*
 -mSpace: cpSpace*
 -mBody: cpBody*
@@ -24,16 +24,16 @@
 +GetRefShape(): cpShape*
 +GetRefBody(): cpBody*
 +CopyTemplate(): Shape&lt;TDefinition&gt;
-/+Render()/
-/+RenderAABB()/
+/+RenderOutline()/
++RenderAABB()
 /#initShape()/</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>1760</x>
-      <y>248</y>
+      <x>1048</x>
+      <y>472</y>
       <w>112</w>
       <h>64</h>
     </coordinates>
@@ -47,8 +47,8 @@ Physics Library</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>1328</x>
-      <y>336</y>
+      <x>616</x>
+      <y>408</y>
       <w>120</w>
       <h>40</h>
     </coordinates>
@@ -60,8 +60,8 @@ in der Physik Engine</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>1328</x>
-      <y>384</y>
+      <x>616</x>
+      <y>456</y>
       <w>120</w>
       <h>48</h>
     </coordinates>
@@ -74,7 +74,65 @@ enschaften</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1440</x>
+      <x>728</x>
+      <y>488</y>
+      <w>48</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;40.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>728</x>
+      <y>424</y>
+      <w>48</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;30.0;10.0;30.0;70.0;40.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>0</x>
+      <y>240</y>
+      <w>1448</w>
+      <h>944</h>
+    </coordinates>
+    <panel_attributes>Physics</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>1048</x>
+      <y>408</y>
+      <w>112</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>bg=yellow
+Low-Level Zugriff
+auf Strukturen der
+Physik Engine</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1016</x>
+      <y>408</y>
+      <w>48</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;40.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1016</x>
       <y>416</y>
       <w>48</w>
       <h>24</h>
@@ -85,76 +143,19 @@ enschaften</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1440</x>
-      <y>352</y>
+      <x>1016</x>
+      <y>416</y>
       <w>48</w>
-      <h>72</h>
+      <h>40</h>
     </coordinates>
     <panel_attributes>lt=-</panel_attributes>
-    <additional_attributes>10.0;10.0;30.0;10.0;30.0;70.0;40.0;70.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLPackage</id>
-    <coordinates>
-      <x>728</x>
-      <y>1048</y>
-      <w>1368</w>
-      <h>776</h>
-    </coordinates>
-    <panel_attributes>Physics</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLNote</id>
-    <coordinates>
-      <x>1760</x>
-      <y>328</y>
-      <w>112</w>
-      <h>32</h>
-    </coordinates>
-    <panel_attributes>bg=yellow
-Low-Level Zugriff
-auf Physikelemente</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>1728</x>
-      <y>336</y>
-      <w>48</w>
-      <h>24</h>
-    </coordinates>
-    <panel_attributes>lt=-</panel_attributes>
-    <additional_attributes>10.0;10.0;40.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>1728</x>
-      <y>336</y>
-      <w>48</w>
-      <h>32</h>
-    </coordinates>
-    <panel_attributes>lt=-</panel_attributes>
-    <additional_attributes>10.0;20.0;40.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>1728</x>
-      <y>336</y>
-      <w>48</w>
-      <h>48</h>
-    </coordinates>
-    <panel_attributes>lt=-</panel_attributes>
-    <additional_attributes>10.0;40.0;40.0;10.0</additional_attributes>
+    <additional_attributes>10.0;30.0;40.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>472</x>
-      <y>168</y>
+      <x>24</x>
+      <y>312</y>
       <w>416</w>
       <h>72</h>
     </coordinates>
@@ -167,176 +168,314 @@ auf Physikelemente</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
-    <id>UMLNote</id>
-    <coordinates>
-      <x>920</x>
-      <y>168</y>
-      <w>120</w>
-      <h>48</h>
-    </coordinates>
-    <panel_attributes>bg=yellow
-Template muss für
-Copy Funktion def-
-iniert werden</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>680</x>
-      <y>552</y>
+      <x>368</x>
+      <y>904</y>
       <w>360</w>
-      <h>104</h>
+      <h>112</h>
     </coordinates>
-    <panel_attributes>/game::KinematicShapeDefinition/
+    <panel_attributes>game::KinematicShapeDefinition
 --
-mFriction: float
-mElasticity: float
-mIsSensor: bool
+-mFriction: float
+-mElasticity: float
+-mIsSensor: bool
 --
 +StaticShapeDefinition(friction: float, elasticity: float, isSensor: bool)
 +InitProperties(cpSpace* space, cpBody* body, cpShape* shape)
-+Copy(): KinematicShapeDefinition*</panel_attributes>
++Copy(): game::KinematicShapeDefinition*</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>760</x>
-      <y>304</y>
+      <x>368</x>
+      <y>1032</y>
       <w>464</w>
       <h>120</h>
     </coordinates>
-    <panel_attributes>/game::DynamicShapeDefinition/
+    <panel_attributes>game::DynamicShapeDefinition
 --
-mMass: float
-mFriction: float
-mElasticity: float
-mUseDensity: bool
+-mMass: float
+-mFriction: float
+-mElasticity: float
+-mUseDensity: bool
 --
 +StaticShapeDefinition(mass: float, friction: float, elasticity: float, useDensityForMass: bool)
 +InitProperties(cpSpace* space, cpBody* body, cpShape* shape)
-+Copy(): DynamicShapeDefinition*</panel_attributes>
++Copy(): game::DynamicShapeDefinition*</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>680</x>
-      <y>424</y>
+      <x>368</x>
+      <y>768</y>
       <w>344</w>
-      <h>104</h>
+      <h>112</h>
     </coordinates>
-    <panel_attributes>/game::StaticShapeDefinition/
+    <panel_attributes>game::StaticShapeDefinition
 --
-mFriction: float
-mElasticity: float
-mIsSensor: bool
+-mFriction: float
+-mElasticity: float
+-mIsSensor: bool
 --
 +StaticShapeDefinition(friction: float, elasticity: float, isSensor: bool)
 +InitProperties(cpSpace* space, cpBody* body, cpShape* shape)
-+Copy(): StaticShapeDefinition*</panel_attributes>
++Copy(): game::StaticShapeDefinition*</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1144</x>
-      <y>536</y>
+      <x>432</x>
+      <y>608</y>
       <w>312</w>
       <h>112</h>
     </coordinates>
     <panel_attributes>template=TDefinition: ShapeDefinition
-/game::RectangleShape/
+game::RectangleShape
 --
 -mWidth: float
 -mHeight: float
 --
 +RectangleShape(width: float, height: float)
-+Render()
++RenderOutline()
 #initShape()</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1496</x>
-      <y>536</y>
+      <x>784</x>
+      <y>608</y>
       <w>304</w>
       <h>112</h>
     </coordinates>
     <panel_attributes>template=TDefinition: ShapeDefinition
-/game::CircleShape/
+game::CircleShape
 --
 -mRadius: float
 -mOffset: cpVect
 --
 +CircleShape(radius: float, offset: cpVect)
-+Render()
++RenderOutline()
 #initShape()</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1824</x>
-      <y>544</y>
+      <x>1104</x>
+      <y>608</y>
       <w>304</w>
       <h>96</h>
     </coordinates>
     <panel_attributes>template=TDefinition: ShapeDefinition
-/game::PolygonShape/
+game::PolygonShape
 --
 mVertices: cpVect[]
 --
 +PolygonShape(vertices: cpVect[])
-+Render()
++RenderOutline()
 #initShape()</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1592</x>
-      <y>424</y>
+      <x>880</x>
+      <y>504</y>
       <w>24</w>
-      <h>136</h>
+      <h>128</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;150.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;140.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1592</x>
-      <y>424</y>
-      <w>368</w>
-      <h>144</h>
+      <x>880</x>
+      <y>504</y>
+      <w>360</w>
+      <h>128</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;100.0;440.0;100.0;440.0;160.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;90.0;430.0;90.0;430.0;140.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1240</x>
-      <y>424</y>
+      <x>528</x>
+      <y>504</y>
       <w>376</w>
-      <h>136</h>
+      <h>128</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>450.0;10.0;450.0;100.0;10.0;100.0;10.0;150.0</additional_attributes>
+    <additional_attributes>450.0;10.0;450.0;90.0;10.0;90.0;10.0;140.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>448</x>
-      <y>232</y>
-      <w>328</w>
-      <h>152</h>
+      <x>208</x>
+      <y>376</y>
+      <w>208</w>
+      <h>416</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+&lt;&lt;bind&gt;&gt; (game::StaticShapeDefinition)</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;500.0;200.0;500.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>352</x>
+      <y>328</y>
+      <w>424</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>510.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>136</x>
+      <y>376</y>
+      <w>248</w>
+      <h>552</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+&lt;&lt;bind&gt;&gt; (game::KinematicShapeDefinition)</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;670.0;290.0;670.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>64</x>
+      <y>376</y>
+      <w>320</w>
+      <h>680</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-
 &lt;&lt;bind&gt;&gt; (game::DynamicShapeDefinition)</panel_attributes>
-    <additional_attributes>190.0;10.0;70.0;100.0;190.0;170.0;390.0;170.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;830.0;380.0;830.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>888</x>
+      <y>768</y>
+      <w>440</w>
+      <h>152</h>
+    </coordinates>
+    <panel_attributes>game::ShapeFactory
+--
+--
+_+CreateStaticRectangleShape(): RectangleShape&lt;StaticShapeDefinition&gt;*_
+_+CreateKinematicRectangleShape(): RectangleShape&lt;KinematicShapeDefinition&gt;*_
+_+CreateDynamicRectangleShape(): RectangleShape&lt;DynamicShapeDefinition&gt;*_
+_+CreateStaticPolygonShape(): PolygonShape&lt;StaticShapeDefinition&gt;*_
+_+CreateKinematicPolygonShape(): PolygonShape&lt;KinematicShapeDefinition&gt;*_
+_+CreateDynamicPolygonShape(): PolygonShape&lt;DynamicShapeDefinition&gt;*_
+_+CreateStaticCircleShape(): CircleShape&lt;StaticShapeDefinition&gt;*_
+_+CreateKinematicCircleShape(): CircleShape&lt;KinematicShapeDefinition&gt;*_
+_+CreateDynamicCircleShape(): CircleShape&lt;DynamicShapeDefinition&gt;*_</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>248</x>
+      <y>408</y>
+      <w>120</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>bg=yellow
+Template definiert
+Datentyp der Kopier-
+funktion ("Copy").</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>288</x>
+      <y>376</y>
+      <w>24</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1208</x>
+      <y>304</y>
+      <w>128</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Enumeration&gt;&gt;
+game::ShapeType
+--
+Rectangle
+Circle
+Polygon</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1016</x>
+      <y>312</y>
+      <w>208</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;240.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>944</x>
+      <y>968</y>
+      <w>176</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>game::CollisionTarget
+--
+-mTarget: void*
+-mType: game::ObjectType
+--
++GetType(): game::ObjectType
++GetTarget(): void*</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>1168</x>
+      <y>960</y>
+      <w>144</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>bg=yellow
+Hilfsklasse zur
+Unterscheidung versch.
+Objekttypen im Kollisions-
+callback</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1112</x>
+      <y>968</y>
+      <w>72</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;70.0;10.0</additional_attributes>
   </element>
 </diagram>

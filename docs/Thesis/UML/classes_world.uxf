@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>8</zoom_level>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>88</x>
+      <y>608</y>
+      <w>696</w>
+      <h>592</h>
+    </coordinates>
+    <panel_attributes>World</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>136</x>
+      <y>720</y>
+      <w>384</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>game::GameWorld
+--
+-mGame: GameBase*
+-mBounds: sf::IntRect
+-mMaterialMap: game::MaterialMap*
+-mTileMap: game::TileMap*
+--
++GameWorld(tilemap: game::Tilemap*, materialMap: game::MaterialMap*)
+-loadTilemap()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>144</x>
+      <y>640</y>
+      <w>624</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>game::GameWorldFactory
+--
+--
+_+CreateGameWorld(tilemapFile: std::string, materialMapFile: std::string, texturesPrefix: std::string): game::GameWorld*_
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>104</x>
+      <y>1080</y>
+      <w>288</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;struct&gt;&gt;
+game::Material
+--
++TileID: int
++Type: int
++Shapes: game::Shape&lt;game::StaticShapeDefinition&gt;[]
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>176</x>
+      <y>1008</y>
+      <w>240</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;struct&gt;&gt;
+game::MaterialMap
+--
++Materials: std::map&lt;int, game::Material&gt;
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>616</x>
+      <y>1040</y>
+      <w>152</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;struct&gt;&gt;
+game::Tile
+--
++Id: int
++X: int
++Y: int
++Rot: int
++FlipX: bool
++FlipY: bool
++Texture: sf::Texture*
++Material: game::Material*
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>488</x>
+      <y>864</y>
+      <w>232</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>game::TileLayer
+--
+-mWorldBounds: sf::IntRect
+-mTileBounds: sf::IntRect
+-mZIndex: int
+-mName: std::string
+-mNumber: int
+-mTiles: Tile*[][]
+-mTexture: sf::Texture*
+-mSprite: sf::Sprite*
+--
++OnRender()
++OnTexturesLoaded()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>536</x>
+      <y>808</y>
+      <w>136</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>/game::VisualObject/</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>576</x>
+      <y>720</y>
+      <w>152</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>bg=yellow
+Darstellbares Objekt
+(Definiert im Core Package)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>624</x>
+      <y>752</y>
+      <w>24</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>224</x>
+      <y>864</y>
+      <w>208</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;struct&gt;&gt;
+game::Tilemap
+--
++Layers: std::vector&lt;game::TileLayer&gt;
++TileWidth: int
++TileHeight: int
++TilesWide: int
++TilesHigh: int
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>584</x>
+      <y>824</y>
+      <w>24</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>712</x>
+      <y>952</y>
+      <w>48</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;40.0;10.0;40.0;110.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>112</x>
+      <y>1040</y>
+      <w>80</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>80.0;10.0;10.0;10.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>424</x>
+      <y>864</y>
+      <w>80</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;50.0;50.0;50.0;50.0;10.0;80.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>96</x>
+      <y>784</y>
+      <w>144</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>50.0;10.0;10.0;10.0;10.0;120.0;160.0;120.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>384</x>
+      <y>1088</y>
+      <w>248</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>290.0;110.0;240.0;110.0;240.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>408</x>
+      <y>1112</y>
+      <w>144</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>bg=yellow
+Definiert Form und phys.
+Eigenschaften. (Definiert
+im Physics Package)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>384</x>
+      <y>1144</y>
+      <w>40</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>30.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>432</x>
+      <y>1040</y>
+      <w>152</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>bg=yellow
+Fügt Texturen zu einer
+grossen Textur zusammen.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>448</x>
+      <y>1008</y>
+      <w>56</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;40.0;10.0;10.0;50.0;10.0</additional_attributes>
+  </element>
+</diagram>
