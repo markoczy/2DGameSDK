@@ -26,6 +26,21 @@ namespace game {
   void BoundedFollowCameraController::OnTick() {
     auto center = mEntity->GetCombinedTransform().transformPoint(sf::Vector2f());
     auto conv = getGame()->GetPoseConverter();
+    auto worldVisBounds = getGame()->GetWorld()->GetBounds();
+    auto worldBounds = sf::Vector2f(
+        conv->GetPhysicalDimension(worldVisBounds.width),
+        conv->GetPhysicalDimension(worldVisBounds.height));
+    if(center.x < mBounds.x / 2) {
+      center.x = mBounds.x / 2;
+    } else if(center.x > worldBounds.x - mBounds.x / 2) {
+      center.x = worldBounds.x - mBounds.x / 2;
+    }
+    if(center.y < mBounds.y / 2) {
+      center.y = mBounds.y / 2;
+    } else if(center.y > worldBounds.y - mBounds.y / 2) {
+      center.y = worldBounds.y - mBounds.y / 2;
+    }
+
     mView.setCenter(conv->GetVisualPos(cpv(center.x, center.y)));
   }
   sf::View BoundedFollowCameraController::GetView() {
