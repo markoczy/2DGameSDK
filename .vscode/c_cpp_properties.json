@@ -1,28 +1,22 @@
 {
-    "configurations": [
-        {
-            "name": "Win32",
-            "includePath": [
-                "${workspaceFolder}/Project_2DGameSDK/src/**",
-                "${workspaceFolder}/Project_2DGameSDK/include/**",
-                "${workspaceFolder}/Project_Prototype/src/**",
-                "${workspaceFolder}/Project_Prototype/include/**",
-                "${workspaceFolder}/libs/**",
-                "${workspaceFolder}/libs/SFML-2.5.1/include",
-                "${workspaceFolder}/libs/Chipmunk-7.0.3/include"
-            ],
-            "defines": [
-                "_DEBUG",
-                "UNICODE",
-                "_UNICODE",
-                "DLLBUILD_GAMESDK"
-            ],
-            "windowsSdkVersion": "10.0.16299.0",
-            "compilerPath": "\"C:\\Program Files\\mingw-w64\\x86_64-7.3.0-posix-seh-rt_v5-rev0\\mingw64\\bin\\gcc.exe\"",
-            "intelliSenseMode": "gcc-x64",
-            "cStandard": "c11",
-            "cppStandard": "c++17"
-        }
-    ],
-    "version": 4
+  "configurations": [
+    {
+      "name": "Win32",
+      "includePath": [
+        "${workspaceFolder}/Project_2DGameSDK/src/**",
+        "${workspaceFolder}/Project_2DGameSDK/include/**",
+        "${workspaceFolder}/Project_Prototype/src/**",
+        "${workspaceFolder}/Project_Prototype/include/**",
+        "${workspaceFolder}/libs/**",
+        "${workspaceFolder}/libs/SFML-2.5.1/include",
+        "${workspaceFolder}/libs/Chipmunk-7.0.3/include"
+      ],
+      "defines": ["_DEBUG", "UNICODE", "_UNICODE", "DLLBUILD_GAMESDK"],
+      "windowsSdkVersion": "10.0.16299.0",
+      "intelliSenseMode": "gcc-x64",
+      "cStandard": "c11",
+      "cppStandard": "c++17"
+    }
+  ],
+  "version": 4
 }
