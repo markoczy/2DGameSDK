@@ -64,7 +64,7 @@ namespace game {
   // Constructor / Destructor
   // ###########################################################################
 
-  Game::Game() : mStateManager(this) {
+  Game::Game(GameOptions options) : mStateManager(this), mOptions(options) {
     LOGD("Game minimal contructor call");
     mPhysicalWorld = cpSpaceNew();
     auto collisionHandler = cpSpaceAddCollisionHandler(mPhysicalWorld, CollisionType::Default, CollisionType::Default);

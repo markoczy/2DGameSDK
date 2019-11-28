@@ -16,5 +16,7 @@
 #include <2DGameSDK/core/asset/AssetManager.h>
 #include <2DGameSDK/core/asset/ResourceCache.h>
 #include <2DGameSDK/core/asset/TextureCache.h>
+#include <2DGameSDK/core/camera/CameraController.h>
+#include <2DGameSDK/core/camera/DefaultCameraController.h>
 
 #endif

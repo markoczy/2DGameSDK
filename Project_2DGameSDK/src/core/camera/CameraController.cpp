@@ -3,6 +3,8 @@
 namespace game {
   CameraController::CameraController(GameBase* game) : mGame(game) {}
 
+  CameraController::~CameraController() {}
+
   GameBase* CameraController::getGame() {
     return mGame;
   }

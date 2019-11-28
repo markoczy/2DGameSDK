@@ -222,8 +222,8 @@ int chopperDemo() {
   auto f4Pressed = new OnKeyPress(sf::Keyboard::F4);
 
   // Create game
-  auto game = new Game();
-  game->SetOptions(GameOptions{"My Game", sf::Vector2i(512, 512), 1.0, 50, false, false});
+  auto options = GameOptions{"My Game", sf::Vector2i(512, 512), 1.0, 50, false, false};
+  auto game = new Game(options);
 
   auto gameController = new GameController(game);
   f1Pressed->Subscribe(new MethodObserver<sf::Keyboard::Key, GameController>(gameController, &gameController->HandleKeyPress));

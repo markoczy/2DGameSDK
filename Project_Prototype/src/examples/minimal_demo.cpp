@@ -39,8 +39,8 @@ int minimalDemo() {
   cout << "Start minimalDemo" << endl;
 
   // Create game
-  auto game = new Game();
-  game->SetOptions(GameOptions{"My Game", sf::Vector2i(512, 512), 5.0, 50});
+  auto options = GameOptions{"My Game", sf::Vector2i(512, 512), 5.0, 50};
+  auto game = new Game(options);
 
   // Create Game World
   auto world = GameWorldFactory::CreateGameWorld(game, "res/simple_grass/tilemap.json", "", "res/simple_grass/tile_");

@@ -21,6 +21,7 @@ namespace game {
     virtual sf::View GetView();
 
   private:
+    bool mViewChanged = false;
     sf::View mView;
     sf::Vector2f mBounds;
     sf::Vector2f mCenter;

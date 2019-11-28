@@ -79,8 +79,8 @@ int playerDemo(float zoom) {
   cout << "Start playerDemo" << endl;
 
   // Create game
-  auto game = new Game();
-  game->SetOptions(GameOptions{"My Game", sf::Vector2i(512, 512), zoom, 50});
+  auto options = GameOptions{"My Game", sf::Vector2i(512, 512), zoom, 50};
+  auto game = new Game(options);
 
   // Create Keyboard Events
   auto upPressed = new OnKeyPress(sf::Keyboard::Up);

@@ -10,6 +10,7 @@ namespace game {
   class CameraController {
   public:
     CameraController(GameBase* game);
+    virtual ~CameraController();
 
     virtual sf::View GetView() = 0;
     virtual sf::Vector2f GetBounds() = 0;

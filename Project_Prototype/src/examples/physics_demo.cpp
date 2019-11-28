@@ -141,8 +141,8 @@ int demo1() {
   cout << "Physics Demo" << endl;
 
   // Create game
-  auto game = new Game();
-  game->SetOptions(GameOptions{"My Game", sf::Vector2i(512, 512), 2.0, 50, false, true});
+  auto options = GameOptions{"My Game", sf::Vector2i(512, 512), 2.0, 50, false, true};
+  auto game = new Game(options);
 
   // Create Game World
   auto world = GameWorldFactory::CreateGameWorld(game, "res/simple_grass/tilemap.json", "", "res/simple_grass/tile_");
@@ -187,8 +187,8 @@ int demo2() {
   cout << "Physics Demo 2" << endl;
 
   // Create game
-  auto game = new Game();
-  game->SetOptions(GameOptions{"My Game", sf::Vector2i(200, 200), 2.0, 60, false, false, 0.5});
+  auto options = GameOptions{"My Game", sf::Vector2i(200, 200), 2.0, 60, false, false, 0.5};
+  auto game = new Game(options);
 
   // Create Keyboard Events
   auto upPressed = new OnKeyPress(sf::Keyboard::Up);
@@ -277,8 +277,13 @@ int demo2() {
 int demo3() {
   cout << "Physics Demo 3" << endl;
   // Create game
-  auto game = new Game();
-  game->SetOptions(GameOptions{"My Game", sf::Vector2i(512, 512), 2, 60, false, false, 0.1});
+  auto options = GameOptions{"My Game", sf::Vector2i(512, 512), 2, 60, false, false, 0.1};
+  auto game = new Game(options);
+
+  auto cam = new DefaultCameraController(game);
+  auto bounds = cam->GetBounds();
+  cam->SetCenter(sf::Vector2f(bounds.x / 2 + 4.8, bounds.y / 2));
+  game->SetCameraController(cam);
 
   // Create Keyboard Events
   auto upPressed = new OnKeyPress(sf::Keyboard::Up);

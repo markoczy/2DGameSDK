@@ -52,7 +52,7 @@ namespace game {
      * @brief Default empty constructor, Game is unusable until options,
      *        scene and world are set
      */
-    Game();
+    Game(GameOptions options);
 
     ~Game();
 
@@ -160,8 +160,8 @@ namespace game {
     void render();
 
     StateManager mStateManager;
-    EventController mEventCtrl;
     GameOptions mOptions;
+    EventController mEventCtrl;
     sf::RenderWindow* mWindow;
     sf::View mView;
     cpSpace* mPhysicalWorld = nullptr;
