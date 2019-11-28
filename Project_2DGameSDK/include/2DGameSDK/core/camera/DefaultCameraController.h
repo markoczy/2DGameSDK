@@ -4,20 +4,21 @@
 #include <2DGameSDK/common/graphics/PoseConverter.h>
 #include <2DGameSDK/common/types/base/GameBase.h>
 #include <2DGameSDK/core/camera/CameraController.h>
+#include <2DGameSDK/dll/gamesdk_dll.h>
 #include <2DGameSDK/world/GameWorld.h>
 
 namespace game {
-  class DefaultCameraController : public CameraController {
+  class GAMESDK_DLL DefaultCameraController : public CameraController {
   public:
     DefaultCameraController(GameBase* game);
 
-    sf::Vector2f GetBounds();
-    void SetZoom(float zoom);
+    virtual sf::Vector2f GetBounds();
+    virtual void SetZoom(float zoom);
 
-    void SetCenter(sf::Vector2f center);
+    virtual void SetCenter(sf::Vector2f center);
 
-    virtual void OnTick() = 0;
-    virtual sf::View GetView() = 0;
+    virtual void OnTick();
+    virtual sf::View GetView();
 
   private:
     sf::View mView;

@@ -74,6 +74,9 @@ namespace game {
     collisionHandler->preSolveFunc = &collisionPreSolve;
     collisionHandler->postSolveFunc = &collisionPostSolve;
     collisionHandler->separateFunc = &collisionSeparate;
+
+    mDefaultCameraController = new DefaultCameraController(this);
+    mCameraController = mDefaultCameraController;
   }
 
   Game::~Game() {
@@ -93,12 +96,16 @@ namespace game {
     mWindow->setFramerateLimit(mOptions.FramesPerSecond);
     // mWindow->setVerticalSyncEnabled(true);
 
-    auto world = mStateManager.GetWorld();
-    mView = mWindow->getView();
-    auto sz = mView.getSize() / mOptions.InitialZoom;
-    mView.setSize(sz);
-    mView.setCenter(sz.x / 2, world->GetBounds().height - sz.y / 2);
-    mWindow->setView(mView);
+    mDefaultCameraController->SetZoom(mOptions.InitialZoom);
+    auto bounds = mDefaultCameraController->GetBounds();
+    mDefaultCameraController->SetCenter(sf::Vector2f(bounds.x / 2, bounds.y / 2));
+
+    // auto world = mStateManager.GetWorld();
+    // mView = mWindow->getView();
+    // auto sz = mView.getSize() / mOptions.InitialZoom;
+    // mView.setSize(sz);
+    // mView.setCenter(sz.x / 2, world->GetBounds().height - sz.y / 2);
+    // mWindow->setView(mView);
 
     float step = 1.0f / mOptions.FramesPerSecond;
 
@@ -171,6 +178,10 @@ namespace game {
     return mPoseConverter;
   }
 
+  CameraController* Game::GetCameraController() {
+    return mCameraController;
+  }
+
   void Game::SetScene(SceneGraph* scene) {
     mStateManager.SetScene(scene);
   }
@@ -188,6 +199,20 @@ namespace game {
 
     helpers::safeDelete(mPoseConverter);
     mPoseConverter = new PoseConverter(world->GetBounds().width, world->GetBounds().height, mOptions.MeterPerPixel);
+  }
+
+  void Game::SetCameraController(CameraController* cameraController) {
+    if(mCameraController != mDefaultCameraController) {
+      helpers::safeDelete(mCameraController);
+    }
+    mCameraController = cameraController;
+  }
+
+  void Game::ResetCameraController() {
+    if(mCameraController != mDefaultCameraController) {
+      helpers::safeDelete(mCameraController);
+      mCameraController = mDefaultCameraController;
+    }
   }
 
   // ####### Event Controller wrapper ##########################################
@@ -208,6 +233,8 @@ namespace game {
     try {
       mEventCtrl.OnTick();
       mStateManager.OnTick();
+      mCameraController->OnTick();
+
       mStateManager.OnTickEnded();
     } catch(std::exception& e) {
       LOGE("Error during tick: " << e.what());
@@ -216,6 +243,7 @@ namespace game {
 
   void Game::render() {
     try {
+      mWindow->setView(mCameraController->GetView());
       mWindow->clear(sf::Color(80, 80, 80));
       mStateManager.OnRender(mWindow);
       mWindow->display();

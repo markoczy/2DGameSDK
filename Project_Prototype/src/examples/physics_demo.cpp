@@ -278,7 +278,7 @@ int demo3() {
   cout << "Physics Demo 3" << endl;
   // Create game
   auto game = new Game();
-  game->SetOptions(GameOptions{"My Game", sf::Vector2i(512, 512), 1, 60, false, false, 0.1});
+  game->SetOptions(GameOptions{"My Game", sf::Vector2i(512, 512), 2, 60, false, false, 0.1});
 
   // Create Keyboard Events
   auto upPressed = new OnKeyPress(sf::Keyboard::Up);

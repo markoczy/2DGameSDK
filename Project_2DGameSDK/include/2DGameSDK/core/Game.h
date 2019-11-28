@@ -26,6 +26,8 @@
 #include <2DGameSDK/common/types/base/StateManagerBase.h>
 #include <2DGameSDK/core/GameOptions.h>
 #include <2DGameSDK/core/GameState.h>
+#include <2DGameSDK/core/camera/CameraController.h>
+#include <2DGameSDK/core/camera/DefaultCameraController.h>
 #include <2DGameSDK/core/state/StateManager.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
 #include <2DGameSDK/event/EventController.h>
@@ -88,6 +90,8 @@ namespace game {
 
     PoseConverter* GetPoseConverter();
 
+    CameraController* GetCameraController();
+
     /**
      * @brief Assigns the Game Options
      * 
@@ -114,6 +118,10 @@ namespace game {
      *         will be deleted when this class is out of scope)
      */
     void SetWorld(GameWorld* world);
+
+    void SetCameraController(CameraController* cameraController);
+
+    void ResetCameraController();
 
     /**
      * @brief Add Event to watch inside the EventController
@@ -158,6 +166,8 @@ namespace game {
     sf::View mView;
     cpSpace* mPhysicalWorld = nullptr;
     PoseConverter* mPoseConverter = nullptr;
+    CameraController* mCameraController = nullptr;
+    CameraController* mDefaultCameraController = nullptr;
   };
 } // namespace game
 

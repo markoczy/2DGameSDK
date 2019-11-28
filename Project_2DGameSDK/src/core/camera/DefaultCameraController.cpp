@@ -11,7 +11,7 @@ namespace game {
 
   void DefaultCameraController::SetZoom(float zoom) {
     auto windowSize = getGame()->GetWindow()->getSize();
-    mView.setSize((float)windowSize.x * zoom, (float)windowSize.y * zoom);
+    mView.setSize((float)windowSize.x / zoom, (float)windowSize.y / zoom);
   }
 
   void DefaultCameraController::SetCenter(sf::Vector2f center) {
