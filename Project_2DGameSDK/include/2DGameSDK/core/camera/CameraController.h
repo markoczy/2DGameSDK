@@ -25,6 +25,7 @@ namespace game {
 
   private:
     GameBase* mGame;
+    sf::Vector2f mBounds;
   };
 
 } // namespace game

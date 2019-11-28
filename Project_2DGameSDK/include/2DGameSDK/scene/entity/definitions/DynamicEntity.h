@@ -35,6 +35,8 @@ namespace game {
     virtual int OnCollision(CollisionEventType type, Entity* other, cpArbiter* arb);
     virtual int OnWorldCollision(CollisionEventType type, Tile* tile, cpArbiter* arb);
 
+    virtual sf::Transform GetCombinedTransform();
+
   protected:
     bool mIsCollidable;
     std::vector<Shape<DynamicShapeDefinition>*> mShapes;

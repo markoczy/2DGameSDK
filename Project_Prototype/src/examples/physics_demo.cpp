@@ -280,11 +280,6 @@ int demo3() {
   auto options = GameOptions{"My Game", sf::Vector2i(512, 512), 2, 60, false, false, 0.1};
   auto game = new Game(options);
 
-  auto cam = new DefaultCameraController(game);
-  auto bounds = cam->GetBounds();
-  cam->SetCenter(sf::Vector2f(bounds.x / 2 + 4.8, bounds.y / 2));
-  game->SetCameraController(cam);
-
   // Create Keyboard Events
   auto upPressed = new OnKeyPress(sf::Keyboard::Up);
   auto downPressed = new OnKeyPress(sf::Keyboard::Down);
@@ -329,6 +324,11 @@ int demo3() {
   player->SetMass(playerMass);
   player->SetMoment(cpMomentForBox(playerMass, playerW, playerH));
   scene->AddEntity(player);
+
+  auto cam = new BoundedFollowCameraController(game, player);
+  auto bounds = cam->GetBounds();
+  cam->SetCenter(sf::Vector2f(bounds.x / 2 + 4.8, bounds.y / 2));
+  game->SetCameraController(cam);
 
   auto box = new SpriteStaticEntity(_GROUND_TYPE, game, boxTx, {}, false);
   box->SetTransform(sf::Transform().translate(20, 15));

@@ -21,6 +21,12 @@ namespace game {
     return mIsCollidable;
   }
 
+  sf::Transform DynamicEntity::GetCombinedTransform() {
+    auto pos = cpBodyGetPosition(mBody);
+    auto rot = cpBodyGetAngle(mBody);
+    return sf::Transform().translate(pos.x, pos.y).rotate(rot);
+  }
+
   void DynamicEntity::SetMass(float mass) {
     cpBodySetMass(mBody, mass);
   }
