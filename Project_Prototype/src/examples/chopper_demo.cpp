@@ -222,7 +222,7 @@ int chopperDemo() {
   auto f4Pressed = new OnKeyPress(sf::Keyboard::F4);
 
   // Create game
-  auto options = GameOptions{"My Game", sf::Vector2i(512, 512), 1.0, 50, false, false};
+  auto options = GameOptions{"My Game", sf::Vector2i(512, 512), 2.0, 50, false, false};
   auto game = new Game(options);
 
   auto gameController = new GameController(game);
@@ -239,7 +239,12 @@ int chopperDemo() {
   auto tex = AssetManager::GetTexture("res/textures/heli/heli.png");
   auto tex2 = AssetManager::GetTexture("res/textures/heli/rotor.png");
   auto chopperCollisionMask = getChopperCollisionMask(game);
-  auto ent = new ChopperEntity(game, tex, chopperCollisionMask, 2.0, 5.0, upPressed, downPressed, leftPressed, rightPressed, sf::Vector2f(50, 50));
+  auto player = new ChopperEntity(game, tex, chopperCollisionMask, 2.0, 5.0, upPressed, downPressed, leftPressed, rightPressed, sf::Vector2f(50, 50));
+
+  auto cam = new BoundedFollowCameraController(game, player, true);
+  auto bounds = cam->GetBounds();
+  cam->SetCenter(sf::Vector2f(bounds.x / 2 + 4.8, bounds.y / 2));
+  game->SetCameraController(cam);
 
   // auto ent2 = new RotatingEntity(game, 1, tex2, rotorCollisionMask, 15.0, sf::Vector2f(-5, 2));
   auto rotorCollisionMask = getRotorCollisionMask(game);
@@ -251,7 +256,7 @@ int chopperDemo() {
 
   // Layout entities in scene
   auto scene = new SceneGraph(game);
-  auto parent = scene->AddEntity(ent); //scene->GetRoot()->AddChild(ent);
+  auto parent = scene->AddEntity(player); //scene->GetRoot()->AddChild(ent);
   scene->AddEntity(ent2, parent); // parent->AddChild(ent2);
   scene->AddEntity(enemy);
   game->SetScene(scene);

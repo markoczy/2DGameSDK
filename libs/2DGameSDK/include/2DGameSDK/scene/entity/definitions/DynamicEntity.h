@@ -3,6 +3,7 @@
 
 #include <chipmunk/chipmunk.h>
 
+#include <2DGameSDK/common/graphics/GraphicTools.h>
 #include <2DGameSDK/common/types/base/GameBase.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
 #include <2DGameSDK/physics/CollisionTarget.h>

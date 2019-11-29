@@ -13,8 +13,12 @@
 
 namespace game {
 
-  class GAMESDK_DLL GrahicTools {
+  class GAMESDK_DLL GraphicTools {
   public:
+    static float DegToRad(float deg);
+
+    static float RadToDeg(float rad);
+
     static std::vector<sf::Vector2f> GetRectBoundary(sf::FloatRect rect);
 
     static std::vector<sf::Vector2f> TransformPoints(std::vector<sf::Vector2f> points, sf::Transform transform);
@@ -30,7 +34,7 @@ namespace game {
     static sf::Vector2f GetVisualPos(cpVect physicalPos, float totalHeight);
 
   private:
-    GrahicTools() {}
+    GraphicTools() {}
   };
 
 } // namespace game

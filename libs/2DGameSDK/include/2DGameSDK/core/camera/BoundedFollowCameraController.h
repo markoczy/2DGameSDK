@@ -11,7 +11,7 @@
 namespace game {
   class GAMESDK_DLL BoundedFollowCameraController : public CameraController {
   public:
-    BoundedFollowCameraController(GameBase* game, Entity* entity);
+    BoundedFollowCameraController(GameBase* game, Entity* entity, bool enableRotation = false);
 
     virtual sf::Vector2f GetBounds();
     virtual void SetZoom(float zoom);
@@ -23,9 +23,13 @@ namespace game {
 
   private:
     Entity* mEntity = nullptr;
-    bool mViewChanged = false;
+    bool mEnableRotation = false;
     sf::View mView;
     sf::Vector2f mBounds;
+    float mRadius;
+
+    void updatePosNonRotating(sf::Vector2f worldBounds);
+    void updatePosRotating(sf::Vector2f worldBounds);
   };
 } // namespace game
 

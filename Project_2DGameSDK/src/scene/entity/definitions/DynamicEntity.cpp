@@ -23,7 +23,8 @@ namespace game {
 
   sf::Transform DynamicEntity::GetTransform() {
     auto pos = cpBodyGetPosition(mBody);
-    auto rot = cpBodyGetAngle(mBody);
+
+    auto rot = GraphicTools::RadToDeg(cpBodyGetAngle(mBody));
     return sf::Transform().translate(pos.x, pos.y).rotate(rot);
   }
 
