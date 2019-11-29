@@ -23,6 +23,10 @@ namespace game {
     virtual bool IsKinematic();
     virtual bool IsCollidable();
 
+    virtual sf::Transform GetTransform();
+    virtual sf::Transform GetAccumulatedTransform();
+    virtual sf::Transform GetCombinedTransform();
+
     virtual int OnCollision(CollisionEventType type, Entity* other, cpArbiter* arb);
     virtual int OnWorldCollision(CollisionEventType type, Tile* tile, cpArbiter* arb);
 
@@ -30,6 +34,9 @@ namespace game {
     bool mIsCollidable;
     std::vector<Shape<StaticShapeDefinition>*> mShapes;
     cpBody* mBody = nullptr;
+    sf::Transform mTransform;
+
+    virtual bool setTransform(sf::Transform transform);
   };
 } // namespace game
 

@@ -30,9 +30,6 @@ namespace game {
 
   protected:
     sf::Sprite mSprite;
-
-    // TODO better concept
-    virtual bool setTransform(sf::Transform transform);
   };
 } // namespace game
 

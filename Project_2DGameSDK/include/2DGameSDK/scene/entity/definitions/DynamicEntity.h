@@ -21,6 +21,10 @@ namespace game {
 
     ~DynamicEntity();
 
+    virtual sf::Transform GetTransform();
+    virtual sf::Transform GetAccumulatedTransform();
+    virtual sf::Transform GetCombinedTransform();
+
     virtual bool IsKinematic();
     virtual bool IsCollidable();
 
@@ -35,12 +39,12 @@ namespace game {
     virtual int OnCollision(CollisionEventType type, Entity* other, cpArbiter* arb);
     virtual int OnWorldCollision(CollisionEventType type, Tile* tile, cpArbiter* arb);
 
-    virtual sf::Transform GetCombinedTransform();
-
   protected:
     bool mIsCollidable;
     std::vector<Shape<DynamicShapeDefinition>*> mShapes;
     cpBody* mBody = nullptr;
+
+    virtual bool setTransform(sf::Transform transform);
   };
 
 } // namespace game

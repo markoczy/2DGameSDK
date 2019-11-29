@@ -21,10 +21,18 @@ namespace game {
     return mIsCollidable;
   }
 
-  sf::Transform DynamicEntity::GetCombinedTransform() {
+  sf::Transform DynamicEntity::GetTransform() {
     auto pos = cpBodyGetPosition(mBody);
     auto rot = cpBodyGetAngle(mBody);
     return sf::Transform().translate(pos.x, pos.y).rotate(rot);
+  }
+
+  sf::Transform DynamicEntity::GetAccumulatedTransform() {
+    return constants::SF_TRANSFORM_I;
+  }
+
+  sf::Transform DynamicEntity::GetCombinedTransform() {
+    return GetTransform();
   }
 
   void DynamicEntity::SetMass(float mass) {
@@ -57,6 +65,19 @@ namespace game {
 
   int DynamicEntity::OnWorldCollision(CollisionEventType, Tile*, cpArbiter*) {
     return 1;
+  }
+
+  bool DynamicEntity::setTransform(sf::Transform transform) {
+    auto origin = transform.transformPoint(sf::Vector2f());
+    auto xUnit = transform.transformPoint(sf::Vector2f(1, 0));
+    auto dir = xUnit - origin;
+    float angle = atan2(dir.y, dir.x);
+
+    LOGD("Body Pos: (" << origin.x << ", " << origin.y << "), angle: " << angle);
+    cpBodySetPosition(mBody, cpv(origin.x, origin.y));
+    cpBodySetAngle(mBody, angle);
+    cpSpaceReindexShapesForBody(getGame()->GetPhysicalWorld(), mBody);
+    return true;
   }
 
 } // namespace game

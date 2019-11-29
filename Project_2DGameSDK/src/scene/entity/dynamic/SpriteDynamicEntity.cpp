@@ -42,19 +42,6 @@ namespace game {
     }
   }
 
-  bool SpriteDynamicEntity::setTransform(sf::Transform transform) {
-    auto origin = transform.transformPoint(sf::Vector2f());
-    auto xUnit = transform.transformPoint(sf::Vector2f(1, 0));
-    auto dir = xUnit - origin;
-    float angle = atan2(dir.y, dir.x);
-
-    LOGD("Body Pos: (" << origin.x << ", " << origin.y << "), angle: " << angle);
-    cpBodySetPosition(mBody, cpv(origin.x, origin.y));
-    cpBodySetAngle(mBody, angle);
-    cpSpaceReindexShapesForBody(getGame()->GetPhysicalWorld(), mBody);
-    return true;
-  }
-
   void SpriteDynamicEntity::OnTick() {}
 
 } // namespace game

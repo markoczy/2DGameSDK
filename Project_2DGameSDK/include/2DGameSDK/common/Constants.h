@@ -32,6 +32,8 @@ namespace game::constants {
    */
   const sf::Vector3f SF_VEC3F_ZERO();
 
+  const sf::Transform SF_TRANSFORM_I = sf::Transform();
+
 } // namespace game::constants
 
 #endif
