@@ -70,7 +70,7 @@ namespace game {
 
     GameOptions GetOptions();
 
-    sf::Window* GetWindow();
+    sf::RenderWindow* GetWindow();
 
     StateManagerBase* GetStateManager();
 

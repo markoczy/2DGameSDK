@@ -11,11 +11,16 @@
         "${workspaceFolder}/libs/SFML-2.5.1/include",
         "${workspaceFolder}/libs/Chipmunk-7.0.3/include"
       ],
-      "defines": ["_DEBUG", "UNICODE", "_UNICODE", "DLLBUILD_GAMESDK"],
+      "defines": [
+        "_DEBUG",
+        "UNICODE",
+        "_UNICODE",
+        "DLLBUILD_GAMESDK"
+      ],
       "windowsSdkVersion": "10.0.16299.0",
       "intelliSenseMode": "gcc-x64",
       "cStandard": "c11",
-      "compilerPath": "C:\\Program Files\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\gcc.exe",
+      "compilerPath": "C:\\Program Files\\mingw-w64\\x86_64-7.3.0-posix-seh-rt_v5-rev0\\mingw64\\bin\\gcc.exe",
       "cppStandard": "c++17"
     }
   ],

@@ -20,7 +20,7 @@ namespace game {
 
     virtual GameOptions GetOptions() = 0;
 
-    virtual sf::Window* GetWindow() = 0;
+    virtual sf::RenderWindow* GetWindow() = 0;
 
     virtual StateManagerBase* GetStateManager() = 0;
 
