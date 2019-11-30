@@ -8,6 +8,11 @@ const int _PLAYER_TYPE = 200;
 const int _ENEMY_TYPE = 100;
 static const float _OFFSET = 90;
 
+OverlayDisplay* overlay;
+int overlayIdHeart1 = 0;
+int overlayIdHeart2 = 0;
+int overlayIdHeart3 = 0;
+
 /**
  * @brief Test Entity: Rotates on every tick
  *
@@ -107,6 +112,23 @@ public:
     return true;
   }
 
+  void HandlerEnemyCollision() {
+    if(mCoolDown.getElapsedTime().asMilliseconds() < 1000) return;
+    switch(mLives) {
+    case 3:
+      overlay->Disable(overlayIdHeart3);
+      break;
+    case 2:
+      overlay->Disable(overlayIdHeart2);
+      break;
+    case 1:
+      overlay->Disable(overlayIdHeart1);
+      break;
+    }
+    mLives--;
+    mCoolDown.restart();
+  }
+
   int OnCollision(CollisionEventType type, Entity* other, cpArbiter*) {
     // if(other->GetType() == _ENEMY_TYPE) {
     //   std::cout << "Collision with enemy detected!! Point: (" << point.x
@@ -130,6 +152,7 @@ public:
 
     if(other->GetType() == _ENEMY_TYPE) {
       std::cout << "Collision with Enemy: " << typeStr << std::endl;
+      HandlerEnemyCollision();
       return 1;
     }
     // std::cout << "Registered Collision Event " << typeStr << " cur: " << GetId() << " other " << other->GetId() << std::endl;
@@ -153,6 +176,9 @@ private:
   Observer<sf::Keyboard::Key>* mDown;
   Observer<sf::Keyboard::Key>* mLeft;
   Observer<sf::Keyboard::Key>* mRight;
+
+  sf::Clock mCoolDown;
+  int mLives = 3;
 };
 
 RectangleShape<KinematicShapeDefinition>* getChopperCollisionMask(Game* game) {
@@ -239,7 +265,7 @@ int chopperDemo() {
   auto tex = AssetManager::GetTexture("res/textures/heli/heli.png");
   auto tex2 = AssetManager::GetTexture("res/textures/heli/rotor.png");
   auto chopperCollisionMask = getChopperCollisionMask(game);
-  auto player = new ChopperEntity(game, tex, chopperCollisionMask, 2.0, 5.0, upPressed, downPressed, leftPressed, rightPressed, sf::Vector2f(50, 50));
+  auto player = new ChopperEntity(game, tex, chopperCollisionMask, 2.0, 5.0, upPressed, downPressed, leftPressed, rightPressed, sf::Vector2f(100, 100));
 
   auto cam = new BoundedFollowCameraController(game, player, true);
   auto bounds = cam->GetBounds();
@@ -271,6 +297,18 @@ int chopperDemo() {
   game->AddEvent(f2Pressed);
   game->AddEvent(f3Pressed);
   game->AddEvent(f4Pressed);
+
+  auto heart1 = new sf::Sprite(*AssetManager::GetTexture("res/textures/overlay/heart_14x16.png"));
+  heart1->setPosition(5, 5);
+  auto heart2 = new sf::Sprite(*AssetManager::GetTexture("res/textures/overlay/heart_14x16.png"));
+  heart2->setPosition(25, 5);
+  auto heart3 = new sf::Sprite(*AssetManager::GetTexture("res/textures/overlay/heart_14x16.png"));
+  heart3->setPosition(45, 5);
+  overlay = new OverlayDisplay(game);
+  overlayIdHeart1 = overlay->AddElement(heart1);
+  overlayIdHeart2 = overlay->AddElement(heart2);
+  overlayIdHeart3 = overlay->AddElement(heart3);
+  game->SetOverlayDisplay(overlay);
 
   // Run Game
   game->Run();

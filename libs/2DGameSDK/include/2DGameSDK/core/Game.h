@@ -28,6 +28,7 @@
 #include <2DGameSDK/core/GameState.h>
 #include <2DGameSDK/core/camera/CameraController.h>
 #include <2DGameSDK/core/camera/DefaultCameraController.h>
+// #include <2DGameSDK/core/overlay/OverlayDisplay.h>
 #include <2DGameSDK/core/state/StateManager.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
 #include <2DGameSDK/event/EventController.h>
@@ -40,6 +41,8 @@
 #include <2DGameSDK/world/GameWorld.h>
 
 namespace game {
+  class OverlayDisplay;
+
   /**
    * @brief The Game is the main Controller of the 2DGameSDK, it is used
    *        to execute the main Game Loop, Process Events and Update/Render all
@@ -92,6 +95,8 @@ namespace game {
 
     CameraController* GetCameraController();
 
+    OverlayDisplay* GetOverlayDisplay();
+
     /**
      * @brief Assigns the Game Options
      * 
@@ -120,6 +125,8 @@ namespace game {
     void SetWorld(GameWorld* world);
 
     void SetCameraController(CameraController* cameraController);
+
+    void SetOverlayDisplay(OverlayDisplay* overlay);
 
     void ResetCameraController();
 
@@ -168,6 +175,7 @@ namespace game {
     PoseConverter* mPoseConverter = nullptr;
     CameraController* mCameraController = nullptr;
     CameraController* mDefaultCameraController = nullptr;
+    OverlayDisplay* mOverlayDisplay = nullptr;
   };
 } // namespace game
 

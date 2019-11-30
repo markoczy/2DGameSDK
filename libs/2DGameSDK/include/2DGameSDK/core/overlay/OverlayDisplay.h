@@ -6,14 +6,14 @@
 #include <SFML/Graphics.hpp>
 
 #include <2DGameSDK/common/types/base/GameBase.h>
+#include <2DGameSDK/core/GameOptions.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
-#include <2DGameSDK/world/GameWorld.h>
 
 namespace game {
   class GAMESDK_DLL OverlayDisplay {
   public:
     OverlayDisplay(GameBase* game);
-    int AddElement(sf::Drawable* elem, bool enabled = false);
+    int AddElement(sf::Drawable* elem, bool enabled = true);
     void Enable(int id);
     void Disable(int id);
 
@@ -24,8 +24,8 @@ namespace game {
     GameBase* mGame = nullptr;
     std::map<int, std::tuple<sf::Drawable*, bool>> mDrawables;
     bool mStateChanged = true;
+    sf::RenderTexture* mTexture;
     sf::Sprite mSprite;
-    // sf::RenderTexture* mTexture = nullptr;
   };
 
 } // namespace game

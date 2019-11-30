@@ -4,7 +4,6 @@ using namespace std;
 using namespace game::constants;
 
 namespace game {
-
   unsigned char collideEntities(CollisionEventType type, cpArbiter* arb, Entity* entA, Entity* entB) {
     if(!entA->IsCollidable() || !entB->IsCollidable()) return 0;
     int retA = entA->OnCollision(type, entB, arb);
@@ -59,6 +58,13 @@ namespace game {
   }
 
   sf::Clock dbgClock;
+
+  // TODO dep inversion..
+  class OverlayDisplay {
+  public:
+    void OnTick();
+    void OnRender(sf::RenderTarget* target);
+  };
 
   // ###########################################################################
   // Constructor / Destructor
@@ -190,6 +196,10 @@ namespace game {
     return mStateManager.GetWorld();
   }
 
+  OverlayDisplay* Game::GetOverlayDisplay() {
+    return mOverlayDisplay;
+  }
+
   void Game::SetOptions(GameOptions options) {
     mOptions = options;
   }
@@ -215,6 +225,10 @@ namespace game {
     }
   }
 
+  void Game::SetOverlayDisplay(OverlayDisplay* overlay) {
+    mOverlayDisplay = overlay;
+  }
+
   // ####### Event Controller wrapper ##########################################
 
   int Game::AddEvent(ObservableBase* event) {
@@ -234,7 +248,7 @@ namespace game {
       mEventCtrl.OnTick();
       mStateManager.OnTick();
       mCameraController->OnTick();
-
+      if(mOverlayDisplay != nullptr) mOverlayDisplay->OnTick();
       mStateManager.OnTickEnded();
     } catch(std::exception& e) {
       LOGE("Error during tick: " << e.what());
@@ -246,6 +260,7 @@ namespace game {
       mWindow->setView(mCameraController->GetView());
       mWindow->clear(sf::Color(80, 80, 80));
       mStateManager.OnRender(mWindow);
+      if(mOverlayDisplay != nullptr) mOverlayDisplay->OnRender(mWindow);
       mWindow->display();
     } catch(std::exception& e) {
       LOGE("Error during render: " << e.what());

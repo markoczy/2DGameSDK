@@ -333,25 +333,16 @@ int demo3() {
   auto box = new SpriteStaticEntity(_GROUND_TYPE, game, boxTx, {}, false);
   box->SetTransform(sf::Transform().translate(20, 15));
   scene->AddEntity(box);
-
-  // scene->AddEntity(getBox(game, 5, 2.5, 10, 43.75));
-  // scene->AddEntity(getBox(game, 5, 2.5, 15, 43.75));
-  // scene->AddEntity(getBox(game, 5, 2.5, 15, 41.25));
-
-  // scene->AddEntity(getBox(game, 5, 2.5, 25, 43.75));
-  // scene->AddEntity(getBox(game, 5, 2.5, 25, 41.25));
-
-  // scene->AddEntity(getBox(game, 5, 2.5, 30, 41.25));
-  // scene->AddEntity(getBox(game, 5, 2.5, 30, 38.75));
-
-  // scene->AddEntity(getBox(game, 5, 2.5, 40, 36.25));
-
-  // scene->AddEntity(getBox(game, 5, 10, 45, 32.5));
-
-  // scene->AddEntity(getBox(game, 5, 2.5, 30, 22.5));
-  // scene->AddEntity(getBox(game, 5, 2.5, 25, 22.5));
-
   game->SetScene(scene);
+
+  auto heart1 = new sf::Sprite(*AssetManager::GetTexture("res/textures/overlay/heart_14x16.png"));
+  heart1->setPosition(5, 5);
+  auto heart2 = new sf::Sprite(*AssetManager::GetTexture("res/textures/overlay/heart_14x16.png"));
+  heart2->setPosition(25, 5);
+  auto overlay = new OverlayDisplay(game);
+  overlay->AddElement(heart1);
+  overlay->AddElement(heart2);
+  game->SetOverlayDisplay(overlay);
 
   // Send Events to controller
   game->AddEvent(upPressed);
