@@ -13,6 +13,7 @@
 
 #include <2DGameSDK/core/asset/TextureCache.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
+#include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 
 namespace game {
@@ -37,6 +38,8 @@ namespace game {
      * @return The loaded or previously cached SFML Texture
      */
     static sf::Texture* GetTexture(const std::string& identifier);
+
+    static sf::SoundBuffer* GetAudio(const std::string& identifier);
 
   private:
     static TextureCache _textures;

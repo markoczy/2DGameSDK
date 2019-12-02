@@ -16,4 +16,12 @@ namespace game {
     }
   }
 
+  sf::SoundBuffer* AssetManager::GetAudio(const std::string& identifier) {
+    try {
+      return _sounds.Get(identifier);
+    } catch(std::exception& e) {
+      throw std::runtime_error("Failed to load or create texture " + identifier + ": " + e.what());
+    }
+  }
+
 } // namespace game
