@@ -11,6 +11,8 @@ namespace game {
   class GameWorld;
   class PoseConverter;
   class ObservableBase;
+  class OverlayDisplay;
+  class AudioController;
 
   class GameBase {
   public:
@@ -29,6 +31,10 @@ namespace game {
     virtual GameWorld* GetWorld() = 0;
 
     virtual PoseConverter* GetPoseConverter() = 0;
+
+    virtual OverlayDisplay* GetOverlayDisplay() = 0;
+
+    virtual AudioController* GetAudioController() = 0;
 
     virtual void SetOptions(GameOptions options) = 0;
 

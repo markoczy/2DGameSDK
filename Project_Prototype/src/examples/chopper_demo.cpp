@@ -125,6 +125,7 @@ public:
       overlay->Disable(overlayIdHeart1);
       break;
     }
+    getGame()->GetAudioController()->PlayOnce(AssetManager::GetAudio("res/audio/Hit_Hurt.wav"));
     mLives--;
     mCoolDown.restart();
   }

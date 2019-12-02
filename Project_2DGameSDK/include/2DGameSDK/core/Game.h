@@ -26,6 +26,7 @@
 #include <2DGameSDK/common/types/base/StateManagerBase.h>
 #include <2DGameSDK/core/GameOptions.h>
 #include <2DGameSDK/core/GameState.h>
+#include <2DGameSDK/core/audio/AudioController.h>
 #include <2DGameSDK/core/camera/CameraController.h>
 #include <2DGameSDK/core/camera/DefaultCameraController.h>
 // #include <2DGameSDK/core/overlay/OverlayDisplay.h>
@@ -96,6 +97,8 @@ namespace game {
     CameraController* GetCameraController();
 
     OverlayDisplay* GetOverlayDisplay();
+
+    AudioController* GetAudioController();
 
     /**
      * @brief Assigns the Game Options
@@ -176,6 +179,7 @@ namespace game {
     CameraController* mCameraController = nullptr;
     CameraController* mDefaultCameraController = nullptr;
     OverlayDisplay* mOverlayDisplay = nullptr;
+    AudioController* mAudioController = nullptr;
   };
 } // namespace game
 

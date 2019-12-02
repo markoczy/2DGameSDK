@@ -83,6 +83,8 @@ namespace game {
 
     mDefaultCameraController = new DefaultCameraController(this);
     mCameraController = mDefaultCameraController;
+
+    mAudioController = new AudioController();
   }
 
   Game::~Game() {
@@ -186,6 +188,10 @@ namespace game {
 
   CameraController* Game::GetCameraController() {
     return mCameraController;
+  }
+
+  AudioController* Game::GetAudioController() {
+    return mAudioController;
   }
 
   void Game::SetScene(SceneGraph* scene) {

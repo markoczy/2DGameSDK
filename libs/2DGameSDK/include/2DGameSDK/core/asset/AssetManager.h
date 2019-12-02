@@ -11,6 +11,7 @@
 #ifndef __ASSET_MANAGER_H__
 #define __ASSET_MANAGER_H__
 
+#include <2DGameSDK/core/asset/SoundBufferCache.h>
 #include <2DGameSDK/core/asset/TextureCache.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
 #include <SFML/Audio.hpp>
@@ -43,6 +44,7 @@ namespace game {
 
   private:
     static TextureCache _textures;
+    static SoundBufferCache _sounds;
   };
 
 } // namespace game
