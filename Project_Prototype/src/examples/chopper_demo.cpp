@@ -125,7 +125,7 @@ public:
       overlay->Disable(overlayIdHeart1);
       break;
     }
-    getGame()->GetAudioController()->PlayOnce(AssetManager::GetAudio("res/audio/Hit_Hurt.wav"));
+    getGame()->GetAudioController()->PlayOnce(mHitSound);
     mLives--;
     mCoolDown.restart();
   }
@@ -180,6 +180,7 @@ private:
 
   sf::Clock mCoolDown;
   int mLives = 3;
+  sf::SoundBuffer* mHitSound = AssetManager::GetAudio("res/audio/Hit_Hurt.wav");
 };
 
 RectangleShape<KinematicShapeDefinition>* getChopperCollisionMask(Game* game) {
