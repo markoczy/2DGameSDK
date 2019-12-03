@@ -11,12 +11,15 @@ namespace game {
 
   class GAMESDK_DLL AudioController {
   public:
+    void OnTick();
     void PlayOnce(sf::SoundBuffer* sound, float volume = 100);
     int PlayRepeated(sf::SoundBuffer* sound, float volume = 100);
     void Stop(int id);
 
   private:
     std::map<int, sf::Sound*> mSounds;
+    sf::Clock mCleanupTimer;
+    int mCleanupIntervall = 5000;
   };
 
 } // namespace game

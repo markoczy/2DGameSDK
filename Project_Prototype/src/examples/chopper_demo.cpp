@@ -312,6 +312,8 @@ int chopperDemo() {
   overlayIdHeart3 = overlay->AddElement(heart3);
   game->SetOverlayDisplay(overlay);
 
+  game->GetAudioController()->PlayRepeated(AssetManager::GetAudio("res/audio/Juhani_Junkala/junkala_level_1.wav"), 50);
+
   // Run Game
   game->Run();
 

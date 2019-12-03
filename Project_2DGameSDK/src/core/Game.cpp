@@ -254,6 +254,7 @@ namespace game {
       mEventCtrl.OnTick();
       mStateManager.OnTick();
       mCameraController->OnTick();
+      mAudioController->OnTick();
       if(mOverlayDisplay != nullptr) mOverlayDisplay->OnTick();
       mStateManager.OnTickEnded();
     } catch(std::exception& e) {
