@@ -72,6 +72,8 @@ public:
     mCenter = sf::Vector2f(rect.width / 2, rect.height / 2);
     SetTransform(sf::Transform().translate(pos));
     mDir = sf::Vector2f(0, -1);
+
+    mHitSound = game->GetAudioController()->AddSound(AssetManager::GetAudio("res/audio/Hit_Hurt.wav"));
   }
 
   void OnTick() {
@@ -180,7 +182,7 @@ private:
 
   sf::Clock mCoolDown;
   int mLives = 3;
-  sf::SoundBuffer* mHitSound = AssetManager::GetAudio("res/audio/Hit_Hurt.wav");
+  int mHitSound;
 };
 
 RectangleShape<KinematicShapeDefinition>* getChopperCollisionMask(Game* game) {

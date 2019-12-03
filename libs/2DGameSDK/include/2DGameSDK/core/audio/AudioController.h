@@ -11,9 +11,11 @@ namespace game {
 
   class GAMESDK_DLL AudioController {
   public:
-    void PlayOnce(sf::SoundBuffer* sound, float volume = 100);
-    int PlayRepeated(sf::SoundBuffer* sound, float volume = 100);
+    int AddSound(sf::SoundBuffer* sound);
+    void PlayOnce(int id, float volume = 100);
+    int PlayRepeated(int id, float volume = 100);
     void Stop(int id);
+    void Delete(int id);
 
   private:
     std::map<int, sf::Sound*> mSounds;
