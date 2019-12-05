@@ -73,7 +73,8 @@
         "xstring": "cpp",
         "xtr1common": "cpp",
         "xtree": "cpp",
-        "xutility": "cpp"
+        "xutility": "cpp",
+        "set": "cpp"
     },
     // C++ Format Style for Project 2DGameSDK:
     // see .clang-format file in project root

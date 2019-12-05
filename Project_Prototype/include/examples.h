@@ -50,4 +50,6 @@ int chopperDemo();
 
 int physicsDemo();
 
+int prototype1();
+
 #endif

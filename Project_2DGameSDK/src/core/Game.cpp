@@ -101,7 +101,7 @@ namespace game {
     LOGI("Game started");
     cpSpaceSetIterations(mPhysicalWorld, 10);
     mWindow = new sf::RenderWindow(sf::VideoMode(mOptions.ScreenDim.x, mOptions.ScreenDim.y), mOptions.Title);
-    mWindow->setFramerateLimit(mOptions.FramesPerSecond);
+    // mWindow->setFramerateLimit(mOptions.FramesPerSecond);
     // mWindow->setVerticalSyncEnabled(true);
 
     mDefaultCameraController->SetZoom(mOptions.InitialZoom);
