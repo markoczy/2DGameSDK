@@ -98,7 +98,7 @@ int prototype1() {
 
   auto tex = AssetManager::GetTexture("res/textures/spaceships/scorpio/prefab_scorpio_1.png");
   auto player = new PlayerEntity(game, tex, 10.0, upPressed, downPressed, leftPressed, rightPressed);
-  // player->SetTransform(sf::Transform().translate())
+  player->SetTransform(sf::Transform().translate(960, 300));
 
   // Layout entities in scene
   auto scene = new SceneGraph(game);
@@ -106,8 +106,6 @@ int prototype1() {
   game->SetScene(scene);
 
   auto cam = new BoundedFollowCameraController(game, player);
-  auto bounds = cam->GetBounds();
-  cam->SetCenter(sf::Vector2f(bounds.x / 2 + 4.8, bounds.y / 2));
   game->SetCameraController(cam);
 
   game->GetAudioController()->PlayRepeated(AssetManager::GetAudio("res/audio/tgfcoder/FrozenJam.oga"));
