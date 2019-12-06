@@ -20,7 +20,7 @@ namespace game {
     virtual void OnTick();
     virtual sf::View GetView();
 
-  private:
+  protected:
     bool mViewChanged = false;
     sf::View mView;
     sf::Vector2f mBounds;

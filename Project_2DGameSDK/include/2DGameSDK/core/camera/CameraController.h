@@ -4,10 +4,11 @@
 #include <SFML/Graphics.hpp>
 
 #include <2DGameSDK/common/types/base/GameBase.h>
+#include <2DGameSDK/dll/gamesdk_dll.h>
 
 namespace game {
 
-  class CameraController {
+  class GAMESDK_DLL CameraController {
   public:
     CameraController(GameBase* game);
     virtual ~CameraController();

@@ -13,6 +13,7 @@ namespace game {
   class ObservableBase;
   class OverlayDisplay;
   class AudioController;
+  class CameraController;
 
   class GameBase {
   public:
@@ -31,6 +32,8 @@ namespace game {
     virtual GameWorld* GetWorld() = 0;
 
     virtual PoseConverter* GetPoseConverter() = 0;
+
+    virtual CameraController* GetCameraController() = 0;
 
     virtual OverlayDisplay* GetOverlayDisplay() = 0;
 
