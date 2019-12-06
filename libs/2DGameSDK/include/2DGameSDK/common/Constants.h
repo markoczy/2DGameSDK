@@ -15,6 +15,7 @@
 
 namespace game::constants {
   const int DEFAULT_ZINDEX_ENTITY = 100;
+  const int DEFAULT_ZINDEX_PROJECTILE = 200;
   const int DEFAULT_ZINDEX_WORLD = 0;
 
   const float PI = 3.14159265358979323846;

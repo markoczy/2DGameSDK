@@ -21,5 +21,6 @@
 #include <2DGameSDK/core/camera/CameraController.h>
 #include <2DGameSDK/core/camera/DefaultCameraController.h>
 #include <2DGameSDK/core/overlay/OverlayDisplay.h>
+#include <2DGameSDK/core/projectile/Projectile.h>
 
 #endif

@@ -5,7 +5,8 @@ namespace game {
   enum class ObjectType {
     Unknown = 0,
     Tile = 1,
-    Entity = 2
+    Entity = 2,
+    Projectile = 3
   };
 } // namespace game
 

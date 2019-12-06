@@ -16,7 +16,8 @@ public:
                      Observable<sf::Keyboard::Key>* up,
                      Observable<sf::Keyboard::Key>* down,
                      Observable<sf::Keyboard::Key>* left,
-                     Observable<sf::Keyboard::Key>* right) : SpriteKinematicEntity(_PLAYER_TYPE, game, texture), mSpeed(speed) {
+                     Observable<sf::Keyboard::Key>* right,
+                     Observable<sf::Keyboard::Key>* space) : SpriteKinematicEntity(_PLAYER_TYPE, game, texture), mSpeed(speed) {
     //
     //
     //
@@ -24,11 +25,13 @@ public:
     mDown = new MethodObserver<sf::Keyboard::Key, Proto1PlayerEntity>(this, &Proto1PlayerEntity::MoveDown);
     mLeft = new MethodObserver<sf::Keyboard::Key, Proto1PlayerEntity>(this, &Proto1PlayerEntity::MoveLeft);
     mRight = new MethodObserver<sf::Keyboard::Key, Proto1PlayerEntity>(this, &Proto1PlayerEntity::MoveRight);
+    mSpace = new MethodObserver<sf::Keyboard::Key, Proto1PlayerEntity>(this, &Proto1PlayerEntity::Shoot);
 
     mUp->SubscribeTo(up);
     mDown->SubscribeTo(down);
     mLeft->SubscribeTo(left);
     mRight->SubscribeTo(right);
+    mSpace->SubscribeTo(space);
   }
 
   ~Proto1PlayerEntity() {
@@ -36,6 +39,7 @@ public:
     delete mDown;
     delete mLeft;
     delete mRight;
+    delete mSpace;
   }
 
   void OnTick() {
@@ -79,8 +83,20 @@ public:
     mDt.x += mSpeed;
   }
 
+  void Shoot(sf::Keyboard::Key) {
+    if(mLastShoot.getElapsedTime().asMilliseconds() > mCooldownShoot) {
+      auto game = (Game*)getGame();
+      auto proj = new Projectile(game, 777, AssetManager::GetTexture("res/textures/sample.png"), ShapeFactory::CreateKinematicCircleShape(game, 10, 0, 0), GetCombinedTransform().translate(0, 60), sf::Vector2f(0, 1000));
+      mLastShoot.restart();
+      game->GetAudioController()->PlayOnce(mShootSound);
+    }
+  }
+
 private:
+  float mCooldownShoot = 500;
+  sf::Clock mLastShoot;
   float mSpeed;
+  sf::SoundBuffer* mShootSound = AssetManager::GetAudio("res/audio/Laser_Shoot.wav");
   // Delta Transform of current tick
   sf::Vector2f mDt;
 
@@ -89,6 +105,7 @@ private:
   Observer<sf::Keyboard::Key>* mDown;
   Observer<sf::Keyboard::Key>* mLeft;
   Observer<sf::Keyboard::Key>* mRight;
+  Observer<sf::Keyboard::Key>* mSpace;
 };
 
 class ScrollCamera : public DefaultCameraController, public Entity {
@@ -143,6 +160,7 @@ int prototype1() {
   auto downPressed = new OnKeyPress(sf::Keyboard::Down);
   auto leftPressed = new OnKeyPress(sf::Keyboard::Left);
   auto rightPressed = new OnKeyPress(sf::Keyboard::Right);
+  auto spacePressed = new OnKeyPress(sf::Keyboard::Space);
 
   float aspectRatio = (float)sf::VideoMode::getDesktopMode().width / (float)sf::VideoMode::getDesktopMode().height;
 
@@ -155,6 +173,7 @@ int prototype1() {
   game->AddEvent(downPressed);
   game->AddEvent(leftPressed);
   game->AddEvent(rightPressed);
+  game->AddEvent(spacePressed);
 
   // Create Game World
   auto world = GameWorldFactory::CreateGameWorld(game, "res/maps/proto1/tilemap.json", "", "res/maps/proto1/tile_");
@@ -165,7 +184,7 @@ int prototype1() {
   game->SetCameraController(cam);
 
   auto tex = AssetManager::GetTexture("res/textures/spaceships/scorpio/prefab_scorpio_1.png");
-  auto player = new Proto1PlayerEntity(game, tex, 5.0, upPressed, downPressed, leftPressed, rightPressed);
+  auto player = new Proto1PlayerEntity(game, tex, 5.0, upPressed, downPressed, leftPressed, rightPressed, spacePressed);
   float offsetY = -(cam->GetBounds().y / 2.0) + 80;
   player->SetTransform(sf::Transform().translate(0, offsetY));
 
@@ -176,6 +195,7 @@ int prototype1() {
   game->SetScene(scene);
 
   game->GetAudioController()->PlayRepeated(AssetManager::GetAudio("res/audio/tgfcoder/FrozenJam.oga"));
+
   game->Run();
   return 0;
 }

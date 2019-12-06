@@ -69,14 +69,11 @@ namespace game {
   }
 
   bool DynamicEntity::setTransform(sf::Transform transform) {
-    auto origin = transform.transformPoint(sf::Vector2f());
-    auto xUnit = transform.transformPoint(sf::Vector2f(1, 0));
-    auto dir = xUnit - origin;
-    float angle = atan2(dir.y, dir.x);
+    auto pose = getGame()->GetPoseConverter()->GetPhysicalPose(transform);
 
-    LOGD("Body Pos: (" << origin.x << ", " << origin.y << "), angle: " << angle);
-    cpBodySetPosition(mBody, cpv(origin.x, origin.y));
-    cpBodySetAngle(mBody, angle);
+    LOGD("Body Pos: (" << pose.origin.x << ", " << pose.origin.y << "), angle: " << pose.angle);
+    cpBodySetPosition(mBody, pose.origin);
+    cpBodySetAngle(mBody, pose.angle);
     cpSpaceReindexShapesForBody(getGame()->GetPhysicalWorld(), mBody);
     return true;
   }
