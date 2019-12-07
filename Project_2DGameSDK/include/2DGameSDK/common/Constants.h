@@ -18,6 +18,8 @@ namespace game::constants {
   const int DEFAULT_ZINDEX_PROJECTILE = 200;
   const int DEFAULT_ZINDEX_WORLD = 0;
 
+  const int DEFAULT_ANIMATION_START = 0;
+
   const float PI = 3.14159265358979323846;
   const float PI_2 = 1.57079632679489661923;
   const float PI_4 = 0.785398163397448309615;
