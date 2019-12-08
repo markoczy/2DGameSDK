@@ -32,6 +32,8 @@ public:
     mLeft->SubscribeTo(left);
     mRight->SubscribeTo(right);
     mSpace->SubscribeTo(space);
+
+    mSize = sf::Vector2f(texture->getSize().x, texture->getSize().y);
   }
 
   ~Proto1PlayerEntity() {
@@ -45,9 +47,8 @@ public:
   void OnTick() {
     if(mDt.x != 0 || mDt.y != 0) {
       auto transform = GetTransform();
-      auto localBounds = mSprite.getLocalBounds();
-      auto bottomLeft = transform.transformPoint(sf::Vector2f(-localBounds.width / 2, -localBounds.height / 2));
-      auto topRight = transform.transformPoint(sf::Vector2f(localBounds.width / 2, localBounds.height / 2));
+      auto bottomLeft = transform.transformPoint(sf::Vector2f(-mSize.x / 2, -mSize.y / 2));
+      auto topRight = transform.transformPoint(sf::Vector2f(mSize.x / 2, mSize.y / 2));
       auto camBounds = getGame()->GetCameraController()->GetBounds();
 
       if(bottomLeft.x + mDt.x < -camBounds.x / 2) {
@@ -97,6 +98,7 @@ private:
   sf::Clock mLastShoot;
   float mSpeed;
   sf::SoundBuffer* mShootSound = AssetManager::GetAudio("res/audio/Laser_Shoot.wav");
+  sf::Vector2f mSize;
   // Delta Transform of current tick
   sf::Vector2f mDt;
 

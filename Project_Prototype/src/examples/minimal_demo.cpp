@@ -16,14 +16,14 @@ public:
                  sf::Texture* texture,
                  float rotPerTick,
                  sf::Vector2f pos = sf::Vector2f()) : SpriteKinematicEntity(1, game, texture), mRot(rotPerTick) {
-    auto rect = mSprite.getTextureRect();
-    mCenter = sf::Vector2f(rect.width / 2, rect.height / 2);
+    // auto rect = mSprite.getTextureRect();
+    // mCenter = sf::Vector2f(rect.width / 2, rect.height / 2);
 
     SetTransform(sf::Transform().translate(pos));
   }
 
   void OnTick() {
-    Transform(sf::Transform().rotate(mRot, mCenter));
+    Transform(sf::Transform().rotate(mRot));
     auto pt = mTransform.transformPoint(sf::Vector2f());
     cout << "Transform: (" << pt.x << ", " << pt.x << ")" << endl;
     pt = mCombinedTransform.transformPoint(sf::Vector2f());
@@ -32,7 +32,6 @@ public:
 
 private:
   float mRot;
-  sf::Vector2f mCenter;
 };
 
 int minimalDemo() {

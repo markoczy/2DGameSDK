@@ -33,8 +33,8 @@ public:
     mRight->SubscribeTo(right);
 
     SetAnimState(1);
-    auto rect = mCurState.getTextureRect();
-    mCenter = sf::Vector2f(rect.width / 2, rect.height / 2);
+    // auto rect = mCurState.getTextureRect();
+    // mCenter = sf::Vector2f(rect.width / 2, rect.height / 2);
 
     SetTransform(sf::Transform().translate(pos));
     mDir = sf::Vector2f(0, -1);

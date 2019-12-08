@@ -2,7 +2,7 @@
 
 namespace game {
 
-  KinematicEntity::KinematicEntity(int type, GameBase* game, std::vector<Shape<KinematicShapeDefinition>*> shapes, bool isCollidable) : Entity(type, game), mShapes(shapes), mIsCollidable(isCollidable) {
+  KinematicEntity::KinematicEntity(int type, GameBase* game, RenderStrategy* renderer, std::vector<Shape<KinematicShapeDefinition>*> shapes, bool isCollidable) : Entity(type, game), mRenderer(renderer), mShapes(shapes), mIsCollidable(isCollidable) {
     mBody = cpSpaceAddBody(game->GetPhysicalWorld(), cpBodyNewKinematic());
     cpBodySetUserData(mBody, new CollisionTarget(this, ObjectType::Entity));
 
@@ -32,6 +32,26 @@ namespace game {
 
   sf::Transform KinematicEntity::GetCombinedTransform() {
     return mCombinedTransform;
+  }
+
+  RenderStrategy* KinematicEntity::GetRenderer() {
+    return mRenderer;
+  }
+
+  void KinematicEntity::OnRender(sf::RenderTarget* target, sf::RenderStates states) {
+    if(mRenderer && mRenderer->IsRenderEnabled()) {
+      auto visTransform = getGame()->GetPoseConverter()->GetVisualTransform(GetCombinedTransform());
+      states.transform = states.transform * visTransform;
+      mRenderer->OnRender(target, visTransform);
+    }
+
+    auto options = getGame()->GetOptions();
+    if(!(options.RenderCollisionMask || options.RenderAABB)) return;
+
+    for(auto shape : mShapes) {
+      if(options.RenderCollisionMask) shape->Render(target, sf::Color::Red, 1.0 / options.InitialZoom);
+      if(options.RenderAABB) shape->RenderAABB(target, sf::Color::Magenta, 1.0 / options.InitialZoom);
+    }
   }
 
   bool KinematicEntity::setTransform(sf::Transform transform) {

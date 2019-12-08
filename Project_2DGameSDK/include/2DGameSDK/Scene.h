@@ -18,9 +18,11 @@
 #include <2DGameSDK/scene/entity/definitions/DynamicEntity.h>
 #include <2DGameSDK/scene/entity/definitions/KinematicEntity.h>
 #include <2DGameSDK/scene/entity/definitions/StaticEntity.h>
-#include <2DGameSDK/scene/entity/dynamic/SpriteDynamicEntity.h>
-#include <2DGameSDK/scene/entity/kinematic/AnimatedKinematicEntity.h>
-#include <2DGameSDK/scene/entity/kinematic/SpriteKinematicEntity.h>
-#include <2DGameSDK/scene/entity/static/SpriteStaticEntity.h>
+#include <2DGameSDK/scene/entity/prefabs/AnimatedDynamicEntity.h>
+#include <2DGameSDK/scene/entity/prefabs/AnimatedKinematicEntity.h>
+#include <2DGameSDK/scene/entity/prefabs/AnimatedStaticEntity.h>
+#include <2DGameSDK/scene/entity/prefabs/SpriteDynamicEntity.h>
+#include <2DGameSDK/scene/entity/prefabs/SpriteKinematicEntity.h>
+#include <2DGameSDK/scene/entity/prefabs/SpriteStaticEntity.h>
 
 #endif

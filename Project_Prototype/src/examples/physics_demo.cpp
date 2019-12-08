@@ -158,8 +158,9 @@ int demo1() {
   ground->SetTransform(sf::Transform().translate(100, 200));
 
   auto shape = ShapeFactory::CreateDynamicRectangleShape(game, 5, 5, 0.1, 0.3, 1, true);
-  auto box = new SpriteDynamicEntity(2, game, boxTx, {shape}, true);
-  box->SetSize(sf::Vector2f(5, 5));
+  auto boxRenderer = new SingleSpriteRenderStrategy(game, boxTx);
+  boxRenderer->SetSize(sf::Vector2f(5, 5));
+  auto box = new DynamicEntity(2, game, boxRenderer, {shape}, true);
   box->SetTransform(sf::Transform().translate(100, 100).rotate(10));
 
   scene->AddEntity(ground);
