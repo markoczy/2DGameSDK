@@ -1,7 +1,7 @@
 #include <2DGameSDK/scene/entity/definitions/DynamicEntity.h>
 
 namespace game {
-  DynamicEntity::DynamicEntity(int type, GameBase* game, std::vector<Shape<DynamicShapeDefinition>*> shapes, bool isCollidable) : Entity(type, game), mIsCollidable(isCollidable), mShapes(shapes) {
+  DynamicEntity::DynamicEntity(int type, GameBase* game, RenderStrategy* renderer, std::vector<Shape<DynamicShapeDefinition>*> shapes, bool isCollidable) : Entity(type, game), mRenderer(renderer), mIsCollidable(isCollidable), mShapes(shapes) {
     mBody = cpSpaceAddBody(game->GetPhysicalWorld(), cpBodyNew(0, 0));
     cpBodySetUserData(mBody, new CollisionTarget(this, ObjectType::Entity));
 
@@ -36,6 +36,10 @@ namespace game {
     return GetTransform();
   }
 
+  RenderStrategy* DynamicEntity::GetRenderer() {
+    return mRenderer;
+  }
+
   void DynamicEntity::SetMass(float mass) {
     cpBodySetMass(mBody, mass);
   }
@@ -58,6 +62,26 @@ namespace game {
 
   void DynamicEntity::SetTorque(float torque) {
     cpBodySetTorque(mBody, torque);
+  }
+
+  void DynamicEntity::OnRender(sf::RenderTarget* target, sf::RenderStates states) {
+    auto physPose = Pose<cpVect>{
+        cpBodyGetPosition(mBody),
+        (float)cpBodyGetAngle(mBody)};
+    auto visPose = getGame()->GetPoseConverter()->GetVisualPose(physPose);
+
+    LOGD("Pos: (" << visPose.origin.x << ", " << visPose.origin.y << "), Angle:" << visPose.angle);
+
+    states.transform = states.transform * sf::Transform().translate(visPose.origin).rotate(visPose.angle);
+    mRenderer->OnRender(target, states);
+
+    auto options = getGame()->GetOptions();
+    if(!(options.RenderCollisionMask || options.RenderAABB)) return;
+
+    for(auto shape : mShapes) {
+      if(options.RenderCollisionMask) shape->Render(target, sf::Color::Red, 1.0 / options.InitialZoom);
+      if(options.RenderAABB) shape->RenderAABB(target, sf::Color::Magenta, 1.0 / options.InitialZoom);
+    }
   }
 
   int DynamicEntity::OnCollision(CollisionEventType, Entity*, cpArbiter*) {

@@ -5,6 +5,7 @@
 
 #include <2DGameSDK/common/graphics/GraphicTools.h>
 #include <2DGameSDK/common/types/base/GameBase.h>
+#include <2DGameSDK/core/visual/RenderStrategy.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
 #include <2DGameSDK/physics/CollisionTarget.h>
 #include <2DGameSDK/physics/shape/Shape.h>
@@ -17,6 +18,7 @@ namespace game {
   public:
     DynamicEntity(int type,
                   GameBase* game,
+                  RenderStrategy * renderer,
                   std::vector<Shape<DynamicShapeDefinition>*> shapes = std::vector<Shape<DynamicShapeDefinition>*>(),
                   bool isCollidable = false);
 
@@ -25,6 +27,8 @@ namespace game {
     virtual sf::Transform GetTransform();
     virtual sf::Transform GetAccumulatedTransform();
     virtual sf::Transform GetCombinedTransform();
+
+    virtual RenderStrategy* GetRenderer();
 
     virtual bool IsKinematic();
     virtual bool IsCollidable();
@@ -37,6 +41,7 @@ namespace game {
     virtual void SetAngularVelocity(float angularVelocity);
     virtual void SetTorque(float torque);
 
+    void OnRender(sf::RenderTarget* target, sf::RenderStates states);
     virtual int OnCollision(CollisionEventType type, Entity* other, cpArbiter* arb);
     virtual int OnWorldCollision(CollisionEventType type, Tile* tile, cpArbiter* arb);
 
@@ -44,6 +49,7 @@ namespace game {
     bool mIsCollidable;
     std::vector<Shape<DynamicShapeDefinition>*> mShapes;
     cpBody* mBody = nullptr;
+    RenderStrategy* mRenderer = nullptr;
 
     virtual bool setTransform(sf::Transform transform);
   };
