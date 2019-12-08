@@ -18,7 +18,7 @@ namespace game {
   public:
     DynamicEntity(int type,
                   GameBase* game,
-                  RenderStrategy * renderer,
+                  RenderStrategy* renderer,
                   std::vector<Shape<DynamicShapeDefinition>*> shapes = std::vector<Shape<DynamicShapeDefinition>*>(),
                   bool isCollidable = false);
 
@@ -46,10 +46,10 @@ namespace game {
     virtual int OnWorldCollision(CollisionEventType type, Tile* tile, cpArbiter* arb);
 
   protected:
+    RenderStrategy* mRenderer = nullptr;
     bool mIsCollidable;
     std::vector<Shape<DynamicShapeDefinition>*> mShapes;
     cpBody* mBody = nullptr;
-    RenderStrategy* mRenderer = nullptr;
 
     virtual bool setTransform(sf::Transform transform);
   };

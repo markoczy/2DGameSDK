@@ -25,6 +25,8 @@ namespace game::constants {
   const float PI_4 = 0.785398163397448309615;
   const float PI_X_2 = 6.28318530717958647692;
 
+  const sf::Vector2f DIMENSION_USE_DEFAULT = sf::Vector2f(-1, -1);
+
   /**
    * @brief SFML 2D Vector (0, 0)
    */

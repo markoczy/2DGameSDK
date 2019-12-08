@@ -20,6 +20,7 @@
 #include <2DGameSDK/scene/entity/definitions/StaticEntity.h>
 #include <2DGameSDK/scene/entity/kinematic/AnimatedKinematicEntity.h>
 #include <2DGameSDK/scene/entity/kinematic/SpriteKinematicEntity.h>
+#include <2DGameSDK/scene/entity/prefabs/SpriteDynamicEntity.h>
 #include <2DGameSDK/scene/entity/static/SpriteStaticEntity.h>
 
 #endif

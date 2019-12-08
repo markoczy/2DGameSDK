@@ -6,17 +6,17 @@ using namespace game;
 const int _PLAYER_TYPE = 200;
 const int _GROUND_TYPE = 100;
 
-class PhysPlayerEntity : public DynamicEntity {
+class PhysPlayerEntity : public SpriteDynamicEntity {
 public:
   PhysPlayerEntity(Game* game,
-                   RenderStrategy* renderer,
+                   sf::Texture* texture,
                    float speed,
                    float jumpForce,
                    vector<Shape<DynamicShapeDefinition>*> shapes,
                    Observable<sf::Keyboard::Key>* up,
                    Observable<sf::Keyboard::Key>* down,
                    Observable<sf::Keyboard::Key>* left,
-                   Observable<sf::Keyboard::Key>* right) : DynamicEntity(_PLAYER_TYPE, game, renderer, shapes, true), mSpeed(speed), mJumpForce(jumpForce) {
+                   Observable<sf::Keyboard::Key>* right) : SpriteDynamicEntity(_PLAYER_TYPE, game, texture, shapes, true), mSpeed(speed), mJumpForce(jumpForce) {
     //
     //
     //
@@ -228,9 +228,8 @@ int demo2() {
   float playerMass = 5;
   // auto shape = new CircleDynamicShape(game, 1);
   auto shape = ShapeFactory::CreateDynamicRectangleShape(game, playerW, playerH, 1, 0.7, 0.1);
-  auto playerRenderer = new SingleSpriteRenderStrategy(game, boxTx);
-  playerRenderer->SetSize(sf::Vector2f(playerW, playerH));
-  auto player = new PhysPlayerEntity(game, playerRenderer, 50, 1100, {shape}, upPressed, downPressed, leftPressed, rightPressed);
+  auto player = new PhysPlayerEntity(game, boxTx, 50, 1100, {shape}, upPressed, downPressed, leftPressed, rightPressed);
+  player->SetSize(sf::Vector2f(playerW, playerH));
   player->SetTransform(sf::Transform().translate(10, 15));
   player->SetMass(playerMass);
   player->SetMoment(cpMomentForBox(playerMass, playerW, playerH));
@@ -320,9 +319,8 @@ int demo3() {
   float playerMass = 5;
   // auto shape = new CircleDynamicShape(game, 1);
   auto shape = ShapeFactory::CreateDynamicRectangleShape(game, playerW, playerH, 1, 0.7, 0.1);
-  auto playerRenderer = new SingleSpriteRenderStrategy(game, boxTx);
-  playerRenderer->SetSize(sf::Vector2f(playerW, playerH));
-  auto player = new PhysPlayerEntity(game, playerRenderer, 50, 1100, {shape}, upPressed, downPressed, leftPressed, rightPressed);
+  auto player = new PhysPlayerEntity(game, boxTx, 50, 1100, {shape}, upPressed, downPressed, leftPressed, rightPressed);
+  player->SetSize(sf::Vector2f(playerW, playerH));
   player->SetTransform(sf::Transform().translate(10, 15));
   player->SetMass(playerMass);
   player->SetMoment(cpMomentForBox(playerMass, playerW, playerH));
