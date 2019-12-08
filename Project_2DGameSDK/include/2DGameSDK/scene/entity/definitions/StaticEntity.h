@@ -5,6 +5,8 @@
 
 #include <2DGameSDK/common/graphics/GraphicTools.h>
 #include <2DGameSDK/common/types/base/GameBase.h>
+#include <2DGameSDK/core/GameOptions.h>
+#include <2DGameSDK/core/visual/RenderStrategy.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
 #include <2DGameSDK/physics/CollisionTarget.h>
 #include <2DGameSDK/physics/shape/Shape.h>
@@ -16,6 +18,7 @@ namespace game {
   public:
     StaticEntity(int type,
                  GameBase* game,
+                 RenderStrategy* renderer,
                  std::vector<Shape<StaticShapeDefinition>*> shapes = std::vector<Shape<StaticShapeDefinition>*>(),
                  bool isCollidable = false);
 
@@ -28,10 +31,14 @@ namespace game {
     virtual sf::Transform GetAccumulatedTransform();
     virtual sf::Transform GetCombinedTransform();
 
+    virtual RenderStrategy* GetRenderer();
+    virtual void OnRender(sf::RenderTarget* target, sf::RenderStates states);
+
     virtual int OnCollision(CollisionEventType type, Entity* other, cpArbiter* arb);
     virtual int OnWorldCollision(CollisionEventType type, Tile* tile, cpArbiter* arb);
 
   protected:
+    RenderStrategy* mRenderer = nullptr;
     bool mIsCollidable;
     std::vector<Shape<StaticShapeDefinition>*> mShapes;
     cpBody* mBody = nullptr;

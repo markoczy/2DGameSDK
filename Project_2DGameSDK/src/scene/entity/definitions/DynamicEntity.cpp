@@ -65,15 +65,17 @@ namespace game {
   }
 
   void DynamicEntity::OnRender(sf::RenderTarget* target, sf::RenderStates states) {
-    auto physPose = Pose<cpVect>{
-        cpBodyGetPosition(mBody),
-        (float)cpBodyGetAngle(mBody)};
-    auto visPose = getGame()->GetPoseConverter()->GetVisualPose(physPose);
+    if(mRenderer && mRenderer->IsRenderEnabled()) {
+      auto physPose = Pose<cpVect>{
+          cpBodyGetPosition(mBody),
+          (float)cpBodyGetAngle(mBody)};
+      auto visPose = getGame()->GetPoseConverter()->GetVisualPose(physPose);
 
-    LOGD("Pos: (" << visPose.origin.x << ", " << visPose.origin.y << "), Angle:" << visPose.angle);
+      LOGD("Pos: (" << visPose.origin.x << ", " << visPose.origin.y << "), Angle:" << visPose.angle);
 
-    states.transform = states.transform * sf::Transform().translate(visPose.origin).rotate(visPose.angle);
-    mRenderer->OnRender(target, states);
+      states.transform = states.transform * sf::Transform().translate(visPose.origin).rotate(visPose.angle);
+      mRenderer->OnRender(target, states);
+    }
 
     auto options = getGame()->GetOptions();
     if(!(options.RenderCollisionMask || options.RenderAABB)) return;

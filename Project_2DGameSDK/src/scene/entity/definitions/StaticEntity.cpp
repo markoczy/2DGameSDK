@@ -1,7 +1,7 @@
 #include <2DGameSDK/scene/entity/definitions/StaticEntity.h>
 
 namespace game {
-  StaticEntity::StaticEntity(int type, GameBase* game, std::vector<Shape<StaticShapeDefinition>*> shapes, bool isCollidable) : Entity(type, game), mIsCollidable(isCollidable), mShapes(shapes) {
+  StaticEntity::StaticEntity(int type, GameBase* game, RenderStrategy* renderer, std::vector<Shape<StaticShapeDefinition>*> shapes, bool isCollidable) : Entity(type, game), mRenderer(renderer), mIsCollidable(isCollidable), mShapes(shapes) {
     mBody = cpSpaceAddBody(game->GetPhysicalWorld(), cpBodyNewStatic());
     cpBodySetUserData(mBody, new CollisionTarget(this, ObjectType::Entity));
 
@@ -29,6 +29,31 @@ namespace game {
 
   sf::Transform StaticEntity::GetCombinedTransform() {
     return GetTransform();
+  }
+
+  RenderStrategy* StaticEntity::GetRenderer() {
+    return mRenderer;
+  }
+
+  void StaticEntity::OnRender(sf::RenderTarget* target, sf::RenderStates states) {
+    if(mRenderer && mRenderer->IsRenderEnabled()) {
+      auto physPose = Pose<cpVect>{
+          cpBodyGetPosition(mBody),
+          (float)cpBodyGetAngle(mBody)};
+      auto visPose = getGame()->GetPoseConverter()->GetVisualPose(physPose);
+
+      LOGD("Pos: (" << visPose.origin.x << ", " << visPose.origin.y << "), Angle:" << visPose.angle);
+
+      states.transform = states.transform * sf::Transform().translate(visPose.origin).rotate(visPose.angle);
+      mRenderer->OnRender(target, states);
+    }
+    auto options = getGame()->GetOptions();
+    if(!(options.RenderCollisionMask || options.RenderAABB)) return;
+
+    for(auto shape : mShapes) {
+      if(options.RenderCollisionMask) shape->Render(target, sf::Color::Red, 1.0 / options.InitialZoom);
+      if(options.RenderAABB) shape->RenderAABB(target, sf::Color::Magenta, 1.0 / options.InitialZoom);
+    }
   }
 
   int StaticEntity::OnCollision(CollisionEventType, Entity*, cpArbiter*) {

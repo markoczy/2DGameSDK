@@ -25,8 +25,8 @@ public:
                  Shape<KinematicShapeDefinition>* shape,
                  float rotPerTick,
                  sf::Vector2f pos = sf::Vector2f()) : SpriteKinematicEntity(type, game, texture, vector<Shape<KinematicShapeDefinition>*>({shape})), mRot(rotPerTick) {
-    auto rect = mSprite.getTextureRect();
-    mCenter = sf::Vector2f(rect.width / 2, rect.height / 2);
+    // auto rect = mSprite.getTextureRect();
+    // mCenter = sf::Vector2f(rect.width / 2, rect.height / 2);
     SetTransform(sf::Transform().translate(pos));
   }
 
@@ -68,8 +68,8 @@ public:
     mLeft->SubscribeTo(left);
     mRight->SubscribeTo(right);
 
-    auto rect = mSprite.getTextureRect();
-    mCenter = sf::Vector2f(rect.width / 2, rect.height / 2);
+    // auto rect = mSprite.getTextureRect();
+    // mCenter = sf::Vector2f(rect.width / 2, rect.height / 2);
     SetTransform(sf::Transform().translate(pos));
     mDir = sf::Vector2f(0, -1);
   }
@@ -170,7 +170,6 @@ private:
 
   float mAngle;
   sf::Vector2f mDir;
-  sf::Vector2f mCenter;
 
   // Needed for cleanup
   Observer<sf::Keyboard::Key>* mUp;
