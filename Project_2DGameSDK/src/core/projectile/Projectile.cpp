@@ -31,15 +31,20 @@ namespace game {
     mZIndex = zIndex;
   }
 
+  void OnTick() {}
+
   void Projectile::OnRender(sf::RenderTarget* target, sf::RenderStates states) {
     auto physPose = Pose<cpVect>{
         cpBodyGetPosition(mBody),
         (float)cpBodyGetAngle(mBody)};
     auto visPose = mGame->GetPoseConverter()->GetVisualPose(physPose);
 
-    mSprite.setPosition(visPose.origin);
-    mSprite.setRotation(visPose.angle);
+    states.transform = states.transform * sf::Transform().translate(visPose.origin).rotate(visPose.angle);
+    mRenderer.OnRender(target, states);
 
-    target->draw(mSprite, states);
+    // mSprite.setPosition(visPose.origin);
+    // mSprite.setRotation(visPose.angle);
+
+    // target->draw(mSprite, states);
   }
 } // namespace game
