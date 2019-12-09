@@ -87,7 +87,8 @@ public:
   void Shoot(sf::Keyboard::Key) {
     if(mLastShoot.getElapsedTime().asMilliseconds() > mCooldownShoot) {
       auto game = (Game*)getGame();
-      auto proj = new SpriteProjectile(game, 777, AssetManager::GetTexture("res/textures/sample.png"), ShapeFactory::CreateKinematicCircleShape(game, 10, 0, 0), GetCombinedTransform().translate(0, 60), sf::Vector2f(0, 1000));
+      auto proj = new SequencedProjectile(game, 777, projectileTex, ShapeFactory::CreateKinematicCircleShape(game, 10, 0, 0), GetCombinedTransform().translate(-11, 80), sf::Vector2f(0, 800), 8);
+      // auto proj = new SpriteProjectile(game, 777, AssetManager::GetTexture("res/textures/sample.png"), ShapeFactory::CreateKinematicCircleShape(game, 10, 0, 0), GetCombinedTransform().translate(0, 60), sf::Vector2f(0, 1000));
       mLastShoot.restart();
       game->GetAudioController()->PlayOnce(mShootSound);
     }
@@ -98,6 +99,14 @@ private:
   sf::Clock mLastShoot;
   float mSpeed;
   sf::SoundBuffer* mShootSound = AssetManager::GetAudio("res/audio/Laser_Shoot.wav");
+  std::vector<sf::Texture*> projectileTex = {
+      AssetManager::GetTexture("res/textures/projectiles/rawdanitsu/green1.png"),
+      AssetManager::GetTexture("res/textures/projectiles/rawdanitsu/green2.png"),
+      AssetManager::GetTexture("res/textures/projectiles/rawdanitsu/green3.png"),
+      AssetManager::GetTexture("res/textures/projectiles/rawdanitsu/green4.png"),
+      AssetManager::GetTexture("res/textures/projectiles/rawdanitsu/green5.png"),
+      AssetManager::GetTexture("res/textures/projectiles/rawdanitsu/green6.png"),
+  };
   sf::Vector2f mSize;
   // Delta Transform of current tick
   sf::Vector2f mDt;

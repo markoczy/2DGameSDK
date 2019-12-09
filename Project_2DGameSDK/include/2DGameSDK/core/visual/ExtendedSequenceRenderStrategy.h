@@ -1,5 +1,5 @@
-#ifndef __SEQUENCED_RENDER_STRATEGY_H__
-#define __SEQUENCED_RENDER_STRATEGY_H__
+#ifndef __EXTENDED_SEQUENCE_RENDER_STRATEGY_H__
+#define __EXTENDED_SEQUENCE_RENDER_STRATEGY_H__
 
 #include <SFML/Graphics.hpp>
 #include <map>
@@ -8,8 +8,8 @@
 #include <2DGameSDK/dll/gamesdk_dll.h>
 
 namespace game {
-  class GAMESDK_DLL SequencedRenderStrategy : public AnimatedRenderStrategy {
-    SequencedRenderStrategy(GameBase* game, std::map<int, sf::Texture*> animationStates, int startState = constants::DEFAULT_ANIMATION_START);
+  class GAMESDK_DLL ExtendedSequenceRenderStrategy : public AnimatedRenderStrategy {
+    ExtendedSequenceRenderStrategy(GameBase* game, std::map<int, sf::Texture*> animationStates, int startState = constants::DEFAULT_ANIMATION_START);
 
     virtual void RunSequence(std::vector<int> sequence, int frames, bool loop = true);
     virtual void StopAtLast();

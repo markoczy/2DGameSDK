@@ -1,9 +1,9 @@
-#include <2DGameSDK/core/visual/SequencedRenderStrategy.h>
+#include <2DGameSDK/core/visual/ExtendedSequenceRenderStrategy.h>
 
 namespace game {
-  SequencedRenderStrategy::SequencedRenderStrategy(GameBase* game, std::map<int, sf::Texture*> animationStates, int startState) : AnimatedRenderStrategy(game, animationStates, startState) {}
+  ExtendedSequenceRenderStrategy::ExtendedSequenceRenderStrategy(GameBase* game, std::map<int, sf::Texture*> animationStates, int startState) : AnimatedRenderStrategy(game, animationStates, startState) {}
 
-  void SequencedRenderStrategy::RunSequence(std::vector<int> sequence, int frames, bool loop) {
+  void ExtendedSequenceRenderStrategy::RunSequence(std::vector<int> sequence, int frames, bool loop) {
     mSequence = sequence;
     mFrames = frames;
     mLooping = loop;
@@ -13,16 +13,16 @@ namespace game {
     SetAnimState(sequence[0]);
   }
 
-  void SequencedRenderStrategy::StopAtLast() {
+  void ExtendedSequenceRenderStrategy::StopAtLast() {
     mLooping = false;
   }
 
-  void SequencedRenderStrategy::StopNow(int newState) {
+  void ExtendedSequenceRenderStrategy::StopNow(int newState) {
     mRunning = false;
     SetAnimState(newState);
   }
 
-  void SequencedRenderStrategy::OnRender(sf::RenderTarget* target, sf::RenderStates states) {
+  void ExtendedSequenceRenderStrategy::OnRender(sf::RenderTarget* target, sf::RenderStates states) {
     if(!mRunning) return AnimatedRenderStrategy::OnRender(target, states);
     if(mCurFrame < mFrames) {
       mCurFrame++;
