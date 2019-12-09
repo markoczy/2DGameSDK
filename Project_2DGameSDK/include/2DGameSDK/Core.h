@@ -22,6 +22,7 @@
 #include <2DGameSDK/core/camera/DefaultCameraController.h>
 #include <2DGameSDK/core/overlay/OverlayDisplay.h>
 #include <2DGameSDK/core/projectile/Projectile.h>
+#include <2DGameSDK/core/projectile/prefabs/SpriteProjectile.h>
 #include <2DGameSDK/core/visual/AnimatedRenderStrategy.h>
 #include <2DGameSDK/core/visual/InvisibleRenderStrategy.h>
 #include <2DGameSDK/core/visual/RenderStrategy.h>

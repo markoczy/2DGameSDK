@@ -18,7 +18,7 @@
 namespace game {
   class GAMESDK_DLL Projectile : public GameObject, public VisualObject {
   public:
-    Projectile(GameBase* game, int type, RenderStrategy* renderer, Shape<KinematicShapeDefinition>* shape, sf::Transform start, sf::Vector2f velocity);
+    Projectile(GameBase* game, int type, RenderStrategy* renderer, Shape<KinematicShapeDefinition>* shapes, sf::Transform start, sf::Vector2f velocity);
     ~Projectile();
 
     virtual int GetZIndex();
@@ -30,9 +30,7 @@ namespace game {
     virtual void OnRender(sf::RenderTarget* target, sf::RenderStates states = sf::RenderStates::Default);
 
   protected:
-    GameBase* mGame;
     int mType;
-    sf::Sprite mSprite;
     RenderStrategy* mRenderer = nullptr;
     Shape<KinematicShapeDefinition>* mShape;
     int mZIndex = constants::DEFAULT_ZINDEX_PROJECTILE;

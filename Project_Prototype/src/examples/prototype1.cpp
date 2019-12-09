@@ -87,7 +87,7 @@ public:
   void Shoot(sf::Keyboard::Key) {
     if(mLastShoot.getElapsedTime().asMilliseconds() > mCooldownShoot) {
       auto game = (Game*)getGame();
-      auto proj = new Projectile(game, 777, AssetManager::GetTexture("res/textures/sample.png"), ShapeFactory::CreateKinematicCircleShape(game, 10, 0, 0), GetCombinedTransform().translate(0, 60), sf::Vector2f(0, 1000));
+      auto proj = new SpriteProjectile(game, 777, AssetManager::GetTexture("res/textures/sample.png"), ShapeFactory::CreateKinematicCircleShape(game, 10, 0, 0), GetCombinedTransform().translate(0, 60), sf::Vector2f(0, 1000));
       mLastShoot.restart();
       game->GetAudioController()->PlayOnce(mShootSound);
     }

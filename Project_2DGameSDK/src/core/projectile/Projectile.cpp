@@ -1,16 +1,13 @@
 #include <2DGameSDK/core/projectile/Projectile.h>
 
 namespace game {
-  Projectile::Projectile(GameBase* game, int type, sf::Texture* texture, Shape<KinematicShapeDefinition>* shape, sf::Transform start, sf::Vector2f velocity) : mGame(game), mType(type), mSprite(*texture), mShape(shape) {
-    auto rect = mSprite.getLocalBounds();
-    mSprite.setOrigin(rect.width / 2.0f, rect.height / 2.0f);
-
+  Projectile::Projectile(GameBase* game, int type, RenderStrategy* renderer, Shape<KinematicShapeDefinition>* shape, sf::Transform start, sf::Vector2f velocity) : GameObject(ObjectType::Projectile, game), mType(type), mRenderer(renderer), mShape(shape) {
     auto space = game->GetPhysicalWorld();
     mBody = cpSpaceAddBody(space, cpBodyNewKinematic());
     game->GetPhysicalWorld();
     mShape->AttachToBody(space, mBody);
 
-    auto pose = mGame->GetPoseConverter()->GetPhysicalPose(start);
+    auto pose = game->GetPoseConverter()->GetPhysicalPose(start);
     cpBodySetPosition(mBody, pose.origin);
     cpBodySetAngle(mBody, pose.angle);
     cpSpaceReindexShapesForBody(space, mBody);
@@ -31,20 +28,15 @@ namespace game {
     mZIndex = zIndex;
   }
 
-  void OnTick() {}
+  void Projectile::OnTick() {}
 
   void Projectile::OnRender(sf::RenderTarget* target, sf::RenderStates states) {
     auto physPose = Pose<cpVect>{
         cpBodyGetPosition(mBody),
         (float)cpBodyGetAngle(mBody)};
-    auto visPose = mGame->GetPoseConverter()->GetVisualPose(physPose);
+    auto visPose = getGame()->GetPoseConverter()->GetVisualPose(physPose);
 
     states.transform = states.transform * sf::Transform().translate(visPose.origin).rotate(visPose.angle);
-    mRenderer.OnRender(target, states);
-
-    // mSprite.setPosition(visPose.origin);
-    // mSprite.setRotation(visPose.angle);
-
-    // target->draw(mSprite, states);
+    mRenderer->OnRender(target, states);
   }
 } // namespace game
