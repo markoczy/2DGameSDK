@@ -56,6 +56,7 @@ namespace game {
     virtual sf::Transform GetCombinedTransform();
     virtual RenderStrategy* GetRenderer();
 
+    virtual void OnTickEnded();
     virtual void OnRender(sf::RenderTarget* target, sf::RenderStates states);
 
   protected:
