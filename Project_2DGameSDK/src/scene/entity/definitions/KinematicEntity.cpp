@@ -38,6 +38,14 @@ namespace game {
     return mRenderer;
   }
 
+  void KinematicEntity::OnTickEnded() {
+    auto pose = getGame()->GetPoseConverter()->GetPhysicalPose(GetCombinedTransform());
+
+    LOGD("Body Pos: (" << pose.origin.x << ", " << pose.origin.y << "), angle: " << pose.angle);
+    cpBodySetPosition(mBody, pose.origin);
+    cpBodySetAngle(mBody, pose.angle);
+  }
+
   void KinematicEntity::OnRender(sf::RenderTarget* target, sf::RenderStates states) {
     if(mRenderer && mRenderer->IsRenderEnabled()) {
       auto visTransform = getGame()->GetPoseConverter()->GetVisualTransform(GetCombinedTransform());
