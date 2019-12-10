@@ -24,6 +24,7 @@ namespace game {
 
   unsigned char collideProjectileTile(CollisionEventType type, cpArbiter* arb, Projectile* projectile, Tile* tile) {
     projectile->OnCollision(type, arb);
+    return 0;
   }
 
   unsigned char collideEntityAny(CollisionEventType type, cpArbiter* arb, Entity* ent, CollisionTarget* other) {
@@ -32,7 +33,8 @@ namespace game {
       return collideEntities(type, arb, ent, (Entity*)other->GetTarget());
     case ObjectType::Tile:
       return collideEntityTile(type, arb, ent, (Tile*)other->GetTarget());
-    //TODO Projectile
+    case ObjectType::Projectile:
+      return collideEntityProjectile(type, arb, ent, (Projectile*)other->GetTarget());
     default:
       return 0;
     }
@@ -45,7 +47,8 @@ namespace game {
     case ObjectType::Tile:
       // Colliding tiles is senseless..
       return 0;
-    //TODO Projectile
+    case ObjectType::Projectile:
+      return collideProjectileTile(type, arb, (Projectile*)other->GetTarget(), tile);
     default:
       return 0;
     }

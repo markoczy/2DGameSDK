@@ -52,7 +52,7 @@ namespace game {
     void OnParentTransformed(sf::Transform accumulated);
     virtual int OnCollision(CollisionEventType type, Entity* other, cpArbiter* arb);
     virtual int OnWorldCollision(CollisionEventType type, Tile* tile, cpArbiter* arb);
-    virtual int OnProjectileCollision(CollisionEventType type, Projectile* tile, cpArbiter* arb);
+    virtual int OnProjectileCollision(CollisionEventType type, Projectile* projectile, cpArbiter* arb);
 
     virtual void OnTickEnded();
 

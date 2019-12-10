@@ -6,18 +6,22 @@ using namespace sf;
 
 // Type of player entity
 const int _PLAYER_TYPE = 200;
+const int _ENEMY_TYPE = 300;
 const int _CAM_TYPE = 500;
+
+using KinematicShape = game::Shape<KinematicShapeDefinition>;
 
 class Proto1PlayerEntity : public SpriteKinematicEntity {
 public:
   Proto1PlayerEntity(Game* game,
                      sf::Texture* texture,
+                     KinematicShape* shape,
                      float speed,
                      Observable<sf::Keyboard::Key>* up,
                      Observable<sf::Keyboard::Key>* down,
                      Observable<sf::Keyboard::Key>* left,
                      Observable<sf::Keyboard::Key>* right,
-                     Observable<sf::Keyboard::Key>* space) : SpriteKinematicEntity(_PLAYER_TYPE, game, texture), mSpeed(speed) {
+                     Observable<sf::Keyboard::Key>* space) : SpriteKinematicEntity(_PLAYER_TYPE, game, texture, {shape}, true), mSpeed(speed) {
     //
     //
     //
@@ -119,6 +123,24 @@ private:
   Observer<sf::Keyboard::Key>* mSpace;
 };
 
+class EnemyEntity : public SpriteKinematicEntity {
+public:
+  EnemyEntity(Game* game,
+              sf::Texture* texture,
+              KinematicShape* shape) : SpriteKinematicEntity(_ENEMY_TYPE, game, texture, {shape}, true){};
+
+  int OnProjectileCollision(CollisionEventType type, Projectile* projectile, cpArbiter* arb) {
+    if(mCoolDown.getElapsedTime().asMilliseconds() < 500) return 0;
+    std::cout << "Enemy Hit!!!" << std::endl;
+    getGame()->GetAudioController()->PlayOnce(mHitSound);
+    mCoolDown.restart();
+  }
+
+private:
+  sf::SoundBuffer* mHitSound = AssetManager::GetAudio("res/audio/Hit_Hurt2.wav");
+  sf::Clock mCoolDown;
+};
+
 class ScrollCamera : public DefaultCameraController, public Entity {
 public:
   ScrollCamera(Game* game) : DefaultCameraController(game), Entity(_CAM_TYPE, game) {
@@ -195,14 +217,19 @@ int prototype1() {
   game->SetCameraController(cam);
 
   auto tex = AssetManager::GetTexture("res/textures/spaceships/scorpio/prefab_scorpio_1.png");
-  auto player = new Proto1PlayerEntity(game, tex, 5.0, upPressed, downPressed, leftPressed, rightPressed, spacePressed);
+  auto playerShape = ShapeFactory::CreateKinematicRectangleShape(game, 124, 135, 0, 0);
+  auto player = new Proto1PlayerEntity(game, tex, playerShape, 5.0, upPressed, downPressed, leftPressed, rightPressed, spacePressed);
   float offsetY = -(cam->GetBounds().y / 2.0) + 80;
   player->SetTransform(sf::Transform().translate(0, offsetY));
+
+  auto enemy = new EnemyEntity(game, tex, playerShape->CopyTemplate());
+  enemy->SetTransform(sf::Transform().translate(1000, 1800).rotate(180));
 
   // Layout entities in scene
   auto scene = new SceneGraph(game);
   int camId = scene->AddEntity(cam);
   scene->AddEntity(player, camId);
+  scene->AddEntity(enemy);
   game->SetScene(scene);
 
   game->GetAudioController()->PlayRepeated(AssetManager::GetAudio("res/audio/tgfcoder/FrozenJam.oga"));
