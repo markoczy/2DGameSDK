@@ -40,7 +40,7 @@ namespace game {
     mRenderer->OnRender(target, states);
   }
 
-  int OnCollision(CollisionEventType type, cpArbiter* arb) {
+  int Projectile::OnCollision(CollisionEventType type, cpArbiter* arb) {
     // TODO destroy projectile
     return 0;
   }

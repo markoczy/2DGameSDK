@@ -16,6 +16,16 @@ namespace game {
     return entity->OnWorldCollision(type, tile, arb);
   }
 
+  unsigned char collideEntityProjectile(CollisionEventType type, cpArbiter* arb, Entity* entity, Projectile* projectile) {
+    if(!entity->IsCollidable()) return 0;
+    projectile->OnCollision(type, arb);
+    return entity->OnProjectileCollision(type, projectile, arb);
+  }
+
+  unsigned char collideProjectileTile(CollisionEventType type, cpArbiter* arb, Projectile* projectile, Tile* tile) {
+    projectile->OnCollision(type, arb);
+  }
+
   unsigned char collideEntityAny(CollisionEventType type, cpArbiter* arb, Entity* ent, CollisionTarget* other) {
     switch(other->GetType()) {
     case ObjectType::Entity:
@@ -41,6 +51,18 @@ namespace game {
     }
   }
 
+  unsigned char collideProjectileAny(CollisionEventType type, cpArbiter* arb, Projectile* projectile, CollisionTarget* other) {
+    switch(other->GetType()) {
+    case ObjectType::Entity:
+      return collideEntityProjectile(type, arb, (Entity*)other->GetTarget(), projectile);
+    case ObjectType::Tile:
+      return collideProjectileTile(type, arb, projectile, (Tile*)other->GetTarget());
+      ;
+    default:
+      return 0;
+    }
+  }
+
   unsigned char collisionFunc(CollisionEventType type, cpArbiter* arb) {
     cpBody* bodyA;
     cpBody* bodyB;
@@ -49,28 +71,15 @@ namespace game {
     auto targetA = (CollisionTarget*)cpBodyGetUserData(bodyA);
     auto targetB = (CollisionTarget*)cpBodyGetUserData(bodyB);
 
-    // switch(targetA->GetType()) {
-    // case ObjectType::Entity:
-    //   return collideEntityAny(type, arb, (Entity*)targetA->GetTarget(), targetB);
-    // case ObjectType::Tile:
-    //   return collideTileAny(type, arb, (Tile*)targetA->GetTarget(), targetB);
-    // default:
-    //   return 0;
-    // }
-
-    bool aIsEntity = targetA->GetType() == ObjectType::Entity;
-    bool bIsEntity = targetB->GetType() == ObjectType::Entity;
-
-    if(aIsEntity) {
-      if(bIsEntity) {
-        return collideEntities(type, arb, (Entity*)targetA->GetTarget(), (Entity*)targetB->GetTarget());
-      } else {
-        return collideEntityTile(type, arb, (Entity*)targetA->GetTarget(), (Tile*)targetB->GetTarget());
-      }
-    } else {
-      if(bIsEntity) {
-        return collideEntityTile(type, arb, (Entity*)targetB->GetTarget(), (Tile*)targetA->GetTarget());
-      }
+    switch(targetA->GetType()) {
+    case ObjectType::Entity:
+      return collideEntityAny(type, arb, (Entity*)targetA->GetTarget(), targetB);
+    case ObjectType::Tile:
+      return collideTileAny(type, arb, (Tile*)targetA->GetTarget(), targetB);
+    case ObjectType::Projectile:
+      return collideProjectileAny(type, arb, (Projectile*)targetA->GetTarget(), targetB);
+    default:
+      return 0;
     }
   }
 

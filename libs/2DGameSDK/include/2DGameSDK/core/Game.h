@@ -30,6 +30,7 @@
 #include <2DGameSDK/core/camera/CameraController.h>
 #include <2DGameSDK/core/camera/DefaultCameraController.h>
 // #include <2DGameSDK/core/overlay/OverlayDisplay.h>
+#include <2DGameSDK/core/projectile/Projectile.h>
 #include <2DGameSDK/core/state/StateManager.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
 #include <2DGameSDK/event/EventController.h>

@@ -11,6 +11,7 @@
 #include <2DGameSDK/core/VisualObject.h>
 #include <2DGameSDK/core/visual/RenderStrategy.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
+#include <2DGameSDK/physics/CollisionEventType.h>
 #include <2DGameSDK/physics/CollisionTarget.h>
 #include <2DGameSDK/physics/shape/Shape.h>
 #include <2DGameSDK/physics/shape/definitions/KinematicShapeDefinition.h>
@@ -28,6 +29,8 @@ namespace game {
     virtual void OnTick();
 
     virtual void OnRender(sf::RenderTarget* target, sf::RenderStates states = sf::RenderStates::Default);
+
+    virtual int OnCollision(CollisionEventType type, cpArbiter* arb);
 
   protected:
     int mType;
