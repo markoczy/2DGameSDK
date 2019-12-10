@@ -39,4 +39,10 @@ namespace game {
     states.transform = states.transform * sf::Transform().translate(visPose.origin).rotate(visPose.angle);
     mRenderer->OnRender(target, states);
   }
+
+  int OnCollision(CollisionEventType type, cpArbiter* arb) {
+    // TODO destroy projectile
+    return 0;
+  }
+
 } // namespace game

@@ -16,6 +16,31 @@ namespace game {
     return entity->OnWorldCollision(type, tile, arb);
   }
 
+  unsigned char collideEntityAny(CollisionEventType type, cpArbiter* arb, Entity* ent, CollisionTarget* other) {
+    switch(other->GetType()) {
+    case ObjectType::Entity:
+      return collideEntities(type, arb, ent, (Entity*)other->GetTarget());
+    case ObjectType::Tile:
+      return collideEntityTile(type, arb, ent, (Tile*)other->GetTarget());
+    //TODO Projectile
+    default:
+      return 0;
+    }
+  }
+
+  unsigned char collideTileAny(CollisionEventType type, cpArbiter* arb, Tile* tile, CollisionTarget* other) {
+    switch(other->GetType()) {
+    case ObjectType::Entity:
+      return collideEntityTile(type, arb, (Entity*)other->GetTarget(), tile);
+    case ObjectType::Tile:
+      // Colliding tiles is senseless..
+      return 0;
+    //TODO Projectile
+    default:
+      return 0;
+    }
+  }
+
   unsigned char collisionFunc(CollisionEventType type, cpArbiter* arb) {
     cpBody* bodyA;
     cpBody* bodyB;
@@ -23,6 +48,15 @@ namespace game {
 
     auto targetA = (CollisionTarget*)cpBodyGetUserData(bodyA);
     auto targetB = (CollisionTarget*)cpBodyGetUserData(bodyB);
+
+    // switch(targetA->GetType()) {
+    // case ObjectType::Entity:
+    //   return collideEntityAny(type, arb, (Entity*)targetA->GetTarget(), targetB);
+    // case ObjectType::Tile:
+    //   return collideTileAny(type, arb, (Tile*)targetA->GetTarget(), targetB);
+    // default:
+    //   return 0;
+    // }
 
     bool aIsEntity = targetA->GetType() == ObjectType::Entity;
     bool bIsEntity = targetB->GetType() == ObjectType::Entity;
@@ -38,7 +72,6 @@ namespace game {
         return collideEntityTile(type, arb, (Entity*)targetB->GetTarget(), (Tile*)targetA->GetTarget());
       }
     }
-    return 0;
   }
 
   unsigned char collisionBegin(cpArbiter* arb, cpSpace*, cpDataPointer) {

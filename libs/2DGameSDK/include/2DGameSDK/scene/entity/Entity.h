@@ -15,6 +15,7 @@
 namespace game {
   class Tile;
   class SceneGraphNode;
+  class Projectile;
 
   class GAMESDK_DLL Entity : public GameObject, public VisualObject {
   public:
@@ -51,6 +52,7 @@ namespace game {
     void OnParentTransformed(sf::Transform accumulated);
     virtual int OnCollision(CollisionEventType type, Entity* other, cpArbiter* arb);
     virtual int OnWorldCollision(CollisionEventType type, Tile* tile, cpArbiter* arb);
+    virtual int OnProjectileCollision(CollisionEventType type, Projectile* tile, cpArbiter* arb);
 
     virtual void OnTickEnded();
 

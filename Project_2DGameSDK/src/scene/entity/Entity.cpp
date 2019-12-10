@@ -59,6 +59,10 @@ namespace game {
     return 0;
   }
 
+  int Entity::OnProjectileCollision(CollisionEventType, Projectile*, cpArbiter*) {
+    return 0;
+  }
+
   bool Entity::setTransform(sf::Transform) { return false; }
   bool Entity::transform(sf::Transform) { return false; }
   bool Entity::setAccumulatedTransform(sf::Transform) { return false; }
