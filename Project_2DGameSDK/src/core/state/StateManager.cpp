@@ -38,6 +38,19 @@ namespace game {
     OnZOrderChanged();
   }
 
+  void StateManager::DestroyObject(GameObject* object) {
+    mDestroyObjects.push_back(object->GetId());
+  }
+
+  void StateManager::DestroyVisualObject(VisualObject* object) {
+    for(auto it = mRenderObjects.begin(); it != mRenderObjects.end(); it++) {
+      if(*it == object) {
+        mRenderObjects.erase(it);
+        return;
+      }
+    }
+  }
+
   void StateManager::OnTick() {
     for(auto entry : mObjects) {
       entry.second->OnTick();
@@ -45,6 +58,12 @@ namespace game {
   }
 
   void StateManager::OnTickEnded() {
+    for(auto id : mDestroyObjects) {
+      helpers::safeDelete(mObjects[id]);
+      mObjects.erase(id);
+    }
+    mDestroyObjects.clear();
+
     for(auto entry : mObjects) {
       entry.second->OnTickEnded();
     }

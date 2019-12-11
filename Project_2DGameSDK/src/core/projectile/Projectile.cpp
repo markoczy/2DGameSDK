@@ -41,7 +41,11 @@ namespace game {
   }
 
   int Projectile::OnCollision(CollisionEventType type, cpArbiter* arb) {
-    // TODO destroy projectile
+    if(!mDestroying) {
+      getGame()->GetStateManager()->DestroyObject(this);
+      getGame()->GetStateManager()->DestroyVisualObject(this);
+      mDestroying = true;
+    }
     return 0;
   }
 

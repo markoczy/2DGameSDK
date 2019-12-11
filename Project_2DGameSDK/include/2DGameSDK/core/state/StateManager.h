@@ -35,6 +35,10 @@ namespace game {
 
     void AddVisualObject(VisualObject* object);
 
+    void DestroyObject(GameObject* object);
+
+    void DestroyVisualObject(VisualObject* object);
+
     void OnTick();
 
     void OnTickEnded();
@@ -49,6 +53,8 @@ namespace game {
     SceneGraph* mScene = nullptr;
     std::map<int, GameObject*> mObjects;
     std::vector<VisualObject*> mRenderObjects;
+
+    std::vector<int> mDestroyObjects;
   };
 } // namespace game
 

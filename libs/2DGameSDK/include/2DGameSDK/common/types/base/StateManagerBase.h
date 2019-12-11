@@ -25,6 +25,10 @@ namespace game {
 
     virtual void AddVisualObject(VisualObject* object) = 0;
 
+    virtual void DestroyObject(GameObject* object) = 0;
+
+    virtual void DestroyVisualObject(VisualObject* object) = 0;
+
     virtual void OnTick() = 0;
 
     virtual void OnTickEnded() = 0;

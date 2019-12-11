@@ -12,7 +12,12 @@ namespace game {
     }
   }
 
-  KinematicEntity::~KinematicEntity() {}
+  KinematicEntity::~KinematicEntity() {
+    for(auto shape : mShapes) {
+      delete shape;
+    }
+    cpBodyDestroy(mBody);
+  }
 
   bool KinematicEntity::IsKinematic() {
     return true;

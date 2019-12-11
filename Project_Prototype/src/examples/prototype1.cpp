@@ -132,13 +132,24 @@ public:
   int OnProjectileCollision(CollisionEventType type, Projectile* projectile, cpArbiter* arb) {
     if(mCoolDown.getElapsedTime().asMilliseconds() < 500) return 0;
     std::cout << "Enemy Hit!!!" << std::endl;
-    getGame()->GetAudioController()->PlayOnce(mHitSound);
+    mHits++;
+    if(mHits < 4) {
+      getGame()->GetAudioController()->PlayOnce(mHitSound);
+    } else if(!mDestroying) {
+      getGame()->GetStateManager()->DestroyObject(this);
+      getGame()->GetStateManager()->DestroyVisualObject(this);
+      getGame()->GetAudioController()->PlayOnce(mDestroySound);
+      mDestroying = true;
+    }
     mCoolDown.restart();
   }
 
 private:
   sf::SoundBuffer* mHitSound = AssetManager::GetAudio("res/audio/Hit_Hurt2.wav");
+  sf::SoundBuffer* mDestroySound = AssetManager::GetAudio("res/audio/Explosion.wav");
   sf::Clock mCoolDown;
+  int mHits = 0;
+  bool mDestroying = false;
 };
 
 class ScrollCamera : public DefaultCameraController, public Entity {

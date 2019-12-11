@@ -38,6 +38,7 @@ namespace game {
     Shape<KinematicShapeDefinition>* mShape;
     int mZIndex = constants::DEFAULT_ZINDEX_PROJECTILE;
     cpBody* mBody;
+    bool mDestroying = false;
   };
 } // namespace game
 
