@@ -76,12 +76,9 @@ namespace game {
   }
 
   bool KinematicEntity::transform(sf::Transform transform) {
+    // local y is inverted in visual model, so we have to invert the transform
     auto origin = transform.transformPoint(sf::Vector2f());
-    auto xUnit = transform.transformPoint(sf::Vector2f(1, 0));
-    auto dir = xUnit - origin;
-    float angle = atan2(dir.y, dir.x);
-    float visAngle = (180 * angle) / constants::PI;
-    auto newT = sf::Transform().translate(origin.x, -origin.y).rotate(visAngle);
+    auto newT = transform.translate(0, -2 * origin.y);
 
     mTransform = mTransform * newT;
     mCombinedTransform = mAccTransform * mTransform;
