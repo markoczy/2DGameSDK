@@ -21,7 +21,10 @@ namespace game {
     Shape(ShapeType type, GameBase* game, TDefinition* definition) : mType(type), mGame(game), mDefinition(definition) {}
 
     virtual ~Shape() {
-      if(mShape) cpShapeDestroy(mShape);
+      if(mShape) {
+        cpSpaceRemoveShape(mSpace, mShape);
+        cpShapeFree(mShape);
+      }
     }
 
     void AttachToBody(cpSpace* space, cpBody* body) {

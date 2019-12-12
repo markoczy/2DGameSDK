@@ -5,6 +5,7 @@
 #include <chipmunk/chipmunk.h>
 
 #include <2DGameSDK/common/Constants.h>
+#include <2DGameSDK/common/Helpers.h>
 #include <2DGameSDK/common/graphics/GraphicTools.h>
 #include <2DGameSDK/common/types/ObjectType.h>
 #include <2DGameSDK/common/types/base/GameBase.h>
@@ -20,7 +21,7 @@ namespace game {
   class GAMESDK_DLL Projectile : public GameObject, public VisualObject {
   public:
     Projectile(GameBase* game, int type, RenderStrategy* renderer, Shape<KinematicShapeDefinition>* shapes, sf::Transform start, sf::Vector2f velocity);
-    ~Projectile();
+    virtual ~Projectile();
 
     virtual int GetZIndex();
 

@@ -11,7 +11,14 @@ namespace game {
     }
   }
 
-  StaticEntity::~StaticEntity() {}
+  StaticEntity::~StaticEntity() {
+    auto space = getGame()->GetPhysicalWorld();
+    for(auto shape : mShapes) {
+      helpers::safeDelete(shape);
+    }
+    cpSpaceRemoveBody(space, mBody);
+    cpBodyFree(mBody);
+  }
 
   bool StaticEntity::IsKinematic() { return false; }
 

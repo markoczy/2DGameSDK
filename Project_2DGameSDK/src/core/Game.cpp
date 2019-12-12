@@ -22,7 +22,7 @@ namespace game {
     return entity->OnProjectileCollision(type, projectile, arb);
   }
 
-  unsigned char collideProjectileTile(CollisionEventType type, cpArbiter* arb, Projectile* projectile, Tile* tile) {
+  unsigned char collideProjectileTile(CollisionEventType type, cpArbiter* arb, Projectile* projectile, Tile*) {
     projectile->OnCollision(type, arb);
     return 0;
   }
@@ -296,11 +296,17 @@ namespace game {
 
   void Game::tick() {
     try {
+      LOGD("Tick Events");
       mEventCtrl.OnTick();
+      LOGD("Tick State Manager");
       mStateManager.OnTick();
+      LOGD("Tick Camera");
       mCameraController->OnTick();
+      LOGD("Tick Audio");
       mAudioController->OnTick();
+      LOGD("Tick Overlay");
       if(mOverlayDisplay != nullptr) mOverlayDisplay->OnTick();
+      LOGD("Tick End");
       mStateManager.OnTickEnded();
     } catch(std::exception& e) {
       LOGE("Error during tick: " << e.what());
@@ -309,9 +315,12 @@ namespace game {
 
   void Game::render() {
     try {
+      LOGD("Set View");
       mWindow->setView(mCameraController->GetView());
       mWindow->clear(sf::Color(80, 80, 80));
+      LOGD("Render State");
       mStateManager.OnRender(mWindow);
+      LOGD("Render Overlay");
       if(mOverlayDisplay != nullptr) mOverlayDisplay->OnRender(mWindow);
       mWindow->display();
     } catch(std::exception& e) {

@@ -18,7 +18,12 @@ namespace game {
     game->GetStateManager()->AddVisualObject(this);
   }
 
-  Projectile::~Projectile() {}
+  Projectile::~Projectile() {
+    auto space = getGame()->GetPhysicalWorld();
+    helpers::safeDelete(mShape);
+    cpSpaceRemoveBody(space, mBody);
+    cpBodyFree(mBody);
+  }
 
   int Projectile::GetZIndex() {
     return mZIndex;
@@ -40,7 +45,7 @@ namespace game {
     mRenderer->OnRender(target, states);
   }
 
-  int Projectile::OnCollision(CollisionEventType type, cpArbiter* arb) {
+  int Projectile::OnCollision(CollisionEventType, cpArbiter*) {
     if(!mDestroying) {
       getGame()->GetStateManager()->DestroyObject(this);
       getGame()->GetStateManager()->DestroyVisualObject(this);

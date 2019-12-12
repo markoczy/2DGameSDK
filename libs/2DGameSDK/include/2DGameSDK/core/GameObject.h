@@ -39,7 +39,7 @@ namespace game {
      * @brief Destroys the GameObject
      * 
      */
-    ~GameObject();
+    virtual ~GameObject();
 
     /**
      * @brief Retreives the Id

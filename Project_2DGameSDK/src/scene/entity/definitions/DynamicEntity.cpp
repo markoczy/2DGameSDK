@@ -11,7 +11,14 @@ namespace game {
     }
   }
 
-  DynamicEntity::~DynamicEntity() {}
+  DynamicEntity::~DynamicEntity() {
+    auto space = getGame()->GetPhysicalWorld();
+    for(auto shape : mShapes) {
+      helpers::safeDelete(shape);
+    }
+    cpSpaceRemoveBody(space, mBody);
+    cpBodyFree(mBody);
+  }
 
   bool DynamicEntity::IsKinematic() {
     return false;

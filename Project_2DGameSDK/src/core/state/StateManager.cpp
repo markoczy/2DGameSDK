@@ -82,7 +82,7 @@ namespace game {
     // bool renderCollisionMasks = mGame->GetOptions().RenderCollisionMask;
     // if(renderAABB || renderCollisionMasks) {
     // }
-    LOGD("Rendered " << cnt << " Objects");
+    LOGD("Statemanager Rendered " << cnt << " Objects");
   }
 
   void StateManager::OnZOrderChanged() {

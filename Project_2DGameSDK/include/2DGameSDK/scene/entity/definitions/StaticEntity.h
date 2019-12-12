@@ -3,6 +3,7 @@
 
 #include <vector>
 
+#include <2DGameSDK/common/Helpers.h>
 #include <2DGameSDK/common/graphics/GraphicTools.h>
 #include <2DGameSDK/common/types/base/GameBase.h>
 #include <2DGameSDK/core/GameOptions.h>

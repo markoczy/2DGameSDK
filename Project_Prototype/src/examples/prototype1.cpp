@@ -130,7 +130,7 @@ public:
               KinematicShape* shape) : SpriteKinematicEntity(_ENEMY_TYPE, game, texture, {shape}, true){};
 
   int OnProjectileCollision(CollisionEventType type, Projectile* projectile, cpArbiter* arb) {
-    if(mCoolDown.getElapsedTime().asMilliseconds() < 500) return 0;
+    if(mCoolDown.getElapsedTime().asMilliseconds() < 300) return 0;
     std::cout << "Enemy Hit!!!" << std::endl;
     mHits++;
     if(mHits < 4) {
@@ -142,6 +142,7 @@ public:
       mDestroying = true;
     }
     mCoolDown.restart();
+    return 0;
   }
 
 private:
@@ -234,13 +235,21 @@ int prototype1() {
   player->SetTransform(sf::Transform().translate(0, offsetY));
 
   auto enemy = new EnemyEntity(game, tex, playerShape->CopyTemplate());
-  enemy->SetTransform(sf::Transform().translate(1000, 1800).rotate(180));
+  enemy->SetTransform(sf::Transform().translate(800, 1800).rotate(180));
+
+  auto enemy2 = new EnemyEntity(game, tex, playerShape->CopyTemplate());
+  enemy2->SetTransform(sf::Transform().translate(1100, 1600).rotate(180));
+
+  auto enemy3 = new EnemyEntity(game, tex, playerShape->CopyTemplate());
+  enemy3->SetTransform(sf::Transform().translate(1400, 1400).rotate(180));
 
   // Layout entities in scene
   auto scene = new SceneGraph(game);
   int camId = scene->AddEntity(cam);
   scene->AddEntity(player, camId);
   scene->AddEntity(enemy);
+  scene->AddEntity(enemy2);
+  scene->AddEntity(enemy3);
   game->SetScene(scene);
 
   game->GetAudioController()->PlayRepeated(AssetManager::GetAudio("res/audio/tgfcoder/FrozenJam.oga"));

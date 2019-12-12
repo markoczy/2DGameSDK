@@ -11,6 +11,7 @@
 #ifndef __KINEMATIC_ENTITY_H__
 #define __KINEMATIC_ENTITY_H__
 
+#include <2DGameSDK/common/Helpers.h>
 #include <2DGameSDK/common/types/base/GameBase.h>
 #include <2DGameSDK/core/GameOptions.h>
 #include <2DGameSDK/core/visual/RenderStrategy.h>

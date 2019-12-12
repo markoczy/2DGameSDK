@@ -13,10 +13,12 @@ namespace game {
   }
 
   KinematicEntity::~KinematicEntity() {
+    auto space = getGame()->GetPhysicalWorld();
     for(auto shape : mShapes) {
-      delete shape;
+      helpers::safeDelete(shape);
     }
-    cpBodyDestroy(mBody);
+    cpSpaceRemoveBody(space, mBody);
+    cpBodyFree(mBody);
   }
 
   bool KinematicEntity::IsKinematic() {
