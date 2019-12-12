@@ -20,7 +20,7 @@
 namespace game {
   class GAMESDK_DLL Projectile : public GameObject, public VisualObject {
   public:
-    Projectile(GameBase* game, int type, RenderStrategy* renderer, Shape<KinematicShapeDefinition>* shapes, sf::Transform start, sf::Vector2f velocity);
+    Projectile(GameBase* game, int type, RenderStrategy* renderer, Shape<KinematicShapeDefinition>* shapes, sf::Transform start, sf::Vector2f velocity, int destructionDelay = 1);
     virtual ~Projectile();
 
     virtual int GetZIndex();
@@ -39,7 +39,10 @@ namespace game {
     Shape<KinematicShapeDefinition>* mShape;
     int mZIndex = constants::DEFAULT_ZINDEX_PROJECTILE;
     cpBody* mBody;
+
+    int mDestructionDelay = 1;
     bool mDestroying = false;
+    bool mDestroyed = false;
   };
 } // namespace game
 

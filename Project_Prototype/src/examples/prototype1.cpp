@@ -91,7 +91,7 @@ public:
   void Shoot(sf::Keyboard::Key) {
     if(mLastShoot.getElapsedTime().asMilliseconds() > mCooldownShoot) {
       auto game = (Game*)getGame();
-      auto proj = new SequencedProjectile(game, 777, projectileTex, ShapeFactory::CreateKinematicCircleShape(game, 10, 0, 0), GetCombinedTransform().translate(-11, 80), sf::Vector2f(0, 800), 8);
+      auto proj = new SequencedProjectile(game, 777, projectileTex, ShapeFactory::CreateKinematicCircleShape(game, 5, 0, 0), GetCombinedTransform().translate(-11, 80), sf::Vector2f(0, 600), 8);
       // auto proj = new SpriteProjectile(game, 777, AssetManager::GetTexture("res/textures/sample.png"), ShapeFactory::CreateKinematicCircleShape(game, 10, 0, 0), GetCombinedTransform().translate(0, 60), sf::Vector2f(0, 1000));
       mLastShoot.restart();
       game->GetAudioController()->PlayOnce(mShootSound);
@@ -153,6 +153,18 @@ private:
   bool mDestroying = false;
 };
 
+PolygonShape<KinematicShapeDefinition>* getPlayerShape(Game* game) {
+  auto verts = vector<cpVect>();
+  verts.push_back(cpv(-62, -27.5));
+  verts.push_back(cpv(61, -27.5));
+  verts.push_back(cpv(61, 21.5));
+  verts.push_back(cpv(4, 67.5));
+  verts.push_back(cpv(-5, 67.5));
+  verts.push_back(cpv(-62, 21.5));
+  return ShapeFactory::CreateKinematicPolygonShape(game, verts, 0, 0);
+  // return new PolygonKinematicShape(game, verts);
+}
+
 class ScrollCamera : public DefaultCameraController, public Entity {
 public:
   ScrollCamera(Game* game) : DefaultCameraController(game), Entity(_CAM_TYPE, game) {
@@ -210,7 +222,7 @@ int prototype1() {
   float aspectRatio = (float)sf::VideoMode::getDesktopMode().width / (float)sf::VideoMode::getDesktopMode().height;
 
   // Create game
-  auto options = GameOptions{"Arcade Shooter Prototype", sf::Vector2i(1024, 1024 / aspectRatio), 0.5, 60, false, false};
+  auto options = GameOptions{"Arcade Shooter Prototype", sf::Vector2i(1024, 1024 / aspectRatio), 0.5, 60, false, true};
   auto game = new Game(options);
 
   // Send Events to controller
@@ -225,11 +237,12 @@ int prototype1() {
   game->SetWorld(world);
 
   auto cam = new ScrollCamera(game);
-  cam->SetScroll(sf::Vector2f(0, 1));
+  cam->SetScroll(sf::Vector2f(0, 0.5));
   game->SetCameraController(cam);
 
   auto tex = AssetManager::GetTexture("res/textures/spaceships/scorpio/prefab_scorpio_1.png");
-  auto playerShape = ShapeFactory::CreateKinematicRectangleShape(game, 124, 135, 0, 0);
+  auto playerShape = getPlayerShape(game);
+  // auto playerShape = ShapeFactory::CreateKinematicRectangleShape(game, 124, 135, 0, 0);
   auto player = new Proto1PlayerEntity(game, tex, playerShape, 5.0, upPressed, downPressed, leftPressed, rightPressed, spacePressed);
   float offsetY = -(cam->GetBounds().y / 2.0) + 80;
   player->SetTransform(sf::Transform().translate(0, offsetY));
