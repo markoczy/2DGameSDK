@@ -17,8 +17,8 @@ namespace game {
 
     void SetSize(sf::Vector2f size);
 
-  private:
-    SingleSpriteRenderStrategy* mSpecificRenderer = nullptr;
+  protected:
+    SingleSpriteRenderStrategy* mSpriteRenderer = nullptr;
   };
 
 } // namespace game

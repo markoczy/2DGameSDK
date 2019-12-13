@@ -43,11 +43,9 @@ namespace game {
   }
 
   void StateManager::DestroyVisualObject(VisualObject* object) {
-    for(auto it = mRenderObjects.begin(); it != mRenderObjects.end(); it++) {
-      if(*it == object) {
-        mRenderObjects.erase(it);
-        return;
-      }
+    auto it = std::find(mRenderObjects.begin(), mRenderObjects.end(), object);
+    if(it != mRenderObjects.end()) {
+      mRenderObjects.erase(it);
     }
   }
 

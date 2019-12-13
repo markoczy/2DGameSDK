@@ -9,6 +9,10 @@ namespace game {
 
   SingleSpriteRenderStrategy::~SingleSpriteRenderStrategy() {}
 
+  sf::Sprite* SingleSpriteRenderStrategy::GetSprite() {
+    return &mSprite;
+  }
+
   void SingleSpriteRenderStrategy::SetSize(sf::Vector2f size) {
     auto rect = mSprite.getTextureRect();
     mSprite.setScale(getGame()->GetPoseConverter()->GetVisualScale(sf::Vector2f(rect.width, rect.height), size));

@@ -22,9 +22,11 @@ namespace game {
     PolygonShape(GameBase* game, TDefinition* definition, std::vector<cpVect> vertices) : Shape<TDefinition>(ShapeType::Polygon, game, definition), mVertices(vertices) {}
 
     virtual void Render(sf::RenderTarget* target, sf::Color color = sf::Color::Black, float stroke = 0.5) {
+      auto conv = this->getGame()->GetPoseConverter();
       auto shape = sf::ConvexShape(mVertices.size());
       for(size_t i = 0; i < mVertices.size(); i++) {
-        shape.setPoint(i, sf::Vector2f(mVertices[i].x, -mVertices[i].y));
+        auto pt = sf::Vector2f(conv->GetVisualDimension(mVertices[i].x), conv->GetVisualDimension(-mVertices[i].y));
+        shape.setPoint(i, pt);
       }
 
       shape.setPosition(Shape<TDefinition>::getVisualPosition());

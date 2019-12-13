@@ -15,6 +15,7 @@ namespace game {
     SingleSpriteRenderStrategy(GameBase* game, sf::Texture* tex);
     virtual ~SingleSpriteRenderStrategy();
 
+    virtual sf::Sprite* GetSprite();
     virtual void SetSize(sf::Vector2f size);
     virtual void OnRender(sf::RenderTarget* target, sf::RenderStates states);
 

@@ -3,11 +3,11 @@
 namespace game {
 
   SpriteKinematicEntity::SpriteKinematicEntity(int type, GameBase* game, sf::Texture* texture, std::vector<Shape<KinematicShapeDefinition>*> shapes, bool isCollidable) : KinematicEntity(type, game, nullptr, shapes, isCollidable) {
-    mSpecificRenderer = new SingleSpriteRenderStrategy(game, texture);
-    mRenderer = mSpecificRenderer;
+    mSpriteRenderer = new SingleSpriteRenderStrategy(game, texture);
+    mRenderer = mSpriteRenderer;
   }
 
   void SpriteKinematicEntity::SetSize(sf::Vector2f size) {
-    mSpecificRenderer->SetSize(size);
+    mSpriteRenderer->SetSize(size);
   }
 } // namespace game

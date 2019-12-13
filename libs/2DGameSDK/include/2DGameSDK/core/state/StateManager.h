@@ -18,7 +18,7 @@ namespace game {
 
   class StateManager : public StateManagerBase {
   public:
-    StateManager(GameBase* game);
+      StateManager(GameBase* game);
     ~StateManager();
 
     GameWorld* GetWorld();

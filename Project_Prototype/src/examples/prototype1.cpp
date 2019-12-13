@@ -135,6 +135,7 @@ public:
     mHits++;
     if(mHits < 4) {
       getGame()->GetAudioController()->PlayOnce(mHitSound);
+      mGlowTime = 5;
     } else if(!mDestroying) {
       getGame()->GetStateManager()->DestroyObject(this);
       getGame()->GetStateManager()->DestroyVisualObject(this);
@@ -145,12 +146,31 @@ public:
     return 0;
   }
 
+  void OnTick() {
+    if(mGlowTime > 0) {
+      if(!mIsGlowing) {
+        auto sprite = mSpriteRenderer->GetSprite();
+        sprite->setColor(sf::Color::Red);
+        mIsGlowing = true;
+      }
+      mGlowTime--;
+    } else if(mIsGlowing) {
+      auto sprite = mSpriteRenderer->GetSprite();
+      sprite->setColor(sf::Color::White);
+      mIsGlowing = false;
+    }
+  }
+
 private:
   sf::SoundBuffer* mHitSound = AssetManager::GetAudio("res/audio/Hit_Hurt2.wav");
   sf::SoundBuffer* mDestroySound = AssetManager::GetAudio("res/audio/Explosion.wav");
+
   sf::Clock mCoolDown;
   int mHits = 0;
   bool mDestroying = false;
+
+  int mGlowTime = 0;
+  bool mIsGlowing = false;
 };
 
 PolygonShape<KinematicShapeDefinition>* getPlayerShape(Game* game) {

@@ -317,8 +317,17 @@ int demo3() {
   float playerW = 1;
   float playerH = 1;
   float playerMass = 5;
+
+  auto verts = vector<cpVect>();
+  verts.push_back(cpv(-0.5, -0.5));
+  verts.push_back(cpv(0.5, -0.5));
+  // verts.push_back(cpv(0.5, 0.5));
+  verts.push_back(cpv(-0.5, 0.5));
+  auto shape = ShapeFactory::CreateDynamicPolygonShape(game, verts, 1, 0.7, 0.1);
+
   // auto shape = new CircleDynamicShape(game, 1);
-  auto shape = ShapeFactory::CreateDynamicRectangleShape(game, playerW, playerH, 1, 0.7, 0.1);
+
+  // auto shape = ShapeFactory::CreateDynamicRectangleShape(game, playerW, playerH, 1, 0.7, 0.1);
   auto player = new PhysPlayerEntity(game, boxTx, 50, 1100, {shape}, upPressed, downPressed, leftPressed, rightPressed);
   player->SetSize(sf::Vector2f(playerW, playerH));
   player->SetTransform(sf::Transform().translate(10, 15));
