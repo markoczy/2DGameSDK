@@ -37,7 +37,6 @@ namespace game {
     }
 
     virtual ~Observable() {
-      std::cout << mId << " Destructor" << std::endl;
       for(auto entry : mObservers) {
         helpers::safeDelete(entry.second);
       }
@@ -67,7 +66,6 @@ namespace game {
      * @param id The unique subscription id
      */
     void Unsubscribe(int id) {
-      std::cout << mId << " Unsubscribe " << id << std::endl;
       mObservers.erase(id);
     }
 

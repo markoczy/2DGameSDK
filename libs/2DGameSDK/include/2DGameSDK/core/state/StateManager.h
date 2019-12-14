@@ -11,6 +11,7 @@
 #include <2DGameSDK/core/GameOptions.h>
 #include <2DGameSDK/core/VisualObject.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
+#include <2DGameSDK/scene/entity/Entity.h>
 
 namespace game {
   class SceneGraph;

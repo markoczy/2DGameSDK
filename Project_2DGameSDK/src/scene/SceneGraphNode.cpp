@@ -15,6 +15,10 @@ namespace game {
     helpers::safeDelete(mEntity);
   }
 
+  void SceneGraphNode::OnEntityDestroyed() {
+    if(mParent != nullptr) mParent->RemoveChild(this);
+  }
+
   void SceneGraphNode::OnEntityTransformed(sf::Transform accumulated) {
     for(auto iChild : mChildren) {
       auto ent = iChild->mEntity;
@@ -26,5 +30,10 @@ namespace game {
         iChild->OnEntityTransformed(parentTransform);
       }
     }
+  }
+
+  void SceneGraphNode::RemoveChild(SceneGraphNode* child) {
+    auto it = std::find(mChildren.begin(), mChildren.end(), child);
+    mChildren.erase(it);
   }
 } // namespace game

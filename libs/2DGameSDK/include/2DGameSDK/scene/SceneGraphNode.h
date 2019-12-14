@@ -46,7 +46,11 @@ namespace game {
      */
     ~SceneGraphNode();
 
+    void OnEntityDestroyed();
+
     void OnEntityTransformed(sf::Transform accumulated);
+
+    void RemoveChild(SceneGraphNode* child);
 
   private:
     friend class SceneGraph;

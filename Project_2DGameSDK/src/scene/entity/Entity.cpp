@@ -4,13 +4,18 @@ namespace game {
   class SceneGraphNode {
   public:
     void OnEntityTransformed(sf::Transform accumulated);
+    void OnEntityDestroyed();
   };
 
   Entity::Entity(int type, GameBase* game) : GameObject(ObjectType::Entity, game), mType(type) {
     game->GetStateManager()->AddVisualObject(this);
   }
 
-  Entity::~Entity() {}
+  Entity::~Entity() {
+    if(mGraphNode != nullptr) {
+      mGraphNode->OnEntityDestroyed();
+    }
+  }
 
   bool Entity::IsKinematic() { return false; }
 

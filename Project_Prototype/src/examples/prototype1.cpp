@@ -9,6 +9,31 @@ const int _PLAYER_TYPE = 200;
 const int _ENEMY_TYPE = 300;
 const int _CAM_TYPE = 500;
 
+const int _PLAYER_PROJECTILE = 800;
+const int _ENEMY_PROJECTILE = 900;
+
+const std::vector<sf::Texture*> _PROJECTILE_GREEN = {
+    AssetManager::GetTexture("res/textures/projectiles/rawdanitsu/green1.png"),
+    AssetManager::GetTexture("res/textures/projectiles/rawdanitsu/green2.png"),
+    AssetManager::GetTexture("res/textures/projectiles/rawdanitsu/green3.png"),
+    AssetManager::GetTexture("res/textures/projectiles/rawdanitsu/green4.png"),
+    AssetManager::GetTexture("res/textures/projectiles/rawdanitsu/green5.png"),
+    AssetManager::GetTexture("res/textures/projectiles/rawdanitsu/green6.png"),
+};
+
+const std::vector<sf::Texture*> _PROJECTILE_AM_RED = {
+    AssetManager::GetTexture("res/textures/projectiles/rawdanitsu/am_red1.png"),
+    AssetManager::GetTexture("res/textures/projectiles/rawdanitsu/am_red2.png"),
+    AssetManager::GetTexture("res/textures/projectiles/rawdanitsu/am_red3.png"),
+    AssetManager::GetTexture("res/textures/projectiles/rawdanitsu/am_red4.png"),
+    AssetManager::GetTexture("res/textures/projectiles/rawdanitsu/am_red5.png"),
+    AssetManager::GetTexture("res/textures/projectiles/rawdanitsu/am_red6.png"),
+};
+
+sf::SoundBuffer* _SOUND_HIT_HURT_2 = AssetManager::GetAudio("res/audio/Hit_Hurt2.wav");
+
+sf::SoundBuffer* _SOUND_EXPLOSION = AssetManager::GetAudio("res/audio/Explosion.wav");
+
 using KinematicShape = game::Shape<KinematicShapeDefinition>;
 
 std::vector<sf::Texture*> initExplosion1() {
@@ -120,6 +145,8 @@ protected:
 
 class Proto1PlayerEntity : public SpriteKinematicEntity {
 public:
+  using DestructionHandler = MethodObserver<void*, Proto1PlayerEntity>;
+
   Proto1PlayerEntity(Game* game,
                      sf::Texture* texture,
                      KinematicShape* shape,
@@ -128,7 +155,7 @@ public:
                      Observable<sf::Keyboard::Key>* down,
                      Observable<sf::Keyboard::Key>* left,
                      Observable<sf::Keyboard::Key>* right,
-                     Observable<sf::Keyboard::Key>* space) : SpriteKinematicEntity(_PLAYER_TYPE, game, texture, {shape}, true), mSpeed(speed) {
+                     Observable<sf::Keyboard::Key>* space) : SpriteKinematicEntity(_PLAYER_TYPE, game, texture, {shape}, true), mSpeed(speed), mOnHit(new OnHit()) {
     //
     //
     //
@@ -145,6 +172,11 @@ public:
     mSpace->SubscribeTo(space);
 
     mSize = sf::Vector2f(texture->getSize().x, texture->getSize().y);
+
+    mDestructible = new DestructibleBehaviour(game, mOnHit, mSpriteRenderer, _SOUND_HIT_HURT_2, 3, 10);
+    (new DestructionHandler(this, &Proto1PlayerEntity::OnDestroy))->SubscribeTo(mDestructible);
+    game->AddEvent(mOnHit);
+    game->AddEvent(mDestructible);
   }
 
   ~Proto1PlayerEntity() {
@@ -198,10 +230,38 @@ public:
   void Shoot(sf::Keyboard::Key) {
     if(mLastShoot.getElapsedTime().asMilliseconds() > mCooldownShoot) {
       auto game = (Game*)getGame();
-      auto proj = new SequencedProjectile(game, 777, projectileTex, ShapeFactory::CreateKinematicCircleShape(game, 5, 0, 0), GetCombinedTransform().translate(0, 80), sf::Vector2f(0, 600), 100, 8);
+      auto proj = new SequencedProjectile(game, _PLAYER_PROJECTILE, _PROJECTILE_GREEN, ShapeFactory::CreateKinematicCircleShape(game, 5, 0, 0), GetCombinedTransform().translate(0, 80), sf::Vector2f(0, 600), 100, 8);
       // auto proj = new SpriteProjectile(game, 777, AssetManager::GetTexture("res/textures/sample.png"), ShapeFactory::CreateKinematicCircleShape(game, 10, 0, 0), GetCombinedTransform().translate(0, 60), sf::Vector2f(0, 1000));
       mLastShoot.restart();
       game->GetAudioController()->PlayOnce(mShootSound);
+    }
+  }
+
+  int OnCollision(CollisionEventType type, Entity* other, cpArbiter* arb) {
+    mOnHit->SetTriggered({other->GetType(), 1});
+    return 0;
+  }
+
+  int OnProjectileCollision(CollisionEventType type, Projectile* projectile, cpArbiter* arb) {
+    if(projectile->GetType() == _ENEMY_PROJECTILE) {
+      mOnHit->SetTriggered({projectile->GetType(), 1});
+    }
+    return 0;
+  }
+
+  void OnDestroy(void*) {
+    if(!mDestroying) {
+      cout << "Player Before create explosion" << endl;
+      auto explosion = new Effect(getGame(), _EXPLOSION1, GetCombinedTransform());
+      cout << "Player After create explosion" << endl;
+
+      getGame()->DestroyEvent(mOnHit);
+      getGame()->DestroyEvent(mDestructible);
+      getGame()->GetStateManager()->DestroyObject(this);
+      getGame()->GetStateManager()->DestroyVisualObject(this);
+      getGame()->GetAudioController()->PlayOnce(_SOUND_EXPLOSION);
+      mDestroying = true;
+      cout << "Plaer After destroy" << endl;
     }
   }
 
@@ -209,18 +269,13 @@ private:
   float mCooldownShoot = 500;
   sf::Clock mLastShoot;
   float mSpeed;
+  OnHit* mOnHit = nullptr;
+  DestructibleBehaviour* mDestructible = nullptr;
   sf::SoundBuffer* mShootSound = AssetManager::GetAudio("res/audio/Laser_Shoot.wav");
-  std::vector<sf::Texture*> projectileTex = {
-      AssetManager::GetTexture("res/textures/projectiles/rawdanitsu/green1.png"),
-      AssetManager::GetTexture("res/textures/projectiles/rawdanitsu/green2.png"),
-      AssetManager::GetTexture("res/textures/projectiles/rawdanitsu/green3.png"),
-      AssetManager::GetTexture("res/textures/projectiles/rawdanitsu/green4.png"),
-      AssetManager::GetTexture("res/textures/projectiles/rawdanitsu/green5.png"),
-      AssetManager::GetTexture("res/textures/projectiles/rawdanitsu/green6.png"),
-  };
   sf::Vector2f mSize;
   // Delta Transform of current tick
   sf::Vector2f mDt;
+  bool mDestroying = false;
 
   // Needed for cleanup
   Observer<sf::Keyboard::Key>* mUp;
@@ -237,33 +292,16 @@ public:
   EnemyEntity(Game* game,
               sf::Texture* texture,
               KinematicShape* shape) : SpriteKinematicEntity(_ENEMY_TYPE, game, texture, {shape}, true), mOnHit(new OnHit()) {
-    mDestructible = new DestructibleBehaviour(game, mOnHit, mSpriteRenderer, mHitSound, 3, 10);
+    mDestructible = new DestructibleBehaviour(game, mOnHit, mSpriteRenderer, _SOUND_HIT_HURT_2, 3, 10);
     (new DestructionHandler(this, &EnemyEntity::OnDestroy))->SubscribeTo(mDestructible);
     game->AddEvent(mOnHit);
     game->AddEvent(mDestructible);
   };
 
   int OnProjectileCollision(CollisionEventType type, Projectile* projectile, cpArbiter* arb) {
-    std::cout << GetId() << " OnProjectileCollision" << std::endl;
-    mOnHit->SetTriggered({projectile->GetType(), 1});
-    std::cout << GetId() << " After OnProjectileCollision" << std::endl;
-    // if(mCoolDown.getElapsedTime().asMilliseconds() < 300) return 0;
-    // std::cout << "Enemy Hit!!!" << std::endl;
-    // mHits++;
-    // if(mHits < 4) {
-    //   getGame()->GetAudioController()->PlayOnce(mHitSound);
-    //   mGlowTime = 5;
-    // } else if(!mDestroying) {
-    //   cout << "Before create explosion" << endl;
-    //   auto explosion = new Effect(getGame(), _EXPLOSION1, GetCombinedTransform());
-    //   cout << "After create explosion" << endl;
-
-    //   getGame()->GetStateManager()->DestroyObject(this);
-    //   getGame()->GetStateManager()->DestroyVisualObject(this);
-    //   getGame()->GetAudioController()->PlayOnce(mDestroySound);
-    //   mDestroying = true;
-    // }
-    // mCoolDown.restart();
+    if(projectile->GetType() == _PLAYER_PROJECTILE) {
+      mOnHit->SetTriggered({projectile->GetType(), 1});
+    }
     return 0;
   }
 
@@ -277,31 +315,26 @@ public:
       getGame()->DestroyEvent(mDestructible);
       getGame()->GetStateManager()->DestroyObject(this);
       getGame()->GetStateManager()->DestroyVisualObject(this);
-      getGame()->GetAudioController()->PlayOnce(mDestroySound);
+      getGame()->GetAudioController()->PlayOnce(_SOUND_EXPLOSION);
       mDestroying = true;
     }
   }
 
+  void Shoot() {
+    auto game = (Game*)getGame();
+    auto proj = new SequencedProjectile(game, _ENEMY_PROJECTILE, _PROJECTILE_AM_RED, ShapeFactory::CreateKinematicCircleShape(game, 5, 0, 0), GetCombinedTransform().translate(0, 80), sf::Vector2f(0, -300), 500, 8);
+  }
+
   void OnTick() {
-    // if(mGlowTime > 0) {
-    //   if(!mIsGlowing) {
-    //     auto sprite = mSpriteRenderer->GetSprite();
-    //     sprite->setColor(sf::Color::Red);
-    //     mIsGlowing = true;
-    //   }
-    //   mGlowTime--;
-    // } else if(mIsGlowing) {
-    //   auto sprite = mSpriteRenderer->GetSprite();
-    //   sprite->setColor(sf::Color::White);
-    //   mIsGlowing = false;
-    // }
+    if(mTimeLastShot++ > 200) {
+      Shoot();
+      mTimeLastShot = 0;
+    }
   }
 
 private:
   OnHit* mOnHit = nullptr;
   DestructibleBehaviour* mDestructible = nullptr;
-  sf::SoundBuffer* mHitSound = AssetManager::GetAudio("res/audio/Hit_Hurt2.wav");
-  sf::SoundBuffer* mDestroySound = AssetManager::GetAudio("res/audio/Explosion.wav");
 
   sf::Clock mCoolDown;
   int mHits = 0;
@@ -309,6 +342,7 @@ private:
 
   int mGlowTime = 0;
   bool mIsGlowing = false;
+  int mTimeLastShot = 0;
 };
 
 PolygonShape<KinematicShapeDefinition>* getEnemyShape(Game* game) {
