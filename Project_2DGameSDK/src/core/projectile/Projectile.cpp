@@ -25,6 +25,10 @@ namespace game {
     cpBodyFree(mBody);
   }
 
+  int Projectile::GetType() {
+    return mType;
+  }
+
   int Projectile::GetZIndex() {
     return mZIndex;
   }

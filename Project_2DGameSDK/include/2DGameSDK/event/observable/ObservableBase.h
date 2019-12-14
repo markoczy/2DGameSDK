@@ -29,6 +29,8 @@ namespace game {
      * 
      */
     virtual void Update() = 0;
+
+    virtual int GetId() = 0;
   };
 
 } // namespace game

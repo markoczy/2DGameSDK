@@ -45,9 +45,9 @@ namespace game {
 
     virtual void SetWorld(GameWorld* world) = 0;
 
-    virtual int AddEvent(ObservableBase* event) = 0;
+    virtual void AddEvent(ObservableBase* event) = 0;
 
-    virtual ObservableBase* GetEvent(int id) = 0;
+    virtual void DestroyEvent(ObservableBase* event) = 0;
 
     virtual cpSpace* GetPhysicalWorld() = 0;
   };

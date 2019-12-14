@@ -11,13 +11,16 @@
 #ifndef __OBSERVABLE_H__
 #define __OBSERVABLE_H__
 
-#include <2DGameSDK/dll/gamesdk_dll.h>
-#include <2DGameSDK/event/observable/ObservableBase.h>
-#include <2DGameSDK/event/observer/Observer.h>
 #include <iostream>
 #include <map>
 #include <tuple>
 #include <vector>
+
+#include <2DGameSDK/common/Helpers.h>
+#include <2DGameSDK/dll/gamesdk_dll.h>
+#include <2DGameSDK/event/observable/ObservableBase.h>
+#include <2DGameSDK/event/observable/ObservableCounter.h>
+#include <2DGameSDK/event/observer/Observer.h>
 
 namespace game {
 
@@ -30,6 +33,19 @@ namespace game {
   template <class TData>
   class Observable : public ObservableBase {
   public:
+    Observable() : mId(ObservableCounter::NextId()) {
+    }
+
+    virtual ~Observable() {
+      for(auto entry : mObservers) {
+        helpers::safeDelete(entry.second);
+      }
+    }
+
+    virtual int GetId() {
+      return mId;
+    }
+
     /**
      * @brief Register an Observer for this Observable.
      * 
@@ -80,7 +96,10 @@ namespace game {
 
   private:
     std::map<int, Observer<TData>*> mObservers;
-    int mCounter;
+    int mId = 0;
+    int mCounter = 0;
+
+    static int observable_counter;
   };
 
 } // namespace game

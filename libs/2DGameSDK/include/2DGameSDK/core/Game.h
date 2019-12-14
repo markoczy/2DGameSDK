@@ -144,15 +144,9 @@ namespace game {
      * @remark Ownership of the object is tranfered to this class (i.e. object
      *         will be deleted when this class is out of scope)
      */
-    int AddEvent(ObservableBase* event);
+    void AddEvent(ObservableBase* event);
 
-    /**
-     * @brief Get any Event from the EventController
-     * 
-     * @param id The Identifier
-     * @return ObservableBase* The Event 
-     */
-    ObservableBase* GetEvent(int id);
+    void DestroyEvent(ObservableBase* event);
 
     //? encapsulation of physical world?
     cpSpace* GetPhysicalWorld();

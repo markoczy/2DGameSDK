@@ -282,12 +282,12 @@ namespace game {
 
   // ####### Event Controller wrapper ##########################################
 
-  int Game::AddEvent(ObservableBase* event) {
+  void Game::AddEvent(ObservableBase* event) {
     return mEventCtrl.AddEvent(event);
   }
 
-  ObservableBase* Game::GetEvent(int identifier) {
-    return mEventCtrl.GetEvent(identifier);
+  void Game::DestroyEvent(ObservableBase* event) {
+    return mEventCtrl.DestroyEvent(event);
   }
 
   // ###########################################################################

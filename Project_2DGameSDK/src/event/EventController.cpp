@@ -12,16 +12,25 @@ namespace game {
     mEvents.clear();
   }
 
-  int EventController::AddEvent(ObservableBase* event) {
-    mEvents[mEventCounter] = event;
-    return mEventCounter++;
+  void EventController::AddEvent(ObservableBase* event) {
+    mEvents[event->GetId()] = event;
   }
 
-  ObservableBase* EventController::GetEvent(int id) {
-    return mEvents[id];
+  void EventController::DestroyEvent(ObservableBase* event) {
+    mDestroyList.push_back(event->GetId());
   }
+
+  // ObservableBase* EventController::GetEvent(int id) {
+  //   return mEvents[id];
+  // }
 
   void EventController::OnTick() {
+    for(auto id : mDestroyList) {
+      helpers::safeDelete(mEvents[id]);
+      mEvents.erase(id);
+    }
+    mDestroyList.clear();
+
     for(auto it = mEvents.begin(); it != mEvents.end(); ++it) {
       it->second->Update();
     }

@@ -11,11 +11,13 @@
 #ifndef __EVENT_CONTROLLER_H__
 #define __EVENT_CONTROLLER_H__
 
+#include <map>
+#include <string>
+#include <vector>
+
 #include <2DGameSDK/common/Helpers.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
 #include <2DGameSDK/event/observable/ObservableBase.h>
-#include <map>
-#include <string>
 
 namespace game {
   /**
@@ -43,7 +45,7 @@ namespace game {
      * 
      * @return The unique id of the Event
      */
-    int AddEvent(ObservableBase* event);
+    void AddEvent(ObservableBase* event);
 
     /**
      * @brief Retreives the Event. Should not be used for Game Logic as
@@ -53,7 +55,9 @@ namespace game {
      * 
      * @return The Event
      */
-    ObservableBase* GetEvent(int id);
+    // ObservableBase* GetEvent(int id);
+
+    void DestroyEvent(ObservableBase* event);
 
     /**
      * @brief Updates all Events
@@ -64,6 +68,7 @@ namespace game {
   private:
     int mEventCounter = 0;
     std::map<int, ObservableBase*> mEvents;
+    std::vector<int> mDestroyList;
   };
 
 } // namespace game

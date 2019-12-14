@@ -23,6 +23,101 @@ std::vector<sf::Texture*> initExplosion1() {
 
 std::vector<sf::Texture*> _EXPLOSION1 = initExplosion1();
 
+struct HitData {
+  int Type = 0;
+  int HpLoss = 1;
+};
+
+class OnHit : public Observable<HitData> {
+public:
+  void SetTriggered(HitData data) {
+    mTriggered = true;
+    mData = data;
+  }
+
+protected:
+  bool mTriggered = false;
+  HitData mData;
+
+  std::tuple<bool, HitData> triggered() {
+    bool ret = mTriggered;
+    mTriggered = false;
+    return std::make_tuple(ret, mData);
+  }
+};
+
+class DestructibleBehaviour : public Observable<void*> {
+public:
+  using HitObserver = MethodObserver<HitData, DestructibleBehaviour>;
+
+  DestructibleBehaviour(GameBase* game, OnHit* onHit, SingleSpriteRenderStrategy* renderer, sf::SoundBuffer* hitSound, int hp = 1, int coolDown = 10) : mGame(game), mRenderer(renderer), mHitSound(hitSound), mHp(hp), mCooldown(coolDown), mLastHit(coolDown) {
+    mOnHit = new HitObserver(this, &DestructibleBehaviour::HandleHit);
+    mOnHit->SubscribeTo(onHit);
+  }
+
+  void Update() {
+    hitBehaviour();
+    glowBehaviour();
+    Observable<void*>::Update();
+  }
+
+  void HandleHit(HitData data) {
+    std::cout << "Handle Hit" << std::endl;
+    mHpLoss = data.HpLoss;
+  }
+
+protected:
+  GameBase* mGame = nullptr;
+  HitObserver* mOnHit = nullptr;
+  SingleSpriteRenderStrategy* mRenderer = nullptr;
+  sf::SoundBuffer* mHitSound = nullptr;
+  int mHp = 1;
+  int mCooldown = 10;
+
+  // Hit Logic
+  int mLastHit = 0;
+  bool mDestroyed = false;
+  bool mEventSent = false;
+  int mHpLoss = 0;
+
+  // Glow Logic
+  int mGlowTime = 0;
+  bool mIsGlowing = false;
+
+  void hitBehaviour() {
+    if(mLastHit++ > mCooldown && mHpLoss > 0) {
+      mHp -= mHpLoss;
+      mLastHit = 0;
+      if(mHp > 0) {
+        mGame->GetAudioController()->PlayOnce(mHitSound);
+        mGlowTime = 5;
+      } else {
+        mDestroyed = true;
+      }
+    }
+    mHpLoss = 0;
+  }
+
+  void glowBehaviour() {
+    if(mGlowTime > 0) {
+      if(!mIsGlowing) {
+        auto sprite = mRenderer->GetSprite();
+        sprite->setColor(sf::Color::Red);
+        mIsGlowing = true;
+      }
+      mGlowTime--;
+    } else if(mIsGlowing) {
+      auto sprite = mRenderer->GetSprite();
+      sprite->setColor(sf::Color::White);
+      mIsGlowing = false;
+    }
+  }
+
+  std::tuple<bool, void*> triggered() {
+    return std::make_tuple(mDestroyed, nullptr);
+  }
+};
+
 class Proto1PlayerEntity : public SpriteKinematicEntity {
 public:
   Proto1PlayerEntity(Game* game,
@@ -137,47 +232,74 @@ private:
 
 class EnemyEntity : public SpriteKinematicEntity {
 public:
+  using DestructionHandler = MethodObserver<void*, EnemyEntity>;
+
   EnemyEntity(Game* game,
               sf::Texture* texture,
-              KinematicShape* shape) : SpriteKinematicEntity(_ENEMY_TYPE, game, texture, {shape}, true){};
+              KinematicShape* shape) : SpriteKinematicEntity(_ENEMY_TYPE, game, texture, {shape}, true), mOnHit(new OnHit()) {
+    mDestructible = new DestructibleBehaviour(game, mOnHit, mSpriteRenderer, mHitSound, 3, 10);
+    (new DestructionHandler(this, &EnemyEntity::OnDestroy))->SubscribeTo(mDestructible);
+    game->AddEvent(mOnHit);
+    game->AddEvent(mDestructible);
+  };
 
   int OnProjectileCollision(CollisionEventType type, Projectile* projectile, cpArbiter* arb) {
-    if(mCoolDown.getElapsedTime().asMilliseconds() < 300) return 0;
-    std::cout << "Enemy Hit!!!" << std::endl;
-    mHits++;
-    if(mHits < 4) {
-      getGame()->GetAudioController()->PlayOnce(mHitSound);
-      mGlowTime = 5;
-    } else if(!mDestroying) {
-      cout << "Before create explosion" << endl;
-      auto explosion = new Effect(getGame(), _EXPLOSION1, GetCombinedTransform());
-      cout << "After create explosion" << endl;
+    std::cout << GetId() << " OnProjectileCollision" << std::endl;
+    mOnHit->SetTriggered({projectile->GetType(), 1});
+    std::cout << GetId() << " After OnProjectileCollision" << std::endl;
+    // if(mCoolDown.getElapsedTime().asMilliseconds() < 300) return 0;
+    // std::cout << "Enemy Hit!!!" << std::endl;
+    // mHits++;
+    // if(mHits < 4) {
+    //   getGame()->GetAudioController()->PlayOnce(mHitSound);
+    //   mGlowTime = 5;
+    // } else if(!mDestroying) {
+    //   cout << "Before create explosion" << endl;
+    //   auto explosion = new Effect(getGame(), _EXPLOSION1, GetCombinedTransform());
+    //   cout << "After create explosion" << endl;
 
+    //   getGame()->GetStateManager()->DestroyObject(this);
+    //   getGame()->GetStateManager()->DestroyVisualObject(this);
+    //   getGame()->GetAudioController()->PlayOnce(mDestroySound);
+    //   mDestroying = true;
+    // }
+    // mCoolDown.restart();
+    return 0;
+  }
+
+  void OnDestroy(void*) {
+    if(!mDestroying) {
+      cout << GetId() << " Before create explosion" << endl;
+      auto explosion = new Effect(getGame(), _EXPLOSION1, GetCombinedTransform());
+      cout << GetId() << " After create explosion" << endl;
+
+      getGame()->DestroyEvent(mOnHit);
+      getGame()->DestroyEvent(mDestructible);
       getGame()->GetStateManager()->DestroyObject(this);
       getGame()->GetStateManager()->DestroyVisualObject(this);
       getGame()->GetAudioController()->PlayOnce(mDestroySound);
       mDestroying = true;
     }
-    mCoolDown.restart();
-    return 0;
   }
 
   void OnTick() {
-    if(mGlowTime > 0) {
-      if(!mIsGlowing) {
-        auto sprite = mSpriteRenderer->GetSprite();
-        sprite->setColor(sf::Color::Red);
-        mIsGlowing = true;
-      }
-      mGlowTime--;
-    } else if(mIsGlowing) {
-      auto sprite = mSpriteRenderer->GetSprite();
-      sprite->setColor(sf::Color::White);
-      mIsGlowing = false;
-    }
+    // if(mGlowTime > 0) {
+    //   if(!mIsGlowing) {
+    //     auto sprite = mSpriteRenderer->GetSprite();
+    //     sprite->setColor(sf::Color::Red);
+    //     mIsGlowing = true;
+    //   }
+    //   mGlowTime--;
+    // } else if(mIsGlowing) {
+    //   auto sprite = mSpriteRenderer->GetSprite();
+    //   sprite->setColor(sf::Color::White);
+    //   mIsGlowing = false;
+    // }
   }
 
 private:
+  OnHit* mOnHit = nullptr;
+  DestructibleBehaviour* mDestructible = nullptr;
   sf::SoundBuffer* mHitSound = AssetManager::GetAudio("res/audio/Hit_Hurt2.wav");
   sf::SoundBuffer* mDestroySound = AssetManager::GetAudio("res/audio/Explosion.wav");
 

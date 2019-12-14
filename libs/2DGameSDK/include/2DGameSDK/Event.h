@@ -16,6 +16,7 @@
 #include <2DGameSDK/event/data/GenericEventData.h>
 #include <2DGameSDK/event/observable/Observable.h>
 #include <2DGameSDK/event/observable/ObservableBase.h>
+#include <2DGameSDK/event/observable/ObservableCounter.h>
 #include <2DGameSDK/event/observable/OnKeyPress.h>
 #include <2DGameSDK/event/observer/FunctionObserver.h>
 #include <2DGameSDK/event/observer/MethodObserver.h>

@@ -23,6 +23,8 @@ namespace game {
     Projectile(GameBase* game, int type, RenderStrategy* renderer, Shape<KinematicShapeDefinition>* shapes, sf::Transform start, sf::Vector2f velocity, int maxLifetime = 100);
     virtual ~Projectile();
 
+    virtual int GetType();
+
     virtual int GetZIndex();
 
     virtual void SetZIndex(int zIndex);
