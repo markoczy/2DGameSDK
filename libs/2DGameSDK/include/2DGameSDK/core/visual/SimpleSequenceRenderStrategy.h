@@ -14,9 +14,11 @@
 namespace game {
   class GAMESDK_DLL SimpleSequenceRenderStrategy : public RenderStrategy {
   public:
-    SimpleSequenceRenderStrategy(GameBase* game, std::vector<sf::Texture*> sequence, int frames = 1, int startAt = 0);
+    SimpleSequenceRenderStrategy(GameBase* game, std::vector<sf::Texture*> sequence, int frames = 1, int startAt = 0, bool repeat = true);
 
     virtual ~SimpleSequenceRenderStrategy();
+
+    virtual bool IsFinished();
 
     virtual void SetSize(int idx, sf::Vector2f size);
 
@@ -27,8 +29,10 @@ namespace game {
   protected:
     int mFrames = 1;
     int mCurIdx = 0;
+    bool mRepeated = true;
     std::vector<sf::Sprite> mSequence;
     int mCurFrame = 0;
+    bool mIsFinished = false;
   };
 } // namespace game
 

@@ -4,4 +4,4 @@
 - License: Public Domain
 - Source: https://opengameart.org/content/lasers-and-beams
 
-**All Assets where changed by me (A. Markóczy) to make them more compatible with the game engine**
+**Assets were exported to single files to adapt them to the game engine**

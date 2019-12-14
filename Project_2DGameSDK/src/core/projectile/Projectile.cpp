@@ -1,7 +1,7 @@
 #include <2DGameSDK/core/projectile/Projectile.h>
 
 namespace game {
-  Projectile::Projectile(GameBase* game, int type, RenderStrategy* renderer, Shape<KinematicShapeDefinition>* shape, sf::Transform start, sf::Vector2f velocity, int destructionDelay) : GameObject(ObjectType::Projectile, game), mType(type), mRenderer(renderer), mShape(shape), mDestructionDelay(destructionDelay) {
+  Projectile::Projectile(GameBase* game, int type, RenderStrategy* renderer, Shape<KinematicShapeDefinition>* shape, sf::Transform start, sf::Vector2f velocity, int maxLifetime) : GameObject(ObjectType::Projectile, game), mType(type), mRenderer(renderer), mShape(shape), mLifetime(maxLifetime) {
     auto space = game->GetPhysicalWorld();
     mBody = cpSpaceAddBody(space, cpBodyNewKinematic());
     game->GetPhysicalWorld();
@@ -34,7 +34,7 @@ namespace game {
   }
 
   void Projectile::OnTick() {
-    if(mDestroying && !mDestroyed && --mDestructionDelay < 0) {
+    if(--mLifetime < 0) {
       getGame()->GetStateManager()->DestroyObject(this);
       getGame()->GetStateManager()->DestroyVisualObject(this);
       mDestroyed = true;
@@ -52,8 +52,16 @@ namespace game {
   }
 
   int Projectile::OnCollision(CollisionEventType, cpArbiter*) {
-    mDestroying = true;
+    mLifetime = 1;
     return 0;
+  }
+
+  void Projectile::onDestroy() {
+    if(!mDestroyed) {
+      getGame()->GetStateManager()->DestroyObject(this);
+      getGame()->GetStateManager()->DestroyVisualObject(this);
+      mDestroyed = true;
+    }
   }
 
 } // namespace game

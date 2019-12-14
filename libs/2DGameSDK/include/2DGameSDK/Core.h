@@ -20,6 +20,7 @@
 #include <2DGameSDK/core/camera/BoundedFollowCameraController.h>
 #include <2DGameSDK/core/camera/CameraController.h>
 #include <2DGameSDK/core/camera/DefaultCameraController.h>
+#include <2DGameSDK/core/effect/Effect.h>
 #include <2DGameSDK/core/overlay/OverlayDisplay.h>
 #include <2DGameSDK/core/projectile/Projectile.h>
 #include <2DGameSDK/core/projectile/prefabs/SequencedProjectile.h>

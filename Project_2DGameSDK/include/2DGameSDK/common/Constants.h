@@ -14,9 +14,10 @@
 #include <SFML/Graphics.hpp>
 
 namespace game::constants {
+  const int DEFAULT_ZINDEX_WORLD = 0;
   const int DEFAULT_ZINDEX_ENTITY = 100;
   const int DEFAULT_ZINDEX_PROJECTILE = 200;
-  const int DEFAULT_ZINDEX_WORLD = 0;
+  const int DEFAULT_ZINDEX_EFFECT = 300;
 
   const int DEFAULT_ANIMATION_START = 0;
 

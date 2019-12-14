@@ -7,5 +7,9 @@
 **The following assets are used as provided by the author:**
 
 - prefab_scorpio_1.png
+- prefab_scorpio_6B.png
 
 **The following assets where changed/remixed by me (A. Markóczy):**
+
+- prefab_an_1.png
+- prefab_an_1B.png

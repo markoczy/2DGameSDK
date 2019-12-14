@@ -9,7 +9,7 @@ namespace game {
 
   class GAMESDK_DLL SequencedProjectile : public Projectile {
   public:
-    SequencedProjectile(GameBase* game, int type, std::vector<sf::Texture*> sequence, Shape<KinematicShapeDefinition>* shapes, sf::Transform start, sf::Vector2f velocity, int seqFrames = 1, int seqStart = 0);
+    SequencedProjectile(GameBase* game, int type, std::vector<sf::Texture*> sequence, Shape<KinematicShapeDefinition>* shapes, sf::Transform start, sf::Vector2f velocity, int maxLifetime = 100, int seqFrames = 1, int seqStart = 0);
   };
 
 } // namespace game

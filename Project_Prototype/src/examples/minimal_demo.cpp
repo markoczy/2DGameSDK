@@ -42,7 +42,7 @@ int minimalDemo() {
   auto game = new Game(options);
 
   // Create Game World
-  auto world = GameWorldFactory::CreateGameWorld(game, "res/simple_grass/tilemap.json", "", "res/simple_grass/tile_");
+  auto world = GameWorldFactory::CreateGameWorld(game, "res/maps/simple_grass/tilemap.json", "", "res/maps/simple_grass/tile_");
   game->SetWorld(world);
   cout << "GameWorld created." << endl;
 

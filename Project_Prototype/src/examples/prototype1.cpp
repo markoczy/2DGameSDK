@@ -11,6 +11,18 @@ const int _CAM_TYPE = 500;
 
 using KinematicShape = game::Shape<KinematicShapeDefinition>;
 
+std::vector<sf::Texture*> initExplosion1() {
+  auto ret = std::vector<sf::Texture*>(63);
+  for(int i = 0; i < 63; i++) {
+    stringstream ss;
+    ss << "res/textures/effects/Sinestesia/explosions2/3_" << setfill('0') << setw(2) << i << ".png";
+    ret[i] = AssetManager::GetTexture(ss.str());
+  }
+  return ret;
+}
+
+std::vector<sf::Texture*> _EXPLOSION1 = initExplosion1();
+
 class Proto1PlayerEntity : public SpriteKinematicEntity {
 public:
   Proto1PlayerEntity(Game* game,
@@ -91,7 +103,7 @@ public:
   void Shoot(sf::Keyboard::Key) {
     if(mLastShoot.getElapsedTime().asMilliseconds() > mCooldownShoot) {
       auto game = (Game*)getGame();
-      auto proj = new SequencedProjectile(game, 777, projectileTex, ShapeFactory::CreateKinematicCircleShape(game, 5, 0, 0), GetCombinedTransform().translate(-11, 80), sf::Vector2f(0, 600), 8);
+      auto proj = new SequencedProjectile(game, 777, projectileTex, ShapeFactory::CreateKinematicCircleShape(game, 5, 0, 0), GetCombinedTransform().translate(0, 80), sf::Vector2f(0, 600), 100, 8);
       // auto proj = new SpriteProjectile(game, 777, AssetManager::GetTexture("res/textures/sample.png"), ShapeFactory::CreateKinematicCircleShape(game, 10, 0, 0), GetCombinedTransform().translate(0, 60), sf::Vector2f(0, 1000));
       mLastShoot.restart();
       game->GetAudioController()->PlayOnce(mShootSound);
@@ -137,6 +149,10 @@ public:
       getGame()->GetAudioController()->PlayOnce(mHitSound);
       mGlowTime = 5;
     } else if(!mDestroying) {
+      cout << "Before create explosion" << endl;
+      auto explosion = new Effect(getGame(), _EXPLOSION1, GetCombinedTransform());
+      cout << "After create explosion" << endl;
+
       getGame()->GetStateManager()->DestroyObject(this);
       getGame()->GetStateManager()->DestroyVisualObject(this);
       getGame()->GetAudioController()->PlayOnce(mDestroySound);
@@ -172,6 +188,18 @@ private:
   int mGlowTime = 0;
   bool mIsGlowing = false;
 };
+
+PolygonShape<KinematicShapeDefinition>* getEnemyShape(Game* game) {
+  auto verts = vector<cpVect>();
+  verts.push_back(cpv(-85, -31));
+  verts.push_back(cpv(84, -31));
+  verts.push_back(cpv(76, -5));
+  verts.push_back(cpv(0, 49));
+  verts.push_back(cpv(-1, 49));
+  verts.push_back(cpv(-77, -5));
+  return ShapeFactory::CreateKinematicPolygonShape(game, verts, 0, 0);
+  // return new PolygonKinematicShape(game, verts);
+}
 
 PolygonShape<KinematicShapeDefinition>* getPlayerShape(Game* game) {
   auto verts = vector<cpVect>();
@@ -242,7 +270,7 @@ int prototype1() {
   float aspectRatio = (float)sf::VideoMode::getDesktopMode().width / (float)sf::VideoMode::getDesktopMode().height;
 
   // Create game
-  auto options = GameOptions{"Arcade Shooter Prototype", sf::Vector2i(1024, 1024 / aspectRatio), 0.5, 60, false, true};
+  auto options = GameOptions{"Arcade Shooter Prototype", sf::Vector2i(1024, 1024 / aspectRatio), 0.5, 60, false, false};
   auto game = new Game(options);
 
   // Send Events to controller
@@ -260,21 +288,36 @@ int prototype1() {
   cam->SetScroll(sf::Vector2f(0, 0.5));
   game->SetCameraController(cam);
 
-  auto tex = AssetManager::GetTexture("res/textures/spaceships/scorpio/prefab_scorpio_1.png");
+  auto playerTex = AssetManager::GetTexture("res/textures/spaceships/scorpio/prefab_scorpio_1.png");
+  auto enemyTex = AssetManager::GetTexture("res/textures/spaceships/scorpio/prefab_scorpio_6B.png");
+  auto enemyTex2 = AssetManager::GetTexture("res/textures/spaceships/scorpio/prefab_am_1B.png");
   auto playerShape = getPlayerShape(game);
   // auto playerShape = ShapeFactory::CreateKinematicRectangleShape(game, 124, 135, 0, 0);
-  auto player = new Proto1PlayerEntity(game, tex, playerShape, 5.0, upPressed, downPressed, leftPressed, rightPressed, spacePressed);
+  auto player = new Proto1PlayerEntity(game, playerTex, playerShape, 5.0, upPressed, downPressed, leftPressed, rightPressed, spacePressed);
   float offsetY = -(cam->GetBounds().y / 2.0) + 80;
   player->SetTransform(sf::Transform().translate(0, offsetY));
 
-  auto enemy = new EnemyEntity(game, tex, playerShape->CopyTemplate());
+  auto enemyShape = getEnemyShape(game);
+  auto enemy = new EnemyEntity(game, enemyTex, enemyShape);
   enemy->SetTransform(sf::Transform().translate(800, 1800).rotate(180));
 
-  auto enemy2 = new EnemyEntity(game, tex, playerShape->CopyTemplate());
+  auto enemy2 = new EnemyEntity(game, enemyTex, enemyShape->CopyTemplate());
   enemy2->SetTransform(sf::Transform().translate(1100, 1600).rotate(180));
 
-  auto enemy3 = new EnemyEntity(game, tex, playerShape->CopyTemplate());
+  auto enemy3 = new EnemyEntity(game, enemyTex, enemyShape->CopyTemplate());
   enemy3->SetTransform(sf::Transform().translate(1400, 1400).rotate(180));
+
+  auto enemy4 = new EnemyEntity(game, enemyTex, enemyShape->CopyTemplate());
+  enemy4->SetTransform(sf::Transform().translate(800, 2100).rotate(180));
+
+  auto enemy5 = new EnemyEntity(game, enemyTex, enemyShape->CopyTemplate());
+  enemy5->SetTransform(sf::Transform().translate(1100, 2400).rotate(180));
+
+  auto enemy6 = new EnemyEntity(game, enemyTex, enemyShape->CopyTemplate());
+  enemy6->SetTransform(sf::Transform().translate(1400, 2700).rotate(180));
+
+  auto enemy7 = new EnemyEntity(game, enemyTex, enemyShape->CopyTemplate());
+  enemy7->SetTransform(sf::Transform().translate(1100, 3000).rotate(180));
 
   // Layout entities in scene
   auto scene = new SceneGraph(game);
@@ -283,6 +326,10 @@ int prototype1() {
   scene->AddEntity(enemy);
   scene->AddEntity(enemy2);
   scene->AddEntity(enemy3);
+  scene->AddEntity(enemy4);
+  scene->AddEntity(enemy5);
+  scene->AddEntity(enemy6);
+  scene->AddEntity(enemy7);
   game->SetScene(scene);
 
   game->GetAudioController()->PlayRepeated(AssetManager::GetAudio("res/audio/tgfcoder/FrozenJam.oga"));
