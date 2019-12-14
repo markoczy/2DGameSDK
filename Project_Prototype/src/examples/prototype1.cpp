@@ -30,6 +30,8 @@ const std::vector<sf::Texture*> _PROJECTILE_AM_RED = {
     AssetManager::GetTexture("res/textures/projectiles/rawdanitsu/am_red6.png"),
 };
 
+sf::Texture* _ENEMY_TEX = AssetManager::GetTexture("res/textures/spaceships/scorpio/prefab_scorpio_6B.png");
+
 sf::SoundBuffer* _SOUND_HIT_HURT_2 = AssetManager::GetAudio("res/audio/Hit_Hurt2.wav");
 
 sf::SoundBuffer* _SOUND_EXPLOSION = AssetManager::GetAudio("res/audio/Explosion.wav");
@@ -70,6 +72,51 @@ protected:
     return std::make_tuple(ret, mData);
   }
 };
+
+struct SequenceTransformElement {
+  sf::Transform Transform;
+  int Frames = 1;
+};
+
+class SequenceTransformBehaviour {
+public:
+  SequenceTransformBehaviour(vector<SequenceTransformElement> sequenceTransform, int start = 0, bool repeat = false) : mSequenceTransform(sequenceTransform), mRepeat(repeat), mCurIdx(start) {}
+
+  void OnTick() {
+    auto cur = mSequenceTransform[mCurIdx];
+    if(mCurFrame++ > cur.Frames) {
+      mCurFrame = 0;
+      if(mCurIdx < mSequenceTransform.size() - 1) {
+        mCurIdx++;
+      } else if(mRepeat) {
+        mCurIdx = 0;
+      } else {
+        mFinished = true;
+      }
+    }
+  }
+
+  sf::Transform GetTransform() {
+    if(mFinished) return sf::Transform::Identity;
+    return mSequenceTransform[mCurIdx].Transform;
+  }
+
+protected:
+  vector<SequenceTransformElement> mSequenceTransform;
+  bool mRepeat = false;
+  bool mFinished = false;
+  int mCurIdx = 0;
+  int mCurFrame = 0;
+};
+
+vector<SequenceTransformElement> createLeftRightSequence(int speed, int ticks, bool invert = false) {
+  auto ret = vector<SequenceTransformElement>();
+  ret.push_back({sf::Transform().translate(invert ? speed : -speed, 0), ticks});
+  ret.push_back({sf::Transform().translate(invert ? speed : -speed, 0), ticks});
+  ret.push_back({sf::Transform().translate(invert ? -speed : speed, 0), ticks});
+  ret.push_back({sf::Transform().translate(invert ? -speed : speed, 0), ticks});
+  return ret;
+}
 
 class DestructibleBehaviour : public Observable<void*> {
 public:
@@ -320,13 +367,31 @@ public:
     }
   }
 
+  void SetFlightSequence(SequenceTransformBehaviour* sequence) {
+    mFlightSequence = sequence;
+  }
+
+  void SetShootDelay(int delay) {
+    mShootDelay = delay;
+  }
+
   void Shoot() {
     auto game = (Game*)getGame();
-    auto proj = new SequencedProjectile(game, _ENEMY_PROJECTILE, _PROJECTILE_AM_RED, ShapeFactory::CreateKinematicCircleShape(game, 5, 0, 0), GetCombinedTransform().translate(0, 80), sf::Vector2f(0, -300), 500, 8);
+    auto proj = new SequencedProjectile(game, _ENEMY_PROJECTILE, _PROJECTILE_AM_RED, ShapeFactory::CreateKinematicCircleShape(game, 5, 0, 0), GetCombinedTransform().translate(0, 80), sf::Vector2f(0, -300), 300, 8);
   }
 
   void OnTick() {
-    if(mTimeLastShot++ > 200) {
+    if(mFlightSequence != nullptr) {
+      mFlightSequence->OnTick();
+      Transform(mFlightSequence->GetTransform());
+    }
+
+    if(mShootDelay > 0) {
+      mShootDelay--;
+      return;
+    }
+
+    if(mTimeLastShot++ > 150) {
       Shoot();
       mTimeLastShot = 0;
     }
@@ -335,6 +400,7 @@ public:
 private:
   OnHit* mOnHit = nullptr;
   DestructibleBehaviour* mDestructible = nullptr;
+  SequenceTransformBehaviour* mFlightSequence = nullptr;
 
   sf::Clock mCoolDown;
   int mHits = 0;
@@ -343,30 +409,45 @@ private:
   int mGlowTime = 0;
   bool mIsGlowing = false;
   int mTimeLastShot = 0;
+  int mShootDelay = 0;
 };
 
 PolygonShape<KinematicShapeDefinition>* getEnemyShape(Game* game) {
-  auto verts = vector<cpVect>();
-  verts.push_back(cpv(-85, -31));
-  verts.push_back(cpv(84, -31));
-  verts.push_back(cpv(76, -5));
-  verts.push_back(cpv(0, 49));
-  verts.push_back(cpv(-1, 49));
-  verts.push_back(cpv(-77, -5));
-  return ShapeFactory::CreateKinematicPolygonShape(game, verts, 0, 0);
-  // return new PolygonKinematicShape(game, verts);
+  static PolygonShape<KinematicShapeDefinition>* ret = nullptr;
+  if(ret == nullptr) {
+    auto verts = vector<cpVect>();
+    verts.push_back(cpv(-85, -31));
+    verts.push_back(cpv(84, -31));
+    verts.push_back(cpv(76, -5));
+    verts.push_back(cpv(0, 49));
+    verts.push_back(cpv(-1, 49));
+    verts.push_back(cpv(-77, -5));
+    ret = ShapeFactory::CreateKinematicPolygonShape(game, verts, 0, 0);
+  }
+  return ret;
 }
 
 PolygonShape<KinematicShapeDefinition>* getPlayerShape(Game* game) {
+  static PolygonShape<KinematicShapeDefinition>* ret = nullptr;
   auto verts = vector<cpVect>();
-  verts.push_back(cpv(-62, -27.5));
-  verts.push_back(cpv(61, -27.5));
-  verts.push_back(cpv(61, 21.5));
-  verts.push_back(cpv(4, 67.5));
-  verts.push_back(cpv(-5, 67.5));
-  verts.push_back(cpv(-62, 21.5));
-  return ShapeFactory::CreateKinematicPolygonShape(game, verts, 0, 0);
-  // return new PolygonKinematicShape(game, verts);
+  if(ret == nullptr) {
+    verts.push_back(cpv(-62, -27.5));
+    verts.push_back(cpv(61, -27.5));
+    verts.push_back(cpv(61, 21.5));
+    verts.push_back(cpv(4, 67.5));
+    verts.push_back(cpv(-5, 67.5));
+    verts.push_back(cpv(-62, 21.5));
+    ret = ShapeFactory::CreateKinematicPolygonShape(game, verts, 0, 0);
+  }
+  return ret;
+}
+
+void spawnHorizontalGlider(Game* game, sf::Vector2f pos, int time = 100, bool invert = false, int shootDelay = 0) {
+  auto glider = new EnemyEntity(game, _ENEMY_TEX, getEnemyShape(game)->CopyTemplate());
+  glider->SetTransform(sf::Transform().translate(pos).rotate(180));
+  glider->SetFlightSequence(new SequenceTransformBehaviour(createLeftRightSequence(2, time, invert), 1, true));
+  glider->SetShootDelay(shootDelay);
+  game->GetScene()->AddEntity(glider);
 }
 
 class ScrollCamera : public DefaultCameraController, public Entity {
@@ -445,7 +526,6 @@ int prototype1() {
   game->SetCameraController(cam);
 
   auto playerTex = AssetManager::GetTexture("res/textures/spaceships/scorpio/prefab_scorpio_1.png");
-  auto enemyTex = AssetManager::GetTexture("res/textures/spaceships/scorpio/prefab_scorpio_6B.png");
   auto enemyTex2 = AssetManager::GetTexture("res/textures/spaceships/scorpio/prefab_am_1B.png");
   auto playerShape = getPlayerShape(game);
   // auto playerShape = ShapeFactory::CreateKinematicRectangleShape(game, 124, 135, 0, 0);
@@ -453,40 +533,20 @@ int prototype1() {
   float offsetY = -(cam->GetBounds().y / 2.0) + 80;
   player->SetTransform(sf::Transform().translate(0, offsetY));
 
-  auto enemyShape = getEnemyShape(game);
-  auto enemy = new EnemyEntity(game, enemyTex, enemyShape);
-  enemy->SetTransform(sf::Transform().translate(800, 1800).rotate(180));
-
-  auto enemy2 = new EnemyEntity(game, enemyTex, enemyShape->CopyTemplate());
-  enemy2->SetTransform(sf::Transform().translate(1100, 1600).rotate(180));
-
-  auto enemy3 = new EnemyEntity(game, enemyTex, enemyShape->CopyTemplate());
-  enemy3->SetTransform(sf::Transform().translate(1400, 1400).rotate(180));
-
-  auto enemy4 = new EnemyEntity(game, enemyTex, enemyShape->CopyTemplate());
-  enemy4->SetTransform(sf::Transform().translate(800, 2100).rotate(180));
-
-  auto enemy5 = new EnemyEntity(game, enemyTex, enemyShape->CopyTemplate());
-  enemy5->SetTransform(sf::Transform().translate(1100, 2400).rotate(180));
-
-  auto enemy6 = new EnemyEntity(game, enemyTex, enemyShape->CopyTemplate());
-  enemy6->SetTransform(sf::Transform().translate(1400, 2700).rotate(180));
-
-  auto enemy7 = new EnemyEntity(game, enemyTex, enemyShape->CopyTemplate());
-  enemy7->SetTransform(sf::Transform().translate(1100, 3000).rotate(180));
-
   // Layout entities in scene
   auto scene = new SceneGraph(game);
   int camId = scene->AddEntity(cam);
   scene->AddEntity(player, camId);
-  scene->AddEntity(enemy);
-  scene->AddEntity(enemy2);
-  scene->AddEntity(enemy3);
-  scene->AddEntity(enemy4);
-  scene->AddEntity(enemy5);
-  scene->AddEntity(enemy6);
-  scene->AddEntity(enemy7);
   game->SetScene(scene);
+
+  spawnHorizontalGlider(game, sf::Vector2f(500, 1500), 100, false, 300);
+  spawnHorizontalGlider(game, sf::Vector2f(1548, 1500), 100, true, 300);
+  spawnHorizontalGlider(game, sf::Vector2f(1024, 1700), 50, true, 400);
+
+  spawnHorizontalGlider(game, sf::Vector2f(500, 2500), 50, false, 1200);
+  spawnHorizontalGlider(game, sf::Vector2f(1548, 2500), 50, true, 1200);
+  spawnHorizontalGlider(game, sf::Vector2f(700, 2700), 50, false, 1200);
+  spawnHorizontalGlider(game, sf::Vector2f(1348, 2700), 50, true, 1200);
 
   game->GetAudioController()->PlayRepeated(AssetManager::GetAudio("res/audio/tgfcoder/FrozenJam.oga"));
 
