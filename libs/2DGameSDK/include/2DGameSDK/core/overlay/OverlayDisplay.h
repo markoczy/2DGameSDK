@@ -14,6 +14,8 @@ namespace game {
   public:
     OverlayDisplay(GameBase* game);
     int AddElement(sf::Drawable* elem, bool enabled = true);
+
+    void Update();
     void Enable(int id);
     void Disable(int id);
 

@@ -11,6 +11,10 @@ namespace game {
     return counter++;
   }
 
+  void OverlayDisplay::Update() {
+    mStateChanged = true;
+  }
+
   void OverlayDisplay::Enable(int id) {
     std::get<1>(mDrawables[id]) = true;
     mStateChanged = true;

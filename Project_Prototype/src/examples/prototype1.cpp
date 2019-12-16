@@ -18,6 +18,9 @@ int _ENEMY_PROJECTILE = 900;
 
 const int _PROJECTILE_SEQ_FRAMES = 8;
 
+sf::Texture* _PLAYER_TEXTURE = AssetManager::GetTexture("res/textures/spaceships/scorpio/prefab_scorpio_1.png");
+sf::Texture* _OVERLAY_HEART_TEXTURE = AssetManager::GetTexture("res/textures/spaceships/scorpio/prefab_am_overlay_1.png");
+
 std::vector<sf::Texture*> _PROJECTILE_GREEN = {
     AssetManager::GetTexture("res/textures/projectiles/rawdanitsu/green1.png"),
     AssetManager::GetTexture("res/textures/projectiles/rawdanitsu/green2.png"),
@@ -26,19 +29,6 @@ std::vector<sf::Texture*> _PROJECTILE_GREEN = {
     AssetManager::GetTexture("res/textures/projectiles/rawdanitsu/green5.png"),
     AssetManager::GetTexture("res/textures/projectiles/rawdanitsu/green6.png"),
 };
-// EnemyEntity(Game* game,
-//             sf::Texture* texture,
-//             KinematicShape* shape,
-//             int hp,
-//             std::vector<sf::Texture*> projectileSequence,
-//             KinematicShape* projectileShape,
-//             int shootInterval = 150,
-//             int shootDelay = 0)
-//     //////////////////////////////////////////////////////////////////////////
-//     : SpriteKinematicEntity(_ENEMY_TYPE, game, texture, {shape}, true),
-//       DestructibleBehaviour(game, this, mSpriteRenderer, _SOUND_HIT_HURT_2, hp, _DESCTRUCTIBLE_COOLDOWN),
-//       SequenceTransformBehaviour(this),
-//       RepeatedShootBehaviour(game, this, _ENEMY_PROJECTILE, projectileSequence, _SOUND_ENEMY_SHOOT, projectileShape, {sf::Vector2f(-15, 60), sf::Vector2f(15, 60)}, {sf::Vector2f(0, -300)}, 8, shootInterval, 300, shootDelay){};
 
 std::vector<sf::Texture*> _PROJECTILE_AM_RED = {
     AssetManager::GetTexture("res/textures/projectiles/rawdanitsu/am_red1.png"),
@@ -167,6 +157,14 @@ public:
     cout << "Destructible Constructor" << endl;
   }
 
+  bool IsDestroyed() {
+    return mDestroyed;
+  }
+
+  int GetHp() {
+    return mHp;
+  }
+
   void OnTick() {
     hitBehaviour();
     glowBehaviour();
@@ -175,10 +173,6 @@ public:
 
   void OnHit(int hpLoss) {
     mHpLoss = hpLoss;
-  }
-
-  bool IsDestroyed() {
-    return mDestroyed;
   }
 
 protected:
@@ -312,6 +306,79 @@ protected:
   int mTimeLastShot = 0;
 };
 
+class GameController {
+public:
+  GameController(GameBase* game) : mGame(game) {
+  }
+
+  void InitOverlay() {
+    auto h = mGame->GetOptions().ScreenDim.y;
+
+    auto font = new sf::Font();
+    font->loadFromFile("res/fonts/Press_Start_2P/PressStart2P-Regular.ttf");
+    mText = new sf::Text("Score: 000000", *font, 20);
+    mText->setStyle(sf::Text::Bold);
+    mText->setFillColor(sf::Color::Red);
+    mText->setOutlineColor(sf::Color::Red);
+    // mText->setPosition(730, 15);
+    mText->setPosition(730, h - 35);
+
+    for(unsigned i = 0; i < mHearts.size(); i++) {
+      auto sprite = new sf::Sprite(*_OVERLAY_HEART_TEXTURE);
+      // sprite->setPosition(15 + (i * 45), 10);
+      sprite->setPosition(15 + (i * 45), h - 42);
+      mHearts[i] = sprite;
+    }
+
+    auto overlay = mGame->GetOverlayDisplay();
+    overlay->AddElement(mText);
+
+    for(unsigned i = 0; i < mHearts.size(); i++) {
+      mHeartIds[i] = overlay->AddElement(mHearts[i]);
+    }
+  }
+
+  int GetScore() {
+    return mScore;
+  }
+
+  void AddScore(int score) {
+    mScore += score;
+    stringstream ss;
+    ss << "Score: " << setfill('0') << setw(6) << mScore;
+    mText->setString(ss.str());
+    mGame->GetOverlayDisplay()->Update();
+  }
+
+  void SetHeartCount(int count) {
+    if(mHeartCount == count) return;
+    mHeartCount = count;
+    for(int i = 0; i < mHearts.size(); i++) {
+      if(mHeartCount > i) {
+        mGame->GetOverlayDisplay()->Enable(mHeartIds[i]);
+      } else {
+        mGame->GetOverlayDisplay()->Disable(mHeartIds[i]);
+      }
+    }
+  }
+
+protected:
+  int mScore = 0;
+  sf::Text* mText = nullptr;
+  GameBase* mGame = nullptr;
+  int mHeartCount = 3;
+  std::vector<sf::Sprite*> mHearts = std::vector<sf::Sprite*>(3);
+  std::vector<int> mHeartIds = std::vector<int>(3);
+};
+
+GameController* getGameController(GameBase* game) {
+  static GameController* ret = nullptr;
+  if(ret == nullptr) {
+    ret = new GameController(game);
+  }
+  return ret;
+}
+
 class Proto1PlayerEntity : public SpriteKinematicEntity,
                            public DestructibleBehaviour<Proto1PlayerEntity>,
                            public PlayerMoveBehaviour<Proto1PlayerEntity>,
@@ -362,6 +429,7 @@ public:
     DestructibleBehaviour::OnTick();
     PlayerMoveBehaviour::OnTick();
     PlayerShootBehaviour::OnTick();
+    getGameController(getGame())->SetHeartCount(GetHp());
   }
 
   void OnMove(sf::Vector2f dt) {
@@ -399,15 +467,12 @@ public:
 
   void OnDestroy() {
     if(!mDestroying) {
-      cout << "Player Before create explosion" << endl;
       new Effect(getGame(), _EXPLOSION1, GetCombinedTransform());
-      cout << "Player After create explosion" << endl;
 
       getGame()->GetStateManager()->DestroyObject(this);
       getGame()->GetStateManager()->DestroyVisualObject(this);
       getGame()->GetAudioController()->PlayOnce(_SOUND_EXPLOSION);
       mDestroying = true;
-      cout << "Plaer After destroy" << endl;
     }
   }
 
@@ -429,6 +494,7 @@ public:
               KinematicShape* projectileShape,
               std::vector<sf::Vector2f> projectileOffsets,
               std::vector<sf::Vector2f> projectileVelocity,
+              int score = 100,
               int projectileLifetime = 300,
               int shootInterval = 150,
               int shootDelay = 0)
@@ -436,7 +502,7 @@ public:
       : SpriteKinematicEntity(_ENEMY_TYPE, game, texture, {shape}, true),
         DestructibleBehaviour(game, this, mSpriteRenderer, _SOUND_HIT_HURT_2, hp, _DESCTRUCTIBLE_COOLDOWN),
         SequenceTransformBehaviour(this),
-        RepeatedShootBehaviour(game, this, _ENEMY_PROJECTILE, projectileSequence, _SOUND_ENEMY_SHOOT, projectileShape, projectileOffsets, projectileVelocity, _PROJECTILE_SEQ_FRAMES, shootInterval, projectileLifetime, shootDelay){};
+        RepeatedShootBehaviour(game, this, _ENEMY_PROJECTILE, projectileSequence, _SOUND_ENEMY_SHOOT, projectileShape, projectileOffsets, projectileVelocity, _PROJECTILE_SEQ_FRAMES, shootInterval, projectileLifetime, shootDelay), mScore(score){};
 
   int OnProjectileCollision(CollisionEventType type, Projectile* projectile, cpArbiter* arb) {
     if(projectile->GetType() == _PLAYER_PROJECTILE) {
@@ -447,6 +513,9 @@ public:
 
   void OnDestroy() {
     if(!mDestroying) {
+      if(GetHp() < 1) {
+        getGameController(getGame())->AddScore(mScore);
+      }
       cout << GetId() << " Before create explosion" << endl;
       auto explosion = new Effect(getGame(), _EXPLOSION1, GetCombinedTransform());
       cout << GetId() << " After create explosion" << endl;
@@ -466,6 +535,7 @@ public:
 
 private:
   bool mDestroying = false;
+  int mScore = 100;
 };
 
 PolygonShape<KinematicShapeDefinition>* getEnemyShape(Game* game) {
@@ -478,6 +548,23 @@ PolygonShape<KinematicShapeDefinition>* getEnemyShape(Game* game) {
     verts.push_back(cpv(0, 49));
     verts.push_back(cpv(-1, 49));
     verts.push_back(cpv(-77, -5));
+    ret = ShapeFactory::CreateKinematicPolygonShape(game, verts, 0, 0);
+  }
+  return ret;
+}
+
+PolygonShape<KinematicShapeDefinition>* getBusterShape(Game* game) {
+  static PolygonShape<KinematicShapeDefinition>* ret = nullptr;
+  if(ret == nullptr) {
+    auto verts = vector<cpVect>();
+    verts.push_back(cpv(-135.0, -11));
+    verts.push_back(cpv(-64.0, -21));
+    verts.push_back(cpv(-63.0, -43));
+    verts.push_back(cpv(62.0, -43));
+    verts.push_back(cpv(64.0, -21));
+    verts.push_back(cpv(134.0, -11));
+    verts.push_back(cpv(10.0, 36));
+    verts.push_back(cpv(-11, 36));
     ret = ShapeFactory::CreateKinematicPolygonShape(game, verts, 0, 0);
   }
   return ret;
@@ -509,7 +596,7 @@ vector<SequenceTransformElement> createLeftRightSequence(int speed, int ticks, b
 
 class GliderEnemyEntity : public EnemyEntity {
 public:
-  GliderEnemyEntity(Game* game, int shootInterval = 150, int shootDelay = 0) : EnemyEntity(game, _ENEMY_TEX, getEnemyShape(game)->CopyTemplate(), 3, _PROJECTILE_AM_RED, ShapeFactory::CreateKinematicCircleShape(game, 5, 0, 0), {sf::Vector2f(-15, 60), sf::Vector2f(15, 60)}, {sf::Vector2f(0, -300)}, 300, shootInterval, shootDelay) {}
+  GliderEnemyEntity(Game* game, int shootInterval = 150, int shootDelay = 0) : EnemyEntity(game, _ENEMY_TEX, getEnemyShape(game)->CopyTemplate(), 3, _PROJECTILE_AM_RED, ShapeFactory::CreateKinematicCircleShape(game, 5, 0, 0), {sf::Vector2f(-15, 60), sf::Vector2f(15, 60)}, {sf::Vector2f(0, -300)}, 100, 300, shootInterval, shootDelay) {}
 };
 
 class BusterEnemyEntity : public EnemyEntity {
@@ -519,7 +606,7 @@ public:
                     int shootDelay = 0)
       : EnemyEntity(game,
                     _ENEMY_BUSTER_TEX,
-                    getEnemyShape(game)->CopyTemplate(),
+                    getBusterShape(game)->CopyTemplate(),
                     5,
                     _PROJECTILE_AM_YELLOW,
                     ShapeFactory::CreateKinematicCircleShape(game, 5, 0, 0),
@@ -533,6 +620,7 @@ public:
                      sf::Vector2f(0, -200),
                      sf::Vector2f(-20, -200),
                      sf::Vector2f(-40, -200)},
+                    500,
                     300,
                     shootInterval,
                     shootDelay) {}
@@ -618,12 +706,11 @@ int prototype1() {
   cam->SetScroll(sf::Vector2f(0, 0.5));
   game->SetCameraController(cam);
 
-  auto playerTex = AssetManager::GetTexture("res/textures/spaceships/scorpio/prefab_scorpio_1.png");
   // auto enemyTex2 = AssetManager::GetTexture("res/textures/spaceships/scorpio/prefab_am_1B.png");
   auto playerShape = getPlayerShape(game);
   // auto playerShape = ShapeFactory::CreateKinematicRectangleShape(game, 124, 135, 0, 0);
   cout << "Creating Player" << endl;
-  auto player = new Proto1PlayerEntity(game, playerTex, playerShape, 5.0, spacePressed);
+  auto player = new Proto1PlayerEntity(game, _PLAYER_TEXTURE, playerShape, 5.0, spacePressed);
   cout << "After create Player" << endl;
   float offsetY = -(cam->GetBounds().y / 2.0) + 80;
   player->SetTransform(sf::Transform().translate(0, offsetY));
@@ -650,6 +737,13 @@ int prototype1() {
   cout << "After Glider spawn" << endl;
 
   game->GetAudioController()->PlayRepeated(AssetManager::GetAudio("res/audio/tgfcoder/FrozenJam.oga"));
+
+  auto ctrl = getGameController(game);
+
+  auto overlay = new OverlayDisplay(game);
+  game->SetOverlayDisplay(overlay);
+
+  ctrl->InitOverlay();
 
   game->Run();
   return 0;
