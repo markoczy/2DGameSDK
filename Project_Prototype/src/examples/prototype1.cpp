@@ -326,6 +326,52 @@ protected:
   int mTimeLastShot = 0;
 };
 
+class ScrollCamera : public DefaultCameraController, public Entity {
+public:
+  ScrollCamera(GameBase* game) : DefaultCameraController(game), Entity(_CAM_TYPE, game) {
+    SetZoom(game->GetOptions().InitialZoom);
+    SetCenter(sf::Vector2f(GetBounds().x / 2, GetBounds().y / 2));
+  }
+
+  ~ScrollCamera() {}
+
+  sf::Transform GetTransform() {
+    return mTransform;
+  }
+
+  sf::Transform GetCombinedTransform() {
+    return mTransform;
+  }
+
+  void SetScroll(sf::Vector2f scrollPerTick) {
+    mScroll = scrollPerTick;
+  }
+
+  void SetCenter(sf::Vector2f center) {
+    DefaultCameraController::SetCenter(center);
+    SetTransform(sf::Transform().translate(center));
+  }
+
+  void OnTick() {
+    DefaultCameraController::OnTick();
+    auto newCenter = mCenter + mScroll;
+    SetCenter(newCenter);
+  }
+
+  void OnRender(sf::RenderTarget* target, sf::RenderStates states = sf::RenderStates::Default) {}
+
+protected:
+  sf::Transform mTransform;
+  sf::Vector2f mLocalCenter;
+  sf::Vector2f mScroll;
+
+  bool setTransform(sf::Transform transform) {
+    mTransform = transform;
+    return true;
+  }
+  bool transform(sf::Transform) { return false; }
+};
+
 class GameController {
 public:
   GameController(GameBase* game) : mGame(game) {
@@ -365,6 +411,10 @@ public:
     }
   }
 
+  void SetScrollCamera(ScrollCamera* cam) {
+    mScrollCamera = cam;
+  }
+
   int GetScore() {
     return mScore;
   }
@@ -391,6 +441,7 @@ public:
 
   void GameOver() {
     mGame->GetOverlayDisplay()->Enable(mGameOverId);
+    if(mScrollCamera) mScrollCamera->SetScroll(sf::Vector2f());
   }
 
 protected:
@@ -402,6 +453,7 @@ protected:
   int mHeartCount = 3;
   std::vector<sf::Sprite*> mHearts = std::vector<sf::Sprite*>(3);
   std::vector<int> mHeartIds = std::vector<int>(3);
+  ScrollCamera* mScrollCamera = nullptr;
 };
 
 GameController* getGameController(GameBase* game) {
@@ -695,52 +747,6 @@ void spawnImmobileBuster(GameBase* game, sf::Vector2f pos, int shootDelay = 0) {
   game->GetScene()->AddEntity(glider);
 }
 
-class ScrollCamera : public DefaultCameraController, public Entity {
-public:
-  ScrollCamera(GameBase* game) : DefaultCameraController(game), Entity(_CAM_TYPE, game) {
-    SetZoom(game->GetOptions().InitialZoom);
-    SetCenter(sf::Vector2f(GetBounds().x / 2, GetBounds().y / 2));
-  }
-
-  ~ScrollCamera() {}
-
-  sf::Transform GetTransform() {
-    return mTransform;
-  }
-
-  sf::Transform GetCombinedTransform() {
-    return mTransform;
-  }
-
-  void SetScroll(sf::Vector2f scrollPerTick) {
-    mScroll = scrollPerTick;
-  }
-
-  void SetCenter(sf::Vector2f center) {
-    DefaultCameraController::SetCenter(center);
-    SetTransform(sf::Transform().translate(center));
-  }
-
-  void OnTick() {
-    DefaultCameraController::OnTick();
-    auto newCenter = mCenter + mScroll;
-    SetCenter(newCenter);
-  }
-
-  void OnRender(sf::RenderTarget* target, sf::RenderStates states = sf::RenderStates::Default) {}
-
-protected:
-  sf::Transform mTransform;
-  sf::Vector2f mLocalCenter;
-  sf::Vector2f mScroll;
-
-  bool setTransform(sf::Transform transform) {
-    mTransform = transform;
-    return true;
-  }
-  bool transform(sf::Transform) { return false; }
-};
-
 class SpawnSequencer : public GameObject {
 public:
   SpawnSequencer(GameBase* game) : GameObject(ObjectType::Unknown, game) {
@@ -833,6 +839,7 @@ int prototype1() {
   game->GetAudioController()->PlayRepeated(AssetManager::GetAudio("res/audio/tgfcoder/FrozenJam.oga"));
 
   auto ctrl = getGameController(game);
+  ctrl->SetScrollCamera(cam);
 
   auto overlay = new OverlayDisplay(game);
   game->SetOverlayDisplay(overlay);
