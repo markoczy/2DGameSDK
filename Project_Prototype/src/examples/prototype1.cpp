@@ -154,7 +154,6 @@ template <class TEntity>
 class DestructibleBehaviour {
 public:
   DestructibleBehaviour(GameBase* game, TEntity* base, SingleSpriteRenderStrategy* renderer, sf::SoundBuffer* hitSound, int hp = 1, int coolDown = 10) : mGame(game), mBase(base), mRenderer(renderer), mHitSound(hitSound), mHp(hp), mCooldown(coolDown), mLastHit(coolDown) {
-    cout << "Destructible Constructor" << endl;
   }
 
   bool IsDestroyed() {
@@ -227,10 +226,31 @@ protected:
   }
 };
 
+template <class TEntity>
+class DespawnTimeoutBehaviour {
+public:
+  DespawnTimeoutBehaviour(GameBase* game, TEntity* base, int timeout = -1) : mGame(game), mBase(base), mTimeout(timeout) {
+  }
+
+  void OnTick() {
+    if(mTimeout == -1) return;
+    if(++mCounter > mTimeout) {
+      mGame->GetStateManager()->DestroyObject(mBase);
+      mGame->GetStateManager()->DestroyVisualObject(mBase);
+    }
+  }
+
+protected:
+  GameBase* mGame = nullptr;
+  TEntity* mBase = nullptr;
+  int mTimeout = 0;
+  int mCounter = 0;
+};
+
 template <class TEntity, int ID = 1>
 class RepeatedShootBehaviour {
 public:
-  RepeatedShootBehaviour(Game* game, TEntity* base, int projectileType, std::vector<sf::Texture*> sequence, sf::SoundBuffer* shootSound, KinematicShape* shape, std::vector<sf::Vector2f> offsets, std::vector<sf::Vector2f> velocity, int seqFrames, int shootIntervall = 100, int maxLifetime = 300, int shootDelay = 0) : mGame(game), mBase(base), mType(projectileType), mSequence(sequence), mShootSound(shootSound), mShape(shape), mOffsets(offsets), mVelocity(velocity), mSeqFrames(seqFrames), mShootIntervall(shootIntervall), mMaxLifetime(maxLifetime), mShootDelay(shootDelay) {
+  RepeatedShootBehaviour(GameBase* game, TEntity* base, int projectileType, std::vector<sf::Texture*> sequence, sf::SoundBuffer* shootSound, KinematicShape* shape, std::vector<sf::Vector2f> offsets, std::vector<sf::Vector2f> velocity, int seqFrames, int shootIntervall = 100, int maxLifetime = 300, int shootDelay = 0) : mGame(game), mBase(base), mType(projectileType), mSequence(sequence), mShootSound(shootSound), mShape(shape), mOffsets(offsets), mVelocity(velocity), mSeqFrames(seqFrames), mShootIntervall(shootIntervall), mMaxLifetime(maxLifetime), mShootDelay(shootDelay) {
   }
 
   void Shoot() {
@@ -252,7 +272,7 @@ public:
   }
 
 protected:
-  Game* mGame = nullptr;
+  GameBase* mGame = nullptr;
   TEntity* mBase = nullptr;
   int mType = 0;
   std::vector<sf::Texture*> mSequence;
@@ -271,7 +291,7 @@ protected:
 template <class TEntity, int ID = 1>
 class PlayerShootBehaviour {
 public:
-  PlayerShootBehaviour(Game* game, TEntity* base, Key key, int projectileType, std::vector<sf::Texture*> sequence, sf::SoundBuffer* shootSound, KinematicShape* shape, std::vector<sf::Vector2f> offsets, std::vector<sf::Vector2f> velocity, int seqFrames, int shootIntervall = 100, int maxLifetime = 300) : mGame(game), mBase(base), mKey(key), mType(projectileType), mSequence(sequence), mShootSound(shootSound), mShape(shape), mOffsets(offsets), mVelocity(velocity), mSeqFrames(seqFrames), mShootIntervall(shootIntervall), mMaxLifetime(maxLifetime) {
+  PlayerShootBehaviour(GameBase* game, TEntity* base, Key key, int projectileType, std::vector<sf::Texture*> sequence, sf::SoundBuffer* shootSound, KinematicShape* shape, std::vector<sf::Vector2f> offsets, std::vector<sf::Vector2f> velocity, int seqFrames, int shootIntervall = 100, int maxLifetime = 300) : mGame(game), mBase(base), mKey(key), mType(projectileType), mSequence(sequence), mShootSound(shootSound), mShape(shape), mOffsets(offsets), mVelocity(velocity), mSeqFrames(seqFrames), mShootIntervall(shootIntervall), mMaxLifetime(maxLifetime) {
   }
 
   void Shoot() {
@@ -290,7 +310,7 @@ public:
   }
 
 protected:
-  Game* mGame = nullptr;
+  GameBase* mGame = nullptr;
   TEntity* mBase = nullptr;
   Key mKey;
   int mType = 0;
@@ -320,8 +340,14 @@ public:
     mText->setStyle(sf::Text::Bold);
     mText->setFillColor(sf::Color::Red);
     mText->setOutlineColor(sf::Color::Red);
-    // mText->setPosition(730, 15);
     mText->setPosition(730, h - 35);
+
+    mGameOver = new sf::Text("Game Over!", *font, 64);
+    mGameOver->setOrigin(mGameOver->getLocalBounds().width / 2, mGameOver->getLocalBounds().height / 2);
+    mGameOver->setStyle(sf::Text::Bold);
+    mGameOver->setFillColor(sf::Color::Red);
+    mGameOver->setOutlineColor(sf::Color::Red);
+    mGameOver->setPosition(512, h / 2);
 
     for(unsigned i = 0; i < mHearts.size(); i++) {
       auto sprite = new sf::Sprite(*_OVERLAY_HEART_TEXTURE);
@@ -332,6 +358,7 @@ public:
 
     auto overlay = mGame->GetOverlayDisplay();
     overlay->AddElement(mText);
+    mGameOverId = overlay->AddElement(mGameOver, false);
 
     for(unsigned i = 0; i < mHearts.size(); i++) {
       mHeartIds[i] = overlay->AddElement(mHearts[i]);
@@ -362,9 +389,15 @@ public:
     }
   }
 
+  void GameOver() {
+    mGame->GetOverlayDisplay()->Enable(mGameOverId);
+  }
+
 protected:
   int mScore = 0;
   sf::Text* mText = nullptr;
+  sf::Text* mGameOver = nullptr;
+  int mGameOverId = 0;
   GameBase* mGame = nullptr;
   int mHeartCount = 3;
   std::vector<sf::Sprite*> mHearts = std::vector<sf::Sprite*>(3);
@@ -384,7 +417,7 @@ class Proto1PlayerEntity : public SpriteKinematicEntity,
                            public PlayerMoveBehaviour<Proto1PlayerEntity>,
                            public PlayerShootBehaviour<Proto1PlayerEntity> {
 public:
-  Proto1PlayerEntity(Game* game,
+  Proto1PlayerEntity(GameBase* game,
                      sf::Texture* texture,
                      KinematicShape* shape,
                      float speed,
@@ -472,6 +505,7 @@ public:
       getGame()->GetStateManager()->DestroyObject(this);
       getGame()->GetStateManager()->DestroyVisualObject(this);
       getGame()->GetAudioController()->PlayOnce(_SOUND_EXPLOSION);
+      getGameController(getGame())->GameOver();
       mDestroying = true;
     }
   }
@@ -484,9 +518,10 @@ private:
 class EnemyEntity : public SpriteKinematicEntity,
                     public DestructibleBehaviour<EnemyEntity>,
                     public SequenceTransformBehaviour<EnemyEntity>,
-                    public RepeatedShootBehaviour<EnemyEntity> {
+                    public RepeatedShootBehaviour<EnemyEntity>,
+                    public DespawnTimeoutBehaviour<EnemyEntity> {
 public:
-  EnemyEntity(Game* game,
+  EnemyEntity(GameBase* game,
               sf::Texture* texture,
               KinematicShape* shape,
               int hp,
@@ -497,12 +532,14 @@ public:
               int score = 100,
               int projectileLifetime = 300,
               int shootInterval = 150,
-              int shootDelay = 0)
+              int shootDelay = 0,
+              int despawnTimeout = -1)
       //////////////////////////////////////////////////////////////////////////
       : SpriteKinematicEntity(_ENEMY_TYPE, game, texture, {shape}, true),
         DestructibleBehaviour(game, this, mSpriteRenderer, _SOUND_HIT_HURT_2, hp, _DESCTRUCTIBLE_COOLDOWN),
         SequenceTransformBehaviour(this),
-        RepeatedShootBehaviour(game, this, _ENEMY_PROJECTILE, projectileSequence, _SOUND_ENEMY_SHOOT, projectileShape, projectileOffsets, projectileVelocity, _PROJECTILE_SEQ_FRAMES, shootInterval, projectileLifetime, shootDelay), mScore(score){};
+        RepeatedShootBehaviour(game, this, _ENEMY_PROJECTILE, projectileSequence, _SOUND_ENEMY_SHOOT, projectileShape, projectileOffsets, projectileVelocity, _PROJECTILE_SEQ_FRAMES, shootInterval, projectileLifetime, shootDelay),
+        DespawnTimeoutBehaviour(game, this, despawnTimeout), mScore(score){};
 
   int OnProjectileCollision(CollisionEventType type, Projectile* projectile, cpArbiter* arb) {
     if(projectile->GetType() == _PLAYER_PROJECTILE) {
@@ -531,6 +568,7 @@ public:
     DestructibleBehaviour::OnTick();
     SequenceTransformBehaviour::OnTick();
     RepeatedShootBehaviour::OnTick();
+    DespawnTimeoutBehaviour::OnTick();
   }
 
 private:
@@ -538,7 +576,7 @@ private:
   int mScore = 100;
 };
 
-PolygonShape<KinematicShapeDefinition>* getEnemyShape(Game* game) {
+PolygonShape<KinematicShapeDefinition>* getEnemyShape(GameBase* game) {
   static PolygonShape<KinematicShapeDefinition>* ret = nullptr;
   if(ret == nullptr) {
     auto verts = vector<cpVect>();
@@ -553,7 +591,7 @@ PolygonShape<KinematicShapeDefinition>* getEnemyShape(Game* game) {
   return ret;
 }
 
-PolygonShape<KinematicShapeDefinition>* getBusterShape(Game* game) {
+PolygonShape<KinematicShapeDefinition>* getBusterShape(GameBase* game) {
   static PolygonShape<KinematicShapeDefinition>* ret = nullptr;
   if(ret == nullptr) {
     auto verts = vector<cpVect>();
@@ -570,7 +608,7 @@ PolygonShape<KinematicShapeDefinition>* getBusterShape(Game* game) {
   return ret;
 }
 
-PolygonShape<KinematicShapeDefinition>* getPlayerShape(Game* game) {
+PolygonShape<KinematicShapeDefinition>* getPlayerShape(GameBase* game) {
   static PolygonShape<KinematicShapeDefinition>* ret = nullptr;
   auto verts = vector<cpVect>();
   if(ret == nullptr) {
@@ -596,12 +634,28 @@ vector<SequenceTransformElement> createLeftRightSequence(int speed, int ticks, b
 
 class GliderEnemyEntity : public EnemyEntity {
 public:
-  GliderEnemyEntity(Game* game, int shootInterval = 150, int shootDelay = 0) : EnemyEntity(game, _ENEMY_TEX, getEnemyShape(game)->CopyTemplate(), 3, _PROJECTILE_AM_RED, ShapeFactory::CreateKinematicCircleShape(game, 5, 0, 0), {sf::Vector2f(-15, 60), sf::Vector2f(15, 60)}, {sf::Vector2f(0, -300)}, 100, 300, shootInterval, shootDelay) {}
+  GliderEnemyEntity(GameBase* game,
+                    int shootInterval = 150,
+                    int shootDelay = 0,
+                    int despawnTimeout = -1)
+      : EnemyEntity(game,
+                    _ENEMY_TEX,
+                    getEnemyShape(game)->CopyTemplate(),
+                    3,
+                    _PROJECTILE_AM_RED,
+                    ShapeFactory::CreateKinematicCircleShape(game, 5, 0, 0),
+                    {sf::Vector2f(-15, 60), sf::Vector2f(15, 60)},
+                    {sf::Vector2f(0, -300)},
+                    100,
+                    300,
+                    shootInterval,
+                    shootDelay,
+                    despawnTimeout) {}
 };
 
 class BusterEnemyEntity : public EnemyEntity {
 public:
-  BusterEnemyEntity(Game* game,
+  BusterEnemyEntity(GameBase* game,
                     int shootInterval = 150,
                     int shootDelay = 0)
       : EnemyEntity(game,
@@ -626,14 +680,16 @@ public:
                     shootDelay) {}
 };
 
-void spawnHorizontalGlider(Game* game, sf::Vector2f pos, int time = 100, bool invert = false, int shootDelay = 0) {
-  auto glider = new GliderEnemyEntity(game, 150, shootDelay);
+void spawnHorizontalGlider(GameBase* game, sf::Vector2f pos, int time = 100, bool invert = false, int shootDelay = 0, int despawnTimeout = -1) {
+  cout << "Spawning Horizontal Glider" << endl;
+  auto glider = new GliderEnemyEntity(game, 150, shootDelay, despawnTimeout);
   glider->SetTransform(sf::Transform().translate(pos).rotate(180));
   glider->SetSequenceTransform(createLeftRightSequence(2, time, invert), 1, true);
   game->GetScene()->AddEntity(glider);
 }
 
-void spawnImmobileBuster(Game* game, sf::Vector2f pos, int shootDelay = 0) {
+void spawnImmobileBuster(GameBase* game, sf::Vector2f pos, int shootDelay = 0) {
+  cout << "Spawning Immobile Buster" << endl;
   auto glider = new BusterEnemyEntity(game, 300, shootDelay);
   glider->SetTransform(sf::Transform().translate(pos).rotate(180));
   game->GetScene()->AddEntity(glider);
@@ -641,7 +697,7 @@ void spawnImmobileBuster(Game* game, sf::Vector2f pos, int shootDelay = 0) {
 
 class ScrollCamera : public DefaultCameraController, public Entity {
 public:
-  ScrollCamera(Game* game) : DefaultCameraController(game), Entity(_CAM_TYPE, game) {
+  ScrollCamera(GameBase* game) : DefaultCameraController(game), Entity(_CAM_TYPE, game) {
     SetZoom(game->GetOptions().InitialZoom);
     SetCenter(sf::Vector2f(GetBounds().x / 2, GetBounds().y / 2));
   }
@@ -685,6 +741,54 @@ protected:
   bool transform(sf::Transform) { return false; }
 };
 
+class SpawnSequencer : public GameObject {
+public:
+  SpawnSequencer(GameBase* game) : GameObject(ObjectType::Unknown, game) {
+    mTriggers.push(300);
+    mTriggers.push(400);
+    mTriggers.push(1300);
+    mTriggers.push(1600);
+  }
+
+  void OnTick() {
+    if(mCounter++ == mCurTrigger) {
+      OnTrigger();
+      if(mTriggers.size() > 0) {
+        mCurTrigger = mTriggers.front();
+        mTriggers.pop();
+      };
+    }
+  }
+
+  void OnTrigger() {
+    auto game = getGame();
+    switch(mCurTrigger) {
+    case 300:
+      spawnHorizontalGlider(game, sf::Vector2f(500, 1500), 100, false, 20, 1500);
+      spawnHorizontalGlider(game, sf::Vector2f(1548, 1500), 100, true, 20, 1500);
+      break;
+    case 400:
+      spawnHorizontalGlider(game, sf::Vector2f(1024, 1700), 50, true, 20, 1500);
+      break;
+    case 1300:
+      spawnHorizontalGlider(game, sf::Vector2f(500, 2500), 50, false, 20, 1500);
+      spawnHorizontalGlider(game, sf::Vector2f(1548, 2500), 50, true, 20, 1500);
+      spawnHorizontalGlider(game, sf::Vector2f(700, 2700), 50, false, 20, 1500);
+      spawnHorizontalGlider(game, sf::Vector2f(1348, 2700), 50, true, 20, 1500);
+      break;
+    case 1600:
+      spawnImmobileBuster(game, sf::Vector2f(1024, 3000), 20);
+    default:
+      break;
+    }
+  }
+
+private:
+  int mCounter = 0;
+  int mCurTrigger = 0;
+  queue<int> mTriggers;
+};
+
 int prototype1() {
   // Create Keyboard Events
   auto spacePressed = new OnKeyPress(sf::Keyboard::Space);
@@ -724,16 +828,6 @@ int prototype1() {
 
   cout << "Creating Gliders" << endl;
 
-  spawnHorizontalGlider(game, sf::Vector2f(500, 1500), 100, false, 300);
-  spawnHorizontalGlider(game, sf::Vector2f(1548, 1500), 100, true, 300);
-  spawnHorizontalGlider(game, sf::Vector2f(1024, 1700), 50, true, 400);
-
-  spawnHorizontalGlider(game, sf::Vector2f(500, 2500), 50, false, 1200);
-  spawnHorizontalGlider(game, sf::Vector2f(1548, 2500), 50, true, 1200);
-  spawnHorizontalGlider(game, sf::Vector2f(700, 2700), 50, false, 1200);
-  spawnHorizontalGlider(game, sf::Vector2f(1348, 2700), 50, true, 1200);
-
-  spawnImmobileBuster(game, sf::Vector2f(1024, 3000), 1500);
   cout << "After Glider spawn" << endl;
 
   game->GetAudioController()->PlayRepeated(AssetManager::GetAudio("res/audio/tgfcoder/FrozenJam.oga"));
@@ -744,6 +838,8 @@ int prototype1() {
   game->SetOverlayDisplay(overlay);
 
   ctrl->InitOverlay();
+
+  game->GetStateManager()->AddObject(new SpawnSequencer(game));
 
   game->Run();
   return 0;
