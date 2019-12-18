@@ -12,6 +12,7 @@
 #define __GAME_H__
 
 #include <chrono>
+#include <functional>
 #include <iostream>
 #include <thread>
 
@@ -76,6 +77,8 @@ namespace game {
     GameOptions GetOptions();
 
     sf::RenderWindow* GetWindow();
+
+    sf::View GetView();
 
     StateManagerBase* GetStateManager();
 
@@ -175,6 +178,7 @@ namespace game {
     CameraController* mDefaultCameraController = nullptr;
     OverlayDisplay* mOverlayDisplay = nullptr;
     AudioController* mAudioController = nullptr;
+    sf::Thread* mRenderThread = nullptr;
   };
 } // namespace game
 
