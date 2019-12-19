@@ -35,7 +35,6 @@ namespace game {
     auto lock = sf::Lock(mRenderMutex);
     if(mStateChanged) {
       auto bounds = mGame->GetOptions().ScreenDim;
-      mTexture = new sf::RenderTexture();
       mTexture->create(bounds.x, bounds.y);
       mTexture->clear(sf::Color::Transparent);
       for(auto entry : mDrawables) {

@@ -107,12 +107,13 @@ namespace game {
     win->setFramerateLimit(game->GetOptions().FramesPerSecond);
     win->setVerticalSyncEnabled(true);
     win->setActive(true);
-    while(win->isOpen()) {
+    while(game->IsRunning()) {
       win->clear(sf::Color(80, 80, 80));
       win->setView(game->GetView());
       mgr->OnRender(win);
       win->display();
     }
+    win->close();
   }
 
   sf::Clock dbgClock;
@@ -150,6 +151,7 @@ namespace game {
 
   void Game::Run() {
     LOGI("Game started");
+    mRunning = true;
     cpSpaceSetIterations(mPhysicalWorld, 10);
     mWindow = new sf::RenderWindow(sf::VideoMode(mOptions.ScreenDim.x, mOptions.ScreenDim.y), mOptions.Title);
 
@@ -165,7 +167,7 @@ namespace game {
 
     int sleepMillis = int(1000.0 * (1.0 / mOptions.FramesPerSecond));
     sf::Clock clock;
-    while(mWindow->isOpen()) {
+    while(mRunning) {
       clock.restart();
       // Handle window events
       sf::Event event;
@@ -199,7 +201,7 @@ namespace game {
 
   void Game::Stop() {
     LOGI("Stop call");
-    mWindow->close();
+    mRunning = false;
   }
 
   cpSpace* Game::GetPhysicalWorld() {
@@ -207,6 +209,10 @@ namespace game {
   }
 
   // ####### Accessors (get/set) ###############################################
+
+  bool Game::IsRunning() {
+    return mRunning;
+  }
 
   sf::RenderWindow* Game::GetWindow() {
     return mWindow;

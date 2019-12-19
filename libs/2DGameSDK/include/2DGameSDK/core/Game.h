@@ -74,6 +74,8 @@ namespace game {
      */
     void Stop();
 
+    bool IsRunning();
+
     GameOptions GetOptions();
 
     sf::RenderWindow* GetWindow();
@@ -167,8 +169,10 @@ namespace game {
      */
     void render();
 
-    StateManager mStateManager;
     GameOptions mOptions;
+
+    bool mRunning = false;
+    StateManager mStateManager;
     EventController mEventCtrl;
     sf::RenderWindow* mWindow;
     sf::View mView;
