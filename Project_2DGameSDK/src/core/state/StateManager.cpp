@@ -2,10 +2,11 @@
 
 namespace game {
 
-  StateManager::StateManager(GameBase* game) : mGame(game) {
+  StateManager::StateManager(GameBase* game) : mGame(game), mRenderMutex(new sf::Mutex()) {
   }
 
   StateManager::~StateManager() {
+    helpers::safeDelete(mRenderMutex);
   }
 
   GameWorld* StateManager::GetWorld() {
@@ -14,6 +15,10 @@ namespace game {
 
   SceneGraph* StateManager::GetScene() {
     return mScene;
+  }
+
+  sf::Mutex* StateManager::GetRenderMutex() {
+    return mRenderMutex;
   }
 
   void StateManager::SetWorld(GameWorld* world) {
@@ -50,12 +55,17 @@ namespace game {
   }
 
   void StateManager::OnTick() {
+    auto lock = sf::Lock(*mRenderMutex);
     for(auto entry : mObjects) {
       entry.second->OnTick();
     }
+
+    auto overlay = mGame->GetOverlayDisplay();
+    if(overlay != nullptr) overlay->OnTick();
   }
 
   void StateManager::OnTickEnded() {
+    auto lock = sf::Lock(*mRenderMutex);
     for(auto id : mDestroyObjects) {
       helpers::safeDelete(mObjects[id]);
       mObjects.erase(id);
@@ -68,6 +78,7 @@ namespace game {
   }
 
   void StateManager::OnRender(sf::RenderTarget* target) {
+    auto lock = sf::Lock(*mRenderMutex);
     int cnt = 0;
     for(auto iObj : mRenderObjects) {
       if(iObj != nullptr) {
@@ -76,10 +87,8 @@ namespace game {
       }
     }
 
-    // bool renderAABB = mGame->GetOptions().RenderAABB;
-    // bool renderCollisionMasks = mGame->GetOptions().RenderCollisionMask;
-    // if(renderAABB || renderCollisionMasks) {
-    // }
+    auto overlay = mGame->GetOverlayDisplay();
+    if(overlay != nullptr) overlay->OnRender(target);
     LOGD("Statemanager Rendered " << cnt << " Objects");
   }
 

@@ -17,6 +17,8 @@ namespace game {
 
     virtual GameObject* GetObject(int id) = 0;
 
+    virtual sf::Mutex* GetRenderMutex() = 0;
+
     virtual void SetWorld(GameWorld* world) = 0;
 
     virtual void SetScene(SceneGraph* scene) = 0;

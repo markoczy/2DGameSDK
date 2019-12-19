@@ -21,6 +21,8 @@ namespace game {
 
     virtual void Stop() = 0;
 
+    virtual bool IsRunning() = 0;
+
     virtual GameOptions GetOptions() = 0;
 
     virtual sf::RenderWindow* GetWindow() = 0;

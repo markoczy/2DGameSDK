@@ -4,6 +4,7 @@ using namespace std;
 using namespace game::constants;
 
 namespace game {
+
   unsigned char collideEntities(CollisionEventType type, cpArbiter* arb, Entity* entA, Entity* entB) {
     if(!entA->IsCollidable() || !entB->IsCollidable()) return 0;
     int retA = entA->OnCollision(type, entB, arb);
@@ -102,14 +103,20 @@ namespace game {
     collisionFunc(CollisionEventType::Separate, arb);
   }
 
-  sf::Clock dbgClock;
+  void renderFunc(Game* game, sf::RenderWindow* win, StateManager* mgr) {
+    win->setFramerateLimit(game->GetOptions().FramesPerSecond);
+    win->setVerticalSyncEnabled(true);
+    win->setActive(true);
+    while(game->IsRunning()) {
+      win->clear(sf::Color(80, 80, 80));
+      win->setView(game->GetView());
+      mgr->OnRender(win);
+      win->display();
+    }
+    win->close();
+  }
 
-  // TODO dep inversion..
-  class OverlayDisplay {
-  public:
-    void OnTick();
-    void OnRender(sf::RenderTarget* target);
-  };
+  sf::Clock dbgClock;
 
   // ###########################################################################
   // Constructor / Destructor
@@ -144,27 +151,23 @@ namespace game {
 
   void Game::Run() {
     LOGI("Game started");
+    mRunning = true;
     cpSpaceSetIterations(mPhysicalWorld, 10);
     mWindow = new sf::RenderWindow(sf::VideoMode(mOptions.ScreenDim.x, mOptions.ScreenDim.y), mOptions.Title);
-    mWindow->setFramerateLimit(mOptions.FramesPerSecond);
-    // mWindow->setVerticalSyncEnabled(true);
 
     mDefaultCameraController->SetZoom(mOptions.InitialZoom);
     auto bounds = mDefaultCameraController->GetBounds();
     mDefaultCameraController->SetCenter(sf::Vector2f(bounds.x / 2, bounds.y / 2));
 
-    // auto world = mStateManager.GetWorld();
-    // mView = mWindow->getView();
-    // auto sz = mView.getSize() / mOptions.InitialZoom;
-    // mView.setSize(sz);
-    // mView.setCenter(sz.x / 2, world->GetBounds().height - sz.y / 2);
-    // mWindow->setView(mView);
+    mWindow->setActive(false);
+    mRenderThread = new sf::Thread(std::bind(&renderFunc, this, mWindow, &mStateManager));
+    mRenderThread->launch();
 
     float step = 1.0f / mOptions.FramesPerSecond;
 
     int sleepMillis = int(1000.0 * (1.0 / mOptions.FramesPerSecond));
     sf::Clock clock;
-    while(mWindow->isOpen()) {
+    while(mRunning) {
       clock.restart();
       // Handle window events
       sf::Event event;
@@ -184,16 +187,12 @@ namespace game {
       cpSpaceStep(mPhysicalWorld, step);
       LOGD("Phys update in: " << dbgClock.getElapsedTime().asMilliseconds());
 
-      dbgClock.restart();
-      render();
-      LOGD("Render in: " << dbgClock.getElapsedTime().asMilliseconds());
-
       // Sync Sim Time
       int time = clock.getElapsedTime().asMilliseconds();
       LOGD("Total Cycle time: " << time);
       if(sleepMillis > time) {
-        // LOGD("Sleeping " << sleepMillis - time);
-        std::this_thread::sleep_for(std::chrono::milliseconds(sleepMillis - time));
+        LOGD("Sleeping " << sleepMillis - time);
+        sf::sleep(sf::milliseconds(sleepMillis - time));
       } else {
         LOGW("Overdue " << time - sleepMillis);
       }
@@ -202,7 +201,7 @@ namespace game {
 
   void Game::Stop() {
     LOGI("Stop call");
-    mWindow->close();
+    mRunning = false;
   }
 
   cpSpace* Game::GetPhysicalWorld() {
@@ -211,8 +210,16 @@ namespace game {
 
   // ####### Accessors (get/set) ###############################################
 
+  bool Game::IsRunning() {
+    return mRunning;
+  }
+
   sf::RenderWindow* Game::GetWindow() {
     return mWindow;
+  }
+
+  sf::View Game::GetView() {
+    return mCameraController->GetView();
   }
 
   GameOptions Game::GetOptions() {
@@ -304,8 +311,8 @@ namespace game {
       mCameraController->OnTick();
       LOGD("Tick Audio");
       mAudioController->OnTick();
-      LOGD("Tick Overlay");
-      if(mOverlayDisplay != nullptr) mOverlayDisplay->OnTick();
+      // LOGD("Tick Overlay");
+      // if(mOverlayDisplay != nullptr) mOverlayDisplay->OnTick();
       LOGD("Tick End");
       mStateManager.OnTickEnded();
     } catch(std::exception& e) {

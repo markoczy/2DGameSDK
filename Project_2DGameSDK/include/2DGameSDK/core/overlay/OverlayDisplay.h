@@ -28,6 +28,7 @@ namespace game {
     bool mStateChanged = true;
     sf::RenderTexture* mTexture;
     sf::Sprite mSprite;
+    sf::Mutex mRenderMutex;
   };
 
 } // namespace game

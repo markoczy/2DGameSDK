@@ -10,6 +10,7 @@
 #include <2DGameSDK/core/GameObject.h>
 #include <2DGameSDK/core/GameOptions.h>
 #include <2DGameSDK/core/VisualObject.h>
+#include <2DGameSDK/core/overlay/OverlayDisplay.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
 #include <2DGameSDK/scene/entity/Entity.h>
 
@@ -27,6 +28,8 @@ namespace game {
     SceneGraph* GetScene();
 
     GameObject* GetObject(int id);
+
+    sf::Mutex* GetRenderMutex();
 
     void SetWorld(GameWorld* world);
 
@@ -50,6 +53,8 @@ namespace game {
 
   private:
     GameBase* mGame = nullptr;
+    sf::Mutex* mRenderMutex = nullptr;
+
     GameWorld* mWorld = nullptr;
     SceneGraph* mScene = nullptr;
     std::map<int, GameObject*> mObjects;
