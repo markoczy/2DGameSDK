@@ -53,6 +53,8 @@ namespace game {
     bool RenderCollisionMask = false;
 
     float MeterPerPixel = 1.0;
+
+    bool AudioEnabled = true;
   };
 
   //   GAMESDK_DLL GameOptions DefaultOptions = GameOptions{

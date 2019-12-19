@@ -136,7 +136,7 @@ namespace game {
     mDefaultCameraController = new DefaultCameraController(this);
     mCameraController = mDefaultCameraController;
 
-    mAudioController = new AudioController();
+    mAudioController = new AudioController(this);
   }
 
   Game::~Game() {

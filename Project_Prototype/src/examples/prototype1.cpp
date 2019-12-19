@@ -20,6 +20,7 @@ const int _PROJECTILE_SEQ_FRAMES = 8;
 
 sf::Texture* _PLAYER_TEXTURE = AssetManager::GetTexture("res/textures/spaceships/scorpio/prefab_scorpio_1.png");
 sf::Texture* _OVERLAY_HEART_TEXTURE = AssetManager::GetTexture("res/textures/spaceships/scorpio/prefab_am_overlay_1.png");
+sf::Texture* _BOX_TEXTURE = AssetManager::GetTexture("res/textures/spaceships/scorpio/prefab_am_box_1B.png");
 
 std::vector<sf::Texture*> _PROJECTILE_GREEN = {
     AssetManager::GetTexture("res/textures/projectiles/rawdanitsu/green1.png"),
@@ -50,6 +51,7 @@ std::vector<sf::Texture*> _PROJECTILE_AM_YELLOW = {
 
 sf::Texture* _ENEMY_TEX = AssetManager::GetTexture("res/textures/spaceships/scorpio/prefab_scorpio_6B.png");
 sf::Texture* _ENEMY_BUSTER_TEX = AssetManager::GetTexture("res/textures/spaceships/scorpio/prefab_scorpio_12B.png");
+sf::Texture* _ENEMY_BOSS_TEX = AssetManager::GetTexture("res/textures/spaceships/scorpio/prefab_boss.png");
 
 sf::SoundBuffer* _SOUND_HIT_HURT_2 = AssetManager::GetAudio("res/audio/Hit_Hurt2.wav");
 
@@ -84,6 +86,7 @@ public:
   SequenceTransformBehaviour(TEntity* base) : mBase(base) {}
 
   void SetSequenceTransform(vector<SequenceTransformElement> sequenceTransform, unsigned int start = 0, bool repeat = false) {
+    mFinished = false;
     mSequenceTransform = sequenceTransform;
     mCurIdx = start;
     mRepeat = repeat;
@@ -411,6 +414,10 @@ public:
     }
   }
 
+  ScrollCamera* GetScrollCamera() {
+    return mScrollCamera;
+  }
+
   void SetScrollCamera(ScrollCamera* cam) {
     mScrollCamera = cam;
   }
@@ -628,6 +635,77 @@ private:
   int mScore = 100;
 };
 
+class BoxEntity : public SpriteKinematicEntity,
+                  public DestructibleBehaviour<BoxEntity>,
+                  public DespawnTimeoutBehaviour<BoxEntity> {
+public:
+  BoxEntity(GameBase* game,
+            sf::Texture* texture,
+            KinematicShape* shape,
+            int hp,
+            int score,
+            int despawnTimeout = -1)
+      : SpriteKinematicEntity(_ENEMY_TYPE, game, texture, {shape}, true),
+        DestructibleBehaviour(game, this, mSpriteRenderer, _SOUND_HIT_HURT_2, hp, _DESCTRUCTIBLE_COOLDOWN),
+        DespawnTimeoutBehaviour(game, this, despawnTimeout), mScore(score) {}
+
+  int OnProjectileCollision(CollisionEventType type, Projectile* projectile, cpArbiter* arb) {
+    if(projectile->GetType() == _PLAYER_PROJECTILE) {
+      OnHit(1);
+    }
+    return 0;
+  }
+
+  void OnDestroy() {
+    if(!mDestroying) {
+      if(GetHp() < 1) {
+        getGameController(getGame())->AddScore(mScore);
+      }
+      cout << GetId() << " Before create explosion" << endl;
+      auto explosion = new Effect(getGame(), _EXPLOSION1, GetCombinedTransform());
+      cout << GetId() << " After create explosion" << endl;
+
+      getGame()->GetStateManager()->DestroyObject(this);
+      getGame()->GetStateManager()->DestroyVisualObject(this);
+      getGame()->GetAudioController()->PlayOnce(_SOUND_EXPLOSION);
+      mDestroying = true;
+    }
+  }
+
+  void OnTick() {
+    DestructibleBehaviour::OnTick();
+    DespawnTimeoutBehaviour::OnTick();
+  }
+
+protected:
+  bool mDestroying = false;
+  int mScore = 0;
+};
+
+game::RectangleShape<KinematicShapeDefinition>* getBoxShape(GameBase* game) {
+  static game::RectangleShape<KinematicShapeDefinition>* ret = nullptr;
+  if(ret == nullptr) {
+    ret = ShapeFactory::CreateKinematicRectangleShape(game, 100, 100, 0, 0);
+  }
+  return ret;
+}
+
+// TODO..
+PolygonShape<KinematicShapeDefinition>* getBossShape(GameBase* game) {
+  static PolygonShape<KinematicShapeDefinition>* ret = nullptr;
+  if(ret == nullptr) {
+    auto verts = vector<cpVect>();
+    verts.push_back(cpv(-85, -31));
+    verts.push_back(cpv(84, -31));
+    verts.push_back(cpv(76, -5));
+    verts.push_back(cpv(0, 49));
+    verts.push_back(cpv(-1, 49));
+    verts.push_back(cpv(-77, -5));
+    ret = ShapeFactory::CreateKinematicPolygonShape(game, verts, 0, 0);
+  }
+  return ret;
+}
+
 PolygonShape<KinematicShapeDefinition>* getEnemyShape(GameBase* game) {
   static PolygonShape<KinematicShapeDefinition>* ret = nullptr;
   if(ret == nullptr) {
@@ -684,6 +762,16 @@ vector<SequenceTransformElement> createLeftRightSequence(int speed, int ticks, b
   return ret;
 }
 
+vector<SequenceTransformElement> createRectancleSequence(int speed, int x, int y) {
+  auto ret = vector<SequenceTransformElement>();
+  ret.push_back({sf::Transform().translate(speed, 0), x});
+  ret.push_back({sf::Transform().translate(0, -speed), 2 * y});
+  ret.push_back({sf::Transform().translate(-speed, 0), 2 * x});
+  ret.push_back({sf::Transform().translate(0, speed), 2 * y});
+  ret.push_back({sf::Transform().translate(speed, 0), x});
+  return ret;
+}
+
 class GliderEnemyEntity : public EnemyEntity {
 public:
   GliderEnemyEntity(GameBase* game,
@@ -709,7 +797,8 @@ class BusterEnemyEntity : public EnemyEntity {
 public:
   BusterEnemyEntity(GameBase* game,
                     int shootInterval = 150,
-                    int shootDelay = 0)
+                    int shootDelay = 0,
+                    int despawnTimeout = -1)
       : EnemyEntity(game,
                     _ENEMY_BUSTER_TEX,
                     getBusterShape(game)->CopyTemplate(),
@@ -729,7 +818,85 @@ public:
                     500,
                     300,
                     shootInterval,
-                    shootDelay) {}
+                    shootDelay,
+                    despawnTimeout) {}
+};
+
+class BossEntity : public SpriteKinematicEntity,
+                   public DestructibleBehaviour<BossEntity>,
+                   public SequenceTransformBehaviour<BossEntity>,
+                   public RepeatedShootBehaviour<BossEntity, 1>,
+                   public RepeatedShootBehaviour<BossEntity, 2> {
+public:
+  BossEntity(GameBase* game)
+      //////////////////////////////////////////////////////////////////////////
+      : SpriteKinematicEntity(_ENEMY_TYPE, game, _ENEMY_BOSS_TEX, {getBossShape(game)}, true),
+        DestructibleBehaviour(game, this, mSpriteRenderer, _SOUND_HIT_HURT_2, 20, _DESCTRUCTIBLE_COOLDOWN),
+        SequenceTransformBehaviour(this),
+        RepeatedShootBehaviour<BossEntity, 1>(game,
+                                              this,
+                                              _ENEMY_PROJECTILE,
+                                              _PROJECTILE_AM_YELLOW,
+                                              _SOUND_ENEMY_SHOOT,
+                                              ShapeFactory::CreateKinematicCircleShape(game, 5, 0, 0),
+                                              {sf::Vector2f(-60, 60), sf::Vector2f(-30, 60), sf::Vector2f(0, 60), sf::Vector2f(30, 60), sf::Vector2f(60, 60)},
+                                              {sf::Vector2f(40, -200), sf::Vector2f(20, -200), sf::Vector2f(0, -200), sf::Vector2f(-20, -200), sf::Vector2f(-40, -200)},
+                                              _PROJECTILE_SEQ_FRAMES,
+                                              500,
+                                              300,
+                                              100 /* delay */),
+        RepeatedShootBehaviour<BossEntity, 2>(game,
+                                              this,
+                                              _ENEMY_PROJECTILE,
+                                              _PROJECTILE_AM_RED,
+                                              _SOUND_ENEMY_SHOOT,
+                                              ShapeFactory::CreateKinematicCircleShape(game, 5, 0, 0),
+                                              {sf::Vector2f(-15, 60), sf::Vector2f(15, 60)},
+                                              {sf::Vector2f(0, -300)},
+                                              _PROJECTILE_SEQ_FRAMES,
+                                              100,
+                                              300,
+                                              100 /* delay */) {
+    SetSequenceTransform({{sf::Transform().translate(0, -2), 220}}, 0, false);
+  };
+
+  int OnProjectileCollision(CollisionEventType type, Projectile* projectile, cpArbiter* arb) {
+    if(projectile->GetType() == _PLAYER_PROJECTILE) {
+      OnHit(1);
+    }
+    return 0;
+  }
+
+  void OnDestroy() {
+    if(!mDestroying) {
+      if(GetHp() < 1) {
+        getGameController(getGame())->AddScore(mScore);
+      }
+      cout << GetId() << " Before create explosion" << endl;
+      auto explosion = new Effect(getGame(), _EXPLOSION1, GetCombinedTransform());
+      cout << GetId() << " After create explosion" << endl;
+
+      getGame()->GetStateManager()->DestroyObject(this);
+      getGame()->GetStateManager()->DestroyVisualObject(this);
+      getGame()->GetAudioController()->PlayOnce(_SOUND_EXPLOSION);
+      mDestroying = true;
+    }
+  }
+
+  void OnTick() {
+    DestructibleBehaviour::OnTick();
+    SequenceTransformBehaviour::OnTick();
+    RepeatedShootBehaviour<BossEntity, 1>::OnTick();
+    RepeatedShootBehaviour<BossEntity, 2>::OnTick();
+
+    if(mFinished) {
+      SetSequenceTransform(createRectancleSequence(2, 300, 150), 0, true);
+    }
+  }
+
+private:
+  bool mDestroying = false;
+  int mScore = 5000;
 };
 
 void spawnHorizontalGlider(GameBase* game, sf::Vector2f pos, int time = 100, bool invert = false, int shootDelay = 0, int despawnTimeout = -1) {
@@ -740,11 +907,27 @@ void spawnHorizontalGlider(GameBase* game, sf::Vector2f pos, int time = 100, boo
   game->GetScene()->AddEntity(glider);
 }
 
-void spawnImmobileBuster(GameBase* game, sf::Vector2f pos, int shootDelay = 0) {
+void spawnImmobileBuster(GameBase* game, sf::Vector2f pos, int shootDelay = 0, int despawnTimeout = -1) {
   cout << "Spawning Immobile Buster" << endl;
-  auto glider = new BusterEnemyEntity(game, 300, shootDelay);
+  auto glider = new BusterEnemyEntity(game, 300, shootDelay, despawnTimeout);
   glider->SetTransform(sf::Transform().translate(pos).rotate(180));
   game->GetScene()->AddEntity(glider);
+}
+
+void spawnBox(GameBase* game, sf::Vector2f pos, int despawnTimeout = -1) {
+  cout << "Spawning Box" << endl;
+  auto box = new BoxEntity(game, _BOX_TEXTURE, getBoxShape(game)->CopyTemplate(), 3, 50, despawnTimeout);
+  box->SetTransform(sf::Transform().translate(pos));
+  box->SetSize(sf::Vector2f(100, 100));
+  game->GetScene()->AddEntity(box);
+}
+
+void spawnBoss(GameBase* game, sf::Vector2f pos) {
+  cout << "Spawning Boss" << endl;
+  auto boss = new BossEntity(game);
+  boss->SetTransform(sf::Transform().translate(pos).rotate(180));
+  boss->SetSize(sf::Vector2f(100, 100));
+  game->GetScene()->AddEntity(boss);
 }
 
 class SpawnSequencer : public GameObject {
@@ -752,8 +935,12 @@ public:
   SpawnSequencer(GameBase* game) : GameObject(ObjectType::Unknown, game) {
     mTriggers.push(300);
     mTriggers.push(400);
+    mTriggers.push(1000);
     mTriggers.push(1300);
     mTriggers.push(1600);
+    mTriggers.push(2000);
+    mTriggers.push(2300);
+    mTriggers.push(3600);
   }
 
   void OnTick() {
@@ -776,6 +963,11 @@ public:
     case 400:
       spawnHorizontalGlider(game, sf::Vector2f(1024, 1700), 50, true, 20, 1500);
       break;
+    case 1000:
+      spawnBox(game, sf::Vector2f(904, 2200), 1500);
+      spawnBox(game, sf::Vector2f(1024, 2320), 1500);
+      spawnBox(game, sf::Vector2f(1144, 2200), 1500);
+      break;
     case 1300:
       spawnHorizontalGlider(game, sf::Vector2f(500, 2500), 50, false, 20, 1500);
       spawnHorizontalGlider(game, sf::Vector2f(1548, 2500), 50, true, 20, 1500);
@@ -783,7 +975,26 @@ public:
       spawnHorizontalGlider(game, sf::Vector2f(1348, 2700), 50, true, 20, 1500);
       break;
     case 1600:
-      spawnImmobileBuster(game, sf::Vector2f(1024, 3000), 20);
+      spawnImmobileBuster(game, sf::Vector2f(1024, 3000), 20, 1500);
+      break;
+    case 2000:
+      spawnBox(game, sf::Vector2f(200, 3200), 1500);
+      spawnBox(game, sf::Vector2f(320, 3320), 1500);
+      spawnBox(game, sf::Vector2f(440, 3200), 1500);
+
+      spawnBox(game, sf::Vector2f(1608, 3200), 1500);
+      spawnBox(game, sf::Vector2f(1728, 3320), 1500);
+      spawnBox(game, sf::Vector2f(1848, 3200), 1500);
+      break;
+    case 2300:
+      spawnImmobileBuster(game, sf::Vector2f(724, 3500), 20, 1500);
+      spawnImmobileBuster(game, sf::Vector2f(1324, 3500), 20, 1500);
+      spawnBox(game, sf::Vector2f(1024, 3500), 1500);
+      break;
+    case 3600:
+      getGameController(game)->GetScrollCamera()->SetScroll(sf::Vector2f());
+      mBoss = new BossEntity(game);
+      mBoss->SetTransform(sf::Transform().translate(1024, 5000).rotate(180));
     default:
       break;
     }
@@ -793,6 +1004,7 @@ private:
   int mCounter = 0;
   int mCurTrigger = 0;
   queue<int> mTriggers;
+  BossEntity* mBoss = nullptr;
 };
 
 int prototype1() {
@@ -802,7 +1014,14 @@ int prototype1() {
   float aspectRatio = (float)sf::VideoMode::getDesktopMode().width / (float)sf::VideoMode::getDesktopMode().height;
 
   // Create game
-  auto options = GameOptions{"Arcade Shooter Prototype", sf::Vector2i(1024, 1024 / aspectRatio), 0.5, 60, false, false};
+  auto options = GameOptions{"Arcade Shooter Prototype", /* Title */
+                             sf::Vector2i(1024, 1024 / aspectRatio), /* Dim */
+                             0.5, /* Scale */
+                             60, /* FPS */
+                             false, /* Debug AABB */
+                             false, /* Debug Shapes */
+                             1.0, /* Pixel to Meter */
+                             false /* Audio Enabled */};
   auto game = new Game(options);
 
   // Send Events to controller

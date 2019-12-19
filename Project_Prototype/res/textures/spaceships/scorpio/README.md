@@ -11,5 +11,7 @@
 
 **The following assets where changed/remixed by me (A. Markóczy):**
 
-- prefab_an_1.png
-- prefab_an_1B.png
+- prefab_am_1.png
+- prefab_am_1B.png
+- prefab_am_box_1.png
+- prefab_am_box_1B.png

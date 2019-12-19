@@ -5,6 +5,8 @@ using namespace std;
 namespace game {
   int _counter = 0;
 
+  AudioController::AudioController(GameBase* game) : mGame(game) {}
+
   void AudioController::OnTick() {
     int elapsed = mCleanupTimer.getElapsedTime().asMilliseconds();
     if(elapsed < mCleanupIntervall) return;
@@ -18,6 +20,7 @@ namespace game {
   }
 
   void AudioController::PlayOnce(sf::SoundBuffer* sound, float volume) {
+    if(!mGame->GetOptions().AudioEnabled) return;
     auto snd = new sf::Sound(*sound);
     snd->setVolume(volume);
     snd->play();
@@ -26,6 +29,7 @@ namespace game {
   }
 
   int AudioController::PlayRepeated(sf::SoundBuffer* sound, float volume) {
+    if(!mGame->GetOptions().AudioEnabled) return -1;
     auto snd = new sf::Sound(*sound);
     snd->setLoop(true);
     snd->setVolume(volume);
@@ -35,6 +39,7 @@ namespace game {
   }
 
   void AudioController::Stop(int id) {
+    if(id == -1) return;
     auto sound = mSounds[id];
     if(sound != nullptr) {
       sound->stop();
