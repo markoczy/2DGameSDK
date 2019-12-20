@@ -73,10 +73,7 @@ sf::SoundBuffer* _SOUND_PLAYER_SHOOT = AssetManager::GetAudio("res/audio/Laser_S
 sf::SoundBuffer* _SOUND_ENEMY_SHOOT = AssetManager::GetAudio("res/audio/Laser_Shoot.wav");
 
 sf::SoundBuffer* _MUSIC_LEVEL = AssetManager::GetAudio("res/audio/x/Arcade.ogg");
-
-sf::SoundBuffer* _BOSS_INTRO = AssetManager::GetAudio("res/audio/x/BossIntro.wav");
-sf::SoundBuffer* _BOSS_MUSIC = AssetManager::GetAudio("res/audio/x/BossMain.wav");
-// sf::SoundBuffer* _MUSIC_LEVEL = AssetManager::GetAudio("res/audio/tgfcoder/FrozenJam.oga");
+sf::SoundBuffer* _BOSS_MUSIC = AssetManager::GetAudio("res/audio/Matthew_Pablo/Orbital_Colossus.ogg");
 
 using KinematicShape = game::Shape<KinematicShapeDefinition>;
 
@@ -1009,7 +1006,7 @@ public:
     mTriggers.push(2300);
     mTriggers.push(3600);
     mTriggers.push(3700);
-    mTriggers.push(3820);
+    // mTriggers.push(3820);
 
     // getGameController(game)->SetSpawnSequencer(this);
   }
@@ -1081,9 +1078,7 @@ public:
       mBoss->SetTransform(sf::Transform().translate(1024, 5000).rotate(180));
       break;
     case 3700:
-      game->GetAudioController()->PlayOnce(_BOSS_INTRO);
-      break;
-    case 3820:
+      // game->GetAudioController()->PlayOnce(_BOSS_INTRO);
       game->GetAudioController()->PlayRepeated(_BOSS_MUSIC);
       break;
     default:
