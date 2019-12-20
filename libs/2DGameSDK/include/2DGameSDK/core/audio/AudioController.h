@@ -19,10 +19,13 @@ namespace game {
     int PlayRepeated(sf::SoundBuffer* sound, float volume = 100);
     void Stop(int id);
 
+    void FadeOut(int id, int ticks);
+
   private:
     GameBase* mGame = nullptr;
 
     std::map<int, sf::Sound*> mSounds;
+    std::vector<std::tuple<int, float>> mFading;
     sf::Clock mCleanupTimer;
     int mCleanupIntervall = 5000;
   };

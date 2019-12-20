@@ -6,6 +6,16 @@ using namespace sf;
 
 using Key = sf::Keyboard::Key;
 
+std::vector<sf::Texture*> loadTiles(string prefix, int count) {
+  auto ret = std::vector<sf::Texture*>(count);
+  for(int i = 0; i < count; i++) {
+    stringstream ss;
+    ss << prefix << setfill('0') << setw(2) << i << ".png";
+    ret[i] = AssetManager::GetTexture(ss.str());
+  }
+  return ret;
+}
+
 // Type of player entity
 const int _PLAYER_TYPE = 200;
 const int _ENEMY_TYPE = 300;
@@ -51,29 +61,27 @@ std::vector<sf::Texture*> _PROJECTILE_AM_YELLOW = {
 
 sf::Texture* _ENEMY_TEX = AssetManager::GetTexture("res/textures/spaceships/scorpio/prefab_scorpio_6B.png");
 sf::Texture* _ENEMY_BUSTER_TEX = AssetManager::GetTexture("res/textures/spaceships/scorpio/prefab_scorpio_12B.png");
-sf::Texture* _ENEMY_BOSS_TEX = AssetManager::GetTexture("res/textures/spaceships/scorpio/prefab_boss.png");
+sf::Texture* _ENEMY_BOSS_TEX = AssetManager::GetTexture("res/textures/spaceships/scorpio/prefab_boss_2.png");
 
 sf::SoundBuffer* _SOUND_HIT_HURT_2 = AssetManager::GetAudio("res/audio/Hit_Hurt2.wav");
 
 sf::SoundBuffer* _SOUND_EXPLOSION = AssetManager::GetAudio("res/audio/Explosion.wav");
+sf::SoundBuffer* _SOUND_EXPLOSION_2 = AssetManager::GetAudio("res/audio/Explosion2.wav");
 
 sf::SoundBuffer* _SOUND_PLAYER_SHOOT = AssetManager::GetAudio("res/audio/Laser_Shoot.wav");
 
 sf::SoundBuffer* _SOUND_ENEMY_SHOOT = AssetManager::GetAudio("res/audio/Laser_Shoot.wav");
 
+sf::SoundBuffer* _MUSIC_LEVEL = AssetManager::GetAudio("res/audio/x/Arcade.ogg");
+
+sf::SoundBuffer* _BOSS_INTRO = AssetManager::GetAudio("res/audio/x/BossIntro.wav");
+sf::SoundBuffer* _BOSS_MUSIC = AssetManager::GetAudio("res/audio/x/BossMain.wav");
+// sf::SoundBuffer* _MUSIC_LEVEL = AssetManager::GetAudio("res/audio/tgfcoder/FrozenJam.oga");
+
 using KinematicShape = game::Shape<KinematicShapeDefinition>;
 
-std::vector<sf::Texture*> initExplosion1() {
-  auto ret = std::vector<sf::Texture*>(63);
-  for(int i = 0; i < 63; i++) {
-    stringstream ss;
-    ss << "res/textures/effects/Sinestesia/explosions2/3_" << setfill('0') << setw(2) << i << ".png";
-    ret[i] = AssetManager::GetTexture(ss.str());
-  }
-  return ret;
-}
-
-std::vector<sf::Texture*> _EXPLOSION1 = initExplosion1();
+std::vector<sf::Texture*> _EXPLOSION1 = loadTiles("res/textures/effects/Sinestesia/explosions2/3_", 63);
+std::vector<sf::Texture*> _EXPLOSION2 = loadTiles("res/textures/effects/Sinestesia/explosions2/2_big_", 63);
 
 struct SequenceTransformElement {
   sf::Transform Transform;
@@ -422,6 +430,10 @@ public:
     mScrollCamera = cam;
   }
 
+  // void SetSpawnSequencer(SpawnSequencer* sequencer) {
+  //   mSequencer = sequencer;
+  // }
+
   int GetScore() {
     return mScore;
   }
@@ -449,6 +461,7 @@ public:
   void GameOver() {
     mGame->GetOverlayDisplay()->Enable(mGameOverId);
     if(mScrollCamera) mScrollCamera->SetScroll(sf::Vector2f());
+    // if(mSequencer) mSequencer->PauseTriggers();
   }
 
 protected:
@@ -461,6 +474,7 @@ protected:
   std::vector<sf::Sprite*> mHearts = std::vector<sf::Sprite*>(3);
   std::vector<int> mHeartIds = std::vector<int>(3);
   ScrollCamera* mScrollCamera = nullptr;
+  // SpawnSequencer* mSequencer = nullptr;
 };
 
 GameController* getGameController(GameBase* game) {
@@ -690,17 +704,26 @@ game::RectangleShape<KinematicShapeDefinition>* getBoxShape(GameBase* game) {
   return ret;
 }
 
-// TODO..
 PolygonShape<KinematicShapeDefinition>* getBossShape(GameBase* game) {
   static PolygonShape<KinematicShapeDefinition>* ret = nullptr;
   if(ret == nullptr) {
     auto verts = vector<cpVect>();
-    verts.push_back(cpv(-85, -31));
-    verts.push_back(cpv(84, -31));
-    verts.push_back(cpv(76, -5));
-    verts.push_back(cpv(0, 49));
-    verts.push_back(cpv(-1, 49));
-    verts.push_back(cpv(-77, -5));
+    verts.push_back(cpv(-1, 162));
+    verts.push_back(cpv(-22, 103));
+    verts.push_back(cpv(-71, 122));
+    verts.push_back(cpv(-99, 94));
+    verts.push_back(cpv(-115, 18));
+    verts.push_back(cpv(-115, -54));
+    verts.push_back(cpv(-81, -11));
+    verts.push_back(cpv(-79, -138));
+    verts.push_back(cpv(79, -138));
+    verts.push_back(cpv(81, -11));
+    verts.push_back(cpv(115, -54));
+    verts.push_back(cpv(115, 18));
+    verts.push_back(cpv(99, 94));
+    verts.push_back(cpv(71, 122));
+    verts.push_back(cpv(22, 103));
+    verts.push_back(cpv(1, 162));
     ret = ShapeFactory::CreateKinematicPolygonShape(game, verts, 0, 0);
   }
   return ret;
@@ -806,9 +829,9 @@ public:
                     _PROJECTILE_AM_YELLOW,
                     ShapeFactory::CreateKinematicCircleShape(game, 5, 0, 0),
                     {sf::Vector2f(-60, 60),
-                     sf::Vector2f(-30, 60),
-                     sf::Vector2f(0, 60),
-                     sf::Vector2f(30, 60),
+                     sf::Vector2f(-30, 65),
+                     sf::Vector2f(0, 70),
+                     sf::Vector2f(30, 65),
                      sf::Vector2f(60, 60)},
                     {sf::Vector2f(40, -200),
                      sf::Vector2f(20, -200),
@@ -839,8 +862,26 @@ public:
                                               _PROJECTILE_AM_YELLOW,
                                               _SOUND_ENEMY_SHOOT,
                                               ShapeFactory::CreateKinematicCircleShape(game, 5, 0, 0),
-                                              {sf::Vector2f(-60, 60), sf::Vector2f(-30, 60), sf::Vector2f(0, 60), sf::Vector2f(30, 60), sf::Vector2f(60, 60)},
-                                              {sf::Vector2f(40, -200), sf::Vector2f(20, -200), sf::Vector2f(0, -200), sf::Vector2f(-20, -200), sf::Vector2f(-40, -200)},
+                                              {
+                                                  // up
+                                                  sf::Vector2f(-60, -175), sf::Vector2f(-30, -180), sf::Vector2f(0, -185),
+                                                  sf::Vector2f(30, -180),
+                                                  sf::Vector2f(60, -175),
+                                                  // down
+                                                  sf::Vector2f(-60, 175),
+                                                  sf::Vector2f(-30, 180), sf::Vector2f(0, 185),
+                                                  sf::Vector2f(30, 180),
+                                                  sf::Vector2f(60, 175)
+                                                  //
+                                              },
+                                              {
+                                                  // up
+                                                  sf::Vector2f(80, 200), sf::Vector2f(40, 200), sf::Vector2f(0, 200), sf::Vector2f(-40, 200), sf::Vector2f(-80, 200),
+                                                  // down
+                                                  sf::Vector2f(80, -200),
+                                                  sf::Vector2f(40, -200), sf::Vector2f(0, -200), sf::Vector2f(-40, -200), sf::Vector2f(-80, -200)
+                                                  //
+                                              },
                                               _PROJECTILE_SEQ_FRAMES,
                                               500,
                                               300,
@@ -851,8 +892,33 @@ public:
                                               _PROJECTILE_AM_RED,
                                               _SOUND_ENEMY_SHOOT,
                                               ShapeFactory::CreateKinematicCircleShape(game, 5, 0, 0),
-                                              {sf::Vector2f(-15, 60), sf::Vector2f(15, 60)},
-                                              {sf::Vector2f(0, -300)},
+                                              {
+                                                  // down
+                                                  sf::Vector2f(-35, 160),
+                                                  sf::Vector2f(0, 175),
+                                                  sf::Vector2f(35, 160),
+                                                  // left
+                                                  sf::Vector2f(135, -5),
+                                                  // right
+                                                  sf::Vector2f(-135, 0),
+                                                  // up
+                                                  sf::Vector2f(-15, -175),
+                                                  sf::Vector2f(15, -175),
+                                              },
+                                              {
+                                                  // down
+                                                  sf::Vector2f(0, -300),
+                                                  sf::Vector2f(0, -300),
+                                                  sf::Vector2f(0, -300),
+                                                  // left
+                                                  sf::Vector2f(-300, -5),
+                                                  // right
+                                                  sf::Vector2f(300, 0),
+                                                  // up
+                                                  sf::Vector2f(0, 300),
+                                                  sf::Vector2f(0, 300),
+                                                  //
+                                              },
                                               _PROJECTILE_SEQ_FRAMES,
                                               100,
                                               300,
@@ -873,12 +939,12 @@ public:
         getGameController(getGame())->AddScore(mScore);
       }
       cout << GetId() << " Before create explosion" << endl;
-      auto explosion = new Effect(getGame(), _EXPLOSION1, GetCombinedTransform());
+      auto explosion = new Effect(getGame(), _EXPLOSION2, GetCombinedTransform());
       cout << GetId() << " After create explosion" << endl;
 
       getGame()->GetStateManager()->DestroyObject(this);
       getGame()->GetStateManager()->DestroyVisualObject(this);
-      getGame()->GetAudioController()->PlayOnce(_SOUND_EXPLOSION);
+      getGame()->GetAudioController()->PlayOnce(_SOUND_EXPLOSION_2);
       mDestroying = true;
     }
   }
@@ -890,7 +956,8 @@ public:
     RepeatedShootBehaviour<BossEntity, 2>::OnTick();
 
     if(mFinished) {
-      SetSequenceTransform(createRectancleSequence(2, 300, 150), 0, true);
+      // SetSequenceTransform(createRectancleSequence(2, 300, 150), 0, true);
+      SetSequenceTransform(createRectancleSequence(3, 200, 100), 0, true);
     }
   }
 
@@ -941,9 +1008,22 @@ public:
     mTriggers.push(2000);
     mTriggers.push(2300);
     mTriggers.push(3600);
+    mTriggers.push(3700);
+    mTriggers.push(3820);
+
+    // getGameController(game)->SetSpawnSequencer(this);
+  }
+
+  void PauseTriggers() {
+    mEnabled = false;
+  }
+
+  void ResumeTriggers() {
+    mEnabled = true;
   }
 
   void OnTick() {
+    if(!mEnabled) return;
     if(mCounter++ == mCurTrigger) {
       OnTrigger();
       if(mTriggers.size() > 0) {
@@ -956,6 +1036,9 @@ public:
   void OnTrigger() {
     auto game = getGame();
     switch(mCurTrigger) {
+    case 0:
+      mMusicId = game->GetAudioController()->PlayRepeated(_MUSIC_LEVEL);
+      break;
     case 300:
       spawnHorizontalGlider(game, sf::Vector2f(500, 1500), 100, false, 20, 1500);
       spawnHorizontalGlider(game, sf::Vector2f(1548, 1500), 100, true, 20, 1500);
@@ -992,17 +1075,27 @@ public:
       spawnBox(game, sf::Vector2f(1024, 3500), 1500);
       break;
     case 3600:
+      game->GetAudioController()->FadeOut(mMusicId, 100);
       getGameController(game)->GetScrollCamera()->SetScroll(sf::Vector2f());
       mBoss = new BossEntity(game);
       mBoss->SetTransform(sf::Transform().translate(1024, 5000).rotate(180));
+      break;
+    case 3700:
+      game->GetAudioController()->PlayOnce(_BOSS_INTRO);
+      break;
+    case 3820:
+      game->GetAudioController()->PlayRepeated(_BOSS_MUSIC);
+      break;
     default:
       break;
     }
   }
 
 private:
+  bool mEnabled = true;
   int mCounter = 0;
   int mCurTrigger = 0;
+  int mMusicId = -1;
   queue<int> mTriggers;
   BossEntity* mBoss = nullptr;
 };
@@ -1019,9 +1112,9 @@ int prototype1() {
                              0.5, /* Scale */
                              60, /* FPS */
                              false, /* Debug AABB */
-                             false, /* Debug Shapes */
+                             true, /* Debug Shapes */
                              1.0, /* Pixel to Meter */
-                             false /* Audio Enabled */};
+                             true /* Audio Enabled */};
   auto game = new Game(options);
 
   // Send Events to controller
@@ -1054,8 +1147,6 @@ int prototype1() {
   cout << "Creating Gliders" << endl;
 
   cout << "After Glider spawn" << endl;
-
-  game->GetAudioController()->PlayRepeated(AssetManager::GetAudio("res/audio/tgfcoder/FrozenJam.oga"));
 
   auto ctrl = getGameController(game);
   ctrl->SetScrollCamera(cam);

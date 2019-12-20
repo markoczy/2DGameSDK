@@ -8,6 +8,27 @@ namespace game {
   AudioController::AudioController(GameBase* game) : mGame(game) {}
 
   void AudioController::OnTick() {
+    auto it = mFading.begin();
+    while(it != mFading.end()) {
+      int id = get<0>(*it);
+      float decr = get<1>(*it);
+      auto sound = mSounds[id];
+      if(sound) {
+        float newVol = sound->getVolume() - decr;
+        if(newVol > 0) {
+          sound->setVolume(newVol);
+          it++;
+        } else {
+          sound->stop();
+          helpers::safeDelete(sound);
+          mSounds.erase(id);
+          it = mFading.erase(it);
+        }
+      } else {
+        it++;
+      }
+    }
+
     int elapsed = mCleanupTimer.getElapsedTime().asMilliseconds();
     if(elapsed < mCleanupIntervall) return;
 
@@ -17,6 +38,7 @@ namespace game {
         mSounds.erase(it);
       }
     }
+    mCleanupTimer.restart();
   }
 
   void AudioController::PlayOnce(sf::SoundBuffer* sound, float volume) {
@@ -46,5 +68,13 @@ namespace game {
       helpers::safeDelete(sound);
     }
     mSounds.erase(id);
+  }
+
+  void AudioController::FadeOut(int id, int ticks) {
+    if(id == -1) return;
+    auto sound = mSounds[id];
+    if(!sound) return;
+    float fadePerTick = sound->getVolume() / (float)ticks;
+    mFading.push_back(make_tuple(id, fadePerTick));
   }
 } // namespace game
