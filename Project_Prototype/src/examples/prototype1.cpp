@@ -427,7 +427,7 @@ public:
     mScrollCamera = cam;
   }
 
-  // void SetSpawnSequencer(SpawnSequencer* sequencer) {
+  // void SetGameSequencer(GameSequencer* sequencer) {
   //   mSequencer = sequencer;
   // }
 
@@ -471,7 +471,7 @@ protected:
   std::vector<sf::Sprite*> mHearts = std::vector<sf::Sprite*>(3);
   std::vector<int> mHeartIds = std::vector<int>(3);
   ScrollCamera* mScrollCamera = nullptr;
-  // SpawnSequencer* mSequencer = nullptr;
+  // GameSequencer* mSequencer = nullptr;
 };
 
 GameController* getGameController(GameBase* game) {
@@ -994,9 +994,9 @@ void spawnBoss(GameBase* game, sf::Vector2f pos) {
   game->GetScene()->AddEntity(boss);
 }
 
-class SpawnSequencer : public GameObject {
+class GameSequencer : public GameObject {
 public:
-  SpawnSequencer(GameBase* game) : GameObject(ObjectType::Unknown, game) {
+  GameSequencer(GameBase* game) : GameObject(ObjectType::Unknown, game) {
     mTriggers.push(300);
     mTriggers.push(400);
     mTriggers.push(1000);
@@ -1008,7 +1008,7 @@ public:
     mTriggers.push(3700);
     // mTriggers.push(3820);
 
-    // getGameController(game)->SetSpawnSequencer(this);
+    // getGameController(game)->SetGameSequencer(this);
   }
 
   void PauseTriggers() {
@@ -1151,7 +1151,7 @@ int prototype1() {
 
   ctrl->InitOverlay();
 
-  game->GetStateManager()->AddObject(new SpawnSequencer(game));
+  game->GetStateManager()->AddObject(new GameSequencer(game));
 
   game->Run();
   return 0;
