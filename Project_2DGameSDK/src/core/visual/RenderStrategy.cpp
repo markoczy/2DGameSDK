@@ -2,7 +2,7 @@
 
 namespace game {
 
-  RenderStrategy::RenderStrategy(GameBase* game, bool canRender) : mGame(game), mCanRender(canRender) {}
+  RenderStrategy::RenderStrategy(GameBase* game, bool canRender) :  mCanRender(canRender),mGame(game) {}
 
   RenderStrategy::~RenderStrategy() {}
 

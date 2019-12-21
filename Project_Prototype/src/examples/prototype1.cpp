@@ -72,7 +72,7 @@ sf::SoundBuffer* _SOUND_PLAYER_SHOOT = AssetManager::GetAudio("res/audio/Laser_S
 
 sf::SoundBuffer* _SOUND_ENEMY_SHOOT = AssetManager::GetAudio("res/audio/Laser_Shoot.wav");
 
-sf::SoundBuffer* _MUSIC_LEVEL = AssetManager::GetAudio("res/audio/x/Arcade.ogg");
+sf::SoundBuffer* _MUSIC_LEVEL = AssetManager::GetAudio("res/audio/Trevor_Lentz/Arcade.ogg");
 sf::SoundBuffer* _BOSS_MUSIC = AssetManager::GetAudio("res/audio/Matthew_Pablo/Orbital_Colossus.ogg");
 
 using KinematicShape = game::Shape<KinematicShapeDefinition>;
