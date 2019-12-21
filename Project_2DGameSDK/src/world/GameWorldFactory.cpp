@@ -22,7 +22,7 @@ namespace game {
 
   GameWorld* GameWorldFactory::CreateGameWorld(Game* game, std::string tilemapFile, std::string materialMapFile, std::string texturesPrefix, int pad) {
     auto tilemap = loadTilemap(game, tilemapFile);
-    loadTextures(tilemap, texturesPrefix);
+    loadTextures(tilemap, texturesPrefix, pad);
     MaterialMap* materialMap = nullptr;
     if(materialMapFile != "") {
       materialMap = loadMaterialMap(game, materialMapFile);
