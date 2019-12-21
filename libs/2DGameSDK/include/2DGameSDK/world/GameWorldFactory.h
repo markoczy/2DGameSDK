@@ -52,7 +52,7 @@ namespace game {
      * @param texturesPrefix The prefix to find textures (Asset Manager)
      * @return GameWorld* The new Game World
      */
-    static GameWorld* CreateGameWorld(Game* game, std::string tilemapFile, std::string materialMapFile, std::string texturesPrefix);
+    static GameWorld* CreateGameWorld(Game* game, std::string tilemapFile, std::string materialMapFile, std::string texturesPrefix, int pad = 2);
 
   private:
     /**
@@ -72,7 +72,7 @@ namespace game {
      * @param tilemap The Tilemap
      * @param prefix The textures prefix
      */
-    static void loadTextures(Tilemap* tilemap, std::string prefix);
+    static void loadTextures(Tilemap* tilemap, std::string prefix, int pad = 2);
 
     static void loadMaterials(Game* game, Tilemap* tilemap, MaterialMap* materialMap);
   };

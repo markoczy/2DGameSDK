@@ -6,7 +6,7 @@ using namespace std;
 int main(int argc, char* argv[]) {
   cout << "Started." << endl;
 
-  std::string demo = "proto1";
+  std::string demo = "proto2";
   if(argc > 1) {
     demo = argv[1];
     std::transform(demo.begin(), demo.end(), demo.begin(), ::tolower);
@@ -14,6 +14,8 @@ int main(int argc, char* argv[]) {
 
   if(demo == "proto1") {
     return prototype1();
+  } else if(demo == "proto2") {
+    return prototype2();
   } else if(demo == "minimal") {
     return minimalDemo();
   } else if(demo == "player") {

@@ -20,7 +20,7 @@ namespace game {
     return ret;
   }
 
-  GameWorld* GameWorldFactory::CreateGameWorld(Game* game, std::string tilemapFile, std::string materialMapFile, std::string texturesPrefix) {
+  GameWorld* GameWorldFactory::CreateGameWorld(Game* game, std::string tilemapFile, std::string materialMapFile, std::string texturesPrefix, int pad) {
     auto tilemap = loadTilemap(game, tilemapFile);
     loadTextures(tilemap, texturesPrefix);
     MaterialMap* materialMap = nullptr;
@@ -192,7 +192,7 @@ namespace game {
     }
   }
 
-  void GameWorldFactory::loadTextures(Tilemap* tilemap, std::string prefix) {
+  void GameWorldFactory::loadTextures(Tilemap* tilemap, std::string prefix, int pad) {
     LOGI("Start");
     try {
       for(unsigned int iLayer = 0; iLayer < tilemap->Layers.size(); iLayer++) {
@@ -202,7 +202,7 @@ namespace game {
           for(unsigned int iX = 0; iX < tiles[iY].size(); iX++) {
             auto tile = tiles[iY][iX];
             if(tile->TileID > -1) {
-              string fileName = getFilename(prefix, tile->TileID, 2);
+              string fileName = getFilename(prefix, tile->TileID, pad);
               tile->Texture = AssetManager::GetTexture(fileName);
             }
           }

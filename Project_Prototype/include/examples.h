@@ -54,4 +54,6 @@ int physicsDemo();
 
 int prototype1();
 
+int prototype2();
+
 #endif
