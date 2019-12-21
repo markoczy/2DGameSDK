@@ -11,7 +11,7 @@ namespace game {
     virtual int GetZIndex() = 0;
 
     static bool SortByZOrder(VisualObject* a, VisualObject* b) {
-      return a->GetZIndex() > b->GetZIndex();
+      return a->GetZIndex() < b->GetZIndex();
     }
   };
 } // namespace game
