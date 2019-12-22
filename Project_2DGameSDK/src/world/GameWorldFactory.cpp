@@ -162,9 +162,15 @@ namespace game {
             float height = shape["height"].get<float>();
             LOGD("Shape " << curMaterial << "-" << curShape << " height: " << height);
             shapeOut = ShapeFactory::CreateStaticRectangleShape(game, width * pxToMeter, height * pxToMeter, friction, elasticity, sensor);
-          } else if(def == "circle") {
-            // TODO
-            LOGE("Unimplemented circle shape");
+          } else if(def == "circ" || def == "circle") {
+            float radius = shape["radius"].get<float>();
+            auto offsetOut = cpv(0, 0);
+            auto offset = shape["offset"];
+            if(offset != nullptr) {
+              offsetOut.x = offset["x"].get<float>() * pxToMeter;
+              offsetOut.y = offset["y"].get<float>() * pxToMeter;
+            }
+            shapeOut = ShapeFactory::CreateStaticCircleShape(game, radius * pxToMeter, friction, elasticity, offsetOut, sensor);
           } else if(def == "poly" || def == "polygon") {
             // TODO
             LOGE("Unimplemented polygon shape");

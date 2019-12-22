@@ -87,6 +87,7 @@ namespace proto2 {
   class PlayerMoveBehaviour {
   public:
     PlayerMoveBehaviour(TEntity* base, float speed, Key forward, Key backward, Key left, Key right) : mBase(base), mSpeed(speed), mIncr(mSpeed / 10), mForward(forward), mBackward(backward), mLeft(left), mRight(right) {
+      int i = 1;
     }
 
     void OnTick() {

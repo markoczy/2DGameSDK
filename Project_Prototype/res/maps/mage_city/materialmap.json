@@ -1,8 +1,112 @@
 {
   "materials": [
     {
+      "tile": 5,
+      "name": "pot",
+      "type": 100,
+      "shapes": [
+        {
+          "shape": "circ",
+          "radius": 16,
+          "friction": 1.0,
+          "elasticity": 0.0,
+          "sensor": false
+        }
+      ]
+    },
+    {
+      "tile": 12,
+      "name": "pot",
+      "type": 100,
+      "shapes": [
+        {
+          "shape": "circ",
+          "radius": 16,
+          "friction": 1.0,
+          "elasticity": 0.0,
+          "sensor": false
+        }
+      ]
+    },
+    {
+      "tile": 13,
+      "name": "barrel",
+      "type": 100,
+      "shapes": [
+        {
+          "shape": "circ",
+          "radius": 16,
+          "friction": 1.0,
+          "elasticity": 0.0,
+          "sensor": false
+        }
+      ]
+    },
+    {
+      "tile": 14,
+      "name": "table1",
+      "type": 100,
+      "shapes": [
+        {
+          "shape": "rect",
+          "width": 32,
+          "height": 32,
+          "friction": 1.0,
+          "elasticity": 0.0,
+          "sensor": false
+        }
+      ]
+    },
+    {
+      "tile": 15,
+      "name": "table2",
+      "type": 100,
+      "shapes": [
+        {
+          "shape": "rect",
+          "width": 32,
+          "height": 32,
+          "friction": 1.0,
+          "elasticity": 0.0,
+          "sensor": false
+        }
+      ]
+    },
+    {
+      "tile": 23,
+      "name": "fountain",
+      "type": 100,
+      "shapes": [
+        {
+          "shape": "circ",
+          "radius": 32,
+          "friction": 1.0,
+          "elasticity": 0.0,
+          "sensor": false,
+          "offset": {
+            "x": 16,
+            "y": -16
+          }
+        }
+      ]
+    },
+    {
+      "tile": 28,
+      "name": "pot",
+      "type": 100,
+      "shapes": [
+        {
+          "shape": "circ",
+          "radius": 16,
+          "friction": 1.0,
+          "elasticity": 0.0,
+          "sensor": false
+        }
+      ]
+    },
+    {
       "tile": 34,
-      "name": "34",
+      "name": "wall",
       "type": 100,
       "shapes": [
         {
@@ -17,7 +121,7 @@
     },
     {
       "tile": 35,
-      "name": "35",
+      "name": "wall",
       "type": 100,
       "shapes": [
         {
@@ -32,7 +136,7 @@
     },
     {
       "tile": 37,
-      "name": "37",
+      "name": "wall",
       "type": 100,
       "shapes": [
         {
@@ -47,7 +151,7 @@
     },
     {
       "tile": 38,
-      "name": "38",
+      "name": "wall",
       "type": 100,
       "shapes": [
         {
@@ -62,7 +166,7 @@
     },
     {
       "tile": 42,
-      "name": "42",
+      "name": "wall",
       "type": 100,
       "shapes": [
         {
@@ -77,7 +181,216 @@
     },
     {
       "tile": 43,
-      "name": "43",
+      "name": "wall",
+      "type": 100,
+      "shapes": [
+        {
+          "shape": "rect",
+          "width": 32,
+          "height": 32,
+          "friction": 1.0,
+          "elasticity": 0.0,
+          "sensor": false
+        }
+      ]
+    },
+    {
+      "tile": 113,
+      "name": "tree",
+      "type": 100,
+      "shapes": [
+        {
+          "shape": "circ",
+          "radius": 12,
+          "friction": 1.0,
+          "elasticity": 0.0,
+          "sensor": false
+        }
+      ]
+    },
+    {
+      "tile": 114,
+      "name": "statue",
+      "type": 100,
+      "shapes": [
+        {
+          "shape": "rect",
+          "width": 28,
+          "height": 28,
+          "friction": 1.0,
+          "elasticity": 0.0,
+          "sensor": false
+        }
+      ]
+    },
+    {
+      "tile": 147,
+      "name": "tree",
+      "type": 100,
+      "shapes": [
+        {
+          "shape": "rect",
+          "width": 32,
+          "height": 32,
+          "friction": 1.0,
+          "elasticity": 0.0,
+          "sensor": false
+        }
+      ]
+    },
+    {
+      "tile": 148,
+      "name": "tree",
+      "type": 100,
+      "shapes": [
+        {
+          "shape": "rect",
+          "width": 32,
+          "height": 32,
+          "friction": 1.0,
+          "elasticity": 0.0,
+          "sensor": false
+        }
+      ]
+    },
+    {
+      "tile": 214,
+      "name": "wall",
+      "type": 100,
+      "shapes": [
+        {
+          "shape": "rect",
+          "width": 32,
+          "height": 32,
+          "friction": 1.0,
+          "elasticity": 0.0,
+          "sensor": false
+        }
+      ]
+    },
+    {
+      "tile": 215,
+      "name": "wall",
+      "type": 100,
+      "shapes": [
+        {
+          "shape": "rect",
+          "width": 32,
+          "height": 32,
+          "friction": 1.0,
+          "elasticity": 0.0,
+          "sensor": false
+        }
+      ]
+    },
+    {
+      "tile": 222,
+      "name": "wall",
+      "type": 100,
+      "shapes": [
+        {
+          "shape": "rect",
+          "width": 32,
+          "height": 32,
+          "friction": 1.0,
+          "elasticity": 0.0,
+          "sensor": false
+        }
+      ]
+    },
+    {
+      "tile": 223,
+      "name": "wall",
+      "type": 100,
+      "shapes": [
+        {
+          "shape": "rect",
+          "width": 32,
+          "height": 32,
+          "friction": 1.0,
+          "elasticity": 0.0,
+          "sensor": false
+        }
+      ]
+    },
+    {
+      "tile": 230,
+      "name": "wall",
+      "type": 100,
+      "shapes": [
+        {
+          "shape": "rect",
+          "width": 32,
+          "height": 32,
+          "friction": 1.0,
+          "elasticity": 0.0,
+          "sensor": false
+        }
+      ]
+    },
+    {
+      "tile": 231,
+      "name": "wall",
+      "type": 100,
+      "shapes": [
+        {
+          "shape": "rect",
+          "width": 32,
+          "height": 32,
+          "friction": 1.0,
+          "elasticity": 0.0,
+          "sensor": false
+        }
+      ]
+    },
+    {
+      "tile": 279,
+      "name": "wall",
+      "type": 100,
+      "shapes": [
+        {
+          "shape": "rect",
+          "width": 32,
+          "height": 32,
+          "friction": 1.0,
+          "elasticity": 0.0,
+          "sensor": false
+        }
+      ]
+    },
+    {
+      "tile": 281,
+      "name": "wall",
+      "type": 100,
+      "shapes": [
+        {
+          "shape": "rect",
+          "width": 32,
+          "height": 32,
+          "friction": 1.0,
+          "elasticity": 0.0,
+          "sensor": false
+        }
+      ]
+    },
+    {
+      "tile": 289,
+      "name": "wall",
+      "type": 100,
+      "shapes": [
+        {
+          "shape": "rect",
+          "width": 32,
+          "height": 32,
+          "friction": 1.0,
+          "elasticity": 0.0,
+          "sensor": false
+        }
+      ]
+    },
+    {
+      "tile": 297,
+      "name": "wall",
       "type": 100,
       "shapes": [
         {
@@ -92,7 +405,7 @@
     },
     {
       "tile": 305,
-      "name": "305",
+      "name": "wall",
       "type": 100,
       "shapes": [
         {
@@ -107,7 +420,7 @@
     },
     {
       "tile": 313,
-      "name": "313",
+      "name": "wall",
       "type": 100,
       "shapes": [
         {
@@ -122,7 +435,7 @@
     },
     {
       "tile": 321,
-      "name": "321",
+      "name": "wall",
       "type": 100,
       "shapes": [
         {
@@ -137,7 +450,7 @@
     },
     {
       "tile": 327,
-      "name": "327",
+      "name": "wall",
       "type": 100,
       "shapes": [
         {
