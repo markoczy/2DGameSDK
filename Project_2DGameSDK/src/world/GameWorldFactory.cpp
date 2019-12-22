@@ -48,14 +48,14 @@ namespace game {
       tilemapOut->TilesWide = data["tileswide"];
       tilemapOut->TilesHigh = data["tileshigh"];
 
-      auto worldBounds = sf::IntRect(0, 0, tilemapOut->TilesWide * tilemapOut->TileWidth, tilemapOut->TilesHigh * tilemapOut->TileHeight);
-      auto tileBounds = sf::IntRect(0, 0, tilemapOut->TileWidth, tilemapOut->TileHeight);
+      auto tileAmounts = sf::Vector2i(tilemapOut->TilesWide, tilemapOut->TilesHigh);
+      auto tileBounds = sf::Vector2i(tilemapOut->TileWidth, tilemapOut->TileHeight);
 
       // Loop Layers
       while(layers[curLayer] != nullptr) {
         auto layer = layers[curLayer];
 
-        auto layerOut = new TileLayer(worldBounds, tileBounds);
+        auto layerOut = new TileLayer(tileAmounts, tileBounds);
         if(layer["name"] != nullptr) {
           layerOut->SetName(layer["name"].get<string>());
         }
@@ -103,9 +103,19 @@ namespace game {
           curTile++;
         }
         layerOut->SetTiles(tilesOut);
-        layersOut.push_back(layerOut);
+        auto multilayered = layer["multilayered"];
+        if(multilayered != nullptr && multilayered.get<bool>()) {
+          std::cout << "Multilayer mode!" << std::endl;
+          for(auto l : layerOut->CreateMultilayered()) {
+            layersOut.push_back(l);
+          }
+        } else {
+          layersOut.push_back(layerOut);
+        }
+
         curLayer++;
       }
+      std::cout << "Total Layers: " << layersOut.size() << std::endl;
       sort(layersOut.begin(), layersOut.end(), compareLayers);
       tilemapOut->Layers = layersOut;
       return tilemapOut;

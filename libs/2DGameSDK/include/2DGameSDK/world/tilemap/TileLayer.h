@@ -26,7 +26,7 @@ namespace game {
    */
   class TileLayer : public VisualObject {
   public:
-    TileLayer(sf::IntRect worldBounds, sf::IntRect tileBounds);
+    TileLayer(sf::Vector2i tileAmounts, sf::Vector2i tileBounds, int yOffset = 0);
     ~TileLayer();
 
     int GetZIndex();
@@ -48,9 +48,13 @@ namespace game {
 
     void OnTexturesLoaded();
 
+    std::vector<TileLayer*> CreateMultilayered();
+
   private:
-    sf::IntRect mWorldBounds = sf::IntRect();
-    sf::IntRect mTileBounds = sf::IntRect();
+    sf::Vector2i mTileAmounts = sf::Vector2i();
+    sf::Vector2i mTileBounds = sf::Vector2i();
+    sf::Vector2i mTotalBounds = sf::Vector2i();
+    int mYOffset = 0;
     int mZIndex = constants::DEFAULT_ZINDEX_WORLD;
     std::string mName;
     int mNumber;

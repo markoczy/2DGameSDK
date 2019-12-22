@@ -2,7 +2,11 @@
 
 namespace game {
 
-  TileLayer::TileLayer(sf::IntRect worldBounds, sf::IntRect tileBounds) : mWorldBounds(worldBounds), mTileBounds(tileBounds) {}
+  TileLayer::TileLayer(sf::Vector2i tileAmounts, sf::Vector2i tileBounds, int yOffset)
+      : mTileAmounts(tileAmounts),
+        mTileBounds(tileBounds),
+        mTotalBounds(tileBounds.x * tileAmounts.x, tileBounds.y * tileAmounts.y),
+        mYOffset(yOffset) {}
 
   TileLayer::~TileLayer() {
     helpers::safeDelete(mSprite);
@@ -48,19 +52,53 @@ namespace game {
 
   void TileLayer::OnTexturesLoaded() {
     mTexture = new sf::Texture();
-    if(!mTexture->create(mWorldBounds.width, mWorldBounds.height)) {
+    if(!mTexture->create(mTotalBounds.x, mTotalBounds.y)) {
       throw std::runtime_error("Texture creation failed at load tilemap");
     }
 
     for(auto row : mTiles) {
       for(auto tile : row) {
         if(tile->Texture != nullptr) {
-          int x = tile->X * mTileBounds.width;
-          int y = tile->Y * mTileBounds.height;
+          int x = (tile->X % row.size()) * mTileBounds.x;
+          int y = (tile->Y % mTiles.size()) * mTileBounds.y;
           mTexture->update(*tile->Texture, x, y);
         }
       }
     }
     mSprite = new sf::Sprite(*mTexture);
+    mSprite->setPosition(0, mYOffset * mTileBounds.y);
   }
+
+  std::vector<TileLayer*> TileLayer::CreateMultilayered() {
+    auto ret = std::vector<TileLayer*>();
+    for(unsigned y = 0; y < mTiles.size(); y++) {
+      auto row = mTiles[y];
+      bool hasRenderedTiles = false;
+      unsigned x = 0;
+      while(!hasRenderedTiles && x < row.size()) {
+        auto tile = row[x];
+        if(tile && tile->TileID != -1) hasRenderedTiles = true;
+        x++;
+      }
+
+      if(hasRenderedTiles) {
+        auto layer = new TileLayer(sf::Vector2i(mTileAmounts.x, 1), mTileBounds, y);
+        layer->SetTiles({row});
+        layer->SetZIndex(constants::DEFAULT_ZINDEX_WORLD + y);
+        std::cout << "Setting Z-Index: " << constants::DEFAULT_ZINDEX_WORLD + y << std::endl;
+        ret.push_back(layer);
+      }
+      // for(auto tile : row) {
+      //   if(tile->Texture != nullptr) {
+      //     int x = tile->X * mTileBounds.x;
+      //     int y = tile->Y * mTileBounds.y;
+      //     mTexture->update(*tile->Texture, x, y);
+      //   }
+      // }
+    }
+
+    std::cout << "Created " << ret.size() << " layers" << std::endl;
+    return ret;
+  }
+
 } // namespace game

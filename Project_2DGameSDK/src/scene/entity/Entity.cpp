@@ -35,6 +35,7 @@ namespace game {
 
   void Entity::SetZIndex(int zIndex) {
     mZIndex = zIndex;
+    getGame()->GetStateManager()->OnZOrderChanged();
   }
 
   void Entity::SetTransform(sf::Transform transform) {

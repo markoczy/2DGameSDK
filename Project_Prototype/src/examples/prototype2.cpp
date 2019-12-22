@@ -222,8 +222,16 @@ namespace proto2 {
                               sf::Keyboard::Right) {}
 
     void OnTick() {
-      PlayerMoveBehaviour::OnTick();
+      auto worlBounds = getGame()->GetWorld()->GetBounds();
+      float pxToMeter = getGame()->GetOptions().MeterPerPixel;
+      auto pos = cpBodyGetPosition(mBody);
+      float y = worlBounds.height - (pos.y / pxToMeter) - 10;
+      int yTile = (int)(y / 32.0);
+      SetZIndex(yTile);
     }
+
+    // void OnTickEnded() {
+    // }
   };
 
   //***************************************************************************/
@@ -259,8 +267,6 @@ namespace proto2 {
 
     auto space = game->GetPhysicalWorld();
     cpSpaceSetGravity(space, cpv(0, 0));
-
-    // cpSpaceSetDamping(space, 0.1);
 
     game->Run();
     return 0;

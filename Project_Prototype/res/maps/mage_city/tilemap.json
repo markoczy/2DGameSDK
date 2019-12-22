@@ -5,6 +5,7 @@
     "layers": [
         {
             "number": 1,
+            "multilayered": true,
             "tiles": [
                 {
                     "x": 0,
