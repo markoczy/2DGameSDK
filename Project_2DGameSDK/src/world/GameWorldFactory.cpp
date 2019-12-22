@@ -105,7 +105,6 @@ namespace game {
         layerOut->SetTiles(tilesOut);
         auto multilayered = layer["multilayered"];
         if(multilayered != nullptr && multilayered.get<bool>()) {
-          std::cout << "Multilayer mode!" << std::endl;
           for(auto l : layerOut->CreateMultilayered()) {
             layersOut.push_back(l);
           }
@@ -115,7 +114,6 @@ namespace game {
 
         curLayer++;
       }
-      std::cout << "Total Layers: " << layersOut.size() << std::endl;
       sort(layersOut.begin(), layersOut.end(), compareLayers);
       tilemapOut->Layers = layersOut;
       return tilemapOut;

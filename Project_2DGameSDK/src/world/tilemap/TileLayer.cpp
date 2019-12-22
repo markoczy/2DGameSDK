@@ -84,20 +84,11 @@ namespace game {
       if(hasRenderedTiles) {
         auto layer = new TileLayer(sf::Vector2i(mTileAmounts.x, 1), mTileBounds, y);
         layer->SetTiles({row});
-        layer->SetZIndex(constants::DEFAULT_ZINDEX_WORLD + y);
-        std::cout << "Setting Z-Index: " << constants::DEFAULT_ZINDEX_WORLD + y << std::endl;
+        layer->SetZIndex(constants::DEFAULT_ZINDEX_WORLD + 2 * y);
         ret.push_back(layer);
       }
-      // for(auto tile : row) {
-      //   if(tile->Texture != nullptr) {
-      //     int x = tile->X * mTileBounds.x;
-      //     int y = tile->Y * mTileBounds.y;
-      //     mTexture->update(*tile->Texture, x, y);
-      //   }
-      // }
     }
 
-    std::cout << "Created " << ret.size() << " layers" << std::endl;
     return ret;
   }
 

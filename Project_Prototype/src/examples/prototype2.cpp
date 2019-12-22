@@ -62,6 +62,20 @@ namespace proto2 {
       {10, AssetManager::GetTexture("res/textures/rpghero/hero_10.png")},
       {11, AssetManager::GetTexture("res/textures/rpghero/hero_11.png")}};
 
+  std::map<int, sf::Texture*> _GIRL_ANIM = {
+      {0, AssetManager::GetTexture("res/textures/rpggirl/girl_00.png")},
+      {1, AssetManager::GetTexture("res/textures/rpggirl/girl_01.png")},
+      {2, AssetManager::GetTexture("res/textures/rpggirl/girl_02.png")},
+      {3, AssetManager::GetTexture("res/textures/rpggirl/girl_03.png")},
+      {4, AssetManager::GetTexture("res/textures/rpggirl/girl_04.png")},
+      {5, AssetManager::GetTexture("res/textures/rpggirl/girl_05.png")},
+      {6, AssetManager::GetTexture("res/textures/rpggirl/girl_06.png")},
+      {7, AssetManager::GetTexture("res/textures/rpggirl/girl_07.png")},
+      {8, AssetManager::GetTexture("res/textures/rpggirl/girl_08.png")},
+      {9, AssetManager::GetTexture("res/textures/rpggirl/girl_09.png")},
+      {10, AssetManager::GetTexture("res/textures/rpggirl/girl_10.png")},
+      {11, AssetManager::GetTexture("res/textures/rpggirl/girl_11.png")}};
+
   //*
   //* SHAPES
   //*---------------------------------------------------------------------------
@@ -215,7 +229,7 @@ namespace proto2 {
                                 true,
                                 10),
           PlayerMoveBehaviour(this,
-                              5,
+                              7,
                               sf::Keyboard::Up,
                               sf::Keyboard::Down,
                               sf::Keyboard::Left,
@@ -225,13 +239,12 @@ namespace proto2 {
       auto worlBounds = getGame()->GetWorld()->GetBounds();
       float pxToMeter = getGame()->GetOptions().MeterPerPixel;
       auto pos = cpBodyGetPosition(mBody);
-      float y = worlBounds.height - (pos.y / pxToMeter) - 10;
-      int yTile = (int)(y / 32.0);
+      float y = worlBounds.height - (pos.y / pxToMeter) + 20;
+      int yTile = 2 * ((int)(y / 32.0)) - 1;
       SetZIndex(yTile);
-    }
 
-    // void OnTickEnded() {
-    // }
+      PlayerMoveBehaviour::OnTick();
+    }
   };
 
   //***************************************************************************/
