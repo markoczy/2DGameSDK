@@ -20,6 +20,14 @@ namespace game {
     cpBodyFree(mBody);
   }
 
+  cpVect DynamicEntity::GetVelocity() {
+    return cpBodyGetVelocity(mBody);
+  }
+
+  cpVect DynamicEntity::GetForce() {
+    return cpBodyGetForce(mBody);
+  }
+
   bool DynamicEntity::IsKinematic() {
     return false;
   }

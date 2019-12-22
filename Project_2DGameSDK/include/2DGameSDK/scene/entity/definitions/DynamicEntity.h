@@ -25,6 +25,9 @@ namespace game {
 
     ~DynamicEntity();
 
+    virtual cpVect GetVelocity();
+    virtual cpVect GetForce();
+
     virtual sf::Transform GetTransform();
     virtual sf::Transform GetAccumulatedTransform();
     virtual sf::Transform GetCombinedTransform();

@@ -22,11 +22,45 @@ namespace proto2 {
 
   const int _PLAYER_TYPE = 200;
 
+  enum class Direction {
+    DEFAULT = -1,
+    UP = 0,
+    RIGHT = 1,
+    LEFT = 2,
+    DOWN = 3
+  };
+
+  enum class IdleAnim {
+    UP = 10,
+    RIGHT = 7,
+    LEFT = 4,
+    DOWN = 1
+  };
+
+  std::vector<int> WalkDownAnim = {0, 1, 2};
+  std::vector<int> WalkLeftAnim = {3, 4, 5};
+  std::vector<int> WalkRightAnim = {6, 7, 8};
+  std::vector<int> WalkUpAnim = {9, 10, 11};
+
   //*
   //* ASSETS
   //*---------------------------------------------------------------------------
 
   sf::Texture* _PLAYER_TEXTURE = AssetManager::GetTexture("res/textures/rpghero/hero_10.png");
+
+  std::map<int, sf::Texture*> _PLAYER_ANIM = {
+      {0, AssetManager::GetTexture("res/textures/rpghero/hero_00.png")},
+      {1, AssetManager::GetTexture("res/textures/rpghero/hero_01.png")},
+      {2, AssetManager::GetTexture("res/textures/rpghero/hero_02.png")},
+      {3, AssetManager::GetTexture("res/textures/rpghero/hero_03.png")},
+      {4, AssetManager::GetTexture("res/textures/rpghero/hero_04.png")},
+      {5, AssetManager::GetTexture("res/textures/rpghero/hero_05.png")},
+      {6, AssetManager::GetTexture("res/textures/rpghero/hero_06.png")},
+      {7, AssetManager::GetTexture("res/textures/rpghero/hero_07.png")},
+      {8, AssetManager::GetTexture("res/textures/rpghero/hero_08.png")},
+      {9, AssetManager::GetTexture("res/textures/rpghero/hero_09.png")},
+      {10, AssetManager::GetTexture("res/textures/rpghero/hero_10.png")},
+      {11, AssetManager::GetTexture("res/textures/rpghero/hero_11.png")}};
 
   //*
   //* SHAPES
@@ -36,10 +70,10 @@ namespace proto2 {
     static PolygonShape<DynamicShapeDefinition>* ret = nullptr;
     if(ret == nullptr) {
       auto verts = vector<cpVect>();
-      verts.push_back(cpv(-6, -16));
-      verts.push_back(cpv(-6, -23));
-      verts.push_back(cpv(5, -23));
-      verts.push_back(cpv(5, -16));
+      verts.push_back(cpv(-0.6, -1.2));
+      verts.push_back(cpv(-0.6, -2.3));
+      verts.push_back(cpv(0.5, -2.3));
+      verts.push_back(cpv(0.5, -1.2));
       ret = ShapeFactory::CreateDynamicPolygonShape(game, verts, 1, 1, 0);
     }
     return ret;
@@ -52,50 +86,139 @@ namespace proto2 {
   template <class TEntity>
   class PlayerMoveBehaviour {
   public:
-    PlayerMoveBehaviour(TEntity* base, float speed, Key forward, Key backward, Key left, Key right) : mBase(base), mSpeed(speed), mForward(forward), mBackward(backward), mLeft(left), mRight(right) {
-      cout << "PlayerMove Constructor" << endl;
+    PlayerMoveBehaviour(TEntity* base, float speed, Key forward, Key backward, Key left, Key right) : mBase(base), mSpeed(speed), mIncr(mSpeed / 10), mForward(forward), mBackward(backward), mLeft(left), mRight(right) {
     }
 
     void OnTick() {
-      std::cout << "OnTick.." << std::endl;
+      // Direction dir = Direction::DEFAULT;
       if(sf::Keyboard::isKeyPressed(mForward)) {
-        mDv.y += mSpeed;
+        mDv.y += mIncr;
+        mLastDirection = Direction::UP;
       }
       if(sf::Keyboard::isKeyPressed(mBackward)) {
-        mDv.y -= mSpeed;
+        mDv.y -= mIncr;
+        mLastDirection = Direction::DOWN;
       }
       if(sf::Keyboard::isKeyPressed(mLeft)) {
-        mDv.x -= mSpeed;
+        mDv.x -= mIncr;
+        mLastDirection = Direction::LEFT;
       }
       if(sf::Keyboard::isKeyPressed(mRight)) {
-        mDv.x += mSpeed;
+        mDv.x += mIncr;
+        mLastDirection = Direction::RIGHT;
       }
 
-      mBase->SetVelocity(mDv);
-      mDv = cpv(0, 0);
+      if(mDv.x || mDv.y) {
+        mWalking = true;
+        cpVect curV = mBase->GetVelocity();
+        mDv = cpv(curV.x + mDv.x, curV.y + mDv.y);
+        float len = cpvlength(mDv);
+        if(len > mSpeed) {
+          float f = mSpeed / len;
+          mDv = cpv(mDv.x * f, mDv.y * f);
+        }
 
-      // if(mDt.x != 0 || mDt.y != 0) {
-      //   // mBase->OnMove(mDt);
-      //   mBase->Transform(sf::Transform().translate(mDt));
-      // }
-      // mDt = sf::Vector2f();
+        mBase->SetVelocity(mDv);
+        mDv = cpv(0, 0);
+      } else {
+        mWalking = false;
+        mCurFrame = 0;
+        mCurWalkAnim = 0;
+        mBase->SetVelocity(cpv(0, 0));
+      }
+
+      if(mWalking) {
+        setWalkingPos();
+      } else {
+        setIdlePos();
+      }
     }
 
   protected:
     TEntity* mBase = nullptr;
     float mSpeed = 0;
+    float mIncr = 0;
     Key mForward, mBackward, mLeft, mRight;
-
+    Direction mLastDirection = Direction::UP;
+    bool mWalking = false;
     cpVect mDv;
+    int mCurFrame = 0;
+    int mCurWalkAnim = 0;
+    vector<int> mAnim;
+
+    void setWalking(Direction dir) {
+      mLastDirection = dir;
+      if(!mWalking) {
+        mCurFrame = 0;
+        mCurWalkAnim = 0;
+      }
+      mWalking = true;
+    }
+
+    void setIdlePos() {
+      switch(mLastDirection) {
+      case Direction::UP:
+        mBase->SetAnimState((int)IdleAnim::UP);
+        break;
+      case Direction::RIGHT:
+        mBase->SetAnimState((int)IdleAnim::RIGHT);
+        break;
+      case Direction::DOWN:
+        mBase->SetAnimState((int)IdleAnim::DOWN);
+        break;
+      case Direction::LEFT:
+        mBase->SetAnimState((int)IdleAnim::LEFT);
+        break;
+      default:
+        break;
+      };
+    }
+
+    void setWalkingPos() {
+      switch(mLastDirection) {
+      case Direction::UP:
+        mAnim = WalkUpAnim;
+        break;
+      case Direction::RIGHT:
+        mAnim = WalkRightAnim;
+        break;
+      case Direction::DOWN:
+        mAnim = WalkDownAnim;
+        break;
+      case Direction::LEFT:
+        mAnim = WalkLeftAnim;
+        break;
+      default:
+        break;
+      };
+
+      if(++mCurFrame > 10) {
+        mCurFrame = 0;
+        mCurWalkAnim = (mCurWalkAnim + 1) % mAnim.size();
+      }
+      mBase->SetAnimState(mAnim[mCurWalkAnim]);
+    }
   };
 
   //***************************************************************************/
 
   //************************* HIGH LEVEL OBJECTS ******************************/
 
-  class PlayerEntity : public SpriteDynamicEntity, public PlayerMoveBehaviour<PlayerEntity> {
+  class PlayerEntity : public AnimatedDynamicEntity, public PlayerMoveBehaviour<PlayerEntity> {
   public:
-    PlayerEntity(GameBase* game) : SpriteDynamicEntity(_PLAYER_TYPE, game, _PLAYER_TEXTURE, {getPlayerShape(game)}), PlayerMoveBehaviour(this, 35, sf::Keyboard::Up, sf::Keyboard::Down, sf::Keyboard::Left, sf::Keyboard::Right) {}
+    PlayerEntity(GameBase* game)
+        : AnimatedDynamicEntity(_PLAYER_TYPE,
+                                game,
+                                _PLAYER_ANIM,
+                                {getPlayerShape(game)},
+                                true,
+                                10),
+          PlayerMoveBehaviour(this,
+                              5,
+                              sf::Keyboard::Up,
+                              sf::Keyboard::Down,
+                              sf::Keyboard::Left,
+                              sf::Keyboard::Right) {}
 
     void OnTick() {
       PlayerMoveBehaviour::OnTick();
@@ -113,20 +236,21 @@ namespace proto2 {
                                2, /* Scale */
                                60, /* FPS */
                                false, /* Debug AABB */
-                               true, /* Debug Shapes */
-                               1.0, /* Pixel to Meter */
+                               false, /* Debug Shapes */
+                               0.1, /* Pixel to Meter */
                                true /* Audio Enabled */};
     auto game = new Game(options);
 
     // Create Game World
-    auto world = GameWorldFactory::CreateGameWorld(game, "res/maps/mage_city/tilemap.json", "", "res/maps/mage_city/tile_", 3);
+    auto world = GameWorldFactory::CreateGameWorld(game, "res/maps/mage_city/tilemap.json", "res/maps/mage_city/materialmap.json", "res/maps/mage_city/tile_", 3);
     game->SetWorld(world);
 
     auto scene = new SceneGraph(game);
     game->SetScene(scene);
 
     auto player = new PlayerEntity(game);
-    player->SetTransform(sf::Transform().translate(50, 600));
+    player->SetMoment(INFINITY);
+    player->SetTransform(sf::Transform().translate(11, 5));
     scene->AddEntity(player);
 
     auto cam = new BoundedFollowCameraController(game, player);
@@ -134,6 +258,8 @@ namespace proto2 {
 
     auto space = game->GetPhysicalWorld();
     cpSpaceSetGravity(space, cpv(0, 0));
+
+    // cpSpaceSetDamping(space, 0.1);
 
     game->Run();
     return 0;

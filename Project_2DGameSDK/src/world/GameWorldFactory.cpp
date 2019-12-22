@@ -237,6 +237,7 @@ namespace game {
           }
 
           auto material = materialMap->Materials[tile->TileID];
+          if(!material) continue;
           auto matBody = cpSpaceAddBody(space, cpBodyNewStatic());
 
           auto visualPos = sf::Vector2f((tile->X + 0.5) * tilemap->TileWidth, (tile->Y + 0.5) * tilemap->TileHeight);

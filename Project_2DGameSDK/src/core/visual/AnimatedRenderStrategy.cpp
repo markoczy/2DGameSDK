@@ -3,7 +3,10 @@
 namespace game {
   AnimatedRenderStrategy::AnimatedRenderStrategy(GameBase* game, std::map<int, sf::Texture*> animationStates, int startState) : RenderStrategy(game, true), mCurState(startState) {
     for(auto entry : animationStates) {
-      mAnimationStates[entry.first] = sf::Sprite(*entry.second);
+      auto sprite = sf::Sprite(*entry.second);
+      auto rect = sprite.getLocalBounds();
+      sprite.setOrigin(rect.width / 2, rect.height / 2);
+      mAnimationStates[entry.first] = sprite;
     }
   }
 

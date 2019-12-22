@@ -1,0 +1,154 @@
+{
+  "materials": [
+    {
+      "tile": 34,
+      "name": "34",
+      "type": 100,
+      "shapes": [
+        {
+          "shape": "rect",
+          "width": 32,
+          "height": 32,
+          "friction": 1.0,
+          "elasticity": 0.0,
+          "sensor": false
+        }
+      ]
+    },
+    {
+      "tile": 35,
+      "name": "35",
+      "type": 100,
+      "shapes": [
+        {
+          "shape": "rect",
+          "width": 32,
+          "height": 32,
+          "friction": 1.0,
+          "elasticity": 0.0,
+          "sensor": false
+        }
+      ]
+    },
+    {
+      "tile": 37,
+      "name": "37",
+      "type": 100,
+      "shapes": [
+        {
+          "shape": "rect",
+          "width": 32,
+          "height": 32,
+          "friction": 1.0,
+          "elasticity": 0.0,
+          "sensor": false
+        }
+      ]
+    },
+    {
+      "tile": 38,
+      "name": "38",
+      "type": 100,
+      "shapes": [
+        {
+          "shape": "rect",
+          "width": 32,
+          "height": 32,
+          "friction": 1.0,
+          "elasticity": 0.0,
+          "sensor": false
+        }
+      ]
+    },
+    {
+      "tile": 42,
+      "name": "42",
+      "type": 100,
+      "shapes": [
+        {
+          "shape": "rect",
+          "width": 32,
+          "height": 32,
+          "friction": 1.0,
+          "elasticity": 0.0,
+          "sensor": false
+        }
+      ]
+    },
+    {
+      "tile": 43,
+      "name": "43",
+      "type": 100,
+      "shapes": [
+        {
+          "shape": "rect",
+          "width": 32,
+          "height": 32,
+          "friction": 1.0,
+          "elasticity": 0.0,
+          "sensor": false
+        }
+      ]
+    },
+    {
+      "tile": 305,
+      "name": "305",
+      "type": 100,
+      "shapes": [
+        {
+          "shape": "rect",
+          "width": 32,
+          "height": 32,
+          "friction": 1.0,
+          "elasticity": 0.0,
+          "sensor": false
+        }
+      ]
+    },
+    {
+      "tile": 313,
+      "name": "313",
+      "type": 100,
+      "shapes": [
+        {
+          "shape": "rect",
+          "width": 32,
+          "height": 32,
+          "friction": 1.0,
+          "elasticity": 0.0,
+          "sensor": false
+        }
+      ]
+    },
+    {
+      "tile": 321,
+      "name": "321",
+      "type": 100,
+      "shapes": [
+        {
+          "shape": "rect",
+          "width": 32,
+          "height": 32,
+          "friction": 1.0,
+          "elasticity": 0.0,
+          "sensor": false
+        }
+      ]
+    },
+    {
+      "tile": 327,
+      "name": "327",
+      "type": 100,
+      "shapes": [
+        {
+          "shape": "rect",
+          "width": 32,
+          "height": 32,
+          "friction": 1.0,
+          "elasticity": 0.0,
+          "sensor": false
+        }
+      ]
+    }
+  ]
+}
