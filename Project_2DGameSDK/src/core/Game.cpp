@@ -105,7 +105,7 @@ namespace game {
 
   void renderFunc(Game* game, sf::RenderWindow* win, StateManager* mgr) {
     win->setFramerateLimit(game->GetOptions().FramesPerSecond);
-    win->setVerticalSyncEnabled(true);
+    // win->setVerticalSyncEnabled(true);
     win->setActive(true);
     while(game->IsRunning()) {
       win->clear(sf::Color(80, 80, 80));
@@ -307,8 +307,8 @@ namespace game {
       mEventCtrl.OnTick();
       LOGD("Tick State Manager");
       mStateManager.OnTick();
-      LOGD("Tick Camera");
-      mCameraController->OnTick();
+      // LOGD("Tick Camera");
+      // mCameraController->OnTick();
       LOGD("Tick Audio");
       mAudioController->OnTick();
       // LOGD("Tick Overlay");

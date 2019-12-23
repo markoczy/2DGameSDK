@@ -20,7 +20,11 @@ namespace proto2 {
   //* CONSTANTS
   //*---------------------------------------------------------------------------
 
+  const int _NPC_TYPE = 100;
   const int _PLAYER_TYPE = 200;
+
+  const float _WALK_SPEED = 3;
+  const float _RUN_SPEED = 7;
 
   enum class Direction {
     DEFAULT = -1,
@@ -41,6 +45,11 @@ namespace proto2 {
   std::vector<int> WalkLeftAnim = {3, 4, 5};
   std::vector<int> WalkRightAnim = {6, 7, 8};
   std::vector<int> WalkUpAnim = {9, 10, 11};
+
+  std::vector<string> _DIALOGS = {
+      "Hello Player",
+      "What's up?",
+      "Wanna go\non a quest?"};
 
   //*
   //* ASSETS
@@ -76,11 +85,19 @@ namespace proto2 {
       {10, AssetManager::GetTexture("res/textures/rpggirl/girl_10.png")},
       {11, AssetManager::GetTexture("res/textures/rpggirl/girl_11.png")}};
 
+  sf::Font* getFont() {
+    auto font = new sf::Font();
+    font->loadFromFile("res/fonts/Press_Start_2P/PressStart2P-Regular.ttf");
+    return font;
+  }
+
+  sf::Font* _FONT = getFont();
+
   //*
   //* SHAPES
   //*---------------------------------------------------------------------------
 
-  DynamicShape* getPlayerShape(GameBase* game) {
+  DynamicShape* getHumanoidShape(GameBase* game) {
     static PolygonShape<DynamicShapeDefinition>* ret = nullptr;
     if(ret == nullptr) {
       auto verts = vector<cpVect>();
@@ -97,78 +114,93 @@ namespace proto2 {
 
   //************************* BEHAVIOURS (GENERIC ENTITY LOGIC) ***************/
 
-  template <class TEntity>
-  class PlayerMoveBehaviour {
+  class Dialog : public sf::Drawable {
   public:
-    PlayerMoveBehaviour(TEntity* base, float speed, Key forward, Key backward, Key left, Key right) : mBase(base), mSpeed(speed), mIncr(mSpeed / 10), mForward(forward), mBackward(backward), mLeft(left), mRight(right) {
-      int i = 1;
+    Dialog() : mText("", *_FONT, 20), mRect(sf::RectangleShape()) {
+      mRect.setSize(sf::Vector2f(400, 200));
+      mRect.setPosition(100, 100);
+      mRect.setFillColor(sf::Color(50, 50, 255, 200));
+      mRect.setOutlineColor(sf::Color::Black);
+      mRect.setOutlineThickness(5);
+
+      mText.setPosition(110, 110);
+      mText.setFillColor(sf::Color(255, 255, 255, 200));
     }
 
-    void OnTick() {
-      // Direction dir = Direction::DEFAULT;
-      if(sf::Keyboard::isKeyPressed(mForward)) {
-        mDv.y += mIncr;
-        mLastDirection = Direction::UP;
-      }
-      if(sf::Keyboard::isKeyPressed(mBackward)) {
-        mDv.y -= mIncr;
-        mLastDirection = Direction::DOWN;
-      }
-      if(sf::Keyboard::isKeyPressed(mLeft)) {
-        mDv.x -= mIncr;
-        mLastDirection = Direction::LEFT;
-      }
-      if(sf::Keyboard::isKeyPressed(mRight)) {
-        mDv.x += mIncr;
-        mLastDirection = Direction::RIGHT;
+    void SetText(string text) {
+      mText.setString(text);
+    }
+
+  protected:
+    sf::Text mText;
+    sf::RectangleShape mRect;
+
+    // Override Drawable
+    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const {
+      target.draw(mRect, states);
+      target.draw(mText, states);
+    }
+  };
+
+  template <class TEntity>
+  class AnimatedMoveBehaviour {
+  public:
+    AnimatedMoveBehaviour(TEntity* base, float speed) : mBase(base), mSpeed(speed), mIncr(speed / 10) {}
+
+    void UpdateMove(cpVect dv) {
+      if(mIsImmobile) {
+        dv = cpv(0, 0);
       }
 
-      if(mDv.x || mDv.y) {
-        mWalking = true;
+      auto dir = Direction::DEFAULT;
+      if(dv.x > 0) {
+        dir = Direction::RIGHT;
+      } else if(dv.x < 0) {
+        dir = Direction::LEFT;
+      }
+      if(dv.y > 0) {
+        dir = Direction::UP;
+      } else if(dv.y < 0) {
+        dir = Direction::DOWN;
+      }
+      if(dir != Direction::DEFAULT) {
+        mLastDirection = dir;
+      }
+
+      if(dv.x || dv.y) {
         cpVect curV = mBase->GetVelocity();
-        mDv = cpv(curV.x + mDv.x, curV.y + mDv.y);
-        float len = cpvlength(mDv);
+        dv = cpv(curV.x + (dv.x * mIncr), curV.y + (dv.y * mIncr));
+
+        // throttle speed if necessary
+        float len = cpvlength(dv);
         if(len > mSpeed) {
           float f = mSpeed / len;
-          mDv = cpv(mDv.x * f, mDv.y * f);
+          dv = cpv(dv.x * f, dv.y * f);
         }
 
-        mBase->SetVelocity(mDv);
-        mDv = cpv(0, 0);
+        mBase->SetVelocity(dv);
+        setWalkingPos();
       } else {
-        mWalking = false;
         mCurFrame = 0;
         mCurWalkAnim = 0;
         mBase->SetVelocity(cpv(0, 0));
-      }
-
-      if(mWalking) {
-        setWalkingPos();
-      } else {
         setIdlePos();
       }
+    }
+
+    void SetImmobile(bool isImmobile) {
+      mIsImmobile = isImmobile;
     }
 
   protected:
     TEntity* mBase = nullptr;
     float mSpeed = 0;
     float mIncr = 0;
-    Key mForward, mBackward, mLeft, mRight;
     Direction mLastDirection = Direction::UP;
-    bool mWalking = false;
-    cpVect mDv;
     int mCurFrame = 0;
     int mCurWalkAnim = 0;
+    bool mIsImmobile = false;
     vector<int> mAnim;
-
-    void setWalking(Direction dir) {
-      mLastDirection = dir;
-      if(!mWalking) {
-        mCurFrame = 0;
-        mCurWalkAnim = 0;
-      }
-      mWalking = true;
-    }
 
     void setIdlePos() {
       switch(mLastDirection) {
@@ -215,41 +247,213 @@ namespace proto2 {
     }
   };
 
+  template <class TEntity>
+  class PlayerMoveBehaviour : public AnimatedMoveBehaviour<TEntity> {
+  public:
+    PlayerMoveBehaviour(TEntity* base, float speed, Key forward, Key backward, Key left, Key right) : AnimatedMoveBehaviour<TEntity>(base, speed), mForward(forward), mBackward(backward), mLeft(left), mRight(right) {}
+
+    void OnTick() {
+      auto dv = cpv(0, 0);
+
+      if(sf::Keyboard::isKeyPressed(mLeft)) {
+        dv.x -= 1;
+      }
+      if(sf::Keyboard::isKeyPressed(mRight)) {
+        dv.x += 1;
+      }
+      if(sf::Keyboard::isKeyPressed(mForward)) {
+        dv.y += 1;
+      }
+      if(sf::Keyboard::isKeyPressed(mBackward)) {
+        dv.y -= 1;
+      }
+
+      AnimatedMoveBehaviour<TEntity>::UpdateMove(dv);
+    }
+
+  protected:
+    Key mForward, mBackward, mLeft, mRight;
+  };
+
+  template <class TEntity>
+  class RandomMoveBehaviour : public AnimatedMoveBehaviour<TEntity> {
+  public:
+    RandomMoveBehaviour(TEntity* base, float speed) : AnimatedMoveBehaviour<TEntity>(base, speed) {}
+
+    void OnTick() {
+      if(mCurTick > mTicks) {
+        mLastMove++;
+        if(mLastMove > rand() % 15000) {
+          mTicks = rand() % 30;
+          mDv.x = rand() % 3 - 1;
+          mDv.y = rand() % 3 - 1;
+          mCurTick = 0;
+          mLastMove = 0;
+          this->UpdateMove(mDv);
+        } else {
+          this->UpdateMove(cpv(0, 0));
+        }
+      } else {
+        mCurTick++;
+        this->UpdateMove(mDv);
+      }
+    }
+
+  protected:
+    cpVect mDv;
+    int mTicks = 0;
+    int mCurTick = 0;
+    int mLastMove = 0;
+  }; // namespace proto2
+
+  int getHumanZIndex(GameBase* game, cpVect pos) {
+    auto worlBounds = game->GetWorld()->GetBounds();
+    float pxToMeter = game->GetOptions().MeterPerPixel;
+    float y = worlBounds.height - (pos.y / pxToMeter) + 20;
+    int yTile = 2 * ((int)(y / 32.0)) - 1;
+    return yTile;
+  }
+
   //***************************************************************************/
 
   //************************* HIGH LEVEL OBJECTS ******************************/
 
-  class PlayerEntity : public AnimatedDynamicEntity, public PlayerMoveBehaviour<PlayerEntity> {
+  class PlayerEntity : public AnimatedDynamicEntity,
+                       public PlayerMoveBehaviour<PlayerEntity> {
   public:
     PlayerEntity(GameBase* game)
         : AnimatedDynamicEntity(_PLAYER_TYPE,
                                 game,
                                 _PLAYER_ANIM,
-                                {getPlayerShape(game)},
+                                {getHumanoidShape(game)},
                                 true,
                                 10),
           PlayerMoveBehaviour(this,
-                              7,
+                              _RUN_SPEED,
                               sf::Keyboard::Up,
                               sf::Keyboard::Down,
                               sf::Keyboard::Left,
-                              sf::Keyboard::Right) {}
+                              sf::Keyboard::Right) {
+      // disable rotation
+      SetMoment(INFINITY);
+    }
 
     void OnTick() {
-      auto worlBounds = getGame()->GetWorld()->GetBounds();
-      float pxToMeter = getGame()->GetOptions().MeterPerPixel;
-      auto pos = cpBodyGetPosition(mBody);
-      float y = worlBounds.height - (pos.y / pxToMeter) + 20;
-      int yTile = 2 * ((int)(y / 32.0)) - 1;
-      SetZIndex(yTile);
-
       PlayerMoveBehaviour::OnTick();
+      int zIndex = getHumanZIndex(getGame(), cpBodyGetPosition(mBody));
+      if(mLastZIndex != zIndex) {
+        SetZIndex(zIndex);
+        mLastZIndex = zIndex;
+      }
     }
+
+  protected:
+    int mLastZIndex = 0;
+    bool mIsImmobile = false;
   };
+
+  class NPCEntity : public AnimatedDynamicEntity,
+                    public RandomMoveBehaviour<NPCEntity> {
+  public:
+    NPCEntity(GameBase* game)
+        : AnimatedDynamicEntity(_NPC_TYPE,
+                                game,
+                                _GIRL_ANIM,
+                                {getHumanoidShape(game)},
+                                true,
+                                10),
+          RandomMoveBehaviour(this,
+                              _WALK_SPEED),
+          mDialog(new Dialog()) {
+      // disable rotation
+      SetMoment(INFINITY);
+      mDialogId = getGame()->GetOverlayDisplay()->AddElement(mDialog, false);
+      mDialog->SetText(_DIALOGS[rand() % _DIALOGS.size()]);
+    }
+
+    void OnTick() {
+      RandomMoveBehaviour::OnTick();
+      int zIndex = getHumanZIndex(getGame(), cpBodyGetPosition(mBody));
+      if(mLastZIndex != zIndex) {
+        SetZIndex(zIndex);
+        mLastZIndex = zIndex;
+      }
+    }
+
+    int GetDialogId() {
+      mDialog->SetText(_DIALOGS[rand() % _DIALOGS.size()]);
+      return mDialogId;
+    }
+
+  protected:
+    int mLastZIndex = 0;
+    Dialog* mDialog = nullptr;
+    int mDialogId = 0;
+  };
+
+  class GameController : public GameObject {
+  public:
+    GameController(GameBase* game) : GameObject(ObjectType::Unknown, game) {}
+
+    void OnTick() {
+      mCoolDown++;
+
+      if(mCoolDown > 25 && sf::Keyboard::isKeyPressed(Key::Space)) {
+        if(mOpenDialog) {
+          // cout << "Closing Dialog " << mCurDialogId << endl;
+          mOpenDialog = false;
+          mNPC->SetImmobile(false);
+          mPlayer->SetImmobile(false);
+          getGame()->GetOverlayDisplay()->Disable(mCurDialogId);
+        } else {
+          auto pt = mPlayer->GetCombinedTransform().transformPoint(sf::Vector2f());
+          for(auto npc : mNpcs) {
+            auto ptn = npc->GetCombinedTransform().transformPoint(sf::Vector2f());
+            if(abs(pt.x - ptn.x) < 10 && abs(pt.y - ptn.y) < 10) {
+              mCurDialogId = npc->GetDialogId();
+              mOpenDialog = true;
+              mNPC = npc;
+              npc->SetImmobile(true);
+              mPlayer->SetImmobile(true);
+              getGame()->GetOverlayDisplay()->Enable(mCurDialogId);
+            }
+          }
+        }
+        mCoolDown = 0;
+      }
+    }
+
+    void SetPlayer(PlayerEntity* player) {
+      mPlayer = player;
+    }
+
+    void AddNPC(NPCEntity* npc) {
+      mNpcs.push_back(npc);
+    }
+
+  protected:
+    PlayerEntity* mPlayer = nullptr;
+    NPCEntity* mNPC = nullptr;
+    bool mOpenDialog = false;
+    int mCurDialogId = -1;
+
+    int mCoolDown = 0;
+
+    std::vector<NPCEntity*> mNpcs;
+  };
+
+  GameController* getGameController(GameBase* game) {
+    static GameController* ret = nullptr;
+    if(ret == nullptr) {
+      ret = new GameController(game);
+    }
+    return ret;
+  }
 
   //***************************************************************************/
 
   int demo() {
+    srand(time(NULL));
     float aspectRatio = (float)sf::VideoMode::getDesktopMode().width / (float)sf::VideoMode::getDesktopMode().height;
 
     // Create game
@@ -263,6 +467,9 @@ namespace proto2 {
                                true /* Audio Enabled */};
     auto game = new Game(options);
 
+    auto overlay = new OverlayDisplay(game);
+    game->SetOverlayDisplay(overlay);
+
     // Create Game World
     auto world = GameWorldFactory::CreateGameWorld(game, "res/maps/mage_city/tilemap.json", "res/maps/mage_city/materialmap.json", "res/maps/mage_city/tile_", 3);
     game->SetWorld(world);
@@ -271,9 +478,17 @@ namespace proto2 {
     game->SetScene(scene);
 
     auto player = new PlayerEntity(game);
-    player->SetMoment(INFINITY);
     player->SetTransform(sf::Transform().translate(11, 5));
     scene->AddEntity(player);
+
+    auto npc = new NPCEntity(game);
+    npc->SetTransform(sf::Transform().translate(45, 35));
+    scene->AddEntity(npc);
+
+    auto ctrl = getGameController(game);
+    ctrl->SetPlayer(player);
+    ctrl->AddNPC(npc);
+    game->GetStateManager()->AddObject(ctrl);
 
     auto cam = new BoundedFollowCameraController(game, player);
     game->SetCameraController(cam);

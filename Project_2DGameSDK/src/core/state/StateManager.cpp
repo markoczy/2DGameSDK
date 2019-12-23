@@ -62,6 +62,9 @@ namespace game {
 
     auto overlay = mGame->GetOverlayDisplay();
     if(overlay != nullptr) overlay->OnTick();
+
+    auto cam = mGame->GetCameraController();
+    cam->OnTick();
   }
 
   void StateManager::OnTickEnded() {

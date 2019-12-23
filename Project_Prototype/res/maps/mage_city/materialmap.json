@@ -1,6 +1,21 @@
 {
   "materials": [
     {
+      "tile": 0,
+      "name": "generic-solid",
+      "type": 100,
+      "shapes": [
+        {
+          "shape": "rect",
+          "width": 32,
+          "height": 32,
+          "friction": 1.0,
+          "elasticity": 0.0,
+          "sensor": false
+        }
+      ]
+    },
+    {
       "tile": 5,
       "name": "pot",
       "type": 100,

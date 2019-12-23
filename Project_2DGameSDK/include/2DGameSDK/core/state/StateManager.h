@@ -10,6 +10,7 @@
 #include <2DGameSDK/core/GameObject.h>
 #include <2DGameSDK/core/GameOptions.h>
 #include <2DGameSDK/core/VisualObject.h>
+#include <2DGameSDK/core/camera/CameraController.h>
 #include <2DGameSDK/core/overlay/OverlayDisplay.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
 #include <2DGameSDK/scene/entity/Entity.h>
