@@ -17,11 +17,8 @@ namespace game {
   }
 
   void OverlayDisplay::Enable(int id) {
-    std::cout << "Enable 1" << std::endl;
     auto lock = sf::Lock(mRenderMutex);
-    std::cout << "Enable 2" << std::endl;
     std::get<1>(mDrawables[id]) = true;
-    std::cout << "Enable 3" << std::endl;
     mStateChanged = true;
   }
 

@@ -93,6 +93,10 @@ namespace proto2 {
 
   sf::Font* _FONT = getFont();
 
+  sf::SoundBuffer* _MUSIC_LEVEL = AssetManager::GetAudio("res/audio/Fantasy_Musica/Town 01.ogg");
+  sf::SoundBuffer* _SOUND_INTERACT = AssetManager::GetAudio("res/audio/Blip_Select.wav");
+  sf::SoundBuffer* _SOUND_INTERACT_2 = AssetManager::GetAudio("res/audio/Blip_Select2.wav");
+
   //*
   //* SHAPES
   //*---------------------------------------------------------------------------
@@ -120,7 +124,7 @@ namespace proto2 {
       mRect.setSize(sf::Vector2f(400, 200));
       mRect.setPosition(100, 100);
       mRect.setFillColor(sf::Color(50, 50, 255, 200));
-      mRect.setOutlineColor(sf::Color::Black);
+      mRect.setOutlineColor(sf::Color(0, 0, 0, 200));
       mRect.setOutlineThickness(5);
 
       mText.setPosition(110, 110);
@@ -405,17 +409,19 @@ namespace proto2 {
           mNPC->SetImmobile(false);
           mPlayer->SetImmobile(false);
           getGame()->GetOverlayDisplay()->Disable(mCurDialogId);
+          getGame()->GetAudioController()->PlayOnce(_SOUND_INTERACT_2);
         } else {
           auto pt = mPlayer->GetCombinedTransform().transformPoint(sf::Vector2f());
           for(auto npc : mNpcs) {
             auto ptn = npc->GetCombinedTransform().transformPoint(sf::Vector2f());
-            if(abs(pt.x - ptn.x) < 10 && abs(pt.y - ptn.y) < 10) {
+            if(abs(pt.x - ptn.x) < 3 && abs(pt.y - ptn.y) < 3) {
               mCurDialogId = npc->GetDialogId();
               mOpenDialog = true;
               mNPC = npc;
               npc->SetImmobile(true);
               mPlayer->SetImmobile(true);
               getGame()->GetOverlayDisplay()->Enable(mCurDialogId);
+              getGame()->GetAudioController()->PlayOnce(_SOUND_INTERACT);
             }
           }
         }
@@ -495,6 +501,8 @@ namespace proto2 {
 
     auto space = game->GetPhysicalWorld();
     cpSpaceSetGravity(space, cpv(0, 0));
+
+    game->GetAudioController()->PlayRepeated(_MUSIC_LEVEL);
 
     game->Run();
     return 0;
