@@ -1202,7 +1202,7 @@ namespace proto1 {
                                0.5, /* Scale */
                                60, /* FPS */
                                false, /* Debug AABB */
-                               true, /* Debug Shapes */
+                               false, /* Debug Shapes */
                                1.0, /* Pixel to Meter */
                                true /* Audio Enabled */};
     auto game = new Game(options);
