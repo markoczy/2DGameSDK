@@ -192,6 +192,10 @@ namespace proto2 {
       }
     }
 
+    void SetDirection(Direction dir) {
+      mLastDirection = dir;
+    }
+
     void SetImmobile(bool isImmobile) {
       mIsImmobile = isImmobile;
     }
@@ -314,7 +318,7 @@ namespace proto2 {
     auto worlBounds = game->GetWorld()->GetBounds();
     float pxToMeter = game->GetOptions().MeterPerPixel;
     float y = worlBounds.height - (pos.y / pxToMeter) + 20;
-    int yTile = 2 * ((int)(y / 32.0)) - 1;
+    int yTile = (10.0 * (y / 32.0)) - 10;
     return yTile;
   }
 
@@ -414,10 +418,30 @@ namespace proto2 {
           auto pt = mPlayer->GetCombinedTransform().transformPoint(sf::Vector2f());
           for(auto npc : mNpcs) {
             auto ptn = npc->GetCombinedTransform().transformPoint(sf::Vector2f());
-            if(abs(pt.x - ptn.x) < 3 && abs(pt.y - ptn.y) < 3) {
+            if(abs(pt.x - ptn.x) < 5 && abs(pt.y - ptn.y) < 5) {
               mCurDialogId = npc->GetDialogId();
               mOpenDialog = true;
               mNPC = npc;
+
+              // Make npc look in player's direction
+              float dx = pt.x - ptn.x;
+              float dy = pt.y - ptn.y;
+              Direction dir = Direction::DEFAULT;
+              if(abs(dx) > abs(dy)) {
+                if(dx > 0) {
+                  dir = Direction::RIGHT;
+                } else {
+                  dir = Direction::LEFT;
+                }
+              } else {
+                if(dy > 0) {
+                  dir = Direction::UP;
+                } else {
+                  dir = Direction::DOWN;
+                }
+              }
+              npc->SetDirection(dir);
+
               npc->SetImmobile(true);
               mPlayer->SetImmobile(true);
               getGame()->GetOverlayDisplay()->Enable(mCurDialogId);

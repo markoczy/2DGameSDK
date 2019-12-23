@@ -84,7 +84,7 @@ namespace game {
       if(hasRenderedTiles) {
         auto layer = new TileLayer(sf::Vector2i(mTileAmounts.x, 1), mTileBounds, y);
         layer->SetTiles({row});
-        layer->SetZIndex(constants::DEFAULT_ZINDEX_WORLD + 2 * y);
+        layer->SetZIndex(constants::DEFAULT_ZINDEX_WORLD + 10 * y);
         ret.push_back(layer);
       }
     }
