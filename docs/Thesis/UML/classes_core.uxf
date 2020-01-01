@@ -1,25 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="14.3.0">
-  <zoom_level>7</zoom_level>
+  <zoom_level>9</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>175</x>
-      <y>644</y>
-      <w>343</w>
-      <h>161</h>
+      <x>351</x>
+      <y>117</y>
+      <w>441</w>
+      <h>243</h>
     </coordinates>
-    <panel_attributes>game::Game
+    <panel_attributes>Game
 --
--mStateManager: game::StateManager
--mEventCtrl: game::EventController
--mOptions: game::GameOptions
+-mStateManager: StateManager
+-mOptions: GameOptions
 -mWindow: sf::RenderWindow*
--mView: sf::View
 -mPhysicalWorld: cpSpace*
 -mPoseConverter: PoseConverter*
+-mCameraController: CameraController*
+-mOverlayDisplay: OverlayDisplay*
+-mAudioController: AudioController*
+-mRenderThread: sf::Thread
 --
-+Game(options: GameOptions, scene: *SceneGraph, world: *GameWorld)
++Game(options: GameOptions)
 +Run()
 +Stop()
 -tick()
@@ -29,10 +31,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>301</x>
-      <y>581</y>
-      <w>91</w>
-      <h>21</h>
+      <x>513</x>
+      <y>36</y>
+      <w>117</w>
+      <h>27</h>
     </coordinates>
     <panel_attributes>/game::GameBase/
 </panel_attributes>
@@ -41,10 +43,10 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>329</x>
-      <y>595</y>
-      <w>21</w>
-      <h>63</h>
+      <x>549</x>
+      <y>54</y>
+      <w>27</w>
+      <h>81</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
@@ -52,10 +54,10 @@
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>413</x>
-      <y>581</y>
-      <w>133</w>
-      <h>35</h>
+      <x>657</x>
+      <y>36</y>
+      <w>171</w>
+      <h>45</h>
     </coordinates>
     <panel_attributes>bg=yellow
 Abstrakte Basisklasse
@@ -65,22 +67,27 @@ Abstrakte Basisklasse
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>567</x>
-      <y>644</y>
-      <w>217</w>
-      <h>161</h>
+      <x>855</x>
+      <y>117</y>
+      <w>279</w>
+      <h>288</h>
     </coordinates>
-    <panel_attributes>game::StateManager
+    <panel_attributes>StateManager
 --
--mGame: game::GameBase*
--mWorld: game::GameWorld*
--mScene: game::SceneGraph*
--mObjects: std::map&lt;int, GameObject*&gt;
--mRenderObjects: std::vector&lt;VisualObject*&gt;
+-mGame: GameBase*
+-mRenderMutex: sf::Mutex*
+-mEventController: game::EventController
+-mWorld: GameWorld*
+-mScene: SceneGraph*
+-mObjects: map&lt;int, GameObject*&gt;
+-mRenderObjects: vector&lt;VisualObject*&gt;
 --
-+StateManager(game: game::GameBase*)
-+AddObject(object: game::GameObject*)
-+AddVisualObject(object: game::VisualObject*)
++StateManager(game: GameBase*)
++GetRenderMutex(): sf::Mutex*
++AddObject(object: GameObject*)
++AddVisualObject(object: VisualObject*)
++DestroyObject(object: GameObject*)
++DestroyVisualObject(object: VisualObject*)
 +OnTick()
 +OnTickEnded()
 +OnRender()
@@ -90,10 +97,10 @@ Abstrakte Basisklasse
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>511</x>
-      <y>644</y>
-      <w>70</w>
-      <h>35</h>
+      <x>783</x>
+      <y>117</y>
+      <w>90</w>
+      <h>45</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;30.0;50.0;30.0;50.0;10.0;80.0;10.0</additional_attributes>
@@ -101,15 +108,15 @@ Abstrakte Basisklasse
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>840</x>
-      <y>616</y>
-      <w>294</w>
-      <h>84</h>
+      <x>1206</x>
+      <y>81</y>
+      <w>378</w>
+      <h>108</h>
     </coordinates>
-    <panel_attributes>/game::GameObject/
+    <panel_attributes>/GameObject/
 --
--mObjectType: game::ObjectType
--mGame: game::GameBase*
+-mObjectType: ObjectType
+-mGame: GameBase*
 -mId: int
 --
 /+OnTick()/
@@ -119,26 +126,26 @@ Abstrakte Basisklasse
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>840</x>
-      <y>721</y>
-      <w>322</w>
-      <h>63</h>
+      <x>1206</x>
+      <y>216</y>
+      <w>414</w>
+      <h>81</h>
     </coordinates>
-    <panel_attributes>/game::VisualObject/
+    <panel_attributes>/VisualObject/
 --
 --
 /+OnRender()/
 /+GetZIndex(): int/
-_+SortByZOrder(a: game::VisualObject*, b: game::VisualObject*): bool_</panel_attributes>
+_+SortByZOrder(a: VisualObject*, b: VisualObject*): bool_</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>777</x>
-      <y>616</y>
-      <w>77</w>
-      <h>98</h>
+      <x>1125</x>
+      <y>81</y>
+      <w>99</w>
+      <h>126</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;120.0;50.0;120.0;50.0;10.0;90.0;10.0</additional_attributes>
@@ -146,10 +153,10 @@ _+SortByZOrder(a: game::VisualObject*, b: game::VisualObject*): bool_</panel_att
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>777</x>
-      <y>707</y>
-      <w>77</w>
-      <h>35</h>
+      <x>1125</x>
+      <y>198</y>
+      <w>99</w>
+      <h>45</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;50.0;10.0;50.0;30.0;90.0;30.0</additional_attributes>
@@ -157,10 +164,10 @@ _+SortByZOrder(a: game::VisualObject*, b: game::VisualObject*): bool_</panel_att
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>154</x>
-      <y>553</y>
-      <w>1022</w>
-      <h>553</h>
+      <x>324</x>
+      <y>0</y>
+      <w>1314</w>
+      <h>711</h>
     </coordinates>
     <panel_attributes>Core</panel_attributes>
     <additional_attributes/>
@@ -168,84 +175,99 @@ _+SortByZOrder(a: game::VisualObject*, b: game::VisualObject*): bool_</panel_att
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>196</x>
-      <y>861</y>
-      <w>294</w>
-      <h>77</h>
+      <x>0</x>
+      <y>765</y>
+      <w>378</w>
+      <h>135</h>
     </coordinates>
     <panel_attributes>/game::CameraController/
 --
--mGame: game::GameBase*
+-mGame: GameBase*
 --
-+CameraController(game: game::GameBase*)
-/+OnTick()/
-/+GetView(): sf::View/</panel_attributes>
++CameraController(game: GameBase*)
+/+GetView(): sf::View/
+/+GetBounds(): sf::Vector2f/
+/+SetZoom(zoom: float)/
+/+SetCenter(center: sf::Vector2f)/
+/+OnTick()/</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>196</x>
-      <y>980</y>
-      <w>245</w>
-      <h>84</h>
+      <x>0</x>
+      <y>972</y>
+      <w>279</w>
+      <h>180</h>
     </coordinates>
     <panel_attributes>game::DefaultCameraController
 --
+-mViewChanged: bool
+-mView: sf::View
+-mBounds: sf::Vector2f
+-mCenter: sf::Vector2f
 --
-+GetBounds(): sf::FloatRect
++DefaultCameraController(game: GameBase*)
++GetView(): sf::View
++GetBounds(): sf::Vector2f
 +SetZoom(zoom: float)
 +SetCenter(center: sf::Vector2f)
-+OnTick()
-+GetView()</panel_attributes>
++OnTick()</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>301</x>
-      <y>931</y>
-      <w>21</w>
-      <h>63</h>
+      <x>135</x>
+      <y>891</y>
+      <w>27</w>
+      <h>99</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>455</x>
-      <y>980</y>
-      <w>245</w>
-      <h>84</h>
+      <x>297</x>
+      <y>972</y>
+      <w>423</w>
+      <h>198</h>
     </coordinates>
     <panel_attributes>game::BoundedFollowCameraController
 --
+-mEntity: Entity*
+-mEnableRotation: bool
+-mView: sf::View
+-mBounds: sf::Vector2f
+-mRadius: float
 --
-TBD...
-
-(Konzept: Kann einer Entity folgen aber nicht die
-Weltbegrenzungen passieren)</panel_attributes>
++BoundedFollowCameraController(game: GameBase*, entity: Entity*, ...)
++GetView(): sf::View
++GetBounds(): sf::Vector2f
++SetZoom(zoom: float)
++SetCenter(center: sf::Vector2f)
++OnTick()</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>301</x>
-      <y>931</y>
-      <w>294</w>
-      <h>63</h>
+      <x>135</x>
+      <y>891</y>
+      <w>342</w>
+      <h>99</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;40.0;400.0;40.0;400.0;70.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0;360.0;60.0;360.0;90.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>385</x>
-      <y>581</y>
-      <w>42</w>
-      <h>21</h>
+      <x>621</x>
+      <y>36</y>
+      <w>54</w>
+      <h>27</h>
     </coordinates>
     <panel_attributes>lt=-</panel_attributes>
     <additional_attributes>10.0;10.0;40.0;10.0</additional_attributes>
@@ -253,12 +275,513 @@ Weltbegrenzungen passieren)</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>175</x>
-      <y>826</y>
-      <w>546</w>
-      <h>259</h>
+      <x>351</x>
+      <y>459</y>
+      <w>702</w>
+      <h>225</h>
     </coordinates>
     <panel_attributes>Camera</panel_attributes>
     <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>945</x>
+      <y>1098</y>
+      <w>207</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;static&gt;&gt;
+AssetManager
+--
+_-textures: TextureCache_
+_-sounds: SoundBufferCache_
+--
+_+GetTexture(): sf::Texture*_
+_+GetAudio(): sf::SoundBuffer*_</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1242</x>
+      <y>1026</y>
+      <w>369</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>template=TResource: Object
+/ResourceCache/
+--
+-mResources: map&lt;string, TResource&gt;
+--
++Get(identifier: string): TResource
++Clear()
+/#createResource(identifier: string): TResource/
+/#destroyResource(identifier: string)/</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1062</x>
+      <y>1260</y>
+      <w>279</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>TextureCache
+--
+--
+#createResource(identifier: string): sf::Texture*
+#destroyResource(identifier: string)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1368</x>
+      <y>1260</y>
+      <w>306</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>SoundBufferCache
+--
+--
+#createResource(identifier: string): sf::SoundBuffer*
+#destroyResource(identifier: string)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1377</x>
+      <y>1161</y>
+      <w>144</w>
+      <h>117</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0;140.0;80.0;140.0;110.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1188</x>
+      <y>1161</y>
+      <w>216</w>
+      <h>117</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>220.0;10.0;220.0;80.0;10.0;80.0;10.0;110.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1143</x>
+      <y>1152</y>
+      <w>63</w>
+      <h>126</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;50.0;10.0;50.0;120.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1143</x>
+      <y>1134</y>
+      <w>252</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;60.0;10.0;60.0;80.0;260.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <type>CustomElementImpl</type>
+    <coordinates>
+      <x>1368</x>
+      <y>1188</y>
+      <w>37</w>
+      <h>19</h>
+    </coordinates>
+    <panel_attributes>// Modify the text below and
+// observe the element preview.
+
+Hello, World! 
+Enjoy UMLet!</panel_attributes>
+    <additional_attributes/>
+    <custom_code>drawArcOpen(10,0+height/2,width-20,height,-180,-180);</custom_code>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1386</x>
+      <y>1197</y>
+      <w>153</w>
+      <h>81</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;150.0;10.0;150.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1512</x>
+      <y>774</y>
+      <w>342</w>
+      <h>153</h>
+    </coordinates>
+    <panel_attributes>AudioController
+--
+-mGame: GameBase*
+-mSounds: map&lt;int, sf::Sound*&gt;
+-mFading: tuple&lt;int, float&gt;[]
+--
++OnTick()
++PlayOnce(sound: sf::SoundBuffer*, volume: float)
++PlayRepeated(sound: sf::SoundBuffer*, volume: float): int
++FadeOut(id: int, ticks: int)
++Stop(id: int)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>612</x>
+      <y>1305</y>
+      <w>333</w>
+      <h>198</h>
+    </coordinates>
+    <panel_attributes>Effect
+--
+#mRenderer: SimpleSequenceRenderStrategy*
+#mTransform: sf::Transform
+#mZIndex: int
+--
++Effect(GameBase* game, sf::Texture*[] sequence, ...)
++GetZIndex(): int
++SetZIndex(zIndex: int)
++SetTransform(sf::Transform transform)
++SetSize(size: sf::Vector2f)
++SetSize(idx: int, size: sf::Vector2f)
++OnTick()
++OnRender(target: sf::RenderTarget, ...)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>765</x>
+      <y>1539</y>
+      <w>261</w>
+      <h>216</h>
+    </coordinates>
+    <panel_attributes>Projectile
+--
+#mType: int
+#mRenderer: RenderStrategy*
+#mShape: Shape&lt;KinematicShapePhysics&gt;
+#mZIndex: int
+#mBody: cpBody*
+--
++GetType(): int
++GetZIndex(): int
++SetZIndex(zIndex: int)
++OnTick()
++OnRender(...)
++OnCollision(...): int
+#onDestroy()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>765</x>
+      <y>1800</y>
+      <w>108</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>SpriteProjectile
+--
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>891</x>
+      <y>1800</y>
+      <w>135</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>SequencedProjectile
+--
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>873</x>
+      <y>1746</y>
+      <w>90</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0;80.0;40.0;80.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>801</x>
+      <y>1746</y>
+      <w>99</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>90.0;10.0;90.0;40.0;10.0;40.0;10.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>765</x>
+      <y>1845</y>
+      <w>252</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>bg=yellow
+Unterschiedliche Rendering Strategien
+(SingleSprite und SimpleSequence)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>801</x>
+      <y>1818</y>
+      <w>99</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;90.0;30.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>873</x>
+      <y>1818</y>
+      <w>99</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>90.0;10.0;10.0;30.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1215</x>
+      <y>1530</y>
+      <w>288</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>/RenderStrategy/
+--
+#mGame: GameBase*
+#mCanReder: bool
+--
++RenderStrategy(game: GameBase*, ...)
++IsRenderEnabled(): bool
+/+OnRender(...)/</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1548</x>
+      <y>1611</y>
+      <w>207</w>
+      <h>99</h>
+    </coordinates>
+    <panel_attributes>SingleSpriteRenderStrategy
+--
+#mSprite: sf::Sprite
+--
++SingleSpriteRenderStrategy(...)
++SetSize(size: sf::Vector2f)
++OnRender(...)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1548</x>
+      <y>1728</y>
+      <w>207</w>
+      <h>117</h>
+    </coordinates>
+    <panel_attributes>SimpleSequenceRenderStrategy
+--
+#mSequence: sf::Sprite[]
+#mRepeated: bool
+--
++SimpleSequenceRenderStrategy(...)
++SetSize(size: sf::Vector2f)
++OnRender(...)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1548</x>
+      <y>1530</y>
+      <w>207</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>InvisibleRenderStrategy
+--
+--
++InvisibleRenderStrategy(...)
++OnRender(...)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1215</x>
+      <y>1701</y>
+      <w>288</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>AnimatedRenderStrategy
+--
+#mStates: map&lt;int, sf::Sprite&gt;
+#mState: int
+--
++SingleSpriteRenderStrategy(...)
++SetAnimState(state: int)
++SetSize(size: sf::Vector2f)
++SetSize(size: sf::Vector2f, idx: int)
++OnRender(...)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1215</x>
+      <y>1881</y>
+      <w>288</w>
+      <h>126</h>
+    </coordinates>
+    <panel_attributes>ExtendedSequenceRenderStrategy
+--
+#mSequence: int[]
+#mFrames: int
+--
++ExtendedSequenceRenderStrategy(...)
++RunSequence(seq: int[], frames: int, loop: bool)
++StopAtLast()
++StopNow()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1332</x>
+      <y>1530</y>
+      <w>234</w>
+      <h>162</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;120.0;10.0;160.0;220.0;160.0;220.0;10.0;240.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1332</x>
+      <y>1611</y>
+      <w>234</w>
+      <h>81</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;30.0;10.0;70.0;220.0;70.0;220.0;10.0;240.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1332</x>
+      <y>1629</y>
+      <w>27</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1332</x>
+      <y>1629</y>
+      <w>234</w>
+      <h>126</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0;220.0;50.0;220.0;120.0;240.0;120.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1332</x>
+      <y>1836</y>
+      <w>27</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>1548</x>
+      <y>1881</y>
+      <w>207</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>bg=yellow
+Eine Animationssequenz ist
+eine Abfolge von Animations-
+zuständen, beim Wechsel wird
+SetAnimState aufgerufen.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1494</x>
+      <y>1899</y>
+      <w>72</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;60.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1017</x>
+      <y>1521</y>
+      <w>351</w>
+      <h>81</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;70.0;370.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>936</x>
+      <y>1323</y>
+      <w>837</w>
+      <h>315</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;910.0;330.0</additional_attributes>
   </element>
 </diagram>
