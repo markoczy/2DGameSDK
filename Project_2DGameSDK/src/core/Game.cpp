@@ -108,7 +108,8 @@ namespace game {
     // win->setVerticalSyncEnabled(true);
     win->setActive(true);
     while(game->IsRunning()) {
-      win->clear(sf::Color(80, 80, 80));
+      // win->clear(sf::Color(80, 80, 80));
+      win->clear(sf::Color::White);
       win->setView(game->GetView());
       mgr->OnRender(win);
       win->display();

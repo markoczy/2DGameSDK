@@ -89,7 +89,7 @@ int playerDemo(float zoom) {
   auto rightPressed = new OnKeyPress(sf::Keyboard::Right);
 
   // Create Game World
-  auto world = GameWorldFactory::CreateGameWorld(game, "res/maps/empty/tilemap.json", "", "res/maps/empty/tile_");
+  auto world = GameWorldFactory::CreateGameWorld(game, "res/maps/testmap/tilemap.json", "", "res/maps/testmap/tile_");
   game->SetWorld(world);
 
   // Create Player entity and Rotating child entity
@@ -102,7 +102,6 @@ int playerDemo(float zoom) {
   auto scene = new SceneGraph(game);
   auto parent = scene->AddEntity(ent); // scene->GetRoot()->AddChild(ent);
   scene->AddEntity(ent, parent); // parent->AddChild(ent2);
-  game->SetScene(scene);
 
   // Send Events to controller
   game->AddEvent(upPressed);
