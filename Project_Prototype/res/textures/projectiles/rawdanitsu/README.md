@@ -1,7 +1,7 @@
 # Lasers and beams
 
 - Author: "Rawdanitsu" (Nickname on Opengameart.org)
-- License: Public Domain
+- License: [Public Domain CC0](https://creativecommons.org/publicdomain/zero/1.0/)
 - Source: https://opengameart.org/content/lasers-and-beams
 
 **Assets were exported to single files to adapt them to the game engine**

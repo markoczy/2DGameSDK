@@ -139,9 +139,10 @@ private:
 
 int demo1() {
   cout << "Physics Demo" << endl;
+  float aspectRatio = (float)sf::VideoMode::getDesktopMode().width / (float)sf::VideoMode::getDesktopMode().height;
 
   // Create game
-  auto options = GameOptions{"My Game", sf::Vector2i(512, 512), 2.0, 50, false, true};
+  auto options = GameOptions{"My Game", sf::Vector2i(1024, 1024 / aspectRatio), 2.0, 50, false, true};
   auto game = new Game(options);
 
   // Create Game World
@@ -278,7 +279,9 @@ int demo2() {
 int demo3() {
   cout << "Physics Demo 3" << endl;
   // Create game
-  auto options = GameOptions{"My Game", sf::Vector2i(512, 512), 2, 60, false, false, 0.1};
+  float aspectRatio = (float)sf::VideoMode::getDesktopMode().width / (float)sf::VideoMode::getDesktopMode().height;
+
+  auto options = GameOptions{"My Game", sf::Vector2i(1024, 1024 / aspectRatio), 2, 60, false, false, 0.1};
   auto game = new Game(options);
 
   // Create Keyboard Events
@@ -323,11 +326,11 @@ int demo3() {
   verts.push_back(cpv(0.5, -0.5));
   // verts.push_back(cpv(0.5, 0.5));
   verts.push_back(cpv(-0.5, 0.5));
-  auto shape = ShapeFactory::CreateDynamicPolygonShape(game, verts, 1, 0.7, 0.1);
+  // auto shape = ShapeFactory::CreateDynamicPolygonShape(game, verts, 1, 0.7, 0.1);
 
   // auto shape = new CircleDynamicShape(game, 1);
 
-  // auto shape = ShapeFactory::CreateDynamicRectangleShape(game, playerW, playerH, 1, 0.7, 0.1);
+  auto shape = ShapeFactory::CreateDynamicRectangleShape(game, playerW, playerH, 1, 0.7, 0.1);
   auto player = new PhysPlayerEntity(game, boxTx, 50, 1100, {shape}, upPressed, downPressed, leftPressed, rightPressed);
   player->SetSize(sf::Vector2f(playerW, playerH));
   player->SetTransform(sf::Transform().translate(10, 15));

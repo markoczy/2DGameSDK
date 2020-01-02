@@ -3,113 +3,67 @@
 using namespace std;
 using namespace game;
 
-// Type of player entity
-const int _PLAYER_TYPE = 200;
+using Key = sf::Keyboard::Key;
 
-/**
- * @brief Test Entity: Movement Controllable by given observables
- */
+const int PLAYER_TYPE = 200;
+
 class PlayerEntity : public SpriteKinematicEntity {
 public:
-  PlayerEntity(Game* game,
-               sf::Texture* texture,
-               float speed,
-               Observable<sf::Keyboard::Key>* up,
-               Observable<sf::Keyboard::Key>* down,
-               Observable<sf::Keyboard::Key>* left,
-               Observable<sf::Keyboard::Key>* right) : SpriteKinematicEntity(_PLAYER_TYPE, game, texture), mSpeed(speed) {
-    //
-    //
-    //
-    mUp = new MethodObserver<sf::Keyboard::Key, PlayerEntity>(this, &PlayerEntity::MoveUp);
-    mDown = new MethodObserver<sf::Keyboard::Key, PlayerEntity>(this, &PlayerEntity::MoveDown);
-    mLeft = new MethodObserver<sf::Keyboard::Key, PlayerEntity>(this, &PlayerEntity::MoveLeft);
-    mRight = new MethodObserver<sf::Keyboard::Key, PlayerEntity>(this, &PlayerEntity::MoveRight);
+  PlayerEntity(GameBase* game)
+      : SpriteKinematicEntity(PLAYER_TYPE,
+                              game,
+                              AssetManager::GetTexture("res/textures/spaceships/scorpio/prefab_scorpio_1.png")) {}
 
-    mUp->SubscribeTo(up);
-    mDown->SubscribeTo(down);
-    mLeft->SubscribeTo(left);
-    mRight->SubscribeTo(right);
-  }
-
-  ~PlayerEntity() {
-    delete mUp;
-    delete mDown;
-    delete mLeft;
-    delete mRight;
-  }
-
-  void OnTick() {
-    if(mDt.x != 0 || mDt.y != 0) {
-      Transform(sf::Transform().translate(mDt));
-      // GetTransformable()->move(mDt);
-      mDt = sf::Vector2f();
+  void OnTick() override {
+    // 4 axis movement
+    auto move = sf::Vector2f();
+    if(sf::Keyboard::isKeyPressed(Key::Up)) {
+      move.y += 5;
     }
+    if(sf::Keyboard::isKeyPressed(Key::Down)) {
+      move.y -= 5;
+    }
+    if(sf::Keyboard::isKeyPressed(Key::Left)) {
+      move.x -= 5;
+    }
+    if(sf::Keyboard::isKeyPressed(Key::Right)) {
+      move.x += 5;
+    }
+    SetTransform(GetTransform().translate(move));
   }
-
-  void MoveUp(sf::Keyboard::Key) {
-    mDt.y -= mSpeed;
-  }
-
-  void MoveDown(sf::Keyboard::Key) {
-    mDt.y += mSpeed;
-  }
-
-  void MoveLeft(sf::Keyboard::Key) {
-    mDt.x -= mSpeed;
-  }
-
-  void MoveRight(sf::Keyboard::Key) {
-    mDt.x += mSpeed;
-  }
-
-private:
-  float mSpeed;
-  // Delta Transform of current tick
-  sf::Vector2f mDt;
-
-  // Needed for cleanup
-  Observer<sf::Keyboard::Key>* mUp;
-  Observer<sf::Keyboard::Key>* mDown;
-  Observer<sf::Keyboard::Key>* mLeft;
-  Observer<sf::Keyboard::Key>* mRight;
 };
 
-int playerDemo(float zoom) {
-  cout << "Start playerDemo" << endl;
+int playerDemo(float) {
+  float aspectRatio = (float)sf::VideoMode::getDesktopMode().width / (float)sf::VideoMode::getDesktopMode().height;
+  // create game
+  auto game = new Game(GameOptions{"My Game Title", sf::Vector2i(1024, 1024 / aspectRatio)});
 
-  // Create game
-  auto options = GameOptions{"My Game", sf::Vector2i(512, 512), zoom, 50};
-  auto game = new Game(options);
+  // create scene graph
+  auto scene = new SceneGraph(game);
 
-  // Create Keyboard Events
-  auto upPressed = new OnKeyPress(sf::Keyboard::Up);
-  auto downPressed = new OnKeyPress(sf::Keyboard::Down);
-  auto leftPressed = new OnKeyPress(sf::Keyboard::Left);
-  auto rightPressed = new OnKeyPress(sf::Keyboard::Right);
+  // create player
+  auto player = new PlayerEntity(game);
 
-  // Create Game World
-  auto world = GameWorldFactory::CreateGameWorld(game, "res/maps/testmap/tilemap.json", "", "res/maps/testmap/tile_");
+  // add player
+  scene->AddEntity(player);
+
+  // set scene
+  game->SetScene(scene);
+  int i = 1;
+  // create world
+  auto world = GameWorldFactory::CreateGameWorld(game, "res/maps/proto1/tilemap.json", "", "res/maps/proto1/tile_");
+  // auto world = GameWorldFactory::CreateGameWorld(game, "res/maps/space/tilemap.json", "", "res/maps/space/tile_");
+
+  // create camera that follows the player
+  auto cam = new BoundedFollowCameraController(game, player);
+
+  // set camera
+  game->SetCameraController(cam);
+
+  // set world
   game->SetWorld(world);
 
-  // Create Player entity and Rotating child entity
-  auto tex = AssetManager::GetTexture("res/textures/sample.png");
-  // auto tex2 = AssetManager::GetTexture("res/textures/discus.png");
-  auto ent = new PlayerEntity(game, tex, 2.0, upPressed, downPressed, leftPressed, rightPressed);
-  // auto ent2 = new RotatingEntity(tex2, 5.0);
-
-  // Layout entities in scene
-  auto scene = new SceneGraph(game);
-  auto parent = scene->AddEntity(ent); // scene->GetRoot()->AddChild(ent);
-  scene->AddEntity(ent, parent); // parent->AddChild(ent2);
-
-  // Send Events to controller
-  game->AddEvent(upPressed);
-  game->AddEvent(downPressed);
-  game->AddEvent(leftPressed);
-  game->AddEvent(rightPressed);
-
-  // Run Game
+  // run game :-)
   game->Run();
 
   return 0;
