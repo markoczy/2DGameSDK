@@ -4,8 +4,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>351</x>
-      <y>117</y>
+      <x>324</x>
+      <y>522</y>
       <w>441</w>
       <h>243</h>
     </coordinates>
@@ -31,8 +31,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>513</x>
-      <y>36</y>
+      <x>486</x>
+      <y>441</y>
       <w>117</w>
       <h>27</h>
     </coordinates>
@@ -43,8 +43,8 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>549</x>
-      <y>54</y>
+      <x>522</x>
+      <y>459</y>
       <w>27</w>
       <h>81</h>
     </coordinates>
@@ -54,8 +54,8 @@
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>657</x>
-      <y>36</y>
+      <x>630</x>
+      <y>441</y>
       <w>171</w>
       <h>45</h>
     </coordinates>
@@ -67,8 +67,8 @@ Abstrakte Basisklasse
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>855</x>
-      <y>117</y>
+      <x>828</x>
+      <y>522</y>
       <w>279</w>
       <h>288</h>
     </coordinates>
@@ -97,8 +97,8 @@ Abstrakte Basisklasse
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>783</x>
-      <y>117</y>
+      <x>756</x>
+      <y>522</y>
       <w>90</w>
       <h>45</h>
     </coordinates>
@@ -108,8 +108,8 @@ Abstrakte Basisklasse
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1206</x>
-      <y>81</y>
+      <x>1179</x>
+      <y>486</y>
       <w>378</w>
       <h>108</h>
     </coordinates>
@@ -126,8 +126,8 @@ Abstrakte Basisklasse
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1206</x>
-      <y>216</y>
+      <x>1179</x>
+      <y>621</y>
       <w>414</w>
       <h>81</h>
     </coordinates>
@@ -142,8 +142,8 @@ _+SortByZOrder(a: VisualObject*, b: VisualObject*): bool_</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1125</x>
-      <y>81</y>
+      <x>1098</x>
+      <y>486</y>
       <w>99</w>
       <h>126</h>
     </coordinates>
@@ -153,8 +153,8 @@ _+SortByZOrder(a: VisualObject*, b: VisualObject*): bool_</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1125</x>
-      <y>198</y>
+      <x>1098</x>
+      <y>603</y>
       <w>99</w>
       <h>45</h>
     </coordinates>
@@ -164,10 +164,10 @@ _+SortByZOrder(a: VisualObject*, b: VisualObject*): bool_</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>324</x>
-      <y>0</y>
-      <w>1314</w>
-      <h>711</h>
+      <x>297</x>
+      <y>405</y>
+      <w>2124</w>
+      <h>1035</h>
     </coordinates>
     <panel_attributes>Core</panel_attributes>
     <additional_attributes/>
@@ -175,8 +175,8 @@ _+SortByZOrder(a: VisualObject*, b: VisualObject*): bool_</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>0</x>
-      <y>765</y>
+      <x>333</x>
+      <y>891</y>
       <w>378</w>
       <h>135</h>
     </coordinates>
@@ -195,8 +195,8 @@ _+SortByZOrder(a: VisualObject*, b: VisualObject*): bool_</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>0</x>
-      <y>972</y>
+      <x>333</x>
+      <y>1116</y>
       <w>279</w>
       <h>180</h>
     </coordinates>
@@ -218,19 +218,19 @@ _+SortByZOrder(a: VisualObject*, b: VisualObject*): bool_</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>135</x>
-      <y>891</y>
+      <x>468</x>
+      <y>1017</y>
       <w>27</w>
-      <h>99</h>
+      <h>117</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;110.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>297</x>
-      <y>972</y>
+      <x>630</x>
+      <y>1116</y>
       <w>423</w>
       <h>198</h>
     </coordinates>
@@ -253,19 +253,19 @@ _+SortByZOrder(a: VisualObject*, b: VisualObject*): bool_</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>135</x>
-      <y>891</y>
+      <x>468</x>
+      <y>1017</y>
       <w>342</w>
-      <h>99</h>
+      <h>117</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;60.0;360.0;60.0;360.0;90.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0;360.0;80.0;360.0;110.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>621</x>
-      <y>36</y>
+      <x>594</x>
+      <y>441</y>
       <w>54</w>
       <h>27</h>
     </coordinates>
@@ -273,21 +273,10 @@ _+SortByZOrder(a: VisualObject*, b: VisualObject*): bool_</panel_attributes>
     <additional_attributes>10.0;10.0;40.0;10.0</additional_attributes>
   </element>
   <element>
-    <id>UMLPackage</id>
-    <coordinates>
-      <x>351</x>
-      <y>459</y>
-      <w>702</w>
-      <h>225</h>
-    </coordinates>
-    <panel_attributes>Camera</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>945</x>
-      <y>1098</y>
+      <x>1656</x>
+      <y>558</y>
       <w>207</w>
       <h>108</h>
     </coordinates>
@@ -304,8 +293,8 @@ _+GetAudio(): sf::SoundBuffer*_</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1242</x>
-      <y>1026</y>
+      <x>1953</x>
+      <y>486</y>
       <w>369</w>
       <h>144</h>
     </coordinates>
@@ -323,8 +312,8 @@ _+GetAudio(): sf::SoundBuffer*_</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1062</x>
-      <y>1260</y>
+      <x>1773</x>
+      <y>720</y>
       <w>279</w>
       <h>72</h>
     </coordinates>
@@ -338,8 +327,8 @@ _+GetAudio(): sf::SoundBuffer*_</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1368</x>
-      <y>1260</y>
+      <x>2079</x>
+      <y>720</y>
       <w>306</w>
       <h>72</h>
     </coordinates>
@@ -353,8 +342,8 @@ _+GetAudio(): sf::SoundBuffer*_</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1377</x>
-      <y>1161</y>
+      <x>2088</x>
+      <y>621</y>
       <w>144</w>
       <h>117</h>
     </coordinates>
@@ -364,8 +353,8 @@ _+GetAudio(): sf::SoundBuffer*_</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1188</x>
-      <y>1161</y>
+      <x>1899</x>
+      <y>621</y>
       <w>216</w>
       <h>117</h>
     </coordinates>
@@ -375,8 +364,8 @@ _+GetAudio(): sf::SoundBuffer*_</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1143</x>
-      <y>1152</y>
+      <x>1854</x>
+      <y>612</y>
       <w>63</w>
       <h>126</h>
     </coordinates>
@@ -386,8 +375,8 @@ _+GetAudio(): sf::SoundBuffer*_</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1143</x>
-      <y>1134</y>
+      <x>1854</x>
+      <y>594</y>
       <w>252</w>
       <h>90</h>
     </coordinates>
@@ -397,8 +386,8 @@ _+GetAudio(): sf::SoundBuffer*_</panel_attributes>
   <element>
     <type>CustomElementImpl</type>
     <coordinates>
-      <x>1368</x>
-      <y>1188</y>
+      <x>2079</x>
+      <y>648</y>
       <w>37</w>
       <h>19</h>
     </coordinates>
@@ -413,8 +402,8 @@ Enjoy UMLet!</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1386</x>
-      <y>1197</y>
+      <x>2097</x>
+      <y>657</y>
       <w>153</w>
       <h>81</h>
     </coordinates>
@@ -424,8 +413,8 @@ Enjoy UMLet!</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1512</x>
-      <y>774</y>
+      <x>774</x>
+      <y>891</y>
       <w>342</w>
       <h>153</h>
     </coordinates>
@@ -445,8 +434,8 @@ Enjoy UMLet!</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>612</x>
-      <y>1305</y>
+      <x>2052</x>
+      <y>828</y>
       <w>333</w>
       <h>198</h>
     </coordinates>
@@ -469,8 +458,8 @@ Enjoy UMLet!</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>765</x>
-      <y>1539</y>
+      <x>2052</x>
+      <y>1062</y>
       <w>261</w>
       <h>216</h>
     </coordinates>
@@ -494,8 +483,8 @@ Enjoy UMLet!</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>765</x>
-      <y>1800</y>
+      <x>2052</x>
+      <y>1323</y>
       <w>108</w>
       <h>27</h>
     </coordinates>
@@ -507,8 +496,8 @@ Enjoy UMLet!</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>891</x>
-      <y>1800</y>
+      <x>2178</x>
+      <y>1323</y>
       <w>135</w>
       <h>27</h>
     </coordinates>
@@ -520,8 +509,8 @@ Enjoy UMLet!</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>873</x>
-      <y>1746</y>
+      <x>2160</x>
+      <y>1269</y>
       <w>90</w>
       <h>72</h>
     </coordinates>
@@ -531,8 +520,8 @@ Enjoy UMLet!</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>801</x>
-      <y>1746</y>
+      <x>2088</x>
+      <y>1269</y>
       <w>99</w>
       <h>72</h>
     </coordinates>
@@ -542,8 +531,8 @@ Enjoy UMLet!</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>765</x>
-      <y>1845</y>
+      <x>2052</x>
+      <y>1368</y>
       <w>252</w>
       <h>45</h>
     </coordinates>
@@ -555,8 +544,8 @@ Unterschiedliche Rendering Strategien
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>801</x>
-      <y>1818</y>
+      <x>2088</x>
+      <y>1341</y>
       <w>99</w>
       <h>45</h>
     </coordinates>
@@ -566,8 +555,8 @@ Unterschiedliche Rendering Strategien
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>873</x>
-      <y>1818</y>
+      <x>2160</x>
+      <y>1341</y>
       <w>99</w>
       <h>45</h>
     </coordinates>
@@ -577,8 +566,8 @@ Unterschiedliche Rendering Strategien
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1215</x>
-      <y>1530</y>
+      <x>1323</x>
+      <y>873</y>
       <w>288</w>
       <h>108</h>
     </coordinates>
@@ -595,8 +584,8 @@ Unterschiedliche Rendering Strategien
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1548</x>
-      <y>1611</y>
+      <x>1656</x>
+      <y>954</y>
       <w>207</w>
       <h>99</h>
     </coordinates>
@@ -612,8 +601,8 @@ Unterschiedliche Rendering Strategien
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1548</x>
-      <y>1728</y>
+      <x>1656</x>
+      <y>1071</y>
       <w>207</w>
       <h>117</h>
     </coordinates>
@@ -630,8 +619,8 @@ Unterschiedliche Rendering Strategien
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1548</x>
-      <y>1530</y>
+      <x>1656</x>
+      <y>873</y>
       <w>207</w>
       <h>63</h>
     </coordinates>
@@ -645,8 +634,8 @@ Unterschiedliche Rendering Strategien
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1215</x>
-      <y>1701</y>
+      <x>1323</x>
+      <y>1044</y>
       <w>288</w>
       <h>144</h>
     </coordinates>
@@ -665,8 +654,8 @@ Unterschiedliche Rendering Strategien
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1215</x>
-      <y>1881</y>
+      <x>1323</x>
+      <y>1224</y>
       <w>288</w>
       <h>126</h>
     </coordinates>
@@ -684,8 +673,8 @@ Unterschiedliche Rendering Strategien
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1332</x>
-      <y>1530</y>
+      <x>1440</x>
+      <y>873</y>
       <w>234</w>
       <h>162</h>
     </coordinates>
@@ -695,8 +684,8 @@ Unterschiedliche Rendering Strategien
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1332</x>
-      <y>1611</y>
+      <x>1440</x>
+      <y>954</y>
       <w>234</w>
       <h>81</h>
     </coordinates>
@@ -706,8 +695,8 @@ Unterschiedliche Rendering Strategien
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1332</x>
-      <y>1629</y>
+      <x>1440</x>
+      <y>972</y>
       <w>27</w>
       <h>90</h>
     </coordinates>
@@ -717,8 +706,8 @@ Unterschiedliche Rendering Strategien
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1332</x>
-      <y>1629</y>
+      <x>1440</x>
+      <y>972</y>
       <w>234</w>
       <h>126</h>
     </coordinates>
@@ -728,8 +717,8 @@ Unterschiedliche Rendering Strategien
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1332</x>
-      <y>1836</y>
+      <x>1440</x>
+      <y>1179</y>
       <w>27</w>
       <h>63</h>
     </coordinates>
@@ -739,8 +728,8 @@ Unterschiedliche Rendering Strategien
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>1548</x>
-      <y>1881</y>
+      <x>1656</x>
+      <y>1224</y>
       <w>207</w>
       <h>72</h>
     </coordinates>
@@ -754,8 +743,8 @@ SetAnimState aufgerufen.</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1494</x>
-      <y>1899</y>
+      <x>1602</x>
+      <y>1242</y>
       <w>72</w>
       <h>27</h>
     </coordinates>
@@ -765,23 +754,50 @@ SetAnimState aufgerufen.</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1017</x>
-      <y>1521</y>
-      <w>351</w>
-      <h>81</h>
+      <x>1449</x>
+      <y>828</y>
+      <w>621</w>
+      <h>297</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;70.0;370.0;10.0</additional_attributes>
+    <additional_attributes>670.0;310.0;540.0;310.0;540.0;10.0;10.0;10.0;10.0;50.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>936</x>
-      <y>1323</y>
-      <w>837</w>
-      <h>315</h>
+      <x>1935</x>
+      <y>846</y>
+      <w>135</w>
+      <h>135</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;910.0;330.0</additional_attributes>
+    <additional_attributes>130.0;10.0;60.0;10.0;60.0;130.0;10.0;130.0</additional_attributes>
+  </element>
+  <element>
+    <type>CustomElementImpl</type>
+    <coordinates>
+      <x>1917</x>
+      <y>945</y>
+      <w>37</w>
+      <h>19</h>
+    </coordinates>
+    <panel_attributes>// Modify the text below and
+// observe the element preview.
+
+Hello, World! 
+Enjoy UMLet!</panel_attributes>
+    <additional_attributes/>
+    <custom_code>drawArcOpen(10,0+height/2,width-20,height,-180,-180);</custom_code>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1854</x>
+      <y>954</y>
+      <w>90</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;80.0;10.0</additional_attributes>
   </element>
 </diagram>

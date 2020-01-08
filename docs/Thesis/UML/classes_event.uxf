@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>80</x>
+      <y>320</y>
+      <w>300</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>EventController
+--
+mEvents: map&lt;int, ObservableBase*&gt;
+--
++AddEvent(key: int, event: ObservableBase*)
++GetEvent(key: int): ObservableBase*
++Tick()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>370</x>
+      <y>340</y>
+      <w>110</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;90.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>80</x>
+      <y>650</y>
+      <w>350</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>template=TData: Object
+Always
+--
+-mData: *TData
+--
++Always(TData* data)
++Update()
++Subscribe(subscriber: Observer&lt;TData&gt;): int
+#triggered(): bool
+#emit(obj: TData)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>120</x>
+      <y>820</y>
+      <w>170</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>Triggers on every tick
+bg=yellow</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>190</x>
+      <y>800</y>
+      <w>30</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>170</x>
+      <y>590</y>
+      <w>30</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>170</x>
+      <y>590</y>
+      <w>420</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+&lt;&lt;bind&gt;&gt; (Empty)</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0;400.0;40.0;400.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>80</x>
+      <y>460</y>
+      <w>380</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>template=TData: Object
+/Observable/
+--
+#mObservers: std::vector&lt;Observable&lt;TData&gt;&gt;
+--
++Update()
++Subscribe(subscriber: Observer&lt;TData&gt;): int
+/#triggered(): bool/
+#emit(obj: TData)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>460</x>
+      <y>320</y>
+      <w>160</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>/ObservableBase/
+--
+--
+/+Update()/</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>220</x>
+      <y>370</y>
+      <w>310</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>290.0;10.0;290.0;80.0;10.0;80.0;10.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>470</x>
+      <y>660</y>
+      <w>300</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>OnKeyPress
+--
+-mKey: sf::Key
+--
++KeyPress(key: sf::Key)
++Update()
++Subscribe(subscriber: Observer&lt;TData&gt;): int
+#triggered(): bool
+#emit(obj: Empty)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>470</x>
+      <y>550</y>
+      <w>100</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>Empty
+--
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>590</x>
+      <y>540</y>
+      <w>140</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>Data Class that
+contains no data
+bg=yellow</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>560</x>
+      <y>550</y>
+      <w>50</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;30.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>60</x>
+      <y>280</y>
+      <w>790</w>
+      <h>850</h>
+    </coordinates>
+    <panel_attributes>Event</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>400</x>
+      <y>500</y>
+      <w>410</w>
+      <h>380</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;390.0;10.0;390.0;330.0;220.0;330.0;220.0;360.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>480</x>
+      <y>850</y>
+      <w>350</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>template=TData: Object
+/Observer/
+--
+/+Callback(TData* data)/</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>80</x>
+      <y>1020</y>
+      <w>620</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>template=TData: Object, THandler: Object
+MethodObserver
+--
++MethodObserver(handler: *THandler, ObserverMethod&lt;TData, THandler&gt;)
++Callback(data: *TData)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>80</x>
+      <y>900</y>
+      <w>380</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>template=TData: Object
+FunctionObserver
+--
++FunctionObserver(func: ObserverFunc&lt;TData&gt;)
++Callback(TData* data)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>430</x>
+      <y>910</y>
+      <w>150</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>130.0;10.0;130.0;80.0;10.0;80.0;10.0;120.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>400</x>
+      <y>910</y>
+      <w>180</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>160.0;10.0;160.0;40.0;10.0;40.0</additional_attributes>
+  </element>
+</diagram>
