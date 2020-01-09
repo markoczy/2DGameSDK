@@ -5,7 +5,7 @@
     <id>UMLSequenceAllInOne</id>
     <coordinates>
       <x>0</x>
-      <y>0</y>
+      <y>140</y>
       <w>1940</w>
       <h>1580</h>
     </coordinates>
@@ -81,7 +81,7 @@ main-&gt;&gt;&gt;sg :AddEntity(entity, ...); on=sg
 sg.&gt;main; off=sg
 
 // End Loop
-off=main; --=loop1
+--=loop1
 tick=
 
 // Set Scene
@@ -96,7 +96,7 @@ game.&gt;main; off=game
     <id>UMLNote</id>
     <coordinates>
       <x>1560</x>
-      <y>250</y>
+      <y>390</y>
       <w>180</w>
       <h>60</h>
     </coordinates>
@@ -110,7 +110,7 @@ Chipmunk Physics Engine</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>1510</x>
-      <y>250</y>
+      <y>390</y>
       <w>70</w>
       <h>30</h>
     </coordinates>

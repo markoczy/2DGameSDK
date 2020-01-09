@@ -5,7 +5,7 @@
     <id>UMLSequenceAllInOne</id>
     <coordinates>
       <x>0</x>
-      <y>135</y>
+      <y>171</y>
       <w>1584</w>
       <h>720</h>
     </coordinates>
@@ -60,7 +60,7 @@ win.&gt;game; off=win
     <id>UMLNote</id>
     <coordinates>
       <x>801</x>
-      <y>342</y>
+      <y>378</y>
       <w>135</w>
       <h>72</h>
     </coordinates>
@@ -75,7 +75,7 @@ Thread</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>756</x>
-      <y>378</y>
+      <y>414</y>
       <w>63</w>
       <h>27</h>
     </coordinates>
@@ -86,7 +86,7 @@ Thread</panel_attributes>
     <id>UMLNote</id>
     <coordinates>
       <x>765</x>
-      <y>558</y>
+      <y>594</y>
       <w>135</w>
       <h>54</h>
     </coordinates>
@@ -100,7 +100,7 @@ des Overlay Displays</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>720</x>
-      <y>576</y>
+      <y>612</y>
       <w>63</w>
       <h>27</h>
     </coordinates>
@@ -111,7 +111,7 @@ des Overlay Displays</panel_attributes>
     <id>UMLNote</id>
     <coordinates>
       <x>1044</x>
-      <y>711</y>
+      <y>747</y>
       <w>180</w>
       <h>72</h>
     </coordinates>
@@ -126,7 +126,7 @@ gewählte Framerate</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>999</x>
-      <y>738</y>
+      <y>774</y>
       <w>63</w>
       <h>27</h>
     </coordinates>

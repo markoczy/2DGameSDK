@@ -4,8 +4,8 @@
   <element>
     <id>UMLSequenceAllInOne</id>
     <coordinates>
-      <x>234</x>
-      <y>108</y>
+      <x>0</x>
+      <y>27</y>
       <w>1665</w>
       <h>1008</h>
     </coordinates>
@@ -76,8 +76,8 @@ off=game
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>909</x>
-      <y>288</y>
+      <x>675</x>
+      <y>207</y>
       <w>216</w>
       <h>45</h>
     </coordinates>
@@ -89,8 +89,8 @@ Thread und Render Thread.</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>936</x>
-      <y>324</y>
+      <x>702</x>
+      <y>243</y>
       <w>27</w>
       <h>45</h>
     </coordinates>
@@ -100,8 +100,8 @@ Thread und Render Thread.</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>666</x>
-      <y>981</y>
+      <x>432</x>
+      <y>900</y>
       <w>180</w>
       <h>54</h>
     </coordinates>
@@ -114,8 +114,8 @@ Durchlaufs</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>630</x>
-      <y>990</y>
+      <x>396</x>
+      <y>909</y>
       <w>54</w>
       <h>27</h>
     </coordinates>
@@ -125,8 +125,8 @@ Durchlaufs</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>666</x>
-      <y>909</y>
+      <x>432</x>
+      <y>828</y>
       <w>180</w>
       <h>45</h>
     </coordinates>
@@ -138,8 +138,8 @@ Physics Engine</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>603</x>
-      <y>918</y>
+      <x>369</x>
+      <y>837</y>
       <w>81</w>
       <h>27</h>
     </coordinates>
@@ -149,8 +149,8 @@ Physics Engine</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>1035</x>
-      <y>549</y>
+      <x>801</x>
+      <y>468</y>
       <w>180</w>
       <h>54</h>
     </coordinates>
@@ -162,8 +162,8 @@ und das Overlay Display</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>972</x>
-      <y>558</y>
+      <x>738</x>
+      <y>477</y>
       <w>81</w>
       <h>27</h>
     </coordinates>
@@ -173,8 +173,8 @@ und das Overlay Display</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>1035</x>
-      <y>747</y>
+      <x>801</x>
+      <y>666</y>
       <w>189</w>
       <h>45</h>
     </coordinates>
@@ -186,8 +186,8 @@ Spielobjekte</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>999</x>
-      <y>756</y>
+      <x>765</x>
+      <y>675</y>
       <w>54</w>
       <h>27</h>
     </coordinates>
