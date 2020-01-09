@@ -358,3 +358,10 @@
   - `Pose` Datentyp
 - Können die komplizierten Umrechnungen bei `KinematicEntity.Transform`
   umgangen werden?
+
+
+# TODO
+
+OnTickEnded StateManager weg
+EventController > StateManager
+Memeory Leaks

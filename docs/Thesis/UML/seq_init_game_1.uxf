@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLSequenceAllInOne</id>
+    <coordinates>
+      <x>0</x>
+      <y>0</y>
+      <w>1940</w>
+      <h>1580</h>
+    </coordinates>
+    <panel_attributes>title=Game Initialization
+obj=GameWorldFactory~gwf
+obj=scene: SceneGraph~sg CREATED_LATER EXECUTION
+obj=Main Loop~main EXECUTION
+obj=game: Game~game CREATED_LATER EXECUTION
+obj=stateManager: StateManager~sm CREATED_LATER EXECUTION
+
+
+// Create Game
+main-&gt;&gt;&gt;main + :createOptions(...)
+on=main
+main.&gt;main + :options; off=main
+tick=
+main-&gt;&gt;&gt;game: new(options)
+
+// Create Chipmunk space
+game-&gt;&gt;&gt;game+ : cpSpaceNew(...);
+on=game
+off=game; game.&gt;game + :space
+tick=
+
+// Create state manager
+game-&gt;&gt;&gt;sm: new()
+sm.&gt;game: stateManager: StateManager*; off=sm
+
+// Create Event Controller
+game-&gt;&gt;&gt;game +: new EventController();
+on=game
+game.&gt;game+: eventController; off=game
+tick=
+
+//game-&gt;&gt;&gt;ec: new()
+//ec.&gt;game: eventController: EventController*; off=ec
+
+game-&gt;&gt;&gt;sm: SetEventController(eventController); on=sm
+sm.&gt;game; off=sm
+
+game.&gt;main: game: Game*; off=game
+
+// Create Gameworld
+main-&gt;&gt;&gt;gwf: CreateGameWorld(game, ...); on=gwf
+gwf-&gt;gwf + :loadTilemap(...)
+on=gwf
+off=gwf
+gwf-&gt;gwf + :loadMaterials(...)
+on=gwf
+off=gwf
+gwf-&gt;gwf + :loadTextures(...)
+on=gwf
+off=gwf
+gwf.&gt;main: world: GameWorld*; off=gwf
+
+// Set World in game
+main-&gt;&gt;&gt;game: SetWorld(world); on=game
+game-&gt;&gt;&gt;sm: SetWorld(world); on=sm
+sm.&gt;game; off=sm
+game.&gt;main; off=game
+
+// Create Scene
+main-&gt;&gt;&gt;sg: new(game)
+sg.&gt;main; off=sg
+
+// Add Entities
+combinedFragment=loop~loop1 sg main; main:[More Entities to create...]
+main-&gt;main + :new Entity(...)
+on=main
+main-&gt;main + :entity;off=main
+tick=
+main-&gt;&gt;&gt;sg :AddEntity(entity, ...); on=sg
+sg.&gt;main; off=sg
+
+// End Loop
+off=main; --=loop1
+tick=
+
+// Set Scene
+main-&gt;&gt;&gt;game: SetScene(scene); on=game
+game-&gt;&gt;&gt;sm: SetScene(scene); on=sm
+sm.&gt;game; off=sm
+game.&gt;main; off=game
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>1560</x>
+      <y>250</y>
+      <w>180</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>bg=yellow
+Erstellt die physikalische
+Welt innerhalb der
+Chipmunk Physics Engine</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1510</x>
+      <y>250</y>
+      <w>70</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;50.0;10.0</additional_attributes>
+  </element>
+</diagram>

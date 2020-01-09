@@ -321,6 +321,7 @@ namespace game {
     }
   }
 
+  //! OBSOLETE!!!!!
   void Game::render() {
     try {
       LOGD("Set View");

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="14.3.0">
-  <zoom_level>5</zoom_level>
+  <zoom_level>7</zoom_level>
   <element>
     <id>UMLSequenceAllInOne</id>
     <coordinates>
-      <x>125</x>
-      <y>250</y>
-      <w>1150</w>
-      <h>650</h>
+      <x>0</x>
+      <y>140</y>
+      <w>1610</w>
+      <h>910</h>
     </coordinates>
     <panel_attributes>title=Game Loop
 obj=Main Loop~main

@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>9</zoom_level>
+  <element>
+    <id>UMLSequenceAllInOne</id>
+    <coordinates>
+      <x>234</x>
+      <y>108</y>
+      <w>1665</w>
+      <h>1008</h>
+    </coordinates>
+    <panel_attributes>title=Game Loop
+obj=game: Game~game EXECUTION
+obj=stateManager: StateManager~sm
+obj=eventController: EventController~ec
+obj=cameraController: CameraController~cam
+
+tick=
+// Start loop
+combinedFragment=loop~loop1 game cam; game: [interrupted == false]
+
+// Window Events
+game-&gt;game + :handleWindowEvents()
+on=game
+off=game
+
+// Tick State Manager
+game-&gt;&gt;&gt;sm: OnTick(); on=sm
+sm-&gt;sm+: lock(renderMutex)
+on=sm
+off=sm
+
+// Tick Events
+sm-&gt;&gt;&gt;ec: OnTick(); on=ec
+ec-&gt;ec + :tickEvents()
+on=ec
+off=ec
+ec.&gt;sm; off=ec
+
+// Tick Objects
+sm-&gt;sm+ :tickState()
+on=sm
+off=sm
+
+// Tick Camera
+sm-&gt;&gt;&gt;cam:                      OnTick(); on=cam
+cam-&gt;cam+: updateView();
+on=cam
+off=cam
+cam.&gt;sm; off=cam
+
+// Handle Deleted
+sm-&gt;sm+ :handleDeleted()
+on=sm
+off=sm
+
+// Unlock and return
+sm-&gt;sm+: unlock(renderMutex)
+on=sm
+off=sm
+sm.&gt;game; off=sm
+
+// Tick physics
+game-&gt;game+: cpSpaceStep(...)
+on=game
+off=game
+
+// Sleep
+game-&gt;game+: sleep(remainingTime)
+on=game
+off=game
+
+--=loop1;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>909</x>
+      <y>288</y>
+      <w>216</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>bg=yellow
+Blockiert Mutex zwischen Game 
+Thread und Render Thread.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>936</x>
+      <y>324</y>
+      <w>27</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;30.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>666</x>
+      <y>981</y>
+      <w>180</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>bg=yellow
+Zeit pro Durchlauf minus
+vergangene Zeit des aktuellen
+Durchlaufs</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>630</x>
+      <y>990</y>
+      <w>54</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;40.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>666</x>
+      <y>909</y>
+      <w>180</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>bg=yellow
+Zeitschritt der Chipmunk
+Physics Engine</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>603</x>
+      <y>918</y>
+      <w>81</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;70.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>1035</x>
+      <y>549</y>
+      <w>180</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>bg=yellow
+Aktualisiert alle Spielobjekte,
+und das Overlay Display</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>972</x>
+      <y>558</y>
+      <w>81</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;70.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>1035</x>
+      <y>747</y>
+      <w>189</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>bg=yellow
+Löscht als gelöscht markierte
+Spielobjekte</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>999</x>
+      <y>756</y>
+      <w>54</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;40.0;10.0</additional_attributes>
+  </element>
+</diagram>
