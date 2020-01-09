@@ -161,17 +161,10 @@ namespace game {
      */
     void tick();
 
-    /**
-     * @brief Renders all Game Elements
-     * 
-     */
-    void render();
-
     StateManager mStateManager;
     GameOptions mOptions;
 
     bool mRunning = false;
-    EventController mEventCtrl;
     sf::RenderWindow* mWindow;
     sf::View mView;
     cpSpace* mPhysicalWorld = nullptr;

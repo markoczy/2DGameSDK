@@ -3,10 +3,12 @@
 namespace game {
 
   StateManager::StateManager(GameBase* game) : mGame(game), mRenderMutex(new sf::Mutex()) {
+    mEventController = new EventController();
   }
 
   StateManager::~StateManager() {
     helpers::safeDelete(mRenderMutex);
+    helpers::safeDelete(mEventController);
   }
 
   GameWorld* StateManager::GetWorld() {
@@ -15,6 +17,10 @@ namespace game {
 
   SceneGraph* StateManager::GetScene() {
     return mScene;
+  }
+
+  EventController* StateManager::GetEventController() {
+    return mEventController;
   }
 
   sf::Mutex* StateManager::GetRenderMutex() {
@@ -27,6 +33,10 @@ namespace game {
 
   void StateManager::SetScene(SceneGraph* scene) {
     mScene = scene;
+  }
+
+  void StateManager::SetEventController(EventController* eventController) {
+    mEventController = eventController;
   }
 
   GameObject* StateManager::GetObject(int id) {
@@ -56,6 +66,11 @@ namespace game {
 
   void StateManager::OnTick() {
     auto lock = sf::Lock(*mRenderMutex);
+
+    // Update Events
+    mEventController->OnTick();
+
+    // Update Objects
     for(auto entry : mObjects) {
       entry.second->OnTick();
     }

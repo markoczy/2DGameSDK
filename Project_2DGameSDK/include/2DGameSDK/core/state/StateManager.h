@@ -13,6 +13,7 @@
 #include <2DGameSDK/core/camera/CameraController.h>
 #include <2DGameSDK/core/overlay/OverlayDisplay.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
+#include <2DGameSDK/event/EventController.h>
 #include <2DGameSDK/scene/entity/Entity.h>
 
 namespace game {
@@ -28,6 +29,8 @@ namespace game {
 
     SceneGraph* GetScene();
 
+    EventController* GetEventController();
+
     GameObject* GetObject(int id);
 
     sf::Mutex* GetRenderMutex();
@@ -35,6 +38,8 @@ namespace game {
     void SetWorld(GameWorld* world);
 
     void SetScene(SceneGraph* scene);
+
+    void SetEventController(EventController* eventController);
 
     void AddObject(GameObject* object);
 
@@ -58,6 +63,7 @@ namespace game {
 
     GameWorld* mWorld = nullptr;
     SceneGraph* mScene = nullptr;
+    EventController* mEventController = nullptr;
     std::map<int, GameObject*> mObjects;
     std::vector<VisualObject*> mRenderObjects;
 

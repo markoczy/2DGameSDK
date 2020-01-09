@@ -8,12 +8,15 @@ namespace game {
   class SceneGraph;
   class GameObject;
   class VisualObject;
+  class EventController;
 
   class StateManagerBase {
   public:
     virtual GameWorld* GetWorld() = 0;
 
     virtual SceneGraph* GetScene() = 0;
+
+    virtual EventController* GetEventController() = 0;
 
     virtual GameObject* GetObject(int id) = 0;
 
@@ -22,6 +25,8 @@ namespace game {
     virtual void SetWorld(GameWorld* world) = 0;
 
     virtual void SetScene(SceneGraph* scene) = 0;
+
+    virtual void SetEventController(EventController* eventController) = 0;
 
     virtual void AddObject(GameObject* object) = 0;
 

@@ -291,11 +291,11 @@ namespace game {
   // ####### Event Controller wrapper ##########################################
 
   void Game::AddEvent(ObservableBase* event) {
-    return mEventCtrl.AddEvent(event);
+    return mStateManager.GetEventController()->AddEvent(event);
   }
 
   void Game::DestroyEvent(ObservableBase* event) {
-    return mEventCtrl.DestroyEvent(event);
+    return mStateManager.GetEventController()->DestroyEvent(event);
   }
 
   // ###########################################################################
@@ -304,8 +304,6 @@ namespace game {
 
   void Game::tick() {
     try {
-      LOGD("Tick Events");
-      mEventCtrl.OnTick();
       LOGD("Tick State Manager");
       mStateManager.OnTick();
       // LOGD("Tick Camera");
@@ -318,22 +316,6 @@ namespace game {
       mStateManager.OnTickEnded();
     } catch(std::exception& e) {
       LOGE("Error during tick: " << e.what());
-    }
-  }
-
-  //! OBSOLETE!!!!!
-  void Game::render() {
-    try {
-      LOGD("Set View");
-      mWindow->setView(mCameraController->GetView());
-      mWindow->clear(sf::Color(80, 80, 80));
-      LOGD("Render State");
-      mStateManager.OnRender(mWindow);
-      LOGD("Render Overlay");
-      if(mOverlayDisplay != nullptr) mOverlayDisplay->OnRender(mWindow);
-      mWindow->display();
-    } catch(std::exception& e) {
-      LOGE("Error during render: " << e.what());
     }
   }
 
