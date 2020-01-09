@@ -362,6 +362,6 @@
 
 # TODO
 
-OnTickEnded StateManager weg
-EventController > StateManager
+OnTickEnded StateManager weg -> DONE
+EventController > StateManager -> DONE
 Memeory Leaks

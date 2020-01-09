@@ -305,15 +305,12 @@ namespace game {
   void Game::tick() {
     try {
       LOGD("Tick State Manager");
+      // CS_
       mStateManager.OnTick();
-      // LOGD("Tick Camera");
-      // mCameraController->OnTick();
+      // _CS
       LOGD("Tick Audio");
-      mAudioController->OnTick();
-      // LOGD("Tick Overlay");
-      // if(mOverlayDisplay != nullptr) mOverlayDisplay->OnTick();
+      if(mAudioController) mAudioController->OnTick();
       LOGD("Tick End");
-      mStateManager.OnTickEnded();
     } catch(std::exception& e) {
       LOGE("Error during tick: " << e.what());
     }

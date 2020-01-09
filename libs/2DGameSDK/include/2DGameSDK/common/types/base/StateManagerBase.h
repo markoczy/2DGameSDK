@@ -38,8 +38,6 @@ namespace game {
 
     virtual void OnTick() = 0;
 
-    virtual void OnTickEnded() = 0;
-
     virtual void OnRender(sf::RenderTarget* target) = 0;
 
     virtual void OnZOrderChanged() = 0;

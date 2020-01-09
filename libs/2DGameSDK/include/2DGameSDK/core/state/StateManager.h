@@ -51,8 +51,6 @@ namespace game {
 
     void OnTick();
 
-    void OnTickEnded();
-
     void OnRender(sf::RenderTarget* target);
 
     void OnZOrderChanged();
@@ -68,6 +66,9 @@ namespace game {
     std::vector<VisualObject*> mRenderObjects;
 
     std::vector<int> mDestroyObjects;
+
+    void onTick();
+    void onTickEnded();
   };
 } // namespace game
 

@@ -65,34 +65,8 @@ namespace game {
   }
 
   void StateManager::OnTick() {
-    auto lock = sf::Lock(*mRenderMutex);
-
-    // Update Events
-    mEventController->OnTick();
-
-    // Update Objects
-    for(auto entry : mObjects) {
-      entry.second->OnTick();
-    }
-
-    auto overlay = mGame->GetOverlayDisplay();
-    if(overlay != nullptr) overlay->OnTick();
-
-    auto cam = mGame->GetCameraController();
-    cam->OnTick();
-  }
-
-  void StateManager::OnTickEnded() {
-    auto lock = sf::Lock(*mRenderMutex);
-    for(auto id : mDestroyObjects) {
-      helpers::safeDelete(mObjects[id]);
-      mObjects.erase(id);
-    }
-    mDestroyObjects.clear();
-
-    for(auto entry : mObjects) {
-      entry.second->OnTickEnded();
-    }
+    onTick();
+    onTickEnded();
   }
 
   void StateManager::OnRender(sf::RenderTarget* target) {
@@ -114,4 +88,36 @@ namespace game {
     std::sort(mRenderObjects.begin(), mRenderObjects.end(), VisualObject::SortByZOrder);
   }
 
+  void StateManager::onTick() {
+    auto lock = sf::Lock(*mRenderMutex);
+
+    // Update Events
+    mEventController->OnTick();
+
+    // Update Objects
+    for(auto entry : mObjects) {
+      entry.second->OnTick();
+    }
+
+    auto overlay = mGame->GetOverlayDisplay();
+    if(overlay != nullptr) overlay->OnTick();
+
+    auto cam = mGame->GetCameraController();
+    cam->OnTick();
+  }
+
+  void StateManager::onTickEnded() {
+    // Handle Deleted Objects
+    auto lock = sf::Lock(*mRenderMutex);
+    for(auto id : mDestroyObjects) {
+      helpers::safeDelete(mObjects[id]);
+      mObjects.erase(id);
+    }
+    mDestroyObjects.clear();
+
+    // Post Update Objects
+    for(auto entry : mObjects) {
+      entry.second->OnTickEnded();
+    }
+  }
 } // namespace game
