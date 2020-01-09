@@ -4,12 +4,12 @@
   <element>
     <id>UMLSequenceAllInOne</id>
     <coordinates>
-      <x>0</x>
-      <y>180</y>
+      <x>126</x>
+      <y>126</y>
       <w>1584</w>
       <h>720</h>
     </coordinates>
-    <panel_attributes>title=Game Loop
+    <panel_attributes>title=Render Loop
 obj=renderThread: sf::Thread~game EXECUTION
 obj=stateManager: StateManager~sm
 obj=window: sf::Window~win
@@ -59,8 +59,8 @@ win.&gt;game; off=win
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>801</x>
-      <y>387</y>
+      <x>927</x>
+      <y>333</y>
       <w>135</w>
       <h>72</h>
     </coordinates>
@@ -74,8 +74,8 @@ Thread</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>756</x>
-      <y>423</y>
+      <x>882</x>
+      <y>369</y>
       <w>63</w>
       <h>27</h>
     </coordinates>
@@ -85,8 +85,8 @@ Thread</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>765</x>
-      <y>603</y>
+      <x>891</x>
+      <y>549</y>
       <w>135</w>
       <h>54</h>
     </coordinates>
@@ -99,8 +99,8 @@ des Overlay Displays</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>720</x>
-      <y>621</y>
+      <x>846</x>
+      <y>567</y>
       <w>63</w>
       <h>27</h>
     </coordinates>
@@ -110,8 +110,8 @@ des Overlay Displays</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>1044</x>
-      <y>756</y>
+      <x>1170</x>
+      <y>702</y>
       <w>180</w>
       <h>72</h>
     </coordinates>
@@ -125,8 +125,8 @@ gewählte Framerate</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>999</x>
-      <y>783</y>
+      <x>1125</x>
+      <y>729</y>
       <w>63</w>
       <h>27</h>
     </coordinates>
