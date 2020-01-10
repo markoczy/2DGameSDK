@@ -92,7 +92,7 @@ public:
   }
 };
 
-int chipmunkDemo() {
+int chipmunkDemo(int count) {
   sf::Vector2f worldDim(worldWidth, worldHeight);
   vector<PhysicalEntity> entities;
 
@@ -106,13 +106,13 @@ int chipmunkDemo() {
   // entities.push_back(box);
 
   auto ground = PhysicalEntity(space, false, &boxTexture, sf::Vector2f(0, 25), sf::Vector2f(50, 10), worldDim);
-  auto left = PhysicalEntity(space, false, &boxTexture, sf::Vector2f(49, 0), sf::Vector2f(1, 500), worldDim);
-  auto right = PhysicalEntity(space, false, &boxTexture, sf::Vector2f(0, 0), sf::Vector2f(1, 500), worldDim);
+  auto left = PhysicalEntity(space, false, &boxTexture, sf::Vector2f(49, 0), sf::Vector2f(1, 50000), worldDim);
+  auto right = PhysicalEntity(space, false, &boxTexture, sf::Vector2f(0, 0), sf::Vector2f(1, 50000), worldDim);
   entities.push_back(ground);
   entities.push_back(left);
   entities.push_back(right);
 
-  for(int i = 0; i < 500; i++) {
+  for(int i = 0; i < count; i++) {
     auto x = rand() % 48 + 1;
     auto y = rand() % 5 + 0;
 

@@ -21,7 +21,12 @@ int main(int argc, char* argv[]) {
   } else if(demo == "chopper") {
     chopperDemo();
   } else if(demo == "chipmunk") {
-    chipmunkDemo();
+    int entities = 100;
+    if(argc > 2) {
+      entities = stoi(argv[2]);
+      cout << "Spawning " << entities << " entities" << endl;
+    }
+    chipmunkDemo(entities);
   } else {
     cerr << "No Valid Demo selected, choices are: minimal, player, gta2, chopper" << endl;
   }
