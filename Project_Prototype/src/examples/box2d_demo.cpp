@@ -99,7 +99,7 @@ std::vector<b2Vec2> getShape(float width, float height) {
   return ret;
 }
 
-int box2dDemo() {
+int box2dDemo(int count) {
   vector<PhysicalEntity> entities;
   sf::Vector2f worldDim(worldWidth, worldHeight);
   auto world = b2World(b2Vec2(0.0f, -10.0f));
@@ -111,13 +111,13 @@ int box2dDemo() {
   // entities.push_back(box);
 
   auto ground = PhysicalEntity(&world, false, &boxTexture, sf::Vector2f(0, 25), sf::Vector2f(50, 10), worldDim);
-  auto left = PhysicalEntity(&world, false, &boxTexture, sf::Vector2f(49, 0), sf::Vector2f(1, 500), worldDim);
-  auto right = PhysicalEntity(&world, false, &boxTexture, sf::Vector2f(0, 0), sf::Vector2f(1, 500), worldDim);
+  auto left = PhysicalEntity(&world, false, &boxTexture, sf::Vector2f(49, 0), sf::Vector2f(1, 50000), worldDim);
+  auto right = PhysicalEntity(&world, false, &boxTexture, sf::Vector2f(0, 0), sf::Vector2f(1, 50000), worldDim);
   entities.push_back(ground);
   entities.push_back(left);
   entities.push_back(right);
 
-  for(int i = 0; i < 500; i++) {
+  for(int i = 0; i < count; i++) {
     auto x = rand() % 48 + 1;
     auto y = rand() % 5 + 0;
 
@@ -155,7 +155,7 @@ int box2dDemo() {
         window.close();
     }
 
-    world.Step(time.asSeconds(), 10, 10);
+    world.Step(time.asSeconds(), 1, 1);
     ticks++;
 
     // Clear screen
