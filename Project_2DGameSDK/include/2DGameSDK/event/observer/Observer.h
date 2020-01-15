@@ -5,7 +5,7 @@
  * @version 1.0
  * @date 2019-06-11
  * 
- * @copyright Copyright (c) 2019
+ * @copyright Copyright (c) 2020
  * 
  */
 #ifndef __OBSERVER_H__
@@ -60,7 +60,6 @@ namespace game {
      * @param observable The Observable to Subscribe to
      */
     void SubscribeTo(Observable<TData>* observable) {
-      // TODO handle already subscibed
       mSubscriptionId = observable->Subscribe(this);
       mObservable = observable;
     }

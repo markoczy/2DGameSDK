@@ -5,7 +5,7 @@
  * @version 1.0
  * @date 2019-06-12
  * 
- * @copyright Copyright (c) 2019
+ * @copyright Copyright (c) 2020
  * 
  */
 #ifndef __MATERIAL_MAP_H__

@@ -5,7 +5,7 @@
  * @version 1.0
  * @date 2019-06-11
  * 
- * @copyright Copyright (c) 2019
+ * @copyright Copyright (c) 2020
  * 
  */
 #ifndef __GAME_OPTIONS_H__
@@ -51,15 +51,15 @@ namespace game {
      * @brief Wether to render the Collision Masks
      */
     bool RenderCollisionMask = false;
-
+    /**
+     * @brief Scale value from meter to pixel
+     */
     float MeterPerPixel = 1.0;
-
+    /**
+     * @brief Wether sound is played
+     */
     bool AudioEnabled = true;
   };
-
-  //   GAMESDK_DLL GameOptions DefaultOptions = GameOptions{
-  //       "Game", sf::Vector2i(800, 600), 50};
-
 } // namespace game
 
 #endif

@@ -5,7 +5,7 @@
  * @version 1.0
  * @date 2019-06-12
  * 
- * @copyright Copyright (c) 2019
+ * @copyright Copyright (c) 2020
  * 
  */
 #ifndef __GAME_OBJECT_H__
@@ -48,13 +48,31 @@ namespace game {
      */
     int GetId();
 
+    /**
+     * @brief Retreives the Object Type
+     * 
+     * @return ObjectType the type
+     */
     ObjectType GetObjectType();
 
+    /**
+     * @brief Updates the object
+     * 
+     */
     virtual void OnTick();
 
+    /**
+     * @brief Post update event
+     * 
+     */
     virtual void OnTickEnded();
 
   protected:
+    /**
+     * @brief Retreives the Game
+     * 
+     * @return GameBase* the game
+     */
     GameBase* getGame();
 
   private:

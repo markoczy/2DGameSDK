@@ -5,7 +5,7 @@
  * @version 1.0
  * @date 2019-06-11
  * 
- * @copyright Copyright (c) 2019
+ * @copyright Copyright (c) 2020
  * 
  */
 #ifndef __OBSERVABLE_H__
@@ -33,15 +33,28 @@ namespace game {
   template <class TData>
   class Observable : public ObservableBase {
   public:
+    /**
+     * @brief Constructs a new Observable
+     * 
+     */
     Observable() : mId(ObservableCounter::NextId()) {
     }
 
+    /**
+     * @brief Destroys the Observable
+     * 
+     */
     virtual ~Observable() {
       for(auto entry : mObservers) {
         helpers::safeDelete(entry.second);
       }
     }
 
+    /**
+     * @brief Retreives the Id
+     * 
+     * @return int the id
+     */
     virtual int GetId() {
       return mId;
     }

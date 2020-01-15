@@ -5,7 +5,7 @@
  * @version 1.0
  * @date 2019-06-13
  * 
- * @copyright Copyright (c) 2019
+ * @copyright Copyright (c) 2020
  * 
  */
 #ifndef __KINEMATIC_ENTITY_H__

@@ -1,4 +1,13 @@
-
+/**
+ * @file Physics.h
+ * @author Aleistar Markoczy (a.markoczy@gmail.com)
+ * @brief All Headers of the physics package
+ * @version 1.0
+ * @date 2020-01-15
+ * 
+ * @copyright Copyright (c) 2020
+ * 
+ */
 #ifndef __GAMESDK_PHYSICS_H__
 #define __GAMESDK_PHYSICS_H__
 

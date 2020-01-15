@@ -5,7 +5,7 @@
  * @version 1.0
  * @date 2019-06-11
  * 
- * @copyright Copyright (c) 2019
+ * @copyright Copyright (c) 2020
  * 
  */
 #ifndef __ASSET_MANAGER_H__
@@ -40,6 +40,12 @@ namespace game {
      */
     static sf::Texture* GetTexture(const std::string& identifier);
 
+    /**
+     * @brief Returns an SFML SoundBuffer by it's identifier
+     * 
+     * @param identifier the unique identifier (i.e. path to the file)
+     * @return sf::SoundBuffer* The loaded or previously cached SFML SoundBuffer
+     */
     static sf::SoundBuffer* GetAudio(const std::string& identifier);
 
   private:
