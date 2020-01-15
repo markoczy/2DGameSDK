@@ -1,11 +1,27 @@
 var classgame_1_1_entity =
 [
-    [ "Entity", "classgame_1_1_entity.html#ae18cd4d004ed8c414001401743b1e0dc", null ],
+    [ "Entity", "classgame_1_1_entity.html#a7c5b0f76666be0c358d1e9086201c66d", null ],
     [ "~Entity", "classgame_1_1_entity.html#a5d715de89150ed4fc2b9b97461ee6d44", null ],
-    [ "GetId", "classgame_1_1_entity.html#a4e8945028cb37f3832f479a9cabfce46", null ],
+    [ "GetAccumulatedTransform", "classgame_1_1_entity.html#aef339f771f6ff9c32570a51f0658aeae", null ],
+    [ "GetCombinedTransform", "classgame_1_1_entity.html#ab6a4b75928517553b31c12da4fe94865", null ],
+    [ "GetTransform", "classgame_1_1_entity.html#af92b5fb3bc18bd8d6b76b099ba58e057", null ],
     [ "GetType", "classgame_1_1_entity.html#aed0a3e2b73d49235bd3b317992df9a6a", null ],
-    [ "Render", "classgame_1_1_entity.html#a2352739f0c8abb0948a72338b11b1491", null ],
-    [ "Tick", "classgame_1_1_entity.html#a867772bcbe42fa928eb238461707876d", null ],
-    [ "mId", "classgame_1_1_entity.html#ae6a84789a6c2923b55b0df57192cd3a4", null ],
-    [ "mType", "classgame_1_1_entity.html#ae0bc050f28f35389a636ae953efd94de", null ]
+    [ "GetZIndex", "classgame_1_1_entity.html#a5919692a1346b431b0a6a81d03c70382", null ],
+    [ "IsCollidable", "classgame_1_1_entity.html#a4255b29e6301f7099d23d4f12b1f32ae", null ],
+    [ "IsKinematic", "classgame_1_1_entity.html#a71f2ca318399c5fdc415bbd0d3664d95", null ],
+    [ "OnCollision", "classgame_1_1_entity.html#a099314b06c2779253989bb7a1e5d86a7", null ],
+    [ "OnParentTransformed", "classgame_1_1_entity.html#aacfde16275ec9962fb69fcc1e4b781e2", null ],
+    [ "OnProjectileCollision", "classgame_1_1_entity.html#a21b9a0e791337a8dea05598d55422f81", null ],
+    [ "OnTickEnded", "classgame_1_1_entity.html#a6146a19fe15e34351602f3d007883786", null ],
+    [ "OnWorldCollision", "classgame_1_1_entity.html#ac03d8ae1d2df62c66b7b761607cc272f", null ],
+    [ "setAccumulatedTransform", "classgame_1_1_entity.html#a1f202c62bb9e1e00e2310de9a1ad46fa", null ],
+    [ "SetGraphNode", "classgame_1_1_entity.html#af254d1aa7d126a82b1abf884a97c53d3", null ],
+    [ "SetTransform", "classgame_1_1_entity.html#ad1c737fbf455c244ea7cd2ab1aadebdc", null ],
+    [ "setTransform", "classgame_1_1_entity.html#ad548cd8d5ef8dfffb1211dad1fd991bf", null ],
+    [ "SetZIndex", "classgame_1_1_entity.html#aac5483134593f5638ac3d81d3a7f4930", null ],
+    [ "Transform", "classgame_1_1_entity.html#a767674ca317c2c640d66a878420fd7d7", null ],
+    [ "transform", "classgame_1_1_entity.html#a5927202a84ea3ca6f7a6718bf092f2f6", null ],
+    [ "mGraphNode", "classgame_1_1_entity.html#a85ed4d84e40c956e359bc0dba649c200", null ],
+    [ "mType", "classgame_1_1_entity.html#ae0bc050f28f35389a636ae953efd94de", null ],
+    [ "mZIndex", "classgame_1_1_entity.html#ab0e883f155ad5a952f1f4463d86907ec", null ]
 ];

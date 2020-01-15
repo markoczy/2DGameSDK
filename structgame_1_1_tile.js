@@ -5,8 +5,9 @@ var structgame_1_1_tile =
     [ "Id", "structgame_1_1_tile.html#ace94bd4c529da78665a816096a044545", null ],
     [ "Material", "structgame_1_1_tile.html#a537473851af23e19fc6410a684b7d124", null ],
     [ "Rot", "structgame_1_1_tile.html#ac67b0478f66a25f5006cf56148469292", null ],
+    [ "Sprite", "structgame_1_1_tile.html#aff1a7a8c7018595fd1715731be5712d3", null ],
     [ "Texture", "structgame_1_1_tile.html#a166791e2c21a99cbb303905f21aad49f", null ],
-    [ "Tile", "structgame_1_1_tile.html#a4bf55abcd69f66145a5db555a09ce7f0", null ],
+    [ "TileID", "structgame_1_1_tile.html#ad7618a4238d6fa7cfa9b64e99b623cb4", null ],
     [ "X", "structgame_1_1_tile.html#a7b8aee11390333139a251a23a825e968", null ],
     [ "Y", "structgame_1_1_tile.html#a335fefed4c17cf619d41e2604467ace7", null ]
 ];

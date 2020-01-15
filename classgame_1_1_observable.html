@@ -112,6 +112,15 @@ Inheritance diagram for game::Observable&lt; TData &gt;:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:a58c3cda37c71ca09c6279c5b3f0f5809"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_observable.html#a58c3cda37c71ca09c6279c5b3f0f5809">Observable</a> ()</td></tr>
+<tr class="memdesc:a58c3cda37c71ca09c6279c5b3f0f5809"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new <a class="el" href="classgame_1_1_observable.html" title="Generic Observable type, used to create Game Events.">Observable</a>.  <a href="#a58c3cda37c71ca09c6279c5b3f0f5809">More...</a><br /></td></tr>
+<tr class="separator:a58c3cda37c71ca09c6279c5b3f0f5809"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a1a92b329f367e4d5aacca3efb402b1"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_observable.html#a4a1a92b329f367e4d5aacca3efb402b1">~Observable</a> ()</td></tr>
+<tr class="memdesc:a4a1a92b329f367e4d5aacca3efb402b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys the <a class="el" href="classgame_1_1_observable.html" title="Generic Observable type, used to create Game Events.">Observable</a>.  <a href="#a4a1a92b329f367e4d5aacca3efb402b1">More...</a><br /></td></tr>
+<tr class="separator:a4a1a92b329f367e4d5aacca3efb402b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a713d0dbc0c4838b3fd38528b6a51bb7a"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_observable.html#a713d0dbc0c4838b3fd38528b6a51bb7a">GetId</a> ()</td></tr>
+<tr class="memdesc:a713d0dbc0c4838b3fd38528b6a51bb7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retreives the Id.  <a href="#a713d0dbc0c4838b3fd38528b6a51bb7a">More...</a><br /></td></tr>
+<tr class="separator:a713d0dbc0c4838b3fd38528b6a51bb7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9a607d889cb6534e5ab508f198344d69"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_observable.html#a9a607d889cb6534e5ab508f198344d69">Subscribe</a> (<a class="el" href="classgame_1_1_observer.html">Observer</a>&lt; TData &gt; *subscriber)</td></tr>
 <tr class="memdesc:a9a607d889cb6534e5ab508f198344d69"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register an <a class="el" href="classgame_1_1_observer.html" title="Generic abstract Observer template of the Event implementation.">Observer</a> for this <a class="el" href="classgame_1_1_observable.html" title="Generic Observable type, used to create Game Events.">Observable</a>.  <a href="#a9a607d889cb6534e5ab508f198344d69">More...</a><br /></td></tr>
 <tr class="separator:a9a607d889cb6534e5ab508f198344d69"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -121,12 +130,16 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a7143df296f3b29151237c8c686639049"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_observable.html#a7143df296f3b29151237c8c686639049">Update</a> ()</td></tr>
 <tr class="memdesc:a7143df296f3b29151237c8c686639049"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the observable i.e. verifies if the observable was triggered. If triggered, the callback function of all registered Observers is executed.  <a href="#a7143df296f3b29151237c8c686639049">More...</a><br /></td></tr>
 <tr class="separator:a7143df296f3b29151237c8c686639049"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classgame_1_1_observable_base"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classgame_1_1_observable_base')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classgame_1_1_observable_base.html">game::ObservableBase</a></td></tr>
+<tr class="memitem:a976169e8df525fc81e8662362bc60f4b inherit pub_methods_classgame_1_1_observable_base"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_observable_base.html#a976169e8df525fc81e8662362bc60f4b">~ObservableBase</a> ()</td></tr>
+<tr class="memdesc:a976169e8df525fc81e8662362bc60f4b inherit pub_methods_classgame_1_1_observable_base"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys the <a class="el" href="classgame_1_1_observable.html" title="Generic Observable type, used to create Game Events.">Observable</a> Base.  <a href="classgame_1_1_observable_base.html#a976169e8df525fc81e8662362bc60f4b">More...</a><br /></td></tr>
+<tr class="separator:a976169e8df525fc81e8662362bc60f4b inherit pub_methods_classgame_1_1_observable_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:af24e98c2018dec8a98fcdc1f6a369152"><td class="memItemLeft" align="right" valign="top">virtual std::tuple&lt; bool, TData * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_observable.html#af24e98c2018dec8a98fcdc1f6a369152">triggered</a> ()=0</td></tr>
-<tr class="memdesc:af24e98c2018dec8a98fcdc1f6a369152"><td class="mdescLeft">&#160;</td><td class="mdescRight">Abstract function that checks if the <a class="el" href="classgame_1_1_observable.html" title="Generic Observable type, used to create Game Events.">Observable</a> was triggered.  <a href="#af24e98c2018dec8a98fcdc1f6a369152">More...</a><br /></td></tr>
-<tr class="separator:af24e98c2018dec8a98fcdc1f6a369152"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e7d2de06d5031942713c860d9d9010e"><td class="memItemLeft" align="right" valign="top">virtual std::tuple&lt; bool, TData &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_observable.html#a5e7d2de06d5031942713c860d9d9010e">triggered</a> ()=0</td></tr>
+<tr class="memdesc:a5e7d2de06d5031942713c860d9d9010e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Abstract function that checks if the <a class="el" href="classgame_1_1_observable.html" title="Generic Observable type, used to create Game Events.">Observable</a> was triggered.  <a href="#a5e7d2de06d5031942713c860d9d9010e">More...</a><br /></td></tr>
+<tr class="separator:a5e7d2de06d5031942713c860d9d9010e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class TData&gt;<br />
@@ -139,7 +152,98 @@ class game::Observable&lt; TData &gt;</h3>
   </table>
   </dd>
 </dl>
-</div><h2 class="groupheader">Member Function Documentation</h2>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a58c3cda37c71ca09c6279c5b3f0f5809"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a58c3cda37c71ca09c6279c5b3f0f5809">&#9670;&nbsp;</a></span>Observable()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class TData&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classgame_1_1_observable.html">game::Observable</a>&lt; TData &gt;::<a class="el" href="classgame_1_1_observable.html">Observable</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructs a new <a class="el" href="classgame_1_1_observable.html" title="Generic Observable type, used to create Game Events.">Observable</a>. </p>
+
+</div>
+</div>
+<a id="a4a1a92b329f367e4d5aacca3efb402b1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a1a92b329f367e4d5aacca3efb402b1">&#9670;&nbsp;</a></span>~Observable()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class TData&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="classgame_1_1_observable.html">game::Observable</a>&lt; TData &gt;::~<a class="el" href="classgame_1_1_observable.html">Observable</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destroys the <a class="el" href="classgame_1_1_observable.html" title="Generic Observable type, used to create Game Events.">Observable</a>. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a713d0dbc0c4838b3fd38528b6a51bb7a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a713d0dbc0c4838b3fd38528b6a51bb7a">&#9670;&nbsp;</a></span>GetId()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class TData&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual int <a class="el" href="classgame_1_1_observable.html">game::Observable</a>&lt; TData &gt;::GetId </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Retreives the Id. </p>
+<dl class="section return"><dt>Returns</dt><dd>int the id </dd></dl>
+
+<p>Implements <a class="el" href="classgame_1_1_observable_base.html#ae2480ddd4429c173eb2bf6ab3645e198">game::ObservableBase</a>.</p>
+
+</div>
+</div>
 <a id="a9a607d889cb6534e5ab508f198344d69"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9a607d889cb6534e5ab508f198344d69">&#9670;&nbsp;</a></span>Subscribe()</h2>
 
@@ -177,8 +281,8 @@ template&lt;class TData&gt; </div>
 
 </div>
 </div>
-<a id="af24e98c2018dec8a98fcdc1f6a369152"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af24e98c2018dec8a98fcdc1f6a369152">&#9670;&nbsp;</a></span>triggered()</h2>
+<a id="a5e7d2de06d5031942713c860d9d9010e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5e7d2de06d5031942713c860d9d9010e">&#9670;&nbsp;</a></span>triggered()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -189,7 +293,7 @@ template&lt;class TData&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual std::tuple&lt;bool, TData*&gt; <a class="el" href="classgame_1_1_observable.html">game::Observable</a>&lt; TData &gt;::triggered </td>
+          <td class="memname">virtual std::tuple&lt;bool, TData&gt; <a class="el" href="classgame_1_1_observable.html">game::Observable</a>&lt; TData &gt;::triggered </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>

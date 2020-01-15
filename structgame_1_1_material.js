@@ -1,5 +1,7 @@
 var structgame_1_1_material =
 [
-    [ "Destructive", "structgame_1_1_material.html#a138fa9a222c2f6781e6132f70810686e", null ],
-    [ "Solid", "structgame_1_1_material.html#af26df571742718642811de187ee435b6", null ]
+    [ "Name", "structgame_1_1_material.html#a447f1d5a74da4ee61b913f49cbe42ac6", null ],
+    [ "Shapes", "structgame_1_1_material.html#abc0b65583778e8a58245f1e8dea13f21", null ],
+    [ "TileID", "structgame_1_1_material.html#ad790f3b662f86559ccba89f607e31a2c", null ],
+    [ "Type", "structgame_1_1_material.html#adc70ded271474107350bc2c750eb79b2", null ]
 ];

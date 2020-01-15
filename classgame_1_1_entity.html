@@ -89,14 +89,15 @@ $(document).ready(function(){initNavTree('classgame_1_1_entity.html','');});
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classgame_1_1_entity-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">game::Entity Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
+<div class="title">game::Entity Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Defines a simple <a class="el" href="classgame_1_1_game.html" title="The Game is the main Controller of the 2DGameSDK, it is used to execute the main Game Loop,...">Game</a> Object (no transformations)  
+<p>Generic <a class="el" href="classgame_1_1_entity.html" title="Generic Entity.">Entity</a>.  
  <a href="classgame_1_1_entity.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_entity_8h_source.html">Entity.h</a>&gt;</code></p>
@@ -106,48 +107,137 @@ Inheritance diagram for game::Entity:</div>
  <div class="center">
   <img src="classgame_1_1_entity.png" usemap="#game::Entity_map" alt=""/>
   <map id="game::Entity_map" name="game::Entity_map">
-<area href="classgame_1_1_transformable_entity.html" title="Abstract class that defines an Entity that is Transformable and can be placed on the SceneGraph." alt="game::TransformableEntity" shape="rect" coords="111,56,323,80"/>
-<area href="classgame_1_1_animated_transformable_entity.html" title="Entity that is transformable and that defines a set of animation states, where every state is represe..." alt="game::AnimatedTransformableEntity" shape="rect" coords="0,112,212,136"/>
-<area href="classgame_1_1_sprite_transformable_entity.html" title="Simple specialisation of the TransformableEntity class. Does not do anything during Tick()." alt="game::SpriteTransformableEntity" shape="rect" coords="222,112,434,136"/>
+<area href="classgame_1_1_game_object.html" title="Defines a simple Game Object (no transformations)" alt="game::GameObject" shape="rect" coords="390,0,575,24"/>
+<area href="classgame_1_1_visual_object.html" title="An object that can be rendered." alt="game::VisualObject" shape="rect" coords="585,0,770,24"/>
+<area href="classgame_1_1_dynamic_entity.html" title="Defines an Entity with a dynamic body." alt="game::DynamicEntity" shape="rect" coords="97,112,282,136"/>
+<area href="classgame_1_1_kinematic_entity.html" title="Abstract class that defines an Entity that is kinematic and can be placed on the SceneGraph." alt="game::KinematicEntity" shape="rect" coords="487,112,672,136"/>
+<area href="classgame_1_1_static_entity.html" alt="game::StaticEntity" shape="rect" coords="877,112,1062,136"/>
+<area href="classgame_1_1_animated_dynamic_entity.html" title="Dynamic entity with animated render strategy." alt="game::AnimatedDynamicEntity" shape="rect" coords="0,168,185,192"/>
+<area href="classgame_1_1_sprite_dynamic_entity.html" title="Dynamic entity with single sprite render strategy." alt="game::SpriteDynamicEntity" shape="rect" coords="195,168,380,192"/>
+<area href="classgame_1_1_animated_kinematic_entity.html" title="Kinematic entity with animated render strategy." alt="game::AnimatedKinematicEntity" shape="rect" coords="390,168,575,192"/>
+<area href="classgame_1_1_sprite_kinematic_entity.html" title="Kinematic entity with single sprite render strategy." alt="game::SpriteKinematicEntity" shape="rect" coords="585,168,770,192"/>
+<area href="classgame_1_1_animated_static_entity.html" title="Static entity with animated render strategy." alt="game::AnimatedStaticEntity" shape="rect" coords="780,168,965,192"/>
+<area href="classgame_1_1_sprite_static_entity.html" title="Static entity with single sprite render strategy." alt="game::SpriteStaticEntity" shape="rect" coords="975,168,1160,192"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ae18cd4d004ed8c414001401743b1e0dc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_entity.html#ae18cd4d004ed8c414001401743b1e0dc">Entity</a> (int type)</td></tr>
-<tr class="memdesc:ae18cd4d004ed8c414001401743b1e0dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new <a class="el" href="classgame_1_1_entity.html" title="Defines a simple Game Object (no transformations)">Entity</a> object.  <a href="#ae18cd4d004ed8c414001401743b1e0dc">More...</a><br /></td></tr>
-<tr class="separator:ae18cd4d004ed8c414001401743b1e0dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5d715de89150ed4fc2b9b97461ee6d44"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_entity.html#a5d715de89150ed4fc2b9b97461ee6d44">~Entity</a> ()</td></tr>
-<tr class="memdesc:a5d715de89150ed4fc2b9b97461ee6d44"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys the <a class="el" href="classgame_1_1_entity.html" title="Defines a simple Game Object (no transformations)">Entity</a> object.  <a href="#a5d715de89150ed4fc2b9b97461ee6d44">More...</a><br /></td></tr>
+<tr class="memitem:a7c5b0f76666be0c358d1e9086201c66d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_entity.html#a7c5b0f76666be0c358d1e9086201c66d">Entity</a> (int type, <a class="el" href="classgame_1_1_game_base.html">GameBase</a> *game)</td></tr>
+<tr class="memdesc:a7c5b0f76666be0c358d1e9086201c66d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new <a class="el" href="classgame_1_1_entity.html" title="Generic Entity.">Entity</a>.  <a href="#a7c5b0f76666be0c358d1e9086201c66d">More...</a><br /></td></tr>
+<tr class="separator:a7c5b0f76666be0c358d1e9086201c66d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d715de89150ed4fc2b9b97461ee6d44"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_entity.html#a5d715de89150ed4fc2b9b97461ee6d44">~Entity</a> ()</td></tr>
+<tr class="memdesc:a5d715de89150ed4fc2b9b97461ee6d44"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys the <a class="el" href="classgame_1_1_entity.html" title="Generic Entity.">Entity</a>.  <a href="#a5d715de89150ed4fc2b9b97461ee6d44">More...</a><br /></td></tr>
 <tr class="separator:a5d715de89150ed4fc2b9b97461ee6d44"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4e8945028cb37f3832f479a9cabfce46"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_entity.html#a4e8945028cb37f3832f479a9cabfce46">GetId</a> ()</td></tr>
-<tr class="memdesc:a4e8945028cb37f3832f479a9cabfce46"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retreives the Id.  <a href="#a4e8945028cb37f3832f479a9cabfce46">More...</a><br /></td></tr>
-<tr class="separator:a4e8945028cb37f3832f479a9cabfce46"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a71f2ca318399c5fdc415bbd0d3664d95"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_entity.html#a71f2ca318399c5fdc415bbd0d3664d95">IsKinematic</a> ()</td></tr>
+<tr class="memdesc:a71f2ca318399c5fdc415bbd0d3664d95"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retreives wether the object is kinematic.  <a href="#a71f2ca318399c5fdc415bbd0d3664d95">More...</a><br /></td></tr>
+<tr class="separator:a71f2ca318399c5fdc415bbd0d3664d95"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4255b29e6301f7099d23d4f12b1f32ae"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_entity.html#a4255b29e6301f7099d23d4f12b1f32ae">IsCollidable</a> ()</td></tr>
+<tr class="memdesc:a4255b29e6301f7099d23d4f12b1f32ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retreives wether the object is collidable.  <a href="#a4255b29e6301f7099d23d4f12b1f32ae">More...</a><br /></td></tr>
+<tr class="separator:a4255b29e6301f7099d23d4f12b1f32ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aed0a3e2b73d49235bd3b317992df9a6a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_entity.html#aed0a3e2b73d49235bd3b317992df9a6a">GetType</a> ()</td></tr>
 <tr class="memdesc:aed0a3e2b73d49235bd3b317992df9a6a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retreives the Type.  <a href="#aed0a3e2b73d49235bd3b317992df9a6a">More...</a><br /></td></tr>
 <tr class="separator:aed0a3e2b73d49235bd3b317992df9a6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a867772bcbe42fa928eb238461707876d"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_entity.html#a867772bcbe42fa928eb238461707876d">Tick</a> ()=0</td></tr>
-<tr class="memdesc:a867772bcbe42fa928eb238461707876d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the <a class="el" href="classgame_1_1_entity.html" title="Defines a simple Game Object (no transformations)">Entity</a>.  <a href="#a867772bcbe42fa928eb238461707876d">More...</a><br /></td></tr>
-<tr class="separator:a867772bcbe42fa928eb238461707876d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2352739f0c8abb0948a72338b11b1491"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_entity.html#a2352739f0c8abb0948a72338b11b1491">Render</a> (sf::RenderTarget *target, sf::RenderStates states=sf::RenderStates::Default)=0</td></tr>
-<tr class="memdesc:a2352739f0c8abb0948a72338b11b1491"><td class="mdescLeft">&#160;</td><td class="mdescRight">Renders the <a class="el" href="classgame_1_1_entity.html" title="Defines a simple Game Object (no transformations)">Entity</a>.  <a href="#a2352739f0c8abb0948a72338b11b1491">More...</a><br /></td></tr>
-<tr class="separator:a2352739f0c8abb0948a72338b11b1491"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5919692a1346b431b0a6a81d03c70382"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_entity.html#a5919692a1346b431b0a6a81d03c70382">GetZIndex</a> ()</td></tr>
+<tr class="memdesc:a5919692a1346b431b0a6a81d03c70382"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retreive the Z Index.  <a href="#a5919692a1346b431b0a6a81d03c70382">More...</a><br /></td></tr>
+<tr class="separator:a5919692a1346b431b0a6a81d03c70382"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af92b5fb3bc18bd8d6b76b099ba58e057"><td class="memItemLeft" align="right" valign="top">virtual sf::Transform&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_entity.html#af92b5fb3bc18bd8d6b76b099ba58e057">GetTransform</a> ()</td></tr>
+<tr class="memdesc:af92b5fb3bc18bd8d6b76b099ba58e057"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retreives the current Transform.  <a href="#af92b5fb3bc18bd8d6b76b099ba58e057">More...</a><br /></td></tr>
+<tr class="separator:af92b5fb3bc18bd8d6b76b099ba58e057"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef339f771f6ff9c32570a51f0658aeae"><td class="memItemLeft" align="right" valign="top">virtual sf::Transform&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_entity.html#aef339f771f6ff9c32570a51f0658aeae">GetAccumulatedTransform</a> ()</td></tr>
+<tr class="memdesc:aef339f771f6ff9c32570a51f0658aeae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retreives the current Accumulated Transform.  <a href="#aef339f771f6ff9c32570a51f0658aeae">More...</a><br /></td></tr>
+<tr class="separator:aef339f771f6ff9c32570a51f0658aeae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6a4b75928517553b31c12da4fe94865"><td class="memItemLeft" align="right" valign="top">virtual sf::Transform&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_entity.html#ab6a4b75928517553b31c12da4fe94865">GetCombinedTransform</a> ()</td></tr>
+<tr class="memdesc:ab6a4b75928517553b31c12da4fe94865"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retreives the current Combined Transform (current*accumulated)  <a href="#ab6a4b75928517553b31c12da4fe94865">More...</a><br /></td></tr>
+<tr class="separator:ab6a4b75928517553b31c12da4fe94865"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac5483134593f5638ac3d81d3a7f4930"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_entity.html#aac5483134593f5638ac3d81d3a7f4930">SetZIndex</a> (int zIndex)</td></tr>
+<tr class="memdesc:aac5483134593f5638ac3d81d3a7f4930"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the Z Index.  <a href="#aac5483134593f5638ac3d81d3a7f4930">More...</a><br /></td></tr>
+<tr class="separator:aac5483134593f5638ac3d81d3a7f4930"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad1c737fbf455c244ea7cd2ab1aadebdc"><td class="memItemLeft" align="right" valign="top"><a id="ad1c737fbf455c244ea7cd2ab1aadebdc"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>SetTransform</b> (sf::Transform transform)</td></tr>
+<tr class="separator:ad1c737fbf455c244ea7cd2ab1aadebdc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af254d1aa7d126a82b1abf884a97c53d3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_entity.html#af254d1aa7d126a82b1abf884a97c53d3">SetGraphNode</a> (<a class="el" href="classgame_1_1_scene_graph_node.html">SceneGraphNode</a> *graphNode)</td></tr>
+<tr class="memdesc:af254d1aa7d126a82b1abf884a97c53d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the Graph Node object.  <a href="#af254d1aa7d126a82b1abf884a97c53d3">More...</a><br /></td></tr>
+<tr class="separator:af254d1aa7d126a82b1abf884a97c53d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a767674ca317c2c640d66a878420fd7d7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_entity.html#a767674ca317c2c640d66a878420fd7d7">Transform</a> (sf::Transform transform)</td></tr>
+<tr class="memdesc:a767674ca317c2c640d66a878420fd7d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the entity's tranformation.  <a href="#a767674ca317c2c640d66a878420fd7d7">More...</a><br /></td></tr>
+<tr class="separator:a767674ca317c2c640d66a878420fd7d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aacfde16275ec9962fb69fcc1e4b781e2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_entity.html#aacfde16275ec9962fb69fcc1e4b781e2">OnParentTransformed</a> (sf::Transform accumulated)</td></tr>
+<tr class="memdesc:aacfde16275ec9962fb69fcc1e4b781e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates accumulated transformation.  <a href="#aacfde16275ec9962fb69fcc1e4b781e2">More...</a><br /></td></tr>
+<tr class="separator:aacfde16275ec9962fb69fcc1e4b781e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a099314b06c2779253989bb7a1e5d86a7"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_entity.html#a099314b06c2779253989bb7a1e5d86a7">OnCollision</a> (<a class="el" href="namespacegame.html#a9257775dde5cb9bb9883a762ec979e1f">CollisionEventType</a> type, <a class="el" href="classgame_1_1_entity.html">Entity</a> *other, cpArbiter *arb)</td></tr>
+<tr class="memdesc:a099314b06c2779253989bb7a1e5d86a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback when entity has collided with another entity.  <a href="#a099314b06c2779253989bb7a1e5d86a7">More...</a><br /></td></tr>
+<tr class="separator:a099314b06c2779253989bb7a1e5d86a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac03d8ae1d2df62c66b7b761607cc272f"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_entity.html#ac03d8ae1d2df62c66b7b761607cc272f">OnWorldCollision</a> (<a class="el" href="namespacegame.html#a9257775dde5cb9bb9883a762ec979e1f">CollisionEventType</a> type, <a class="el" href="structgame_1_1_tile.html">Tile</a> *tile, cpArbiter *arb)</td></tr>
+<tr class="memdesc:ac03d8ae1d2df62c66b7b761607cc272f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback when entity has collided with another entity.  <a href="#ac03d8ae1d2df62c66b7b761607cc272f">More...</a><br /></td></tr>
+<tr class="separator:ac03d8ae1d2df62c66b7b761607cc272f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21b9a0e791337a8dea05598d55422f81"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_entity.html#a21b9a0e791337a8dea05598d55422f81">OnProjectileCollision</a> (<a class="el" href="namespacegame.html#a9257775dde5cb9bb9883a762ec979e1f">CollisionEventType</a> type, <a class="el" href="classgame_1_1_projectile.html">Projectile</a> *projectile, cpArbiter *arb)</td></tr>
+<tr class="memdesc:a21b9a0e791337a8dea05598d55422f81"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback when entity has collided with a projectile.  <a href="#a21b9a0e791337a8dea05598d55422f81">More...</a><br /></td></tr>
+<tr class="separator:a21b9a0e791337a8dea05598d55422f81"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6146a19fe15e34351602f3d007883786"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_entity.html#a6146a19fe15e34351602f3d007883786">OnTickEnded</a> ()</td></tr>
+<tr class="memdesc:a6146a19fe15e34351602f3d007883786"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback after update.  <a href="#a6146a19fe15e34351602f3d007883786">More...</a><br /></td></tr>
+<tr class="separator:a6146a19fe15e34351602f3d007883786"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classgame_1_1_game_object"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classgame_1_1_game_object')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classgame_1_1_game_object.html">game::GameObject</a></td></tr>
+<tr class="memitem:a6df23f8f0e7dd79bfc0ec7c5dfa9790d inherit pub_methods_classgame_1_1_game_object"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_game_object.html#a6df23f8f0e7dd79bfc0ec7c5dfa9790d">GameObject</a> (<a class="el" href="namespacegame.html#a5415a558ce9aff7e465746f06dbc1374">ObjectType</a> objType, <a class="el" href="classgame_1_1_game_base.html">GameBase</a> *game)</td></tr>
+<tr class="memdesc:a6df23f8f0e7dd79bfc0ec7c5dfa9790d inherit pub_methods_classgame_1_1_game_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new <a class="el" href="classgame_1_1_game_object.html" title="Defines a simple Game Object (no transformations)">GameObject</a>.  <a href="classgame_1_1_game_object.html#a6df23f8f0e7dd79bfc0ec7c5dfa9790d">More...</a><br /></td></tr>
+<tr class="separator:a6df23f8f0e7dd79bfc0ec7c5dfa9790d inherit pub_methods_classgame_1_1_game_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5783be79ed4f1790a63742d232f23851 inherit pub_methods_classgame_1_1_game_object"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_game_object.html#a5783be79ed4f1790a63742d232f23851">~GameObject</a> ()</td></tr>
+<tr class="memdesc:a5783be79ed4f1790a63742d232f23851 inherit pub_methods_classgame_1_1_game_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys the <a class="el" href="classgame_1_1_game_object.html" title="Defines a simple Game Object (no transformations)">GameObject</a>.  <a href="classgame_1_1_game_object.html#a5783be79ed4f1790a63742d232f23851">More...</a><br /></td></tr>
+<tr class="separator:a5783be79ed4f1790a63742d232f23851 inherit pub_methods_classgame_1_1_game_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae1f1cc3617d19b981be9416b64b31b56 inherit pub_methods_classgame_1_1_game_object"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_game_object.html#ae1f1cc3617d19b981be9416b64b31b56">GetId</a> ()</td></tr>
+<tr class="memdesc:ae1f1cc3617d19b981be9416b64b31b56 inherit pub_methods_classgame_1_1_game_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retreives the Id.  <a href="classgame_1_1_game_object.html#ae1f1cc3617d19b981be9416b64b31b56">More...</a><br /></td></tr>
+<tr class="separator:ae1f1cc3617d19b981be9416b64b31b56 inherit pub_methods_classgame_1_1_game_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1cb39a781f2392814e2ea69794e94616 inherit pub_methods_classgame_1_1_game_object"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacegame.html#a5415a558ce9aff7e465746f06dbc1374">ObjectType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_game_object.html#a1cb39a781f2392814e2ea69794e94616">GetObjectType</a> ()</td></tr>
+<tr class="memdesc:a1cb39a781f2392814e2ea69794e94616 inherit pub_methods_classgame_1_1_game_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retreives the Object Type.  <a href="classgame_1_1_game_object.html#a1cb39a781f2392814e2ea69794e94616">More...</a><br /></td></tr>
+<tr class="separator:a1cb39a781f2392814e2ea69794e94616 inherit pub_methods_classgame_1_1_game_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d1fdd02dcba670770efaad6a3a9db3f inherit pub_methods_classgame_1_1_game_object"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_game_object.html#a8d1fdd02dcba670770efaad6a3a9db3f">OnTick</a> ()</td></tr>
+<tr class="memdesc:a8d1fdd02dcba670770efaad6a3a9db3f inherit pub_methods_classgame_1_1_game_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the object.  <a href="classgame_1_1_game_object.html#a8d1fdd02dcba670770efaad6a3a9db3f">More...</a><br /></td></tr>
+<tr class="separator:a8d1fdd02dcba670770efaad6a3a9db3f inherit pub_methods_classgame_1_1_game_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classgame_1_1_visual_object"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classgame_1_1_visual_object')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classgame_1_1_visual_object.html">game::VisualObject</a></td></tr>
+<tr class="memitem:a119a733adbd086a1579eca3b5c4769e6 inherit pub_methods_classgame_1_1_visual_object"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_visual_object.html#a119a733adbd086a1579eca3b5c4769e6">OnRender</a> (sf::RenderTarget *target, sf::RenderStates states=sf::RenderStates::Default)=0</td></tr>
+<tr class="memdesc:a119a733adbd086a1579eca3b5c4769e6 inherit pub_methods_classgame_1_1_visual_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">Renders the object.  <a href="classgame_1_1_visual_object.html#a119a733adbd086a1579eca3b5c4769e6">More...</a><br /></td></tr>
+<tr class="separator:a119a733adbd086a1579eca3b5c4769e6 inherit pub_methods_classgame_1_1_visual_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:ad548cd8d5ef8dfffb1211dad1fd991bf"><td class="memItemLeft" align="right" valign="top"><a id="ad548cd8d5ef8dfffb1211dad1fd991bf"></a>
+virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>setTransform</b> (sf::Transform transform)</td></tr>
+<tr class="separator:ad548cd8d5ef8dfffb1211dad1fd991bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5927202a84ea3ca6f7a6718bf092f2f6"><td class="memItemLeft" align="right" valign="top"><a id="a5927202a84ea3ca6f7a6718bf092f2f6"></a>
+virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>transform</b> (sf::Transform transform)</td></tr>
+<tr class="separator:a5927202a84ea3ca6f7a6718bf092f2f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f202c62bb9e1e00e2310de9a1ad46fa"><td class="memItemLeft" align="right" valign="top"><a id="a1f202c62bb9e1e00e2310de9a1ad46fa"></a>
+virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>setAccumulatedTransform</b> (sf::Transform accumulated)</td></tr>
+<tr class="separator:a1f202c62bb9e1e00e2310de9a1ad46fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_methods_classgame_1_1_game_object"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classgame_1_1_game_object')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classgame_1_1_game_object.html">game::GameObject</a></td></tr>
+<tr class="memitem:a6d5dca66962ea48a018393f0963b7c48 inherit pro_methods_classgame_1_1_game_object"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgame_1_1_game_base.html">GameBase</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_game_object.html#a6d5dca66962ea48a018393f0963b7c48">getGame</a> ()</td></tr>
+<tr class="memdesc:a6d5dca66962ea48a018393f0963b7c48 inherit pro_methods_classgame_1_1_game_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retreives the <a class="el" href="classgame_1_1_game.html" title="The Game is the main Controller of the 2DGameSDK, it is used to execute the main Game Loop,...">Game</a>.  <a href="classgame_1_1_game_object.html#a6d5dca66962ea48a018393f0963b7c48">More...</a><br /></td></tr>
+<tr class="separator:a6d5dca66962ea48a018393f0963b7c48 inherit pro_methods_classgame_1_1_game_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:ae0bc050f28f35389a636ae953efd94de"><td class="memItemLeft" align="right" valign="top"><a id="ae0bc050f28f35389a636ae953efd94de"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>mType</b></td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>mType</b> = 0</td></tr>
 <tr class="separator:ae0bc050f28f35389a636ae953efd94de"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae6a84789a6c2923b55b0df57192cd3a4"><td class="memItemLeft" align="right" valign="top"><a id="ae6a84789a6c2923b55b0df57192cd3a4"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>mId</b></td></tr>
-<tr class="separator:ae6a84789a6c2923b55b0df57192cd3a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab0e883f155ad5a952f1f4463d86907ec"><td class="memItemLeft" align="right" valign="top"><a id="ab0e883f155ad5a952f1f4463d86907ec"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>mZIndex</b> = constants::DEFAULT_ZINDEX_ENTITY</td></tr>
+<tr class="separator:ab0e883f155ad5a952f1f4463d86907ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a85ed4d84e40c956e359bc0dba649c200"><td class="memItemLeft" align="right" valign="top"><a id="a85ed4d84e40c956e359bc0dba649c200"></a>
+<a class="el" href="classgame_1_1_scene_graph_node.html">SceneGraphNode</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>mGraphNode</b> = nullptr</td></tr>
+<tr class="separator:a85ed4d84e40c956e359bc0dba649c200"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pub_static_methods_classgame_1_1_visual_object"><td colspan="2" onclick="javascript:toggleInherit('pub_static_methods_classgame_1_1_visual_object')"><img src="closed.png" alt="-"/>&#160;Static Public Member Functions inherited from <a class="el" href="classgame_1_1_visual_object.html">game::VisualObject</a></td></tr>
+<tr class="memitem:ab149e36a310c0810ed54e7dc2938c203 inherit pub_static_methods_classgame_1_1_visual_object"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_visual_object.html#ab149e36a310c0810ed54e7dc2938c203">SortByZOrder</a> (<a class="el" href="classgame_1_1_visual_object.html">VisualObject</a> *a, <a class="el" href="classgame_1_1_visual_object.html">VisualObject</a> *b)</td></tr>
+<tr class="memdesc:ab149e36a310c0810ed54e7dc2938c203 inherit pub_static_methods_classgame_1_1_visual_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compares visual objects for sort.  <a href="classgame_1_1_visual_object.html#ab149e36a310c0810ed54e7dc2938c203">More...</a><br /></td></tr>
+<tr class="separator:ab149e36a310c0810ed54e7dc2938c203 inherit pub_static_methods_classgame_1_1_visual_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Defines a simple <a class="el" href="classgame_1_1_game.html" title="The Game is the main Controller of the 2DGameSDK, it is used to execute the main Game Loop,...">Game</a> Object (no transformations) </p>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classgame_1_1_transformable_entity.html" title="Abstract class that defines an Entity that is Transformable and can be placed on the SceneGraph.">TransformableEntity</a> </dd></dl>
+<div class="textblock"><p>Generic <a class="el" href="classgame_1_1_entity.html" title="Generic Entity.">Entity</a>. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="ae18cd4d004ed8c414001401743b1e0dc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae18cd4d004ed8c414001401743b1e0dc">&#9670;&nbsp;</a></span>Entity()</h2>
+<a id="a7c5b0f76666be0c358d1e9086201c66d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c5b0f76666be0c358d1e9086201c66d">&#9670;&nbsp;</a></span>Entity()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -156,16 +246,27 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>mId</b></td></tr>
           <td class="memname">game::Entity::Entity </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>type</em></td><td>)</td>
+          <td class="paramname"><em>type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="classgame_1_1_game_base.html">GameBase</a> *&#160;</td>
+          <td class="paramname"><em>game</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Creates a new <a class="el" href="classgame_1_1_entity.html" title="Defines a simple Game Object (no transformations)">Entity</a> object. </p>
+<p>Constructs a new <a class="el" href="classgame_1_1_entity.html" title="Generic Entity.">Entity</a>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">type</td><td>The <a class="el" href="classgame_1_1_entity.html" title="Defines a simple Game Object (no transformations)">Entity</a> Type (does not affect anything and is meant to be used freely to identify entities of some kind) </td></tr>
+    <tr><td class="paramname">type</td><td>the user defined type </td></tr>
+    <tr><td class="paramname">game</td><td>the game </td></tr>
   </table>
   </dd>
 </dl>
@@ -177,6 +278,9 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>mId</b></td></tr>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">game::Entity::~Entity </td>
@@ -185,30 +289,105 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>mId</b></td></tr>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p>Destroys the <a class="el" href="classgame_1_1_entity.html" title="Defines a simple Game Object (no transformations)">Entity</a> object. </p>
+<p>Destroys the <a class="el" href="classgame_1_1_entity.html" title="Generic Entity.">Entity</a>. </p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a4e8945028cb37f3832f479a9cabfce46"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4e8945028cb37f3832f479a9cabfce46">&#9670;&nbsp;</a></span>GetId()</h2>
+<a id="aef339f771f6ff9c32570a51f0658aeae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aef339f771f6ff9c32570a51f0658aeae">&#9670;&nbsp;</a></span>GetAccumulatedTransform()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int game::Entity::GetId </td>
+          <td class="memname">sf::Transform game::Entity::GetAccumulatedTransform </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p>Retreives the Id. </p>
-<dl class="section return"><dt>Returns</dt><dd>int The Identifier </dd></dl>
+<p>Retreives the current Accumulated Transform. </p>
+<dl class="section return"><dt>Returns</dt><dd>sf::Transform the accumulated transform </dd></dl>
+
+<p>Reimplemented in <a class="el" href="classgame_1_1_kinematic_entity.html#a0cef4d8f31d96aedeba3015538f182f4">game::KinematicEntity</a>, <a class="el" href="classgame_1_1_dynamic_entity.html#a9e19e56721d4eb81d443627070f98cd3">game::DynamicEntity</a>, and <a class="el" href="classgame_1_1_static_entity.html#a1430e2f746fa51c61ced10c127bf8622">game::StaticEntity</a>.</p>
+
+</div>
+</div>
+<a id="ab6a4b75928517553b31c12da4fe94865"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab6a4b75928517553b31c12da4fe94865">&#9670;&nbsp;</a></span>GetCombinedTransform()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">sf::Transform game::Entity::GetCombinedTransform </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Retreives the current Combined Transform (current*accumulated) </p>
+<dl class="section return"><dt>Returns</dt><dd>sf::Transform </dd></dl>
+
+<p>Reimplemented in <a class="el" href="classgame_1_1_kinematic_entity.html#a7b9cb7a3a13cdf1cc6d5312a97714431">game::KinematicEntity</a>, <a class="el" href="classgame_1_1_dynamic_entity.html#a6dce5a6a66020d3bd307891c80c45fd1">game::DynamicEntity</a>, and <a class="el" href="classgame_1_1_static_entity.html#a0ec2b67501165bbf1371c0af3a33bf8a">game::StaticEntity</a>.</p>
+
+</div>
+</div>
+<a id="af92b5fb3bc18bd8d6b76b099ba58e057"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af92b5fb3bc18bd8d6b76b099ba58e057">&#9670;&nbsp;</a></span>GetTransform()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">sf::Transform game::Entity::GetTransform </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Retreives the current Transform. </p>
+<dl class="section return"><dt>Returns</dt><dd>sf::Transform the transform </dd></dl>
+
+<p>Reimplemented in <a class="el" href="classgame_1_1_kinematic_entity.html#a2211d1b00ea6b90da010121360b13199">game::KinematicEntity</a>, <a class="el" href="classgame_1_1_dynamic_entity.html#a49b20046c529b96b89227443b4c3f0a0">game::DynamicEntity</a>, and <a class="el" href="classgame_1_1_static_entity.html#a875a2e9e966e47732a2fe78854130bc9">game::StaticEntity</a>.</p>
 
 </div>
 </div>
@@ -228,12 +407,12 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>mId</b></td></tr>
 </div><div class="memdoc">
 
 <p>Retreives the Type. </p>
-<dl class="section return"><dt>Returns</dt><dd>int The <a class="el" href="classgame_1_1_entity.html" title="Defines a simple Game Object (no transformations)">Entity</a> Type </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>int The <a class="el" href="classgame_1_1_game_object.html" title="Defines a simple Game Object (no transformations)">GameObject</a> Type </dd></dl>
 
 </div>
 </div>
-<a id="a2352739f0c8abb0948a72338b11b1491"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2352739f0c8abb0948a72338b11b1491">&#9670;&nbsp;</a></span>Render()</h2>
+<a id="a5919692a1346b431b0a6a81d03c70382"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5919692a1346b431b0a6a81d03c70382">&#9670;&nbsp;</a></span>GetZIndex()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -242,16 +421,112 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>mId</b></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void game::Entity::Render </td>
+          <td class="memname">int game::Entity::GetZIndex </td>
           <td>(</td>
-          <td class="paramtype">sf::RenderTarget *&#160;</td>
-          <td class="paramname"><em>target</em>, </td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Retreive the Z Index. </p>
+<dl class="section return"><dt>Returns</dt><dd>int the Z Index </dd></dl>
+
+<p>Implements <a class="el" href="classgame_1_1_visual_object.html#ab645b75af798fe5f5065a08f65f8d305">game::VisualObject</a>.</p>
+
+</div>
+</div>
+<a id="a4255b29e6301f7099d23d4f12b1f32ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4255b29e6301f7099d23d4f12b1f32ae">&#9670;&nbsp;</a></span>IsCollidable()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool game::Entity::IsCollidable </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Retreives wether the object is collidable. </p>
+<dl class="section return"><dt>Returns</dt><dd>bool is collidable </dd></dl>
+
+<p>Reimplemented in <a class="el" href="classgame_1_1_dynamic_entity.html#a8501e368941754b009208a4a704cfc54">game::DynamicEntity</a>, <a class="el" href="classgame_1_1_kinematic_entity.html#ae1a1e3cf7b5cc7308f5ef44124e4137a">game::KinematicEntity</a>, and <a class="el" href="classgame_1_1_static_entity.html#af91b79a48b1a4c1746496acb4de5b4bf">game::StaticEntity</a>.</p>
+
+</div>
+</div>
+<a id="a71f2ca318399c5fdc415bbd0d3664d95"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a71f2ca318399c5fdc415bbd0d3664d95">&#9670;&nbsp;</a></span>IsKinematic()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool game::Entity::IsKinematic </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Retreives wether the object is kinematic. </p>
+<dl class="section return"><dt>Returns</dt><dd>bool is kinematic </dd></dl>
+
+<p>Reimplemented in <a class="el" href="classgame_1_1_dynamic_entity.html#aef9a3688219e0f337c66984ae987fad3">game::DynamicEntity</a>, <a class="el" href="classgame_1_1_kinematic_entity.html#a01da2c7df5376c706371989229c62f8b">game::KinematicEntity</a>, and <a class="el" href="classgame_1_1_static_entity.html#ad595dd8e1d237048468de6443c785c1d">game::StaticEntity</a>.</p>
+
+</div>
+</div>
+<a id="a099314b06c2779253989bb7a1e5d86a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a099314b06c2779253989bb7a1e5d86a7">&#9670;&nbsp;</a></span>OnCollision()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int game::Entity::OnCollision </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacegame.html#a9257775dde5cb9bb9883a762ec979e1f">CollisionEventType</a>&#160;</td>
+          <td class="paramname"><em>type</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">sf::RenderStates&#160;</td>
-          <td class="paramname"><em>states</em> = <code>sf::RenderStates::Default</code>&#160;</td>
+          <td class="paramtype"><a class="el" href="classgame_1_1_entity.html">Entity</a> *&#160;</td>
+          <td class="paramname"><em>other</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">cpArbiter *&#160;</td>
+          <td class="paramname"><em>arb</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -261,26 +536,54 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>mId</b></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Renders the <a class="el" href="classgame_1_1_entity.html" title="Defines a simple Game Object (no transformations)">Entity</a>. </p>
+<p>Callback when entity has collided with another entity. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">target</td><td>The screen or texture to render on </td></tr>
-    <tr><td class="paramname">states</td><td>The initial Render States (transformation etc.) </td></tr>
+    <tr><td class="paramname">type</td><td>collision event type </td></tr>
+    <tr><td class="paramname">other</td><td>the other entity </td></tr>
+    <tr><td class="paramname">arb</td><td>the chipmunk arbiter </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>int the collision return value </dd></dl>
+
+<p>Reimplemented in <a class="el" href="classgame_1_1_dynamic_entity.html#aea973a38cd57633deac15b3e8c751f1c">game::DynamicEntity</a>, and <a class="el" href="classgame_1_1_static_entity.html#a460633b38155d2888d46e6b798e1dcfa">game::StaticEntity</a>.</p>
+
+</div>
+</div>
+<a id="aacfde16275ec9962fb69fcc1e4b781e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aacfde16275ec9962fb69fcc1e4b781e2">&#9670;&nbsp;</a></span>OnParentTransformed()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void game::Entity::OnParentTransformed </td>
+          <td>(</td>
+          <td class="paramtype">sf::Transform&#160;</td>
+          <td class="paramname"><em>accumulated</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Updates accumulated transformation. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">accumulated</td><td></td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="classgame_1_1_animated_transformable_entity.html#ad2f37d543cf76c6838c4e1cc78fdcd65">game::AnimatedTransformableEntity</a>, and <a class="el" href="classgame_1_1_sprite_transformable_entity.html#ab710ba58359d96f2f0a4e05b6ca754a6">game::SpriteTransformableEntity</a>.</p>
-
 </div>
 </div>
-<a id="a867772bcbe42fa928eb238461707876d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a867772bcbe42fa928eb238461707876d">&#9670;&nbsp;</a></span>Tick()</h2>
+<a id="a21b9a0e791337a8dea05598d55422f81"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a21b9a0e791337a8dea05598d55422f81">&#9670;&nbsp;</a></span>OnProjectileCollision()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -289,7 +592,60 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>mId</b></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void game::Entity::Tick </td>
+          <td class="memname">int game::Entity::OnProjectileCollision </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacegame.html#a9257775dde5cb9bb9883a762ec979e1f">CollisionEventType</a>&#160;</td>
+          <td class="paramname"><em>type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classgame_1_1_projectile.html">Projectile</a> *&#160;</td>
+          <td class="paramname"><em>projectile</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">cpArbiter *&#160;</td>
+          <td class="paramname"><em>arb</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Callback when entity has collided with a projectile. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">type</td><td>collision event type </td></tr>
+    <tr><td class="paramname">projectile</td><td>the projectile </td></tr>
+    <tr><td class="paramname">arb</td><td>the chipmunk arbiter </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>int the collision return value </dd></dl>
+
+</div>
+</div>
+<a id="a6146a19fe15e34351602f3d007883786"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6146a19fe15e34351602f3d007883786">&#9670;&nbsp;</a></span>OnTickEnded()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void game::Entity::OnTickEnded </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -297,14 +653,149 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>mId</b></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Updates the <a class="el" href="classgame_1_1_entity.html" title="Defines a simple Game Object (no transformations)">Entity</a>. </p>
+<p>Callback after update. </p>
 
-<p>Implemented in <a class="el" href="classgame_1_1_animated_transformable_entity.html#ae039944b3bce50418c13d46c122d02ea">game::AnimatedTransformableEntity</a>, and <a class="el" href="classgame_1_1_sprite_transformable_entity.html#a4876aeda0604ce3d345f7027ab847e7a">game::SpriteTransformableEntity</a>.</p>
+<p>Reimplemented from <a class="el" href="classgame_1_1_game_object.html#a40fb2192af57548f63da9c246aedf6cc">game::GameObject</a>.</p>
+
+<p>Reimplemented in <a class="el" href="classgame_1_1_kinematic_entity.html#ab6fb9834427b256894a445d2f6176ab8">game::KinematicEntity</a>.</p>
+
+</div>
+</div>
+<a id="ac03d8ae1d2df62c66b7b761607cc272f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac03d8ae1d2df62c66b7b761607cc272f">&#9670;&nbsp;</a></span>OnWorldCollision()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int game::Entity::OnWorldCollision </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacegame.html#a9257775dde5cb9bb9883a762ec979e1f">CollisionEventType</a>&#160;</td>
+          <td class="paramname"><em>type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structgame_1_1_tile.html">Tile</a> *&#160;</td>
+          <td class="paramname"><em>tile</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">cpArbiter *&#160;</td>
+          <td class="paramname"><em>arb</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Callback when entity has collided with another entity. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">type</td><td>collision event type </td></tr>
+    <tr><td class="paramname">other</td><td>the other entity </td></tr>
+    <tr><td class="paramname">arb</td><td>the chipmunk arbiter </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>int the collision return value </dd></dl>
+
+<p>Reimplemented in <a class="el" href="classgame_1_1_dynamic_entity.html#a7a4e985afda54897c3dc2833789410ec">game::DynamicEntity</a>, and <a class="el" href="classgame_1_1_static_entity.html#a09df7bc7867b874300157806608db068">game::StaticEntity</a>.</p>
+
+</div>
+</div>
+<a id="af254d1aa7d126a82b1abf884a97c53d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af254d1aa7d126a82b1abf884a97c53d3">&#9670;&nbsp;</a></span>SetGraphNode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void game::Entity::SetGraphNode </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classgame_1_1_scene_graph_node.html">SceneGraphNode</a> *&#160;</td>
+          <td class="paramname"><em>graphNode</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set the Graph Node object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">graphNode</td><td>The corresponding <a class="el" href="classgame_1_1_scene_graph_node.html" title="Single Node of the Scene Graph.">SceneGraphNode</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aac5483134593f5638ac3d81d3a7f4930"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aac5483134593f5638ac3d81d3a7f4930">&#9670;&nbsp;</a></span>SetZIndex()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void game::Entity::SetZIndex </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>zIndex</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets the Z Index. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">zIndex</td><td>the new Z Index </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a767674ca317c2c640d66a878420fd7d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a767674ca317c2c640d66a878420fd7d7">&#9670;&nbsp;</a></span>Transform()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void game::Entity::Transform </td>
+          <td>(</td>
+          <td class="paramtype">sf::Transform&#160;</td>
+          <td class="paramname"><em>transform</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets the entity's tranformation. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">transform</td><td>the new transfomration </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['world',['World',['../structgame_1_1_game_state.html#acf885d799f978a8d12243809a4e8ac9a',1,'game::GameState']]]
+  ['meterperpixel',['MeterPerPixel',['../structgame_1_1_game_options.html#aab48606fcb6e9429a3f0bb1c613f0230',1,'game::GameOptions']]]
 ];

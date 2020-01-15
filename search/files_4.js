@@ -1,11 +1,10 @@
 var searchData=
 [
-  ['game_2eh',['Game.h',['../_game_8h.html',1,'']]],
-  ['gameoptions_2eh',['GameOptions.h',['../_game_options_8h.html',1,'']]],
-  ['gamesdk_5fdll_2eh',['gamesdk_dll.h',['../gamesdk__dll_8h.html',1,'']]],
-  ['gamesdk_5flogger_2eh',['gamesdk_logger.h',['../gamesdk__logger_8h.html',1,'']]],
-  ['gamestate_2eh',['GameState.h',['../_game_state_8h.html',1,'']]],
-  ['gameworld_2eh',['GameWorld.h',['../_game_world_8h.html',1,'']]],
-  ['gameworldfactory_2eh',['GameWorldFactory.h',['../_game_world_factory_8h.html',1,'']]],
-  ['genericeventdata_2eh',['GenericEventData.h',['../_generic_event_data_8h.html',1,'']]]
+  ['effect_2eh',['Effect.h',['../_effect_8h.html',1,'']]],
+  ['emptyeventdata_2eh',['EmptyEventData.h',['../_empty_event_data_8h.html',1,'']]],
+  ['entity_2eh',['Entity.h',['../_entity_8h.html',1,'']]],
+  ['entityfactory_2eh',['EntityFactory.h',['../_entity_factory_8h.html',1,'']]],
+  ['event_2eh',['Event.h',['../_event_8h.html',1,'']]],
+  ['eventcontroller_2eh',['EventController.h',['../_event_controller_8h.html',1,'']]],
+  ['extendedsequencerenderstrategy_2eh',['ExtendedSequenceRenderStrategy.h',['../_extended_sequence_render_strategy_8h.html',1,'']]]
 ];

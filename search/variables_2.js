@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['initialzoom',['InitialZoom',['../structgame_1_1_game_options.html#ab2a4855a506f2a6111bb2b088d22a706',1,'game::GameOptions']]]
+  ['empty_5fevent_5fdata',['EMPTY_EVENT_DATA',['../_empty_event_data_8h.html#a9b808e5043da15d57544b6db763bf964',1,'game::constants']]]
 ];
