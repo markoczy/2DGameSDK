@@ -29,17 +29,20 @@ namespace game {
   class SceneGraphNode;
 
   /**
-   * @brief Abstract class that defines an Entity that is Transformable and can
+   * @brief Abstract class that defines an Entity that is kinematic and can
    *        be placed on the SceneGraph.
    * 
    */
   class GAMESDK_DLL KinematicEntity : public Entity {
   public:
     /**
-     * @brief Creates a new Transformable Entity object
+     * @brief Constructs a new Kinematic Entity
      * 
-     * @param type type The Entity Type (does not affect anything and is meant
-     *        to be used freely to identify entities of some kind)
+     * @param type the user defined type
+     * @param game the game 
+     * @param renderer the render strategy
+     * @param shapes the physical shapes
+     * @param isCollidable wether the object is collidable
      */
     KinematicEntity(int type, GameBase* game, RenderStrategy* renderer, std::vector<Shape<KinematicShapePhysics>*> shapes = std::vector<Shape<KinematicShapePhysics>*>(), bool isCollidable = false);
 
@@ -49,15 +52,60 @@ namespace game {
      */
     virtual ~KinematicEntity();
 
+    /**
+     * @brief Retreives wether the object is kinematic
+     * 
+     * @return bool is kinematic
+     */
     virtual bool IsKinematic();
+
+    /**
+     * @brief Retreives wether the object is collidable
+     * 
+     * @return bool is collidable
+     */
     virtual bool IsCollidable();
 
+    /**
+     * @brief Retreives the current Transform
+     * 
+     * @return sf::Transform the transform
+     */
     virtual sf::Transform GetTransform();
+
+    /**
+     * @brief Retreives the current Accumulated Transform
+     * 
+     * @return sf::Transform the accumulated transform
+     */
     virtual sf::Transform GetAccumulatedTransform();
+
+    /**
+     * @brief Retreives the current Combined Transform (current*accumulated)
+     * 
+     * @return sf::Transform 
+     */
     virtual sf::Transform GetCombinedTransform();
+
+    /**
+     * @brief Retreives the current Render strategy
+     * 
+     * @return RenderStrategy* 
+     */
     virtual RenderStrategy* GetRenderer();
 
+    /**
+     * @brief After Update Callback
+     * 
+     */
     virtual void OnTickEnded();
+
+    /**
+     * @brief Renders the entity
+     * 
+     * @param target the render target
+     * @param states the render states
+     */
     virtual void OnRender(sf::RenderTarget* target, sf::RenderStates states);
 
   protected:

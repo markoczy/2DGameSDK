@@ -39,8 +39,6 @@ namespace game {
   }
 
   std::tuple<bool, sf::Vector2f> GraphicTools::LinesIntersect(sf::Vector2f a1, sf::Vector2f b1, sf::Vector2f a2, sf::Vector2f b2) {
-    //TODO check parallel
-
     float n = ((a1.x * (a2.y - b2.y) - a1.y * (a2.x - b2.x) + a2.x * b2.y - a2.y * b2.x) / (a1.x * (a2.y - b2.y) - a1.y * (a2.x - b2.x) + a2.x * b1.y - a2.y * b1.x + b1.x * b2.y - b1.y * b2.x));
     if(n < 0 || n > 1) return _NO_COLLISION;
 

@@ -26,7 +26,6 @@ namespace game {
         ent->OnParentTransformed(accumulated);
         auto parentTransform = ent->GetAccumulatedTransform() * ent->GetTransform();
 
-        //TODO recursive overhead.. (stack??)
         iChild->OnEntityTransformed(parentTransform);
       }
     }

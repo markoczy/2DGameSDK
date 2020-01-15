@@ -180,7 +180,6 @@ namespace game {
             }
             shapeOut = ShapeFactory::CreateStaticCircleShape(game, radius * pxToMeter, friction, elasticity, offsetOut, sensor);
           } else if(def == "poly" || def == "polygon") {
-            // TODO
             LOGE("Unimplemented polygon shape");
           } else {
             LOGE("Bad definition type: " + def);
