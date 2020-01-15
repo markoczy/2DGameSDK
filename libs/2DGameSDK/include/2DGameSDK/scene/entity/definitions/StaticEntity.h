@@ -11,7 +11,7 @@
 #include <2DGameSDK/dll/gamesdk_dll.h>
 #include <2DGameSDK/physics/CollisionTarget.h>
 #include <2DGameSDK/physics/shape/Shape.h>
-#include <2DGameSDK/physics/shape/definitions/StaticShapeDefinition.h>
+#include <2DGameSDK/physics/shape/physics/StaticShapePhysics.h>
 #include <2DGameSDK/scene/entity/Entity.h>
 
 namespace game {
@@ -20,7 +20,7 @@ namespace game {
     StaticEntity(int type,
                  GameBase* game,
                  RenderStrategy* renderer,
-                 std::vector<Shape<StaticShapeDefinition>*> shapes = std::vector<Shape<StaticShapeDefinition>*>(),
+                 std::vector<Shape<StaticShapePhysics>*> shapes = std::vector<Shape<StaticShapePhysics>*>(),
                  bool isCollidable = false);
 
     ~StaticEntity();
@@ -41,7 +41,7 @@ namespace game {
   protected:
     RenderStrategy* mRenderer = nullptr;
     bool mIsCollidable;
-    std::vector<Shape<StaticShapeDefinition>*> mShapes;
+    std::vector<Shape<StaticShapePhysics>*> mShapes;
     cpBody* mBody = nullptr;
     sf::Transform mTransform;
 

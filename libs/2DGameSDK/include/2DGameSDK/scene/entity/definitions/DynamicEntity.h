@@ -10,7 +10,7 @@
 #include <2DGameSDK/dll/gamesdk_dll.h>
 #include <2DGameSDK/physics/CollisionTarget.h>
 #include <2DGameSDK/physics/shape/Shape.h>
-#include <2DGameSDK/physics/shape/definitions/DynamicShapeDefinition.h>
+#include <2DGameSDK/physics/shape/physics/DynamicShapePhysics.h>
 #include <2DGameSDK/scene/entity/Entity.h>
 
 namespace game {
@@ -20,7 +20,7 @@ namespace game {
     DynamicEntity(int type,
                   GameBase* game,
                   RenderStrategy* renderer,
-                  std::vector<Shape<DynamicShapeDefinition>*> shapes = std::vector<Shape<DynamicShapeDefinition>*>(),
+                  std::vector<Shape<DynamicShapePhysics>*> shapes = std::vector<Shape<DynamicShapePhysics>*>(),
                   bool isCollidable = false);
 
     ~DynamicEntity();
@@ -52,7 +52,7 @@ namespace game {
   protected:
     RenderStrategy* mRenderer = nullptr;
     bool mIsCollidable;
-    std::vector<Shape<DynamicShapeDefinition>*> mShapes;
+    std::vector<Shape<DynamicShapePhysics>*> mShapes;
     cpBody* mBody = nullptr;
 
     virtual bool setTransform(sf::Transform transform);

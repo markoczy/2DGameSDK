@@ -10,14 +10,45 @@
 namespace game {
   class GAMESDK_DLL DefaultCameraController : public CameraController {
   public:
+    /**
+     * @brief Constructs a new Default Camera Controller
+     * 
+     * @param game 
+     */
     DefaultCameraController(GameBase* game);
 
+    /**
+     * @brief Retreives the camera Bounds
+     * 
+     * @return sf::Vector2f the camera bounds
+     */
     virtual sf::Vector2f GetBounds();
+
+    /**
+     * @brief Sets the Zoom
+     * 
+     * @param zoom the new zoom
+     */
     virtual void SetZoom(float zoom);
 
+    /**
+     * @brief Sets the Center
+     * 
+     * @param center the new center
+     */
     virtual void SetCenter(sf::Vector2f center);
 
+    /**
+     * @brief Updates the Camera Controller
+     * 
+     */
     virtual void OnTick();
+
+    /**
+     * @brief Retreives the current View
+     * 
+     * @return sf::View the view
+     */
     virtual sf::View GetView();
 
   protected:

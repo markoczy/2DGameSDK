@@ -24,7 +24,7 @@
 #include <2DGameSDK/physics/CollisionTarget.h>
 #include <2DGameSDK/physics/shape/Shape.h>
 #include <2DGameSDK/physics/shape/ShapeFactory.h>
-#include <2DGameSDK/physics/shape/definitions/StaticShapeDefinition.h>
+#include <2DGameSDK/physics/shape/physics/StaticShapePhysics.h>
 #include <2DGameSDK/physics/shape/shapes/CircleShape.h>
 #include <2DGameSDK/physics/shape/shapes/PolygonShape.h>
 #include <2DGameSDK/physics/shape/shapes/RectangleShape.h>

@@ -12,7 +12,7 @@ namespace game {
     SpriteStaticEntity(int type,
                        GameBase* game,
                        sf::Texture* texture,
-                       std::vector<Shape<StaticShapeDefinition>*> shapes = std::vector<Shape<StaticShapeDefinition>*>(),
+                       std::vector<Shape<StaticShapePhysics>*> shapes = std::vector<Shape<StaticShapePhysics>*>(),
                        bool isCollidable = false);
 
     void SetSize(sf::Vector2f size);

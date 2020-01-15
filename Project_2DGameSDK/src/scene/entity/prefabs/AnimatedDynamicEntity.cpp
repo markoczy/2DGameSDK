@@ -2,7 +2,7 @@
 
 namespace game {
 
-  AnimatedDynamicEntity::AnimatedDynamicEntity(int type, GameBase* game, std::map<int, sf::Texture*> animationStates, std::vector<Shape<DynamicShapeDefinition>*> shapes, bool isCollidable, int initialState) : DynamicEntity(type, game, nullptr, shapes, isCollidable) {
+  AnimatedDynamicEntity::AnimatedDynamicEntity(int type, GameBase* game, std::map<int, sf::Texture*> animationStates, std::vector<Shape<DynamicShapePhysics>*> shapes, bool isCollidable, int initialState) : DynamicEntity(type, game, nullptr, shapes, isCollidable) {
     mSpecificRenderer = new AnimatedRenderStrategy(game, animationStates, initialState);
     mRenderer = mSpecificRenderer;
   }

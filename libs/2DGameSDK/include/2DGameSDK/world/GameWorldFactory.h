@@ -5,7 +5,7 @@
  * @version 1.0
  * @date 2019-06-12
  * 
- * @copyright Copyright (c) 2019
+ * @copyright Copyright (c) 2020
  * 
  */
 #ifndef __GAME_WORLD_FACTORY_H__
@@ -24,7 +24,7 @@
 #include <2DGameSDK/physics/CollisionTarget.h>
 #include <2DGameSDK/physics/shape/Shape.h>
 #include <2DGameSDK/physics/shape/ShapeFactory.h>
-#include <2DGameSDK/physics/shape/definitions/StaticShapeDefinition.h>
+#include <2DGameSDK/physics/shape/physics/StaticShapePhysics.h>
 #include <2DGameSDK/physics/shape/shapes/CircleShape.h>
 #include <2DGameSDK/physics/shape/shapes/PolygonShape.h>
 #include <2DGameSDK/physics/shape/shapes/RectangleShape.h>
@@ -58,11 +58,19 @@ namespace game {
     /**
      * @brief Loads the tilemap from a file
      * 
+     * @param game the game
      * @param filename The path to the file
      * @return Tilemap* The created Tilemap
      */
     static Tilemap* loadTilemap(Game* game, std::string filename);
 
+    /**
+     * @brief Loads the material map from a file
+     * 
+     * @param game the game
+     * @param filename the path to the file
+     * @return MaterialMap* the material map
+     */
     static MaterialMap* loadMaterialMap(Game* game, std::string filename);
 
     /**
@@ -74,6 +82,13 @@ namespace game {
      */
     static void loadTextures(Tilemap* tilemap, std::string prefix, int pad = 2);
 
+    /**
+     * @brief Load the materials once the material map is parsed
+     * 
+     * @param game the game
+     * @param tilemap the tilemap
+     * @param materialMap the materialmap
+     */
     static void loadMaterials(Game* game, Tilemap* tilemap, MaterialMap* materialMap);
   };
 

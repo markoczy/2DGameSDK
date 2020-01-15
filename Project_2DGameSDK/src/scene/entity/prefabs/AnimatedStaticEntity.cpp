@@ -2,7 +2,7 @@
 
 namespace game {
 
-  AnimatedStaticEntity::AnimatedStaticEntity(int type, GameBase* game, std::map<int, sf::Texture*> animationStates, std::vector<Shape<StaticShapeDefinition>*> shapes, bool isCollidable, int initialState) : StaticEntity(type, game, nullptr, shapes, isCollidable) {
+  AnimatedStaticEntity::AnimatedStaticEntity(int type, GameBase* game, std::map<int, sf::Texture*> animationStates, std::vector<Shape<StaticShapePhysics>*> shapes, bool isCollidable, int initialState) : StaticEntity(type, game, nullptr, shapes, isCollidable) {
     mSpecificRenderer = new AnimatedRenderStrategy(game, animationStates, initialState);
     mRenderer = mSpecificRenderer;
   }

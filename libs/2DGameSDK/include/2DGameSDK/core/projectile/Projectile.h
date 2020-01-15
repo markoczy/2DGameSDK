@@ -1,3 +1,13 @@
+/**
+ * @file Projectile.h
+ * @author Aleistar Markoczy (a.markoczy@gmail.com)
+ * @brief Projectile class
+ * @version 1.0
+ * @date 2020-01-15
+ * 
+ * @copyright Copyright (c) 2020
+ * 
+ */
 #ifndef __PROJECTILE_H__
 #define __PROJECTILE_H__
 
@@ -15,30 +25,84 @@
 #include <2DGameSDK/physics/CollisionEventType.h>
 #include <2DGameSDK/physics/CollisionTarget.h>
 #include <2DGameSDK/physics/shape/Shape.h>
-#include <2DGameSDK/physics/shape/definitions/KinematicShapeDefinition.h>
+#include <2DGameSDK/physics/shape/physics/KinematicShapePhysics.h>
 
 namespace game {
+
+  /**
+   * @brief Defines a generic projectile
+   * 
+   */
   class GAMESDK_DLL Projectile : public GameObject, public VisualObject {
   public:
-    Projectile(GameBase* game, int type, RenderStrategy* renderer, Shape<KinematicShapeDefinition>* shapes, sf::Transform start, sf::Vector2f velocity, int maxLifetime = 100);
+    /**
+     * @brief Constructs a new Projectile
+     * 
+     * @param game the game
+     * @param type the user defined projectile type
+     * @param renderer the render strategy
+     * @param shapes shapes the physical shapes
+     * @param start the spawn point in world coordinates
+     * @param velocity the velocity vector
+     * @param maxLifetime the maximum lifetime (-1 for infinite)
+     */
+    Projectile(GameBase* game, int type, RenderStrategy* renderer, Shape<KinematicShapePhysics>* shapes, sf::Transform start, sf::Vector2f velocity, int maxLifetime = 100);
+
+    /**
+     * @brief Destroys the Projectile
+     * 
+     */
     virtual ~Projectile();
 
+    /**
+     * @brief Retreives the user defined Type
+     * 
+     * @return int the type
+     */
     virtual int GetType();
 
+    /**
+     * @brief Retreives the Z Index
+     * 
+     * @return int the Z Index
+     */
     virtual int GetZIndex();
 
+    /**
+     * @brief Sets the Z Index
+     * 
+     * @param zIndex the Z Index
+     */
     virtual void SetZIndex(int zIndex);
 
+    /**
+     * @brief Updates the Projectile
+     * 
+     */
     virtual void OnTick();
 
+    /**
+     * @brief Renders the projectile
+     * 
+     * @param target 
+     * @param states 
+     */
     virtual void OnRender(sf::RenderTarget* target, sf::RenderStates states = sf::RenderStates::Default);
 
+    /**
+     * @brief Collision callback method
+     * 
+     * @param type the collision event type
+     * @param arb the cpArbiter object
+     * @return int the collision return value (0 don't proceed calculation,
+     *         ~0 proceed calculation)
+     */
     virtual int OnCollision(CollisionEventType type, cpArbiter* arb);
 
   protected:
     int mType;
     RenderStrategy* mRenderer = nullptr;
-    Shape<KinematicShapeDefinition>* mShape;
+    Shape<KinematicShapePhysics>* mShape;
     int mZIndex = constants::DEFAULT_ZINDEX_PROJECTILE;
     cpBody* mBody;
 

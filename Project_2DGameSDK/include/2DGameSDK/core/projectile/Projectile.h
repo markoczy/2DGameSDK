@@ -25,7 +25,7 @@
 #include <2DGameSDK/physics/CollisionEventType.h>
 #include <2DGameSDK/physics/CollisionTarget.h>
 #include <2DGameSDK/physics/shape/Shape.h>
-#include <2DGameSDK/physics/shape/definitions/KinematicShapeDefinition.h>
+#include <2DGameSDK/physics/shape/physics/KinematicShapePhysics.h>
 
 namespace game {
 
@@ -46,7 +46,7 @@ namespace game {
      * @param velocity the velocity vector
      * @param maxLifetime the maximum lifetime (-1 for infinite)
      */
-    Projectile(GameBase* game, int type, RenderStrategy* renderer, Shape<KinematicShapeDefinition>* shapes, sf::Transform start, sf::Vector2f velocity, int maxLifetime = 100);
+    Projectile(GameBase* game, int type, RenderStrategy* renderer, Shape<KinematicShapePhysics>* shapes, sf::Transform start, sf::Vector2f velocity, int maxLifetime = 100);
 
     /**
      * @brief Destroys the Projectile
@@ -102,7 +102,7 @@ namespace game {
   protected:
     int mType;
     RenderStrategy* mRenderer = nullptr;
-    Shape<KinematicShapeDefinition>* mShape;
+    Shape<KinematicShapePhysics>* mShape;
     int mZIndex = constants::DEFAULT_ZINDEX_PROJECTILE;
     cpBody* mBody;
 

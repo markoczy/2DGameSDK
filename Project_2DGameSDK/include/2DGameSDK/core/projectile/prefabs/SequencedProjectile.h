@@ -36,7 +36,7 @@ namespace game {
      * @param seqFrames the frames per rendered texture
      * @param seqStart the sequence start index
      */
-    SequencedProjectile(GameBase* game, int type, std::vector<sf::Texture*> sequence, Shape<KinematicShapeDefinition>* shapes, sf::Transform start, sf::Vector2f velocity, int maxLifetime = 100, int seqFrames = 1, int seqStart = 0);
+    SequencedProjectile(GameBase* game, int type, std::vector<sf::Texture*> sequence, Shape<KinematicShapePhysics>* shapes, sf::Transform start, sf::Vector2f velocity, int maxLifetime = 100, int seqFrames = 1, int seqStart = 0);
   };
 
 } // namespace game

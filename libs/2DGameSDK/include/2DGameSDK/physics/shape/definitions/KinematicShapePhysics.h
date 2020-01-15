@@ -5,16 +5,16 @@
 
 #include <2DGameSDK/dll/gamesdk_dll.h>
 #include <2DGameSDK/physics/CollisionType.h>
-#include <2DGameSDK/physics/shape/definitions/ShapeDefinition.h>
+#include <2DGameSDK/physics/shape/definitions/ShapePhysics.h>
 
 namespace game {
-  class GAMESDK_DLL KinematicShapeDefinition : public ShapeDefinition<KinematicShapeDefinition> {
+  class GAMESDK_DLL KinematicShapePhysics : public ShapePhysics<KinematicShapePhysics> {
   public:
-    KinematicShapeDefinition(float friction, float elasticity, bool isSensor = true);
+    KinematicShapePhysics(float friction, float elasticity, bool isSensor = true);
 
     virtual void InitProperties(cpSpace* space, cpBody* body, cpShape* shape);
 
-    virtual KinematicShapeDefinition* Copy();
+    virtual KinematicShapePhysics* Copy();
 
   protected:
     float mFriction = 0;

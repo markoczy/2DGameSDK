@@ -13,7 +13,7 @@ namespace game {
     AnimatedDynamicEntity(int type,
                           GameBase* game,
                           std::map<int, sf::Texture*> animationStates,
-                          std::vector<Shape<DynamicShapeDefinition>*> shapes = std::vector<Shape<DynamicShapeDefinition>*>(),
+                          std::vector<Shape<DynamicShapePhysics>*> shapes = std::vector<Shape<DynamicShapePhysics>*>(),
                           bool isCollidable = false,
                           int initialState = constants::DEFAULT_ANIMATION_START);
 

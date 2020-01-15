@@ -10,7 +10,7 @@
 #include <2DGameSDK/common/types/base/GameBase.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
 #include <2DGameSDK/physics/shape/ShapeType.h>
-#include <2DGameSDK/physics/shape/definitions/ShapeDefinition.h>
+#include <2DGameSDK/physics/shape/physics/ShapePhysics.h>
 
 namespace game {
   // class Game;

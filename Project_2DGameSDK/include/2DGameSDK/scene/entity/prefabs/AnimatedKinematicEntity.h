@@ -13,7 +13,7 @@ namespace game {
     AnimatedKinematicEntity(int type,
                             GameBase* game,
                             std::map<int, sf::Texture*> animationStates,
-                            std::vector<Shape<KinematicShapeDefinition>*> shapes = std::vector<Shape<KinematicShapeDefinition>*>(),
+                            std::vector<Shape<KinematicShapePhysics>*> shapes = std::vector<Shape<KinematicShapePhysics>*>(),
                             bool isCollidable = false,
                             int initialState = constants::DEFAULT_ANIMATION_START);
 

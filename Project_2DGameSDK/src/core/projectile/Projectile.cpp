@@ -1,7 +1,7 @@
 #include <2DGameSDK/core/projectile/Projectile.h>
 
 namespace game {
-  Projectile::Projectile(GameBase* game, int type, RenderStrategy* renderer, Shape<KinematicShapeDefinition>* shape, sf::Transform start, sf::Vector2f velocity, int maxLifetime) : GameObject(ObjectType::Projectile, game), mType(type), mRenderer(renderer), mShape(shape), mLifetime(maxLifetime) {
+  Projectile::Projectile(GameBase* game, int type, RenderStrategy* renderer, Shape<KinematicShapePhysics>* shape, sf::Transform start, sf::Vector2f velocity, int maxLifetime) : GameObject(ObjectType::Projectile, game), mType(type), mRenderer(renderer), mShape(shape), mLifetime(maxLifetime) {
     auto space = game->GetPhysicalWorld();
     mBody = cpSpaceAddBody(space, cpBodyNewKinematic());
     game->GetPhysicalWorld();

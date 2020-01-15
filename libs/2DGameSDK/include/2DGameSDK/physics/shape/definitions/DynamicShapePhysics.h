@@ -6,16 +6,16 @@
 #include <2DGameSDK/core/Game.h>
 #include <2DGameSDK/dll/gamesdk_dll.h>
 #include <2DGameSDK/physics/CollisionType.h>
-#include <2DGameSDK/physics/shape/definitions/ShapeDefinition.h>
+#include <2DGameSDK/physics/shape/definitions/ShapePhysics.h>
 
 namespace game {
-  class GAMESDK_DLL DynamicShapeDefinition : public ShapeDefinition<DynamicShapeDefinition> {
+  class GAMESDK_DLL DynamicShapePhysics : public ShapePhysics<DynamicShapePhysics> {
   public:
-    DynamicShapeDefinition(float mass, float friction, float elasticity, bool useDensityForMass = false);
+    DynamicShapePhysics(float mass, float friction, float elasticity, bool useDensityForMass = false);
 
     virtual void InitProperties(cpSpace* space, cpBody* body, cpShape* shape);
 
-    virtual DynamicShapeDefinition* Copy();
+    virtual DynamicShapePhysics* Copy();
 
   protected:
     float mMass = 0;

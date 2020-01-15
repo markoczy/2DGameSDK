@@ -9,8 +9,8 @@ namespace proto2 {
   using namespace sf;
 
   using Key = sf::Keyboard::Key;
-  using KinematicShape = game::Shape<KinematicShapeDefinition>;
-  using DynamicShape = game::Shape<DynamicShapeDefinition>;
+  using KinematicShape = game::Shape<KinematicShapePhysics>;
+  using DynamicShape = game::Shape<DynamicShapePhysics>;
 
   //***************************************************************************/
 
@@ -102,7 +102,7 @@ namespace proto2 {
   //*---------------------------------------------------------------------------
 
   DynamicShape* getHumanoidShape(GameBase* game) {
-    static PolygonShape<DynamicShapeDefinition>* ret = nullptr;
+    static PolygonShape<DynamicShapePhysics>* ret = nullptr;
     if(ret == nullptr) {
       auto verts = vector<cpVect>();
       verts.push_back(cpv(-0.6, -1.2));

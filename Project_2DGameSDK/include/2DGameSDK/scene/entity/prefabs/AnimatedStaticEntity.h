@@ -13,7 +13,7 @@ namespace game {
     AnimatedStaticEntity(int type,
                          GameBase* game,
                          std::map<int, sf::Texture*> animationStates,
-                         std::vector<Shape<StaticShapeDefinition>*> shapes = std::vector<Shape<StaticShapeDefinition>*>(),
+                         std::vector<Shape<StaticShapePhysics>*> shapes = std::vector<Shape<StaticShapePhysics>*>(),
                          bool isCollidable = false,
                          int initialState = constants::DEFAULT_ANIMATION_START);
 

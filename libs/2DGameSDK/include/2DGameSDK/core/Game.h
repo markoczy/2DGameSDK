@@ -5,7 +5,7 @@
  * @version 1.0
  * @date 2019-06-11
  * 
- * @copyright Copyright (c) 2019
+ * @copyright Copyright (c) 2020
  * 
  */
 #ifndef __GAME_H__
@@ -72,14 +72,39 @@ namespace game {
      */
     void Stop();
 
+    /**
+     * @brief Checks wether game is running
+     * 
+     * @return float game is running
+     */
     bool IsRunning();
 
+    /**
+     * @brief Retreives current game options
+     * 
+     * @return GameOptions the options
+     */
     GameOptions GetOptions();
 
+    /**
+     * @brief Retreives the game window
+     * 
+     * @return sf::RenderWindow* the window
+     */
     sf::RenderWindow* GetWindow();
 
+    /**
+     * @brief Retreives the current View
+     * 
+     * @return sf::View the view
+     */
     sf::View GetView();
 
+    /**
+     * @brief Retreives the current State Manager
+     * 
+     * @return StateManagerBase* the state manager
+     */
     StateManagerBase* GetStateManager();
 
     /**
@@ -96,12 +121,32 @@ namespace game {
      */
     GameWorld* GetWorld();
 
+    /**
+     * @brief Retreives the current Pose Converter
+     * 
+     * @return PoseConverter* the pose converter
+     */
     PoseConverter* GetPoseConverter();
 
+    /**
+     * @brief Retreives the current Camera Controller 
+     * 
+     * @return CameraController* the CameraController
+     */
     CameraController* GetCameraController();
 
+    /**
+     * @brief Retreives the current Overlay Display
+     * 
+     * @return OverlayDisplay* the overlay display 
+     */
     OverlayDisplay* GetOverlayDisplay();
 
+    /**
+     * @brief Retreives the current Audio Controller
+     * 
+     * @return AudioController* the audio controller
+     */
     AudioController* GetAudioController();
 
     /**
@@ -131,10 +176,24 @@ namespace game {
      */
     void SetWorld(GameWorld* world);
 
+    /**
+     * @brief Sets the Camera Controller
+     * 
+     * @param cameraController the new Camera Controller
+     */
     void SetCameraController(CameraController* cameraController);
 
+    /**
+     * @brief Sets the Overlay Display
+     * 
+     * @param overlay the new Overlay display
+     */
     void SetOverlayDisplay(OverlayDisplay* overlay);
 
+    /**
+     * @brief Resets camera controller to default
+     * 
+     */
     void ResetCameraController();
 
     /**
@@ -149,9 +208,18 @@ namespace game {
      */
     void AddEvent(ObservableBase* event);
 
+    /**
+     * @brief Destroys an event
+     * 
+     * @param event the event to destroy
+     */
     void DestroyEvent(ObservableBase* event);
 
-    //? encapsulation of physical world?
+    /**
+     * @brief Retreives the Chipmunk Physical World
+     * 
+     * @return cpSpace* the physical world
+     */
     cpSpace* GetPhysicalWorld();
 
   private:

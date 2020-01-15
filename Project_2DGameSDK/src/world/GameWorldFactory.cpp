@@ -161,7 +161,7 @@ namespace game {
           bool sensor = shape["sensor"].get<bool>();
           LOGD("Shape " << curMaterial << "-" << curShape << " sensor: " << sensor);
 
-          Shape<StaticShapeDefinition>* shapeOut = nullptr;
+          Shape<StaticShapePhysics>* shapeOut = nullptr;
           string def = shape["shape"].get<string>();
           LOGD("Shape " << curMaterial << "-" << curShape << " definition: " << def);
           if(def == "rect" || def == "rectangle") {

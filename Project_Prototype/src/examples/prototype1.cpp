@@ -9,7 +9,7 @@ namespace proto1 {
   using namespace sf;
 
   using Key = sf::Keyboard::Key;
-  using KinematicShape = game::Shape<KinematicShapeDefinition>;
+  using KinematicShape = game::Shape<KinematicShapePhysics>;
 
   std::vector<sf::Texture*> loadTiles(string prefix, int count) {
     auto ret = std::vector<sf::Texture*>(count);
@@ -99,16 +99,16 @@ namespace proto1 {
   //* SHAPES
   //*---------------------------------------------------------------------------
 
-  game::RectangleShape<KinematicShapeDefinition>* getBoxShape(GameBase* game) {
-    static game::RectangleShape<KinematicShapeDefinition>* ret = nullptr;
+  game::RectangleShape<KinematicShapePhysics>* getBoxShape(GameBase* game) {
+    static game::RectangleShape<KinematicShapePhysics>* ret = nullptr;
     if(ret == nullptr) {
       ret = ShapeFactory::CreateKinematicRectangleShape(game, 100, 100, 0, 0);
     }
     return ret;
   }
 
-  PolygonShape<KinematicShapeDefinition>* getBossShape(GameBase* game) {
-    static PolygonShape<KinematicShapeDefinition>* ret = nullptr;
+  PolygonShape<KinematicShapePhysics>* getBossShape(GameBase* game) {
+    static PolygonShape<KinematicShapePhysics>* ret = nullptr;
     if(ret == nullptr) {
       auto verts = vector<cpVect>();
       verts.push_back(cpv(-1, 162));
@@ -132,8 +132,8 @@ namespace proto1 {
     return ret;
   }
 
-  PolygonShape<KinematicShapeDefinition>* getEnemyShape(GameBase* game) {
-    static PolygonShape<KinematicShapeDefinition>* ret = nullptr;
+  PolygonShape<KinematicShapePhysics>* getEnemyShape(GameBase* game) {
+    static PolygonShape<KinematicShapePhysics>* ret = nullptr;
     if(ret == nullptr) {
       auto verts = vector<cpVect>();
       verts.push_back(cpv(-85, -31));
@@ -147,8 +147,8 @@ namespace proto1 {
     return ret;
   }
 
-  PolygonShape<KinematicShapeDefinition>* getBusterShape(GameBase* game) {
-    static PolygonShape<KinematicShapeDefinition>* ret = nullptr;
+  PolygonShape<KinematicShapePhysics>* getBusterShape(GameBase* game) {
+    static PolygonShape<KinematicShapePhysics>* ret = nullptr;
     if(ret == nullptr) {
       auto verts = vector<cpVect>();
       verts.push_back(cpv(-135.0, -11));
@@ -164,8 +164,8 @@ namespace proto1 {
     return ret;
   }
 
-  PolygonShape<KinematicShapeDefinition>* getPlayerShape(GameBase* game) {
-    static PolygonShape<KinematicShapeDefinition>* ret = nullptr;
+  PolygonShape<KinematicShapePhysics>* getPlayerShape(GameBase* game) {
+    static PolygonShape<KinematicShapePhysics>* ret = nullptr;
     auto verts = vector<cpVect>();
     if(ret == nullptr) {
       verts.push_back(cpv(-62, -27.5));

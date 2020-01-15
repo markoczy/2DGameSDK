@@ -5,7 +5,7 @@
  * @version 1.0
  * @date 2019-06-12
  * 
- * @copyright Copyright (c) 2019
+ * @copyright Copyright (c) 2020
  * 
  */
 #ifndef __GAME_WORLD_H__
@@ -42,6 +42,11 @@ namespace game {
      */
     ~GameWorld();
 
+    /**
+     * @brief Retreives the world Bounds as texture dimension
+     * 
+     * @return sf::IntRect the world bounds
+     */
     sf::IntRect GetBounds();
 
   private:

@@ -12,7 +12,7 @@
 #include <2DGameSDK/physics/CollisionType.h>
 #include <2DGameSDK/physics/shape/Shape.h>
 #include <2DGameSDK/physics/shape/ShapeType.h>
-#include <2DGameSDK/physics/shape/definitions/ShapeDefinition.h>
+#include <2DGameSDK/physics/shape/physics/ShapePhysics.h>
 
 namespace game {
 

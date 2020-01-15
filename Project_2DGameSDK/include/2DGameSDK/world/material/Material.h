@@ -14,7 +14,7 @@
 #include <vector>
 
 // #include<2DGameSDK/physics/shape/Shape.h>
-#include <2DGameSDK/physics/shape/definitions/StaticShapeDefinition.h>
+#include <2DGameSDK/physics/shape/physics/StaticShapePhysics.h>
 
 namespace game {
   template <class TDefinition>
@@ -28,7 +28,7 @@ namespace game {
     int TileID = 0;
     int Type = 0;
     std::string Name = "";
-    std::vector<Shape<StaticShapeDefinition>*> Shapes = std::vector<Shape<StaticShapeDefinition>*>();
+    std::vector<Shape<StaticShapePhysics>*> Shapes = std::vector<Shape<StaticShapePhysics>*>();
   };
 
 } // namespace game

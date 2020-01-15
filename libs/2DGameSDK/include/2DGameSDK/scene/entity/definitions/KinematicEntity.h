@@ -5,7 +5,7 @@
  * @version 1.0
  * @date 2019-06-13
  * 
- * @copyright Copyright (c) 2019
+ * @copyright Copyright (c) 2020
  * 
  */
 #ifndef __KINEMATIC_ENTITY_H__
@@ -19,7 +19,7 @@
 #include <2DGameSDK/physics/CollisionEventType.h>
 #include <2DGameSDK/physics/CollisionTarget.h>
 #include <2DGameSDK/physics/shape/Shape.h>
-#include <2DGameSDK/physics/shape/definitions/KinematicShapeDefinition.h>
+#include <2DGameSDK/physics/shape/physics/KinematicShapePhysics.h>
 #include <2DGameSDK/scene/entity/Entity.h>
 
 #include <SFML/Graphics.hpp>
@@ -41,7 +41,7 @@ namespace game {
      * @param type type The Entity Type (does not affect anything and is meant
      *        to be used freely to identify entities of some kind)
      */
-    KinematicEntity(int type, GameBase* game, RenderStrategy* renderer, std::vector<Shape<KinematicShapeDefinition>*> shapes = std::vector<Shape<KinematicShapeDefinition>*>(), bool isCollidable = false);
+    KinematicEntity(int type, GameBase* game, RenderStrategy* renderer, std::vector<Shape<KinematicShapePhysics>*> shapes = std::vector<Shape<KinematicShapePhysics>*>(), bool isCollidable = false);
 
     /**
      * @brief Destroys the Transformable Entity object
@@ -62,7 +62,7 @@ namespace game {
 
   protected:
     RenderStrategy* mRenderer = nullptr;
-    std::vector<Shape<KinematicShapeDefinition>*> mShapes;
+    std::vector<Shape<KinematicShapePhysics>*> mShapes;
     bool mIsCollidable;
     sf::Transform mTransform;
     sf::Transform mAccTransform;

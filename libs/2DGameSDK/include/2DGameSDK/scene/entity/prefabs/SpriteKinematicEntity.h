@@ -12,7 +12,7 @@ namespace game {
     SpriteKinematicEntity(int type,
                           GameBase* game,
                           sf::Texture* texture,
-                          std::vector<Shape<KinematicShapeDefinition>*> shapes = std::vector<Shape<KinematicShapeDefinition>*>(),
+                          std::vector<Shape<KinematicShapePhysics>*> shapes = std::vector<Shape<KinematicShapePhysics>*>(),
                           bool isCollidable = false);
 
     void SetSize(sf::Vector2f size);

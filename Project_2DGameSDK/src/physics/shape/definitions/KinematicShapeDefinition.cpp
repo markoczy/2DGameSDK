@@ -1,18 +1,18 @@
-#include <2DGameSDK/physics/shape/definitions/KinematicShapeDefinition.h>
+#include <2DGameSDK/physics/shape/physics/KinematicShapePhysics.h>
 
 namespace game {
 
-  KinematicShapeDefinition::KinematicShapeDefinition(float friction, float elasticity, bool isSensor) : mFriction(friction), mElasticity(elasticity), mIsSensor(isSensor) {}
+  KinematicShapePhysics::KinematicShapePhysics(float friction, float elasticity, bool isSensor) : mFriction(friction), mElasticity(elasticity), mIsSensor(isSensor) {}
 
-  void KinematicShapeDefinition::InitProperties(cpSpace*, cpBody*, cpShape* shape) {
+  void KinematicShapePhysics::InitProperties(cpSpace*, cpBody*, cpShape* shape) {
     cpShapeSetCollisionType(shape, CollisionType::Default);
     if(mIsSensor) cpShapeSetSensor(shape, true);
     if(mFriction != 0) cpShapeSetFriction(shape, mFriction);
     if(mElasticity != 0) cpShapeSetElasticity(shape, mElasticity);
   }
 
-  KinematicShapeDefinition* KinematicShapeDefinition::Copy() {
-    return new KinematicShapeDefinition(mFriction, mElasticity, mIsSensor);
+  KinematicShapePhysics* KinematicShapePhysics::Copy() {
+    return new KinematicShapePhysics(mFriction, mElasticity, mIsSensor);
   }
 
 } // namespace game

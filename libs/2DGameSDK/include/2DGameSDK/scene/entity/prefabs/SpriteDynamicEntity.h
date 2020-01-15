@@ -12,7 +12,7 @@ namespace game {
     SpriteDynamicEntity(int type,
                         GameBase* game,
                         sf::Texture* texture,
-                        std::vector<Shape<DynamicShapeDefinition>*> shapes = std::vector<Shape<DynamicShapeDefinition>*>(),
+                        std::vector<Shape<DynamicShapePhysics>*> shapes = std::vector<Shape<DynamicShapePhysics>*>(),
                         bool isCollidable = false);
 
     void SetSize(sf::Vector2f size);

@@ -5,7 +5,7 @@
 #include <chipmunk/chipmunk.h>
 
 template <class TDefinition>
-class GAMESDK_DLL ShapeDefinition {
+class GAMESDK_DLL ShapePhysics {
 public:
   virtual void InitProperties(cpSpace* space, cpBody* body, cpShape* shape) = 0;
 

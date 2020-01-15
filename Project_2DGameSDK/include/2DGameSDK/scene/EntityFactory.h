@@ -10,9 +10,9 @@ namespace game {
 
   class GAMESDK_DLL EntityFactory {
   public:
-    static DynamicEntity CreateSingleSpriteDynamicEntity(int type, GameBase* game, sf::Texture* texture, std::vector<Shape<DynamicShapeDefinition>*> shapes, sf::Vector2f size = constants::DIMENSION_USE_DEFAULT, bool isCollidable = false);
+    static DynamicEntity CreateSingleSpriteDynamicEntity(int type, GameBase* game, sf::Texture* texture, std::vector<Shape<DynamicShapePhysics>*> shapes, sf::Vector2f size = constants::DIMENSION_USE_DEFAULT, bool isCollidable = false);
 
-    static DynamicEntity CreateAnimatedDynamicEntity(int type, GameBase* game, sf::Texture* texture, std::vector<Shape<DynamicShapeDefinition>*> shapes, sf::Vector2f size = constants::DIMENSION_USE_DEFAULT, bool isCollidable = false);
+    static DynamicEntity CreateAnimatedDynamicEntity(int type, GameBase* game, sf::Texture* texture, std::vector<Shape<DynamicShapePhysics>*> shapes, sf::Vector2f size = constants::DIMENSION_USE_DEFAULT, bool isCollidable = false);
   };
 
 } // namespace game

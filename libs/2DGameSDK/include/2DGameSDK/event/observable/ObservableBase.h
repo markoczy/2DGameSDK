@@ -5,7 +5,7 @@
  * @version 1.0
  * @date 2019-06-11
  * 
- * @copyright Copyright (c) 2019
+ * @copyright Copyright (c) 2020
  * 
  */
 #ifndef __OBSERVABLE_BASE_H__
@@ -20,6 +20,10 @@ namespace game {
    */
   class ObservableBase {
   public:
+    /**
+     * @brief Destroys the Observable Base
+     * 
+     */
     virtual ~ObservableBase() {}
 
     /**
@@ -30,6 +34,11 @@ namespace game {
      */
     virtual void Update() = 0;
 
+    /**
+     * @brief Retreives the Id
+     * 
+     * @return int the id
+     */
     virtual int GetId() = 0;
   };
 

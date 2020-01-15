@@ -1,18 +1,18 @@
-#include <2DGameSDK/physics/shape/definitions/StaticShapeDefinition.h>
+#include <2DGameSDK/physics/shape/physics/StaticShapePhysics.h>
 
 namespace game {
 
-  StaticShapeDefinition::StaticShapeDefinition(float friction, float elasticity, bool isSensor) : mFriction(friction), mElasticity(elasticity), mIsSensor(isSensor) {}
+  StaticShapePhysics::StaticShapePhysics(float friction, float elasticity, bool isSensor) : mFriction(friction), mElasticity(elasticity), mIsSensor(isSensor) {}
 
-  void StaticShapeDefinition::InitProperties(cpSpace*, cpBody*, cpShape* shape) {
+  void StaticShapePhysics::InitProperties(cpSpace*, cpBody*, cpShape* shape) {
     cpShapeSetCollisionType(shape, CollisionType::Default);
     if(mIsSensor) cpShapeSetSensor(shape, true);
     if(mFriction != 0) cpShapeSetFriction(shape, mFriction);
     if(mElasticity != 0) cpShapeSetElasticity(shape, mElasticity);
   }
 
-  StaticShapeDefinition* StaticShapeDefinition::Copy() {
-    return new StaticShapeDefinition(mFriction, mElasticity, mIsSensor);
+  StaticShapePhysics* StaticShapePhysics::Copy() {
+    return new StaticShapePhysics(mFriction, mElasticity, mIsSensor);
   }
 
 } // namespace game

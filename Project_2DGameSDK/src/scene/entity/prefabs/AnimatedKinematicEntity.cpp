@@ -2,7 +2,7 @@
 
 namespace game {
 
-  AnimatedKinematicEntity::AnimatedKinematicEntity(int type, GameBase* game, std::map<int, sf::Texture*> animationStates, std::vector<Shape<KinematicShapeDefinition>*> shapes, bool isCollidable, int initialState) : KinematicEntity(type, game, nullptr, shapes, isCollidable) {
+  AnimatedKinematicEntity::AnimatedKinematicEntity(int type, GameBase* game, std::map<int, sf::Texture*> animationStates, std::vector<Shape<KinematicShapePhysics>*> shapes, bool isCollidable, int initialState) : KinematicEntity(type, game, nullptr, shapes, isCollidable) {
     mSpecificRenderer = new AnimatedRenderStrategy(game, animationStates, initialState);
     mRenderer = mSpecificRenderer;
   }

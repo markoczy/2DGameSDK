@@ -36,7 +36,7 @@ namespace game {
      * @param start the spawn point in world coordinates
      * @param velocity the velocity vector
      */
-    SpriteProjectile(GameBase* game, int type, sf::Texture* texture, Shape<KinematicShapeDefinition>* shape, sf::Transform start, sf::Vector2f velocity);
+    SpriteProjectile(GameBase* game, int type, sf::Texture* texture, Shape<KinematicShapePhysics>* shape, sf::Transform start, sf::Vector2f velocity);
   };
 } // namespace game
 

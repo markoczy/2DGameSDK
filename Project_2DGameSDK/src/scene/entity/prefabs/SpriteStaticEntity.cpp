@@ -2,7 +2,7 @@
 
 namespace game {
 
-  SpriteStaticEntity::SpriteStaticEntity(int type, GameBase* game, sf::Texture* texture, std::vector<Shape<StaticShapeDefinition>*> shapes, bool isCollidable) : StaticEntity(type, game, nullptr, shapes, isCollidable) {
+  SpriteStaticEntity::SpriteStaticEntity(int type, GameBase* game, sf::Texture* texture, std::vector<Shape<StaticShapePhysics>*> shapes, bool isCollidable) : StaticEntity(type, game, nullptr, shapes, isCollidable) {
     mSpecificRenderer = new SingleSpriteRenderStrategy(game, texture);
     mRenderer = mSpecificRenderer;
   }
