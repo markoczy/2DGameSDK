@@ -1,3 +1,13 @@
+/**
+ * @file PolygonShape.h
+ * @author Aleistar Markoczy (a.markoczy@gmail.com)
+ * @brief PolygonShape class
+ * @version 1.0
+ * @date 2020-01-15
+ * 
+ * @copyright Copyright (c) 2020
+ * 
+ */
 #ifndef __POLYGON_SHAPE_H__
 #define __POLYGON_SHAPE_H__
 
@@ -15,12 +25,29 @@
 #include <2DGameSDK/physics/shape/physics/ShapePhysics.h>
 
 namespace game {
-
-  template <class TDefinition>
-  class GAMESDK_DLL PolygonShape : public Shape<TDefinition> {
+  /**
+   * @brief A Polygon shape
+   * 
+   * @tparam TPhysics The Shape Physics type 
+   */
+  template <class TPhysics>
+  class GAMESDK_DLL PolygonShape : public Shape<TPhysics> {
   public:
-    PolygonShape(GameBase* game, TDefinition* definition, std::vector<cpVect> vertices) : Shape<TDefinition>(ShapeType::Polygon, game, definition), mVertices(vertices) {}
+    /**
+     * @brief Constructs a new Polygon Shape
+     * 
+     * @param game the game
+     * @param definition the physics strategy
+     * @param vertices the polygon vertices
+     */
+    PolygonShape(GameBase* game, TPhysics* definition, std::vector<cpVect> vertices) : Shape<TPhysics>(ShapeType::Polygon, game, definition), mVertices(vertices) {}
 
+    /**
+     * @brief Renders the shape
+     * 
+     * @param target the render target
+     * @param states the render states
+     */
     virtual void Render(sf::RenderTarget* target, sf::Color color = sf::Color::Black, float stroke = 0.5) {
       auto conv = this->getGame()->GetPoseConverter();
       auto shape = sf::ConvexShape(mVertices.size());
@@ -29,21 +56,32 @@ namespace game {
         shape.setPoint(i, pt);
       }
 
-      shape.setPosition(Shape<TDefinition>::getVisualPosition());
-      shape.setRotation(Shape<TDefinition>::getVisualRotation());
+      shape.setPosition(Shape<TPhysics>::getVisualPosition());
+      shape.setRotation(Shape<TPhysics>::getVisualRotation());
       shape.setOutlineColor(color);
       shape.setOutlineThickness(stroke);
       shape.setFillColor(sf::Color::Transparent);
       target->draw(shape);
     }
 
-    virtual Shape<TDefinition>* CopyTemplate() {
-      return new PolygonShape<TDefinition>(this->getGame(), this->getDefinition()->Copy(), mVertices);
+    /**
+     * @brief Creates a copy of the shape
+     * 
+     * @return Shape<TPhysics>* the copy
+     */
+    virtual Shape<TPhysics>* CopyTemplate() {
+      return new PolygonShape<TPhysics>(this->getGame(), this->getPhysics()->Copy(), mVertices);
     }
 
   protected:
     std::vector<cpVect> mVertices;
 
+    /**
+     * @brief Initalizes the shape
+     * 
+     * @param body the chipmunk body
+     * @return cpShape* the chipmunk shape
+     */
     virtual cpShape* initShape(cpSpace*, cpBody* body) {
       auto shape = cpPolyShapeNewRaw(body, mVertices.size(), &mVertices[0], 0);
       return shape;

@@ -46,10 +46,24 @@ namespace game {
      */
     ~SceneGraphNode();
 
+    /**
+     * @brief Callback when an entity was destroyed
+     * 
+     */
     void OnEntityDestroyed();
 
+    /**
+     * @brief Callback when an entity was transformed
+     * 
+     * @param accumulated the accumulated transformation
+     */
     void OnEntityTransformed(sf::Transform accumulated);
 
+    /**
+     * @brief Remove child of node
+     * 
+     * @param child the child node
+     */
     void RemoveChild(SceneGraphNode* child);
 
   private:

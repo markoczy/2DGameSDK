@@ -42,6 +42,11 @@ namespace game {
      */
     ~SceneGraph();
 
+    /**
+     * @brief Retreives all Entities
+     * 
+     * @return std::vector<Entity*> 
+     */
     std::vector<Entity*> GetAllEntities();
 
     /**
@@ -50,6 +55,13 @@ namespace game {
      */
     void OnTick();
 
+    /**
+     * @brief Adds a new entity
+     * 
+     * @param entity the entity
+     * @param parent the parent id (default is root)
+     * @return int the entity id
+     */
     int AddEntity(Entity* entity, int parent = ROOT_NODE);
 
   private:
@@ -57,7 +69,25 @@ namespace game {
     GameBase* mGame;
     std::map<int, SceneGraphNode*> mNodes;
 
+    /**
+     * @brief Updates all nodes recursively
+     * 
+     * @param current the current node
+     * 
+     * @deprecated managed by state manager
+     */
     void tickNodes(SceneGraphNode* current);
+
+    /**
+     * @brief Renders all nodes recursively
+     * 
+     * @param current the current node
+     * @param target the render target
+     * @param options the game options
+     * @param states the render states
+     * 
+     * @deprecated managed by state manager
+     */
     void renderNodes(SceneGraphNode* current, sf::RenderTarget* target, GameOptions* options, sf::RenderStates states = sf::RenderStates::Default);
   };
 

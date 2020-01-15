@@ -70,7 +70,7 @@ namespace game {
      * @return Shape<TPhysics>* the copy
      */
     virtual Shape<TPhysics>* CopyTemplate() {
-      return new PolygonShape<TPhysics>(this->getGame(), this->geTPhysics()->Copy(), mVertices);
+      return new PolygonShape<TPhysics>(this->getGame(), this->getPhysics()->Copy(), mVertices);
     }
 
   protected:

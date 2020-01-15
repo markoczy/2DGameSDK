@@ -53,11 +53,13 @@ if ("${CMAKE_BUILD_TYPE}" MATCHES Debug)
     configure_file("${SFML_DLL_DIR}/sfml-window-d-2.dll" "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}" COPYONLY)
     configure_file("${SFML_DLL_DIR}/sfml-graphics-d-2.dll" "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}" COPYONLY)
     configure_file("${SFML_DLL_DIR}/sfml-audio-d-2.dll" "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}" COPYONLY)
+    configure_file("${SFML_DLL_DIR}/openal32.dll" "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}" COPYONLY)
 else ()
     configure_file("${SFML_DLL_DIR}/sfml-system-2.dll" "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}" COPYONLY)
     configure_file("${SFML_DLL_DIR}/sfml-window-2.dll" "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}" COPYONLY)
     configure_file("${SFML_DLL_DIR}/sfml-graphics-2.dll" "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}" COPYONLY)
     configure_file("${SFML_DLL_DIR}/sfml-audio-2.dll" "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}" COPYONLY)
+    configure_file("${SFML_DLL_DIR}/openal32.dll" "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}" COPYONLY)
 endif ("${CMAKE_BUILD_TYPE}" MATCHES Debug)
 
 # POST BUILD: copy resources

@@ -69,7 +69,7 @@ namespace game {
      * @return Shape<TPhysics>* the copy
      */
     virtual Shape<TPhysics>* CopyTemplate() {
-      return new RectangleShape<TPhysics>(this->getGame(), this->geTPhysics()->Copy(), mWidth, mHeight);
+      return new RectangleShape<TPhysics>(this->getGame(), this->getPhysics()->Copy(), mWidth, mHeight);
     }
 
   protected:

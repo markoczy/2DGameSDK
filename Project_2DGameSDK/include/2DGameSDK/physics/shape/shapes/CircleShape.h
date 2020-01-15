@@ -65,7 +65,7 @@ namespace game {
      * @return Shape<TPhysics>* the copy
      */
     virtual Shape<TPhysics>* CopyTemplate() {
-      return new CircleShape<TPhysics>(this->getGame(), this->geTPhysics()->Copy(), mRadius, mOffset);
+      return new CircleShape<TPhysics>(this->getGame(), this->getPhysics()->Copy(), mRadius, mOffset);
     }
 
   protected:
