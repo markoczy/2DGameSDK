@@ -105,21 +105,85 @@ Inheritance diagram for game::ObservableBase:</div>
  <div class="center">
   <img src="classgame_1_1_observable_base.png" usemap="#game::ObservableBase_map" alt=""/>
   <map id="game::ObservableBase_map" name="game::ObservableBase_map">
-<area href="classgame_1_1_observable.html" title="Generic Observable type, used to create Game Events." alt="game::Observable&lt; TData &gt;" shape="rect" coords="0,56,230,80"/>
-<area href="classgame_1_1_observable.html" alt="game::Observable&lt; EmptyEventData &gt;" shape="rect" coords="240,56,470,80"/>
-<area href="classgame_1_1_on_key_press.html" title="Observable that triggers whenever a given Key is pressed." alt="game::OnKeyPress" shape="rect" coords="240,112,470,136"/>
+<area href="classgame_1_1_observable.html" title="Generic Observable type, used to create Game Events." alt="game::Observable&lt; TData &gt;" shape="rect" coords="0,56,237,80"/>
+<area href="classgame_1_1_observable.html" alt="game::Observable&lt; sf::Keyboard::Key &gt;" shape="rect" coords="247,56,484,80"/>
+<area href="classgame_1_1_on_key_press.html" title="Observable that triggers whenever a given Key is pressed." alt="game::OnKeyPress" shape="rect" coords="247,112,484,136"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:a976169e8df525fc81e8662362bc60f4b"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_observable_base.html#a976169e8df525fc81e8662362bc60f4b">~ObservableBase</a> ()</td></tr>
+<tr class="memdesc:a976169e8df525fc81e8662362bc60f4b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys the <a class="el" href="classgame_1_1_observable.html" title="Generic Observable type, used to create Game Events.">Observable</a> Base.  <a href="#a976169e8df525fc81e8662362bc60f4b">More...</a><br /></td></tr>
+<tr class="separator:a976169e8df525fc81e8662362bc60f4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a93c81f64842821474f89cea3b7cc14a8"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_observable_base.html#a93c81f64842821474f89cea3b7cc14a8">Update</a> ()=0</td></tr>
 <tr class="memdesc:a93c81f64842821474f89cea3b7cc14a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the observable i.e. verifies if the observable was triggered. If triggered, the callback function of all registered Observers is executed.  <a href="#a93c81f64842821474f89cea3b7cc14a8">More...</a><br /></td></tr>
 <tr class="separator:a93c81f64842821474f89cea3b7cc14a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae2480ddd4429c173eb2bf6ab3645e198"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_observable_base.html#ae2480ddd4429c173eb2bf6ab3645e198">GetId</a> ()=0</td></tr>
+<tr class="memdesc:ae2480ddd4429c173eb2bf6ab3645e198"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retreives the Id.  <a href="#ae2480ddd4429c173eb2bf6ab3645e198">More...</a><br /></td></tr>
+<tr class="separator:ae2480ddd4429c173eb2bf6ab3645e198"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Base class of any observable type. </p>
-</div><h2 class="groupheader">Member Function Documentation</h2>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a976169e8df525fc81e8662362bc60f4b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a976169e8df525fc81e8662362bc60f4b">&#9670;&nbsp;</a></span>~ObservableBase()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual game::ObservableBase::~ObservableBase </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destroys the <a class="el" href="classgame_1_1_observable.html" title="Generic Observable type, used to create Game Events.">Observable</a> Base. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="ae2480ddd4429c173eb2bf6ab3645e198"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae2480ddd4429c173eb2bf6ab3645e198">&#9670;&nbsp;</a></span>GetId()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual int game::ObservableBase::GetId </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Retreives the Id. </p>
+<dl class="section return"><dt>Returns</dt><dd>int the id </dd></dl>
+
+<p>Implemented in <a class="el" href="classgame_1_1_observable.html#a713d0dbc0c4838b3fd38528b6a51bb7a">game::Observable&lt; TData &gt;</a>, and <a class="el" href="classgame_1_1_observable.html#a713d0dbc0c4838b3fd38528b6a51bb7a">game::Observable&lt; sf::Keyboard::Key &gt;</a>.</p>
+
+</div>
+</div>
 <a id="a93c81f64842821474f89cea3b7cc14a8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a93c81f64842821474f89cea3b7cc14a8">&#9670;&nbsp;</a></span>Update()</h2>
 
@@ -145,7 +209,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Updates the observable i.e. verifies if the observable was triggered. If triggered, the callback function of all registered Observers is executed. </p>
 
-<p>Implemented in <a class="el" href="classgame_1_1_observable.html#a7143df296f3b29151237c8c686639049">game::Observable&lt; TData &gt;</a>, and <a class="el" href="classgame_1_1_observable.html#a7143df296f3b29151237c8c686639049">game::Observable&lt; EmptyEventData &gt;</a>.</p>
+<p>Implemented in <a class="el" href="classgame_1_1_observable.html#a7143df296f3b29151237c8c686639049">game::Observable&lt; TData &gt;</a>, and <a class="el" href="classgame_1_1_observable.html#a7143df296f3b29151237c8c686639049">game::Observable&lt; sf::Keyboard::Key &gt;</a>.</p>
 
 </div>
 </div>

@@ -90,6 +90,7 @@ $(document).ready(function(){initNavTree('namespacegame.html','');});
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
+<a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a> &#124;
 <a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
@@ -102,20 +103,59 @@ $(document).ready(function(){initNavTree('namespacegame.html','');});
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_animated_transformable_entity.html">AnimatedTransformableEntity</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classgame_1_1_entity.html" title="Defines a simple Game Object (no transformations)">Entity</a> that is transformable and that defines a set of animation states, where every state is represented by it's own texture. The current animation state can be changed at measure to render a different texture for the entity.  <a href="classgame_1_1_animated_transformable_entity.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_animated_dynamic_entity.html">AnimatedDynamicEntity</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dynamic entity with animated render strategy.  <a href="classgame_1_1_animated_dynamic_entity.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_animated_kinematic_entity.html">AnimatedKinematicEntity</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Kinematic entity with animated render strategy.  <a href="classgame_1_1_animated_kinematic_entity.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_animated_render_strategy.html">AnimatedRenderStrategy</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines a render strategy where an object is rendered one of multiple textures depending on the current animation state.  <a href="classgame_1_1_animated_render_strategy.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_animated_static_entity.html">AnimatedStaticEntity</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Static entity with animated render strategy.  <a href="classgame_1_1_animated_static_entity.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_asset_manager.html">AssetManager</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Static class that Loads and Caches all Assets (images, sounds etc.) used for the 2DGameSDK.  <a href="classgame_1_1_asset_manager.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_audio_controller.html">AudioController</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_bounded_follow_camera_controller.html">BoundedFollowCameraController</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Camera that follows the player but never exits the world bounds.  <a href="classgame_1_1_bounded_follow_camera_controller.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_camera_controller.html">CameraController</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_circle_shape.html">CircleShape</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Circle shape with center and radius.  <a href="classgame_1_1_circle_shape.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_collision_target.html">CollisionTarget</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines a collision target.  <a href="classgame_1_1_collision_target.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_default_camera_controller.html">DefaultCameraController</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_dynamic_entity.html">DynamicEntity</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines an <a class="el" href="classgame_1_1_entity.html" title="Generic Entity.">Entity</a> with a dynamic body.  <a href="classgame_1_1_dynamic_entity.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_dynamic_shape_physics.html">DynamicShapePhysics</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classgame_1_1_shape.html" title="Generic Shape class.">Shape</a> Physics strategy for dynamic shapes.  <a href="classgame_1_1_dynamic_shape_physics.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_effect.html">Effect</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Animation effect defined by a sequence of textures.  <a href="classgame_1_1_effect.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_empty_event_data.html">EmptyEventData</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Event Data Object that does not contain any Data.  <a href="classgame_1_1_empty_event_data.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_entity.html">Entity</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines a simple <a class="el" href="classgame_1_1_game.html" title="The Game is the main Controller of the 2DGameSDK, it is used to execute the main Game Loop,...">Game</a> Object (no transformations)  <a href="classgame_1_1_entity.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic <a class="el" href="classgame_1_1_entity.html" title="Generic Entity.">Entity</a>.  <a href="classgame_1_1_entity.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_entity_factory.html">EntityFactory</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides factory methods to create entities.  <a href="classgame_1_1_entity_factory.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_event_controller.html">EventController</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stores and updates the <a class="el" href="classgame_1_1_game.html" title="The Game is the main Controller of the 2DGameSDK, it is used to execute the main Game Loop,...">Game</a> Events.  <a href="classgame_1_1_event_controller.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_extended_sequence_render_strategy.html">ExtendedSequenceRenderStrategy</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Improved <a class="el" href="classgame_1_1_animated_render_strategy.html" title="Defines a render strategy where an object is rendered one of multiple textures depending on the curre...">AnimatedRenderStrategy</a> that allows to define a sequence of Animation States.  <a href="classgame_1_1_extended_sequence_render_strategy.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_function_observer.html">FunctionObserver</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classgame_1_1_observer.html" title="Generic abstract Observer template of the Event implementation.">Observer</a> specialisation that uses a function as a callback. Does not have any scope or closure, if scope is needed, the <a class="el" href="classgame_1_1_method_observer.html" title="Observer specialisation that uses a given method of a given class as a callback. Used to call functio...">MethodObserver</a> class should be used.  <a href="classgame_1_1_function_observer.html#details">More...</a><br /></td></tr>
@@ -123,11 +163,13 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_game.html">Game</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="classgame_1_1_game.html" title="The Game is the main Controller of the 2DGameSDK, it is used to execute the main Game Loop,...">Game</a> is the main Controller of the 2DGameSDK, it is used to execute the main <a class="el" href="classgame_1_1_game.html" title="The Game is the main Controller of the 2DGameSDK, it is used to execute the main Game Loop,...">Game</a> Loop, Process Events and Update/Render all Entities and the World.  <a href="classgame_1_1_game.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgame_1_1_game_options.html">GameOptions</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains all Configurations of the game, as opposed to the <a class="el" href="structgame_1_1_game_state.html" title="Contains the current State of the Game, if the State is changed, the behaviour of the Game changes as...">GameState</a> the options are not meant to influence the behaviour of the <a class="el" href="classgame_1_1_game.html" title="The Game is the main Controller of the 2DGameSDK, it is used to execute the main Game Loop,...">Game</a> (i.e. the <a class="el" href="classgame_1_1_game.html" title="The Game is the main Controller of the 2DGameSDK, it is used to execute the main Game Loop,...">Game</a> Loop).  <a href="structgame_1_1_game_options.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_game_base.html">GameBase</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgame_1_1_game_state.html">GameState</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains the current State of the <a class="el" href="classgame_1_1_game.html" title="The Game is the main Controller of the 2DGameSDK, it is used to execute the main Game Loop,...">Game</a>, if the State is changed, the behaviour of the <a class="el" href="classgame_1_1_game.html" title="The Game is the main Controller of the 2DGameSDK, it is used to execute the main Game Loop,...">Game</a> changes as well.  <a href="structgame_1_1_game_state.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_game_object.html">GameObject</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines a simple <a class="el" href="classgame_1_1_game.html" title="The Game is the main Controller of the 2DGameSDK, it is used to execute the main Game Loop,...">Game</a> Object (no transformations)  <a href="classgame_1_1_game_object.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgame_1_1_game_options.html">GameOptions</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains all Configurations of the game, as opposed to the GameState the options are not meant to influence the behaviour of the <a class="el" href="classgame_1_1_game.html" title="The Game is the main Controller of the 2DGameSDK, it is used to execute the main Game Loop,...">Game</a> (i.e. the <a class="el" href="classgame_1_1_game.html" title="The Game is the main Controller of the 2DGameSDK, it is used to execute the main Game Loop,...">Game</a> Loop).  <a href="structgame_1_1_game_options.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_game_world.html">GameWorld</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines a Map of the <a class="el" href="classgame_1_1_game.html" title="The Game is the main Controller of the 2DGameSDK, it is used to execute the main Game Loop,...">Game</a>.  <a href="classgame_1_1_game_world.html#details">More...</a><br /></td></tr>
@@ -137,6 +179,18 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgame_1_1_generic_event_data.html">GenericEventData</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Event Data Object that can contain Data of any type.  <a href="structgame_1_1_generic_event_data.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_graphic_tools.html">GraphicTools</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classgame_1_1_graphic_tools.html" title="GraphicTools provides Helper functions for graphics operations.">GraphicTools</a> provides Helper functions for graphics operations.  <a href="classgame_1_1_graphic_tools.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_invisible_render_strategy.html">InvisibleRenderStrategy</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines a render strategy where an object is not rendered at all.  <a href="classgame_1_1_invisible_render_strategy.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_kinematic_entity.html">KinematicEntity</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Abstract class that defines an <a class="el" href="classgame_1_1_entity.html" title="Generic Entity.">Entity</a> that is kinematic and can be placed on the <a class="el" href="classgame_1_1_scene_graph.html" title="Directed acyclic Graph that represents the Game Object hierarchy.">SceneGraph</a>.  <a href="classgame_1_1_kinematic_entity.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_kinematic_shape_physics.html">KinematicShapePhysics</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classgame_1_1_shape.html" title="Generic Shape class.">Shape</a> Physics strategy for kinematic shapes.  <a href="classgame_1_1_kinematic_shape_physics.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgame_1_1_material.html">Material</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains all data that defines a <a class="el" href="structgame_1_1_material.html" title="Contains all data that defines a Material in the Game World.">Material</a> in the <a class="el" href="classgame_1_1_game.html" title="The Game is the main Controller of the 2DGameSDK, it is used to execute the main Game Loop,...">Game</a> World.  <a href="structgame_1_1_material.html#details">More...</a><br /></td></tr>
@@ -153,11 +207,35 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_observable_base.html">ObservableBase</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base class of any observable type.  <a href="classgame_1_1_observable_base.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_observable_counter.html">ObservableCounter</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Static counter for observables.  <a href="classgame_1_1_observable_counter.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_observer.html">Observer</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic abstract <a class="el" href="classgame_1_1_observer.html" title="Generic abstract Observer template of the Event implementation.">Observer</a> template of the Event implementation.  <a href="classgame_1_1_observer.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_on_key_press.html">OnKeyPress</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classgame_1_1_observable.html" title="Generic Observable type, used to create Game Events.">Observable</a> that triggers whenever a given Key is pressed.  <a href="classgame_1_1_on_key_press.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_overlay_display.html">OverlayDisplay</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fully configuruable Overlay Display to display the status to the player.  <a href="classgame_1_1_overlay_display.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_polygon_shape.html">PolygonShape</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A Polygon shape.  <a href="classgame_1_1_polygon_shape.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgame_1_1_pose.html">Pose</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines a <a class="el" href="structgame_1_1_pose.html" title="Defines a Pose (position + rotation)">Pose</a> (position + rotation)  <a href="structgame_1_1_pose.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_pose_converter.html">PoseConverter</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts pose (position + rotation) between the physical and the visual coordinate system.  <a href="classgame_1_1_pose_converter.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_projectile.html">Projectile</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines a generic projectile.  <a href="classgame_1_1_projectile.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_rectangle_shape.html">RectangleShape</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A Rectangle <a class="el" href="classgame_1_1_shape.html" title="Generic Shape class.">Shape</a>.  <a href="classgame_1_1_rectangle_shape.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_render_strategy.html">RenderStrategy</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines a generic Render Strategy.  <a href="classgame_1_1_render_strategy.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_resource_cache.html">ResourceCache</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic Template to load and cache any resource. As the resources cannot be cleared in the destructor, it is best practice to <a class="el" href="classgame_1_1_resource_cache.html#aa69492e0ae8e11f2cc45a9372dea9a6d" title="Clears all resources, referencing any resource after this call leads to undefined behaviour.">Clear()</a> the cache before deleting it.  <a href="classgame_1_1_resource_cache.html#details">More...</a><br /></td></tr>
@@ -168,8 +246,44 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_scene_graph_node.html">SceneGraphNode</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Single Node of the Scene Graph.  <a href="classgame_1_1_scene_graph_node.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_sprite_transformable_entity.html">SpriteTransformableEntity</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simple specialisation of the <a class="el" href="classgame_1_1_transformable_entity.html" title="Abstract class that defines an Entity that is Transformable and can be placed on the SceneGraph.">TransformableEntity</a> class. Does not do anything during <a class="el" href="classgame_1_1_sprite_transformable_entity.html#a4876aeda0604ce3d345f7027ab847e7a" title="Updates the Entity.">Tick()</a>.  <a href="classgame_1_1_sprite_transformable_entity.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_sequenced_projectile.html">SequencedProjectile</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines a projectile that is rendered by a sequence of textures.  <a href="classgame_1_1_sequenced_projectile.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_shape.html">Shape</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic <a class="el" href="classgame_1_1_shape.html" title="Generic Shape class.">Shape</a> class.  <a href="classgame_1_1_shape.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_shape_factory.html">ShapeFactory</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Factory class for all shape types.  <a href="classgame_1_1_shape_factory.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_simple_sequence_render_strategy.html">SimpleSequenceRenderStrategy</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines a render strategy that is defined by a sequence of textures.  <a href="classgame_1_1_simple_sequence_render_strategy.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_single_sprite_render_strategy.html">SingleSpriteRenderStrategy</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines a render strategy that is defined by a single texture.  <a href="classgame_1_1_single_sprite_render_strategy.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_sound_buffer_cache.html">SoundBufferCache</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads and Caches SFML SoundBuffer Objects.  <a href="classgame_1_1_sound_buffer_cache.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_sprite_dynamic_entity.html">SpriteDynamicEntity</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dynamic entity with single sprite render strategy.  <a href="classgame_1_1_sprite_dynamic_entity.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_sprite_kinematic_entity.html">SpriteKinematicEntity</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Kinematic entity with single sprite render strategy.  <a href="classgame_1_1_sprite_kinematic_entity.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_sprite_projectile.html">SpriteProjectile</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines a projectile that is rendered as single sprite.  <a href="classgame_1_1_sprite_projectile.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_sprite_static_entity.html">SpriteStaticEntity</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Static entity with single sprite render strategy.  <a href="classgame_1_1_sprite_static_entity.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_state_manager.html">StateManager</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_state_manager_base.html">StateManagerBase</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_static_entity.html">StaticEntity</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_static_shape_physics.html">StaticShapePhysics</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classgame_1_1_shape.html" title="Generic Shape class.">Shape</a> Physics strategy for static shapes.  <a href="classgame_1_1_static_shape_physics.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_texture_cache.html">TextureCache</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads and Caches SFML Textures.  <a href="classgame_1_1_texture_cache.html#details">More...</a><br /></td></tr>
@@ -177,14 +291,14 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgame_1_1_tile.html">Tile</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains all data that defines a single <a class="el" href="structgame_1_1_tile.html" title="Contains all data that defines a single Tile of the Tile Map.">Tile</a> of the <a class="el" href="structgame_1_1_tile.html" title="Contains all data that defines a single Tile of the Tile Map.">Tile</a> Map.  <a href="structgame_1_1_tile.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgame_1_1_tile_layer.html">TileLayer</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains all data that defines a single Layer of the <a class="el" href="structgame_1_1_tile.html" title="Contains all data that defines a single Tile of the Tile Map.">Tile</a> Map.  <a href="structgame_1_1_tile_layer.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_tile_layer.html">TileLayer</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains all data that defines a single Layer of the <a class="el" href="structgame_1_1_tile.html" title="Contains all data that defines a single Tile of the Tile Map.">Tile</a> Map.  <a href="classgame_1_1_tile_layer.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgame_1_1_tilemap.html">Tilemap</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains all data that defines the visual representtion of a <a class="el" href="classgame_1_1_game.html" title="The Game is the main Controller of the 2DGameSDK, it is used to execute the main Game Loop,...">Game</a> World.  <a href="structgame_1_1_tilemap.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_transformable_entity.html">TransformableEntity</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Abstract class that defines an <a class="el" href="classgame_1_1_entity.html" title="Defines a simple Game Object (no transformations)">Entity</a> that is Transformable and can be placed on the <a class="el" href="classgame_1_1_scene_graph.html" title="Directed acyclic Graph that represents the Game Object hierarchy.">SceneGraph</a>.  <a href="classgame_1_1_transformable_entity.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_visual_object.html">VisualObject</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">An object that can be rendered.  <a href="classgame_1_1_visual_object.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
@@ -193,18 +307,89 @@ Typedefs</h2></td></tr>
 <tr class="memitem:a7a5dbfa15fea392ef6b96156c87a712a"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacegame.html#a7a5dbfa15fea392ef6b96156c87a712a">ObserverFunc</a> = void(*)(TData *)</td></tr>
 <tr class="memdesc:a7a5dbfa15fea392ef6b96156c87a712a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Template that defines a <a class="el" href="classgame_1_1_function_observer.html" title="Observer specialisation that uses a function as a callback. Does not have any scope or closure,...">FunctionObserver</a> Callback function.  <a href="#a7a5dbfa15fea392ef6b96156c87a712a">More...</a><br /></td></tr>
 <tr class="separator:a7a5dbfa15fea392ef6b96156c87a712a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a21f85ee630dcf340a85dfcb0ddf8c335"><td class="memTemplParams" colspan="2">template&lt;class TData , class TCallee &gt; </td></tr>
-<tr class="memitem:a21f85ee630dcf340a85dfcb0ddf8c335"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacegame.html#a21f85ee630dcf340a85dfcb0ddf8c335">ObserverMethod</a> = void(TCallee::*)(TData *)</td></tr>
-<tr class="memdesc:a21f85ee630dcf340a85dfcb0ddf8c335"><td class="mdescLeft">&#160;</td><td class="mdescRight">Template that defines a <a class="el" href="classgame_1_1_method_observer.html" title="Observer specialisation that uses a given method of a given class as a callback. Used to call functio...">MethodObserver</a> Callback function.  <a href="#a21f85ee630dcf340a85dfcb0ddf8c335">More...</a><br /></td></tr>
-<tr class="separator:a21f85ee630dcf340a85dfcb0ddf8c335"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a968e490e22e4374e0f0f97d5214d72b4"><td class="memTemplParams" colspan="2">template&lt;class TData , class TCallee &gt; </td></tr>
+<tr class="memitem:a968e490e22e4374e0f0f97d5214d72b4"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacegame.html#a968e490e22e4374e0f0f97d5214d72b4">ObserverMethod</a> = void(TCallee::*)(TData)</td></tr>
+<tr class="memdesc:a968e490e22e4374e0f0f97d5214d72b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Template that defines a <a class="el" href="classgame_1_1_method_observer.html" title="Observer specialisation that uses a given method of a given class as a callback. Used to call functio...">MethodObserver</a> Callback function.  <a href="#a968e490e22e4374e0f0f97d5214d72b4">More...</a><br /></td></tr>
+<tr class="separator:a968e490e22e4374e0f0f97d5214d72b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a89068b978264108e39283758e2e145ff"><td class="memItemLeft" align="right" valign="top"><a id="a89068b978264108e39283758e2e145ff"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><b>json</b> = nlohmann::json</td></tr>
 <tr class="separator:a89068b978264108e39283758e2e145ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:a5415a558ce9aff7e465746f06dbc1374"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegame.html#a5415a558ce9aff7e465746f06dbc1374">ObjectType</a> { <br />
+&#160;&#160;<b>Unknown</b> = 0, 
+<b>Tile</b> = 1, 
+<b>Entity</b> = 2, 
+<b>Projectile</b> = 3, 
+<br />
+&#160;&#160;<b>Effect</b> = 4
+<br />
+ }</td></tr>
+<tr class="memdesc:a5415a558ce9aff7e465746f06dbc1374"><td class="mdescLeft">&#160;</td><td class="mdescRight">Identification of the Object Type.  <a href="namespacegame.html#a5415a558ce9aff7e465746f06dbc1374">More...</a><br /></td></tr>
+<tr class="separator:a5415a558ce9aff7e465746f06dbc1374"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9257775dde5cb9bb9883a762ec979e1f"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegame.html#a9257775dde5cb9bb9883a762ec979e1f">CollisionEventType</a> { <b>Begin</b>, 
+<b>PreSolve</b>, 
+<b>PostSolve</b>, 
+<b>Separate</b>
+ }</td></tr>
+<tr class="memdesc:a9257775dde5cb9bb9883a762ec979e1f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Identifies the type of a chipmunk collision event.  <a href="namespacegame.html#a9257775dde5cb9bb9883a762ec979e1f">More...</a><br /></td></tr>
+<tr class="separator:a9257775dde5cb9bb9883a762ec979e1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad81ed85792d50c80e7645b0f5b613651"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegame.html#ad81ed85792d50c80e7645b0f5b613651">CollisionType</a> { <b>None</b> = 0, 
+<b>Default</b> = 1
+ }</td></tr>
+<tr class="memdesc:ad81ed85792d50c80e7645b0f5b613651"><td class="mdescLeft">&#160;</td><td class="mdescRight">Identifies a chipmunk collision type. Only objects of same collision type can be collided.  <a href="namespacegame.html#ad81ed85792d50c80e7645b0f5b613651">More...</a><br /></td></tr>
+<tr class="separator:ad81ed85792d50c80e7645b0f5b613651"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a07358754930f0a4480b5a96cbc552bce"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegame.html#a07358754930f0a4480b5a96cbc552bce">ShapeType</a> { <b>Rectangle</b> = 1, 
+<b>Polygon</b> = 2, 
+<b>Circle</b> = 3
+ }</td></tr>
+<tr class="memdesc:a07358754930f0a4480b5a96cbc552bce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Identifies a shape type (e.g. rectangle)  <a href="namespacegame.html#a07358754930f0a4480b5a96cbc552bce">More...</a><br /></td></tr>
+<tr class="separator:a07358754930f0a4480b5a96cbc552bce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:a3e6cf0f1ee2dcb4c9ddd8437e9970d09"><td class="memItemLeft" align="right" valign="top"><a id="a3e6cf0f1ee2dcb4c9ddd8437e9970d09"></a>
+unsigned char&#160;</td><td class="memItemRight" valign="bottom"><b>collideEntities</b> (<a class="el" href="namespacegame.html#a9257775dde5cb9bb9883a762ec979e1f">CollisionEventType</a> type, cpArbiter *arb, <a class="el" href="classgame_1_1_entity.html">Entity</a> *entA, <a class="el" href="classgame_1_1_entity.html">Entity</a> *entB)</td></tr>
+<tr class="separator:a3e6cf0f1ee2dcb4c9ddd8437e9970d09"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa293d00737534e7c6f0fe7285bb66040"><td class="memItemLeft" align="right" valign="top"><a id="aa293d00737534e7c6f0fe7285bb66040"></a>
+unsigned char&#160;</td><td class="memItemRight" valign="bottom"><b>collideEntityTile</b> (<a class="el" href="namespacegame.html#a9257775dde5cb9bb9883a762ec979e1f">CollisionEventType</a> type, cpArbiter *arb, <a class="el" href="classgame_1_1_entity.html">Entity</a> *entity, <a class="el" href="structgame_1_1_tile.html">Tile</a> *tile)</td></tr>
+<tr class="separator:aa293d00737534e7c6f0fe7285bb66040"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a947ddc3e94cc9c609b90be5adcc50986"><td class="memItemLeft" align="right" valign="top"><a id="a947ddc3e94cc9c609b90be5adcc50986"></a>
+unsigned char&#160;</td><td class="memItemRight" valign="bottom"><b>collideEntityProjectile</b> (<a class="el" href="namespacegame.html#a9257775dde5cb9bb9883a762ec979e1f">CollisionEventType</a> type, cpArbiter *arb, <a class="el" href="classgame_1_1_entity.html">Entity</a> *entity, <a class="el" href="classgame_1_1_projectile.html">Projectile</a> *projectile)</td></tr>
+<tr class="separator:a947ddc3e94cc9c609b90be5adcc50986"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f56109db28ebe7dff6ba2460b9312af"><td class="memItemLeft" align="right" valign="top"><a id="a5f56109db28ebe7dff6ba2460b9312af"></a>
+unsigned char&#160;</td><td class="memItemRight" valign="bottom"><b>collideProjectileTile</b> (<a class="el" href="namespacegame.html#a9257775dde5cb9bb9883a762ec979e1f">CollisionEventType</a> type, cpArbiter *arb, <a class="el" href="classgame_1_1_projectile.html">Projectile</a> *projectile, <a class="el" href="structgame_1_1_tile.html">Tile</a> *)</td></tr>
+<tr class="separator:a5f56109db28ebe7dff6ba2460b9312af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76204835061328599ea90b94257bfc9c"><td class="memItemLeft" align="right" valign="top"><a id="a76204835061328599ea90b94257bfc9c"></a>
+unsigned char&#160;</td><td class="memItemRight" valign="bottom"><b>collideEntityAny</b> (<a class="el" href="namespacegame.html#a9257775dde5cb9bb9883a762ec979e1f">CollisionEventType</a> type, cpArbiter *arb, <a class="el" href="classgame_1_1_entity.html">Entity</a> *ent, <a class="el" href="classgame_1_1_collision_target.html">CollisionTarget</a> *other)</td></tr>
+<tr class="separator:a76204835061328599ea90b94257bfc9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5087a245ecb8a0bdcfba76d39219d8a2"><td class="memItemLeft" align="right" valign="top"><a id="a5087a245ecb8a0bdcfba76d39219d8a2"></a>
+unsigned char&#160;</td><td class="memItemRight" valign="bottom"><b>collideTileAny</b> (<a class="el" href="namespacegame.html#a9257775dde5cb9bb9883a762ec979e1f">CollisionEventType</a> type, cpArbiter *arb, <a class="el" href="structgame_1_1_tile.html">Tile</a> *tile, <a class="el" href="classgame_1_1_collision_target.html">CollisionTarget</a> *other)</td></tr>
+<tr class="separator:a5087a245ecb8a0bdcfba76d39219d8a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c43ac94b5c5e93bf3acc8b3ed65c4d9"><td class="memItemLeft" align="right" valign="top"><a id="a6c43ac94b5c5e93bf3acc8b3ed65c4d9"></a>
+unsigned char&#160;</td><td class="memItemRight" valign="bottom"><b>collideProjectileAny</b> (<a class="el" href="namespacegame.html#a9257775dde5cb9bb9883a762ec979e1f">CollisionEventType</a> type, cpArbiter *arb, <a class="el" href="classgame_1_1_projectile.html">Projectile</a> *projectile, <a class="el" href="classgame_1_1_collision_target.html">CollisionTarget</a> *other)</td></tr>
+<tr class="separator:a6c43ac94b5c5e93bf3acc8b3ed65c4d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50304b562916ad01fc6247fcf223ea6c"><td class="memItemLeft" align="right" valign="top"><a id="a50304b562916ad01fc6247fcf223ea6c"></a>
+unsigned char&#160;</td><td class="memItemRight" valign="bottom"><b>collisionFunc</b> (<a class="el" href="namespacegame.html#a9257775dde5cb9bb9883a762ec979e1f">CollisionEventType</a> type, cpArbiter *arb)</td></tr>
+<tr class="separator:a50304b562916ad01fc6247fcf223ea6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9560b3f3d23691944894f73b7c661aec"><td class="memItemLeft" align="right" valign="top"><a id="a9560b3f3d23691944894f73b7c661aec"></a>
+unsigned char&#160;</td><td class="memItemRight" valign="bottom"><b>collisionBegin</b> (cpArbiter *arb, cpSpace *, cpDataPointer)</td></tr>
+<tr class="separator:a9560b3f3d23691944894f73b7c661aec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac61874bd3690091054aa775c1f9489a2"><td class="memItemLeft" align="right" valign="top"><a id="ac61874bd3690091054aa775c1f9489a2"></a>
+unsigned char&#160;</td><td class="memItemRight" valign="bottom"><b>collisionPreSolve</b> (cpArbiter *arb, cpSpace *, cpDataPointer)</td></tr>
+<tr class="separator:ac61874bd3690091054aa775c1f9489a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a64c94c399e481b55c25f8b625f0b0cce"><td class="memItemLeft" align="right" valign="top"><a id="a64c94c399e481b55c25f8b625f0b0cce"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>collisionPostSolve</b> (cpArbiter *arb, cpSpace *, cpDataPointer)</td></tr>
+<tr class="separator:a64c94c399e481b55c25f8b625f0b0cce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a546db4d72d69289f8777ecc3bebf87df"><td class="memItemLeft" align="right" valign="top"><a id="a546db4d72d69289f8777ecc3bebf87df"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>collisionSeparate</b> (cpArbiter *arb, cpSpace *, cpDataPointer)</td></tr>
+<tr class="separator:a546db4d72d69289f8777ecc3bebf87df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0c95988a76c0bc9230d57458f8da52c"><td class="memItemLeft" align="right" valign="top"><a id="ad0c95988a76c0bc9230d57458f8da52c"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>renderFunc</b> (<a class="el" href="classgame_1_1_game.html">Game</a> *game, sf::RenderWindow *win, <a class="el" href="classgame_1_1_state_manager.html">StateManager</a> *mgr)</td></tr>
+<tr class="separator:ad0c95988a76c0bc9230d57458f8da52c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a64091c43138ffb2bcfc7a6dfe007c16d"><td class="memItemLeft" align="right" valign="top"><a id="a64091c43138ffb2bcfc7a6dfe007c16d"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>compareLayers</b> (<a class="el" href="structgame_1_1_tile_layer.html">TileLayer</a> *i, <a class="el" href="structgame_1_1_tile_layer.html">TileLayer</a> *j)</td></tr>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>compareLayers</b> (<a class="el" href="classgame_1_1_tile_layer.html">TileLayer</a> *i, <a class="el" href="classgame_1_1_tile_layer.html">TileLayer</a> *j)</td></tr>
 <tr class="separator:a64091c43138ffb2bcfc7a6dfe007c16d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ace98612d9c0f1795bb253912e02ff4f3"><td class="memItemLeft" align="right" valign="top"><a id="ace98612d9c0f1795bb253912e02ff4f3"></a>
 string&#160;</td><td class="memItemRight" valign="bottom"><b>getFilename</b> (string prefix, int tile, int pad)</td></tr>
@@ -212,6 +397,12 @@ string&#160;</td><td class="memItemRight" valign="bottom"><b>getFilename</b> (st
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
+<tr class="memitem:a8c2f3c7c59376eaf7647e784166beb85"><td class="memItemLeft" align="right" valign="top"><a id="a8c2f3c7c59376eaf7647e784166beb85"></a>
+const std::tuple&lt; bool, sf::Vector2f &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>_NO_COLLISION</b> = std::make_tuple(false, sf::Vector2f())</td></tr>
+<tr class="separator:a8c2f3c7c59376eaf7647e784166beb85"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a470bf0855314892ee2b22f4296d17b32"><td class="memItemLeft" align="right" valign="top"><a id="a470bf0855314892ee2b22f4296d17b32"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>_counter</b> = 0</td></tr>
+<tr class="separator:a470bf0855314892ee2b22f4296d17b32"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abe4e6f3ee31a05f39965b390a7f5b27c"><td class="memItemLeft" align="right" valign="top"><a id="abe4e6f3ee31a05f39965b390a7f5b27c"></a>
 sf::Clock&#160;</td><td class="memItemRight" valign="bottom"><b>dbgClock</b></td></tr>
 <tr class="separator:abe4e6f3ee31a05f39965b390a7f5b27c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -243,8 +434,8 @@ template&lt;class TData &gt; </div>
 
 </div>
 </div>
-<a id="a21f85ee630dcf340a85dfcb0ddf8c335"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a21f85ee630dcf340a85dfcb0ddf8c335">&#9670;&nbsp;</a></span>ObserverMethod</h2>
+<a id="a968e490e22e4374e0f0f97d5214d72b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a968e490e22e4374e0f0f97d5214d72b4">&#9670;&nbsp;</a></span>ObserverMethod</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -252,12 +443,85 @@ template&lt;class TData &gt; </div>
 template&lt;class TData , class TCallee &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="namespacegame.html#a21f85ee630dcf340a85dfcb0ddf8c335">game::ObserverMethod</a> = typedef void (TCallee::*)(TData*)</td>
+          <td class="memname">using <a class="el" href="namespacegame.html#a968e490e22e4374e0f0f97d5214d72b4">game::ObserverMethod</a> = typedef void (TCallee::*)(TData)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Template that defines a <a class="el" href="classgame_1_1_method_observer.html" title="Observer specialisation that uses a given method of a given class as a callback. Used to call functio...">MethodObserver</a> Callback function. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Enumeration Type Documentation</h2>
+<a id="a9257775dde5cb9bb9883a762ec979e1f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9257775dde5cb9bb9883a762ec979e1f">&#9670;&nbsp;</a></span>CollisionEventType</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="namespacegame.html#a9257775dde5cb9bb9883a762ec979e1f">game::CollisionEventType</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Identifies the type of a chipmunk collision event. </p>
+
+</div>
+</div>
+<a id="ad81ed85792d50c80e7645b0f5b613651"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad81ed85792d50c80e7645b0f5b613651">&#9670;&nbsp;</a></span>CollisionType</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="namespacegame.html#ad81ed85792d50c80e7645b0f5b613651">game::CollisionType</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Identifies a chipmunk collision type. Only objects of same collision type can be collided. </p>
+
+</div>
+</div>
+<a id="a5415a558ce9aff7e465746f06dbc1374"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5415a558ce9aff7e465746f06dbc1374">&#9670;&nbsp;</a></span>ObjectType</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="namespacegame.html#a5415a558ce9aff7e465746f06dbc1374">game::ObjectType</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Identification of the Object Type. </p>
+
+</div>
+</div>
+<a id="a07358754930f0a4480b5a96cbc552bce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a07358754930f0a4480b5a96cbc552bce">&#9670;&nbsp;</a></span>ShapeType</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="namespacegame.html#a07358754930f0a4480b5a96cbc552bce">game::ShapeType</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Identifies a shape type (e.g. rectangle) </p>
 
 </div>
 </div>

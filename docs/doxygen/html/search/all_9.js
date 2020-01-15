@@ -1,10 +1,13 @@
 var searchData=
 [
-  ['mainpage_2eh',['mainpage.h',['../mainpage_8h.html',1,'']]],
-  ['material',['Material',['../structgame_1_1_material.html',1,'game']]],
-  ['material_2eh',['Material.h',['../_material_8h.html',1,'']]],
-  ['materialmap',['MaterialMap',['../structgame_1_1_material_map.html',1,'game']]],
-  ['materialmap_2eh',['MaterialMap.h',['../_material_map_8h.html',1,'']]],
-  ['methodobserver',['MethodObserver',['../classgame_1_1_method_observer.html',1,'game::MethodObserver&lt; TData, TCallee &gt;'],['../classgame_1_1_method_observer.html#a9a86686fcb9d2527fd0c75d43a9265af',1,'game::MethodObserver::MethodObserver()']]],
-  ['methodobserver_2eh',['MethodObserver.h',['../_method_observer_8h.html',1,'']]]
+  ['initialzoom',['InitialZoom',['../structgame_1_1_game_options.html#ab2a4855a506f2a6111bb2b088d22a706',1,'game::GameOptions']]],
+  ['initproperties',['InitProperties',['../classgame_1_1_dynamic_shape_physics.html#a08b3f94493f74fba9a463c1133c67479',1,'game::DynamicShapePhysics::InitProperties()'],['../classgame_1_1_kinematic_shape_physics.html#a80500ef8e068ada58c40efa003a501b4',1,'game::KinematicShapePhysics::InitProperties()'],['../class_shape_physics.html#ad239caebd96fa85d167e5fe02a78c6ba',1,'ShapePhysics::InitProperties()'],['../classgame_1_1_static_shape_physics.html#acf12b084edc3d9867f1b25859a71cb95',1,'game::StaticShapePhysics::InitProperties()']]],
+  ['initshape',['initShape',['../classgame_1_1_shape.html#aabc43d7ea3b48b6af1eeac9c48069a0b',1,'game::Shape::initShape()'],['../classgame_1_1_circle_shape.html#ae372d1654964c9c2413f11aea43c1e40',1,'game::CircleShape::initShape()'],['../classgame_1_1_polygon_shape.html#a42227760a1778ae0437dec1578aba00b',1,'game::PolygonShape::initShape()'],['../classgame_1_1_rectangle_shape.html#ac0b00bc31689aa07aac0ace721e0e1c4',1,'game::RectangleShape::initShape()']]],
+  ['invisiblerenderstrategy',['InvisibleRenderStrategy',['../classgame_1_1_invisible_render_strategy.html',1,'game::InvisibleRenderStrategy'],['../classgame_1_1_invisible_render_strategy.html#a1ab20ab678d9f043a5a2b9dc95a40c02',1,'game::InvisibleRenderStrategy::InvisibleRenderStrategy()']]],
+  ['invisiblerenderstrategy_2eh',['InvisibleRenderStrategy.h',['../_invisible_render_strategy_8h.html',1,'']]],
+  ['iscollidable',['IsCollidable',['../classgame_1_1_dynamic_entity.html#a8501e368941754b009208a4a704cfc54',1,'game::DynamicEntity::IsCollidable()'],['../classgame_1_1_kinematic_entity.html#ae1a1e3cf7b5cc7308f5ef44124e4137a',1,'game::KinematicEntity::IsCollidable()'],['../classgame_1_1_static_entity.html#af91b79a48b1a4c1746496acb4de5b4bf',1,'game::StaticEntity::IsCollidable()'],['../classgame_1_1_entity.html#a4255b29e6301f7099d23d4f12b1f32ae',1,'game::Entity::IsCollidable()']]],
+  ['isfinished',['IsFinished',['../classgame_1_1_simple_sequence_render_strategy.html#ab7e49abc6e40724d522110768d75c0ce',1,'game::SimpleSequenceRenderStrategy']]],
+  ['iskinematic',['IsKinematic',['../classgame_1_1_dynamic_entity.html#aef9a3688219e0f337c66984ae987fad3',1,'game::DynamicEntity::IsKinematic()'],['../classgame_1_1_kinematic_entity.html#a01da2c7df5376c706371989229c62f8b',1,'game::KinematicEntity::IsKinematic()'],['../classgame_1_1_static_entity.html#ad595dd8e1d237048468de6443c785c1d',1,'game::StaticEntity::IsKinematic()'],['../classgame_1_1_entity.html#a71f2ca318399c5fdc415bbd0d3664d95',1,'game::Entity::IsKinematic()']]],
+  ['isrenderenabled',['IsRenderEnabled',['../classgame_1_1_render_strategy.html#a4fee659716109fba3baf8c936d6386ad',1,'game::RenderStrategy']]],
+  ['isrunning',['IsRunning',['../classgame_1_1_game_base.html#aa13e78089b7f3835211b0633118fc97e',1,'game::GameBase::IsRunning()'],['../classgame_1_1_game.html#af42fcd06ca898a1dfcfc4b3dfc840a09',1,'game::Game::IsRunning()']]]
 ];

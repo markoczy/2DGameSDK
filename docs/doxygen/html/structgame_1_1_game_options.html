@@ -95,7 +95,7 @@ $(document).ready(function(){initNavTree('structgame_1_1_game_options.html','');
 </div><!--header-->
 <div class="contents">
 
-<p>Contains all Configurations of the game, as opposed to the <a class="el" href="structgame_1_1_game_state.html" title="Contains the current State of the Game, if the State is changed, the behaviour of the Game changes as...">GameState</a> the options are not meant to influence the behaviour of the <a class="el" href="classgame_1_1_game.html" title="The Game is the main Controller of the 2DGameSDK, it is used to execute the main Game Loop,...">Game</a> (i.e. the <a class="el" href="classgame_1_1_game.html" title="The Game is the main Controller of the 2DGameSDK, it is used to execute the main Game Loop,...">Game</a> Loop).  
+<p>Contains all Configurations of the game, as opposed to the GameState the options are not meant to influence the behaviour of the <a class="el" href="classgame_1_1_game.html" title="The Game is the main Controller of the 2DGameSDK, it is used to execute the main Game Loop,...">Game</a> (i.e. the <a class="el" href="classgame_1_1_game.html" title="The Game is the main Controller of the 2DGameSDK, it is used to execute the main Game Loop,...">Game</a> Loop).  
  <a href="structgame_1_1_game_options.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_game_options_8h_source.html">GameOptions.h</a>&gt;</code></p>
@@ -108,15 +108,31 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a89d4cb3474377c3552a3163b1458bc60"><td class="memItemLeft" align="right" valign="top">sf::Vector2i&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgame_1_1_game_options.html#a89d4cb3474377c3552a3163b1458bc60">ScreenDim</a></td></tr>
 <tr class="memdesc:a89d4cb3474377c3552a3163b1458bc60"><td class="mdescLeft">&#160;</td><td class="mdescRight">Screen Dimensions.  <a href="#a89d4cb3474377c3552a3163b1458bc60">More...</a><br /></td></tr>
 <tr class="separator:a89d4cb3474377c3552a3163b1458bc60"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab2a4855a506f2a6111bb2b088d22a706"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgame_1_1_game_options.html#ab2a4855a506f2a6111bb2b088d22a706">InitialZoom</a></td></tr>
+<tr class="memitem:ab2a4855a506f2a6111bb2b088d22a706"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgame_1_1_game_options.html#ab2a4855a506f2a6111bb2b088d22a706">InitialZoom</a> = 1</td></tr>
 <tr class="memdesc:ab2a4855a506f2a6111bb2b088d22a706"><td class="mdescLeft">&#160;</td><td class="mdescRight">Zoom at start.  <a href="#ab2a4855a506f2a6111bb2b088d22a706">More...</a><br /></td></tr>
 <tr class="separator:ab2a4855a506f2a6111bb2b088d22a706"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a211c2fd7dad11198ba151161cffcf8e4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgame_1_1_game_options.html#a211c2fd7dad11198ba151161cffcf8e4">FramesPerSecond</a></td></tr>
+<tr class="memitem:a211c2fd7dad11198ba151161cffcf8e4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgame_1_1_game_options.html#a211c2fd7dad11198ba151161cffcf8e4">FramesPerSecond</a> = 50</td></tr>
 <tr class="memdesc:a211c2fd7dad11198ba151161cffcf8e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Framerate in 1/s.  <a href="#a211c2fd7dad11198ba151161cffcf8e4">More...</a><br /></td></tr>
 <tr class="separator:a211c2fd7dad11198ba151161cffcf8e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a79a7601c0fd25eaab0e22451d8812486"><td class="memItemLeft" align="right" valign="top"><a id="a79a7601c0fd25eaab0e22451d8812486"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgame_1_1_game_options.html#a79a7601c0fd25eaab0e22451d8812486">RenderAABB</a> = false</td></tr>
+<tr class="memdesc:a79a7601c0fd25eaab0e22451d8812486"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wether to render the Axis Aligned Bounding Boxes. <br /></td></tr>
+<tr class="separator:a79a7601c0fd25eaab0e22451d8812486"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a758d12ec811e19d50e40d0c23126711b"><td class="memItemLeft" align="right" valign="top"><a id="a758d12ec811e19d50e40d0c23126711b"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgame_1_1_game_options.html#a758d12ec811e19d50e40d0c23126711b">RenderCollisionMask</a> = false</td></tr>
+<tr class="memdesc:a758d12ec811e19d50e40d0c23126711b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wether to render the Collision Masks. <br /></td></tr>
+<tr class="separator:a758d12ec811e19d50e40d0c23126711b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab48606fcb6e9429a3f0bb1c613f0230"><td class="memItemLeft" align="right" valign="top"><a id="aab48606fcb6e9429a3f0bb1c613f0230"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgame_1_1_game_options.html#aab48606fcb6e9429a3f0bb1c613f0230">MeterPerPixel</a> = 1.0</td></tr>
+<tr class="memdesc:aab48606fcb6e9429a3f0bb1c613f0230"><td class="mdescLeft">&#160;</td><td class="mdescRight">Scale value from meter to pixel. <br /></td></tr>
+<tr class="separator:aab48606fcb6e9429a3f0bb1c613f0230"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5fcfc62813d17696c2d007f8508adef4"><td class="memItemLeft" align="right" valign="top"><a id="a5fcfc62813d17696c2d007f8508adef4"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgame_1_1_game_options.html#a5fcfc62813d17696c2d007f8508adef4">AudioEnabled</a> = true</td></tr>
+<tr class="memdesc:a5fcfc62813d17696c2d007f8508adef4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wether sound is played. <br /></td></tr>
+<tr class="separator:a5fcfc62813d17696c2d007f8508adef4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Contains all Configurations of the game, as opposed to the <a class="el" href="structgame_1_1_game_state.html" title="Contains the current State of the Game, if the State is changed, the behaviour of the Game changes as...">GameState</a> the options are not meant to influence the behaviour of the <a class="el" href="classgame_1_1_game.html" title="The Game is the main Controller of the 2DGameSDK, it is used to execute the main Game Loop,...">Game</a> (i.e. the <a class="el" href="classgame_1_1_game.html" title="The Game is the main Controller of the 2DGameSDK, it is used to execute the main Game Loop,...">Game</a> Loop). </p>
+<div class="textblock"><p>Contains all Configurations of the game, as opposed to the GameState the options are not meant to influence the behaviour of the <a class="el" href="classgame_1_1_game.html" title="The Game is the main Controller of the 2DGameSDK, it is used to execute the main Game Loop,...">Game</a> (i.e. the <a class="el" href="classgame_1_1_game.html" title="The Game is the main Controller of the 2DGameSDK, it is used to execute the main Game Loop,...">Game</a> Loop). </p>
 </div><h2 class="groupheader">Member Data Documentation</h2>
 <a id="a211c2fd7dad11198ba151161cffcf8e4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a211c2fd7dad11198ba151161cffcf8e4">&#9670;&nbsp;</a></span>FramesPerSecond</h2>
@@ -125,7 +141,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int game::GameOptions::FramesPerSecond</td>
+          <td class="memname">int game::GameOptions::FramesPerSecond = 50</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -141,7 +157,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">float game::GameOptions::InitialZoom</td>
+          <td class="memname">float game::GameOptions::InitialZoom = 1</td>
         </tr>
       </table>
 </div><div class="memdoc">

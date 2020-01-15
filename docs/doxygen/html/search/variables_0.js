@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['empty_5fevent_5fdata',['EMPTY_EVENT_DATA',['../_empty_event_data_8h.html#a9b808e5043da15d57544b6db763bf964',1,'game::constants']]]
+  ['audioenabled',['AudioEnabled',['../structgame_1_1_game_options.html#a5fcfc62813d17696c2d007f8508adef4',1,'game::GameOptions']]]
 ];

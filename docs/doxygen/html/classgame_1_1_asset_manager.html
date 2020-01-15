@@ -112,6 +112,9 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a203d4b4446d0cf4a4de39d513e07281e"><td class="memItemLeft" align="right" valign="top">static sf::Texture *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_asset_manager.html#a203d4b4446d0cf4a4de39d513e07281e">GetTexture</a> (const std::string &amp;identifier)</td></tr>
 <tr class="memdesc:a203d4b4446d0cf4a4de39d513e07281e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns an SFML texture by it's identifier.  <a href="#a203d4b4446d0cf4a4de39d513e07281e">More...</a><br /></td></tr>
 <tr class="separator:a203d4b4446d0cf4a4de39d513e07281e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36874880be4870ce3504b26cabbc800b"><td class="memItemLeft" align="right" valign="top">static sf::SoundBuffer *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_asset_manager.html#a36874880be4870ce3504b26cabbc800b">GetAudio</a> (const std::string &amp;identifier)</td></tr>
+<tr class="memdesc:a36874880be4870ce3504b26cabbc800b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns an SFML SoundBuffer by it's identifier.  <a href="#a36874880be4870ce3504b26cabbc800b">More...</a><br /></td></tr>
+<tr class="separator:a36874880be4870ce3504b26cabbc800b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Static class that Loads and Caches all Assets (images, sounds etc.) used for the 2DGameSDK. </p>
@@ -136,6 +139,41 @@ Static Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a36874880be4870ce3504b26cabbc800b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a36874880be4870ce3504b26cabbc800b">&#9670;&nbsp;</a></span>GetAudio()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">sf::SoundBuffer * game::AssetManager::GetAudio </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>identifier</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns an SFML SoundBuffer by it's identifier. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">identifier</td><td>the unique identifier (i.e. path to the file) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>sf::SoundBuffer* The loaded or previously cached SFML SoundBuffer </dd></dl>
+
+</div>
+</div>
 <a id="a203d4b4446d0cf4a4de39d513e07281e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a203d4b4446d0cf4a4de39d513e07281e">&#9670;&nbsp;</a></span>GetTexture()</h2>
 

@@ -1,6 +1,7 @@
 var dir_2c1644d41ee6e5b60a716c6d9524c38a =
 [
     [ "Material.h", "_material_8h.html", [
+      [ "Shape", "classgame_1_1_shape.html", "classgame_1_1_shape" ],
       [ "Material", "structgame_1_1_material.html", "structgame_1_1_material" ]
     ] ],
     [ "MaterialMap.h", "_material_map_8h.html", [

@@ -102,15 +102,15 @@ $(document).ready(function(){initNavTree('classgame_1_1_game_world_factory.html'
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a86c6c9d79a08b78ea3d97c484c0e6971"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classgame_1_1_game_world.html">GameWorld</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_game_world_factory.html#a86c6c9d79a08b78ea3d97c484c0e6971">CreateGameWorld</a> (std::string tilemapFile, std::string materialMapFile, std::string texturesPrefix)</td></tr>
-<tr class="memdesc:a86c6c9d79a08b78ea3d97c484c0e6971"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a <a class="el" href="classgame_1_1_game.html" title="The Game is the main Controller of the 2DGameSDK, it is used to execute the main Game Loop,...">Game</a> World object.  <a href="#a86c6c9d79a08b78ea3d97c484c0e6971">More...</a><br /></td></tr>
-<tr class="separator:a86c6c9d79a08b78ea3d97c484c0e6971"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a6b64f0fc5eec3d0d73a976d4c56d61"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classgame_1_1_game_world.html">GameWorld</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgame_1_1_game_world_factory.html#a3a6b64f0fc5eec3d0d73a976d4c56d61">CreateGameWorld</a> (<a class="el" href="classgame_1_1_game.html">Game</a> *game, std::string tilemapFile, std::string materialMapFile, std::string texturesPrefix, int pad=2)</td></tr>
+<tr class="memdesc:a3a6b64f0fc5eec3d0d73a976d4c56d61"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a <a class="el" href="classgame_1_1_game.html" title="The Game is the main Controller of the 2DGameSDK, it is used to execute the main Game Loop,...">Game</a> World object.  <a href="#a3a6b64f0fc5eec3d0d73a976d4c56d61">More...</a><br /></td></tr>
+<tr class="separator:a3a6b64f0fc5eec3d0d73a976d4c56d61"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Factory to create a <a class="el" href="classgame_1_1_game.html" title="The Game is the main Controller of the 2DGameSDK, it is used to execute the main Game Loop,...">Game</a> World. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a86c6c9d79a08b78ea3d97c484c0e6971"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a86c6c9d79a08b78ea3d97c484c0e6971">&#9670;&nbsp;</a></span>CreateGameWorld()</h2>
+<a id="a3a6b64f0fc5eec3d0d73a976d4c56d61"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3a6b64f0fc5eec3d0d73a976d4c56d61">&#9670;&nbsp;</a></span>CreateGameWorld()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -121,6 +121,12 @@ Static Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="classgame_1_1_game_world.html">GameWorld</a> * game::GameWorldFactory::CreateGameWorld </td>
           <td>(</td>
+          <td class="paramtype"><a class="el" href="classgame_1_1_game.html">Game</a> *&#160;</td>
+          <td class="paramname"><em>game</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">std::string&#160;</td>
           <td class="paramname"><em>tilemapFile</em>, </td>
         </tr>
@@ -134,7 +140,13 @@ Static Public Member Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">std::string&#160;</td>
-          <td class="paramname"><em>texturesPrefix</em>&#160;</td>
+          <td class="paramname"><em>texturesPrefix</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>pad</em> = <code>2</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
