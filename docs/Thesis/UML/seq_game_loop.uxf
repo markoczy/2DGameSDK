@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="14.3.0">
-  <zoom_level>9</zoom_level>
+  <zoom_level>8</zoom_level>
   <element>
     <id>UMLSequenceAllInOne</id>
     <coordinates>
-      <x>0</x>
-      <y>27</y>
-      <w>1665</w>
-      <h>1008</h>
+      <x>528</x>
+      <y>200</y>
+      <w>1480</w>
+      <h>1088</h>
     </coordinates>
     <panel_attributes>title=Game Loop
 obj=game: Game~game EXECUTION
@@ -20,55 +20,64 @@ tick=
 combinedFragment=loop~loop1 game cam; game: [interrupted == false]
 
 // Window Events
-game-&gt;game + :handleWindowEvents()
+game-&gt;&gt;&gt;game + :handleWindowEvents()
 on=game
-off=game
+game.&gt;game+;off=game
+tick=
 
 // Tick State Manager
 game-&gt;&gt;&gt;sm: OnTick(); on=sm
-sm-&gt;sm+: lock(renderMutex)
+sm-&gt;&gt;&gt;sm+: lock(renderMutex)
 on=sm
-off=sm
+sm.&gt;sm+;off=sm
+tick=
 
 // Tick Events
 sm-&gt;&gt;&gt;ec: OnTick(); on=ec
-ec-&gt;ec + :tickEvents()
+ec-&gt;&gt;&gt;ec + :tickEvents()
 on=ec
-off=ec
+ec.&gt;ec+;off=ec
+tick=
 ec.&gt;sm; off=ec
 
 // Tick Objects
-sm-&gt;sm+ :tickState()
+sm-&gt;&gt;&gt;sm+ :tickState()
 on=sm
-off=sm
+sm.&gt;sm+;off=sm
+tick=
 
 // Tick Camera
 sm-&gt;&gt;&gt;cam:                      OnTick(); on=cam
-cam-&gt;cam+: updateView();
+cam-&gt;&gt;&gt;cam+: updateView();
 on=cam
-off=cam
+cam.&gt;cam+;off=cam
+tick=
 cam.&gt;sm; off=cam
 
 // Handle Deleted
-sm-&gt;sm+ :handleDeleted()
+sm-&gt;&gt;&gt;sm+ :handleDeleted()
 on=sm
-off=sm
+sm.&gt;sm+;off=sm
+tick=
 
 // Unlock and return
 sm-&gt;sm+: unlock(renderMutex)
 on=sm
-off=sm
+sm.&gt;sm+;off=sm
+tick=
 sm.&gt;game; off=sm
 
 // Tick physics
-game-&gt;game+: cpSpaceStep(...)
+game-&gt;&gt;&gt;game+: cpSpaceStep(...)
 on=game
-off=game
+game.&gt;game+;off=game
+tick=
 
 // Sleep
-game-&gt;game+: sleep(remainingTime)
+game-&gt;&gt;&gt;game+: sleep(remainingTime)
 on=game
-off=game
+game.&gt;game+;off=game
+tick=
 
 --=loop1;</panel_attributes>
     <additional_attributes/>
@@ -76,10 +85,10 @@ off=game
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>675</x>
-      <y>207</y>
-      <w>216</w>
-      <h>45</h>
+      <x>1128</x>
+      <y>384</y>
+      <w>192</w>
+      <h>40</h>
     </coordinates>
     <panel_attributes>bg=yellow
 Blockiert Mutex zwischen Game 
@@ -89,10 +98,10 @@ Thread und Render Thread.</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>702</x>
-      <y>243</y>
-      <w>27</w>
-      <h>45</h>
+      <x>1152</x>
+      <y>416</y>
+      <w>24</w>
+      <h>40</h>
     </coordinates>
     <panel_attributes>lt=-</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;30.0</additional_attributes>
@@ -100,10 +109,10 @@ Thread und Render Thread.</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>432</x>
-      <y>900</y>
-      <w>180</w>
-      <h>54</h>
+      <x>920</x>
+      <y>1144</y>
+      <w>160</w>
+      <h>48</h>
     </coordinates>
     <panel_attributes>bg=yellow
 Zeit pro Durchlauf minus
@@ -114,10 +123,10 @@ Durchlaufs</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>396</x>
-      <y>909</y>
-      <w>54</w>
-      <h>27</h>
+      <x>888</x>
+      <y>1152</y>
+      <w>48</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>lt=-</panel_attributes>
     <additional_attributes>10.0;10.0;40.0;10.0</additional_attributes>
@@ -125,10 +134,10 @@ Durchlaufs</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>432</x>
-      <y>828</y>
-      <w>180</w>
-      <h>45</h>
+      <x>920</x>
+      <y>1064</y>
+      <w>160</w>
+      <h>40</h>
     </coordinates>
     <panel_attributes>bg=yellow
 Zeitschritt der Chipmunk
@@ -138,10 +147,10 @@ Physics Engine</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>369</x>
-      <y>837</y>
-      <w>81</w>
-      <h>27</h>
+      <x>864</x>
+      <y>1072</y>
+      <w>72</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>lt=-</panel_attributes>
     <additional_attributes>10.0;10.0;70.0;10.0</additional_attributes>
@@ -149,10 +158,10 @@ Physics Engine</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>801</x>
-      <y>468</y>
-      <w>180</w>
-      <h>54</h>
+      <x>1248</x>
+      <y>656</y>
+      <w>160</w>
+      <h>48</h>
     </coordinates>
     <panel_attributes>bg=yellow
 Aktualisiert alle Spielobjekte,
@@ -162,10 +171,10 @@ und das Overlay Display</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>738</x>
-      <y>477</y>
-      <w>81</w>
-      <h>27</h>
+      <x>1192</x>
+      <y>664</y>
+      <w>72</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>lt=-</panel_attributes>
     <additional_attributes>10.0;10.0;70.0;10.0</additional_attributes>
@@ -173,10 +182,10 @@ und das Overlay Display</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>801</x>
-      <y>666</y>
-      <w>189</w>
-      <h>45</h>
+      <x>1240</x>
+      <y>872</y>
+      <w>168</w>
+      <h>40</h>
     </coordinates>
     <panel_attributes>bg=yellow
 Löscht als gelöscht markierte
@@ -186,10 +195,10 @@ Spielobjekte</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>765</x>
-      <y>675</y>
-      <w>54</w>
-      <h>27</h>
+      <x>1208</x>
+      <y>880</y>
+      <w>48</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>lt=-</panel_attributes>
     <additional_attributes>10.0;10.0;40.0;10.0</additional_attributes>

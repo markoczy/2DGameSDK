@@ -5,9 +5,9 @@
     <id>UMLSequenceAllInOne</id>
     <coordinates>
       <x>0</x>
-      <y>140</y>
+      <y>0</y>
       <w>1940</w>
-      <h>1580</h>
+      <h>1660</h>
     </coordinates>
     <panel_attributes>title=Game Initialization
 obj=GameWorldFactory~gwf
@@ -50,15 +50,18 @@ game.&gt;main: game: Game*; off=game
 
 // Create Gameworld
 main-&gt;&gt;&gt;gwf: CreateGameWorld(game, ...); on=gwf
-gwf-&gt;gwf + :loadTilemap(...)
+gwf-&gt;&gt;&gt;gwf + :loadTilemap(...)
 on=gwf
-off=gwf
-gwf-&gt;gwf + :loadMaterials(...)
+gwf.&gt;gwf+;off=gwf
+tick=
+gwf-&gt;&gt;&gt;gwf + :loadMaterials(...)
 on=gwf
-off=gwf
-gwf-&gt;gwf + :loadTextures(...)
+gwf.&gt;gwf+;off=gwf
+tick=
+gwf-&gt;&gt;&gt;gwf + :loadTextures(...)
 on=gwf
-off=gwf
+gwf.&gt;gwf+;off=gwf
+tick=
 gwf.&gt;main: world: GameWorld*; off=gwf
 
 // Set World in game
@@ -73,9 +76,9 @@ sg.&gt;main; off=sg
 
 // Add Entities
 combinedFragment=loop~loop1 sg main; main:[More Entities to create...]
-main-&gt;main + :new Entity(...)
+main-&gt;&gt;&gt;main + :new Entity(...)
 on=main
-main-&gt;main + :entity;off=main
+main.&gt;main + :entity;off=main
 tick=
 main-&gt;&gt;&gt;sg :AddEntity(entity, ...); on=sg
 sg.&gt;main; off=sg
@@ -96,7 +99,7 @@ game.&gt;main; off=game
     <id>UMLNote</id>
     <coordinates>
       <x>1560</x>
-      <y>390</y>
+      <y>250</y>
       <w>180</w>
       <h>60</h>
     </coordinates>
@@ -110,7 +113,7 @@ Chipmunk Physics Engine</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>1510</x>
-      <y>390</y>
+      <y>250</y>
       <w>70</w>
       <h>30</h>
     </coordinates>

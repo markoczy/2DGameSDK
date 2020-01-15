@@ -4,10 +4,10 @@
   <element>
     <id>UMLSequenceAllInOne</id>
     <coordinates>
-      <x>0</x>
-      <y>171</y>
+      <x>342</x>
+      <y>531</y>
       <w>1584</w>
-      <h>720</h>
+      <h>783</h>
     </coordinates>
     <panel_attributes>title=Render Loop
 obj=renderThread: sf::Thread~game EXECUTION
@@ -26,9 +26,10 @@ win.&gt;game; off=win
 
 // Tick State Manager
 game-&gt;&gt;&gt;sm: OnRender(...); on=sm
-sm-&gt;sm+: lock(renderMutex)
+sm-&gt;&gt;&gt;sm+: lock(renderMutex)
 on=sm
-off=sm
+sm.&gt;sm+;off=sm
+tick=
 
 sm-&gt;&gt;&gt;cam :                      GetView(); on=cam
 cam.&gt;sm:                            view: sf::View; off=cam
@@ -37,15 +38,17 @@ sm-&gt;&gt;&gt;win: SetView(view); on=win
 win.&gt;sm; off=win
 
 
-sm-&gt;sm+ :renderState()
+sm-&gt;&gt;&gt;sm+ :renderState()
 on=sm
-off=sm
+sm.&gt;sm+; off=sm
+tick=
 
 
 // Unlock and return
 sm-&gt;sm+: unlock(renderMutex)
 on=sm
-off=sm
+sm.&gt;sm+;off=sm
+tick=
 sm.&gt;game; off=sm
 
 // Display Window
@@ -59,8 +62,8 @@ win.&gt;game; off=win
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>801</x>
-      <y>378</y>
+      <x>1143</x>
+      <y>738</y>
       <w>135</w>
       <h>72</h>
     </coordinates>
@@ -74,8 +77,8 @@ Thread</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>756</x>
-      <y>414</y>
+      <x>1098</x>
+      <y>774</y>
       <w>63</w>
       <h>27</h>
     </coordinates>
@@ -85,8 +88,8 @@ Thread</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>765</x>
-      <y>594</y>
+      <x>1107</x>
+      <y>972</y>
       <w>135</w>
       <h>54</h>
     </coordinates>
@@ -99,8 +102,8 @@ des Overlay Displays</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>720</x>
-      <y>612</y>
+      <x>1062</x>
+      <y>990</y>
       <w>63</w>
       <h>27</h>
     </coordinates>
@@ -110,8 +113,8 @@ des Overlay Displays</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>1044</x>
-      <y>747</y>
+      <x>1386</x>
+      <y>1179</y>
       <w>180</w>
       <h>72</h>
     </coordinates>
@@ -125,8 +128,8 @@ gewählte Framerate</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>999</x>
-      <y>774</y>
+      <x>1341</x>
+      <y>1206</y>
       <w>63</w>
       <h>27</h>
     </coordinates>

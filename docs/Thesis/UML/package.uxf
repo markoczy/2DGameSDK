@@ -4,8 +4,8 @@
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>986</x>
-      <y>1020</y>
+      <x>850</x>
+      <y>1071</y>
       <w>238</w>
       <h>136</h>
     </coordinates>
@@ -18,8 +18,8 @@ group=1</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>986</x>
-      <y>782</y>
+      <x>850</x>
+      <y>833</y>
       <w>238</w>
       <h>136</h>
     </coordinates>
@@ -29,8 +29,8 @@ group=1</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>2108</x>
-      <y>782</y>
+      <x>1972</x>
+      <y>833</y>
       <w>238</w>
       <h>136</h>
     </coordinates>
@@ -40,8 +40,8 @@ group=1</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>1326</x>
-      <y>782</y>
+      <x>1190</x>
+      <y>833</y>
       <w>238</w>
       <h>136</h>
     </coordinates>
@@ -51,8 +51,8 @@ group=1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1105</x>
-      <y>901</y>
+      <x>969</x>
+      <y>952</y>
       <w>153</w>
       <h>187</h>
     </coordinates>
@@ -63,8 +63,8 @@ group=1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1207</x>
-      <y>901</y>
+      <x>1071</x>
+      <y>952</y>
       <w>1037</w>
       <h>221</h>
     </coordinates>
@@ -75,8 +75,8 @@ group=1</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>986</x>
-      <y>510</y>
+      <x>850</x>
+      <y>561</y>
       <w>238</w>
       <h>136</h>
     </coordinates>
@@ -86,8 +86,8 @@ group=1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1156</x>
-      <y>629</y>
+      <x>1020</x>
+      <y>680</y>
       <w>1105</w>
       <h>221</h>
     </coordinates>
@@ -98,8 +98,8 @@ group=1</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>1717</x>
-      <y>782</y>
+      <x>1581</x>
+      <y>833</y>
       <w>238</w>
       <h>136</h>
     </coordinates>
@@ -109,8 +109,8 @@ group=1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1547</x>
-      <y>833</y>
+      <x>1411</x>
+      <y>884</y>
       <w>204</w>
       <h>68</h>
     </coordinates>
@@ -121,8 +121,8 @@ group=1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1938</x>
-      <y>833</y>
+      <x>1802</x>
+      <y>884</y>
       <w>204</w>
       <h>68</h>
     </coordinates>
@@ -133,8 +133,8 @@ group=1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1836</x>
-      <y>680</y>
+      <x>1700</x>
+      <y>731</y>
       <w>51</w>
       <h>170</h>
     </coordinates>
@@ -144,8 +144,8 @@ group=1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1428</x>
-      <y>680</y>
+      <x>1292</x>
+      <y>731</y>
       <w>51</w>
       <h>170</h>
     </coordinates>
@@ -155,19 +155,8 @@ group=1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1105</x>
-      <y>765</y>
-      <w>204</w>
-      <h>238</h>
-    </coordinates>
-    <panel_attributes>lt=.</panel_attributes>
-    <additional_attributes>10.0;10.0;100.0;10.0;100.0;120.0;10.0;120.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>1836</x>
-      <y>901</y>
+      <x>1700</x>
+      <y>952</y>
       <w>51</w>
       <h>221</h>
     </coordinates>
@@ -177,8 +166,8 @@ group=1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1428</x>
-      <y>901</y>
+      <x>1292</x>
+      <y>952</y>
       <w>51</w>
       <h>221</h>
     </coordinates>
@@ -188,12 +177,23 @@ group=1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1105</x>
+      <x>969</x>
+      <y>680</y>
+      <w>51</w>
+      <h>221</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;110.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>782</x>
       <y>629</y>
-      <w>51</w>
-      <h>221</h>
+      <w>102</w>
+      <h>561</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;110.0</additional_attributes>
+    <additional_attributes>40.0;10.0;10.0;10.0;10.0;310.0;40.0;310.0</additional_attributes>
   </element>
 </diagram>
