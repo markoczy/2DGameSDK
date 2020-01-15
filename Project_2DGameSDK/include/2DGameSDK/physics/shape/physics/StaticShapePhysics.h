@@ -1,5 +1,5 @@
-#ifndef __STATIC_SHAPE_DEFINITION_H__
-#define __STATIC_SHAPE_DEFINITION_H__
+#ifndef __STATIC_SHAPE_PHYSICS_H__
+#define __STATIC_SHAPE_PHYSICS_H__
 
 #include <chipmunk/chipmunk.h>
 

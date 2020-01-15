@@ -1,5 +1,5 @@
-#ifndef __KINEMATIC_SHAPE_DEFINITION_H__
-#define __KINEMATIC_SHAPE_DEFINITION_H__
+#ifndef __KINEMATIC_SHAPE_PHYSICS_H__
+#define __KINEMATIC_SHAPE_PHYSICS_H__
 
 #include <chipmunk/chipmunk.h>
 

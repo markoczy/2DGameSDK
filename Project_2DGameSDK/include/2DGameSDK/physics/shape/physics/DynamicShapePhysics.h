@@ -1,5 +1,5 @@
-#ifndef __DYNAMIC_SHAPE_DEFINITION_H__
-#define __DYNAMIC_SHAPE_DEFINITION_H__
+#ifndef __DYNAMIC_SHAPE_PHYSICS_H__
+#define __DYNAMIC_SHAPE_PHYSICS_H__
 
 #include <chipmunk/chipmunk.h>
 
