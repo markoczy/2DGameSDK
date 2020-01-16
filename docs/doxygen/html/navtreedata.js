@@ -55,8 +55,8 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_animated_dynamic_entity_8h.html",
-"classgame_1_1_circle_shape.html#a3d5fe85fd519d39720f2b40d840c4183",
-"classgame_1_1_pose_converter.html#aa9fff05cda53f978817899583fc4f0c7",
+"classgame_1_1_circle_shape.html#ac5ca02d1fc47577635df419fcd96566f",
+"classgame_1_1_pose_converter.html#afbaab37ef6805d1175d15071bbd0c0e4",
 "functions_func_u.html"
 ];
 

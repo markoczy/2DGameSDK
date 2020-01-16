@@ -79,14 +79,14 @@ var hierarchy =
     ] ],
     [ "game::Shape< game::KinematicShapePhysics >", "classgame_1_1_shape.html", null ],
     [ "game::ShapeFactory", "classgame_1_1_shape_factory.html", null ],
-    [ "ShapePhysics< TDefinition >", "class_shape_physics.html", null ],
-    [ "ShapePhysics< DynamicShapePhysics >", "class_shape_physics.html", [
+    [ "game::ShapePhysics< TDefinition >", "classgame_1_1_shape_physics.html", null ],
+    [ "game::ShapePhysics< DynamicShapePhysics >", "classgame_1_1_shape_physics.html", [
       [ "game::DynamicShapePhysics", "classgame_1_1_dynamic_shape_physics.html", null ]
     ] ],
-    [ "ShapePhysics< KinematicShapePhysics >", "class_shape_physics.html", [
+    [ "game::ShapePhysics< KinematicShapePhysics >", "classgame_1_1_shape_physics.html", [
       [ "game::KinematicShapePhysics", "classgame_1_1_kinematic_shape_physics.html", null ]
     ] ],
-    [ "ShapePhysics< StaticShapePhysics >", "class_shape_physics.html", [
+    [ "game::ShapePhysics< StaticShapePhysics >", "classgame_1_1_shape_physics.html", [
       [ "game::StaticShapePhysics", "classgame_1_1_static_shape_physics.html", null ]
     ] ],
     [ "game::StateManagerBase", "classgame_1_1_state_manager_base.html", [

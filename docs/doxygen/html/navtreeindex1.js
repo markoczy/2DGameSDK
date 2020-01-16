@@ -1,8 +1,5 @@
 var NAVTREEINDEX1 =
 {
-"classgame_1_1_circle_shape.html#a3d5fe85fd519d39720f2b40d840c4183":[2,0,0,8,3],
-"classgame_1_1_circle_shape.html#a763fe7f26a5a583c7c3baf4d2127ca44":[2,0,0,8,1],
-"classgame_1_1_circle_shape.html#a8910f01251c720d892c69806681e80ad":[2,0,0,8,4],
 "classgame_1_1_circle_shape.html#ac5ca02d1fc47577635df419fcd96566f":[2,0,0,8,0],
 "classgame_1_1_circle_shape.html#add79825eb1f576b2ad1403d310bb1112":[2,0,0,8,5],
 "classgame_1_1_circle_shape.html#ae372d1654964c9c2413f11aea43c1e40":[2,0,0,8,2],
@@ -249,5 +246,8 @@ var NAVTREEINDEX1 =
 "classgame_1_1_pose_converter.html#a6a96f18aa24f7f65e6b4f5b31602eb96":[2,0,0,42,1],
 "classgame_1_1_pose_converter.html#a6ff48bdcb7d145aa9b4841a911f6170d":[2,0,0,42,11],
 "classgame_1_1_pose_converter.html#a8182b32156ade5368c4a40ceeaeb6d81":[2,0,0,42,0],
-"classgame_1_1_pose_converter.html#a9b3d9ce9e869435c1b39dc6cda205c8a":[2,0,0,42,5]
+"classgame_1_1_pose_converter.html#a9b3d9ce9e869435c1b39dc6cda205c8a":[2,0,0,42,5],
+"classgame_1_1_pose_converter.html#aa9fff05cda53f978817899583fc4f0c7":[2,0,0,42,8],
+"classgame_1_1_pose_converter.html#ad9b036b8f98b7acc8b93015c7bb7c693":[2,0,0,42,7],
+"classgame_1_1_pose_converter.html#ae83c5ca3be9cc61c4e87f5f2dd7ca9ae":[2,0,0,42,4]
 };
