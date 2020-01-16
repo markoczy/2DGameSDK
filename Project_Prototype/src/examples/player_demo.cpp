@@ -42,7 +42,6 @@ public:
   void OnTick() {
     if(mDt.x != 0 || mDt.y != 0) {
       Transform(sf::Transform().translate(mDt));
-      // GetTransformable()->move(mDt);
       mDt = sf::Vector2f();
     }
   }
@@ -94,14 +93,12 @@ int playerDemo(float zoom) {
 
   // Create Player entity and Rotating child entity
   auto tex = AssetManager::GetTexture("res/textures/sample.png");
-  // auto tex2 = AssetManager::GetTexture("res/textures/discus.png");
   auto ent = new PlayerEntity(game, tex, 2.0, upPressed, downPressed, leftPressed, rightPressed);
-  // auto ent2 = new RotatingEntity(tex2, 5.0);
 
   // Layout entities in scene
   auto scene = new SceneGraph(game);
-  auto parent = scene->AddEntity(ent); // scene->GetRoot()->AddChild(ent);
-  scene->AddEntity(ent, parent); // parent->AddChild(ent2);
+  auto parent = scene->AddEntity(ent);
+  scene->AddEntity(ent, parent);
 
   // Send Events to controller
   game->AddEvent(upPressed);

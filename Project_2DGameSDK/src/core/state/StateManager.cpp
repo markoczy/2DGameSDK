@@ -9,6 +9,8 @@ namespace game {
   StateManager::~StateManager() {
     helpers::safeDelete(mRenderMutex);
     helpers::safeDelete(mEventController);
+    // helpers::safeDelete(mWorld);
+    // helpers::safeDelete(mScene);
   }
 
   GameWorld* StateManager::GetWorld() {

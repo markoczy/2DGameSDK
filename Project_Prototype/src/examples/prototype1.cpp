@@ -520,7 +520,7 @@ namespace proto1 {
       SetCenter(newCenter);
     }
 
-    void OnRender(sf::RenderTarget* target, sf::RenderStates states = sf::RenderStates::Default) {}
+    void OnRender(sf::RenderTarget*, sf::RenderStates) {}
 
   protected:
     sf::Transform mTransform;
@@ -563,7 +563,6 @@ namespace proto1 {
 
       for(unsigned i = 0; i < mHearts.size(); i++) {
         auto sprite = new sf::Sprite(*_OVERLAY_HEART_TEXTURE);
-        // sprite->setPosition(15 + (i * 45), 10);
         sprite->setPosition(15 + (i * 45), h - 42);
         mHearts[i] = sprite;
       }
@@ -585,10 +584,6 @@ namespace proto1 {
       mScrollCamera = cam;
     }
 
-    // void SetGameSequencer(GameSequencer* sequencer) {
-    //   mSequencer = sequencer;
-    // }
-
     int GetScore() {
       return mScore;
     }
@@ -601,10 +596,10 @@ namespace proto1 {
       mGame->GetOverlayDisplay()->Update();
     }
 
-    void SetHeartCount(int count) {
+    void SetHeartCount(unsigned count) {
       if(mHeartCount == count) return;
       mHeartCount = count;
-      for(int i = 0; i < mHearts.size(); i++) {
+      for(unsigned i = 0; i < mHearts.size(); i++) {
         if(mHeartCount > i) {
           mGame->GetOverlayDisplay()->Enable(mHeartIds[i]);
         } else {
@@ -616,7 +611,6 @@ namespace proto1 {
     void GameOver() {
       mGame->GetOverlayDisplay()->Enable(mGameOverId);
       if(mScrollCamera) mScrollCamera->SetScroll(sf::Vector2f());
-      // if(mSequencer) mSequencer->PauseTriggers();
     }
 
   protected:
@@ -625,7 +619,7 @@ namespace proto1 {
     sf::Text* mGameOver = nullptr;
     int mGameOverId = 0;
     GameBase* mGame = nullptr;
-    int mHeartCount = 3;
+    unsigned mHeartCount = 3;
     std::vector<sf::Sprite*> mHearts = std::vector<sf::Sprite*>(3);
     std::vector<int> mHeartIds = std::vector<int>(3);
     ScrollCamera* mScrollCamera = nullptr;
@@ -652,8 +646,7 @@ namespace proto1 {
     Proto1PlayerEntity(GameBase* game,
                        sf::Texture* texture,
                        KinematicShape* shape,
-                       float speed,
-                       Observable<sf::Keyboard::Key>* space)
+                       float speed)
         //////////////////////////////////////////////////////////////////////////
         : SpriteKinematicEntity(_PLAYER_TYPE,
                                 game,
@@ -718,12 +711,12 @@ namespace proto1 {
       SetTransform(transform * sf::Transform().translate(dt));
     }
 
-    int OnCollision(CollisionEventType type, Entity* other, cpArbiter* arb) {
+    int OnCollision(CollisionEventType, Entity*, cpArbiter*) {
       OnHit(1);
       return 0;
     }
 
-    int OnProjectileCollision(CollisionEventType type, Projectile* projectile, cpArbiter* arb) {
+    int OnProjectileCollision(CollisionEventType, Projectile* projectile, cpArbiter*) {
       if(projectile->GetType() == _ENEMY_PROJECTILE) {
         OnHit(1);
       }
@@ -777,7 +770,7 @@ namespace proto1 {
           RepeatedShootBehaviour(game, this, _ENEMY_PROJECTILE, projectileSequence, _SOUND_ENEMY_SHOOT, projectileShape, projectileOffsets, projectileVelocity, _PROJECTILE_SEQ_FRAMES, shootInterval, projectileLifetime, shootDelay),
           DespawnTimeoutBehaviour(game, this, despawnTimeout), mScore(score){};
 
-    int OnProjectileCollision(CollisionEventType type, Projectile* projectile, cpArbiter* arb) {
+    int OnProjectileCollision(CollisionEventType, Projectile* projectile, cpArbiter*) {
       if(projectile->GetType() == _PLAYER_PROJECTILE) {
         OnHit(1);
       }
@@ -790,7 +783,7 @@ namespace proto1 {
           getGameController(getGame())->AddScore(mScore);
         }
         cout << GetId() << " Before create explosion" << endl;
-        auto explosion = new Effect(getGame(), _EXPLOSION1, GetCombinedTransform());
+        new Effect(getGame(), _EXPLOSION1, GetCombinedTransform());
         cout << GetId() << " After create explosion" << endl;
 
         getGame()->GetStateManager()->DestroyObject(this);
@@ -830,7 +823,7 @@ namespace proto1 {
           DestructibleBehaviour(game, this, mSpriteRenderer, _SOUND_HIT_HURT_2, hp, _DESCTRUCTIBLE_COOLDOWN),
           DespawnTimeoutBehaviour(game, this, despawnTimeout), mScore(score) {}
 
-    int OnProjectileCollision(CollisionEventType type, Projectile* projectile, cpArbiter* arb) {
+    int OnProjectileCollision(CollisionEventType, Projectile* projectile, cpArbiter*) {
       if(projectile->GetType() == _PLAYER_PROJECTILE) {
         OnHit(1);
       }
@@ -843,7 +836,7 @@ namespace proto1 {
           getGameController(getGame())->AddScore(mScore);
         }
         cout << GetId() << " Before create explosion" << endl;
-        auto explosion = new Effect(getGame(), _EXPLOSION1, GetCombinedTransform());
+        new Effect(getGame(), _EXPLOSION1, GetCombinedTransform());
         cout << GetId() << " After create explosion" << endl;
 
         getGame()->GetStateManager()->DestroyObject(this);
@@ -1006,7 +999,7 @@ namespace proto1 {
       SetSequenceTransform({{sf::Transform().translate(0, -2), 220}}, 0, false);
     };
 
-    int OnProjectileCollision(CollisionEventType type, Projectile* projectile, cpArbiter* arb) {
+    int OnProjectileCollision(CollisionEventType, Projectile* projectile, cpArbiter*) {
       if(projectile->GetType() == _PLAYER_PROJECTILE) {
         OnHit(1);
       }
@@ -1019,7 +1012,7 @@ namespace proto1 {
           getGameController(getGame())->AddScore(mScore);
         }
         cout << GetId() << " Before create explosion" << endl;
-        auto explosion = new Effect(getGame(), _EXPLOSION2, GetCombinedTransform());
+        new Effect(getGame(), _EXPLOSION2, GetCombinedTransform());
         cout << GetId() << " After create explosion" << endl;
 
         getGame()->GetStateManager()->DestroyObject(this);
@@ -1036,7 +1029,6 @@ namespace proto1 {
       RepeatedShootBehaviour<BossEntity, 2>::OnTick();
 
       if(mFinished) {
-        // SetSequenceTransform(createRectancleSequence(2, 300, 150), 0, true);
         SetSequenceTransform(createRectancleSequence(3, 200, 100), 0, true);
       }
     }
@@ -1097,9 +1089,6 @@ namespace proto1 {
       mTriggers.push(2300);
       mTriggers.push(3600);
       mTriggers.push(3700);
-      // mTriggers.push(3820);
-
-      // getGameController(game)->SetGameSequencer(this);
     }
 
     void PauseTriggers() {
@@ -1191,9 +1180,6 @@ namespace proto1 {
   //************************* DEMO ********************************************/
 
   int demo() {
-    // Create Keyboard Events
-    auto spacePressed = new OnKeyPress(sf::Keyboard::Space);
-
     float aspectRatio = (float)sf::VideoMode::getDesktopMode().width / (float)sf::VideoMode::getDesktopMode().height;
 
     // Create game
@@ -1207,9 +1193,6 @@ namespace proto1 {
                                true /* Audio Enabled */};
     auto game = new Game(options);
 
-    // Send Events to controller
-    game->AddEvent(spacePressed);
-
     // Create Game World
     auto world = GameWorldFactory::CreateGameWorld(game, "res/maps/proto1/tilemap.json", "", "res/maps/proto1/tile_");
     game->SetWorld(world);
@@ -1218,11 +1201,9 @@ namespace proto1 {
     cam->SetScroll(sf::Vector2f(0, 0.5));
     game->SetCameraController(cam);
 
-    // auto enemyTex2 = AssetManager::GetTexture("res/textures/spaceships/scorpio/prefab_am_1B.png");
     auto playerShape = getPlayerShape(game);
-    // auto playerShape = ShapeFactory::CreateKinematicRectangleShape(game, 124, 135, 0, 0);
     cout << "Creating Player" << endl;
-    auto player = new Proto1PlayerEntity(game, _PLAYER_TEXTURE, playerShape, 5.0, spacePressed);
+    auto player = new Proto1PlayerEntity(game, _PLAYER_TEXTURE, playerShape, 5.0);
     cout << "After create Player" << endl;
     float offsetY = -(cam->GetBounds().y / 2.0) + 80;
     player->SetTransform(sf::Transform().translate(0, offsetY));

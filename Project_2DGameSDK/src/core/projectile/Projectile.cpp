@@ -21,6 +21,7 @@ namespace game {
   Projectile::~Projectile() {
     auto space = getGame()->GetPhysicalWorld();
     helpers::safeDelete(mShape);
+    helpers::safeDelete(mRenderer);
     cpSpaceRemoveBody(space, mBody);
     cpBodyFree(mBody);
   }

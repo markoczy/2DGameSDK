@@ -48,22 +48,18 @@ public:
   void MoveUp(sf::Keyboard::Key) {
     if(touchingFloor) {
       mForce.y += mJumpForce;
-      // SetForce(cpv(0, mJumpForce));
     }
   }
 
   void MoveDown(sf::Keyboard::Key) {
-    // SetForce(cpv(0, -mSpeed));
   }
 
   void MoveLeft(sf::Keyboard::Key) {
     mForce.x -= mSpeed;
-    // SetForce(cpv(-mSpeed, 0));
   }
 
   void MoveRight(sf::Keyboard::Key) {
     mForce.x += mSpeed;
-    // SetForce(cpv(mSpeed, 0));
   }
 
   int OnCollision(CollisionEventType type, Entity* other, cpArbiter*) {
@@ -226,7 +222,7 @@ int demo2() {
   float playerW = 1;
   float playerH = 1;
   float playerMass = 5;
-  // auto shape = new CircleDynamicShape(game, 1);
+
   auto shape = ShapeFactory::CreateDynamicRectangleShape(game, playerW, playerH, 1, 0.7, 0.1);
   auto player = new PhysPlayerEntity(game, boxTx, 50, 1100, {shape}, upPressed, downPressed, leftPressed, rightPressed);
   player->SetSize(sf::Vector2f(playerW, playerH));
@@ -306,14 +302,6 @@ int demo3() {
 
   auto scene = new SceneGraph(game);
 
-  // float groundW = 51.2;
-  // float groundH = 5;
-  // auto groundShape = ShapeFactory::CreateStaticRectangleShape(game, groundW, groundH, 0.7, 0.1, false);
-  // auto ground = new SpriteStaticEntity(_GROUND_TYPE, game, boxTx, {groundShape}, true);
-  // ground->SetSize(sf::Vector2f(groundW, groundH));
-  // ground->SetTransform(sf::Transform().translate(25.6, 2.5));
-  // scene->AddEntity(ground);
-
   float playerW = 1;
   float playerH = 1;
   float playerMass = 5;
@@ -321,13 +309,9 @@ int demo3() {
   auto verts = vector<cpVect>();
   verts.push_back(cpv(-0.5, -0.5));
   verts.push_back(cpv(0.5, -0.5));
-  // verts.push_back(cpv(0.5, 0.5));
   verts.push_back(cpv(-0.5, 0.5));
   auto shape = ShapeFactory::CreateDynamicPolygonShape(game, verts, 1, 0.7, 0.1);
 
-  // auto shape = new CircleDynamicShape(game, 1);
-
-  // auto shape = ShapeFactory::CreateDynamicRectangleShape(game, playerW, playerH, 1, 0.7, 0.1);
   auto player = new PhysPlayerEntity(game, boxTx, 50, 1100, {shape}, upPressed, downPressed, leftPressed, rightPressed);
   player->SetSize(sf::Vector2f(playerW, playerH));
   player->SetTransform(sf::Transform().translate(10, 15));

@@ -8,7 +8,7 @@ namespace game {
   }
 
   Effect::~Effect() {
-    // delete mRenderer;
+    helpers::safeDelete(mRenderer);
   }
 
   int Effect::GetZIndex() { return mZIndex; }

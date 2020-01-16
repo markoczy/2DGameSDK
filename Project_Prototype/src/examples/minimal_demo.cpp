@@ -16,9 +16,6 @@ public:
                  sf::Texture* texture,
                  float rotPerTick,
                  sf::Vector2f pos = sf::Vector2f()) : SpriteKinematicEntity(1, game, texture), mRot(rotPerTick) {
-    // auto rect = mSprite.getTextureRect();
-    // mCenter = sf::Vector2f(rect.width / 2, rect.height / 2);
-
     SetTransform(sf::Transform().translate(pos));
   }
 
@@ -50,13 +47,12 @@ int minimalDemo() {
   auto tex = AssetManager::GetTexture("res/textures/discus.png");
   auto ent = new RotatingEntity(game, tex, 5.0, sf::Vector2f(50, 50));
   cout << "Entity created." << endl;
-  // auto ent2 = new RotatingEntity(tex, 10.0);
 
   // Layout entities in scene
   auto scene = new SceneGraph(game);
-  auto parent = scene->AddEntity(ent); //GetRoot()->AddChild(ent);
+  auto parent = scene->AddEntity(ent);
   cout << "Entity added." << endl;
-  scene->AddEntity(ent, parent); //parent->AddChild(ent2);
+  scene->AddEntity(ent, parent);
   game->SetScene(scene);
   cout << "Child Entity added." << endl;
 

@@ -25,8 +25,6 @@ public:
                  Shape<KinematicShapePhysics>* shape,
                  float rotPerTick,
                  sf::Vector2f pos = sf::Vector2f()) : SpriteKinematicEntity(type, game, texture, vector<Shape<KinematicShapePhysics>*>({shape})), mRot(rotPerTick) {
-    // auto rect = mSprite.getTextureRect();
-    // mCenter = sf::Vector2f(rect.width / 2, rect.height / 2);
     SetTransform(sf::Transform().translate(pos));
   }
 
@@ -68,8 +66,6 @@ public:
     mLeft->SubscribeTo(left);
     mRight->SubscribeTo(right);
 
-    // auto rect = mSprite.getTextureRect();
-    // mCenter = sf::Vector2f(rect.width / 2, rect.height / 2);
     SetTransform(sf::Transform().translate(pos));
     mDir = sf::Vector2f(0, -1);
   }
@@ -77,7 +73,6 @@ public:
   void OnTick() {
     sf::Transform transform;
     if(mDw != 0) {
-      // transform.rotate(mDw, mCenter);
       transform.rotate(mDw);
       mAngle += mDw;
     }
@@ -86,7 +81,7 @@ public:
       cout << "mDt: (" << mDt.x << ", " << mDt.y << ")" << endl;
       transform.translate(mDt);
     }
-    // auto pos = transform.transformPoint(sf::Vector2f());
+
     Transform(transform);
     mDt = sf::Vector2f();
     mDw = 0.0;
@@ -131,10 +126,6 @@ public:
   }
 
   int OnCollision(CollisionEventType type, Entity* other, cpArbiter*) {
-    // if(other->GetType() == _ENEMY_TYPE) {
-    //   std::cout << "Collision with enemy detected!! Point: (" << point.x
-    //             << ", " << point.y << ")" << std::endl;
-    // }
     std::string typeStr;
     switch(type) {
     case CollisionEventType::Begin:
@@ -156,7 +147,6 @@ public:
       HandlerEnemyCollision();
       return 1;
     }
-    // std::cout << "Registered Collision Event " << typeStr << " cur: " << GetId() << " other " << other->GetId() << std::endl;
     return 0;
   }
 
@@ -202,7 +192,6 @@ PolygonShape<KinematicShapePhysics>* getRotorCollisionMask(Game* game) {
   verts.push_back(cpv(13, 1));
   verts.push_back(cpv(1, 1));
   return ShapeFactory::CreateKinematicPolygonShape(game, verts, 0, 0);
-  // return new PolygonKinematicShape(game, verts);
 }
 
 class GameController {
@@ -273,18 +262,16 @@ int chopperDemo() {
   cam->SetCenter(sf::Vector2f(bounds.x / 2 + 4.8, bounds.y / 2));
   game->SetCameraController(cam);
 
-  // auto ent2 = new RotatingEntity(game, 1, tex2, rotorCollisionMask, 15.0, sf::Vector2f(-5, 2));
   auto rotorCollisionMask = getRotorCollisionMask(game);
   auto ent2 = new RotatingEntity(game, _PLAYER_TYPE, tex2, rotorCollisionMask, 15.0, sf::Vector2f(0, 0));
 
-  // auto tex3 = AssetManager::GetTexture("res/textures/heli/rotor.png");
   auto enemyCollisionMask = getRotorCollisionMask(game);
   auto enemy = new RotatingEntity(game, _ENEMY_TYPE, tex2, enemyCollisionMask, 15.0, sf::Vector2f(200, 200));
 
   // Layout entities in scene
   auto scene = new SceneGraph(game);
-  auto parent = scene->AddEntity(player); //scene->GetRoot()->AddChild(ent);
-  scene->AddEntity(ent2, parent); // parent->AddChild(ent2);
+  auto parent = scene->AddEntity(player);
+  scene->AddEntity(ent2, parent);
   scene->AddEntity(enemy);
   game->SetScene(scene);
 

@@ -408,7 +408,6 @@ namespace proto2 {
 
       if(mCoolDown > 25 && sf::Keyboard::isKeyPressed(Key::Space)) {
         if(mOpenDialog) {
-          // cout << "Closing Dialog " << mCurDialogId << endl;
           mOpenDialog = false;
           mNPC->SetImmobile(false);
           mPlayer->SetImmobile(false);

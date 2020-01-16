@@ -20,10 +20,6 @@ namespace game {
     mDestroyList.push_back(event->GetId());
   }
 
-  // ObservableBase* EventController::GetEvent(int id) {
-  //   return mEvents[id];
-  // }
-
   void EventController::OnTick() {
     for(auto id : mDestroyList) {
       helpers::safeDelete(mEvents[id]);

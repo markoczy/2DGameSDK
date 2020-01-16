@@ -35,11 +35,4 @@ namespace game {
     return mView;
   }
 
-  // void DefaultCameraController::updateBounds() {
-  //   auto viewBounds = mView.getSize();
-  //   auto conv = getGame()->GetPoseConverter();
-  //   auto pxToM = getGame()->GetOptions().MeterPerPixel;
-  //   mBounds = sf::Vector2f(viewBounds.x * pxToM, viewBounds.y * pxToM);
-  // }
-
 } // namespace game

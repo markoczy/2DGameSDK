@@ -33,8 +33,6 @@ public:
     mRight->SubscribeTo(right);
 
     SetAnimState(1);
-    // auto rect = mCurState.getTextureRect();
-    // mCenter = sf::Vector2f(rect.width / 2, rect.height / 2);
 
     SetTransform(sf::Transform().translate(pos));
     mDir = sf::Vector2f(0, -1);
@@ -136,7 +134,7 @@ int playerDemoGTA2(float zoom) {
 
   // Layout entities in scene
   auto scene = new SceneGraph(game);
-  scene->AddEntity(ent); // scene->GetRoot()->AddChild(ent);
+  scene->AddEntity(ent);
   game->SetScene(scene);
 
   // Send Events to controller
