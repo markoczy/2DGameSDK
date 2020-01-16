@@ -623,7 +623,6 @@ namespace proto1 {
     std::vector<sf::Sprite*> mHearts = std::vector<sf::Sprite*>(3);
     std::vector<int> mHeartIds = std::vector<int>(3);
     ScrollCamera* mScrollCamera = nullptr;
-    // GameSequencer* mSequencer = nullptr;
   };
 
   GameController* getGameController(GameBase* game) {
