@@ -21,7 +21,6 @@ arguments:
 - Minimal Demo: `Prototype.exe minimal`
 - Player Demo: `Prototype.exe player`
 - Chopper Demo: `Prototype.exe chopper`
-- GTA2 Player Demo: `Prototype.exe gta2`
 - Physics Demo: `Prototype.exe physics`
 
 The following commands start the prototypes, these are more advanced than the
