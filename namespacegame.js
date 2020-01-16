@@ -52,6 +52,7 @@ var namespacegame =
     [ "SequencedProjectile", "classgame_1_1_sequenced_projectile.html", "classgame_1_1_sequenced_projectile" ],
     [ "Shape", "classgame_1_1_shape.html", "classgame_1_1_shape" ],
     [ "ShapeFactory", "classgame_1_1_shape_factory.html", null ],
+    [ "ShapePhysics", "classgame_1_1_shape_physics.html", "classgame_1_1_shape_physics" ],
     [ "SimpleSequenceRenderStrategy", "classgame_1_1_simple_sequence_render_strategy.html", "classgame_1_1_simple_sequence_render_strategy" ],
     [ "SingleSpriteRenderStrategy", "classgame_1_1_single_sprite_render_strategy.html", "classgame_1_1_single_sprite_render_strategy" ],
     [ "SoundBufferCache", "classgame_1_1_sound_buffer_cache.html", null ],

@@ -196,9 +196,6 @@ var NAVTREEINDEX0 =
 "_world_8h.html":[3,0,0,0,0,12],
 "_world_8h_source.html":[3,0,0,0,0,12],
 "annotated.html":[2,0],
-"class_shape_physics.html":[2,0,1],
-"class_shape_physics.html#ab52108a1220ad3c041d4c1b45b5eed29":[2,0,1,0],
-"class_shape_physics.html#ad239caebd96fa85d167e5fe02a78c6ba":[2,0,1,1],
 "classes.html":[2,1],
 "classgame_1_1_animated_dynamic_entity.html":[2,0,0,0],
 "classgame_1_1_animated_dynamic_entity.html#a15cc1e2806a8912678a142750f9955a8":[2,0,0,0,1],
@@ -249,5 +246,8 @@ var NAVTREEINDEX0 =
 "classgame_1_1_camera_controller.html#a9669ec87da9825d344de6bdb088021a3":[2,0,0,7,1],
 "classgame_1_1_camera_controller.html#adf0c893b6ad5ecb8bbf48e0859e75cef":[2,0,0,7,4],
 "classgame_1_1_camera_controller.html#af1bde863573947902b8e167fd2fa2bae":[2,0,0,7,6],
-"classgame_1_1_circle_shape.html":[2,0,0,8]
+"classgame_1_1_circle_shape.html":[2,0,0,8],
+"classgame_1_1_circle_shape.html#a3d5fe85fd519d39720f2b40d840c4183":[2,0,0,8,3],
+"classgame_1_1_circle_shape.html#a763fe7f26a5a583c7c3baf4d2127ca44":[2,0,0,8,1],
+"classgame_1_1_circle_shape.html#a8910f01251c720d892c69806681e80ad":[2,0,0,8,4]
 };
